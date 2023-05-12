@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "启动程序: firefox",
+      "request": "launch",
+      "type": "firefox",
+      "url": "http://localhost:2800",
+      "webRoot": "${workspaceFolder}/admin",
+      "pathMappings": [
+        {
+          "url": "webpack://c-scm/src/views/login",
+          "path": "${workspaceFolder}/src/views/login"
+        },
+        {
+          "url": "webpack://c-scm",
+          "path": "${workspaceFolder}"
+        }
+      ]
+    },
+    {
+      "name": "运行脚本：serve",
+      "command": "npm run serve",
+      "type": "node-terminal",
+      "request": "launch"
+    }
+  ]
+}

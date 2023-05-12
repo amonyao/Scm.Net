@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\workspace\SCM6\src\FytSoa.ApiService\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-03-06T11:20:30.2441669Z;True|2023-03-06T13:55:40.2004816+08:00;True|2023-03-06T13:54:35.9965897+08:00;True|2023-03-06T13:06:40.6441867+08:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

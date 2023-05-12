@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm.Samples</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.71" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.Common">
+      <HintPath>..\Libs\Scm.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Uid">
+      <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Dao">
+      <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

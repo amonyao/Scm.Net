@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm.Samples</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Demo\" />
+  </ItemGroup>
+
+</Project>

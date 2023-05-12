@@ -1,0 +1,128 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DocumentationFile>bin\Debug\Scm.Api.xml</DocumentationFile>
+    <NoWarn>1701;1702;CS1591;CS8601;CS8618</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DocumentationFile>bin\Release\Scm.Api.xml</DocumentationFile>
+    <NoWarn>1701;1702;CS1591;CS8601;CS8618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="images\**" />
+    <Compile Remove="logs\**" />
+    <Compile Remove="Quartz.Settings\**" />
+    <Compile Remove="upload\Generator\**" />
+    <Content Remove="images\**" />
+    <Content Remove="logs\**" />
+    <Content Remove="Quartz.Settings\**" />
+    <Content Remove="upload\Generator\**" />
+    <EmbeddedResource Remove="images\**" />
+    <EmbeddedResource Remove="logs\**" />
+    <EmbeddedResource Remove="Quartz.Settings\**" />
+    <EmbeddedResource Remove="upload\Generator\**" />
+    <None Remove="images\**" />
+    <None Remove="logs\**" />
+    <None Remove="Quartz.Settings\**" />
+    <None Remove="upload\Generator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FytApi.MUI" Version="1.1.1" />
+    <PackageReference Include="FytSoa.Quartz" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageReference Include="Quartz" Version="3.6.2" />
+    <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.71" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.App">
+      <HintPath>..\Libs\Scm.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common">
+      <HintPath>..\Libs\Scm.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Crypto">
+      <HintPath>..\Libs\Scm.Common.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Dto">
+      <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Image">
+      <HintPath>..\Libs\Scm.Common.Image.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Log">
+      <HintPath>..\Libs\Scm.Common.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Text">
+      <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Uid">
+      <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Dao">
+      <HintPath>..\Libs\Scm.Dao.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Dsa.Cache">
+      <HintPath>..\Libs\Scm.Dsa.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Dsa.Dba.Sugar">
+      <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Dto">
+      <HintPath>..\Libs\Scm.Dto.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Email">
+      <HintPath>..\Libs\Scm.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Generator">
+      <HintPath>..\Libs\Scm.Generator.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server">
+      <HintPath>..\Libs\Scm.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Api">
+      <HintPath>..\Libs\Scm.Server.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Bearer">
+      <HintPath>..\Libs\Scm.Server.Bearer.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Dao">
+      <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Ioc">
+      <HintPath>..\Libs\Scm.Server.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Quartz">
+      <HintPath>..\Libs\Scm.Server.Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Swagger">
+      <HintPath>..\Libs\Scm.Server.Swagger.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="upload\images\" />
+  </ItemGroup>
+
+</Project>

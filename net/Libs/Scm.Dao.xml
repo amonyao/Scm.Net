@@ -1,0 +1,1701 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Scm.Dao</name>
+    </assembly>
+    <members>
+        <member name="T:Com.Scm.Dao.Cfg.ConfigCatDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Cfg.ConfigDao">
+            <summary>
+            系统配置
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.user_id">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.types">
+            <summary>
+            配置类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Cfg.ConfigKeyDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.DateThemeDao">
+            <summary>
+            每日主题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.DateThemeDao.dates">
+            <summary>
+            日期。
+            格式：yyyy-MM-dd
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.DateThemeDao.theme_id">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Dev.MenuDao">
+            <summary>
+            资源菜单表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.codec">
+            <summary>
+            权限标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.namec">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.ParentId">
+            <summary>
+            父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.ParentIdList">
+            <summary>
+            父节点集合组
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.Layer">
+            <summary>
+            菜单层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.url">
+            <summary>
+            路由地址
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.redirect">
+            <summary>
+            重定向
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.view">
+            <summary>
+            Vue文件路径
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.icon">
+            <summary>
+            菜单图标
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.active">
+            <summary>
+            高亮
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.color">
+            <summary>
+            颜色
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.fullpage">
+            <summary>
+            是否全屏
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.types">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.api">
+            <summary>
+            接口权限
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Dev.SysMenuApiUrl">
+            <summary>
+            接口权限
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.SysMenuApiUrl.code">
+            <summary>
+            权限标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.SysMenuApiUrl.method">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.SysMenuApiUrl.url">
+            <summary>
+            Api url
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Dev.UidDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.k">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.v">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.c">
+            <summary>
+            缓存大小
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.b">
+            <summary>
+            缓冲大小
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.l">
+            <summary>
+            数值长度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.t">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.m">
+            <summary>
+            掩码
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Dev.VerDetailDao">
+            <summary>
+            更新明细
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerDetailDao.ver_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerDetailDao.types">
+            <summary>
+            升级类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerDetailDao.content">
+            <summary>
+            升级事项
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Dev.VerHeaderDao">
+            <summary>
+            升级日志信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.types">
+            <summary>
+            应用
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.sys">
+            <summary>
+            系统
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.ver">
+            <summary>
+            当前版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.build">
+            <summary>
+            构建版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.ver_min">
+            <summary>
+            最小版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.ver_max">
+            <summary>
+            最大版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.alpha">
+            <summary>
+            是否内测
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.beta">
+            <summary>
+            是否公测
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.forced">
+            <summary>
+            强制更新
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.current">
+            <summary>
+            当前版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.remark">
+            <summary>
+            升级说明(简介)
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Msg.Message.MessageDao">
+            <summary>
+            留言消息表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.ColumnId">
+            <summary>
+            栏目Id
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.types">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.title">
+            <summary>
+            留言标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.email">
+            <summary>
+            邮箱信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.mobile">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.tags">
+            <summary>
+            留言标签
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.remark">
+            <summary>
+            留言内容
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.isread">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.is_del">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.user_id">
+            <summary>
+            收件人ID
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Msg.Notice.NoticeSenderDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeSenderDao.notice_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeSenderDao.user_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeSenderDao.handle">
+            <summary>
+            消息状态
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Sys.DicDetailDao">
+            <summary>
+            字典信息表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.dic_header_id">
+            <summary>
+            分类编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.codec">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.namec">
+            <summary>
+            字典值名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.tag">
+            <summary>
+            标记 1=默认  2=其他
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicDetailDao.cat">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Sys.DicHeaderDao">
+            <summary>
+            字典分类信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.namec">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.codec">
+            <summary>
+            分类标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.types">
+            <summary>
+            1=系统 2=商城
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.ParentId">
+            <summary>
+            父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.Layer">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.row_system">
+            <summary>
+            是否系统内置集成
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.row_delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.DicHeaderDao.details">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Sys.DicHeaderDao.GetDetailByCodec(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="codec"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dao.Sys.DicHeaderDao.GetDetailByNamec(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="namec"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dao.Sys.DicHeaderDao.GetDetail(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dao.Sys.DicHeaderDao.GetDetailByCat(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="cat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dao.Sys.DicHeaderDao.GetDetailByTag(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="tag"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Dao.Sys.LogApiDao">
+            <summary>
+            登录日志
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.Level">
+            <summary>
+            日志级别
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.types">
+            <summary>
+            日志类型  1=登录  2=操作
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.module">
+            <summary>
+            操作模块
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.method">
+            <summary>
+            提交类型：get/post/delete
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.browser">
+            <summary>
+            浏览器信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.agent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.operate_user">
+            <summary>
+            操作人
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.operate_time">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.operate_type">
+            <summary>
+            操作类型:例如添加、修改
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.ip">
+            <summary>
+            IP
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.url">
+            <summary>
+            操作地址
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.parameters">
+            <summary>
+            请求参数
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.message">
+            <summary>
+            详细信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.content">
+            <summary>
+            返回结果
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.duration">
+            <summary>
+            执行时长
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.LogApiDao.status">
+            <summary>
+            操作状态
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Sys.SchedulerDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.ThemeDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.ThemeDao.names">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.ThemeDao.theme">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.GroupDao">
+            <summary>
+            群组
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.GroupDao.codes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.GroupDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.GroupDao.names">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.GroupDao.namec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.GroupDao.pid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.GroupDao.remark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.OrganizeDao">
+            <summary>
+            组织机构表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.codes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.ParentId">
+            <summary>
+            父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.namec">
+            <summary>
+            部门名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.codec">
+            <summary>
+            机构编码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.ParentIdList">
+            <summary>
+            父节点集合
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.Layer">
+            <summary>
+            部门层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.LeaderUser">
+            <summary>
+            部门负责人
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.LeaderMobile">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.LeaderEmail">
+            <summary>
+            联系邮箱
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.OrganizeDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.PositionDao">
+            <summary>
+            岗位表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.PositionDao.codes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.PositionDao.namec">
+            <summary>
+            岗位名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.PositionDao.codec">
+            <summary>
+            岗位编码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.PositionDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.PositionDao.remark">
+            <summary>
+            备注信息
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.PositionDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.RoleAuthDao">
+            <summary>
+            授权表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleAuthDao.role_id">
+            <summary>
+            角色编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleAuthDao.auth_id">
+            <summary>
+            菜单编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleAuthDao.api">
+            <summary>
+            接口权限
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleAuthDao.types">
+            <summary>
+            授权类型1=角色-菜单
+            暂时没有使用
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.RoleDao">
+            <summary>
+            角色表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.codec">
+            <summary>
+            角色编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.names">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.namec">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.ParentId">
+            <summary>
+            角色父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.ParentIdList">
+            <summary>
+            父节点结合
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.Layer">
+            <summary>
+            角色层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.IsSystem">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.MaxLength">
+            <summary>
+            角色设置最大数量 0为不限制
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.remark">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.Console">
+            <summary>
+            控制台
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.RoleDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.UnitDao">
+            <summary>
+            租户管理
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.codes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.names">
+            <summary>
+            默认账号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.namec">
+            <summary>
+            租户名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.contact">
+            <summary>
+            负责人
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.cellphone">
+            <summary>
+            手机号码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.telephone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UnitDao.row_delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.UnitDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.UserDao">
+            <summary>
+            管理员表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.codes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.names">
+            <summary>
+            登录用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.namec">
+            <summary>
+            展示姓名
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.user">
+            <summary>
+            登录用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.pass">
+            <summary>
+            登录密码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.cellphone">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.telephone">
+            <summary>
+            固话
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.LoginTime">
+            <summary>
+            登录时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.last_time">
+            <summary>
+            上次登录时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.LoginCount">
+            <summary>
+            登录次数
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.row_delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.UserDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.UserGroupDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserGroupDao.user_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserGroupDao.group_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.UserOrganizeDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserOrganizeDao.user_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserOrganizeDao.organize_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.UserPositionDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserPositionDao.user_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserPositionDao.position_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Ur.UserRoleDao">
+            <summary>
+            用户角色关系表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserRoleDao.user_id">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserRoleDao.role_id">
+            <summary>
+            角色编号
+            </summary>
+        </member>
+        <member name="T:Scm.Dao.Msg.Notice.NoticeAttachmentDao">
+            <summary>
+            通知文件
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeAttachmentDao.notice_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeAttachmentDao.namec">
+            <summary>
+            文件名称
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeAttachmentDao.url">
+            <summary>
+            文件地址
+            </summary>
+        </member>
+        <member name="T:Scm.Dao.Msg.Notice.NoticeDao">
+            <summary>
+            通知模块
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeDao.send_user">
+            <summary>
+            发送人编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeDao.send_time">
+            <summary>
+            发送时间
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeDao.recipients">
+            <summary>
+            接收人
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeDao.title">
+            <summary>
+            通知标题
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeDao.content">
+            <summary>
+            通知内容
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeDao.files">
+            <summary>
+            附件列表
+            </summary>
+        </member>
+        <member name="T:Scm.Dao.Msg.Notice.NoticeReaderDao">
+            <summary>
+            收件相关：
+            已读模块
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.notice_id">
+            <summary>
+            通知编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.user_id">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.is_arc">
+            <summary>
+            是否归档
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.is_del">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.unread">
+            <summary>
+            未读标识
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.read_qty">
+            <summary>
+            读取次数(统计)
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.reply_qty">
+            <summary>
+            回复次数
+            </summary>
+        </member>
+        <member name="T:Scm.Dao.Msg.Notice.NoticeRecipientDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeRecipientDao.notice_id">
+            <summary>
+            通知编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeRecipientDao.user_id">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeRecipientDao.read_qty">
+            <summary>
+            读取次数
+            </summary>
+        </member>
+        <member name="T:Scm.Dao.Msg.Notice.NoticeSummaryDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.total">
+            <summary>
+            总计
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.unread">
+            <summary>
+            未读
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.draft">
+            <summary>
+            草稿
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.archived">
+            <summary>
+            归档
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.deleted">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.CalendarDao">
+            <summary>
+            日程表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.Title">
+            <summary>
+            日程标题
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.TypeId">
+            <summary>
+            日程类型
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.TypeCode">
+            <summary>
+            日程类型信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.LevelId">
+            <summary>
+            日程等级
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.LevelCode">
+            <summary>
+            日程等级信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.UserIds">
+            <summary>
+            参与人列表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.ToBusiness">
+            <summary>
+            关联业务
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.Remind">
+            <summary>
+            提醒设置
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.CalendarDao.CalendarUser">
+            <summary>
+            参与人列表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarUser.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarUser.FullName">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.CalendarDao.CalendarToBusiness">
+            <summary>
+            日程关联业务对象
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarToBusiness.ProjectType">
+            <summary>
+            项目类型
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarToBusiness.ProjectIds">
+            <summary>
+            项目唯一编号
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.CalendarDao.CalendarRemind">
+            <summary>
+            提醒对象
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarRemind.Number">
+            <summary>
+            提前数据
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarRemind.TimeType">
+            <summary>
+            时间类型
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.RegionDao">
+            <summary>
+            区域表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.names">
+            <summary>
+            区域简称
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.namef">
+            <summary>
+            区域全称
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.namee">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.ParentId">
+            <summary>
+            所属上级
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.lv">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.codes">
+            <summary>
+            城市编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.lat">
+            <summary>
+            维度
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.postcode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.p_status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.RegionDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.SysAdvColumn">
+            <summary>
+            广告位栏目表 
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.ParentId">
+            <summary>
+            父编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.ParentIdList">
+            <summary>
+            父编号集合
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Layer">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Name">
+            <summary>
+            栏目名称
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Flag">
+            <summary>
+            栏目类型
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Width">
+            <summary>
+            栏目宽度
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Height">
+            <summary>
+            栏目高度
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Status">
+            <summary>
+            栏目状态
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.Summary">
+            <summary>
+            栏目说明
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.SiteId">
+            <summary>
+            站点ID
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.CreateTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.CreateUser">
+            <summary>
+            添加人
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvColumn.UpdateUser">
+            <summary>
+            修改人
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.SysAdvInfo">
+            <summary>
+            广告位信息表 
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.ColumnId">
+            <summary>
+            栏目Id
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Title">
+            <summary>
+            广告名称
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Types">
+            <summary>
+            广告位类型
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.ImgUrl">
+            <summary>
+            广告位图片
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.LinkUrl">
+            <summary>
+            连接地址
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Target">
+            <summary>
+            跳转方式
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Summary">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Codes">
+            <summary>
+            广告位代码
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.IsTimeLimit">
+            <summary>
+            是否开启时间限制
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.BeginTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.Hits">
+            <summary>
+            广告点击率
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.CreateTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.CreateUser">
+            <summary>
+            添加人
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysAdvInfo.UpdateUser">
+            <summary>
+            修改人
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.SysRoleConflict">
+            <summary>
+            角色互斥表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleA">
+            <summary>
+            角色A
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleAObj">
+            <summary>
+            角色A信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleB">
+            <summary>
+            角色B
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleBObj">
+            <summary>
+            角色B信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.Summary">
+            <summary>
+            互斥说明
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.VoteDetailDao">
+            <summary>
+            投票项
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteDetailDao.VoteId">
+            <summary>
+            投票编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteDetailDao.Title">
+            <summary>
+            投票项标题
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteDetailDao.Count">
+            <summary>
+            投票数量
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteDetailDao.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteDetailDao.CreateUser">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.VoteHeaderDao">
+            <summary>
+            投票表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Title">
+            <summary>
+            投票标题
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Type">
+            <summary>
+            投票类型（图文、视频、分组）
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.TickRule">
+            <summary>
+            勾选规则（单选、多选）
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.SwipeRule">
+            <summary>
+            防刷规则（IP限制）
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.FileUrl">
+            <summary>
+            文件地址
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Summary">
+            <summary>
+            规则
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.VoteResultDao">
+            <summary>
+            投票日志
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteResultDao.VoteId">
+            <summary>
+            投票编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteResultDao.VoteItemId">
+            <summary>
+            投票项编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteResultDao.UserId">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteResultDao.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.VoteResultDao.CreateUser">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.WorkflowDao">
+            <summary>
+            工作流
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.TypeId">
+            <summary>
+            流程类型
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.TypeCode">
+            <summary>
+            类型信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.Title">
+            <summary>
+            流程名称
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.Refused">
+            <summary>
+            审批被拒后状态
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.Summary">
+            <summary>
+            流程说明
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.WorkflowDao.Flow">
+            <summary>
+            具体流程Json
+            </summary>
+        </member>
+    </members>
+</doc>
