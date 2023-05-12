@@ -1,0 +1,20 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/net/Samples/bin/Debug/net6.0
+/net/Samples/obj
+/net/Samples.Common/bin/Debug/net6.0
+/net/Samples.Common/obj
+/net/Samples.Common.Dto/bin/Debug/net6.0
+/net/Samples.Common.Dto/obj
+/net/Samples.Server/bin/Debug/net6.0
+/net/Samples.Server/obj
+/net/Samples.Server.Dao/bin/Debug/net6.0
+/net/Samples.Server.Dao/obj
+/net/Scm.Api/bin/Debug
+/net/Scm.Api/obj
+/net/Test/bin/Debug/net6.0
+/net/Test/obj
+/vue/node_modules
+/vue/webpack/runtime
