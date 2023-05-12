@@ -18,3 +18,4 @@
 /net/Test/obj
 /vue/node_modules
 /vue/webpack/runtime
+/net/Scm.Api/logs/apilog
