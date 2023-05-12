@@ -135,12 +135,6 @@
 
 ## 特别鸣谢
 
-1. <a href="https://gitee.com/571183806" target="_blank">**云龙**</a> 提供云服务器搭建在线演示系统
-2. <a href="https://gitee.com/Ysmc" target="_blank">**一事冇诚**</a> 对 MongoDB 数据库提供了详细测试
-3. <a href="https://gitee.com/Axxbis" target="_blank">**爱吃油麦菜**</a> 提供云服务器与二级域名搭建备份演示系统、测试环境以及图床
-4. <a href="https://gitee.com/kasenhoo" target="_blank">**kasenhoo**</a> 对 CentOS + MySql 环境提供详细测试
-5. <a href="https://gitee.com/finally44177" target="_blank">**finally44177**</a> 提供 AdminLTE UI 样式 PR 对 MongoDB 数据库提供了详细测试
-
 ## 捐助
 
 如果这个项目对您有所帮助，并希望能够给更多的提供方便，请给予我们支持，深表感谢。

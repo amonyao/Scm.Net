@@ -1,14 +1,16 @@
 ﻿using Com.Scm.Config;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Enums;
 using Com.Scm.Result;
 using Com.Scm.Samples.Demo.Dao;
 using Com.Scm.Samples.Demo.Dto;
 using Com.Scm.Samples.Demo.Dvo;
 using Com.Scm.Service;
 using Com.Scm.Utils;
-using Com.Scm.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MiniExcelLibs;
 
 namespace Com.Scm.Samples.Demo
 {
@@ -20,14 +22,16 @@ namespace Com.Scm.Samples.Demo
     {
         private readonly SugarRepository<DemoDao> _thisRepository;
         private readonly EnvConfig _Config;
+        private readonly IUserService _userService;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="thisRepository"></param>
-        public SamplesDemoService(SugarRepository<DemoDao> thisRepository, EnvConfig config)
+        public SamplesDemoService(SugarRepository<DemoDao> thisRepository, IUserService userService, EnvConfig config)
         {
             _thisRepository = thisRepository;
+            _userService = userService;
             _Config = config;
         }
 
@@ -36,14 +40,23 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<DemoDto>> GetPagesAsync(SearchRequest request)
+        public async Task<PageResult<DemoDvo>> GetPagesAsync(SearchRequest request)
         {
-            return await _thisRepository.AsQueryable()
-                //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
-                //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
-                .OrderByDescending(m => m.id)
-                .Select<DemoDto>()
+            var isEmpty = string.IsNullOrWhiteSpace(request.key);
+            var isCodes = !isEmpty && SamplesUtils.IsDemoCodes(request.key);
+
+            var result = await _thisRepository.AsQueryable()
+                .Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .WhereIF(IsNormalId(request.option_id), a => a.option_id == request.option_id)
+                .WhereIF(isCodes, a => a.codes == request.key)
+                .WhereIF(!isEmpty && !isCodes, a => a.codec.Contains(request.key) || a.names.Contains(request.key))
+            .OrderByDescending(a => a.id)
+                .Select<DemoDvo>()
                 .ToPageAsync(request.page, request.limit);
+
+            Prepare(result.Items);
+            return result;
         }
 
         /// <summary>
@@ -51,14 +64,30 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<DemoDto>> GetListAsync(SearchRequest request)
+        public async Task<List<DemoDvo>> GetListAsync(SearchRequest request)
         {
-            return await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
-                //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
-                .OrderByDescending(m => m.id)
-                .Select<DemoDto>()
+            var items = await _thisRepository.AsQueryable()
+                .Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .WhereIF(IsNormalId(request.option_id), a => a.option_id == request.option_id)
+                .WhereIF(!string.IsNullOrEmpty(request.key), a => a.codec.Contains(request.key) || a.names.Contains(request.key))
+                .OrderByDescending(a => a.id)
+                .Select<DemoDvo>()
                 .ToListAsync();
+
+            Prepare(items);
+            return items;
+        }
+
+        private void Prepare(List<DemoDvo> list)
+        {
+            foreach (var item in list)
+            {
+                item.update_names = _userService.GetUserNames(item.update_user);
+                item.create_names = _userService.GetUserNames(item.create_user);
+
+                // Others TODO
+            }
         }
 
         /// <summary>
@@ -67,11 +96,11 @@ namespace Com.Scm.Samples.Demo
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<DemoDto> GetEditAsync(long id)
+        public async Task<DemoDvo> GetEditAsync(long id)
         {
             return await _thisRepository
-                .AsQueryable()
-                .Select<DemoDto>()
+            .AsQueryable()
+                .Select<DemoDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -81,11 +110,11 @@ namespace Com.Scm.Samples.Demo
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<DemoDto> GetViewAsync(long id)
+        public async Task<DemoDvo> GetViewAsync(long id)
         {
             return await _thisRepository
-                .AsQueryable()
-                .Select<DemoDto>()
+            .AsQueryable()
+                .Select<DemoDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -136,24 +165,46 @@ namespace Com.Scm.Samples.Demo
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> UploadAsync([FromForm] UploadRequest request)
+        public async Task<UploadResponse> UploadAsync([FromForm] UploadRequest request)
         {
+            var response = new UploadResponse();
+
             //判断是否上传了文件内容
             if (request.file == null)
             {
-                return "";
+                response.SetFailure("上传内容为空！");
+                return response;
             }
 
-            var fileName = request.file.FileName;
+            #region 保存文件
+            //var fileName = request.file.FileName;
+            //var ext = Path.GetExtension(fileName);
+            //fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
 
-            var path = _Config.GetUploadPath(fileName);
-            using (var stream = File.OpenWrite(path))
+            //var path = _Config.GetUploadPath(fileName);
+            //using (var stream = File.OpenWrite(path))
+            //{
+            //    //将文件内容复制到流中
+            //    await request.file.CopyToAsync(stream);
+            //}
+            //response.file = fileName;
+            //response.SetSuccess("文件上传成功！");
+            #endregion
+
+            #region 数据导入
+            using (var stream = request.file.OpenReadStream())
             {
-                //将文件内容复制到流中
-                await request.file.CopyToAsync(stream);
+                var list = stream.Query<DemoExcelDvo>();
+                foreach (var item in list)
+                {
+                    var dao = item.Clone<DemoDao>();
+                    await _thisRepository.InsertAsync(dao);
+                }
             }
+            #endregion
 
-            return fileName;
+            response.SetSuccess("文件导入成功！");
+            return response;
         }
 
         /// <summary>

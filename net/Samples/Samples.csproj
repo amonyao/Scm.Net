@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="MiniExcel" Version="1.30.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.71" />
   </ItemGroup>
@@ -21,6 +22,9 @@
     </Reference>
     <Reference Include="Scm.Common.Text">
       <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Uid">
+      <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
