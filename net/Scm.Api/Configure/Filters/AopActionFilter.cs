@@ -24,19 +24,9 @@ public class AopActionFilter : IAsyncActionFilter
 {
     private static readonly List<string> IgnoreApi = new()
     {
-        "api/sysfile/",
-        "/api/exammaterial/upload",
-        "api/captcha",
+        "/api/sysfile/",
+        "/api/captcha",
         "/chathub"
-    };
-
-    private static readonly List<string> IgnorePowerApi = new()
-    {
-        "api/sysfile/",
-        "/api/exammaterial/upload",
-        "api/captcha",
-        "/chathub",
-        "login"
     };
 
     private readonly LogApiService _logService;
@@ -55,16 +45,6 @@ public class AopActionFilter : IAsyncActionFilter
         {
             _Config = new SecurityConfig();
         }
-    }
-
-    private static bool IsIgnorePowerApi(string url)
-    {
-        var isIgnore = false;
-        foreach (var item in IgnorePowerApi.Where(url.Contains))
-        {
-            isIgnore = true;
-        }
-        return isIgnore;
     }
 
     private static bool IsIgnoreApi(string url)

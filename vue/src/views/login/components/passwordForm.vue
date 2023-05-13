@@ -110,7 +110,7 @@ export default {
 
 			this.loadCfg();
 
-			let path = userRes.data.userInfo.unitId == 0 ? "/" : "/tenant";
+			let path = userRes.data.userInfo.unitId == 0 ? "/" : "/";//TODO:区分管理员与用户
 			this.$router.replace({ path: path });
 			this.$message.success("Login Success 登录成功");
 		},

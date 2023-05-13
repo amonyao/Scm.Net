@@ -1,0 +1,107 @@
+<template>
+	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="420px" @close="close">
+		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
+			<el-form-item label="键" prop="k">
+				<el-input v-model="formData.k" placeholder="请输入键" :maxlength="32" show-word-limit clearable></el-input>
+			</el-form-item>
+			<el-form-item label="当前值" prop="v">
+				<el-input v-model="formData.v" placeholder="请输入当前值" :maxlength="20" show-word-limit clearable></el-input>
+			</el-form-item>
+			<el-form-item label="缓存大小" prop="c">
+				<el-input-number v-model="formData.c" placeholder="请输入缓存大小" />
+			</el-form-item>
+			<el-form-item label="缓冲大小" prop="b">
+				<el-input-number v-model="formData.b" placeholder="请输入缓冲大小" />
+			</el-form-item>
+			<el-form-item label="数值长度" prop="l">
+				<el-input-number v-model="formData.l" placeholder="请输入数值长度" />
+			</el-form-item>
+			<el-form-item label="掩码" prop="m">
+				<el-input v-model="formData.m" placeholder="请输入掩码" :maxlength="8" show-word-limit clearable></el-input>
+			</el-form-item>
+
+		</el-form>
+
+		<template #footer>
+			<el-button @click="close">取 消</el-button>
+			<el-button :loading="isSaveing" type="primary" @click="save">
+				确 定
+			</el-button>
+		</template>
+	</sc-dialog>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			mode: "add",
+			titleMap: { add: "新增", edit: "编辑" },
+			visible: false,
+			isSaveing: false,
+			formData: this.def_data(),
+			rules: {
+				k: [{ required: true, trigger: "blur", message: "请输入键" }],
+				v: [{ required: true, trigger: "blur", message: "请输入值" }]
+			},
+		};
+	},
+	mounted() {
+	},
+	methods: {
+		def_data() {
+			return {
+				id: 0,
+				k: '',
+				v: '',
+				c: 0,
+				b: 0,
+				l: 0,
+				t: '',
+				m: '',
+			}
+		},
+		async open(row) {
+			if (!row || !row.id) {
+				this.mode = "add";
+			} else {
+				this.mode = "edit";
+				var res = await this.$API.sysuid.edit.get(row.id);
+				this.formData = res.data;
+			}
+			this.visible = true;
+		},
+		save() {
+			this.$refs.formRef.validate(async (valid) => {
+				if (valid) {
+					this.isSaveing = true;
+					let res = null;
+					if (this.formData.id === 0) {
+						res = await this.$API.sysuid.add.post(this.formData);
+					} else {
+						res = await this.$API.sysuid.update.put(this.formData);
+					}
+					this.isSaveing = false;
+					if (res.code == 200) {
+						this.$emit("complete");
+						this.visible = false;
+						this.$message.success("保存成功");
+					} else {
+						this.$alert(res.message, "提示", { type: "error" });
+					}
+				}
+			});
+		},
+		close() {
+			this.formData = this.def_data();
+			this.$refs.formRef.resetFields();
+			this.visible = false;
+		},
+	},
+};
+</script>
+
+<style>
+.el-input-number {
+	width: 100%;
+}
+</style>

@@ -100,3 +100,5 @@
 {"task":null,"group":null,"begin_time":"2023-05-12T17:38:21.9915294+08:00","end_time":null,"result":"任务初始化未启动,出现异常,异常信息Name cannot be null. (Parameter 'name')","id":0}
 {"task":null,"group":null,"begin_time":"2023-05-12T18:21:30.1347487+08:00","end_time":null,"result":"任务初始化未启动,出现异常,异常信息Name cannot be null. (Parameter 'name')","id":0}
 {"task":null,"group":null,"begin_time":"2023-05-12T18:21:30.1673729+08:00","end_time":null,"result":"任务初始化未启动,出现异常,异常信息Name cannot be null. (Parameter 'name')","id":0}
+{"task":null,"group":null,"begin_time":"2023-05-13T20:00:30.4515289+08:00","end_time":null,"result":"任务初始化未启动,出现异常,异常信息Name cannot be null. (Parameter 'name')","id":0}
+{"task":null,"group":null,"begin_time":"2023-05-13T20:00:30.4896969+08:00","end_time":null,"result":"任务初始化未启动,出现异常,异常信息Name cannot be null. (Parameter 'name')","id":0}
