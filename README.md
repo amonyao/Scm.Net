@@ -22,26 +22,26 @@
 4. 适配多场景异构应用需求，DTO（数据传输层）统一使用**蛇形命名法**；  
 
 ## 主要功能  
-1. 首页自定义风格；
-2. 支持多种登录方式（账户、手机、三方等）；
-3. 支持代码自动生成，支持自定义代码模板；
-4. 集成ID生成器，支持雪花ID、序列ID、格式ID等多种生成方式；
-5. 支持多级权限管理：公司管理、部门管理、岗位管理、分组管理、用户管理、角色管理等。
-6. 支持全局数据字典；
-7. 支持全局配置参数；
-8. 支持多种数据引擎（**MySQL**、**SQL Server**、**Oracle**、**SQLite**、**MariaDB**、**Postgresql**、**Firebird**、**MongoDB**等）；
-9. 支持多种缓存机制（**MemoryCache**、**Map**、**Redis**等）；
-10. 支持**登录日志**与**操作日志**，并记录用户跟进信息（**登录主机**、**操作系统**、**浏览器**等）；
+1. 首页自定义风格；  
+2. 支持多种登录方式（账户、手机、三方等）；  
+3. 支持代码自动生成，支持自定义代码模板；  
+4. 集成ID生成器，支持雪花ID、序列ID、格式ID等多种生成方式；  
+5. 支持多级权限管理：公司管理、部门管理、岗位管理、分组管理、用户管理、角色管理等。  
+6. 支持全局数据字典；  
+7. 支持全局配置参数；  
+8. 支持多种数据引擎（**MySQL**、**SQL Server**、**Oracle**、**SQLite**、**MariaDB**、**Postgresql**、**Firebird**、**MongoDB**等）；  
+9. 支持多种缓存机制（**MemoryCache**、**Map**、**Redis**等）；  
+10. 支持**登录日志**与**操作日志**，并记录用户跟进信息（**登录主机**、**操作系统**、**浏览器**等）；  
 
 ## 更新日志：
-[更新日志](https://gitee.com/zenoyao/scm.net/wikis/更新日志)
+[更新日志](https://gitee.com/zenoyao/scm.net/wikis/更新日志)  
 
 ## 项目特色
-1. 系统提供完善的示例与操作说明；
-2. 系统将不同的功能进行模块化拆分，可以根据需要引入使用；
-3. 前台与后台系统分离，分别为不同的系统（域名可独立）；
-4. 后台系统无需任何二次开发，直接发布即可使用；
-5. 可扩展为多租户、多组织架构应用；
+1. 系统提供完善的示例与操作说明；  
+2. 系统将不同的功能进行模块化拆分，可以根据需要引入使用；  
+3. 前台与后台系统分离，分别为不同的系统（域名可独立）；  
+4. 后台系统无需任何二次开发，直接发布即可使用；  
+5. 可扩展为多租户、多组织架构应用；  
 
 [查看文档](https://gitee.com/zenoyao/scm.net/wikis/%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D)
 
@@ -75,9 +75,6 @@
 | **MacOS**   | 支持          | 支持          | N/A                   | N/A                | 支持           | 支持          |
 | **Linux**   | 支持          | 支持          | N/A                   | N/A                | N/A            | N/A           |
 
-## QQ交流群
-[![QQ](https://img.shields.io/badge/QQ-795206915-green.svg?logo=tencent%20qq&logoColor=red)](https://shang.qq.com/wpa/qunwpa?idkey=d381355e50ff91db410c3da3eadb081ba859f64c2877e86343f4709b171f28b8)
-
 ## 开发环境搭建
 1. 安装 .Net sdk（.Net6或以上）[官方网址](https://dotnet.microsoft.com)
 2. 安装 Visual Studio（2022或以上）[官方网址](https://visualstudio.microsoft.com)
@@ -110,8 +107,13 @@
 1. 前端代码借鉴自 **[SCUI](https://gitee.com/feiyit/scui)**；  
 2. 动态API代码借鉴自 **[Panda.DynamicWebApi](https://gitee.com/mirrors/Panda.DynamicWebApi)**；  
 
+## QQ交流群
+
+![QQ](https://img.shields.io/badge/QQ-415872667-green.svg?logo=tencent%20qq&logoColor=red)  
+<img src="https://gitee.com/zenoyao/scm.net/raw/master/qq.jpg" width="30%"/>
+
 ## 支持作者
 
-如果这个项目对您有所帮助，并希望能够给更多的提供方便，请给予我们支持，深表感谢。
+如果这个项目对您有所帮助，并希望能够给更多的提供方便，请给予笔者支持，深表感谢。
 
-<img src="https://gitee.com/zenoyao/scm.net/images/WeChat/BarCode@2x.png" width="382px;" />
+<img src="https://gitee.com/zenoyao/scm.net/raw/master/wepay.jpg" width="30%"/>
