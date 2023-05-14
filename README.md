@@ -1,7 +1,7 @@
-﻿# SCM.NET
+﻿# Scm.Net
 
 ## 项目介绍
-一款基于.Net6/7及Vue3的中后台管理系统快速开发框架。  
+一款基于.Net6/7及Vue3适用于中后台管理系统的快速开发框架。  
 笔者从事供应链系统产研多年，经常面对异构应用场景需求，在梳理之前多种项目经验的过程中，特开发此项目以期帮助各位同仁位快速搭建一个完整的开发框架，并满足多场景下的异构应用场景需求。  
 以下是笔者以及其它伙伴基于此项目开发的产品：OMS（订单管理系统）、WMS（仓储管理系统）、TMS（运输管理系统）、DMS（配送管理系统）、BMS（计费管理系统）、YMS（园区管理系统）、IOT（物联网管理系统）等。  
 当然，此项目还在不断完善的过程中，还存在不少待完善的事项，也欢迎有兴趣的同仁一起交流沟通。  
@@ -34,7 +34,7 @@
 10. 支持**登录日志**与**操作日志**，并记录用户跟进信息（**登录主机**、**操作系统**、**浏览器**等）；  
 
 ## 更新日志：
-[更新日志](https://gitee.com/zenoyao/scm.net/wikis/更新日志)  
+[更新日志](https://gitee.com/openscm/scm.net/wikis/更新日志)  
 
 ## 项目特色
 1. 系统提供完善的示例与操作说明；  
@@ -43,7 +43,7 @@
 4. 后台系统无需任何二次开发，直接发布即可使用；  
 5. 可扩展为多租户、多组织架构应用；  
 
-[查看文档](https://gitee.com/zenoyao/scm.net/wikis/%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D)
+[查看文档](https://gitee.com/openscm/scm.net/wikis/%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D)
 
 ## 浏览器支持
 
@@ -76,12 +76,12 @@
 | **Linux**   | 支持          | 支持          | N/A                   | N/A                | N/A            | N/A           |
 
 ## 开发环境搭建
-1. 安装 .Net sdk（.Net6或以上）[官方网址](https://dotnet.microsoft.com)
+1. 安装 .Net SDK（.Net6或以上）[官方网址](https://dotnet.microsoft.com)
 2. 安装 Visual Studio（2022或以上）[官方网址](https://visualstudio.microsoft.com)
 3. 安装 MariaDB（10.3或上）[官方网址](https://mariadb.org)
-4. 获取项目代码 [Scm.NET](https://gitee.com/zenoyao/scm.net)
-5. 环境搭建教程：[详细说明](https://gitee.com/zenoyao/scm.net/wikis/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B)
-6. 数据库配置：[详细说明](https://gitee.com/zenoyao/scm.net/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
+4. 获取项目代码：[Scm.NET](https://gitee.com/openscm/scm.net)
+5. 环境搭建教程：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B)
+6. 数据库配置：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
 
 ## 演示地址  
 [![website1](https://img.shields.io/badge/linux-http://scm.leadiot.cn-success.svg?logo=buzzfeed&logoColor=green)](http://scm.leadiot.cn)  
@@ -91,17 +91,17 @@
 普通账号：User@demo/123654  
 
 ## 常见问题
-请点击 [查看文档](https://gitee.com/zenoyao/scm.net/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) 查看常见问题小节  
+请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) 查看常见问题小节  
 
 ## 开源协议
-[![Gitee license](https://img.shields.io/github/license/argozhang/bootstrapadmin.svg?logo=git&logoColor=red)](https://gitee.com/zenoyao/scm.net/blob/master/LICENSE)
+[![Gitee license](https://img.shields.io/github/license/argozhang/bootstrapadmin.svg?logo=git&logoColor=red)](https://gitee.com/openscm/scm.net/blob/master/LICENSE)
 
 ## 项目截图
 后台首页
 
-![后台首页](https://gitee.com/zenoyao/scm.net/images/BA02-01.png "BAHome-01.png")
+![后台首页](https://gitee.com/openscm/scm.net/images/BA02-01.png "BAHome-01.png")
 
-更多截图请点击 [查看文档](https://gitee.com/zenoyao/scm.net/wikis) 查看项目截图小节  
+更多截图请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis) 查看项目截图小节  
 
 ## 特别鸣谢
 1. 前端代码借鉴自 **[SCUI](https://gitee.com/feiyit/scui)**；  
@@ -110,10 +110,10 @@
 ## QQ交流群
 
 ![QQ](https://img.shields.io/badge/QQ-415872667-green.svg?logo=tencent%20qq&logoColor=red)  
-<img src="https://gitee.com/zenoyao/scm.net/raw/master/qq.jpg" width="30%"/>
+<img src="https://gitee.com/openscm/scm.net/raw/master/qq.jpg" width="30%"/>
 
 ## 支持作者
 
 如果这个项目对您有所帮助，并希望能够给更多的提供方便，请给予笔者支持，深表感谢。
 
-<img src="https://gitee.com/zenoyao/scm.net/raw/master/wepay.jpg" width="30%"/>
+<img src="https://gitee.com/openscm/scm.net/raw/master/wepay.jpg" width="30%"/>
