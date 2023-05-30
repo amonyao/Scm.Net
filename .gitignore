@@ -19,3 +19,4 @@
 /vue/node_modules
 /vue/webpack/runtime
 /net/Scm.Api/logs/apilog
+/net/Scm.Api/logs
