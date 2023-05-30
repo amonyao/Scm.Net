@@ -1,195 +1,158 @@
 <template>
-	<el-main>
-		<el-row :gutter="15">
-			<el-col :xl="6" :lg="6" :md="8" :sm="12" :xs="24" v-for="item in list" :key="item.id">
-				<el-card class="task task-item" shadow="hover">
-					<h2>【{{ item.groupName }}】{{ item.taskName }}</h2>
-					<ul>
-						<li>
-							<h4>
-								{{ item.taskType == 1 ? "执行类" : "执行Api" }}
-							</h4>
-							<p style="height: 40px">
-								{{ item.taskType == 1 ? item.dllClassName : item.apiUrl }}
-							</p>
-						</li>
-						<li>
-							<h4>定时规则</h4>
-							<p>{{ item.interval }}</p>
-						</li>
-						<li>
-							<h4>最后一次执行时间</h4>
-							<p>
-								{{ !item.lastRunTime ? "--" : item.lastRunTime }}
-							</p>
-						</li>
-					</ul>
-					<div class="bottom">
-						<div class="state">
-							<el-tag v-if="item.status == 1">
-								{{ formatStatues(item.status) }}
-							</el-tag>
-							<el-tag v-if="item.status == 2" type="danger">
-								{{ formatStatues(item.status) }}
-							</el-tag>
-							<el-tag v-if="item.status == 3" type="info">
-								{{ formatStatues(item.status) }}
-							</el-tag>
-							<el-tag v-if="item.status == 4" type="warning">
-								{{ formatStatues(item.status) }}
-							</el-tag>
-							<el-tag v-if="item.status == 5" type="danger">
-								{{ formatStatues(item.status) }}
-							</el-tag>
-							<el-tag v-if="item.status == 6">
-								{{ formatStatues(item.status) }}
-							</el-tag>
-						</div>
-						<div class="handler">
-							<el-popconfirm title="确定立即执行吗？" @confirm="start(item)">
-								<template #reference>
-									<el-button type="primary" icon="el-icon-caret-right" circle></el-button>
-								</template>
-							</el-popconfirm>
-							<el-dropdown @command="handleCommand">
-								<el-button type="primary" icon="el-icon-more" circle plain></el-button>
-								<template #dropdown>
-									<el-dropdown-menu>
-										<el-dropdown-item :command="{ type: 'pause', model: item }">
-											暂停
-										</el-dropdown-item>
-										<el-dropdown-item :command="{ type: 'run', model: item }">
-											执行
-										</el-dropdown-item>
-										<el-dropdown-item :command="{ type: 'logs', model: item }">
-											日志
-										</el-dropdown-item>
-										<el-dropdown-item :command="{ type: 'edit', model: item }">
-											编辑
-										</el-dropdown-item>
-										<el-dropdown-item :command="{ type: 'del', model: item }" divided>
-											删除
-										</el-dropdown-item>
-									</el-dropdown-menu>
-								</template>
-							</el-dropdown>
-						</div>
-					</div>
-				</el-card>
-			</el-col>
-			<el-col :xl="6" :lg="6" :md="8" :sm="12" :xs="24">
-				<el-card class="task task-add" shadow="none" @click="add">
-					<el-icon><el-icon-plus /></el-icon>
-					<p>添加计划任务</p>
-				</el-card>
-			</el-col>
-		</el-row>
-	</el-main>
-	<modify ref="modify" @complete="init" />
-	<logs ref="logs"></logs>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
+				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
+				<el-divider direction="vertical"></el-divider>
+				<el-button-group>
+					<el-tooltip content="启用">
+						<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
+							@click="status_list(1)"></el-button>
+					</el-tooltip>
+					<el-tooltip content="停用">
+						<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
+							@click="status_list(2)"></el-button>
+					</el-tooltip>
+					<el-tooltip content="删除">
+						<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
+							@click="delete_list"></el-button>
+					</el-tooltip>
+				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-button-group>
+					<el-tooltip content="暂停">
+						<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
+							@click="pause_job"></el-button>
+					</el-tooltip>
+					<el-tooltip content="执行">
+						<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
+							@click="run_job"></el-button>
+					</el-tooltip>
+					<el-tooltip content="日志">
+						<el-button type="primary" icon="el-icon-delete" plain :disabled="selection.length == 0"
+							@click="show_log"></el-button>
+					</el-tooltip>
+				</el-button-group>
+			</div>
+			<div class="right-panel">
+				<div class="right-panel-search">
+					<el-input v-model="param.key" clearable placeholder="群组名称" />
+					<el-button icon="el-icon-search" type="primary" @click="search" />
+				</div>
+			</div>
+		</el-header>
+		<el-main class="nopadding">
+			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+				@selection-change="selectionChange">
+				<!-- 固定列-选择列 -->
+				<el-table-column fixed type="selection" width="60" />
+				<el-table-column align="center" fixed="right" label="操作" width="140">
+					<template #default="scope">
+						<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
+							编辑
+						</el-button>
+						<el-divider direction="vertical" />
+						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row, scope.$index)">
+							<template #reference>
+								<el-button text :disabled="scope.row.isSystem" type="primary" size="small">删除</el-button>
+							</template>
+						</el-popconfirm>
+					</template>
+				</el-table-column>
+				<template #row_status="scope">
+					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
+						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
+							@change="status_item($event, scope.row)">
+						</el-switch>
+					</el-tooltip>
+				</template>
+				<template #isSystem="{ data }">
+					<el-tag :type="data.isSystem ? 'success' : 'danger'">
+						{{ data.isSystem ? "是" : "否" }}
+					</el-tag>
+				</template>
+				<template #maxLength="{ data }">
+					<el-tag type="info">
+						{{ data.maxLength == 0 ? "不限制" : data.maxLength }}
+					</el-tag>
+				</template>
+			</scTable>
+		</el-main>
+		<edit ref="edit" @complete="complete" />
+		<logs ref="logs"></logs>
+	</el-container>
 </template>
-
 <script>
-import modify from "./modify";
-import logs from "./logs";
-
+import { defineAsyncComponent } from "vue";
 export default {
-	name: "task",
 	components: {
-		modify,
-		logs,
+		edit: defineAsyncComponent(() => import("./edit")),
+		logs: defineAsyncComponent(() => import("./logs")),
 	},
 	data() {
 		return {
+			apiObj: this.$API.sysquartz.page,
 			list: [],
+			param: {
+				key: '',
+			},
+			selection: [],
+			column: [
+				{ label: "id", prop: "id", hide: true, },
+				{ prop: "names", label: "任务名称", align: "left", },
+				{ prop: "group", label: "任务分组", align: "left", },
+				{ prop: "types", label: "任务类型", align: "left", },
+				{ prop: "status", label: "执行状态", align: "left", },
+				{ prop: "remark", label: "备注", align: "left", },
+				{ prop: "row_status", label: "数据状态", width: "80", },
+				{ prop: "update_time", label: "更新时间", width: "150", sortable: true, },
+				{ prop: "create_time", label: "创建时间", width: "150", sortable: true, },
+			],
 		};
 	},
 	mounted() {
-		this.init();
 	},
 	methods: {
-		async init() {
-			const res = await this.$API.sysquartz.list.get();
-			if (res.code == 200) {
-				this.list = res.data;
-				console.log('list', this.list)
+		complete() {
+			this.$refs.table.refresh();
+		},
+		search() {
+			this.$refs.table.upData(this.param);
+		},
+		async status_item(e, row) {
+			this.$SCM.status_item(this, this.$API.sysquartz.status, row, row.row_status);
+		},
+		status_list(status) {
+			this.$SCM.status_list(this, this.$API.sysquartz.status, this.selection, status);
+		},
+		async delete_item(row) {
+			this.$SCM.delete_item(this, this.$API.sysquartz.delete, row);
+		},
+		delete_list() {
+			this.$SCM.delete_list(this, this.$API.sysquartz.delete, this.selection);
+		},
+		open_dialog(row) {
+			this.$refs.edit.open(row);
+		},
+		selectionChange(selection) {
+			this.selection = selection;
+		},
+		menuHandle(obj) {
+			if (obj.command == "add") {
+				this.open_dialog({});
+			}
+			if (obj.command == "edit") {
+				this.open_dialog(obj.row);
+			}
+			if (obj.command == "delete") {
+				this.delete_item(obj.row);
 			}
 		},
-		add(row) {
-			if (row.id) {
-				this.$refs.modify.open(row);
-			} else {
-				this.$refs.modify.open();
-			}
-		},
-		del(task) {
-			const that = this;
-			this.$confirm(`确认删除 ${task.taskName} 计划任务吗？`, "提示", {
-				type: "warning",
-				confirmButtonText: "删除",
-				confirmButtonClass: "el-button--danger",
-			})
-				.then(async () => {
-					var res = await that.$API.sysquartz.delete.delete(task);
-					if (res.code == 200) {
-						that.init();
-					} else {
-						that.$alert(res.message, "提示", { type: "error" });
-					}
-				})
-				.catch(() => {
-					//取消
-				});
-		},
-		formatStatues(val) {
-			switch (val) {
-				case 1:
-					return "新增";
-				case 2:
-					return "删除";
-				case 3:
-					return "修改";
-				case 4:
-					return "暂停";
-				case 5:
-					return "停止";
-				case 6:
-					return "运行中";
-				case 7:
-					return "立即执行";
-				default:
-					return "";
-			}
-		},
-		async start(item) {
-			var res = await this.$API.sysquartz.start.put(item);
-			if (res.code == 200) {
-				this.init();
-			} else {
-				this.$alert(res.message, "提示", { type: "error" });
-			}
-		},
-		async handleCommand(arg) {
-			let res = null;
-			switch (arg.type) {
-				case "run":
-					res = await this.$API.sysquartz.run.put(arg.model);
-					break;
-				case "pause":
-					res = await this.$API.sysquartz.pause.put(arg.model);
-					break;
-				case "del":
-					this.del(arg.model);
-					break;
-				case "edit":
-					this.add(arg.model);
-					break;
-				case "logs":
-					this.$refs.logs.opens(arg.model);
-					break;
-			}
+		async pause_job() {
+			var row = this.selection[0];
+			var res = await this.$API.sysquartz.pause.put(row);
 			if (res) {
-				if (res.code == 200 && res.data.status) {
+				if (res.code == 200 && res.data.handle) {
 					this.$message.success("操作成功");
 					this.init();
 				} else {
@@ -197,65 +160,21 @@ export default {
 				}
 			}
 		},
+		async run_job() {
+			var row = this.selection[0];
+			var res = await this.$API.sysquartz.run.put(row);
+			if (res) {
+				if (res.code == 200 && res.data.handle) {
+					this.$message.success("操作成功");
+					this.init();
+				} else {
+					this.$alert(res.data.message, "提示", { type: "error" });
+				}
+			}
+		},
+		async show_log(row) {
+			this.$refs.logs.opens(row);
+		},
 	},
 };
 </script>
-
-<style scoped>
-.task {
-	height: 280px;
-}
-
-.task-item h2 {
-	font-size: 15px;
-	color: #3c4a54;
-	padding-bottom: 15px;
-}
-
-.task-item li {
-	list-style-type: none;
-	margin-bottom: 10px;
-}
-
-.task-item li h4 {
-	font-size: 12px;
-	font-weight: normal;
-	color: #999;
-}
-
-.task-item li p {
-	margin-top: 5px;
-}
-
-.task-item .bottom {
-	border-top: 1px solid #ebeef5;
-	text-align: right;
-	padding-top: 10px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.task-add {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	cursor: pointer;
-	color: #999;
-}
-
-.task-add:hover {
-	color: #409eff;
-}
-
-.task-add i {
-	font-size: 30px;
-}
-
-.task-add p {
-	font-size: 12px;
-	margin-top: 20px;
-}
-</style>

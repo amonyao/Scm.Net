@@ -29,18 +29,20 @@ public class AopActionFilter : IAsyncActionFilter
         "/chathub"
     };
 
+    private readonly EnvConfig _EnvConfig;
     private readonly LogApiService _logService;
     private readonly OperatorService _operatorService;
     private readonly JwtContextHolder _jwtContextHolder;
     private static SecurityConfig _Config;
 
-    public AopActionFilter(LogApiService logService, OperatorService operatorService, JwtContextHolder jwtContextHolder)
+    public AopActionFilter(EnvConfig envConfig, LogApiService logService, OperatorService operatorService, JwtContextHolder jwtContextHolder)
     {
+        _EnvConfig = envConfig;
         _logService = logService;
         _operatorService = operatorService;
         _jwtContextHolder = jwtContextHolder;
 
-        _Config = AppUtils.GetConfig<SecurityConfig>(SecurityConfig.Name);
+        _Config = AppUtils.GetConfig<SecurityConfig>(SecurityConfig.NAME);
         if (_Config == null)
         {
             _Config = new SecurityConfig();

@@ -38,6 +38,8 @@
   <ItemGroup>
     <PackageReference Include="FytApi.MUI" Version="1.1.1" />
     <PackageReference Include="FytSoa.Quartz" Version="1.0.1" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
@@ -119,10 +121,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="upload\images\" />
   </ItemGroup>
 
 </Project>

@@ -15,18 +15,18 @@
 					</sc-table-select>
 				</div>
 				<div class="right-panel">
-					<el-select v-model="param.typeId" placeholder="日程类型" style="width: 160px" clearable>
-						<el-option v-for="item in typeOption" :key="item.value" :label="item.label" :value="item.value" />
+					<el-select v-model="param.types" placeholder="日程类型" style="width: 160px" clearable>
+						<el-option v-for="item in types_list" :key="item.value" :label="item.label" :value="item.id" />
 					</el-select>
-					<el-select v-model="param.levelId" placeholder="日程级别" style="width: 160px" clearable>
-						<el-option v-for="item in levelOption" :key="item.value" :label="item.label" :value="item.value">
+					<el-select v-model="param.level" placeholder="日程级别" style="width: 160px" clearable>
+						<el-option v-for="item in level_list" :key="item.value" :label="item.label" :value="item.id">
 							<span style="float: left">{{ item.label }}</span>
 							<span style="float: right">
 								<small class="circle" :style="{ 'background-color': item.color }"></small>
 							</span>
 						</el-option>
 					</el-select>
-					<el-button icon="el-icon-search" type="primary" @click="init" />
+					<el-button icon="el-icon-search" type="primary" @click="list_data" />
 				</div>
 			</el-header>
 			<el-calendar v-model="toDay" ref="calendar">
@@ -44,7 +44,7 @@
 						<div v-if="getData(data.day) && data.type == 'current-month'" class="calendar-item-info">
 							<template v-for="(item, index) in getData(data.day)" :key="index">
 								<div class="calendar-item-text" v-if="index < 2"
-									:style="{ 'border-left': '3px solid ' + item.levelCode.codeValues, }">
+									:style="{ 'border-left': '3px solid ' + item.level, }">
 									{{ item.title }}
 								</div>
 							</template>
@@ -67,14 +67,14 @@
 					<div class="task-list">
 						<template v-if="dayItem">
 							<el-card shadow="hover" v-for="task in dayItem" :key="task.id" :class="stateMap[task.state]"
-								:style="{ 'border-color': task.levelCode.codeValues, }">
+								:style="{ 'border-color': task.level, }">
 								<h2>{{ task.title }}</h2>
 								<div class="task-bottom">
 									<el-tag type="success" round size="small">
-										{{ task.typeCode.name }}
+										{{ task.types_names }}
 									</el-tag>
-									<div class="level" :style="{ 'background-color': task.levelCode.codeValues, }">
-										{{ task.levelCode.name }}
+									<div class="level" :style="{ 'background-color': task.level, }">
+										{{ task.level_names }}
 									</div>
 									<el-dropdown size="small">
 										<el-button icon="el-icon-more" circle />
@@ -134,21 +134,21 @@ export default {
 				complete: "complete",
 				timeout: "timeout",
 			},
-			apiObj: this.$API.uruser.page,
+			apiObj: this.$API.uruser.simple,
 			selectUser: {},
 			props: {
-				label: "namec",
+				label: "names",
 				value: "id",
 				keyword: "keyword",
 			},
 			param: {
-				id: undefined,
-				typeId: undefined,
-				levelId: undefined,
+				user_id: '0',
+				types: '0',
+				level: '0',
 				toDay: null,
 			},
-			typeOption: [],
-			levelOption: [],
+			types_list: [],
+			level_list: [],
 			toDay: new Date(this.demoDay()),
 			resData: [],
 			groupTime: {},
@@ -164,52 +164,22 @@ export default {
 		},
 	},
 	mounted() {
-		this.initTypeOption();
-		this.initLevelOption();
 		this.init();
+		this.list_data();
 	},
 	methods: {
 		async init() {
-			if (!this.param.typeId) {
-				this.param.typeId = undefined;
-			}
-			if (!this.param.levelId) {
-				this.param.levelId = undefined;
-			}
+			this.$SCM.list_dic(this.types_list, 'calendar-type', true);
+			this.$SCM.list_dic(this.level_list, 'calendar-level', true);
+		},
+		async list_data() {
 			const res = await this.$API.syscalendar.list.get(this.param);
 			res.data.forEach((m) => {
-				m.beginTime = m.startTime;
-				m.startTime = this.$TOOL.dateFormat(m.startTime, "yyyy-MM-dd");
+				m.beginTime = m.start_time;
+				m.start_time = this.$TOOL.dateFormat(m.start_time, "yyyy-MM-dd");
 			});
 			this.resData = res.data;
-			this.data = this.getGroup(this.resData, "startTime");
-		},
-		async initTypeOption() {
-			const res = await this.$API.sysdicdetail.list.get({
-				typeCode: "calendar-type",
-			});
-			if (res.code == 200) {
-				res.data.forEach((e) => {
-					this.typeOption.push({
-						label: e.name,
-						value: e.id,
-					});
-				});
-			}
-		},
-		async initLevelOption() {
-			const res = await this.$API.sysdicdetail.list.get({
-				typeCode: "calendar-level",
-			});
-			if (res.code == 200) {
-				res.data.forEach((e) => {
-					this.levelOption.push({
-						label: e.name,
-						value: e.id,
-						color: e.codeValues,
-					});
-				});
-			}
+			this.data = this.getGroup(this.resData, "start_time");
 		},
 		getData(date) {
 			return this.data[date];
@@ -222,7 +192,7 @@ export default {
 		},
 		userChange(val) {
 			this.selectUser = val;
-			this.param.id = val.id;
+			this.param.user_id = val.id;
 		},
 		getGroup(data, key) {
 			let groups = {};
@@ -236,7 +206,7 @@ export default {
 		selectDate(val) {
 			this.$refs.calendar.selectDate(val);
 			this.param.toDay = this.$TOOL.dateFormat(this.toDay, "yyyy-MM-dd");
-			this.init();
+			this.list_data();
 		},
 		delTask(row) {
 			this.$confirm(`确定删除选中的 ${row.title} 吗？`, "提示", {
@@ -252,7 +222,7 @@ export default {
 					if (res.code == 200) {
 						loading.close();
 						this.$message.success("删除成功");
-						this.init();
+						this.list_data();
 					} else {
 						this.$alert(res.message, "提示", { type: "error" });
 					}

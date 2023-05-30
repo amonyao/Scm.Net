@@ -355,6 +355,81 @@
             消息状态
             </summary>
         </member>
+        <member name="T:Com.Scm.Dao.Sys.Calendar.CalendarDao">
+            <summary>
+            日程表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.title">
+            <summary>
+            日程标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.types">
+            <summary>
+            日程类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.level">
+            <summary>
+            日程等级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.important">
+            <summary>
+            重要程度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.urgent">
+            <summary>
+            紧急程度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.start_time">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.end_time">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.remind_type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.remind_time">
+            <summary>
+            提醒设置
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.repeat_type">
+            <summary>
+            重复方式
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarDao.repeat_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Sys.Calendar.CalendarUserDao">
+            <summary>
+            参与人列表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarUserDao.calendar_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.Calendar.CalendarUserDao.user_id">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Com.Scm.Dao.Sys.DicDetailDao">
             <summary>
             字典信息表
@@ -1026,6 +1101,468 @@
             角色编号
             </summary>
         </member>
+        <member name="T:Com.Scm.Sys.RegionDao">
+            <summary>
+            区域表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.names">
+            <summary>
+            区域简称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.namef">
+            <summary>
+            区域全称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.namee">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.ParentId">
+            <summary>
+            所属上级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.lv">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.codes">
+            <summary>
+            城市编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.lng">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.lat">
+            <summary>
+            维度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.postcode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.p_status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.SysAdvColumn">
+            <summary>
+            广告位栏目表 
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.ParentId">
+            <summary>
+            父编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.ParentIdList">
+            <summary>
+            父编号集合
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Layer">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Name">
+            <summary>
+            栏目名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Flag">
+            <summary>
+            栏目类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Width">
+            <summary>
+            栏目宽度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Height">
+            <summary>
+            栏目高度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Status">
+            <summary>
+            栏目状态
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.Summary">
+            <summary>
+            栏目说明
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.SiteId">
+            <summary>
+            站点ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.CreateTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.CreateUser">
+            <summary>
+            添加人
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvColumn.UpdateUser">
+            <summary>
+            修改人
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.SysAdvInfo">
+            <summary>
+            广告位信息表 
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.ColumnId">
+            <summary>
+            栏目Id
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Title">
+            <summary>
+            广告名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Types">
+            <summary>
+            广告位类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.ImgUrl">
+            <summary>
+            广告位图片
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.LinkUrl">
+            <summary>
+            连接地址
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Target">
+            <summary>
+            跳转方式
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Summary">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Codes">
+            <summary>
+            广告位代码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.IsTimeLimit">
+            <summary>
+            是否开启时间限制
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.BeginTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.Hits">
+            <summary>
+            广告点击率
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.CreateTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.CreateUser">
+            <summary>
+            添加人
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.UpdateTime">
+            <summary>
+            修改时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysAdvInfo.UpdateUser">
+            <summary>
+            修改人
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.Tasks.TaskDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.codes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.names">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.json">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.start_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.end_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.elapsed_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.handle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.result">
+            <summary>
+            执行结果
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.row_delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.Tasks.TaskDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="T:Com.Scm.Sys.VoteDetailDao">
+            <summary>
+            投票项
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteDetailDao.VoteId">
+            <summary>
+            投票编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteDetailDao.Title">
+            <summary>
+            投票项标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteDetailDao.Count">
+            <summary>
+            投票数量
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteDetailDao.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteDetailDao.CreateUser">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.VoteHeaderDao">
+            <summary>
+            投票表
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.Title">
+            <summary>
+            投票标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.Type">
+            <summary>
+            投票类型（图文、视频、分组）
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.StartTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.TickRule">
+            <summary>
+            勾选规则（单选、多选）
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.SwipeRule">
+            <summary>
+            防刷规则（IP限制）
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.FileUrl">
+            <summary>
+            文件地址
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.Summary">
+            <summary>
+            规则
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteHeaderDao.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.VoteResultDao">
+            <summary>
+            投票日志
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteResultDao.VoteId">
+            <summary>
+            投票编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteResultDao.VoteItemId">
+            <summary>
+            投票项编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteResultDao.UserId">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteResultDao.CreateTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.VoteResultDao.CreateUser">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.WorkflowDao">
+            <summary>
+            工作流
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.TypeId">
+            <summary>
+            流程类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.TypeCode">
+            <summary>
+            类型信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.Title">
+            <summary>
+            流程名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.Refused">
+            <summary>
+            审批被拒后状态
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.Summary">
+            <summary>
+            流程说明
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.WorkflowDao.Flow">
+            <summary>
+            具体流程Json
+            </summary>
+        </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeAttachmentDao">
             <summary>
             通知文件
@@ -1172,346 +1709,6 @@
             删除
             </summary>
         </member>
-        <member name="T:Scm.Domain.Sys.CalendarDao">
-            <summary>
-            日程表
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.Title">
-            <summary>
-            日程标题
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.TypeId">
-            <summary>
-            日程类型
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.TypeCode">
-            <summary>
-            日程类型信息
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.LevelId">
-            <summary>
-            日程等级
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.LevelCode">
-            <summary>
-            日程等级信息
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.StartTime">
-            <summary>
-            开始时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.EndTime">
-            <summary>
-            结束时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.UserIds">
-            <summary>
-            参与人列表
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.ToBusiness">
-            <summary>
-            关联业务
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.Remind">
-            <summary>
-            提醒设置
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.CalendarDao.CalendarUser">
-            <summary>
-            参与人列表
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarUser.Id">
-            <summary>
-            编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarUser.FullName">
-            <summary>
-            姓名
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.CalendarDao.CalendarToBusiness">
-            <summary>
-            日程关联业务对象
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarToBusiness.ProjectType">
-            <summary>
-            项目类型
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarToBusiness.ProjectIds">
-            <summary>
-            项目唯一编号
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.CalendarDao.CalendarRemind">
-            <summary>
-            提醒对象
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarRemind.Number">
-            <summary>
-            提前数据
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.CalendarDao.CalendarRemind.TimeType">
-            <summary>
-            时间类型
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.RegionDao">
-            <summary>
-            区域表
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.names">
-            <summary>
-            区域简称
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.namef">
-            <summary>
-            区域全称
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.namee">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.ParentId">
-            <summary>
-            所属上级
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.lv">
-            <summary>
-            层级
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.codes">
-            <summary>
-            城市编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.codec">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.lng">
-            <summary>
-            经度
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.lat">
-            <summary>
-            维度
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.postcode">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.p_status">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.RegionDao.od">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.SysAdvColumn">
-            <summary>
-            广告位栏目表 
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.ParentId">
-            <summary>
-            父编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.ParentIdList">
-            <summary>
-            父编号集合
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Layer">
-            <summary>
-            层级
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Name">
-            <summary>
-            栏目名称
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Flag">
-            <summary>
-            栏目类型
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Width">
-            <summary>
-            栏目宽度
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Height">
-            <summary>
-            栏目高度
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Sort">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Status">
-            <summary>
-            栏目状态
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.Summary">
-            <summary>
-            栏目说明
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.SiteId">
-            <summary>
-            站点ID
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.CreateTime">
-            <summary>
-            添加时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.CreateUser">
-            <summary>
-            添加人
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.UpdateTime">
-            <summary>
-            修改时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvColumn.UpdateUser">
-            <summary>
-            修改人
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.SysAdvInfo">
-            <summary>
-            广告位信息表 
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.ColumnId">
-            <summary>
-            栏目Id
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Title">
-            <summary>
-            广告名称
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Types">
-            <summary>
-            广告位类型
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Status">
-            <summary>
-            状态
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.ImgUrl">
-            <summary>
-            广告位图片
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.LinkUrl">
-            <summary>
-            连接地址
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Target">
-            <summary>
-            跳转方式
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Summary">
-            <summary>
-            描述
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Codes">
-            <summary>
-            广告位代码
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.IsTimeLimit">
-            <summary>
-            是否开启时间限制
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.BeginTime">
-            <summary>
-            开始时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.EndTime">
-            <summary>
-            结束时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Sort">
-            <summary>
-            排序
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.Hits">
-            <summary>
-            广告点击率
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.CreateTime">
-            <summary>
-            添加时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.CreateUser">
-            <summary>
-            添加人
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.UpdateTime">
-            <summary>
-            修改时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.SysAdvInfo.UpdateUser">
-            <summary>
-            修改人
-            </summary>
-        </member>
         <member name="T:Scm.Domain.Sys.SysRoleConflict">
             <summary>
             角色互斥表
@@ -1540,161 +1737,6 @@
         <member name="P:Scm.Domain.Sys.SysRoleConflict.Summary">
             <summary>
             互斥说明
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.VoteDetailDao">
-            <summary>
-            投票项
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteDetailDao.VoteId">
-            <summary>
-            投票编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteDetailDao.Title">
-            <summary>
-            投票项标题
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteDetailDao.Count">
-            <summary>
-            投票数量
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteDetailDao.CreateTime">
-            <summary>
-            创建时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteDetailDao.CreateUser">
-            <summary>
-            创建人
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.VoteHeaderDao">
-            <summary>
-            投票表
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Title">
-            <summary>
-            投票标题
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Type">
-            <summary>
-            投票类型（图文、视频、分组）
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.StartTime">
-            <summary>
-            开始时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.EndTime">
-            <summary>
-            结束时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.TickRule">
-            <summary>
-            勾选规则（单选、多选）
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.SwipeRule">
-            <summary>
-            防刷规则（IP限制）
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.FileUrl">
-            <summary>
-            文件地址
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Summary">
-            <summary>
-            规则
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteHeaderDao.Items">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.VoteResultDao">
-            <summary>
-            投票日志
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteResultDao.VoteId">
-            <summary>
-            投票编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteResultDao.VoteItemId">
-            <summary>
-            投票项编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteResultDao.UserId">
-            <summary>
-            用户编号
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteResultDao.CreateTime">
-            <summary>
-            创建时间
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.VoteResultDao.CreateUser">
-            <summary>
-            创建人
-            </summary>
-        </member>
-        <member name="T:Scm.Domain.Sys.WorkflowDao">
-            <summary>
-            工作流
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.TypeId">
-            <summary>
-            流程类型
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.TypeCode">
-            <summary>
-            类型信息
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.Title">
-            <summary>
-            流程名称
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.Icon">
-            <summary>
-            图标
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.Refused">
-            <summary>
-            审批被拒后状态
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.Status">
-            <summary>
-            状态
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.Summary">
-            <summary>
-            流程说明
-            </summary>
-        </member>
-        <member name="P:Scm.Domain.Sys.WorkflowDao.Flow">
-            <summary>
-            具体流程Json
             </summary>
         </member>
     </members>

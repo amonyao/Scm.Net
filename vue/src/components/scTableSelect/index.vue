@@ -8,68 +8,28 @@
 -->
 
 <template>
-	<el-select
-		ref="select"
-		v-model="defaultValue"
-		:size="size"
-		:clearable="clearable"
-		:multiple="multiple"
-		:collapse-tags="collapseTags"
-		:collapse-tags-tooltip="collapseTagsTooltip"
-		:filterable="filterable"
-		:placeholder="placeholder"
-		:disabled="disabled"
-		:filter-method="filterMethod"
-		@remove-tag="removeTag"
-		@visible-change="visibleChange"
-		@clear="clear"
-	>
+	<el-select ref="select" v-model="defaultValue" :size="size" :clearable="clearable" :multiple="multiple"
+		:collapse-tags="collapseTags" :collapse-tags-tooltip="collapseTagsTooltip" :filterable="filterable"
+		:placeholder="placeholder" :disabled="disabled" :filter-method="filterMethod" @remove-tag="removeTag"
+		@visible-change="visibleChange" @clear="clear">
 		<template #empty>
-			<div
-				class="sc-table-select__table"
-				:style="{ width: tableWidth + 'px' }"
-				v-loading="loading"
-			>
+			<div class="sc-table-select__table" :style="{ width: tableWidth + 'px' }" v-loading="loading">
 				<div class="sc-table-select__header">
-					<slot
-						name="header"
-						:form="formData"
-						:submit="formSubmit"
-					></slot>
+					<slot name="header" :form="formData" :submit="formSubmit"></slot>
 				</div>
-				<el-table
-					ref="table"
-					:data="tableData"
-					:height="245"
-					:highlight-current-row="!multiple"
-					@row-click="click"
-					@select="select"
-					@select-all="selectAll"
-				>
-					<el-table-column
-						v-if="multiple"
-						type="selection"
-						width="45"
-					></el-table-column>
+				<el-table ref="table" :data="tableData" :height="245" :highlight-current-row="!multiple" @row-click="click"
+					@select="select" @select-all="selectAll">
+					<el-table-column v-if="multiple" type="selection" width="45"></el-table-column>
 					<el-table-column v-else type="index" width="45">
-						<template #default="scope"
-							><span>{{
-								scope.$index + (currentPage - 1) * pageSize + 1
-							}}</span></template
-						>
+						<template #default="scope"><span>{{
+							scope.$index + (currentPage - 1) * pageSize + 1
+						}}</span></template>
 					</el-table-column>
 					<slot></slot>
 				</el-table>
 				<div class="sc-table-select__page">
-					<el-pagination
-						small
-						background
-						layout="prev, pager, next"
-						:total="total"
-						:page-size="pageSize"
-						v-model:currentPage="currentPage"
-						@current-change="reload"
-					></el-pagination>
+					<el-pagination small background layout="prev, pager, next" :total="total" :page-size="pageSize"
+						v-model:currentPage="currentPage" @current-change="reload"></el-pagination>
 				</div>
 			</div>
 		</template>
@@ -82,8 +42,8 @@ import config from "@/config/tableSelect";
 export default {
 	props: {
 		modelValue: null,
-		apiObj: { type: Object, default: () => {} },
-		params: { type: Object, default: () => {} },
+		apiObj: { type: Object, default: () => { } },
+		params: { type: Object, default: () => { } },
 		placeholder: { type: String, default: "请选择" },
 		size: { type: String, default: "default" },
 		clearable: { type: Boolean, default: false },
@@ -94,7 +54,7 @@ export default {
 		disabled: { type: Boolean, default: false },
 		tableWidth: { type: Number, default: 400 },
 		mode: { type: String, default: "popover" },
-		props: { type: Object, default: () => {} },
+		props: { type: Object, default: () => { } },
 	},
 	data() {
 		return {
@@ -159,19 +119,16 @@ export default {
 			//表格默认赋值
 			this.$nextTick(() => {
 				if (this.multiple) {
-					this.defaultValue.forEach((row) => {
-						var setrow = this.tableData.filter(
-							(item) =>
-								item[this.defaultProps.value] ===
-								row[this.defaultProps.value]
-						);
-						if (setrow.length > 0) {
-							this.$refs.table.toggleRowSelection(
-								setrow[0],
-								true
+					if (this.defaultValue != null) {
+						this.defaultValue.forEach((row) => {
+							var setrow = this.tableData.filter(
+								(item) => item[this.defaultProps.value] === row[this.defaultProps.value]
 							);
-						}
-					});
+							if (setrow.length > 0) {
+								this.$refs.table.toggleRowSelection(setrow[0], true);
+							}
+						});
+					}
 				} else {
 					var setrow = this.tableData.filter(
 						(item) =>
@@ -313,6 +270,7 @@ export default {
 .sc-table-select__table {
 	padding: 12px;
 }
+
 .sc-table-select__page {
 	padding-top: 12px;
 }

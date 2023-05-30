@@ -2,7 +2,7 @@ import config from "@/config"
 import http from "@/utils/request"
 export default {
 	page: {
-		url: `${config.API_URL}/samplesdemo/pages`,
+		url: `${config.API_URL}/samplesdemo/page`,
 		name: "列表",
 		get: async function (params) {
 			return await http.get(this.url, params);
@@ -27,13 +27,6 @@ export default {
 		name: "添加",
 		post: async function (data) {
 			return await http.post(this.url, data);
-		}
-	},
-	model: {
-		url: `${config.API_URL}/samplesdemo/`,
-		name: "查询一条",
-		get: async function (params) {
-			return await http.get(this.url + params);
 		}
 	},
 	save: {
@@ -71,18 +64,11 @@ export default {
 			return await http.post(this.url, data);
 		}
 	},
-	CreatePut: {
-		url: `${config.API_URL}/samplesdemo/CreatePut`,
-		name: "上传",
-		post: async function (data) {
-			return await http.post(this.url, data);
-		}
-	},
-	CreateAsn: {
-		url: `${config.API_URL}/samplesdemo/Asn`,
-		name: "上传",
-		get: async function (data) {
-			return await http.get(this.url, data);
+	file: {
+		url: `${config.API_URL}/samplesdemo/file`,
+		name: "查看文件",
+		get: async function (params) {
+			return await http.get(this.url + params);
 		}
 	}
 }

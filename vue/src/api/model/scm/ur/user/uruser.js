@@ -43,6 +43,13 @@ export default {
 			return await http.delete(this.url + '?ids=' + params);
 		}
 	},
+	simple: {
+		url: `${config.API_URL}/uruser/simple`,
+		name: "查询",
+		get: async function (params) {
+			return await http.get(this.url, params);
+		}
+	},
 	basic: {
 		url: `${config.API_URL}/uruser/basic`,
 		name: "修改登录人基本信息",

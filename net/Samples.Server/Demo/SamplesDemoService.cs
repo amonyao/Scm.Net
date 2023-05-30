@@ -7,7 +7,6 @@ using Com.Scm.Samples.Demo.Dto;
 using Com.Scm.Samples.Demo.Dvo;
 using Com.Scm.Service;
 using Com.Scm.Utils;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MiniExcelLibs;
 
@@ -16,7 +15,7 @@ namespace Com.Scm.Samples.Demo
     /// <summary>
     /// 示例代码服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "v1")]
+    [ApiExplorerSettings(GroupName = "Samples")]
     public class SamplesDemoService : ApiService
     {
         private readonly SugarRepository<DemoDao> _thisRepository;
@@ -39,7 +38,7 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<DemoDvo>> GetPagesAsync(SearchRequest request)
+        public async Task<PageResult<DemoDvo>> GetPageAsync(SearchRequest request)
         {
             var isEmpty = string.IsNullOrWhiteSpace(request.key);
             var isCodes = !isEmpty && SamplesUtils.IsDemoCodes(request.key);
@@ -209,9 +208,10 @@ namespace Com.Scm.Samples.Demo
         /// <summary>
         /// 查看文件
         /// </summary>
-        /// <param name="file"></param>
+        /// <param name="file">文件代码</param>
         /// <returns></returns>
-        public async Task<FileResult> ViewFileAsync(string file)
+        [HttpGet]
+        public async Task<FileResult> GetFileAsync(string file)
         {
             var path = _Config.GetUploadPath(file);
             using (var stream = File.OpenRead(path))

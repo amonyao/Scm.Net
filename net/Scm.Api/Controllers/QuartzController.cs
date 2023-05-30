@@ -48,7 +48,7 @@ public class QuartzController : ApiController
     public async Task<IActionResult> Post([FromBody] QuarzTaskDao model)
     {
         var data = await _jobService.AddJob(model);
-        model.status = JobState.暂停;
+        model.status = JobHandleEnum.Paused;
         return Ok(data);
     }
 

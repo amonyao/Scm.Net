@@ -46,7 +46,7 @@ public class GlobalExceptionFilter : IAsyncExceptionFilter
                 types = LogTypeEnum.Operate,
                 module = type.FullName,
                 method = context.HttpContext.Request.Method,
-                operate_user = user.Username,
+                operate_user = user.UserName,
                 ip = context.HttpContext.Connection.RemoteIpAddress?.ToString(),
                 url = context.HttpContext.Request.Path + context.HttpContext.Request.QueryString,
                 browser = ServerUtils.GetBrowser(userAgent),
