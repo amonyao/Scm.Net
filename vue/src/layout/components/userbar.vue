@@ -107,7 +107,7 @@ export default {
 	},
 	created() {
 		var userInfo = this.$TOOL.data.get("USER_INFO");
-		this.userName = userInfo.username;
+		this.userName = userInfo.userName;
 		this.userNameF = this.userName.substring(0, 1);
 		this.unitName = userInfo.unitname;
 		this.avatar = config.SERVER_URL + userInfo.avatar;

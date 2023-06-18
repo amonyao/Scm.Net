@@ -285,6 +285,9 @@ tool.crypto = {
 	MD5(data) {
 		return CryptoJS.MD5(data).toString();
 	},
+	SHA(data) {
+		return CryptoJS.SHA256(data).toString();
+	},
 	//BASE64加解密
 	BASE64: {
 		encrypt(data) {

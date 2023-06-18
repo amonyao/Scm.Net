@@ -77,9 +77,14 @@ export default {
 			this.islogin = false;
 		},
 		async checkAuth() {
+			var pass = this.$TOOL.crypto.SHA(this.form.pass);
+			var time = '' + new Date().getTime();
+			pass = this.$TOOL.crypto.SHA(pass + '@' + time);
+
 			const data = {
 				user: this.form.user,
-				pass: this.$TOOL.crypto.MD5(this.form.pass),
+				pass: pass,
+				salt: time,
 				code: this.form.code,
 				key: this.form.codeKey,
 			};
