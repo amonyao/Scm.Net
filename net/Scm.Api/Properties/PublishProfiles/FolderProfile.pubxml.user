@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\workspace\SCM6\src\FytSoa.ApiService\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2023-03-06T11:20:30.2441669Z;True|2023-03-06T13:55:40.2004816+08:00;True|2023-03-06T13:54:35.9965897+08:00;True|2023-03-06T13:06:40.6441867+08:00;</History>
+    <_PublishTargetUrl>D:\workspace\Gitee\Scm.Net\net\Scm.Api\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-06-18T12:24:27.4124562Z;True|2023-06-18T20:19:55.0839853+08:00;True|2023-06-18T20:12:10.5061797+08:00;True|2023-06-18T20:11:49.6977601+08:00;True|2023-06-18T19:47:08.2167313+08:00;True|2023-06-18T19:46:48.0117853+08:00;True|2023-06-18T19:31:51.7678310+08:00;True|2023-03-06T19:20:30.2441669+08:00;True|2023-03-06T13:55:40.2004816+08:00;True|2023-03-06T13:54:35.9965897+08:00;True|2023-03-06T13:06:40.6441867+08:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

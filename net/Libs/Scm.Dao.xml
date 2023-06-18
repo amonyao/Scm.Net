@@ -1014,7 +1014,12 @@
             备注
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Ur.UserDao.LoginTime">
+        <member name="P:Com.Scm.Dao.Ur.UserDao.login_count">
+            <summary>
+            登录次数
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.login_time">
             <summary>
             登录时间
             </summary>
@@ -1024,9 +1029,14 @@
             上次登录时间
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Ur.UserDao.LoginCount">
+        <member name="P:Com.Scm.Dao.Ur.UserDao.error_count">
             <summary>
-            登录次数
+            错误次数
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.UserDao.next_time">
+            <summary>
+            下次登录时间
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Ur.UserDao.row_delete">
@@ -1040,6 +1050,18 @@
             </summary>
             <param name="userId"></param>
             <param name="unitId"></param>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.UserDao.EncodePass">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.UserDao.DecodePass">
+            <summary>
+            
+            </summary>
+            <param name="pass"></param>
         </member>
         <member name="T:Com.Scm.Dao.Ur.UserGroupDao">
             <summary>
