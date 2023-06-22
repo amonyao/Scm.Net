@@ -9,7 +9,7 @@
 
 <template>
 	<slot :open="open">
-		<el-button type="primary" plain @click="open">导入</el-button>
+		<el-button type="primary" plain @click="open">{{ text }}</el-button>
 	</slot>
 	<el-dialog v-model="dialog" :title="title" :width="550" :close-on-click-modal="false" append-to-body destroy-on-close>
 		<el-progress v-if="loading" :text-inside="true" :stroke-width="20" :percentage="percentage"
@@ -51,6 +51,7 @@ export default {
 		maxSize: { type: Number, default: 10 },
 		tip: { type: String, default: "" },
 		templateUrl: { type: String, default: "" },
+		text: { type: String, default: "导入" },
 		title: { type: String, default: "导入" },
 	},
 	data() {

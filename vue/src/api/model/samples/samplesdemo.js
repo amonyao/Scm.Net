@@ -64,6 +64,13 @@ export default {
 			return await http.post(this.url, data);
 		}
 	},
+	import: {
+		url: `${config.API_URL}/samplesdemo/import`,
+		name: "上传",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		}
+	},
 	file: {
 		url: `${config.API_URL}/samplesdemo/file`,
 		name: "查看文件",

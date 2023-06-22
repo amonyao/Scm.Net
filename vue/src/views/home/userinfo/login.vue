@@ -12,11 +12,10 @@
 		</div>
 		<div class="login_main">
 			<div class="login_config">
-				<el-button :icon="
-					config.theme == 'dark'
+				<el-button :icon="config.theme == 'dark'
 						? 'el-icon-sunny'
 						: 'el-icon-moon'
-				" circle type="info" @click="configTheme"></el-button>
+					" circle type="info" @click="configTheme"></el-button>
 				<el-dropdown trigger="click" placement="bottom-end" @command="configLang">
 					<el-button circle>
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -216,10 +215,7 @@ export default {
 		},
 		changeCode() {
 			this.codeUrl =
-				this.$CONFIG.API_URL +
-				"/captcha/" +
-				this.ruleForm.codeKey +
-				`?timestamp=${new Date().getTime()}`;
+				this.$CONFIG.API_URL + "/captcha/" + this.ruleForm.codeKey + `?timestamp=${new Date().getTime()}`;
 		},
 	},
 };

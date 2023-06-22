@@ -175,21 +175,42 @@ namespace Com.Scm.Samples.Demo
             }
 
             #region 保存文件
-            //var fileName = request.file.FileName;
-            //var ext = Path.GetExtension(fileName);
-            //fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
+            var fileName = request.file.FileName;
+            var ext = Path.GetExtension(fileName);
+            fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
 
-            //var path = _Config.GetUploadPath(fileName);
-            //using (var stream = File.OpenWrite(path))
-            //{
-            //    //将文件内容复制到流中
-            //    await request.file.CopyToAsync(stream);
-            //}
-            //response.file = fileName;
-            //response.SetSuccess("文件上传成功！");
+            var path = _Config.GetUploadPath(fileName);
+            using (var stream = File.OpenWrite(path))
+            {
+                //将文件内容复制到流中
+                await request.file.CopyToAsync(stream);
+            }
+            response.file = fileName;
+            response.SetSuccess("文件上传成功！");
             #endregion
 
+            return response;
+        }
+
+        /// <summary>
+        /// 文件上传
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ImportResponse> ImportAsync([FromForm] ImportRequest request)
+        {
+            var response = new ImportResponse();
+
+            //判断是否上传了文件内容
+            if (request.file == null)
+            {
+                response.SetFailure("上传内容为空！");
+                return response;
+            }
+
             #region 数据导入
+            int qty = 0;
             using (var stream = request.file.OpenReadStream())
             {
                 var list = stream.Query<DemoExcelDvo>();
@@ -198,10 +219,12 @@ namespace Com.Scm.Samples.Demo
                     var dao = item.Clone<DemoDao>();
                     await _thisRepository.InsertAsync(dao);
                 }
+                qty = list.Count();
             }
+            response.qty = qty;
+            response.SetSuccess("文件导入成功！");
             #endregion
 
-            response.SetSuccess("文件导入成功！");
             return response;
         }
 

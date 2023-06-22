@@ -4,7 +4,10 @@
 			<div class="left-panel">
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
 				<el-divider direction="vertical"></el-divider>
-				<sc-file-import :api-obj="uploadApi" :template-url="templateUrl" title="导入"></sc-file-import>
+				<sc-file-import ref="upload" :api-obj="uploadApi" text="上传" title="上传" accept=".jpg, .png, .gif"
+					@success="success"></sc-file-import>
+				<sc-file-import ref="import" :api-obj="importApi" :template-url="templateUrl" title="导入"
+					@success="success"></sc-file-import>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
@@ -73,6 +76,7 @@ export default {
 		return {
 			apiObj: this.$API.samplesdemo.page,
 			uploadApi: this.$API.samplesdemo.upload,
+			importApi: this.$API.samplesdemo.import,
 			templateUrl: `${config.SERVER_URL}/upload/templates/示例模板.xlsx`,
 			param: {
 				option_id: '0',
@@ -80,18 +84,18 @@ export default {
 				create_time: '',
 				key: ''
 			},
-			option_list: [{ key: '111', value: '112' }],
-			statusList: [{ key: '111', value: '112' }],
+			option_list: [this.$SCM.OPTION_ALL],
+			statusList: [this.$SCM.OPTION_ALL],
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'codes', label: '系统代码', width: 100 },
+				{ prop: 'codes', label: '系统代码', width: 140 },
 				{ prop: 'codec', label: '客户编码', width: 100 },
-				{ prop: 'names', label: '系统简称', width: 100 },
-				{ prop: 'namec', label: '客户全称', width: 100 },
+				{ prop: 'names', label: '系统简称', width: 160 },
+				{ prop: 'namec', label: '客户全称', width: 200 },
 				{ prop: 'phone', label: '电话', width: 100 },
-				{ prop: 'remark', label: '备注', width: 100 },
-				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'remark', label: '备注', width: 200 },
+				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160 },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 				{ prop: 'create_time', label: '创建时间', width: 160 },
@@ -140,6 +144,13 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
+		},
+		success(res) {
+			//dlg();
+			if (res == null) {
+				return;
+			}
+			//this.$refs.upload.tip = res.message;
 		}
 	},
 };

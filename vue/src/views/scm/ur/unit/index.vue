@@ -93,12 +93,12 @@ export default {
 			list: [],
 			param: {
 				option_id: "",
-				row_status: 1,
+				row_status: '1',
 				create_time: '',
 				key: ""
 			},
-			option_list: [{ key: '111', value: '112' }],
-			statusList: [{ key: '111', value: '112' }],
+			option_list: [this.$SCM.OPTION_ALL],
+			statusList: [this.$SCM.OPTION_ALL],
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },

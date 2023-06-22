@@ -39,8 +39,8 @@ export default {
 		return {
 			codeUrl: "img/loading.gif",
 			form: {
-				user: "admin@Dev",
-				pass: "admin",
+				user: this.$CONFIG.DEF_USER,
+				pass: this.$CONFIG.DEF_PASS,
 				code: undefined,
 				codeKey: "",
 				autologin: false,
