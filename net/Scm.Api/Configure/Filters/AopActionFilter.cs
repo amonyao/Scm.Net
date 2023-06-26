@@ -126,7 +126,7 @@ public class AopActionFilter : IAsyncActionFilter
 
             //判断timespan是否有效
             var ts1 = long.Parse(timestamp);
-            var ts2 = TimeUtils.GetUnixTimeStamp(DateTime.UtcNow, true);
+            var ts2 = TimeUtils.GetUnixTime();
             bool falg = (ts2 - ts1) > 1200 * 1000; //1分钟有效
             if (falg)
             {

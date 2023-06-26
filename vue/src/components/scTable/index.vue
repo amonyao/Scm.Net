@@ -20,12 +20,11 @@
 					<el-table-column v-if="!item.hide" highlight-current-row
 						:align="item.align == null ? 'center' : item.align" :column-key="item.prop" :label="item.label"
 						:prop="item.prop" :min-width="item.width" :sortable="item.sortable" :fixed="item.fixed"
-						:filters="item.filters" :filter-method="
-							remoteFilter || !item.filters ? null : filterHandler
-						" :show-overflow-tooltip="item.showOverflowTooltip">
+						:filters="item.filters" :filter-method="remoteFilter || !item.filters ? null : filterHandler"
+						:show-overflow-tooltip="item.showOverflowTooltip">
 						<template #default="scope">
 							<slot :name="item.prop" v-bind="scope" :data="scope.row">
-								{{ scope.row[item.prop] }}
+								{{ item.formatter ? item.formatter(scope.row[item.prop]) : scope.row[item.prop] }}
 							</slot>
 						</template>
 					</el-table-column>

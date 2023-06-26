@@ -78,9 +78,9 @@ export default {
 				{ prop: 'contact', label: '联系人', width: 100 },
 				{ prop: 'cellphone', label: '手机', width: 100 },
 				{ prop: 'row_status', label: '状态', width: 60 },
-				{ prop: 'create_time', label: '创建时间', width: 150 },
+				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150 },
+				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 			],
 		};

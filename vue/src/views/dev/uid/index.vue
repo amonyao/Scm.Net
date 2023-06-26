@@ -93,7 +93,7 @@ export default {
 				{ prop: 'c', label: '缓存大小', width: 100 },
 				{ prop: 'b', label: '缓冲大小', width: 100 },
 				{ prop: 'l', label: '数值长度', width: 100 },
-				{ prop: 't', label: '', width: 100 },
+				{ prop: 't', label: '访问时间', width: 140, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'm', label: '掩码', width: 100 },
 
 			],

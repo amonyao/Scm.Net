@@ -111,7 +111,7 @@ export default {
 				{ label: "手机号码", prop: "cellphone", width: "120" },
 				{ label: "固话", prop: "telephone", width: "120" },
 				{ label: "状态", prop: "row_status", width: "80" },
-				{ label: "创建时间", prop: "create_time", width: "150", sortable: true },
+				{ label: "创建时间", prop: "create_time", width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},

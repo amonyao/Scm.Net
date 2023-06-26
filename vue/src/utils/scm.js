@@ -1,5 +1,6 @@
 import config from "@/config"
 import http from "@/utils/request"
+import tool from "@/utils/tool"
 
 const scm = {};
 
@@ -13,6 +14,33 @@ scm.regex_int = /^[1-9]\d*$/;
 
 scm.OPTION_ALL = { 'label': '所有', 'id': '0' };
 scm.OPTION_ONE = { 'label': '请选择', 'id': '0' };
+
+scm.encode_pass = function (pass) {
+    var len1 = 4;
+    var len2 = 4;
+    var len3 = 4;
+    var len = pass.length >> 1;
+
+    var idx1 = Math.floor(Math.random() * len);
+    var idx2 = Math.floor(Math.random() * len) + idx1;
+
+    var tmp1 = tool.randomString(len1, false);
+    var tmp2 = tool.randomString(len2, false);
+    var tmp3 = tool.randomString(len3, false);
+
+    var buf = '';
+    var num1 = idx1.toString(16);
+    var num2 = (len1 + idx2).toString(16);
+    buf += (num1.length < 2 ? '0' : '') + num1;
+    buf += (num2.length < 2 ? '0' : '') + num2;
+    buf += pass.slice(0, idx1);
+    buf += tmp1;
+    buf += pass.slice(idx1, idx2);
+    buf += tmp2;
+    buf += pass.slice(idx2);
+    buf += tmp3;
+    return buf;
+};
 
 scm.is_valid_id = function (id) {
     return scm.regex_id.test(id);

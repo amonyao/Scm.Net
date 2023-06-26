@@ -1,7 +1,6 @@
 ﻿using Com.Scm.Dao;
 using Com.Scm.Enums;
 using Com.Scm.Uid;
-using Scm.Server.Dao.Dao;
 using System.ComponentModel.DataAnnotations;
 
 namespace Com.Scm.Samples.Demo.Dao

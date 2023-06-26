@@ -85,8 +85,8 @@ export default {
 				{ prop: "namec", label: "群组名称", align: "left", },
 				{ prop: "remark", label: "备注", align: "left", },
 				{ prop: "row_status", label: "状态", width: "80", },
-				{ prop: "update_time", label: "更新时间", width: "150", sortable: true, },
-				{ prop: "create_time", label: "创建时间", width: "150", sortable: true, },
+				{ prop: "update_time", label: "更新时间", width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "create_time", label: "创建时间", width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},

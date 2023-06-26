@@ -78,37 +78,12 @@ export default {
 			},
 			selection: [],
 			column: [
-				{
-					label: "id",
-					prop: "id",
-					hide: true,
-				},
-				{
-					label: "岗位编号",
-					prop: "codec",
-					width: 120,
-				},
-				{
-					label: "岗位名称",
-					prop: "namec",
-					align: "left",
-				},
-				{
-					label: "排序",
-					prop: "od",
-					width: "80",
-				},
-				{
-					label: "状态",
-					prop: "row_status",
-					width: "80",
-				},
-				{
-					label: "创建时间",
-					prop: "create_time",
-					width: "140",
-					sortable: true,
-				},
+				{ label: "id", prop: "id", hide: true },
+				{ label: "岗位编号", prop: "codec", width: 120 },
+				{ label: "岗位名称", prop: "namec", align: "left" },
+				{ label: "排序", prop: "od", width: "80" },
+				{ label: "状态", prop: "row_status", width: "80" },
+				{ label: "创建时间", prop: "create_time", width: "140", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},

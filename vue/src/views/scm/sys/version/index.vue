@@ -109,9 +109,9 @@ export default {
 				{ prop: 'alpha', label: '是否内测', width: 100 },
 				{ prop: 'beta', label: '是否公测', width: 100 },
 				{ prop: 'row_status', label: '数据状态', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150 },
+				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_name', label: '更新人员', width: 100 },
-				{ prop: 'create_time', label: '创建时间', width: 150 },
+				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_name', label: '创建人员', width: 100 },
 			],
 		};

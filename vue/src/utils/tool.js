@@ -134,23 +134,68 @@ tool.objCopy = function (obj) {
 	return JSON.parse(JSON.stringify(obj));
 };
 
-/* 日期格式化 */
-tool.dateFormat = function (date, fmt = "yyyy-MM-dd hh:mm:ss") {
-	date = new Date(date);
+tool.dateTimeFormat = function (time) {
+	if (!time) {
+		return '';
+	}
+
+	var date = new Date(eval(time));
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hour = date.getHours();
+	var minute = date.getMinutes();
+	var second = date.getSeconds();
+	return `${tool.lpad(year, 4)}-${tool.lpad(month)}-${tool.lpad(day)} ${tool.lpad(hour)}:${tool.lpad(minute)}:${tool.lpad(second)}`;
+};
+
+tool.lpad = function (val, total = 2, str = '0') {
+	return val.toString().padStart(total, str)
+};
+
+/* 日期格式化
+ * yyyy:年
+ * MM:月
+ * dd:日
+ * hh:12制小时
+ * HH:24制小时
+ * mm:分
+ * ss:秒
+ * q:季度
+ * S:毫秒
+ * E:星期
+ */
+tool.dateFormat = function (time, fmt = "yyyy-MM-dd hh:mm:ss") {
+	var date = new Date(time);
+	var y = date.getFullYear();
+	var M = date.getMonth() + 1;
+	var d = date.getDate();
+	var h24 = date.getHours();
+	var h12 = (h24 % 12);
+	var m = date.getMinutes();
+	var s = date.getSeconds();
+	var q = Math.floor((date.getMonth() + 3) / 3);
+	var S = date.getMilliseconds();
+	var E = date.getDay();
 	var o = {
-		"M+": date.getMonth() + 1, //月份
-		"d+": date.getDate(), //日
-		"h+": date.getHours(), //小时
-		"m+": date.getMinutes(), //分
-		"s+": date.getSeconds(), //秒
-		"q+": Math.floor((date.getMonth() + 3) / 3), //季度
-		S: date.getMilliseconds(), //毫秒
+		"M+": M, //月份
+		"d+": d, //日
+		"h+": h12,
+		"H+": h24, //小时
+		"m+": m, //分
+		"s+": s, //秒
+		"q+": q, //季度
+		"S": S, //毫秒
 	};
+	const week = ["\u65e5", "\u4e00", "\u4e8c", "\u4e09", "\u56db", "\u4e94", "\u516d"];
 	if (/(y+)/.test(fmt)) {
 		fmt = fmt.replace(
 			RegExp.$1,
-			(date.getFullYear() + "").substr(4 - RegExp.$1.length)
+			(y + "").substr(4 - RegExp.$1.length)
 		);
+	}
+	if (/(E+)/.test(fmt)) {
+		fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[E]);
 	}
 	for (var k in o) {
 		if (new RegExp("(" + k + ")").test(fmt)) {
@@ -325,6 +370,18 @@ tool.crypto = {
 			return CryptoJS.enc.Utf8.stringify(result);
 		},
 	},
+};
+
+tool.randomString = function (length, upper) {
+	let result = '';
+	const characters = upper ? '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '0123456789abcdefghijklmnopqrstuvwxyz';
+	const charactersLength = characters.length;
+
+	for (let i = 0; i < length; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+
+	return result;
 };
 
 export default tool;

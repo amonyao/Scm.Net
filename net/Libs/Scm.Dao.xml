@@ -1055,13 +1055,11 @@
             <summary>
             
             </summary>
-            <returns></returns>
         </member>
         <member name="M:Com.Scm.Dao.Ur.UserDao.DecodePass">
             <summary>
             
             </summary>
-            <param name="pass"></param>
         </member>
         <member name="T:Com.Scm.Dao.Ur.UserGroupDao">
             <summary>

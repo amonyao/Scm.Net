@@ -116,7 +116,7 @@ export default {
 				{ prop: "od", label: "排序", width: 60, align: "right" },
 				{ prop: "remark", label: "备注", width: 160 },
 				{ prop: "row_status", label: "状态", width: 60 },
-				{ prop: "create_time", label: "创建时间", width: 160, align: "right" },
+				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},

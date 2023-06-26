@@ -12,8 +12,7 @@
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<el-select v-model="param.row_status" clearable placeholder="请选择">
-							<el-option v-for="item in statusList" :key="item.value" :label="item.label"
-								:value="item.value">
+							<el-option v-for="item in statusList" :key="item.value" :label="item.label" :value="item.value">
 							</el-option>
 						</el-select>
 					</el-form-item>
@@ -108,9 +107,9 @@ export default {
 				{ prop: 'contact', label: '联系人', width: 100 },
 				{ prop: 'cellphone', label: '手机', width: 100 },
 				{ prop: 'row_status', label: '状态', width: 60 },
-				{ prop: 'create_time', label: '创建时间', width: 150 },
+				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_user', label: '创建人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150 },
+				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_user', label: '更新人员', width: 100 },
 			],
 		};
