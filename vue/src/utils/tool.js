@@ -9,6 +9,13 @@ import CryptoJS from "crypto-js";
 
 const tool = {};
 
+tool.trim = function (x) {
+	if (!x) {
+		return x;
+	}
+	return x.toString().replace(/^\s+|\s+$/gm, '');
+};
+
 /* localStorage */
 tool.data = {
 	set(table, settings) {

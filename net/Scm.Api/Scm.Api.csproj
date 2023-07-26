@@ -93,6 +93,9 @@
     <Reference Include="Scm.Email">
       <HintPath>..\Libs\Scm.Email.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Express">
+      <HintPath>..\Libs\Scm.Express.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Generator">
       <HintPath>..\Libs\Scm.Generator.dll</HintPath>
     </Reference>

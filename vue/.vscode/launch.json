@@ -6,6 +6,7 @@
       "request": "launch",
       "type": "firefox",
       "url": "http://localhost:2800",
+      "firefoxExecutable":"D:\\Program Files\\Firefox\\firefox.exe",
       "webRoot": "${workspaceFolder}/admin",
       "pathMappings": [
         {
@@ -22,7 +23,7 @@
       "name": "运行脚本：serve",
       "command": "npm run serve",
       "type": "node-terminal",
-      "request": "launch"
+      "request": "launch",
     }
   ]
 }
