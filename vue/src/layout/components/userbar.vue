@@ -34,10 +34,10 @@
 										</div>
 										<div class="msg-list__main">
 											<h2>{{ item.title }}</h2>
-											<p>{{ item.describe }}</p>
+											<p>{{ item.remark }}</p>
 										</div>
 										<div class="msg-list__time">
-											<p>{{ item.time }}</p>
+											<p>{{ getTime(item.create_time) }}</p>
 										</div>
 									</a>
 								</li>
@@ -172,6 +172,9 @@ export default {
 		showMsg() {
 			this.msg = true;
 		},
+		getTime(time) {
+			return this.$TOOL.dateTimeFormat(time);
+		},
 		//标记已读
 		async markRead() {
 			let ids = [];
@@ -187,7 +190,7 @@ export default {
 			}
 		},
 		goMessage() {
-			this.$router.push({ path: "/sys/message" });
+			this.$router.push({ path: "/msg/message" });
 		},
 		//搜索
 		search() {

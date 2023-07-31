@@ -34,6 +34,7 @@
 					<el-divider direction="vertical"></el-divider>
 					<el-button type="primary" plain :disabled="selection.length == 0" @click="permission">分配角色</el-button>
 					<el-button type="danger" plain :disabled="selection.length != 1" @click="pwdreset">密码重置</el-button>
+					<el-button type="danger" plain @click="exportAll()">导出</el-button>
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
@@ -196,6 +197,12 @@ export default {
 				ids.push(element.id);
 			});
 			this.$refs.role.open(ids);
+		},
+		async exportAll() {
+			const res = await this.$API.uruser.exportAll.get();
+			if (res == null || res.code != 200) {
+				return;
+			}
 		},
 		//加载树数据
 		async getRole() {

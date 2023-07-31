@@ -11,7 +11,7 @@
 							{{ node.label }}
 						</span>
 						<span v-if="data.sum > 0">
-							<el-tag type="danger" effect="dark" size="mini">
+							<el-tag type="danger" effect="dark" size="small">
 								{{ data.sum }}
 							</el-tag>
 						</span>
@@ -144,26 +144,16 @@ export default {
 				},
 			],
 			column: [
-				{ label: "id", prop: "id", hide: true },
-				{
-					prop: "title",
-					label: "留言标题",
-					width: 200,
-					align: "left",
-					showOverflowTooltip: true,
-				},
+				{ prop: "id", label: "id", hide: true },
+				{ prop: "title", label: "留言标题", width: 200, align: "left", showOverflowTooltip: true },
 				{ prop: "types", label: "类型", width: 100 },
 				{ prop: "email", label: "邮箱信息", width: 180 },
 				{ prop: "mobile", label: "手机号码", width: 130 },
 				{ prop: "tags", label: "留言标签", width: 200 },
-				{
-					prop: "remark",
-					label: "留言内容",
-					showOverflowTooltip: true,
-				},
+				{ prop: "remark", label: "留言内容", showOverflowTooltip: true },
 				{ prop: "isread", label: "是否已读", width: 100 },
-				{ prop: "userName", label: "用户姓名", width: 100 },
-				{ prop: "create_time", label: "添加时间", width: 180, fixed: "right" }
+				{ prop: "create_names", label: "发送人员", width: 100 },
+				{ prop: "create_time", label: "发送时间", width: 180, sortable: true, formatter: this.$TOOL.dateTimeFormat }
 			],
 		};
 	},

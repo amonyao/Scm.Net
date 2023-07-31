@@ -19,17 +19,21 @@
 						<div class="title">
 							<h2>{{ task.names }}</h2>
 							<p>
-								<span v-time.tip="task.create_time"></span> 创建
+								<span v-time.tip="getTime(task.create_time)"></span> 创建
 							</p>
 						</div>
 						<div class="bottom">
 							<div class="state">
-								<el-tag type="info" v-if="task.handle == '20'">执行中</el-tag>
-								<el-tag type="success" v-if="task.handle == '30'">完成</el-tag>
+								<el-tag type="default" v-if="task.handle == '10'">初始化</el-tag>
+								<el-tag type="info" v-if="task.handle == '30'">执行中</el-tag>
 								<el-tag type="danger" v-if="task.handle == '40'">异常</el-tag>
+								<el-tag type="success" v-if="task.handle == '50'">完成</el-tag>
 							</div>
 							<div class="handler">
-								<el-button v-if="task.handle == '30'" type="primary" circle icon="el-icon-download"
+								<div v-if="task.handle == '40'">
+									{{ task.message }}
+								</div>
+								<el-button v-if="task.handle == '50'" type="primary" circle icon="el-icon-download"
 									@click="download(task)"></el-button>
 							</div>
 						</div>
@@ -44,6 +48,8 @@
 </template>
 
 <script>
+import config from "@/config"
+
 export default {
 	data() {
 		return {
@@ -68,11 +74,14 @@ export default {
 		refresh() {
 			this.getData();
 		},
+		getTime(time) {
+			return this.$TOOL.dateTimeFormat(time);
+		},
 		download(row) {
 			let a = document.createElement("a");
 			a.style = "display: none";
 			a.target = "_blank";
-			a.href = row.result;
+			a.href = `${config.API_URL}${row.file}`;
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);

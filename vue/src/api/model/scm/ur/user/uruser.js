@@ -8,6 +8,13 @@ export default {
 			return await http.get(this.url, params);
 		}
 	},
+	list: {
+		url: `${config.API_URL}/uruser/list`,
+		name: "列表",
+		get: async function (params) {
+			return await http.get(this.url, params);
+		}
+	},
 	add: {
 		url: `${config.API_URL}/uruser`,
 		name: "添加",
@@ -69,6 +76,13 @@ export default {
 		name: "修改密码",
 		put: async function (data) {
 			return await http.put(this.url, data);
+		}
+	},
+	exportAll: {
+		url: `${config.API_URL}/uruser/exportAll`,
+		name: "修改密码",
+		get: async function () {
+			return await http.get(this.url);
 		}
 	}
 }
