@@ -84,7 +84,7 @@
 6. 数据库配置：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
 
 ## 演示地址  
-[![website1](https://img.shields.io/badge/linux-http://scm.leadiot.cn-success.svg?logo=buzzfeed&logoColor=green)](http://scm.leadiot.cn)  
+[![website1](https://img.shields.io/badge/linux-http://scm.leadiot.cn-success.svg?logo=buzzfeed&logoColor=green)](http://scm.c-scm.net)  
 
 账户与密码  
 管理账号：Admin@demo/123654  
