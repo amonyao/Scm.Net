@@ -159,60 +159,28 @@ export default {
 			},
 			rules: {
 				names: [
-					{
-						required: true,
-						message: "请输入登录账号",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入登录账号" },
 				],
 				namec: [
-					{
-						required: true,
-						message: "请输入姓名",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入姓名" },
 				],
 				pass: [
-					{
-						required: true,
-						message: "请输入登录密码",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入登录密码" },
 				],
 				cellphone: [
-					{
-						required: true,
-						message: "请输入手机号码",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入手机号码" },
 				],
 				sex: [
-					{
-						required: true,
-						message: "性别不能为空",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "性别不能为空" },
 				],
 				organizeId: [
-					{
-						required: true,
-						message: "请选择所属部门",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "请选择所属部门" },
 				],
 				position_list: [
-					{
-						required: true,
-						message: "请选择所属岗位",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "请选择所属岗位" },
 				],
 				role_list: [
-					{
-						required: true,
-						message: "请择选所属角色",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "请择选所属角色" },
 				],
 				email: [],
 				remark: [],

@@ -55,7 +55,7 @@
 						<el-color-picker v-model="form.color" :predefine="predefineColors"></el-color-picker>
 					</el-form-item>
 					<el-form-item label="是否显示">
-						<el-radio-group v-model="form.status">
+						<el-radio-group v-model="form.visible">
 							<el-radio :label="true">显示</el-radio>
 							<el-radio :label="false">隐藏</el-radio>
 						</el-radio-group>
@@ -119,6 +119,7 @@ export default {
 		return {
 			form: {
 				id: "0",
+				types: "menu",
 				tenantId: 0,
 				parentId: "",
 				parentIdList: [],
@@ -130,8 +131,7 @@ export default {
 				icon: "",
 				active: "",
 				color: "",
-				types: "menu",
-				status: true,
+				visible: true,
 				fullpage: false,
 				api: [],
 			},
@@ -143,41 +143,20 @@ export default {
 			},
 			rules: {
 				parentIdList: [
-					{
-						required: true,
-						type: "array",
-						message: "请选择上级菜单",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "请选择上级菜单", type: "array" },
 				],
 				types: [
-					{
-						required: true,
-						message: "菜单类型不能为空",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "菜单类型不能为空" },
 				],
 				namec: [
-					{
-						required: true,
-						message: "请输入菜单名称",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入菜单名称" },
 				],
 				codec: [
-					{
-						required: true,
-						message: "请输入权限标识",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入权限标识" },
 				],
 				view: [],
 				url: [
-					{
-						required: true,
-						message: "请输入路由地址",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入路由地址" },
 				],
 			},
 			predefineColors: [

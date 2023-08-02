@@ -1,5 +1,18 @@
 <template>
 	<el-container>
+		<scSearch>
+			<template #search>
+				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
+					<el-form-item label="数据状态" prop="row_status">
+						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+					</el-form-item>
+					<el-form-item label="创建时间" prop="create_time">
+						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+							start-placeholder="开始日期" end-placeholder="结束日期" />
+					</el-form-item>
+				</el-form>
+			</template>
+		</scSearch>
 		<el-header>
 			<div class="left-panel">
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
@@ -27,7 +40,7 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+			<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
 				@selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
@@ -37,7 +50,7 @@
 							编辑
 						</el-button>
 						<el-divider direction="vertical" />
-						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row)">
+						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
 							<template #reference>
 								<el-button text type="primary" size="small">删除</el-button>
 							</template>
@@ -64,50 +77,62 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.mgrunit.page,
 			list: [],
 			param: {
-				key: ""
+				hid: '',
+				row_status: '1',
+				create_time: '',
+				key: ''
 			},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'names', label: '机构简称', width: 100 },
-				{ prop: 'namec', label: '机构全称', width: 100 },
-				{ prop: 'telephone', label: '固话', width: 100 },
-				{ prop: 'contact', label: '联系人', width: 100 },
-				{ prop: 'cellphone', label: '手机', width: 100 },
-				{ prop: 'row_status', label: '状态', width: 60 },
-				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'od', label: '显示排序', width: 100 },
+				{ prop: 'col', label: '字段', width: 100 },
+				{ prop: 'namec', label: '标题', width: 100 },
+				{ prop: 'def', label: '默认值', width: 100 },
+				{ prop: 'fun', label: '表达式', width: 100 },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 100, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 100, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
+			row_status_list: [],
 		};
 	},
 	mounted() {
+		this.init();
+		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
+		async init() {
+			this.param.hid = this.$route.query.id;
+			var res = await this.$API.cfgexportdetail.page.get(this.param);
+			if (res != null && res.code == 200) {
+				this.list = res.data.items;
+			}
+		},
 		complete() {
-			this.$refs.table.refresh();
+			this.init();
 		},
 		search() {
-			this.$refs.table.upData(this.param);
+			this.init();
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.mgrunit.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.cfgexportdetail.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.mgrunit.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.cfgexportdetail.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.mgrunit.delete, row);
+			this.$SCM.delete_item(this, this.$API.cfgexportdetail.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.mgrunit.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.cfgexportdetail.delete, this.selection);
 		},
 		open_dialog(row) {
-			this.$refs.edit.open(row);
+			this.$refs.edit.open(row, this.param.hid);
 		},
 		selectionChange(selection) {
 			this.selection = selection;

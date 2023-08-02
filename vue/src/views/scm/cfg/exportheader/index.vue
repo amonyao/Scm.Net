@@ -1,5 +1,18 @@
 <template>
 	<el-container>
+		<scSearch>
+			<template #search>
+				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
+					<el-form-item label="数据状态" prop="row_status">
+						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+					</el-form-item>
+					<el-form-item label="创建时间" prop="create_time">
+						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+							start-placeholder="开始日期" end-placeholder="结束日期" />
+					</el-form-item>
+				</el-form>
+			</template>
+		</scSearch>
 		<el-header>
 			<div class="left-panel">
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
@@ -18,6 +31,8 @@
 							@click="delete_list"></el-button>
 					</el-tooltip>
 				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-button icon="el-icon-plus" type="primary" @click="open_detail()">详情</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
@@ -37,7 +52,7 @@
 							编辑
 						</el-button>
 						<el-divider direction="vertical" />
-						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row)">
+						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
 							<template #reference>
 								<el-button text type="primary" size="small">删除</el-button>
 							</template>
@@ -64,28 +79,31 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.mgrunit.page,
+			apiObj: this.$API.cfgexportheader.page,
 			list: [],
 			param: {
-				key: ""
+				row_status: '1',
+				create_time: '',
+				key: ''
 			},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'names', label: '机构简称', width: 100 },
-				{ prop: 'namec', label: '机构全称', width: 100 },
-				{ prop: 'telephone', label: '固话', width: 100 },
-				{ prop: 'contact', label: '联系人', width: 100 },
-				{ prop: 'cellphone', label: '手机', width: 100 },
-				{ prop: 'row_status', label: '状态', width: 60 },
-				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'codes', label: '系统编码', width: 100 },
+				{ prop: 'codec', label: '方案编码', width: 100 },
+				{ prop: 'names', label: '方案名称', width: 100 },
+				{ prop: 'file', label: '文件前缀', width: 100 },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 100, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 100, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
+			row_status_list: [],
 		};
 	},
 	mounted() {
+		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
 		complete() {
@@ -95,16 +113,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.mgrunit.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.cfgexportheader.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.mgrunit.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.cfgexportheader.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.mgrunit.delete, row);
+			this.$SCM.delete_item(this, this.$API.cfgexportheader.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.mgrunit.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.cfgexportheader.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -125,6 +143,19 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
+		},
+		open_detail() {
+			if (!this.selection || this.selection.length != 1) {
+				return;
+			}
+
+			this.open_newtab(this.selection[0]);
+		},
+		open_newtab(row) {
+			if (!row.id) {
+				return;
+			}
+			this.$router.push({ path: '/scm/cfg/exportdetail', query: { 'id': row.id } });
 		},
 	},
 };

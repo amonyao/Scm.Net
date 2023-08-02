@@ -1,23 +1,20 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="机构全称" prop="namec">
-				<el-input v-model="formData.namec" placeholder="请输入" :maxlength="32" show-word-limit clearable></el-input>
+			<el-form-item label="显示排序" prop="od">
+				<el-input v-model="formData.od" placeholder="请输入显示排序" :maxlength="11" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="机构简称" prop="names">
-				<el-input v-model="formData.names" placeholder="请输入" :maxlength="32" show-word-limit clearable></el-input>
+			<el-form-item label="字段" prop="col">
+				<el-input v-model="formData.col" placeholder="请输入字段" :maxlength="256" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="固话" prop="telephone">
-				<el-input v-model="formData.telephone" placeholder="请输入" :maxlength="24" show-word-limit
-					clearable></el-input>
+			<el-form-item label="标题" prop="namec">
+				<el-input v-model="formData.namec" placeholder="请输入标题" :maxlength="64" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="联系人" prop="contact">
-				<el-input v-model="formData.contact" placeholder="请输入联系人" :maxlength="32" show-word-limit
-					clearable></el-input>
+			<el-form-item label="默认值" prop="def">
+				<el-input v-model="formData.def" placeholder="请输入默认值" :maxlength="256" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="手机" prop="cellphone">
-				<el-input v-model="formData.cellphone" placeholder="请输入手机号码" :maxlength="16" show-word-limit
-					clearable></el-input>
+			<el-form-item label="表达式" prop="fun">
+				<el-input v-model="formData.fun" placeholder="请输入表达式" :maxlength="256" show-word-limit clearable></el-input>
 			</el-form-item>
 		</el-form>
 
@@ -39,14 +36,11 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
+				col: [
+					{ required: true, trigger: "blur", message: "请输入字段" },
+				],
 				namec: [
-					{ required: true, trigger: "blur", message: "请输入姓名", },
-				],
-				contact: [
-					{ required: true, trigger: "blur", message: "请输入联系人", },
-				],
-				cellphone: [
-					{ required: true, trigger: "blur", message: "请输入联系人号码", },
+					{ required: true, trigger: "blur", message: "请输入标题" },
 				],
 			},
 		};
@@ -54,22 +48,24 @@ export default {
 	mounted() {
 	},
 	methods: {
-		def_data(){
+		def_data() {
 			return {
 				id: 0,
-				names: '',
+				export_id: '',
+				od: '',
+				col: '',
 				namec: '',
-				contact: '',
-				cellphone: '',
-				telephone: ''
-			};
+				def: '',
+				fun: '',
+			}
 		},
-		async open(row) {
+		async open(row, hid) {
 			if (!row || !row.id) {
+				this.formData.export_id = hid;
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.mgrunit.edit.get(row.id);
+				var res = await this.$API.cfgexportdetail.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -80,9 +76,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === 0) {
-						res = await this.$API.mgrunit.add.post(this.formData);
+						res = await this.$API.cfgexportdetail.add.post(this.formData);
 					} else {
-						res = await this.$API.mgrunit.update.put(this.formData);
+						res = await this.$API.cfgexportdetail.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {
