@@ -4,8 +4,8 @@
 			<el-form-item label="键" prop="k">
 				<el-input v-model="formData.k" placeholder="请输入键" :maxlength="32" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="当前值" prop="v">
-				<el-input v-model="formData.v" placeholder="请输入当前值" :maxlength="20" show-word-limit clearable></el-input>
+			<el-form-item label="值" prop="v">
+				<el-input v-model="formData.v" placeholder="请输入值" :maxlength="20" show-word-limit clearable></el-input>
 			</el-form-item>
 			<el-form-item label="缓存大小" prop="c">
 				<el-input-number v-model="formData.c" placeholder="请输入缓存大小" />
@@ -16,10 +16,12 @@
 			<el-form-item label="数值长度" prop="l">
 				<el-input-number v-model="formData.l" placeholder="请输入数值长度" />
 			</el-form-item>
-			<el-form-item label="掩码" prop="m">
-				<el-input v-model="formData.m" placeholder="请输入掩码" :maxlength="8" show-word-limit clearable></el-input>
+			<el-form-item label="前置掩码" prop="m">
+				<el-input v-model="formData.m" placeholder="请输入前置掩码" :maxlength="8" show-word-limit clearable></el-input>
 			</el-form-item>
-
+			<el-form-item label="后置掩码" prop="p">
+				<el-input v-model="formData.p" placeholder="请输入后置掩码" :maxlength="8" show-word-limit clearable></el-input>
+			</el-form-item>
 		</el-form>
 
 		<template #footer>
@@ -56,8 +58,8 @@ export default {
 				c: 0,
 				b: 0,
 				l: 0,
-				t: '',
 				m: '',
+				p: '',
 			}
 		},
 		async open(row) {
