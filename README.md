@@ -87,8 +87,12 @@
 [![website1](https://img.shields.io/badge/linux-http://scm.leadiot.cn-success.svg?logo=buzzfeed&logoColor=green)](http://oms.c-scm.cn)  
 
 账户与密码  
-管理账号：Admin@demo/123654  
-普通账号：User@demo/123654  
+【管理账号】
+用户：Admin@demo
+密码：123654  
+【普通账号】
+用户：User@demo
+密码：123654  
 
 ## 常见问题
 请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) 查看常见问题小节  
