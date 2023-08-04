@@ -24,3 +24,4 @@ PublishProfiles/
 
 # 需要特殊处理的文件
 /net/Scm.Api/upload
+/net/Scm.Api/Properties/PublishProfiles/FolderProfile.pubxml.user
