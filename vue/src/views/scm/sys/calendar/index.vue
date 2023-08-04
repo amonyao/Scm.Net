@@ -327,7 +327,7 @@ export default {
 	margin: 2px 0;
 }
 
->>>.el-calendar-table .el-calendar-day {
+.el-calendar-table .el-calendar-day {
 	padding: 8px 0px !important;
 }
 </style>

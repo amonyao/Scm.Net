@@ -18,6 +18,8 @@
 							@click="delete_list"></el-button>
 					</el-tooltip>
 				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-button icon="el-icon-plus" type="primary" @click="resetData()" />
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
@@ -74,13 +76,13 @@ export default {
 				{ label: "id", prop: "id", hide: true },
 				{ prop: 'names', label: '机构简称', width: 100 },
 				{ prop: 'namec', label: '机构全称', width: 100 },
-				{ prop: 'telephone', label: '固话', width: 100 },
+				{ prop: 'telephone', label: '固话', width: 140 },
 				{ prop: 'contact', label: '联系人', width: 100 },
-				{ prop: 'cellphone', label: '手机', width: 100 },
-				{ prop: 'row_status', label: '状态', width: 60 },
-				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'cellphone', label: '手机', width: 140 },
+				{ prop: 'row_status', label: '状态', width: 80 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 			],
 		};
@@ -125,6 +127,20 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
+		},
+		resetData() {
+			if (!this.selection) {
+				return;
+			}
+
+			var row = this.selection[0];
+			var res = this.$API.mgrunit.resetData.get(row.id);
+			if (res == null) {
+				return;
+			}
+		},
+		clearData() {
+
 		},
 	},
 };

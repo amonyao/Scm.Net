@@ -96,12 +96,7 @@
 						</el-col>
 						<el-col :span="12">
 							<el-form-item label="性别" prop="sex">
-								<el-radio-group v-model="formData.sex" size="default">
-									<el-radio v-for="(item, index) in sexOptions" :key="index" :label="item.value"
-										:disabled="item.disabled">
-										{{ item.label }}
-									</el-radio>
-								</el-radio-group>
+								<sc-select v-model="formData.sex" :data="sex_list" />
 							</el-form-item>
 						</el-col>
 					</el-row>
@@ -140,23 +135,7 @@ export default {
 			},
 			isSaveing: false,
 			visible: false,
-			formData: {
-				id: 0,
-				names: "",
-				namec: "",
-				pass: "",
-				cellphone: "",
-				telephone: "",
-				sex: "男",
-				email: "",
-				status: true,
-				remark: "",
-				avatar: undefined,
-				organize_list: [],
-				position_list: [],
-				role_list: [],
-				loginCount: 0,
-			},
+			formData: this.def_data(),
 			rules: {
 				names: [
 					{ required: true, trigger: "blur", message: "请输入登录账号" },
@@ -187,16 +166,7 @@ export default {
 			},
 			organize_list: [],
 			role_list: [],
-			sexOptions: [
-				{
-					label: "男",
-					value: "男",
-				},
-				{
-					label: "女",
-					value: "女",
-				},
-			],
+			sex_list: [],
 			roleProps: { multiple: true, expandTrigger: "hover" },
 			organizeProps: {
 				multiple: false,
@@ -214,6 +184,25 @@ export default {
 		this.init();
 	},
 	methods: {
+		def_data() {
+			return {
+				id: 0,
+				names: "",
+				namec: "",
+				pass: "",
+				cellphone: "",
+				telephone: "",
+				sex: '0',
+				email: "",
+				status: true,
+				remark: "",
+				avatar: undefined,
+				organize_list: [],
+				position_list: [],
+				role_list: [],
+				loginCount: 0,
+			};
+		},
 		upSuccess(res) {
 			this.formData.avatar = res.data.path;
 			if (res.code == 200) {
@@ -223,6 +212,8 @@ export default {
 			}
 		},
 		async init() {
+			this.$SCM.list_sex(this.sex_list, false);
+
 			const org = await this.$API.urorganize.list.get();
 			let orgArr = [];
 			org.data.forEach(function (m) {
@@ -253,6 +244,7 @@ export default {
 				this.mode = "edit";
 				var res = await this.$API.uruser.model.get(row.id);
 				res.data.avatar = this.$CONFIG.SERVER_URL + res.data.avatar;
+				res.data.sex = '' + res.data.sex;
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -292,22 +284,7 @@ export default {
 			});
 		},
 		close() {
-			this.formData = {
-				id: 0,
-				names: "",
-				namec: "",
-				pass: "",
-				cellphone: "",
-				telephone: "",
-				sex: "男",
-				email: "",
-				remark: "",
-				avatar: undefined,
-				organizeId: undefined,
-				role_list: undefined,
-				position_list: [],
-				loginCount: 0,
-			};
+			this.formData = this.def_data();
 			this.$refs.formRef.resetFields();
 			this.visible = false;
 		},

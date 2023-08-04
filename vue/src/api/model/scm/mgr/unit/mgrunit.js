@@ -70,5 +70,19 @@ export default {
 		delete: async function (params) {
 			return await http.delete(this.url + '?ids=' + params);
 		}
+	},
+	resetData: {
+		url: `${config.API_URL}/mgrunit/ResetData/`,
+		name: "删除",
+		get: async function (params) {
+			return await http.get(this.url + params);
+		}
+	},
+	clearData: {
+		url: `${config.API_URL}/mgrunit/ClearData/`,
+		name: "删除",
+		get: async function (params) {
+			return await http.get(this.url + params);
+		}
 	}
 }

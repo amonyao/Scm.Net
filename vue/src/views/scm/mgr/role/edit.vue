@@ -3,7 +3,7 @@
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
 			<el-form-item label="所属机构" prop="parentId">
 				<el-select v-model="formData.unit_id" placeholder="请选择所属机构" :style="{ width: '100%' }">
-					<el-option v-for="item in unit_list" :key="item.value" :label="item.label" :value="item.value">
+					<el-option v-for="item in unit_list" :key="item.id" :label="item.label" :value="item.id">
 					</el-option>
 				</el-select>
 			</el-form-item>

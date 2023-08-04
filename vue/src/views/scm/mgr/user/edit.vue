@@ -61,8 +61,7 @@
 							<el-form-item label="所属机构" prop="unit_id">
 								<el-select v-model="formData.unit_id" placeholder="请选择所属机构" :change="changeUnit()"
 									:style="{ width: '100%' }">
-									<el-option v-for="item in unitList" :key="item.value" :label="item.label"
-										:value="item.value">
+									<el-option v-for="item in unitList" :key="item.id" :label="item.label" :value="item.id">
 									</el-option>
 								</el-select>
 							</el-form-item>
@@ -179,7 +178,7 @@ export default {
 				pass: "",
 				cellphone: "",
 				telephone: "",
-				sex: "男",
+				sex: "0",
 				email: "",
 				remark: "",
 				avatar: undefined,
