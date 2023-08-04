@@ -65,7 +65,7 @@ export default {
 		//加载树数据
 		async getMenu() {
 			this.menuloading = true;
-			var res = await this.$API.mgrmenu.list.get();
+			var res = await this.$API.devmenu.list.get();
 			this.menuloading = false;
 			let _tree = [];
 			res.data.some((m) => {
@@ -94,7 +94,7 @@ export default {
 		//树拖拽
 		async nodeDrop(dragNode, dropNode, dropType) {
 			this.menuloading = true;
-			var res = await this.$API.mgrmenu.dragging.put({
+			var res = await this.$API.devmenu.dragging.put({
 				dragNode: dragNode.data,
 				dropNode: dropNode.data,
 				sortType: dropType,
@@ -117,7 +117,7 @@ export default {
 				tenantId: 0,
 			};
 			this.menuloading = true;
-			var res = await this.$API.mgrmenu.temp.post(newMenuData);
+			var res = await this.$API.devmenu.temp.post(newMenuData);
 			this.menuloading = false;
 			newMenuData.id = res.data.id;
 
@@ -151,7 +151,7 @@ export default {
 			var reqData = {
 				ids: CheckedNodes.map((item) => item.id),
 			};
-			var res = await this.$API.mgrmenu.delete.delete(
+			var res = await this.$API.devmenu.delete.delete(
 				reqData.ids.join(",")
 			);
 			this.menuloading = false;

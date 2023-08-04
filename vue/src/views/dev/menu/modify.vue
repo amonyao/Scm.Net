@@ -205,7 +205,7 @@ export default {
 		//保存
 		async save() {
 			this.loading = true;
-			var res = await this.$API.mgrmenu.update.put(this.form);
+			var res = await this.$API.devmenu.update.put(this.form);
 			this.loading = false;
 			if (res.code == 200) {
 				this.$emit("complete");
@@ -219,7 +219,7 @@ export default {
 		},
 		//表单注入数据
 		async setData(data) {
-			const res = await this.$API.mgrmenu.model.get(data.id);
+			const res = await this.$API.devmenu.model.get(data.id);
 			if (res.data) {
 				if (!res.data.icon) {
 					res.data.icon = "";

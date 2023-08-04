@@ -77,7 +77,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.sysuid.page,
+			apiObj: this.$API.devuid.page,
 			list: [],
 			param: {
 				option_id: '',
@@ -112,16 +112,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysuid.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.devuid.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysuid.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.devuid.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysuid.delete, row);
+			this.$SCM.delete_item(this, this.$API.devuid.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysuid.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.devuid.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

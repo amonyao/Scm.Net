@@ -30,20 +30,10 @@ export default {
 	data() {
 		return {
 			mode: "add",
-			titleMap: {
-				add: "新增",
-				edit: "编辑",
-			},
+			titleMap: { add: "新增", edit: "编辑" },
 			isSaveing: false,
 			visible: false,
-			formData: {
-				id: 0,
-				unit_id: 0,
-				parentId: 0,
-				namec: undefined,
-				remark: undefined,
-				od: 1,
-			},
+			formData: this.def_data(),
 			unit_list: [],
 			rules: {
 				unit_id: [
@@ -66,6 +56,16 @@ export default {
 	},
 	mounted() { },
 	methods: {
+		def_data() {
+			return {
+				id: 0,
+				unit_id: 0,
+				parentId: 0,
+				namec: undefined,
+				remark: undefined,
+				od: 1,
+			};
+		},
 		async initUnit() {
 			let unitRes = await this.$API.mgrunit.option.get(0);
 			this.unit_list = this.$SCM.option_one(unitRes.data);
@@ -103,13 +103,7 @@ export default {
 			});
 		},
 		close() {
-			this.formData = {
-				id: 0,
-				parentId: 0,
-				namec: undefined,
-				remark: undefined,
-				od: 1,
-			};
+			this.formData = this.def_data();
 			this.$refs.formRef.resetFields();
 			this.visible = false;
 		},

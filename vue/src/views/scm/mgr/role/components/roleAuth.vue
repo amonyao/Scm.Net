@@ -29,7 +29,7 @@ export default {
 	methods: {
 		async getMenu() {
 			this.menuloading = true;
-			var res = await this.$API.mgrmenu.list.get({ tenantId: 0 });
+			var res = await this.$API.devmenu.list.get();
 			this.menuloading = false;
 			let _tree = [];
 			res.data.some((m) => {

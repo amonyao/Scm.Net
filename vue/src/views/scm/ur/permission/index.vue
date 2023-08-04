@@ -119,7 +119,7 @@ export default {
 			this.group = this.$TOOL.changeTree(_tree);
 
 			this.menuloading = true;
-			var resMenu = await this.$API.mgrmenu.list.get();
+			var resMenu = await this.$API.devmenu.list.get();
 			this.menuloading = false;
 			let menutree = [];
 			resMenu.data.some((m) => {
