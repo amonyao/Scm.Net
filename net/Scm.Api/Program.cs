@@ -4,12 +4,12 @@ using Com.Scm.Api.Middleware;
 using Com.Scm.Config;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Email.Config;
-using Com.Scm.Extensions;
 using Com.Scm.Generator;
 using Com.Scm.Generator.Config;
 using Com.Scm.Helper;
 using Com.Scm.Ioc;
 using Com.Scm.Mapper;
+using Com.Scm.Newton;
 using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
 using Com.Scm.Service;
@@ -17,7 +17,6 @@ using Com.Scm.Swagger;
 using Com.Scm.Uid;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
-using System.Text.Json.Serialization;
 
 namespace Com.Scm.Api
 {
@@ -47,13 +46,7 @@ namespace Com.Scm.Api
                 options.Filters.Add<GlobalExceptionFilter>();
                 options.Filters.Add<UnitOfWorkFilter>();
                 options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            }).AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                options.JsonSerializerOptions.AllowTrailingCommas = false;
-                options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
-                options.JsonSerializerOptions.Converters.Add(new LongJsonConverter());
-            });
+            }).JsonSetup();
 
             // Swagger≈‰÷√
             var swaggerConfig = AppUtils.GetConfig<SwaggerConfig>(SwaggerConfig.NAME);
@@ -65,10 +58,16 @@ namespace Com.Scm.Api
             // ª∫¥Ê≈‰÷√
             builder.Services.DsaCacheSetup();
 
+            // ∞≤»´≈‰÷√
+            var secConfig = AppUtils.GetConfig<SecurityConfig>(SecurityConfig.NAME);
+            secConfig.Prepare(builder.Environment);
+            builder.Services.AddSingleton(secConfig);
+
             // UID≈‰÷√
             var uidConfig = AppUtils.GetConfig<UidConfig>(UidConfig.NAME);
             UidHelper.InitConfig(uidConfig);
 
+            // Ω”ø⁄≈‰÷√
             var apiConfig = AppUtils.GetConfig<ApiConfig>(ApiConfig.NAME);
             apiConfig.Prepare(builder.Environment);
             builder.Services.RegisterServices(apiConfig);
@@ -88,7 +87,7 @@ namespace Com.Scm.Api
 
             builder.Services.AddScoped<IDicService, ScmDicService>();
             builder.Services.AddScoped<ICfgService, ScmCfgService>();
-            builder.Services.AddScoped<IUserService, ScmUserService>();
+            builder.Services.AddScoped<ISecService, ScmSecService>();
 
             // Mapper
             builder.Services.AddMapperProfile();

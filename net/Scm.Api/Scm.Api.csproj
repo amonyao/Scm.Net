@@ -40,6 +40,7 @@
     <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.20" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
@@ -113,6 +114,9 @@
     </Reference>
     <Reference Include="Scm.Server.Ioc">
       <HintPath>..\Libs\Scm.Server.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Newton">
+      <HintPath>..\Libs\Scm.Server.Newton.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Quartz">
       <HintPath>..\Libs\Scm.Server.Quartz.dll</HintPath>

@@ -4,61 +4,138 @@
         <name>Scm.Dao</name>
     </assembly>
     <members>
-        <member name="T:Com.Scm.Dao.Cfg.ConfigCatDao">
+        <member name="T:Com.Scm.Dao.Cfg.Config.ConfigCatDao">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Com.Scm.Dao.Cfg.ConfigDao">
+        <member name="T:Com.Scm.Dao.Cfg.Config.ConfigDao">
             <summary>
             系统配置
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.user_id">
+        <member name="P:Com.Scm.Dao.Cfg.Config.ConfigDao.user_id">
             <summary>
             用户
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.types">
+        <member name="P:Com.Scm.Dao.Cfg.Config.ConfigDao.types">
             <summary>
             配置类型
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.key">
+        <member name="P:Com.Scm.Dao.Cfg.Config.ConfigDao.key">
             <summary>
             键
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.value">
+        <member name="P:Com.Scm.Dao.Cfg.Config.ConfigDao.value">
             <summary>
             值
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Cfg.ConfigDao.data">
+        <member name="P:Com.Scm.Dao.Cfg.Config.ConfigDao.data">
             <summary>
             数据
             </summary>
         </member>
-        <member name="T:Com.Scm.Dao.Cfg.ConfigKeyDao">
+        <member name="T:Com.Scm.Dao.Cfg.Config.ConfigKeyDao">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Com.Scm.Dao.DateThemeDao">
+        <member name="T:Com.Scm.Dao.Cfg.DateTheme.DateThemeDao">
             <summary>
             每日主题
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.DateThemeDao.dates">
+        <member name="P:Com.Scm.Dao.Cfg.DateTheme.DateThemeDao.dates">
             <summary>
             日期。
             格式：yyyy-MM-dd
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.DateThemeDao.theme_id">
+        <member name="P:Com.Scm.Dao.Cfg.DateTheme.DateThemeDao.theme_id">
             <summary>
             主题
             </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Cfg.Export.ExportDetailDao">
+            <summary>
+            导出配置明细
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportDetailDao.export_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportDetailDao.od">
+            <summary>
+            显示排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportDetailDao.col">
+            <summary>
+            列名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportDetailDao.namec">
+            <summary>
+            展示名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportDetailDao.def">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportDetailDao.fun">
+            <summary>
+            公式
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Cfg.Export.ExportHeaderDao">
+            <summary>
+            导出配置头档
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.codes">
+            <summary>
+            系统编码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.codec">
+            <summary>
+            用户编码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.names">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.file">
+            <summary>
+            文件名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.details">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.Add(Com.Scm.Dao.Cfg.Export.ExportDetailDao)">
+            <summary>
+            
+            </summary>
+            <param name="detail"></param>
+        </member>
+        <member name="M:Com.Scm.Dao.Cfg.Export.ExportHeaderDao.Add(System.Collections.Generic.IEnumerable{Com.Scm.Dao.Cfg.Export.ExportDetailDao})">
+            <summary>
+            
+            </summary>
+            <param name="items"></param>
         </member>
         <member name="T:Com.Scm.Dao.Dev.MenuDao">
             <summary>
@@ -197,7 +274,12 @@
         </member>
         <member name="P:Com.Scm.Dao.Dev.UidDao.m">
             <summary>
-            掩码
+            前置掩码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Dev.UidDao.p">
+            <summary>
+            后置掩码
             </summary>
         </member>
         <member name="T:Com.Scm.Dao.Dev.VerDetailDao">
@@ -325,14 +407,14 @@
             是否已读
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.is_del">
-            <summary>
-            是否删除
-            </summary>
-        </member>
         <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.user_id">
             <summary>
             收件人ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.row_delete">
+            <summary>
+            是否删除
             </summary>
         </member>
         <member name="T:Com.Scm.Dao.Msg.Notice.NoticeSenderDao">
@@ -1121,6 +1203,51 @@
             角色编号
             </summary>
         </member>
+        <member name="T:Com.Scm.Cfg.User.UserThemeDao">
+            <summary>
+            用户风格配置
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.user_id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.light">
+            <summary>
+            模式
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.color">
+            <summary>
+            颜色
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.lang">
+            <summary>
+            语言
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.layout">
+            <summary>
+            布局
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.menu">
+            <summary>
+            菜单展示方式
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.tabs">
+            <summary>
+            标签展示方式
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Cfg.User.UserThemeDao.home">
+            <summary>
+            首页展示方式
+            </summary>
+        </member>
         <member name="T:Com.Scm.Sys.RegionDao">
             <summary>
             区域表
@@ -1366,6 +1493,11 @@
             
             </summary>
         </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.types">
+            <summary>
+            导出类型
+            </summary>
+        </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.codes">
             <summary>
             
@@ -1373,47 +1505,62 @@
         </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.codec">
             <summary>
-            
+            代码
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.names">
             <summary>
-            
+            名称
             </summary>
         </member>
-        <member name="P:Com.Scm.Sys.Tasks.TaskDao.types">
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.clazz">
             <summary>
-            
+            类名
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.json">
             <summary>
-            查询条件
+            报文
             </summary>
         </member>
-        <member name="P:Com.Scm.Sys.Tasks.TaskDao.start_time">
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.file">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Tasks.TaskDao.end_time">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Tasks.TaskDao.elapsed_time">
-            <summary>
-            
+            文件
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.handle">
             <summary>
-            
+            作业状态
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.result">
             <summary>
-            执行结果
+            作业结果
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.message">
+            <summary>
+            提示信息
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.need_time_f">
+            <summary>
+            预计执行时间（起始）
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.need_time_t">
+            <summary>
+            预计执行时间（结束）
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.exec_time_f">
+            <summary>
+            实际执行时间（实际）
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.TaskDao.exec_time_t">
+            <summary>
+            实际执行时间（结束）
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.Tasks.TaskDao.row_delete">

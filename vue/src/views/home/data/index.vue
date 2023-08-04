@@ -173,6 +173,9 @@ export default {
                 'names': '月度新增用户', 'tips': '本月所有新增用户数量', 'number': 122,
                 'rate': { 'title': '环比变化：', 'value': 31 }
             }];
+        },
+        handleClick() {
+
         }
     }
 }
