@@ -178,7 +178,7 @@ export default {
 	},
 	methods: {
 		async loadTheme() {
-			var res = await this.$API.login.theme.get({});
+			var res = await this.$API.login.dateTheme.get({});
 			if (res == null || res.code != 200) {
 				return;
 			}

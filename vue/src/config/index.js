@@ -25,7 +25,7 @@ const DEFAULT_CONFIG = {
 
 	//SignalR地址
 	SignalR_URL: process.env.VUE_APP_API_BASEURL + "/chathub",
-	
+
 	// 默认用户
 	DEF_USER: process.env.DEF_USER,
 
@@ -69,6 +69,9 @@ const DEFAULT_CONFIG = {
 	//主题颜色
 	COLOR: "",
 
+	//首面
+	HOME: "1",
+
 	//控制台首页默认布局
 	DEFAULT_GRID: {
 		//默认分栏数量和宽度 例如 [24] [18,6] [8,8,8] [6,12,6]
@@ -77,6 +80,7 @@ const DEFAULT_CONFIG = {
 		copmsList: [["welcome", "ver"], ["time", "progress"], ["about"]],
 	},
 };
+
 //合并业务配置
 import MY_CONFIG from "./myConfig";
 Object.assign(DEFAULT_CONFIG, MY_CONFIG);

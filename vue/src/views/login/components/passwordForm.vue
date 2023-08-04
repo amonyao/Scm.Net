@@ -96,6 +96,7 @@ export default {
 			}
 			this.$TOOL.data.set("TOKEN", userRes.data.accessToken);
 			this.$TOOL.data.set("USER_INFO", userRes.data.userInfo);
+			this.$TOOL.data.set("USER_THEME", userRes.data.userTheme);
 
 			//获取菜单
 			var menuRes = await this.$API.mgrmenu.authority.get();

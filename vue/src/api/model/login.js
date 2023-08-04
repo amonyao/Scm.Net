@@ -9,13 +9,6 @@ export default {
 			return await http.post(this.url, data);
 		}
 	},
-	theme: {
-		url: `${config.API_URL}/operator/theme`,
-		name: "获取登录风格",
-		get: async function (data) {
-			return await http.get(this.url, data);
-		}
-	},
 	user: {
 		url: `${config.API_URL}/operator/userword`,
 		name: "查询登录人信息",
@@ -36,5 +29,33 @@ export default {
 		post: async function (data) {
 			return await http.post(this.url, data);
 		}
-	}
+	},
+	dateTheme: {
+		url: `${config.API_URL}/operator/datetheme`,
+		name: "获取登录风格",
+		get: async function (data) {
+			return await http.get(this.url, data);
+		}
+	},
+	userTheme: {
+		url: `${config.API_URL}/operator/usertheme`,
+		name: "获取登录风格",
+		get: async function (data) {
+			return await http.get(this.url, data);
+		}
+	},
+	userBasic: {
+		url: `${config.API_URL}/operator/userbasic`,
+		name: "修改登录人基本信息",
+		put: async function (data = {}) {
+			return await http.put(this.url, data);
+		}
+	},
+	userPass: {
+		url: `${config.API_URL}/operator/userpass`,
+		name: "修改密码",
+		put: async function (data) {
+			return await http.put(this.url, data);
+		}
+	},
 }

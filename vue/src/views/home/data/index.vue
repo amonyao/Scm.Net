@@ -2,16 +2,20 @@
     <el-main>
         <el-row :gutter="15">
             <el-col :lg="6">
-                <myCard :title="summary0.names" :tooltip="summary0.tips" :number="summary0.number" :rate="summary0.rate"></myCard>
+                <myCard :title="summary0.title" :tooltip="summary0.tooltip" :number="summary0.value" :rate="summary0.rate">
+                </myCard>
             </el-col>
             <el-col :lg="6">
-                <myCard :title="summary1.names" :tooltip="summary1.tips" :number="summary1.number" :rate="summary1.rate"></myCard>
+                <myCard :title="summary1.title" :tooltip="summary1.tooltip" :number="summary1.value" :rate="summary1.rate">
+                </myCard>
             </el-col>
             <el-col :lg="6">
-                <myCard :title="summary2.names" :tooltip="summary2.tips" :number="summary2.number" :rate="summary2.rate"></myCard>
+                <myCard :title="summary2.title" :tooltip="summary2.tooltip" :number="summary2.value" :rate="summary2.rate">
+                </myCard>
             </el-col>
             <el-col :lg="6">
-                <myCard :title="summary3.names" :tooltip="summary3.tips" :number="summary3.number" :rate="summary3.rate"></myCard>
+                <myCard :title="summary3.title" :tooltip="summary3.tooltip" :number="summary3.value" :rate="summary3.rate">
+                </myCard>
             </el-col>
         </el-row>
         <el-row>
@@ -78,20 +82,7 @@ export default {
                         axisTick: {
                             alignWithLabel: true
                         },
-                        data: [
-                            '1月',
-                            '2月',
-                            '3月',
-                            '4月',
-                            '5月',
-                            '6月',
-                            '7月',
-                            '8月',
-                            '9月',
-                            '10月',
-                            '11月',
-                            '12月'
-                        ]
+                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
                     }
                 ],
                 yAxis: [
@@ -128,20 +119,7 @@ export default {
                         type: 'line',
                         smooth: true,
                         yAxisIndex: 1,
-                        data: [
-                            6.0,
-                            10.2,
-                            10.3,
-                            11.5,
-                            10.3,
-                            13.2,
-                            14.3,
-                            16.4,
-                            18.0,
-                            16.5,
-                            12.0,
-                            5.2
-                        ]
+                        data: [6.0, 10.2, 10.3, 11.5, 10.3, 13.2, 14.3, 16.4, 18.0, 16.5, 12.0, 5.2]
                     }
                 ]
             },
@@ -153,8 +131,33 @@ export default {
         this.init();
     },
     methods: {
-        init() {
-            this.summarys = [{
+        async init() {
+            var res = await this.$API.home.summary.get();
+            if (res != null && res.code == 200) {
+                this.summarys = res.data.summaries;
+            }
+            if (!this.summarys) {
+                this.summarys = this.defSummarys();
+            }
+            this.summary0 = this.summarys[0];
+            this.summary1 = this.summarys[1];
+            this.summary2 = this.summarys[2];
+            this.summary3 = this.summarys[3];
+
+            res = await this.$API.home.report.get();
+            if (res != null && res.code == 200) {
+                this.optionCharts.series[0].data = res.data.data1;
+                this.optionCharts.series[1].data = res.data.data2;
+            }
+
+            res = await this.$API.home.todo.get();
+            if (res != null && res.code == 200) {
+                // this.optionCharts.series[0].data = res.data.data1;
+                // this.optionCharts.series[1].data = res.data.data2;
+            }
+        },
+        defSummarys() {
+            return [{
                 'names': '今日总单量', 'tips': '今日进入系统的所有订单数量', 'number': 122,
                 'rate': { 'title': '环比变化：', 'value': 10 }
             },
@@ -170,10 +173,6 @@ export default {
                 'names': '月度新增用户', 'tips': '本月所有新增用户数量', 'number': 122,
                 'rate': { 'title': '环比变化：', 'value': 31 }
             }];
-            this.summary0 = this.summarys[0];
-            this.summary1 = this.summarys[1];
-            this.summary2 = this.summarys[2];
-            this.summary3 = this.summarys[3];
         }
     }
 }

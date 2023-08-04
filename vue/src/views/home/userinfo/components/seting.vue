@@ -26,6 +26,13 @@
 					<el-option label="功能坞" value="dock"></el-option>
 				</el-select>
 			</el-form-item>
+			<el-form-item label="首页布局">
+				<el-select v-model="home" placeholder="请选择">
+					<el-option label="自定义" value="1"></el-option>
+					<el-option label="工作台" value="2"></el-option>
+					<el-option label="大屏幕" value="3"></el-option>
+				</el-select>
+			</el-form-item>
 			<el-form-item label="折叠菜单">
 				<el-switch v-model="menuIsCollapse"></el-switch>
 			</el-form-item>
@@ -47,6 +54,7 @@ export default {
 			menuIsCollapse: this.$store.state.global.menuIsCollapse,
 			layoutTags: this.$store.state.global.layoutTags,
 			lang: this.$TOOL.data.get('APP_LANG') || this.$CONFIG.LANG,
+			home: this.$TOOL.data.get('APP_HOME') || this.$CONFIG.HOME,
 			dark: this.$TOOL.data.get('APP_DARK') || false,
 			colorList: ['#409EFF', '#009688', '#536dfe', '#ff5c93', '#c62f2f', '#fd726d'],
 			colorPrimary: this.$TOOL.data.get('APP_COLOR') || this.$CONFIG.COLOR || '#409EFF'
@@ -74,6 +82,9 @@ export default {
 		lang(val) {
 			this.$i18n.locale = val
 			this.$TOOL.data.set("APP_LANG", val);
+		},
+		home(val) {
+			this.$TOOL.data.set("APP_HOME", val);
 		},
 		colorPrimary(val) {
 			document.documentElement.style.setProperty('--el-color-primary', val);

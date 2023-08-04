@@ -57,23 +57,9 @@ export default {
 			return await http.get(this.url, params);
 		}
 	},
-	basic: {
-		url: `${config.API_URL}/uruser/basic`,
-		name: "修改登录人基本信息",
-		put: async function (data = {}) {
-			return await http.put(this.url, data);
-		}
-	},
 	passreset: {
 		url: `${config.API_URL}/uruser/passreset`,
 		name: "重置密码",
-		put: async function (data) {
-			return await http.put(this.url, data);
-		}
-	},
-	setpwd: {
-		url: `${config.API_URL}/uruser/settingpwd`,
-		name: "修改密码",
 		put: async function (data) {
 			return await http.put(this.url, data);
 		}

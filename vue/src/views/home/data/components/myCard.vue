@@ -22,7 +22,7 @@
                     </el-icon>
                 </span>
                 <span class="red" v-else-if="rate.value > 0">
-                    {{ rate.value }} %
+                    {{ rate.value }} {{ rate.units }}
                     <el-icon>
                         <CaretTop />
                     </el-icon>

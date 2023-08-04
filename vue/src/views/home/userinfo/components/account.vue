@@ -12,9 +12,9 @@
 			</el-form-item>
 			<el-form-item label="性别">
 				<el-select v-model="form.sex" placeholder="请选择">
-					<el-option label="保密" value="保密"></el-option>
-					<el-option label="男" value="男"></el-option>
-					<el-option label="女" value="女"></el-option>
+					<el-option label="保密" value="1"></el-option>
+					<el-option label="男" value="2"></el-option>
+					<el-option label="女" value="3"></el-option>
 				</el-select>
 			</el-form-item>
 			<el-form-item label="个性签名">
@@ -33,11 +33,11 @@ export default {
 		return {
 			form: {
 				id: 0,
-				account: "fytsoa@outlook.com",
-				name: "FytSoa",
+				names: "",
+				namec: "",
 				headPic: "",
-				sex: "男",
-				summary: "正所谓富贵险中求",
+				sex: 1,
+				summary: "",
 				role: [],
 				post: [],
 			},
@@ -52,13 +52,13 @@ export default {
 			this.form = res.data;
 		},
 		async saveBasic() {
-			if (!this.form.fullName) {
+			if (!this.form.names) {
 				this.$alert("姓名不能为空！", "提示", { type: "error" });
 				return;
 			}
 			const user = this.$TOOL.data.get("USER_INFO");
 			this.form.id = user.id;
-			const res = await this.$API.uruser.basic.put(this.form);
+			const res = await this.$API.login.userBasic.put(this.form);
 			if (res.code == 200) {
 				this.$message.success("保存成功");
 			} else {
