@@ -9,19 +9,22 @@
 			</el-card>
 		</el-main>
 	</div>
-	<work v-if="dashboard=='1'" @on-mounted="onMounted"></work>
+	<ucWork v-if="dashboard=='1'" @on-mounted="onMounted"></ucWork>
+	<ucData v-if="dashboard=='2'" @on-mounted="onMounted"></ucData>
 	<widgets v-else @on-mounted="onMounted"></widgets>
 </template>
 
 <script>
 	import { defineAsyncComponent } from 'vue';
-	const work = defineAsyncComponent(() => import('./work'));
+	const ucWork = defineAsyncComponent(() => import('./work'));
+	const ucData = defineAsyncComponent(() => import('./data'));
 	const widgets = defineAsyncComponent(() => import('./widgets'));
 
 	export default {
 		name: "dashboard",
 		components: {
-			work,
+			ucWork,
+			ucData,
 			widgets
 		},
 		data(){
@@ -31,7 +34,7 @@
 			}
 		},
 		created(){
-			this.dashboard = this.$TOOL.data.get("USER_INFO").dashboard || '0';
+			this.dashboard = this.$TOOL.data.get("USER_INFO").dashboard || '2';
 		},
 		mounted(){
 
@@ -43,6 +46,3 @@
 		}
 	}
 </script>
-
-<style>
-</style>

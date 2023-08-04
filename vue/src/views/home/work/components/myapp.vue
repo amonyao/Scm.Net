@@ -4,13 +4,13 @@
 			<li v-for="mod in myMods" :key="mod.path" :style="{ background: mod.meta.color || '#909399' }">
 				<a v-if="mod.meta.type == 'link'" :href="mod.path" target="_blank">
 					<el-icon>
-						<component :is="mod.meta.icon || el - icon - menu" />
+						<component :is="mod.meta.icon || 'el-icon-menu'" />
 					</el-icon>
 					<p>{{ mod.meta.title }}</p>
 				</a>
 				<router-link v-else :to="{ path: mod.path }">
 					<el-icon>
-						<component :is="mod.meta.icon || el - icon - menu" />
+						<component :is="mod.meta.icon || 'el-icon-menu'" />
 					</el-icon>
 					<p>{{ mod.meta.title }}</p>
 				</router-link>
@@ -29,7 +29,7 @@
 					<template #item="{ element }">
 						<li :style="{ background: element.meta.color || '#909399' }">
 							<el-icon>
-								<component :is="element.meta.icon || el - icon - menu" />
+								<component :is="element.meta.icon || 'el-icon-menu'" />
 							</el-icon>
 							<p>{{ element.meta.title }}</p>
 						</li>
@@ -42,7 +42,7 @@
 					<template #item="{ element }">
 						<li :style="{ background: element.meta.color || '#909399' }">
 							<el-icon>
-								<component :is="element.meta.icon || el - icon - menu" />
+								<component :is="element.meta.icon || 'el-icon-menu'" />
 							</el-icon>
 							<p>{{ element.meta.title }}</p>
 						</li>
