@@ -84,9 +84,7 @@
 6. 数据库配置：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
 
 ## 演示地址  
-[![website1](https://img.shields.io/badge/linux-http://scm.leadiot.cn-success.svg?logo=buzzfeed&logoColor=green)](http://oms.c-scm.cn)  
-
-账户与密码  
+【登录地址】[点击登录](http://oms.c-scm.cn)  
 【管理账号】
 用户：Admin@demo
 密码：123654  
@@ -103,7 +101,11 @@
 ## 项目截图
 后台首页
 
-![后台首页](https://gitee.com/openscm/scm.net/images/BA02-01.png "BAHome-01.png")
+![后台首页](https://gitee.com/openscm/scm.net/raw/master/screenshot1.png)
+![超管模块](https://gitee.com/openscm/scm.net/raw/master/screenshot2.png)
+![在线SQL](https://gitee.com/openscm/scm.net/raw/master/screenshot3.png)
+![任务调度](https://gitee.com/openscm/scm.net/raw/master/screenshot5.png)
+![系统监控](https://gitee.com/openscm/scm.net/raw/master/screenshot7.png)
 
 更多截图请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis) 查看项目截图小节  
 
