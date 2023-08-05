@@ -322,6 +322,11 @@
             当前版本
             </summary>
         </member>
+        <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.date">
+            <summary>
+            发布日期
+            </summary>
+        </member>
         <member name="P:Com.Scm.Dao.Dev.VerHeaderDao.build">
             <summary>
             构建版本

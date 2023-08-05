@@ -12,10 +12,13 @@ const DEFAULT_CONFIG = {
 	DASHBOARD_URL: "/dashboard",
 
 	//版本号
-	APP_VER: "6.0.1",
+	APP_VER: process.env.VUE_APP_VER,
 
 	//内核版本号
-	CORE_VER: "6.0.1",
+	CORE_VER: process.env.VUE_APP_VER,
+
+	// 构建日期
+	APP_BUILD : process.env.VUE_APP_BUILD,
 
 	//接口地址
 	API_URL: process.env.VUE_APP_API_BASEURL + "/api",

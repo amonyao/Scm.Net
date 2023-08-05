@@ -6,39 +6,35 @@
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="日程类型" prop="types">
-				<el-select v-model="formData.types" placeholder="请选择日程类型" clearable :style="{ width: '100%' }">
-					<el-option v-for="(item, index) in typeOptions" :key="index" :label="item.label" :value="item.value"
-						:disabled="item.disabled"></el-option>
-				</el-select>
+				<sc-select v-model="formData.types" :data="typeOptions" placeholder="请选择日程类型" />
 			</el-form-item>
 			<el-form-item label="日程级别" prop="level">
-				<el-select v-model="formData.level" placeholder="请选择日程级别" clearable :style="{ width: '100%' }">
+				<el-select v-model="formData.level" placeholder="请选择日程级别" :style="{ width: '100%' }">
 					<el-option v-for="item in levelOptions" :key="item.value" :label="item.label" :value="item.value">
 						<span style="float: left">{{ item.label }}</span>
 						<span style="float: right"><small class="circle"
 								:style="{ 'background-color': item.color }"></small></span></el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="开始时间" prop="start_time">
-				<el-date-picker type="datetime" v-model="formData.start_time" :style="{ width: '100%' }"
+			<el-form-item label="开始时间" prop="start_time_txt">
+				<el-date-picker type="datetime" v-model="formData.start_time_txt" :style="{ width: '100%' }"
 					placeholder="请选择开始时间" clearable>
 				</el-date-picker>
 			</el-form-item>
-			<el-form-item label="结束时间" prop="end_time">
-				<el-date-picker type="datetime" v-model="formData.end_time" :style="{ width: '100%' }" placeholder="请选择结束时间"
-					clearable>
+			<el-form-item label="结束时间" prop="end_time_txt">
+				<el-date-picker type="datetime" v-model="formData.end_time_txt" :style="{ width: '100%' }"
+					placeholder="请选择结束时间" clearable>
 				</el-date-picker>
 			</el-form-item>
 			<el-form-item label="参与人" prop="users">
-				<sc-table-select v-model="formData.users" :model-value="defaultValues" :apiObj="apiObj"
-					:table-width="450" :props="props" :style="{ width: '100%' }" multiple clearable collapse-tags
-					collapse-tags-tooltip>
+				<sc-table-select v-model="formData.users" :model-value="defaultValues" :apiObj="apiObj" :table-width="450"
+					:props="props" :style="{ width: '100%' }" multiple clearable collapse-tags collapse-tags-tooltip>
 					<el-table-column prop="headPic" label="头像" width="80">
 						<template #default="scope">
 							<el-avatar :src="$CONFIG.SERVER_URL + scope.row.headPic" size="small"></el-avatar>
 						</template>
 					</el-table-column>
-					<el-table-column prop="names" label="姓名" width="180"></el-table-column>
+					<el-table-column prop="namec" label="姓名" width="180"></el-table-column>
 					<el-table-column prop="roleGroupName" label="角色"></el-table-column>
 				</sc-table-select>
 			</el-form-item>
@@ -63,7 +59,7 @@ export default {
 			visible: false,
 			apiObj: this.$API.uruser.simple,
 			props: {
-				label: "names",
+				label: "namec",
 				value: "id",
 				keyword: "keyword",
 			},
@@ -78,10 +74,10 @@ export default {
 				level: [
 					{ required: true, trigger: "change", message: "请选择日程级别", },
 				],
-				start_time: [
+				start_time_txt: [
 					{ required: true, trigger: "change", message: "请选择开始时间", },
 				],
-				end_time: [
+				end_time_txt: [
 					{ required: true, trigger: "change", message: "请选择结束时间", },
 				],
 				users: [
@@ -103,12 +99,14 @@ export default {
 		},
 		def_data() {
 			return {
-				id: 0,
-				title: undefined,
-				types: 0,
-				level: 0,
-				start_time: null,
-				end_time: null,
+				id: '0',
+				title: '',
+				types: '0',
+				level: '0',
+				start_time: '0',
+				start_time_txt: null,
+				end_time: '0',
+				end_time_txt: null,
 				users: [],
 			}
 		},
@@ -118,7 +116,17 @@ export default {
 			} else {
 				this.mode = "edit";
 				var res = await this.$API.syscalendar.model.get(row.id);
+
+				res.data.level = '' + res.data.level;
+				res.data.types = '' + res.data.types;
 				this.formData = res.data;
+				if (this.formData.start_time) {
+					this.formData.start_time_txt = this.$TOOL.dateTimeFormat(this.formData.start_time);
+				}
+				if (this.formData.end_time) {
+					this.formData.end_time_txt = this.$TOOL.dateTimeFormat(this.formData.end_time);
+				}
+
 				this.defaultValues = res.data.users;
 			}
 			this.visible = true;
@@ -126,6 +134,12 @@ export default {
 		save() {
 			this.$refs.formRef.validate(async (valid) => {
 				if (valid) {
+					if (this.formData.start_time_txt) {
+						this.formData.start_time = new Date(this.formData.start_time_txt).getTime();
+					}
+					if (this.formData.end_time_txt) {
+						this.formData.end_time = new Date(this.formData.end_time_txt).getTime();
+					}
 					this.isSaveing = true;
 					let res = null;
 

@@ -12,8 +12,8 @@ scm.regex_codec = /^[-_0-9a-zA-Z]{1,32}$/;
 scm.regex_namec = /^$\w{1,64}/;
 scm.regex_int = /^[1-9]\d*$/;
 
-scm.OPTION_ALL = { 'label': '所有', 'id': '0' };
-scm.OPTION_ONE = { 'label': '请选择', 'id': '0' };
+scm.OPTION_ALL = { 'label': '所有', 'id': '0', 'value': '0' };
+scm.OPTION_ONE = { 'label': '请选择', 'id': '0', 'value': '0' };
 
 scm.encode_pass = function (pass) {
     var len1 = 4;
@@ -261,6 +261,20 @@ scm.list_origion = async function (list, pid, all) {
 
     var res = await http.get(`${config.API_URL}/cjgresorigion/option/` + pid);
     scm.prepare(list, res, all);
+};
+
+scm.get_dic_names = function (list) {
+    return list || '';
+};
+
+scm.get_option_names = function (options, key, def) {
+    if (!options) {
+        return def;
+    }
+    var obj = options.find((item) => {
+        return item.value == key;
+    });
+    return obj ? obj.label : '';
 };
 
 export default scm;

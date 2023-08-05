@@ -4,7 +4,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="终端类型" prop="types">
-                        <el-select v-model="formData.types" style="width: 100%;" placeholder="请选择">
+                        <el-select v-model="formData.types" style="width: 100%;" placeholder="请选择终端类型">
                             <el-option v-for="item in typeList" :key="item.id" :label="item.label"
                                 :value="item.value"></el-option>
                         </el-select>
@@ -12,21 +12,35 @@
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="系统代码" prop="sys">
-                        <el-input v-model="formData.sys" placeholder="请输入" :maxlength="16" show-word-limit
+                        <el-input v-model="formData.sys" placeholder="请输入系统代码" :maxlength="16" show-word-limit
                             clearable></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col :span="12">
+                    <el-form-item label="日期" prop="date">
+                        <el-date-picker type="date" v-model="formData.date" placeholder="请选择日期" clearable>
+                        </el-date-picker>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
                     <el-form-item label="版本" prop="ver">
-                        <el-input v-model="formData.ver" placeholder="请输入" :maxlength="16" show-word-limit
+                        <el-input v-model="formData.ver" placeholder="请输入版本" :maxlength="16" show-word-limit
+                            clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="最小版本" prop="ver_min">
+                        <el-input v-model="formData.ver_min" placeholder="请输入最小版本" :maxlength="16" show-word-limit
                             clearable></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="最小版本" prop="ver_min">
-                        <el-input v-model="formData.ver_min" placeholder="请输入联系人" :maxlength="16" show-word-limit
+                    <el-form-item label="最大版本" prop="ver_max">
+                        <el-input v-model="formData.ver_max" placeholder="请输入最大版本" :maxlength="16" show-word-limit
                             clearable></el-input>
                     </el-form-item>
                 </el-col>
@@ -71,45 +85,22 @@ export default {
             visible: false,
             isSaveing: false,
             typeList: [],
-            formData: {
-                id: 0,
-                types: 0,
-                sys: '',
-                ver: '',
-                ver_min: '',
-                alpha: false,
-                beta: false,
-                forced: false,
-                remark: ''
-            },
+            formData: this.def_data(),
             rules: {
                 types: [
-                    {
-                        required: true,
-                        trigger: "blur",
-                        message: "请选择终端类型",
-                    },
+                    { required: true, trigger: "blur", message: "请选择终端类型", },
                 ],
                 sys: [
-                    {
-                        required: true,
-                        trigger: "blur",
-                        message: "请输入系统代码",
-                    },
+                    { required: true, trigger: "blur", message: "请输入系统代码", },
+                ],
+                date: [
+                    { required: true, trigger: "blur", message: "请输入日期", },
                 ],
                 ver: [
-                    {
-                        required: true,
-                        trigger: "blur",
-                        message: "请输入当前版本",
-                    },
+                    { required: true, trigger: "blur", message: "请输入版本", },
                 ],
                 remark: [
-                    {
-                        required: true,
-                        trigger: "blur",
-                        message: "请输入版本信息",
-                    },
+                    { required: true, trigger: "blur", message: "请输入版本信息", },
                 ],
             },
         };
@@ -117,6 +108,21 @@ export default {
     mounted() {
     },
     methods: {
+        def_data() {
+            return {
+                id: '0',
+                types: '0',
+                sys: '',
+                date: this.$TOOL.dateFormat(new Date(), 'yyyy-MM-dd'),
+                ver: '',
+                ver_min: '',
+                ver_max: '',
+                alpha: false,
+                beta: false,
+                forced: false,
+                remark: ''
+            };
+        },
         async open(row) {
             await this.$SCM.list_dic(this.typeList, 'client_type', false);
             if (!row || !row.id) {
@@ -124,6 +130,7 @@ export default {
             } else {
                 this.mode = "edit";
                 var res = await this.$API.sysversion.edit.get(row.id);
+                res.data.types = '' + res.data.types;
                 this.formData = res.data;
             }
             this.visible = true;
@@ -133,7 +140,7 @@ export default {
                 if (valid) {
                     this.isSaveing = true;
                     let res = null;
-                    if (this.formData.id === 0) {
+                    if (this.formData.id === '0') {
                         res = await this.$API.sysversion.add.post(this.formData);
                     } else {
                         res = await this.$API.sysversion.update.put(this.formData);
@@ -150,17 +157,7 @@ export default {
             });
         },
         close() {
-            this.formData = {
-                id: 0,
-                types: 0,
-                sys: '',
-                ver: '',
-                ver_min: '',
-                alpha: false,
-                beta: false,
-                forced: false,
-                remark: ''
-            };
+            this.formData = this.def_data();
             this.$refs.formRef.resetFields();
             this.visible = false;
         },

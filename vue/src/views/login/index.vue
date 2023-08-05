@@ -95,7 +95,7 @@
 		</el-container>
 	</div>
 	<div class="login_foot">
-		© {{ $CONFIG.APP_NAME }} {{ $CONFIG.APP_VER }} BUILD 20230510
+		© {{ $CONFIG.APP_NAME }} {{ $CONFIG.APP_VER }} BUILD {{ $CONFIG.APP_BUILD }}
 	</div>
 	<el-dialog v-model="showWechatLogin" :title="$t('login.wechatLoginTitle')" :width="400" destroy-on-close>
 		<div class="qrCodeLogin">

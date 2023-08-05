@@ -15,10 +15,10 @@
 					</sc-table-select>
 				</div>
 				<div class="right-panel">
-					<el-select v-model="param.types" placeholder="日程类型" style="width: 160px" clearable>
+					<el-select v-model="param.types" placeholder="日程类型" style="width: 160px">
 						<el-option v-for="item in types_list" :key="item.value" :label="item.label" :value="item.id" />
 					</el-select>
-					<el-select v-model="param.level" placeholder="日程级别" style="width: 160px" clearable>
+					<el-select v-model="param.level" placeholder="日程级别" style="width: 160px">
 						<el-option v-for="item in level_list" :key="item.value" :label="item.label" :value="item.id">
 							<span style="float: left">{{ item.label }}</span>
 							<span style="float: right">
@@ -71,10 +71,10 @@
 								<h2>{{ task.title }}</h2>
 								<div class="task-bottom">
 									<el-tag type="success" round size="small">
-										{{ task.types_names }}
+										{{ getTypesNames(task.types) }}
 									</el-tag>
 									<div class="level" :style="{ 'background-color': task.level, }">
-										{{ task.level_names }}
+										{{ getLevelNames(task.level) }}
 									</div>
 									<el-dropdown size="small">
 										<el-button icon="el-icon-more" circle />
@@ -137,7 +137,7 @@ export default {
 			apiObj: this.$API.uruser.simple,
 			selectUser: {},
 			props: {
-				label: "names",
+				label: "namec",
 				value: "id",
 				keyword: "keyword",
 			},
@@ -174,12 +174,16 @@ export default {
 		},
 		async list_data() {
 			const res = await this.$API.syscalendar.list.get(this.param);
+			if (res == null || res.code != 200) {
+				return;
+			}
+
 			res.data.forEach((m) => {
-				m.beginTime = m.start_time;
-				m.start_time = this.$TOOL.dateFormat(m.start_time, "yyyy-MM-dd");
+				m.beginTime = m.start_time != '0' ? this.$TOOL.dateFormat(eval(m.start_time), "yyyy-MM-dd") : '';
+				m.endTime = m.end_time != '0' ? this.$TOOL.dateFormat(eval(m.end_time), "yyyy-MM-dd") : '';
 			});
 			this.resData = res.data;
-			this.data = this.getGroup(this.resData, "start_time");
+			this.data = this.getGroup(this.resData, "beginTime");
 		},
 		getData(date) {
 			return this.data[date];
@@ -213,21 +217,19 @@ export default {
 				type: "warning",
 				confirmButtonText: "确定",
 				cancelButtonText: "取消",
-			})
-				.then(async () => {
-					const loading = this.$loading();
-					var res = await this.$API.syscalendar.delete.delete([
-						row.id,
-					]);
-					if (res.code == 200) {
-						loading.close();
-						this.$message.success("删除成功");
-						this.list_data();
-					} else {
-						this.$alert(res.message, "提示", { type: "error" });
-					}
-				})
-				.catch(() => { });
+			}).then(async () => {
+				const loading = this.$loading();
+				var res = await this.$API.syscalendar.delete.delete([
+					row.id,
+				]);
+				if (res.code == 200) {
+					loading.close();
+					this.$message.success("删除成功");
+					this.list_data();
+				} else {
+					this.$alert(res.message, "提示", { type: "error" });
+				}
+			}).catch(() => { });
 		},
 		open(row) {
 			if (row.id) {
@@ -236,6 +238,12 @@ export default {
 				this.$refs.modify.open();
 			}
 		},
+		getTypesNames(types) {
+			return this.$SCM.get_option_names(this.types_list, types, '未知');
+		},
+		getLevelNames(types) {
+			return this.$SCM.get_option_names(this.level_list, types, '未知');
+		}
 	},
 };
 </script>

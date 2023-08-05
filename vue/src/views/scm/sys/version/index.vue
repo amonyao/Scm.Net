@@ -3,11 +3,11 @@
 		<scSearch>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="查询选项" prop="option_id">
-						<sc-select v-model="param.option_id" :data="option_list" clearable placeholder="请选择" />
+					<el-form-item label="终端类型" prop="types">
+						<sc-select v-model="param.types" :data="types_list" clearable placeholder="请选择终端类型" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" :data="row_status_list" clearable placeholder="请选择" />
+						<sc-select v-model="param.row_status" :data="row_status_list" clearable placeholder="请选择数据状态" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -91,17 +91,17 @@ export default {
 			apiObj: this.$API.sysversion.page,
 			list: [],
 			param: {
-				option_id: "",
-				row_status: 1,
+				types: '0',
+				row_status: '1',
 				create_time: '',
-				key: ""
+				key: ''
 			},
-			option_list: [{ label: '选项1', id: 1 }],
-			row_status_list: [{ label: '选项2', id: 2 }],
+			types_list: [],
+			row_status_list: [],
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'types', label: '终端类型', width: 100 },
+				{ prop: 'types', label: '终端类型', width: 100, formatter: this.getTypesNames },
 				{ prop: 'sys', label: '系统代码', width: 100 },
 				{ prop: 'current', label: '当前版本', width: 100 },
 				{ prop: 'ver', label: '版本', width: 100 },
@@ -117,6 +117,8 @@ export default {
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.types_list, 'client_type', true);
+		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
 		complete() {
@@ -170,6 +172,9 @@ export default {
 			} else {
 				this.$alert(res.message, "提示", { type: "error" });
 			}
+		},
+		getTypesNames(types) {
+			return this.$SCM.get_option_names(this.types_list, types, '');
 		}
 	},
 };
