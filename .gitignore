@@ -23,5 +23,8 @@ PublishProfiles/
 [Gg]enerated/
 
 # 需要特殊处理的文件
+/net/Scm.Api/logs/
+/net/Scm.Api/temp/
+/net/Scm.Api/quartz/settings/logs/
 /net/Scm.Api/upload
 /net/Scm.Api/Properties/PublishProfiles/FolderProfile.pubxml.user

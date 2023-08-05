@@ -146,14 +146,14 @@ export default {
 			this.changeCss();
 		},
 		renderContent(h, { node }) {
-			let classname = "";
+			let classname = "el-tree-node__label";
 			if (node.childNodes.length === 0) {
-				classname = "floatRight";
+				classname = " floatRight";
 			} else if (node.childNodes.length > 0) {
-				classname = "clearFloat";
+				classname = " clearFloat";
 			}
 			return (
-				<span class="el-tree-node__label" class={classname}>
+				<span class={classname}>
 					{node.label}
 				</span>
 			);

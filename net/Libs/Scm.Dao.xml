@@ -891,6 +891,11 @@
             角色编号
             </summary>
         </member>
+        <member name="P:Com.Scm.Dao.Ur.RoleAuthDao.od">
+            <summary>
+            显示排序
+            </summary>
+        </member>
         <member name="P:Com.Scm.Dao.Ur.RoleAuthDao.auth_id">
             <summary>
             菜单编号
