@@ -4,10 +4,10 @@
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="终端类型" prop="types">
-						<sc-select v-model="param.types" :data="types_list" clearable placeholder="请选择终端类型" />
+						<sc-select v-model="param.types" :data="types_list" placeholder="请选择终端类型" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" :data="row_status_list" clearable placeholder="请选择数据状态" />
+						<sc-select v-model="param.row_status" :data="row_status_list" placeholder="请选择数据状态" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -88,7 +88,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.sysversion.page,
+			apiObj: this.$API.devversion.page,
 			list: [],
 			param: {
 				types: '0',
@@ -109,10 +109,10 @@ export default {
 				{ prop: 'alpha', label: '是否内测', width: 100 },
 				{ prop: 'beta', label: '是否公测', width: 100 },
 				{ prop: 'row_status', label: '数据状态', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'update_name', label: '更新人员', width: 100 },
-				{ prop: 'create_time', label: '创建时间', width: 150, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'create_name', label: '创建人员', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
 		};
 	},
@@ -128,16 +128,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysversion.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.devversion.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysversion.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.devversion.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysversion.delete, row);
+			this.$SCM.delete_item(this, this.$API.devversion.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysversion.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.devversion.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -165,7 +165,7 @@ export default {
 			}
 			var row = this.selection[0];
 
-			var res = await this.$API.sysversion.current.get(row.id);
+			var res = await this.$API.devversion.current.get(row.id);
 			if (res.code == 200) {
 				this.complete();
 				this.$message.success("保存成功");

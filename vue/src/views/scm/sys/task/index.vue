@@ -3,11 +3,17 @@
 		<scSearch>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="查询选项" prop="option_id">
-						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
+					<el-form-item label="任务类型" prop="types">
+						<sc-select v-model="param.types" placeholder="请选择任务类型" :data="types_list" />
+					</el-form-item>
+					<el-form-item label="执行状态" prop="handle">
+						<sc-select v-model="param.handle" placeholder="请选择执行状态" :data="handle_list" />
+					</el-form-item>
+					<el-form-item label="执行结果" prop="result">
+						<sc-select v-model="param.result" placeholder="请选择执行结果" :data="result_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list"/>
+						<sc-select v-model="param.row_status" placeholder="请选择数据状态" :data="row_status_list" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -18,17 +24,17 @@
 		</scSearch>
 		<el-header>
 			<div class="left-panel">
-				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
-				<el-divider direction="vertical"></el-divider>
+				<!-- <el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
+				<el-divider direction="vertical"></el-divider> -->
 				<el-button-group>
-					<el-tooltip content="启用">
+					<!-- <el-tooltip content="启用">
 						<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
 							@click="status_list(1)"></el-button>
 					</el-tooltip>
 					<el-tooltip content="停用">
 						<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
 							@click="status_list(2)"></el-button>
-					</el-tooltip>
+					</el-tooltip> -->
 					<el-tooltip content="删除">
 						<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
 							@click="delete_list"></el-button>
@@ -49,11 +55,12 @@
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
 					<template #default="scope">
-						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
-							编辑
+						<el-button text type="primary" size="small" @click="open_dialog(scope.row)"
+							:disabled="!canDownload(scope.row)">
+							下载
 						</el-button>
 						<el-divider direction="vertical" />
-						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row, scope.$index)">
 							<template #reference>
 								<el-button text type="primary" size="small">删除</el-button>
 							</template>
@@ -82,42 +89,51 @@ export default {
 		return {
 			apiObj: this.$API.systask.page,
 			list: [],
-            param:{
-				option_id: '',
+			param: {
+				types: '0',
+				handle: '0',
+				result: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
-            },
+			},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-                { prop: 'codes', label: '系统代码', width: 100 },
-                { prop: 'names', label: '任务名称', width: 100 },
-                { prop: 'types', label: '任务类型', width: 100 },
-                { prop: 'start_time', label: '开始时间', width: 100 },
-                { prop: 'end_time', label: '结束时间', width: 100 },
-                { prop: 'elapsed_time', label: '时长', width: 100 },
-                { prop: 'handle', label: '执行状态', width: 100 },
-                { prop: 'row_status', label: '数据状态', width: 100 },
-                { prop: 'update_time', label: '更新时间', width: 140, formatter: this.$TOOL.dateTimeFormat },
-                { prop: 'update_names', label: '更新人员', width: 100 },
-                { prop: 'create_time', label: '创建时间', width: 140, formatter: this.$TOOL.dateTimeFormat },
-                { prop: 'create_names', label: '创建人员', width: 100 },
+				{ prop: 'codes', label: '系统代码', width: 160 },
+				{ prop: 'names', label: '任务名称', width: 160 },
+				{ prop: 'types', label: '任务类型', width: 100, formatter: this.getTypesNames },
+				{ prop: 'need_time_f', label: '计划开始时间', width: 160, formatter: this.dateTimeFormat },
+				{ prop: 'need_time_t', label: '计划结束时间', width: 160, formatter: this.dateTimeFormat },
+				{ prop: 'exec_time_f', label: '实际开始时间', width: 160, formatter: this.dateTimeFormat },
+				{ prop: 'exec_time_t', label: '实际结束时间', width: 160, formatter: this.dateTimeFormat },
+				{ prop: 'handle', label: '执行状态', width: 100, formatter: this.getHandleNames },
+				{ prop: 'result', label: '执行结果', width: 100, formatter: this.getResultNames },
+				{ prop: 'message', label: '提示信息', align: 'left', minWidth: 160, showOverflowTooltip: true },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
 			row_status_list: [],
-			option_list: [],
+			types_list: [],
+			handle_list: [],
+			result_list: [],
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.types_list, 'task_type', true);
+		this.$SCM.list_dic(this.handle_list, 'task_handle', true);
+		this.$SCM.list_dic(this.result_list, 'task_result', true);
 		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
 		complete() {
 			this.$refs.table.refresh();
 		},
-        search(){
-            this.$refs.table.upData(this.param);
-        },
+		search() {
+			this.$refs.table.upData(this.param);
+		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.systask.status, row, row.row_status);
 		},
@@ -149,6 +165,24 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
+		},
+		getTypesNames(types) {
+			return this.$SCM.get_option_names(this.types_list, types, '');
+		},
+		getHandleNames(handle) {
+			return this.$SCM.get_option_names(this.handle_list, handle, '');
+		},
+		getResultNames(result) {
+			return this.$SCM.get_option_names(this.result_list, result, '');
+		},
+		dateTimeFormat(time) {
+			if (!time || time == '0') {
+				return '';
+			}
+			return this.$TOOL.dateTimeFormat(time);
+		},
+		canDownload(row) {
+			return row.types == 2 && row.result == 2 && row.file;
 		},
 	},
 };

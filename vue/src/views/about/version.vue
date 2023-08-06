@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         async init() {
-            var res = await this.$API.sysversion.list.get({ types: 10 });
+            var res = await this.$API.devversion.list.get({ types: 10 });
             if (res == null || res.code != 200) {
                 return;
             }

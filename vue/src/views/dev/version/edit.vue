@@ -19,14 +19,24 @@
             </el-row>
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="日期" prop="date">
-                        <el-date-picker type="date" v-model="formData.date" placeholder="请选择日期" clearable>
+                    <el-form-item label="发布日期" prop="time">
+                        <el-date-picker type="date" v-model="formData.time" placeholder="请选择发布日期" clearable>
                         </el-date-picker>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="12">
                     <el-form-item label="版本" prop="ver">
                         <el-input v-model="formData.ver" placeholder="请输入版本" :maxlength="16" show-word-limit
+                            clearable></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="构建版本" prop="build">
+                        <el-input v-model="formData.build" placeholder="请输入构建版本" :maxlength="16" show-word-limit
                             clearable></el-input>
                     </el-form-item>
                 </el-col>
@@ -93,11 +103,14 @@ export default {
                 sys: [
                     { required: true, trigger: "blur", message: "请输入系统代码", },
                 ],
-                date: [
-                    { required: true, trigger: "blur", message: "请输入日期", },
+                time: [
+                    { required: true, trigger: "blur", message: "请输入发布日期", },
                 ],
                 ver: [
                     { required: true, trigger: "blur", message: "请输入版本", },
+                ],
+                build: [
+                    { required: true, trigger: "blur", message: "请输入构建版本", },
                 ],
                 remark: [
                     { required: true, trigger: "blur", message: "请输入版本信息", },
@@ -113,7 +126,9 @@ export default {
                 id: '0',
                 types: '0',
                 sys: '',
-                date: this.$TOOL.dateFormat(new Date(), 'yyyy-MM-dd'),
+                date: '',
+                time: new Date(),
+                build: '',
                 ver: '',
                 ver_min: '',
                 ver_max: '',
@@ -129,8 +144,11 @@ export default {
                 this.mode = "add";
             } else {
                 this.mode = "edit";
-                var res = await this.$API.sysversion.edit.get(row.id);
+                var res = await this.$API.devversion.edit.get(row.id);
                 res.data.types = '' + res.data.types;
+                if (res.data.date) {
+                    res.data.time = new Date(res.data.date);
+                }
                 this.formData = res.data;
             }
             this.visible = true;
@@ -140,10 +158,13 @@ export default {
                 if (valid) {
                     this.isSaveing = true;
                     let res = null;
+                    if (this.formData.time) {
+                        this.formData.date = this.$TOOL.dateFormat(this.formData.time, 'yyyy-MM-dd');
+                    }
                     if (this.formData.id === '0') {
-                        res = await this.$API.sysversion.add.post(this.formData);
+                        res = await this.$API.devversion.add.post(this.formData);
                     } else {
-                        res = await this.$API.sysversion.update.put(this.formData);
+                        res = await this.$API.devversion.update.put(this.formData);
                     }
                     this.isSaveing = false;
                     if (res.code == 200) {

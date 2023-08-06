@@ -61,7 +61,7 @@ export default {
 		url: `${config.API_URL}/systask`,
 		name: "删除",
 		delete: async function (data) {
-			return await http.delete(this.url, data);
+			return await http.delete(this.url + "?ids=" + data);
 		}
 	}
 }

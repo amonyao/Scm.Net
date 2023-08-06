@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "启动程序: chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:2800",
+      "webRoot": "${workspaceFolder}/admin"
+    },
+    {
       "name": "启动程序: firefox",
       "request": "launch",
       "type": "firefox",

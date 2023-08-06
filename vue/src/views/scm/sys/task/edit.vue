@@ -1,35 +1,26 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="" prop="codes">
-				<el-input v-model="formData.codes" placeholder="请输入" :maxlength="32" show-word-limit clearable></el-input>
-			</el-form-item>
-			<el-form-item label="" prop="names">
-				<el-input v-model="formData.names" placeholder="请输入" :maxlength="32" show-word-limit clearable></el-input>
-			</el-form-item>
-			<el-form-item label="" prop="types">
-				<el-input v-model="formData.types" placeholder="请输入" :maxlength="4" show-word-limit clearable></el-input>
-			</el-form-item>
-			<el-form-item label="" prop="start_time">
-				<el-input v-model="formData.start_time" placeholder="请输入" :maxlength="24" show-word-limit
+			<el-form-item label="系统代码" prop="codes">
+				<el-input v-model="formData.codes" placeholder="请输入系统代码" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="" prop="end_time">
-				<el-input v-model="formData.end_time" placeholder="请输入" :maxlength="24" show-word-limit
+			<el-form-item label="任务名称" prop="names">
+				<el-input v-model="formData.names" placeholder="请输入任务名称" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="" prop="elapsed_time">
-				<el-input v-model="formData.elapsed_time" placeholder="请输入" :maxlength="20" show-word-limit
+			<el-form-item label="任务类型" prop="types">
+				<el-input v-model="formData.types" placeholder="请输入任务类型" :maxlength="4" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="" prop="status">
-				<el-input v-model="formData.status" placeholder="请输入" :maxlength="4" show-word-limit clearable></el-input>
-			</el-form-item>
-			<el-form-item label="" prop="row_delete">
-				<el-input v-model="formData.row_delete" placeholder="请输入" :maxlength="4" show-word-limit
+			<el-form-item label="开始时间" prop="start_time">
+				<el-input v-model="formData.start_time" placeholder="请输入开始时间" :maxlength="24" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-
+			<el-form-item label="结束时间" prop="end_time">
+				<el-input v-model="formData.end_time" placeholder="请输入结束时间" :maxlength="24" show-word-limit
+					clearable></el-input>
+			</el-form-item>
 		</el-form>
 
 		<template #footer>
@@ -61,12 +52,10 @@ export default {
 				codes: '',
 				names: '',
 				types: '',
-				start_time: '',
+				start_time: '0',
+				start_time_txt: '',
 				end_time: '',
-				elapsed_time: '',
-				status: '',
-				row_delete: '',
-
+				end_time_txt: ''
 			}
 		},
 		async open(row) {
