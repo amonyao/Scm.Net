@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         async init() {
-            this.$SCM.list_dic(this.types_list, 'feedback-type', false);
+            this.$SCM.list_dic(this.types_list, 'feedback_type', false);
         },
         close() {
         },

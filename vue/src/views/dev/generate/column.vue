@@ -24,7 +24,7 @@
 export default {
 	data() {
 		return {
-			apiObj: this.$API.mgrgen.column,
+			apiObj: this.$API.devgen.column,
 			mode: "add",
 			titleMap: { add: "表详情" },
 			visible: false,
@@ -40,7 +40,7 @@ export default {
 	},
 	methods: {
 		async init(param) {
-			this.apiObj = this.$API.mgrgen.column;
+			this.apiObj = this.$API.devgen.column;
 			const that = this;
 			setTimeout(function () {
 				that.$refs.table.upData({ table: param });

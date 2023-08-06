@@ -72,7 +72,7 @@ export default {
 			mode: "add",
 			titleMap: { add: "生成代码", },
 			tableData: [],
-			apiObj: this.$API.mgrgen.column,
+			apiObj: this.$API.devgen.column,
 			isSaveing: false,
 			visible: false,
 			formData: {
@@ -118,7 +118,7 @@ export default {
 				if (valid) {
 					this.formData.tableColumnInfo = this.tableData;
 					//this.isSaveing = true;
-					const res = await this.$API.mgrgen.code.post(
+					const res = await this.$API.devgen.code.post(
 						this.formData
 					);
 
@@ -141,7 +141,7 @@ export default {
 
 		},
 		async init() {
-			var res = await this.$API.mgrgen.option.get();
+			var res = await this.$API.devgen.option.get();
 			if (!res || res.code != 200) {
 				return;
 			}
@@ -157,7 +157,7 @@ export default {
 		},
 		async open(row) {
 			this.formData.tableName = row.name;
-			const res = await this.$API.mgrgen.column.get({ table: row.name });
+			const res = await this.$API.devgen.column.get({ table: row.name });
 			this.tableData = res.data.items;
 			this.tableData.forEach(item => {
 				item.isSearch = this.match(this.SearchEnabledColumns, item.dbColumnName);

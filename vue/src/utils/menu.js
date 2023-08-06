@@ -783,7 +783,7 @@ const menu = {
               component: "sys/message",
             },
             {
-              name: "mgrgen",
+              name: "devgen",
               path: "/modules/generate",
               meta: {
                 title: "代码生成",

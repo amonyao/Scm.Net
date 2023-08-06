@@ -47,7 +47,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.mgrgen.list,
+			apiObj: this.$API.devgen.list,
 			list: [],
 			param: {
 				key: "",
