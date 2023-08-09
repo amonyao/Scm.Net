@@ -102,7 +102,7 @@ export default {
 	},
 	methods: {
 		async init() {
-			var cfgRes = await this.$API.scmconfig.list.get(10);
+			var cfgRes = await this.$API.syscfgconfig.list.get(10);
 			cfgRes.data.forEach((item) => {
 				if ("app_lang" == item.key) {
 					this.lang = item.value;
@@ -124,7 +124,7 @@ export default {
 			data.value = val;
 			data.types = 10;
 			data.data = 0;
-			var res = await this.$API.scmconfig.save.post(data);
+			var res = await this.$API.syscfgconfig.save.post(data);
 			if (res.code == 200) {
 				this.$message.success("保存成功");
 				this.visible = false;

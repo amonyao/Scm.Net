@@ -1,6 +1,9 @@
 const DEFAULT_CONFIG = {
 	//标题
 	APP_NAME: process.env.VUE_APP_TITLE,
+	
+	//简介（支持HTML）
+	APP_DESC: '',
 
 	//应用ID
 	APP_KEY: "870cb6cfa286ac4cac462bc8e33b1bb5",
@@ -18,7 +21,7 @@ const DEFAULT_CONFIG = {
 	CORE_VER: process.env.VUE_APP_VER,
 
 	// 构建日期
-	APP_BUILD : process.env.VUE_APP_BUILD,
+	APP_BUILD: process.env.VUE_APP_BUILD,
 
 	//接口地址
 	API_URL: process.env.VUE_APP_API_BASEURL + "/api",

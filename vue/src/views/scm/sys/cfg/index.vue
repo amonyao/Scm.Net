@@ -93,7 +93,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.sysdicdetail.page,
+			apiObj: this.$API.syscfgconfig.page,
 			list: [],
 			showGrouploading: false,
 			groupFilterText: "",
@@ -101,17 +101,15 @@ export default {
 			param: {
 				key: "",
 			},
-			defaultParam: { type: 1 },
+			defaultParam: {},
 			selectColumn: {},
 			selection: [],
 			column: [
 				{ prop: "id", label: "id", hide: true },
-				{ prop: "codec", label: "键", width: 240, align: "left", },
+				{ prop: "key", label: "键", width: 240, align: "left", },
 				{ prop: "value", label: "值", width: 150, align: "left" },
-				{ prop: "namec", label: "名称", width: 150, align: "left" },
-				{ prop: "od", label: "排序", width: 60, align: "right" },
 				{ prop: "remark", label: "备注", width: 160 },
-				{ prop: "row_status", label: "状态", width: 60 },
+				{ prop: "row_status", label: "状态", width: 80 },
 				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
@@ -121,38 +119,27 @@ export default {
 			this.$refs.group.filter(val);
 		},
 	},
-	created: function () {
-		if (this.$route.path === "/exam/setting") {
-			this.defaultParam.type = 2;
-		}
-		if (this.$route.path === "/crm/config") {
-			this.defaultParam.type = 3;
-		}
-		if (this.$route.path === "/hr/config") {
-			this.defaultParam.type = 4;
-		}
-	},
 	mounted() {
-		this.getGroup({ type: this.defaultParam.type });
+		this.getGroup();
 	},
 	methods: {
 		complete() {
-			this.$refs.table.refresh({ type: this.defaultParam.type });
+			this.$refs.table.refresh();
 		},
 		search() {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysdicdetail.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.syscfgconfig.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysdicdetail.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.syscfgconfig.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysdicdetail.delete, row);
+			this.$SCM.delete_item(this, this.$API.syscfgconfig.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysdicdetail.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.syscfgconfig.delete, this.selection);
 		},
 		open_dialog(row) {
 			if (row.id) {
@@ -183,12 +170,12 @@ export default {
 			}
 		},
 		columnComplete() {
-			this.getGroup({ type: this.defaultParam.type });
+			this.getGroup();
 		},
 		//加载树数据
 		async getGroup(param) {
 			this.showGrouploading = true;
-			const res = await this.$API.sysdicheader.list.get(param);
+			const res = await this.$API.syscfgconfigcat.list.get(param);
 			this.showGrouploading = false;
 			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {
@@ -198,7 +185,7 @@ export default {
 					label: m.namec,
 					code: m.codec,
 					type: m.types,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.group = this.$TOOL.changeTree(_tree);
@@ -235,7 +222,7 @@ export default {
 			})
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.sysdicheader.delete.delete(
+					var res = await this.$API.syscfgconfigcat.delete.delete(
 						data.id
 					);
 					if (res.code == 200) {

@@ -1,20 +1,19 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="键" prop="codec">
-				<el-input v-model="formData.codec" placeholder="请输入键" :maxlength="30" show-word-limit clearable
+			<el-form-item label="配置类型" prop="types">
+				<sc-select v-model="formData.types" :data="types_list" />
+			</el-form-item>
+			<el-form-item label="键" prop="key">
+				<el-input v-model="formData.key" placeholder="请输入键" :maxlength="30" show-word-limit clearable
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="值" prop="value">
 				<el-input v-model="formData.value" placeholder="请输入值" :maxlength="30" show-word-limit clearable
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
-			<el-form-item label="名称" prop="namec">
-				<el-input v-model="formData.namec" placeholder="请输入名称" :maxlength="30" show-word-limit clearable
-					:style="{ width: '100%' }"></el-input>
-			</el-form-item>
-			<el-form-item label="排序" prop="od">
-				<el-slider v-model="formData.od" :max="100" :step="1"></el-slider>
+			<el-form-item label="数据类型" prop="data">
+				<sc-select v-model="formData.data" :data="data_list" />
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" type="textarea" placeholder="请输入备注" :maxlength="100" show-word-limit
@@ -39,49 +38,46 @@ export default {
 			isSaveing: false,
 			visible: false,
 			formData: this.def_data(),
+			types_list: [],
+			data_list: [],
 			rules: {
-				codec: [
-					{ required: true, trigger: "blur", message: "字典键不能为空" },
+				types: [
+					{ required: true, trigger: "blur", message: "请选择配置类型" },
+				],
+				key: [
+					{ required: true, trigger: "blur", message: "配置键不能为空" },
 				],
 				value: [
-					{ required: true, trigger: "blur", message: "字典值不能为空" },
-					{ required: true, pattern: /^\d+$/, message: "字典值不是有效数字" },
-				],
-				namec: [
-					{ required: true, trigger: "blur", message: "字典名称不能为空" },
+					{ required: true, trigger: "blur", message: "配置值不能为空" },
 				],
 			},
 		};
 	},
 	mounted() {
-		if (this.$route.path === "/exam/setting") {
-			this.formData.tag = 2;
-		}
-		if (this.$route.path === "/crm/config") {
-			this.formData.tag = 3;
-		}
+		this.$SCM.list_dic(this.types_list, 'client_type', false);
+		this.$SCM.list_dic(this.data_list, 'data_type', false);
 	},
 	methods: {
 		def_data() {
 			return {
-				id: 0,
-				tag: 1,
-				dic_header_id: 0,
-				namec: undefined,
+				id: '0',
+				cat_id: '0',
+				user_id: '0',
+				key: undefined,
 				value: undefined,
-				od: 1,
 				remark: undefined,
 			}
 		},
 		async open(row, type = "edit") {
 			if (type == "add") {
 				this.mode = type;
-				this.formData.dic_header_id = row.id;
-				this.formData.tag = row.type;
+				this.formData.cat_id = row.id;
 			} else {
 				this.mode = type;
-				var res = await this.$API.sysdicdetail.model.get(row.id);
+				var res = await this.$API.syscfgconfig.model.get(row.id);
 				this.formData = res.data;
+				this.formData.types = '' + this.formData.types;
+				this.formData.data = '' + this.formData.data;
 			}
 			this.visible = true;
 		},
@@ -90,10 +86,10 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
-						res = await this.$API.sysdicdetail.add.post(this.formData);
+					if (this.formData.id === '0') {
+						res = await this.$API.syscfgconfig.add.post(this.formData);
 					} else {
-						res = await this.$API.sysdicdetail.update.put(this.formData);
+						res = await this.$API.syscfgconfig.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {
