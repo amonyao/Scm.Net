@@ -125,7 +125,7 @@ export default {
 			this.codeUrl = this.$CONFIG.API_URL + "/captcha/" + this.form.codeKey + `?timestamp=${new Date().getTime()}`;
 		},
 		async loadCfg() {
-			var cfgRes = await this.$API.syscfgconfig.list.get(10);
+			var cfgRes = await this.$API.syscfgconfig.list.get({ 'types': 10 });
 			cfgRes.data.forEach((item) => {
 				if ("app_theme" == item.key) {
 					if (item.value == "true") {

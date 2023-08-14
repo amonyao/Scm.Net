@@ -6,14 +6,18 @@
       "request": "launch",
       "type": "chrome",
       "url": "http://localhost:2800",
-      "webRoot": "${workspaceFolder}/admin"
+      "webRoot": "${workspaceFolder}/admin",
+      "pathMapping": {
+        "url": "webpack://c-scm",
+        "path": "${workspaceFolder}"
+      }
     },
     {
       "name": "启动程序: firefox",
       "request": "launch",
       "type": "firefox",
       "url": "http://localhost:2800",
-      "firefoxExecutable":"D:\\Program Files\\Firefox\\firefox.exe",
+      "firefoxExecutable": "D:\\Program Files\\Firefox\\firefox.exe",
       "webRoot": "${workspaceFolder}/admin",
       "pathMappings": [
         {
