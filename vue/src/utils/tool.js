@@ -391,4 +391,51 @@ tool.randomString = function (length, upper) {
 	return result;
 };
 
+tool.getBrowerInfo = function () {
+	var userAgent = window.navigator.userAgent;
+	var browerInfo = {
+		type: 'unknown',
+		version: 'unknown',
+		userAgent: userAgent
+	};
+	if (document.documentMode) {
+		browerInfo.type = "IE"
+		browerInfo.version = document.documentMode + ''
+	} else if (userAgent.indexOf("Firefox") > -1) {
+		browerInfo.type = "Firefox"
+		browerInfo.version = userAgent.match(/Firefox\/([\d.]+)/)[1]
+	} else if (userAgent.indexOf("Opera") > -1) {
+		browerInfo.type = "Opera"
+		browerInfo.version = userAgent.match(/Opera\/([\d.]+)/)[1]
+	} else if (userAgent.indexOf("Edg") > -1) {
+		browerInfo.type = "Edg"
+		browerInfo.version = userAgent.match(/Edg\/([\d.]+)/)[1]
+	} else if (userAgent.indexOf("Chrome") > -1) {
+		browerInfo.type = "Chrome"
+		browerInfo.version = userAgent.match(/Chrome\/([\d.]+)/)[1]
+	} else if (userAgent.indexOf("Safari") > -1) {
+		browerInfo.type = "Safari"
+		browerInfo.version = userAgent.match(/Safari\/([\d.]+)/)[1]
+	}
+	return browerInfo
+};
+
+tool.isSatisfyBrower = function () {
+	var minVer = {
+		"Chrome": 71,
+		"Firefox": 65,
+		"Safari": 12,
+		"Edg": 97,
+		"IE": 999
+	};
+	var browerInfo = tool.getBrowerInfo();
+	var materVer = browerInfo.version.split('.')[0];
+	return materVer >= minVer[browerInfo.type];
+};
+
+tool.isMobile = function () {
+	//var userAgent = window.navigator.userAgent;
+	return !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i);
+};
+
 export default tool;

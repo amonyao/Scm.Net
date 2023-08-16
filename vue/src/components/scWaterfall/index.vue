@@ -1,8 +1,16 @@
 <template>
     <div id="waterfall" ref="waterfall" @scroll="handleScroll">
-        <div class="img-box default-card-animation" v-for="(image, index) in imageData" :key="index" ref="imgBox"
-            :style="{ 'top': image.top + 'px', 'left': image.left + 'px', 'width': imgWidth + 'px', 'height': image._height + 'px', 'padding': imgGap + 'px' }">
-            <img :data-src="image.src" :alt="image.names">
+        <div class="waterfall-box default-card-animation" v-for="(image, index) in imageData" :key="index"
+            ref="waterfallBox" :style="{
+                'top': image.top + 'px',
+                'left': image.left + 'px',
+                'width': colWidth + 'px',
+                'padding': imgGap + 'px'
+            }">
+            <img :data-src="image.src" :alt="image.names" :style="{ 'height': image._height + 'px', }">
+            <div>
+                <label>这是说明文字</label>
+            </div>
         </div>
     </div>
 </template>
@@ -10,34 +18,20 @@
 export default {
     props: {
         apiObj: { type: Object, default: () => { } },
-        images: { type: Object, default: () => { } },
+        data: { type: Object, default: () => { } },
         columnCount: { type: Number, default: 5 },//列数量
         columnGap: { type: Number, default: 30 },//列间隙
-        backgroundColor: { type: String, default: "rgba(128,128,128,0.2)" }
+        direction: { type: Number, default: 1 }// 展示方向
     },
     computed: {
-        // isMobile() {
-        //     return this.isMobiles();
-        // },
-        // // 容器 waterfall 的宽度
+        // 容器宽度
         viewWidth() {
             return this.$refs.waterfall.clientWidth;
         },
+        // 容器高度
         viewHeight() {
             return this.$refs.waterfall.clientHeight;
         },
-        // // 图片宽度
-        // imgWidth() {
-        //     return this.colWidth - 2 * this.colGap;
-        // },
-        // // 列宽度
-        // colWidth() {
-        //     return this.waterfallWidth / this.colCount;
-        // },
-        // // 列数
-        // colNum() {
-        //     return this.isMobile ? 2 : this.colCount;
-        // }
     },
     data() {
         return {
@@ -47,8 +41,8 @@ export default {
             loadedCount: 0,
             colGap: 10,// 列间隙
             imgGap: 0,//图像间隙
-            colCount: 5,// 列数量
-            colHeight: [],// 列高度
+            colCount: 4,// 列数量
+            colDim: [],// 列高度
             colWidth: 0,
             imgWidth: 0,
             reachBottomDistance: 20, // 滚动触底距离，触发加载新图片
@@ -61,28 +55,26 @@ export default {
     methods: {
         init_data() {
             // 初始化列宽度
-            var dom = this.$refs.waterfall;
-            let domWidth = dom.clientWidth;
-            this.viewHeight = dom.clientHeight;
-            console.log('viewheight:' + this.viewHeight)
+            let domSize = this.direction == 2 ? this.viewHeight : this.viewWidth;
 
             if (!this.colWidth && this.colCount) {
                 var gap = this.colGap * (this.colCount - 1);
-                this.colWidth = (domWidth - gap) / this.colCount;
+                console.log('gap:' + gap);
+                this.colWidth = (domSize - gap) / this.colCount;
             } else if (this.colWidth && !this.colCount) {
-                this.colCount = Math.floor(domWidth / (this.colWidth + this.colGap))
+                this.colCount = Math.floor(domSize / (this.colWidth + this.colGap))
             }
 
             if (this.colWidth < 200) {
                 this.colWidth = 200;
-                this.colCount = Math.floor(domWidth / (this.colWidth + this.colGap))
+                this.colCount = Math.floor(domSize / (this.colWidth + this.colGap))
             }
 
             this.imgWidth = this.colWidth - this.colGap * 2;
 
             // 初始化列高度
             for (var i = 0; i < this.colCount; i += 1) {
-                this.colHeight[i] = 0;
+                this.colDim[i] = 0;
             }
 
             this.load_img();
@@ -157,7 +149,7 @@ export default {
         // waterfall，等到整个视图都渲染完毕再执行
         waterfall() {
             // 选择所有图片
-            this.imgBoxEls = this.$refs["imgBox"];
+            this.imgBoxEls = this.$refs["waterfallBox"];
             // 若没图片，则返回
             if (!this.imgBoxEls)
                 return;
@@ -173,15 +165,15 @@ export default {
 
                 // 找到当前最低的高度和其索引
                 let minIdx = this.getColumn();
-                let minHeight = this.colHeight[minIdx];
+                let minHeight = this.colDim[minIdx];
                 // 当前图片的 top，即当前图片应所在的高度
                 top = minHeight;
                 // 当前图片的 left，即当前图片应该排到目前高度最低那一列下面
-                left = minIdx * this.colWidth;
+                left = minIdx * (this.colWidth + this.colGap);
                 // 更新第 minIdx 列的高度
-                this.colHeight[minIdx] += height;
+                this.colDim[minIdx] += height;
 
-                // 设置 img-box 位置
+                // 设置 waterfall-box 位置
                 imgBox.style.top = top + "px";
                 imgBox.style.left = left + "px";
                 // 当前图片在窗口内，则加载，这是用于后面的图片懒加载。viewHeight 为窗口高度
@@ -190,18 +182,20 @@ export default {
                     imgEl.src = imgEl.getAttribute("data-src");
                     imgEl.style.opacity = 1;
                     imgEl.style.transform = "scale(1)";
+                    // this.$emit('showItem', imgEl, this.imageList[i]);
+                    imgEl.loaded = true;
                 }
             }
             // 排列完之后，之后新增图片从这个索引开始预加载图片和排列，之前排列的图片无需在处理
             this.beginIndex = this.imgBoxEls.length;
         },
         getColumn() {
-            var min = this.colHeight[0];
+            var min = this.colDim[0];
             var idx = 0;
-            for (var i = 1; i < this.colHeight.length; i += 1) {
-                if (this.colHeight[i] < min) {
+            for (var i = 1; i < this.colDim.length; i += 1) {
+                if (this.colDim[i] < min) {
                     idx = i;
-                    min = this.colHeight[i];
+                    min = this.colDim[i];
                 }
             }
             return idx;
@@ -225,8 +219,9 @@ export default {
             this.imgBoxEls.forEach((imgBoxEl) => {
                 let imgEl = imgBoxEl.children[0];
                 // 若已加载，则跳过
-                if (imgEl.src)
+                if (imgEl.loaded)
                     return;
+
                 // 当前图片所处的高度
                 let top = imgBoxEl.style.top;
                 top = Number.parseFloat(top.slice(0, top.length - 2));
@@ -235,6 +230,8 @@ export default {
                     imgEl.src = imgEl.getAttribute("data-src")
                     imgEl.style.opacity = 1;
                     imgEl.style.transform = "scale(1)";
+                    // this.$emit('showItem', imgEl, this.imageList[index]);
+                    imgEl.loaded = true;
                 }
             })
         },
@@ -259,7 +256,7 @@ export default {
         }
     }
 
-    .img-box {
+    .waterfall-box {
         position: absolute;
         border-radius: 10px;
         padding: 5px;

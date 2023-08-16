@@ -1,5 +1,11 @@
 <template>
-    <sc-waterfall></sc-waterfall>
+    <el-container>
+        <el-main style="background-color: rebeccapurple;">
+            <sc-waterfall style="background-color: antiquewhite;" @showItem="showItem" v-slot="{ data }">
+                <img :data-src="data.src" :alt="data.names" :style="{ 'height': data._height + 'px' }">
+            </sc-waterfall>
+        </el-main>
+    </el-container>
 </template>
 <script>
 import scWaterfall from '@/components/scWaterfall'
@@ -38,6 +44,14 @@ export default {
         },
         handleSuccess() {
 
+        },
+        showItem(dom, data) {
+            var img = dom.children[0];
+            if (!img) {
+                return;
+            }
+            img.src = img.getAttribute('data-src');
+            console.log('data:' + data);
         }
     },
 };
