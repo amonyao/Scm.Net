@@ -3,7 +3,7 @@ const DEFAULT_CONFIG = {
 	APP_NAME: process.env.VUE_APP_TITLE,
 	
 	//简介（支持HTML）
-	APP_DESC: '',
+	APP_DESC: process.env.VUE_APP_TITLE,
 
 	//应用ID
 	APP_KEY: "870cb6cfa286ac4cac462bc8e33b1bb5",

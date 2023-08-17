@@ -40,47 +40,49 @@
 				<div class="login_card">
 					<el-card class="login_main">
 						<el-container>
-							<el-main>
-								<div class="login_user">
-									<div class="body">
-										<el-tabs>
-											<el-tab-pane :label="$t('login.accountLogin')" lazy>
-												<password-form></password-form>
-											</el-tab-pane>
-											<el-tab-pane :label="$t('login.mobileLogin')" lazy>
-												<phone-form></phone-form>
-											</el-tab-pane>
-										</el-tabs>
-										<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">
-											<el-divider>{{ $t("login.signInOther") }}</el-divider>
-											<div class="login-oauth">
-												<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"
-													title="微信登录"></el-button>
-												<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"
-													title="QQ登录"></el-button>
-												<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"
-													title="支付宝登录"></el-button>
-												<el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin"
-													title="其它登录"></el-button>
-											</div>
-										</template>
-									</div>
+							<el-header class="login-header">
+								<div class="logo">
+									<label>{{ $CONFIG.APP_NAME }}</label>
 								</div>
-							</el-main>
-							<el-aside class="login_aside">
-								<div class="login_note">
-									<div class="body">
-										<div class="login-header">
-											<div class="logo">
-												<label>{{ $CONFIG.APP_NAME }}</label>
+							</el-header>
+							<el-container>
+								<el-aside class="login_aside">
+									<div class="login_note">
+										<div class="body">
+											<div class="login_note__content">
+												<div v-html="$CONFIG.APP_DESC"></div>
 											</div>
 										</div>
-										<div class="login_note__content">
-											<div v-html="$CONFIG.APP_DESC"></div>
+									</div>
+								</el-aside>
+								<el-main>
+									<div class="login_user">
+										<div class="body">
+											<el-tabs>
+												<el-tab-pane :label="$t('login.accountLogin')" lazy>
+													<password-form></password-form>
+												</el-tab-pane>
+												<el-tab-pane :label="$t('login.mobileLogin')" lazy>
+													<phone-form></phone-form>
+												</el-tab-pane>
+											</el-tabs>
+											<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">
+												<el-divider>{{ $t("login.signInOther") }}</el-divider>
+												<div class="login-oauth">
+													<el-button type="success" icon="sc-icon-wechat" circle
+														@click="wechatLogin" title="微信登录"></el-button>
+													<el-button type="success" icon="sc-icon-wechat" circle
+														@click="wechatLogin" title="QQ登录"></el-button>
+													<el-button type="success" icon="sc-icon-wechat" circle
+														@click="wechatLogin" title="支付宝登录"></el-button>
+													<el-button type="success" icon="sc-icon-wechat" circle
+														@click="wechatLogin" title="其它登录"></el-button>
+												</div>
+											</template>
 										</div>
 									</div>
-								</div>
-							</el-aside>
+								</el-main>
+							</el-container>
 						</el-container>
 					</el-card>
 				</div>
@@ -234,23 +236,13 @@ export default {
 	margin: auto;
 }
 
-.login_user {
-	padding: 30px 10px;
-}
-
-.login_user .body {
-	border-radius: 10px;
-}
-
 .login_aside {
 	width: 50%;
-	border: none;
-	border-left: 1px solid var(--el-border-color-light);
+	padding: 15px;
 }
 
 .login_note {
-	padding: 30px;
-	padding-top: 10px;
+	/* padding: 10px; */
 }
 
 .login_note .body {
@@ -298,12 +290,11 @@ export default {
 }
 
 .login_note__content {
-	padding: 0px 30px;
 	color: #666;
 }
 
 .login-header {
-	margin-bottom: 40px;
+	border: 0px;
 }
 
 .login-header .logo {
@@ -340,6 +331,10 @@ export default {
 }
 
 .login_user {}
+
+.login_user .body {
+	border-radius: 10px;
+}
 
 .login_user .el-divider {
 	margin-top: 40px;
@@ -433,7 +428,6 @@ export default {
 
 	.login_user {
 		width: 100%;
-		padding: 20px 40px;
 	}
 
 	.login_aside {
