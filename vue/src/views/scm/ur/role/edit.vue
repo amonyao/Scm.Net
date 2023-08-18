@@ -3,15 +3,17 @@
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
 			<el-form-item label="所属角色" prop="parentId">
 				<el-tree-select v-model="formData.parentId" placeholder="请选择所属角色" :data="parentIdOptions" collapse-tags
-					check-strictly default-expand-all :style="{ width: '100%' }" />
+					check-strictly default-expand-all />
 			</el-form-item>
 			<el-form-item label="角色名称" prop="namec">
-				<el-input v-model="formData.namec" clearable :maxlength="30" placeholder="请输入角色名称" show-word-limit
-					:style="{ width: '100%' }" />
+				<el-input v-model="formData.namec" clearable :maxlength="30" placeholder="请输入角色名称" show-word-limit />
+			</el-form-item>
+			<el-form-item label="数据权限" prop="data">
+				<sc-select v-model="formData.data" placeholder="请选择数据权限" :data="role_data_list" />
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" :autosize="{ minRows: 2, maxRows: 4 }" :maxlength="500"
-					placeholder="请输入备注" show-word-limit :style="{ width: '100%' }" type="textarea" />
+					placeholder="请输入备注" show-word-limit type="textarea" />
 			</el-form-item>
 		</el-form>
 
@@ -25,40 +27,27 @@
 </template>
 <script>
 export default {
-    emits: ['complete'],
+	emits: ['complete'],
 	data() {
 		return {
 			mode: "add",
-			titleMap: {
-				add: "新增",
-				edit: "编辑",
-			},
+			titleMap: { add: "新增", edit: "编辑" },
 			isSaveing: false,
 			visible: false,
-			formData: {
-				id: 0,
-				parentId: undefined,
-				namec: undefined,
-				remark: undefined,
-				od: 1,
-			},
+			formData: this.def_data(),
 			rules: {
 				parentId: [
-					{
-						required: true,
-						message: "请选择所属角色",
-						trigger: "change",
-					},
+					{ required: true, trigger: "change", message: "请选择所属角色" },
+				],
+				data: [
+					{ required: true, trigger: "blur", message: "请选择数据权限" },
 				],
 				namec: [
-					{
-						required: true,
-						message: "请输入角色名称",
-						trigger: "blur",
-					},
+					{ required: true, trigger: "blur", message: "请输入角色名称" },
 				],
 				remark: [],
 			},
+			role_data_list: [],
 			parentIdOptions: [],
 			parentIdProps: {
 				multiple: false,
@@ -67,8 +56,20 @@ export default {
 			},
 		};
 	},
-	mounted() { },
+	mounted() {
+		this.$SCM.list_dic(this.role_data_list, 'role_data', false);
+	},
 	methods: {
+		def_data() {
+			return {
+				id: 0,
+				parentId: undefined,
+				namec: undefined,
+				data: '0',
+				remark: undefined,
+				od: 1,
+			}
+		},
 		async initTree() {
 			const t = await this.$API.urrole.list.get();
 			let _tree = [
@@ -117,13 +118,7 @@ export default {
 			});
 		},
 		close() {
-			this.formData = {
-				id: 0,
-				parentId: undefined,
-				namec: undefined,
-				remark: undefined,
-				od: 1,
-			};
+			this.formData = this.def_data();
 			this.$refs.formRef.resetFields();
 			this.visible = false;
 		},

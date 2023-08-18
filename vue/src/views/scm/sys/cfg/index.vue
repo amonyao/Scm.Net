@@ -110,6 +110,9 @@ export default {
 				{ prop: "value", label: "值", width: 150, align: "left" },
 				{ prop: "remark", label: "备注", width: 160 },
 				{ prop: "row_status", label: "状态", width: 80 },
+				{ prop: "update_names", label: "更新人员", width: 80 },
+				{ prop: "update_time", label: "更新时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "create_names", label: "创建人员", width: 80 },
 				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};

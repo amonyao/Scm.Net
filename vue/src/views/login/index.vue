@@ -65,6 +65,9 @@
 												<el-tab-pane :label="$t('login.mobileLogin')" lazy>
 													<phone-form></phone-form>
 												</el-tab-pane>
+												<el-tab-pane :label="$t('login.emailLogin')" lazy>
+													<email-form></email-form>
+												</el-tab-pane>
 											</el-tabs>
 											<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">
 												<el-divider>{{ $t("login.signInOther") }}</el-divider>
@@ -112,12 +115,14 @@
 import passwordForm from "./components/passwordForm";
 import phoneForm from "./components/phoneForm";
 import oauthForm from "./components/oauthForm";
+import emailForm from "./components/emailForm";
 
 export default {
 	components: {
 		passwordForm,
 		phoneForm,
 		oauthForm,
+		emailForm,
 	},
 	data() {
 		return {

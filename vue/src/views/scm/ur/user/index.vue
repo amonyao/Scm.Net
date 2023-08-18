@@ -32,7 +32,7 @@
 						</el-tooltip>
 					</el-button-group>
 					<el-divider direction="vertical"></el-divider>
-					<el-button type="primary" plain :disabled="selection.length == 0" @click="permission">分配角色</el-button>
+					<el-button type="primary" plain :disabled="selection.length == 0" @click="userRole">分配角色</el-button>
 					<el-button type="danger" plain :disabled="selection.length != 1" @click="pwdreset">密码重置</el-button>
 					<el-button type="danger" plain @click="exportAll()">导出</el-button>
 				</div>
@@ -49,10 +49,14 @@
 					<!-- 固定列-选择列 -->
 					<el-table-column fixed type="selection" width="60" />
 					<el-table-column label="#" type="index" width="50"></el-table-column>
-					<el-table-column align="center" fixed="right" label="操作" width="140">
+					<el-table-column align="center" fixed="right" label="操作" width="210">
 						<template #default="scope">
 							<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 								编辑
+							</el-button>
+							<el-divider direction="vertical" />
+							<el-button size="small" text type="primary" @click="userData(scope.row)">
+								权限
 							</el-button>
 							<el-divider direction="vertical" />
 							<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row)">
@@ -78,7 +82,8 @@
 				</scTable>
 			</el-main>
 			<edit ref="edit" @complete="complete" />
-			<role ref="role" />
+			<userRole ref="userRole" @complete="complete" />
+			<userData ref="userData" @complete="complete" />
 		</el-container>
 	</el-container>
 </template>
@@ -87,7 +92,8 @@ import { defineAsyncComponent } from "vue";
 export default {
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
-		role: defineAsyncComponent(() => import("./components/userRole")),
+		userRole: defineAsyncComponent(() => import("./components/userRole")),
+		userData: defineAsyncComponent(() => import("./components/userData")),
 	},
 	data() {
 		return {
@@ -187,7 +193,7 @@ export default {
 				})
 				.catch(() => { });
 		},
-		permission() {
+		userRole() {
 			if (this.selection.length == 0) {
 				this.$message.warning("请选择授权角色的用户");
 				return;
@@ -196,7 +202,13 @@ export default {
 			this.selection.forEach((element) => {
 				ids.push(element.id);
 			});
-			this.$refs.role.open(ids);
+			this.$refs.userRole.open(ids);
+		},
+		userData(row) {
+			if (!row || !row.id) {
+				return;
+			}
+			this.$refs.userData.open(row);
 		},
 		async exportAll() {
 			const res = await this.$API.uruser.exportAll.get();

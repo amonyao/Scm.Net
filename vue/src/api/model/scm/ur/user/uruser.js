@@ -70,5 +70,12 @@ export default {
 		get: async function () {
 			return await http.get(this.url);
 		}
+	},
+	userData: {
+		url: `${config.API_URL}/uruser/userData`,
+		name: "修改数据权限",
+		put: async function (data) {
+			return await http.put(this.url, data);
+		}
 	}
 }

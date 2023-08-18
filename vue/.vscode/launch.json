@@ -2,16 +2,23 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "启动程序：Chrome",
       "request": "launch",
-      "name": "启动程序: chrome",
+      "type": "chrome",
       "url": "http://localhost:2800",
-      "webRoot": "${workspaceFolder}/vue",
+      "webRoot": "${workspaceFolder}/vue"
     },
     {
-      "type": "msedge",
-      "request": "launch",
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}/vue"
+    },
+    {
       "name": "启动程序：Edge",
+      "request": "launch",
+      "type": "msedge",
       "url": "http://localhost:2800",
       "webRoot": "${workspaceFolder}/vue"
     },
