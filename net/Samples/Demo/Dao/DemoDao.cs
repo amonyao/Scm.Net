@@ -9,7 +9,7 @@ namespace Com.Scm.Samples.Demo.Dao
     /// 演示对象DAO
     /// </summary>
     [SqlSugar.SugarTable("samples_demo")]
-    public class DemoDao : BaseDataDao, ISystemDao, IDeleteDao
+    public class DemoDao : ScmDataDao, ISystemDao, IDeleteDao
     {
         /// <summary>
         /// 选项

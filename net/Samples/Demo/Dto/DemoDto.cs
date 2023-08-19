@@ -6,7 +6,7 @@ namespace Com.Scm.Samples.Demo.Dto
     /// <summary>
     /// 演示对象DTO
     /// </summary>
-    public class DemoDto : BaseDataDto
+    public class DemoDto : ScmDataDto
     {
         /// <summary>
         /// 系统编码

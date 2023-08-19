@@ -4,92 +4,6 @@
         <name>Scm.App</name>
     </assembly>
     <members>
-        <member name="T:Com.Scm.Cfg.Config.ConfigService">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Com.Scm.Cfg.Config.ConfigService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Cfg.Config.ConfigDao},Com.Scm.Operator.OperatorService)">
-            <summary>
-            
-            </summary>
-            <param name="thisRepository"></param>
-            <param name="operatorService"></param>
-        </member>
-        <member name="M:Com.Scm.Cfg.Config.ConfigService.GetListAsync(Com.Scm.Enums.ClientTypeEnum)">
-            <summary>
-            
-            </summary>
-            <param name="types"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Cfg.Config.ConfigService.GetConfigAsync(System.Int64,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="userId"></param>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Cfg.Config.ConfigService.SaveConfigAsync(System.Int64,System.Int64,Com.Scm.Enums.ClientTypeEnum,System.String,System.String,Com.Scm.Enums.DataTypeEnum)">
-            <summary>
-            
-            </summary>
-            <param name="unitId"></param>
-            <param name="userId"></param>
-            <param name="types"></param>
-            <param name="key"></param>
-            <param name="value"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Cfg.Config.ConfigService.SaveAsync(Com.Scm.Cfg.Config.Dvo.SaveConfigRequest)">
-            <summary>
-            
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Com.Scm.Cfg.Config.Dvo.GetConfigRequest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Cfg.Config.Dvo.GetConfigRequest.user_id">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Cfg.Config.Dvo.GetConfigRequest.types">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Cfg.Config.Dvo.SaveConfigRequest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Cfg.Config.Dvo.SaveConfigRequest.key">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Cfg.Config.Dvo.SaveConfigRequest.value">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Cfg.Config.Dvo.SaveConfigRequest.data">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Cfg.Config.Dvo.SaveConfigRequest.types">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Com.Scm.Cfg.ExportDetail.CfgExportDetailService">
             <summary>
             
@@ -344,6 +258,96 @@
             菜单类型
             </summary>
         </member>
+        <member name="T:Com.Scm.Dev.Menu.DevMenuService">
+            <summary>
+            服务接口
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.#ctor(Com.Scm.Operator.OperatorService,Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dev.Menu.Dao.MgrMenuDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.User.Dao.MgrUserDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.UserRole.Dao.MgrUserRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Role.Dao.MgrRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao},Com.Scm.Dsa.Cache.ICacheService)">
+            <summary>
+            
+            </summary>
+            <param name="operatorService"></param>
+            <param name="thisRepository"></param>
+            <param name="userRepository"></param>
+            <param name="userRoleRepository"></param>
+            <param name="roleRepository"></param>
+            <param name="roleAuthRepository"></param>
+            <param name="cacheService"></param>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
+            <summary>
+            查询所有——分页
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.GetListAsync(Com.Scm.Dvo.Old.WhereParam)">
+            <summary>
+            查询所有
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.OptionAsync(System.Int64)">
+            <summary>
+            查询所有
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.AddAsync(Com.Scm.Dev.Menu.Dto.MgrMenuDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.AddTempAsync(Com.Scm.Dev.Menu.Dvo.SysMenuTempParam)">
+            <summary>
+            添加-临时=未命名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.UpdateAsync(Com.Scm.Dev.Menu.Dto.MgrMenuDto)">
+            <summary>
+            修改
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.DraggingAsync(Com.Scm.Dev.Menu.Dto.ResortRequest)">
+            <summary>
+            拖动节点排序
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.DeleteAsync(System.String)">
+            <summary>
+            删除,支持多个
+            </summary>
+            <param name="ids">逗号分隔</param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.GetAuthorityMenuAsync">
+            <summary>
+            根据登录人ID查询权限菜单[SCUI]
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Menu.DevMenuService.RecursiveModuleSc(System.Collections.Generic.List{Com.Scm.Dev.Menu.Dao.MgrMenuDao},Com.Scm.Dev.Menu.Dao.MgrMenuDao)">
+            <summary>
+            递归模块列表
+            </summary>
+            <param name="source"></param>
+            <param name="parentModel"></param>
+            <returns></returns>
+        </member>
         <member name="T:Com.Scm.Dev.Menu.Dto.MgrAuthorityDto">
             <summary>
             返回给前端的权限菜单
@@ -584,96 +588,6 @@
             租户
             </summary>
         </member>
-        <member name="T:Com.Scm.Dev.Menu.MgrMenuService">
-            <summary>
-            服务接口
-            </summary>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.#ctor(Com.Scm.Operator.OperatorService,Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dev.Menu.Dao.MgrMenuDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.User.Dao.MgrUserDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.UserRole.Dao.MgrUserRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Role.Dao.MgrRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao},Com.Scm.Dsa.Cache.ICacheService)">
-            <summary>
-            
-            </summary>
-            <param name="operatorService"></param>
-            <param name="thisRepository"></param>
-            <param name="userRepository"></param>
-            <param name="userRoleRepository"></param>
-            <param name="roleRepository"></param>
-            <param name="roleAuthRepository"></param>
-            <param name="cacheService"></param>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
-            <summary>
-            查询所有——分页
-            </summary>
-            <param name="param"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.GetListAsync(Com.Scm.Dvo.Old.WhereParam)">
-            <summary>
-            查询所有
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.OptionAsync(System.Int64)">
-            <summary>
-            查询所有
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.GetAsync(System.Int64)">
-            <summary>
-            根据主键查询
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.AddAsync(Com.Scm.Dev.Menu.Dto.MgrMenuDto)">
-            <summary>
-            添加
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.AddTempAsync(Com.Scm.Dev.Menu.Dvo.SysMenuTempParam)">
-            <summary>
-            添加-临时=未命名
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.UpdateAsync(Com.Scm.Dev.Menu.Dto.MgrMenuDto)">
-            <summary>
-            修改
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.DraggingAsync(Com.Scm.Dev.Menu.Dto.ResortRequest)">
-            <summary>
-            拖动节点排序
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.DeleteAsync(System.String)">
-            <summary>
-            删除,支持多个
-            </summary>
-            <param name="ids">逗号分隔</param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.GetAuthorityMenuAsync">
-            <summary>
-            根据登录人ID查询权限菜单[SCUI]
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Dev.Menu.MgrMenuService.RecursiveModuleSc(System.Collections.Generic.List{Com.Scm.Dev.Menu.Dao.MgrMenuDao},Com.Scm.Dev.Menu.Dao.MgrMenuDao)">
-            <summary>
-            递归模块列表
-            </summary>
-            <param name="source"></param>
-            <param name="parentModel"></param>
-            <returns></returns>
-        </member>
         <member name="T:Com.Scm.Dev.Sql.DevSqlService">
             <summary>
             数据库查询
@@ -775,6 +689,75 @@
             
             </summary>
         </member>
+        <member name="T:Com.Scm.Dev.Uid.DevUidService">
+            <summary>
+            服务接口
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Dev.UidDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Ur.UserDao})">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+            <param name="userRepository"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
+            <summary>
+            查询分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.GetListAsync(Com.Scm.Dvo.ScmSearchRequest)">
+            <summary>
+            查询所有
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.GetEditAsync(System.Int64)">
+            <summary>
+            编辑读取
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.GetViewAsync(System.Int64)">
+            <summary>
+            查看读取
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.AddAsync(Com.Scm.Dev.UidDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.UpdateAsync(Com.Scm.Dev.UidDto)">
+            <summary>
+            更新
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Uid.DevUidService.DeleteAsync(System.String)">
+            <summary>
+            批量删除记录
+            </summary>
+            <param name="ids">逗号分隔</param>
+            <returns></returns>
+        </member>
         <member name="T:Com.Scm.Dev.Uid.Dvo.ScmUidDvo">
             <summary>
             
@@ -825,74 +808,203 @@
             
             </summary>
         </member>
-        <member name="T:Com.Scm.Dev.Uid.SysUidService">
+        <member name="T:Com.Scm.Dev.Version.DevVersionService">
             <summary>
             服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Dev.UidDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Ur.UserDao})">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Dev.VerHeaderDao})">
             <summary>
             
             </summary>
             <param name="thisRepository"></param>
-            <param name="userRepository"></param>
-            <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.GetPagesAsync(Com.Scm.Dev.Version.Dvo.SearchRequest)">
             <summary>
             查询分页
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.GetListAsync(Com.Scm.Dvo.ScmSearchRequest)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.GetListAsync(Com.Scm.Dev.Version.Dvo.SearchRequest)">
             <summary>
             查询所有
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.GetAsync(System.Int64)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.GetAsync(System.Int64)">
             <summary>
             根据主键查询
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.GetEditAsync(System.Int64)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.GetEditAsync(System.Int64)">
             <summary>
             编辑读取
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.GetViewAsync(System.Int64)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.GetViewAsync(System.Int64)">
             <summary>
             查看读取
             </summary>
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.AddAsync(Com.Scm.Dev.UidDto)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.AddAsync(Com.Scm.Dev.VerHeaderDto)">
             <summary>
             添加
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.UpdateAsync(Com.Scm.Dev.UidDto)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.UpdateAsync(Com.Scm.Dev.VerHeaderDto)">
             <summary>
             更新
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Dev.Uid.SysUidService.DeleteAsync(System.String)">
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.CurrentAsync(System.Int64)">
+            <summary>
+            设置当前版本
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.GetVerAsync(Com.Scm.Dev.Version.Dvo.GetVerRequest)">
+            <summary>
+            获取指定版本
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
+            <summary>
+            批量更新状态
+            </summary>
+            <param name="param">逗号分隔</param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Dev.Version.DevVersionService.DeleteAsync(System.String)">
             <summary>
             批量删除记录
             </summary>
             <param name="ids">逗号分隔</param>
             <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Dev.Version.Dvo.GetVerRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.GetVerRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.GetVerRequest.sys">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dev.Version.Dvo.SearchRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.SearchRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dev.Version.Dvo.VerDetailDvo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerDetailDvo.types">
+            <summary>
+            升级类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerDetailDvo.content">
+            <summary>
+            升级事项
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dev.Version.Dvo.VerHeaderDvo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.sys">
+            <summary>
+            系统
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.ver">
+            <summary>
+            当前版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.date">
+            <summary>
+            发布日期
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.build">
+            <summary>
+            构建版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.ver_min">
+            <summary>
+            最小版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.ver_max">
+            <summary>
+            最大版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.alpha">
+            <summary>
+            是否内测
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.beta">
+            <summary>
+            是否公测
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.forced">
+            <summary>
+            强制更新
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.current">
+            <summary>
+            当前版本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.remark">
+            <summary>
+            更新事项
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.Version.Dvo.VerHeaderDvo.details">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Com.Scm.Log.Api.Dvo.SearchRequest">
             <summary>
@@ -929,7 +1041,7 @@
             操作日志
             </summary>
         </member>
-        <member name="M:Com.Scm.Log.Api.LogApiService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.LogApiDao})">
+        <member name="M:Com.Scm.Log.Api.LogApiService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Log.LogApiDao})">
             <summary>
             
             </summary>
@@ -982,40 +1094,365 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Com.Scm.Mgr.Cfg.MgrConfigDao">
+        <member name="T:Com.Scm.Mgr.Config.Dao.MgrConfigDao">
             <summary>
             系统配置
             </summary>
         </member>
-        <member name="P:Com.Scm.Mgr.Cfg.MgrConfigDao.unit_id">
+        <member name="P:Com.Scm.Mgr.Config.Dao.MgrConfigDao.unit_id">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Mgr.Cfg.MgrConfigDao.user_id">
+        <member name="P:Com.Scm.Mgr.Config.Dao.MgrConfigDao.user_id">
             <summary>
             用户
             </summary>
         </member>
-        <member name="P:Com.Scm.Mgr.Cfg.MgrConfigDao.types">
+        <member name="P:Com.Scm.Mgr.Config.Dao.MgrConfigDao.types">
             <summary>
             配置类型
             </summary>
         </member>
-        <member name="P:Com.Scm.Mgr.Cfg.MgrConfigDao.key">
+        <member name="P:Com.Scm.Mgr.Config.Dao.MgrConfigDao.key">
             <summary>
             键
             </summary>
         </member>
-        <member name="P:Com.Scm.Mgr.Cfg.MgrConfigDao.value">
+        <member name="P:Com.Scm.Mgr.Config.Dao.MgrConfigDao.value">
             <summary>
             值
             </summary>
         </member>
-        <member name="P:Com.Scm.Mgr.Cfg.MgrConfigDao.data">
+        <member name="P:Com.Scm.Mgr.Config.Dao.MgrConfigDao.data">
             <summary>
             数据
             </summary>
+        </member>
+        <member name="T:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.dic_header_id">
+            <summary>
+            分类编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.codec">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.namec">
+            <summary>
+            字典值名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.tag">
+            <summary>
+            标记 1=默认  2=其他
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao.cat">
+            <summary>
+            类别
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.dic_header_id">
+            <summary>
+            分类编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.codec">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.namec">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.tag">
+            <summary>
+            标记 1=默认  2=其他
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto.cat">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Mgr.DicDetail.Dvo.SearchRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dvo.SearchRequest.codec">
+            <summary>
+            字典栏目Code
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicDetail.Dvo.SearchRequest.tag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Mgr.DicDetail.MgrDicDetailService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.DicDetail.Dao.MgrDicDetailDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Dic.DicHeaderDao})">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+            <param name="headerRepository"></param>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.GetPagesAsync(Com.Scm.Mgr.DicDetail.Dvo.SearchRequest)">
+            <summary>
+            查询分页
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.GetListAsync(Com.Scm.Mgr.DicDetail.Dvo.SearchRequest)">
+            <summary>
+            查询所有
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.AddAsync(Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.UpdateAsync(Com.Scm.Mgr.DicDetail.Dto.MgrDicDetailDto)">
+            <summary>
+            修改
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
+            <summary>
+            更新记录状态
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicDetail.MgrDicDetailService.DeleteAsync(System.String)">
+            <summary>
+            删除记录,支持多个
+            </summary>
+            <param name="ids">逗号分隔</param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.unit_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.namec">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.codec">
+            <summary>
+            分类标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.types">
+            <summary>
+            1=系统 2=商城
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.ParentId">
+            <summary>
+            父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.Layer">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.row_system">
+            <summary>
+            是否系统内置集成
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.row_delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao.details">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.ParentId">
+            <summary>
+            父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.ParentIdList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.Layer">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.namec">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.codec">
+            <summary>
+            分类标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.types">
+            <summary>
+            1=系统 2=商城
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.od">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto.IsSystem">
+            <summary>
+            是否系统内置集成
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Mgr.DicHeader.MgrDicHeaderService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Dic.Dao.MgrDicHeaderDao})">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
+            <summary>
+            查询分页
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.GetListAsync(Com.Scm.Dvo.Old.WhereParam)">
+            <summary>
+            查询所有
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.AddAsync(Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.UpdateAsync(Com.Scm.Mgr.DicHeader.Dto.MgrDicHeaderDto)">
+            <summary>
+            修改
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
+            <summary>
+            更新记录状态
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.DicHeader.MgrDicHeaderService.DeleteAsync(System.String)">
+            <summary>
+            删除记录,支持多个
+            </summary>
+            <param name="ids">逗号分隔</param>
+            <returns></returns>
         </member>
         <member name="T:Com.Scm.Mgr.Organize.Dao.MgrOrganizeDao">
             <summary>
@@ -1261,9 +1698,20 @@
             角色编号
             </summary>
         </member>
+        <member name="P:Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao.od">
+            <summary>
+            显示排序
+            </summary>
+        </member>
         <member name="P:Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao.auth_id">
             <summary>
             菜单编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao.types">
+            <summary>
+            授权类型1=角色-菜单
+            暂时没有使用
             </summary>
         </member>
         <member name="T:Com.Scm.Mgr.RoleAuth.Dto.MgrRoleAuthDto">
@@ -1274,6 +1722,11 @@
         <member name="P:Com.Scm.Mgr.RoleAuth.Dto.MgrRoleAuthDto.role_id">
             <summary>
             角色编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Mgr.RoleAuth.Dto.MgrRoleAuthDto.od">
+            <summary>
+            显示排序
             </summary>
         </member>
         <member name="P:Com.Scm.Mgr.RoleAuth.Dto.MgrRoleAuthDto.auth_id">
@@ -1673,10 +2126,11 @@
             租户管理服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Mgr.Unit.MgrUnitService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Unit.Dao.MgrUnitDao},Com.Scm.Mgr.User.MgrUserService,Com.Scm.Mgr.Role.MgrRoleService,Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.User.Dao.MgrUserDao})">
+        <member name="M:Com.Scm.Mgr.Unit.MgrUnitService.#ctor(SqlSugar.ISqlSugarClient,Com.Scm.Mgr.User.MgrUserService,Com.Scm.Mgr.Role.MgrRoleService,Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Unit.Dao.MgrUnitDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.User.Dao.MgrUserDao})">
             <summary>
             
             </summary>
+            <param name="sqlClient"></param>
             <param name="thisRepository"></param>
             <param name="userService"></param>
             <param name="roleService"></param>
@@ -2031,6 +2485,11 @@
             角色名称（冗余，仅展示用）
             </summary>
         </member>
+        <member name="P:Com.Scm.Mgr.User.Dao.MgrUserDao.data">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Com.Scm.Mgr.User.Dao.MgrUserDao.roles">
             <summary>
             角色列表
@@ -2052,6 +2511,20 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:Com.Scm.Mgr.User.Dao.MgrUserDao.DmlBatchDelete(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="unitId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Mgr.User.Dao.MgrUserDao.DmlBatchInsert(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="unitId"></param>
+            <returns></returns>
         </member>
         <member name="T:Com.Scm.Mgr.User.Dto.MgrUserDto">
             <summary>
@@ -3546,7 +4019,7 @@
             操作人服务
             </summary>
         </member>
-        <member name="M:Com.Scm.Operator.OperatorService.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Com.Scm.Dsa.Cache.ICacheService,Com.Scm.Jwt.JwtContextHolder,Com.Scm.Log.Api.LogApiService,SqlSugar.ISqlSugarClient,Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Unit.Dao.MgrUnitDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.User.Dao.MgrUserDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Role.Dao.MgrRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.UserRole.Dao.MgrUserRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Cfg.MgrConfigDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Msg.Message.MessageDao},Com.Scm.Email.Config.EmailConfig)">
+        <member name="M:Com.Scm.Operator.OperatorService.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor,Com.Scm.Dsa.Cache.ICacheService,Com.Scm.Jwt.JwtContextHolder,Com.Scm.Log.Api.LogApiService,SqlSugar.ISqlSugarClient,Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Unit.Dao.MgrUnitDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.User.Dao.MgrUserDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Role.Dao.MgrRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.UserRole.Dao.MgrUserRoleDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.RoleAuth.Dao.MgrRoleMenuDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Mgr.Config.Dao.MgrConfigDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Msg.Message.MessageDao},Com.Scm.Email.Config.EmailConfig)">
             <summary>
             
             </summary>
@@ -3577,12 +4050,6 @@
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Operator.OperatorService.GetUserThemeAsync">
-            <summary>
-            用户主题
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Com.Scm.Operator.OperatorService.LoginAsync(Com.Scm.Operator.Dvo.LoginRequest)">
             <summary>
             用户登录
@@ -3597,15 +4064,33 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:Com.Scm.Operator.OperatorService.GetSwaggerAsync(System.String,System.String)">
+            <summary>
+            API测试
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Com.Scm.Operator.OperatorService.Logout">
             <summary>
             退出
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Com.Scm.Operator.OperatorService.GetUserThemeAsync">
+            <summary>
+            用户主题
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Com.Scm.Operator.OperatorService.GetUserInfo">
             <summary>
             查询登录人信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Operator.OperatorService.GetUnitInfo">
+            <summary>
+            
             </summary>
             <returns></returns>
         </member>
@@ -3648,12 +4133,6 @@
             设置新密码
             </summary>
             <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Operator.OperatorService.GetUnitInfo">
-            <summary>
-            
-            </summary>
             <returns></returns>
         </member>
         <member name="M:Com.Scm.Operator.OperatorService.SendEmailAsync(Com.Scm.Operator.Dvo.SendEmailRequest)">
@@ -4244,6 +4723,54 @@
             <param name="ids">逗号分隔</param>
             <returns></returns>
         </member>
+        <member name="T:Com.Scm.Sys.App.Dvo.AppDvo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.App.Dvo.AppDvo.name">
+            <summary>
+            应用代码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.App.Dvo.AppDvo.title">
+            <summary>
+            应用名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.App.Dvo.AppDvo.content">
+            <summary>
+            应用简介
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.App.Dvo.GetInfoRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.App.Dvo.GetInfoRequest.name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.App.SysAppService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.App.SysAppService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.AppDao})">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+        </member>
+        <member name="M:Com.Scm.Sys.App.SysAppService.GetAppInfoAsync(Com.Scm.Sys.App.Dvo.GetInfoRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
         <member name="T:Com.Scm.Sys.Calendar.Dvo.CalendarDvo">
             <summary>
             
@@ -4309,6 +4836,11 @@
             
             </summary>
         </member>
+        <member name="P:Com.Scm.Sys.Calendar.Dvo.SearchRequest.user_id">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Com.Scm.Sys.Calendar.Dvo.SearchRequest.types">
             <summary>
             根据类型查询
@@ -4351,7 +4883,7 @@
             <summary>
             查询所有——分页
             </summary>
-            <param name="param"></param>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="M:Com.Scm.Sys.SysCalendarService.GetAsync(System.Int64)">
@@ -4365,7 +4897,7 @@
             <summary>
             添加
             </summary>
-            <param name="model"></param>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="M:Com.Scm.Sys.SysCalendarService.UpdateAsync(Com.Scm.Sys.Calendar.CalendarDto)">
@@ -4380,6 +4912,284 @@
             删除,支持批量
             </summary>
             <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Sys.ConfigCat.Dvo.SearchRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.ConfigCat.Dvo.UpdateRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.ConfigCat.SysConfigCatService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Config.ConfigCatDao},Com.Scm.Operator.OperatorService)">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+            <param name="operatorService"></param>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.GetListAsync(Com.Scm.Sys.ConfigCat.Dvo.SearchRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.AddAsync(Com.Scm.Sys.Config.ConfigCatDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.UpdateAsync(Com.Scm.Sys.Config.ConfigCatDto)">
+            <summary>
+            修改
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
+            <summary>
+            更新记录状态
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigCat.SysConfigCatService.DeleteAsync(System.String)">
+            <summary>
+            删除记录,支持多个
+            </summary>
+            <param name="ids">逗号分隔</param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Sys.ConfigKey.Dvo.SearchRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.ConfigKey.Dvo.SearchRequest.cat_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.ConfigKey.Dvo.SearchRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.ConfigKey.SysConfigKeyService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Config.ConfigKeyDao},Com.Scm.Operator.OperatorService)">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+            <param name="operatorService"></param>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.GetPagesAsync(Com.Scm.Sys.ConfigKey.Dvo.SearchRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.GetListAsync(Com.Scm.Sys.ConfigKey.Dvo.SearchRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.AddAsync(Com.Scm.Sys.Config.ConfigKeyDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.UpdateAsync(Com.Scm.Sys.Config.ConfigKeyDto)">
+            <summary>
+            修改
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
+            <summary>
+            更新记录状态
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.ConfigKey.SysConfigKeyService.DeleteAsync(System.String)">
+            <summary>
+            删除记录,支持多个
+            </summary>
+            <param name="ids">逗号分隔</param>
+            <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Sys.Config.Dvo.GetConfigRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.GetConfigRequest.user_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.GetConfigRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.Config.Dvo.SaveConfigRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.SaveConfigRequest.key">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.SaveConfigRequest.value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.SaveConfigRequest.data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.SaveConfigRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.Config.Dvo.SearchRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Config.Dvo.SearchRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.Config.SysConfigService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Config.ConfigDao},Com.Scm.Operator.OperatorService)">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+            <param name="operatorService"></param>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.GetPagesAsync(Com.Scm.Sys.Config.Dvo.SearchRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.GetListAsync(Com.Scm.Sys.Config.Dvo.SearchRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.GetConfigAsync(System.Int64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.SaveConfigAsync(System.Int64,System.Int64,Com.Scm.Enums.ClientTypeEnum,System.String,System.String,Com.Scm.Enums.DataTypeEnum)">
+            <summary>
+            
+            </summary>
+            <param name="unitId"></param>
+            <param name="userId"></param>
+            <param name="types"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.SaveAsync(Com.Scm.Sys.Config.Dvo.SaveConfigRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.AddAsync(Com.Scm.Sys.Config.ConfigDto)">
+            <summary>
+            添加
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.GetAsync(System.Int64)">
+            <summary>
+            根据主键查询
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.UpdateAsync(Com.Scm.Sys.Config.ConfigDto)">
+            <summary>
+            修改
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
+            <summary>
+            更新记录状态
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Sys.Config.SysConfigService.DeleteAsync(System.String)">
+            <summary>
+            删除记录,支持多个
+            </summary>
+            <param name="ids">逗号分隔</param>
             <returns></returns>
         </member>
         <member name="T:Com.Scm.Sys.DicDetail.Dvo.SearchRequest">
@@ -4402,7 +5212,7 @@
             字典信息表服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.DicDetail.SysDicDetailService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.DicDetailDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.DicHeaderDao})">
+        <member name="M:Com.Scm.Sys.DicDetail.SysDicDetailService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Dic.DicDetailDao},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Dic.DicHeaderDao})">
             <summary>
             
             </summary>
@@ -4430,14 +5240,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Sys.DicDetail.SysDicDetailService.AddAsync(Com.Scm.Sys.DicDetailDto)">
+        <member name="M:Com.Scm.Sys.DicDetail.SysDicDetailService.AddAsync(Com.Scm.Sys.Dic.DicDetailDto)">
             <summary>
             添加
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Sys.DicDetail.SysDicDetailService.UpdateAsync(Com.Scm.Sys.DicDetailDto)">
+        <member name="M:Com.Scm.Sys.DicDetail.SysDicDetailService.UpdateAsync(Com.Scm.Sys.Dic.DicDetailDto)">
             <summary>
             修改
             </summary>
@@ -4458,25 +5268,35 @@
             <param name="ids">逗号分隔</param>
             <returns></returns>
         </member>
+        <member name="T:Com.Scm.Sys.DicHeader.Dvo.SearchReuqest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.DicHeader.Dvo.SearchReuqest.type">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Com.Scm.Sys.DicHeader.SysDicHeaderService">
             <summary>
             服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.DicHeaderDao})">
+        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Dic.DicHeaderDao})">
             <summary>
             
             </summary>
             <param name="thisRepository"></param>
         </member>
-        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
+        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.GetPagesAsync(Com.Scm.Sys.DicHeader.Dvo.SearchReuqest)">
             <summary>
             查询分页
             </summary>
-            <param name="param"></param>
+            <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.GetListAsync(Com.Scm.Dvo.Old.WhereParam)">
+        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.GetListAsync(Com.Scm.Sys.DicHeader.Dvo.SearchReuqest)">
             <summary>
             查询所有
             </summary>
@@ -4489,14 +5309,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.AddAsync(Com.Scm.Sys.DicHeaderDto)">
+        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.AddAsync(Com.Scm.Sys.Dic.DicHeaderDto)">
             <summary>
             添加
             </summary>
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.UpdateAsync(Com.Scm.Sys.DicHeaderDto)">
+        <member name="M:Com.Scm.Sys.DicHeader.SysDicHeaderService.UpdateAsync(Com.Scm.Sys.Dic.DicHeaderDto)">
             <summary>
             修改
             </summary>
@@ -4745,7 +5565,7 @@
             服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.SysAdvColumnService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Sys.SysAdvColumn})">
+        <member name="M:Com.Scm.Sys.SysAdvColumnService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Adv.SysAdvColumn})">
             <summary>
             
             </summary>
@@ -4892,7 +5712,7 @@
             广告位信息表 服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.SysAdvInfoService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Sys.SysAdvInfo},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Sys.SysAdvColumn})">
+        <member name="M:Com.Scm.Sys.SysAdvInfoService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Adv.SysAdvInfo},Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Adv.SysAdvColumn})">
             <summary>
             
             </summary>
@@ -5272,7 +6092,7 @@
             投票项服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.SysVoteItemService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Sys.VoteDetailDao})">
+        <member name="M:Com.Scm.Sys.SysVoteItemService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Vote.VoteDetailDao})">
             <summary>
             
             </summary>
@@ -5348,7 +6168,7 @@
             投票日志服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.SysVoteLogService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Sys.VoteResultDao})">
+        <member name="M:Com.Scm.Sys.SysVoteLogService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Vote.VoteResultDao})">
             <summary>
             
             </summary>
@@ -5464,7 +6284,7 @@
             投票表服务接口
             </summary>
         </member>
-        <member name="M:Com.Scm.Sys.SysVoteService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Sys.VoteHeaderDao})">
+        <member name="M:Com.Scm.Sys.SysVoteService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Sys.Vote.VoteHeaderDao})">
             <summary>
             
             </summary>
@@ -5621,7 +6441,17 @@
             
             </summary>
         </member>
+        <member name="P:Com.Scm.Sys.Tasks.Dvo.SearchRequest.types">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Com.Scm.Sys.Tasks.Dvo.SearchRequest.handle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Tasks.Dvo.SearchRequest.result">
             <summary>
             
             </summary>
@@ -5777,189 +6607,6 @@
             <returns></returns>
         </member>
         <member name="M:Com.Scm.Sys.SysTaskService.DeleteAsync(System.String)">
-            <summary>
-            批量删除记录
-            </summary>
-            <param name="ids">逗号分隔</param>
-            <returns></returns>
-        </member>
-        <member name="T:Com.Scm.Sys.Version.Dvo.GetVerRequest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.GetVerRequest.types">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.GetVerRequest.sys">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Sys.Version.Dvo.SearchRequest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Sys.Version.Dvo.VerDetailDvo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerDetailDvo.types">
-            <summary>
-            升级类型
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerDetailDvo.content">
-            <summary>
-            升级事项
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Sys.Version.Dvo.VerHeaderDvo">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.types">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.sys">
-            <summary>
-            系统
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.ver">
-            <summary>
-            当前版本
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.ver_min">
-            <summary>
-            最小版本
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.ver_max">
-            <summary>
-            最大版本
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.alpha">
-            <summary>
-            是否内测
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.beta">
-            <summary>
-            是否公测
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.forced">
-            <summary>
-            强制更新
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.current">
-            <summary>
-            当前版本
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.remark">
-            <summary>
-            更新事项
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.Version.Dvo.VerHeaderDvo.details">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Sys.Version.SysVersionService">
-            <summary>
-            服务接口
-            </summary>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.#ctor(Com.Scm.Dsa.Dba.Sugar.SugarRepository{Com.Scm.Dao.Dev.VerHeaderDao})">
-            <summary>
-            
-            </summary>
-            <param name="thisRepository"></param>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.GetPagesAsync(Com.Scm.Dvo.ScmSearchPageRequest)">
-            <summary>
-            查询分页
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.GetListAsync(Com.Scm.Dvo.ScmSearchRequest)">
-            <summary>
-            查询所有
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.GetAsync(System.Int64)">
-            <summary>
-            根据主键查询
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.GetEditAsync(System.Int64)">
-            <summary>
-            编辑读取
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.GetViewAsync(System.Int64)">
-            <summary>
-            查看读取
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.AddAsync(Com.Scm.Dev.VerHeaderDto)">
-            <summary>
-            添加
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.UpdateAsync(Com.Scm.Dev.VerHeaderDto)">
-            <summary>
-            更新
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.CurrentAsync(System.Int64)">
-            <summary>
-            设置当前版本
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.GetVerAsync(Com.Scm.Sys.Version.Dvo.GetVerRequest)">
-            <summary>
-            获取指定版本
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.StatusAsync(Com.Scm.Dvo.ScmChangeStatusRequest)">
-            <summary>
-            批量更新状态
-            </summary>
-            <param name="param">逗号分隔</param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Sys.Version.SysVersionService.DeleteAsync(System.String)">
             <summary>
             批量删除记录
             </summary>
@@ -6326,7 +6973,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Com.Scm.Ur.RoleAuth.SysPermissionService.GetByAdminAsync(System.Int64)">
+        <member name="M:Com.Scm.Ur.RoleAuth.SysPermissionService.GetByUserAsync(System.Int64)">
             <summary>
             根据用户获得授权的角色
             </summary>
@@ -6344,6 +6991,11 @@
             </summary>
             <param name="model"></param>
             <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Ur.Role.Dvo.RoleDvo">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:Com.Scm.Ur.Role.Dvo.SearchRequest">
             <summary>
@@ -6631,6 +7283,11 @@
             
             </summary>
         </member>
+        <member name="P:Com.Scm.Ur.User.Dvo.UserDvo.data">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Com.Scm.Ur.User.UrUserService">
             <summary>
             管理员表服务接口
@@ -6721,6 +7378,13 @@
         <member name="M:Com.Scm.Ur.User.UrUserService.SaveUserGroup(Com.Scm.Ur.User.Dvo.UserDvo)">
             <summary>
             更新用户群组
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Ur.User.UrUserService.UpdateUserDataAsync(Com.Scm.Ur.User.Dvo.UserDvo)">
+            <summary>
+            
             </summary>
             <param name="model"></param>
             <returns></returns>

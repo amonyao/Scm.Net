@@ -40,10 +40,11 @@ public class GlobalExceptionFilter : IAsyncExceptionFilter
         if (type != null)
         {
             var userAgent = context.HttpContext.Request.Headers["User-Agent"].ToString();
+            var now = DateTime.Now;
             var logInfo = new LogApiDto()
             {
-                Level = LogEnum.Error,
-                types = LogTypeEnum.Operate,
+                level = LogLevelEnum.Error,
+                types = LogTypesEnum.Operate,
                 module = type.FullName,
                 method = context.HttpContext.Request.Method,
                 operate_user = user.UserName,
@@ -52,7 +53,8 @@ public class GlobalExceptionFilter : IAsyncExceptionFilter
                 browser = ServerUtils.GetBrowser(userAgent),
                 agent = userAgent,
                 message = context.Exception.Message,
-                operate_time = DateTime.Now
+                operate_date = TimeUtils.FormatDate(now),
+                operate_time = TimeUtils.GetUnixTime(now),
             };
             //保存日志信息
             await _logService.AddAsync(logInfo);

@@ -24,29 +24,23 @@ public class AopActionFilter : IAsyncActionFilter
 {
     private static readonly List<string> IgnoreApi = new()
     {
-        "/api/sysfile/",
-        "/api/captcha",
-        "/chathub"
+        "api/sysfile/",
+        "api/captcha",
+        "/chathub",
+        "login"
     };
 
-    private readonly EnvConfig _EnvConfig;
+    private readonly SecurityConfig _Config;
     private readonly LogApiService _logService;
     private readonly OperatorService _operatorService;
     private readonly JwtContextHolder _jwtContextHolder;
-    private static SecurityConfig _Config;
 
-    public AopActionFilter(EnvConfig envConfig, LogApiService logService, OperatorService operatorService, JwtContextHolder jwtContextHolder)
+    public AopActionFilter(SecurityConfig config, LogApiService logService, OperatorService operatorService, JwtContextHolder jwtContextHolder)
     {
-        _EnvConfig = envConfig;
+        _Config = config;
         _logService = logService;
         _operatorService = operatorService;
         _jwtContextHolder = jwtContextHolder;
-
-        _Config = AppUtils.GetConfig<SecurityConfig>(SecurityConfig.NAME);
-        if (_Config == null)
-        {
-            _Config = new SecurityConfig();
-        }
     }
 
     private static bool IsIgnoreApi(string url)
@@ -87,123 +81,123 @@ public class AopActionFilter : IAsyncActionFilter
         #endregion
 
         #region 安全签名认证
-        var request = context.HttpContext.Request;
-        var urlPath = request.Path.ToString().ToLower();
-
-        var isIgnore = IsIgnoreApi(urlPath) || SkipAudit(context);
-        if (!isIgnore)
+        if (_Config.CheckSignature)
         {
-            var method = request.Method;
+            var request = context.HttpContext.Request;
+            var urlPath = request.Path.ToString().ToLower();
 
-            //客户的唯一标示
-            var appkey = request.Headers["appkey"];
-
-            //13位时间戳
-            var timestamp = request.Headers["timestamp"];
-
-            //签名
-            var signature = request.Headers["signature"];
-
-            if (string.IsNullOrEmpty(appkey) || string.IsNullOrEmpty(timestamp) || string.IsNullOrEmpty(signature))
+            var isIgnore = IsIgnoreApi(urlPath) || SkipAudit(context);
+            if (!isIgnore)
             {
-                Logger.Info("ApiSecurity——请求不合法");
-                context.Result = new JsonResult(JResult<int>.Error("请求不合法"));
-                return;
-            }
+                var method = request.Method;
 
-            if (!TextUtils.IsNumberic(timestamp, 10, 13))
-            {
-                context.Result = new JsonResult(JResult<int>.Error("无效的时间戳"));
-                return;
-            }
+                //客户的唯一标示
+                var appkey = request.Headers["appkey"];
 
-            if (appkey != _Config.AppKey)
-            {
-                Logger.Info("ApiSecurity——请求不合法-k");
-                context.Result = new JsonResult(JResult<int>.Error("请求不合法-k"));
-                return;
-            }
+                //13位时间戳
+                var timestamp = request.Headers["timestamp"];
 
-            //判断timespan是否有效
-            var ts1 = long.Parse(timestamp);
-            var ts2 = TimeUtils.GetUnixTime();
-            bool falg = (ts2 - ts1) > 1200 * 1000; //1分钟有效
-            if (falg)
-            {
-                Logger.Info("ApiSecurity——请求不合法-t");
-                context.Result = new JsonResult(JResult<int>.Error("请求不合法-t"));
-                return;
-            }
-            //根据请求类型拼接参数
+                //签名
+                var signature = request.Headers["signature"];
 
-            IDictionary<string, string> parameters = new Dictionary<string, string>();
-            string data = string.Empty;
-            switch (method)
-            {
-                case "POST":
-                    context.HttpContext.Request.Body.Position = 0;
-                    if (context.HttpContext.Request.ContentType.StartsWith("multipart/form-data"))
-                    {
-                        data = "{}";
-                    }
-                    else
-                    {
+                if (string.IsNullOrEmpty(appkey) || string.IsNullOrEmpty(timestamp) || string.IsNullOrEmpty(signature))
+                {
+                    Logger.Info("ApiSecurity——请求不合法");
+                    context.Result = new JsonResult(JResult<int>.Error("请求不合法"));
+                    return;
+                }
+
+                if (!TextUtils.IsNumberic(timestamp, 10, 13))
+                {
+                    context.Result = new JsonResult(JResult<int>.Error("无效的时间戳"));
+                    return;
+                }
+
+                if (appkey != _Config.AppKey)
+                {
+                    Logger.Info("ApiSecurity——请求不合法-k");
+                    context.Result = new JsonResult(JResult<int>.Error("请求不合法-k"));
+                    return;
+                }
+
+                //判断timespan是否有效
+                var ts1 = long.Parse(timestamp);
+                var ts2 = TimeUtils.GetUnixTime();
+                bool falg = (ts2 - ts1) > 1200 * 1000; //1分钟有效
+                if (falg)
+                {
+                    Logger.Info("ApiSecurity——请求不合法-t");
+                    context.Result = new JsonResult(JResult<int>.Error("请求不合法-t"));
+                    return;
+                }
+                //根据请求类型拼接参数
+
+                IDictionary<string, string> parameters = new Dictionary<string, string>();
+                string data = string.Empty;
+                switch (method)
+                {
+                    case "POST":
+                        context.HttpContext.Request.Body.Position = 0;
                         StreamReader stream = new StreamReader(context.HttpContext.Request.Body);
                         string body = await stream.ReadToEndAsync();
+                        //Console.WriteLine("body："+ body);
                         data = body;
                         context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
-                    }
-                    break;
-                case "PUT":
-                    context.HttpContext.Request.Body.Position = 0;
-                    StreamReader streamPut = new StreamReader(context.HttpContext.Request.Body);
-                    string bodyPut = await streamPut.ReadToEndAsync();
-                    data = bodyPut;
-                    context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
-                    break;
-                case "DELETE":
-                    context.HttpContext.Request.Body.Position = 0;
-                    StreamReader streamDel = new StreamReader(context.HttpContext.Request.Body);
-                    string bodyDel = await streamDel.ReadToEndAsync();
-                    data = bodyDel;
-                    context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
-                    break;
-                case "GET":
-                    {
-                        var query = request.Query;
-                        foreach (var item in query)
-                        {
-                            parameters.Add(item.Key, item.Value);
-                        }
-
-                        // 第二步：把字典按Key的字母顺序排序
-                        IDictionary<string, string> sortedParams = new SortedDictionary<string, string>(parameters);
-                        using IEnumerator<KeyValuePair<string, string>> dem = sortedParams.GetEnumerator();
-
-                        // 第三步：把所有参数名和参数值串在一起
-                        StringBuilder stringBuilder = new StringBuilder();
-                        while (dem.MoveNext())
-                        {
-                            string key = dem.Current.Key;
-                            string value = dem.Current.Value;
-                            if (!string.IsNullOrEmpty(value))
-                            {
-                                stringBuilder.Append(key).Append(value);
-                            }
-                        }
-
-                        data = stringBuilder.ToString();
                         break;
-                    }
-            }
+                    case "PUT":
+                        context.HttpContext.Request.Body.Position = 0;
+                        StreamReader streamPut = new StreamReader(context.HttpContext.Request.Body);
+                        string bodyPut = await streamPut.ReadToEndAsync();
+                        //Console.WriteLine("put："+ bodyPut);
+                        data = bodyPut;
+                        context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+                        break;
+                    case "DELETE":
+                        context.HttpContext.Request.Body.Position = 0;
+                        StreamReader streamDel = new StreamReader(context.HttpContext.Request.Body);
+                        string bodyDel = await streamDel.ReadToEndAsync();
+                        //Console.WriteLine("put："+ bodyPut);
+                        data = bodyDel;
+                        context.HttpContext.Request.Body.Seek(0, SeekOrigin.Begin);
+                        break;
+                    case "GET":
+                        {
+                            var query = request.Query;
+                            foreach (var item in query)
+                            {
+                                parameters.Add(item.Key, item.Value);
+                            }
 
-            if (!ApiSecurityValidate(timestamp, appkey, data, signature))
-            {
-                Logger.Info("ApiSecurity——参数不合法-Sign");
-                context.Result = new JsonResult(JResult<int>.Error("参数不合法"));
-                return;
+                            // 第二步：把字典按Key的字母顺序排序
+                            IDictionary<string, string> sortedParams = new SortedDictionary<string, string>(parameters);
+                            using IEnumerator<KeyValuePair<string, string>> dem = sortedParams.GetEnumerator();
+
+                            // 第三步：把所有参数名和参数值串在一起
+                            StringBuilder stringBuilder = new StringBuilder();
+                            while (dem.MoveNext())
+                            {
+                                string key = dem.Current.Key;
+                                string value = dem.Current.Value;
+                                if (!string.IsNullOrEmpty(key))
+                                {
+                                    stringBuilder.Append(key).Append(value);
+                                }
+                            }
+
+                            data = stringBuilder.ToString();
+                            //Console.WriteLine("GET："+JsonConvert.SerializeObject(data));
+                            break;
+                        }
+                }
+
+                if (!ApiSecurityValidate(timestamp, appkey, data, signature))
+                {
+                    Logger.Info("ApiSecurity——参数不合法-Sign");
+                    context.Result = new JsonResult(JResult<int>.Error("参数不合法"));
+                    return;
+                }
+                //Console.WriteLine("success");
             }
-            //Console.WriteLine("success");
         }
         #endregion
 
@@ -238,15 +232,17 @@ public class AopActionFilter : IAsyncActionFilter
             }
 
             var userAgent = ServerUtils.GetUserAgent();
+            var now = DateTime.Now;
             //构建实体
             var logInfo = new LogApiDto()
             {
-                Level = LogEnum.Info,
-                types = LogTypeEnum.Operate,
+                level = LogLevelEnum.Info,
+                types = LogTypesEnum.Operate,
                 module = type?.FullName,
                 method = context.HttpContext.Request.Method,
                 operate_user = user.user_name,
-                operate_time = DateTime.Now,
+                operate_date = TimeUtils.FormatDate(now),
+                operate_time = TimeUtils.GetUnixTime(now),
                 parameters = parametersStr,
                 ip = ServerUtils.GetIp(),
                 url = context.HttpContext.Request.Path + context.HttpContext.Request.QueryString,
@@ -309,7 +305,7 @@ public class AopActionFilter : IAsyncActionFilter
     /// <param name="data"></param>
     /// <param name="signature"></param>
     /// <returns></returns>
-    private static bool ApiSecurityValidate(string timeStamp, string appId, string data, string signature)
+    private bool ApiSecurityValidate(string timeStamp, string appId, string data, string signature)
     {
         //签名key
         var signKey = _Config.SignKey;

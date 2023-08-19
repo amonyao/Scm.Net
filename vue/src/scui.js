@@ -3,7 +3,6 @@ import api from "./api";
 import tool from "./utils/tool";
 import http from "./utils/request";
 import scm from "./utils/scm";
-import wms from "./utils/wms";
 import { permission, rolePermission } from "./utils/permission";
 
 import scTable from "./components/scTable";
@@ -46,7 +45,6 @@ export default {
 		app.config.globalProperties.$AUTH = permission;
 		app.config.globalProperties.$ROLE = rolePermission;
 		app.config.globalProperties.$SCM = scm;
-		app.config.globalProperties.$WMS = wms;
 
 		//注册全局组件
 		app.component("scTable", scTable);

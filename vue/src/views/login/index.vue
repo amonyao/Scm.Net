@@ -50,7 +50,7 @@
 									<div class="login_note">
 										<div class="body">
 											<div class="login_note__content">
-												<div v-html="$CONFIG.APP_DESC"></div>
+												<div v-html="info.content"></div>
 											</div>
 										</div>
 									</div>
@@ -134,6 +134,7 @@ export default {
 				{ name: "简体中文", value: "zh-cn", },
 				{ name: "English", value: "en", },
 			],
+			info: {},
 			WechatLoginCode: "",
 			showWechatLogin: false,
 			isWechatLoginResult: false,
@@ -174,9 +175,18 @@ export default {
 		this.$store.commit("clearIframeList");
 	},
 	mounted() {
+		this.loadInfo();
 		this.loadTheme();
 	},
 	methods: {
+		async loadInfo() {
+			var res = await this.$API.sysapp.model.get({ name: 'scm.web' });
+			if (res == null || res.code != 200) {
+				return;
+			}
+
+			this.info = res.data;
+		},
 		async loadTheme() {
 			var res = await this.$API.login.dateTheme.get({});
 			if (res == null || res.code != 200) {

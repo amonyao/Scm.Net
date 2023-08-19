@@ -2,7 +2,7 @@
 
 namespace Com.Scm.Samples.Demo.Dvo
 {
-    public class DemoDvo : BaseDataDvo
+    public class DemoDvo : ScmDataDvo
     {
         /// <summary>
         /// 系统编码
