@@ -50,7 +50,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SkiaSharp" Version="2.88.3" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.84" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.100" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.2" />
   </ItemGroup>
@@ -128,6 +128,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cms.Server\Cms.Server.csproj" />
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
   </ItemGroup>
 

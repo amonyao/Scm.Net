@@ -1,16 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+	  <RootNamespace>Com.Scm.Cms</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.38" />
-    <PackageReference Include="MiniExcel" Version="1.31.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.100" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cms.Common\Cms.Common.csproj" />
+    <ProjectReference Include="..\Cms.Dao\Cms.Dao.csproj" />
+    <ProjectReference Include="..\Cms.Dto\Cms.Dto.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +28,8 @@
     <Reference Include="Scm.Common.Text">
       <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
     </Reference>
-    <Reference Include="Scm.Common.Uid">
-      <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
+    <Reference Include="Scm.Dao">
+      <HintPath>..\Libs\Scm.Dao.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>

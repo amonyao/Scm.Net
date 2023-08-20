@@ -7,7 +7,7 @@ export default {
 		get: async function(params){
 			return await http.get(this.url,params);
 		}
-	}, 
+	},
 	chart: {
 		url: `${config.API_URL}/logapi/chart`,
 		name: "图表",
@@ -51,5 +51,3 @@ export default {
 		}
 	}
 }
-
-
