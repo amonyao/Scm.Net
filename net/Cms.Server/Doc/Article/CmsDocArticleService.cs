@@ -1,3 +1,5 @@
+using Com.Scm.Cms.Doc.Article.Dvo;
+using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
@@ -5,6 +7,7 @@ using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Cms.Doc
@@ -17,12 +20,15 @@ namespace Com.Scm.Cms.Doc
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly EnvConfig _Config;
 
         public CmsDocArticleService(SugarRepository<CmsDocArticleDao> thisRepository,
-            SugarRepository<UserDao> userRepository)
+            SugarRepository<UserDao> userRepository,
+            EnvConfig config)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _Config = config;
         }
 
         /// <summary>
@@ -155,6 +161,41 @@ namespace Com.Scm.Cms.Doc
         public async Task<int> DeleteAsync(string ids)
         {
             return await DeleteRecord(_thisRepository, ids.ToListLong());
+        }
+
+        /// <summary>
+        /// 文件上传
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost, AllowAnonymous]
+        public async Task<UploadResponse> UploadAsync([FromForm] UploadRequest request)
+        {
+            var response = new UploadResponse();
+
+            //判断是否上传了文件内容
+            if (request.file == null)
+            {
+                response.SetFailure("上传内容为空！");
+                return response;
+            }
+
+            #region 保存文件
+            var fileName = request.file.FileName;
+            var ext = Path.GetExtension(fileName);
+            fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
+
+            var path = _Config.GetUploadPath(fileName);
+            using (var stream = File.OpenWrite(path))
+            {
+                //将文件内容复制到流中
+                await request.file.CopyToAsync(stream);
+            }
+            response.file = fileName;
+            response.SetSuccess("文件上传成功！");
+            #endregion
+
+            return response;
         }
     }
 }

@@ -1,3 +1,4 @@
+using Com.Scm.Cms.Enums;
 using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,7 +25,7 @@ namespace Com.Scm.Cms.Doc
         /// 类型
         /// </summary>
         [Required]
-        public int types { get; set; } = 0;
+        public ArticleTypesEnum types { get; set; } = 0;
 
         /// <summary>
         /// 标题
@@ -150,12 +151,18 @@ namespace Com.Scm.Cms.Doc
         /// 排列方式
         /// </summary>
         [Required]
-        public int origin_types { get; set; } = 0;
+        public OriginEnum origin_types { get; set; } = 0;
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public int public_types { get; set; } = 0;
+        public VisibleEnum visible { get; set; } = 0;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required, StringLength(1024)]
+        public string summary { get; set; }
     }
 }

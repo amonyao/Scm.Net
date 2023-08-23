@@ -1,6 +1,5 @@
 import config from "@/config"
 import http from "@/utils/request"
-import scm from "@/utils/scm"
 
 export default {
 	page: {
@@ -72,10 +71,5 @@ export default {
 		get: async function(data){
 			return await http.get(this.url,data);
 		}
-	},
-	list_option: async function (data, list, opt) {
-		var url = `${config.API_URL}/cmsresdynasty/option`;
-		var res = await http.get(url, data);
-		scm.prepare(list, res, opt);
 	}
 }

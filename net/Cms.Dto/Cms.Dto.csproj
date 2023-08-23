@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,6 +6,10 @@
     <Nullable>disable</Nullable>
     <RootNamespace>Com.Scm.Cms</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cms.Common\Cms.Common.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Scm.Common.Dto">

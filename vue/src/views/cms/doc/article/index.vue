@@ -3,8 +3,8 @@
 		<scSearch>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="查询选项" prop="option_id">
-						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
+					<el-form-item label="文章类型" prop="types_id">
+						<sc-select v-model="param.types_id" placeholder="请选择" :data="types_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
@@ -82,15 +82,15 @@ import { defineAsyncComponent } from "vue";
 export default {
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
-		poetry: defineAsyncComponent(() => import("./poetry")),
-		litera: defineAsyncComponent(() => import("./litera")),
+		poetry: defineAsyncComponent(() => import("./components/poetry")),
+		litera: defineAsyncComponent(() => import("./components/litera")),
 	},
 	data() {
 		return {
 			apiObj: this.$API.cmsdocarticle.page,
 			list: [],
 			param: {
-				option_id: '0',
+				types_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
@@ -98,11 +98,9 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'types', label: '类型', width: 100 },
+				{ prop: 'types', label: '类型', width: 100, formatter: this.getTypesNames },
 				{ prop: 'title', label: '主标题', width: 100 },
-				{ prop: 'sub_title', label: '子标题', width: 100 },
 				{ prop: 'qty', label: '点赞数量', width: 100 },
-				{ prop: 'qty0', label: '起始数量', width: 100 },
 				{ prop: 'fav_qty', label: '收藏数量', width: 100 },
 				{ prop: 'msg_qty', label: '留言数量', width: 100 },
 				{ prop: 'cat_id', label: '分类', width: 100 },
@@ -114,10 +112,11 @@ export default {
 				{ prop: 'create_time', label: '创建时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 			row_status_list: [this.$SCM.OPTION_ALL],
-			option_list: [this.$SCM.OPTION_ALL],
+			types_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.types_list, 'article_type', true);
 	},
 	methods: {
 		complete() {
@@ -158,12 +157,15 @@ export default {
 				return;
 			}
 		},
+		getTypesNames(item) {
+			this.$SCM.get_option_names(this.types_list, item, '-');
+		},
 		open_poetry(row) {
 			this.$refs.poetry.open(row);
 		},
 		open_litera(row) {
 			this.$refs.litera.open(row);
-		}
+		},
 	},
 };
 </script>
