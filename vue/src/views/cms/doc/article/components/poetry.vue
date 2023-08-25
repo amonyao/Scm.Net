@@ -76,7 +76,7 @@ export default {
     mounted() {
         this.init();
         this.getNation();
-        this.$SCM.list_dic(this.visible_list, 'article_visible', true);
+        this.$SCM.list_dic(this.visible_list, 'article_visible', false);
     },
     methods: {
         def_data() {
@@ -89,7 +89,7 @@ export default {
                 dynasty_id: '0',
                 author_id: '0',
                 origin_id: '0',
-                visible: '0',
+                visible: '1',
             }
         },
         async init() {

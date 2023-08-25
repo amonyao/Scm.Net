@@ -54,7 +54,7 @@ export default {
     },
     mounted() {
         this.init();
-        this.$SCM.list_dic(this.visible_list, 'article_visible', true);
+        this.$SCM.list_dic(this.visible_list, 'article_visible', false);
     },
     methods: {
         def_data() {
@@ -62,7 +62,7 @@ export default {
                 id: '0',
                 types: '0',
                 cat_id: '0',
-                visible: '0',
+                visible: '1',
                 batch: false,
                 blank: 1
             }

@@ -158,14 +158,14 @@ export default {
 			}
 		},
 		getTypesNames(item) {
-			this.$SCM.get_option_names(this.types_list, item, '-');
+			return this.$SCM.get_option_names(this.types_list, item, '-');
 		},
 		open_poetry(row) {
 			this.$refs.poetry.open(row);
 		},
 		open_litera(row) {
 			this.$refs.litera.open(row);
-		},
+		}
 	},
 };
 </script>

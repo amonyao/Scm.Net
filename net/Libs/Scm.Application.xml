@@ -6678,6 +6678,69 @@
             <param name="client"></param>
             <param name="dao"></param>
         </member>
+        <member name="T:Com.Scm.Tools.Barcode.BarcodeService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Tools.Barcode.BarcodeService.GetOption">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Tools.Barcode.BarcodeService.GetFonts">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Com.Scm.Tools.Barcode.BarcodeService.GetImageAsync(Com.Scm.Tools.Barcode.Dvo.CreateRequest)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Tools.Barcode.Dvo.CreateRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.fontName">
+            <summary>
+            字体名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.fontSize">
+            <summary>
+            字体大小
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.position">
+            <summary>
+            文本位置
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.format">
+            <summary>
+            条码格式
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.width">
+            <summary>
+            条码宽度
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Tools.Barcode.Dvo.CreateRequest.height">
+            <summary>
+            条码高度
+            </summary>
+        </member>
         <member name="T:Com.Scm.Ur.Group.Dvo.GroupDvo">
             <summary>
             

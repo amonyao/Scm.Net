@@ -81,22 +81,9 @@ namespace Com.Scm.Cms.Doc
         }
 
         /// <summary>
-        /// 下拉列表
+        /// 
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public async Task<List<OptionDvo>> GetOptionAsync(ScmSearchRequest request)
-        {
-            var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
-                .OrderBy(a => a.id)
-                .Select(a => new OptionDvo { id = a.id, label = a.names, value = a.id })
-                .ToListAsync();
-
-            return result;
-        }
-
-
+        /// <param name="list"></param>
         private void Prepare(List<CmsResOriginDto> list)
         {
             foreach (var item in list)

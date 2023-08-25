@@ -4,6 +4,7 @@ using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Filter;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
@@ -22,7 +23,6 @@ namespace Com.Scm.Cms.Doc
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
-        private readonly EnvConfig _Config;
 
         public CmsDocArticleService(SugarRepository<CmsDocArticleDao> thisRepository,
             SugarRepository<UserDao> userRepository,
@@ -30,7 +30,7 @@ namespace Com.Scm.Cms.Doc
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
-            _Config = config;
+            _EnvConfig = config;
         }
 
         /// <summary>
@@ -57,16 +57,17 @@ namespace Com.Scm.Cms.Doc
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<CmsDocArticleDto>> GetListAsync(ScmSearchRequest request)
+        public async Task<List<CmsDocArticleDto>> GetListAsync(ListRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
-                //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
-                .OrderBy(m => m.id)
-                .Select<CmsDocArticleDto>()
+                .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
+                .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
+                .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
+                .Select(a => new CmsDocArticleDto { id = a.id, key = a.key, salt = a.salt, title = a.title, create_time = a.create_time, update_time = a.update_time })
                 .ToListAsync();
 
-            Prepare(result);
+            //Prepare(result);
             return result;
         }
 
@@ -85,10 +86,33 @@ namespace Com.Scm.Cms.Doc
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<CmsDocArticleDto> GetAsync(long id)
+        public async Task<CmsDocArticleDvo> GetAsync(long id)
         {
-            var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<CmsDocArticleDto>();
+            var dvo = await _thisRepository
+                .AsQueryable()
+                .Where(a => a.id == id)
+                .Select<CmsDocArticleDvo>()
+                .FirstAsync();
+
+            if (dvo == null)
+            {
+                dvo = new CmsDocArticleDvo();
+            }
+
+            dvo.content = dvo.summary;
+            if (dvo.files > 0)
+            {
+                var file = GetFile(dvo.id);
+                if (File.Exists(file))
+                {
+                    using (var reader = File.OpenText(file))
+                    {
+                        dvo.content = reader.ReadToEnd();
+                    }
+                }
+            }
+
+            return dvo;
         }
 
         /// <summary>
@@ -198,6 +222,49 @@ namespace Com.Scm.Cms.Doc
             return 0;
         }
 
+        public async Task SaveNotesAsync(CmsDocNotesDto model)
+        {
+            var content = model.content ?? "";
+
+            var dao = await _thisRepository.GetByIdAsync(model.id);
+            if (dao == null)
+            {
+                dao = new CmsDocArticleDao();
+                dao.id = model.id;
+                dao.title = model.title;
+                dao.summary = TextUtils.Left(content, 1024);
+                dao.files = content.Length > 1024 ? 1 : 0;
+                await _thisRepository.InsertAsync(dao);
+            }
+            else
+            {
+                dao.title = model.title;
+                dao.summary = TextUtils.Left(model.content, 1024);
+                dao.files = content.Length > 1024 ? 1 : 0;
+                await _thisRepository.UpdateAsync(dao);
+            }
+
+            if (content.Length > 1024)
+            {
+                var file = GetFile(dao.id);
+                using (var writer = new StreamWriter(file))
+                {
+                    await writer.WriteAsync(model.content);
+                }
+            }
+        }
+
+        private string GetFile(long id)
+        {
+            var path = _EnvConfig.GetRootPath("articles");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            return Path.Combine(path, id + ".txt");
+        }
+
         /// <summary>
         /// 更新
         /// </summary>
@@ -241,7 +308,7 @@ namespace Com.Scm.Cms.Doc
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost, AllowAnonymous]
+        [HttpPost, AllowAnonymous, NoJsonResult]
         public async Task<UploadResponse> UploadAsync([FromForm] UploadRequest request)
         {
             var response = new UploadResponse();
@@ -258,13 +325,14 @@ namespace Com.Scm.Cms.Doc
             var ext = Path.GetExtension(fileName);
             fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
 
-            var path = _Config.GetUploadPath(fileName);
+            var path = _EnvConfig.GetUploadPath(fileName);
             using (var stream = File.OpenWrite(path))
             {
                 //将文件内容复制到流中
                 await request.file.CopyToAsync(stream);
             }
             response.file = fileName;
+            response.location = _EnvConfig.ToUri(path);
             response.SetSuccess("文件上传成功！");
             #endregion
 

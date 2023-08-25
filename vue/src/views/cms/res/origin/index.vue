@@ -3,11 +3,11 @@
 		<scSearch>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="查询选项" prop="option_id">
-						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
+					<el-form-item label="作者" prop="author_id">
+						<sc-select v-model="param.author_id" placeholder="请选择" :data="author_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list"/>
+						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -82,40 +82,45 @@ export default {
 		return {
 			apiObj: this.$API.cmsresorigin.page,
 			list: [],
-            param:{
-				option_id: '0',
+			param: {
+				author_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
-            },
+			},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-                { prop: 'author_id', label: '', width: 100 },
-                { prop: 'od', label: '', width: 100 },
-                { prop: 'names', label: '', width: 100 },
-                { prop: 'namec', label: '', width: 100 },
-                { prop: 'namee', label: '', width: 100 },
-                { prop: 'row_status', label: '', width: 100 },
-                { prop: 'update_time', label: '', width: 100 },
-                { prop: 'update_user', label: '', width: 100 },
-                { prop: 'create_time', label: '', width: 100 },
-                { prop: 'create_user', label: '', width: 100 },
-
+				{ prop: 'author_names', label: '作者', width: 100 },
+				{ prop: 'od', label: '显示排序', width: 100 },
+				{ prop: 'names', label: '系统名称', width: 100 },
+				{ prop: 'namec', label: '中文名称', width: 100 },
+				{ prop: 'namee', label: 'English Name', width: 100 },
+				{ prop: 'row_status', label: '数据状态', width: 80 },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 150, sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 150, sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 			row_status_list: [this.$SCM.OPTION_ALL],
-			option_list: [this.$SCM.OPTION_ALL],
+			author_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
+		this.init();
+		this.$SCM.list_status(this.row_status_list, true);
 	},
 	methods: {
+		async init() {
+			var res = this.$API.cmsresauthor.option.get();
+			this.$SCM.prepare(this.author_list, res, true);
+		},
 		complete() {
 			this.$refs.table.refresh();
 		},
-        search(){
-            this.$refs.table.upData(this.param);
-        },
+		search() {
+			this.$refs.table.upData(this.param);
+		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.cmsresorigin.status, row, row.row_status);
 		},

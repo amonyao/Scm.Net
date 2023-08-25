@@ -12,6 +12,8 @@ namespace Com.Scm.Cms.Enums
         [Description("楹联谚语")]
         Proverb = 30,
         [Description("字谜歇后")]
-        Puzzle = 40
+        Puzzle = 40,
+        [Description("")]
+        Notes = 50
     }
 }

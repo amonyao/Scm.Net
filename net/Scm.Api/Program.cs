@@ -17,6 +17,7 @@ using Com.Scm.Swagger;
 using Com.Scm.Uid;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
+using Microsoft.Extensions.FileProviders;
 
 namespace Com.Scm.Api
 {
@@ -102,11 +103,14 @@ namespace Com.Scm.Api
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            //app.UseFileServer(new FileServerOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "upload")),
-            //    RequestPath = "/upload",
-            //});
+            if (!string.IsNullOrEmpty(envConfig.RootUri))
+            {
+                app.UseFileServer(new FileServerOptions
+                {
+                    FileProvider = new PhysicalFileProvider(envConfig.RootDir),
+                    RequestPath = envConfig.RootUri,
+                });
+            }
 
             app.UseSetup();
 

@@ -68,7 +68,7 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
+				id: '0',
 				nation_id: '0',
 				dynasty_id: '0',
 				od: 0,
@@ -76,7 +76,6 @@ export default {
 				names: '',
 				namec: '',
 				namee: '',
-
 			}
 		},
 		async open(row) {
@@ -94,7 +93,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.cmsresauthor.add.post(this.formData);
 					} else {
 						res = await this.$API.cmsresauthor.update.put(this.formData);
