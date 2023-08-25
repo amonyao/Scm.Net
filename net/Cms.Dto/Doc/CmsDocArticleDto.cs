@@ -164,5 +164,20 @@ namespace Com.Scm.Cms.Doc
         /// </summary>
         [Required, StringLength(1024)]
         public string summary { get; set; }
+
+        /// <summary>
+        /// 文章内容
+        /// </summary>
+        [Required]
+        public string content { get; set; }
+
+        /// <summary>
+        /// 是否批量添加
+        /// </summary>
+        public bool batch { get; set; }
+        /// <summary>
+        /// 换行数量
+        /// </summary>
+        public int blank { get; set; }
     }
 }

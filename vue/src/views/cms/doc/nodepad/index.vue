@@ -1,9 +1,16 @@
 <template>
     <el-container class="doc">
         <el-aside>
-            <div>
-                列表
-            </div>
+            <el-container>
+                <el-header>
+
+                </el-header>
+                <el-main>
+                    <div>
+                        列表
+                    </div>
+                </el-main>
+            </el-container>
         </el-aside>
         <el-main class="nopadding">
             <el-container>
@@ -38,16 +45,16 @@ export default {
                 language: 'zh_CN',
                 menubar: false,
                 inline: true,
-                toolbar: 'code save undo redo restoredraft | cut copy | forecolor backcolor bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | bullist numlist blockquote subscript superscript removeformat | \
+                toolbar: 'newdocument save | undo redo restoredraft | cut copy | forecolor backcolor bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | bullist numlist blockquote subscript superscript removeformat | \
                     formatselect fontselect fontsizeselect | \
-                    table image media charmap emoticons hr pagebreak print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs',
+                    table image media charmap emoticons hr pagebreak print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs | code',
                 fixed_toolbar_container: '.doc .toolbar',
                 custom_ui_selector: 'body',
                 placeholder: 'placeholder占位文字',
                 //auto_focus: true,
                 toolbar_mode: 'wrap',
                 toolbar_sticky: true,
-                plugins: 'image save',
+                plugins: 'code image save',
                 autosave_ask_before_unload: false,
                 fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
                 font_formats: '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times new roman,times;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings,zapf dingbats;知乎配置=BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;小米配置=Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif',

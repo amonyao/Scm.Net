@@ -2,17 +2,13 @@
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
 			<el-form-item label="类型" prop="types">
-				<el-input v-model="formData.types" placeholder="请输入类型" :maxlength="11" show-word-limit
-					clearable></el-input>
+				<el-input v-model="formData.types" placeholder="请输入类型" :maxlength="11" show-word-limit clearable></el-input>
 			</el-form-item>
 			<el-form-item label="名称" prop="namec">
 				<el-input v-model="formData.namec" placeholder="请输入名称" :maxlength="32" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="上级ID" prop="pid">
-				<el-input v-model="formData.pid" placeholder="请输入上级ID" :maxlength="20" show-word-limit clearable></el-input>
-			</el-form-item>
-			<el-form-item label="顶级ID" prop="tid">
-				<el-input v-model="formData.tid" placeholder="请输入顶级ID" :maxlength="20" show-word-limit clearable></el-input>
+			<el-form-item label="上级节点" prop="pid">
+				<el-tree-select v-model="formData.pid" placeholder="请选择上级节点" :data="cat_list" />
 			</el-form-item>
 			<el-form-item label="样式" prop="style_id">
 				<el-input v-model="formData.style_id" placeholder="请输入样式" :maxlength="20" show-word-limit
@@ -44,24 +40,33 @@ export default {
 				namec: [
 					{ required: true, trigger: "blur", message: "名称不能为空" },
 				],
+				pid: [
+					{ required: true, trigger: "blur", message: "请选择上级节点" },
+				],
 			},
 		};
 	},
 	mounted() {
+		this.list_tree();
 	},
 	methods: {
 		def_data() {
 			return {
-				id: 0,
-				types: '',
-				od: '',
+				id: '0',
+				types: '0',
+				od: '0',
 				namec: '',
-				pid: '',
-				tid: '',
-				qty: '',
+				pid: '0',
 				style_id: '',
-
 			}
+		},
+		async list_tree() {
+			var res = await this.$API.cmsrescat.option.get();
+			if (!res || res.code != 200) {
+				return;
+			}
+
+			this.cat_list = this.$TOOL.changeTree(res.data);
 		},
 		async open(row) {
 			if (!row || !row.id) {
@@ -78,7 +83,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.cmsrescat.add.post(this.formData);
 					} else {
 						res = await this.$API.cmsrescat.update.put(this.formData);

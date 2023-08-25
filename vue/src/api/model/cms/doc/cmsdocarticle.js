@@ -36,6 +36,20 @@ export default {
 			return await http.post(this.url, data);
 		}
 	},
+	addpoetry: {
+		url: `${config.API_URL}/cmsdocarticle/poetry`,
+		name: "新增",
+		post: async function(data){
+			return await http.post(this.url, data);
+		}
+	},
+	addlitera: {
+		url: `${config.API_URL}/cmsdocarticle/litera`,
+		name: "新增",
+		post: async function(data){
+			return await http.post(this.url, data);
+		}
+	},
 	update: {
 		url: `${config.API_URL}/cmsdocarticle`,
 		name: "更新",

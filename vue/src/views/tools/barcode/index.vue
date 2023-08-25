@@ -17,8 +17,8 @@
 							<el-input-number v-model="formData.fontSize"></el-input-number>
 						</el-form-item>
 						<el-form-item label="条码">
-							<el-input v-model="formData.meta" placeholder="请输入条码，多个请以空格或换行分隔，扫描文字请以/分隔。如：12345678/这是测试文字" type="textarea"
-								rows="10"></el-input>
+							<el-input v-model="formData.meta" placeholder="请输入条码，多个请以空格或换行分隔，扫描文字请以/分隔。如：12345678/这是测试文字"
+								type="textarea" rows="10"></el-input>
 						</el-form-item>
 						<el-form-item>
 							<el-button @click="genBarcode()">生成</el-button>
@@ -134,5 +134,15 @@ export default {
 .barcode-list .barcode-text {
 	font-size: 20px;
 	margin-bottom: 20px;
+}
+
+.option_left {
+	float: left;
+}
+
+.option_right {
+	float: right;
+	color: var(--el-text-color-secondary);
+	font-size: 13px;
 }
 </style>

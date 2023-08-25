@@ -1,4 +1,5 @@
 using Com.Scm.Cms.Doc;
+using Com.Scm.Cms.Res.Cat.Dvo;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Result;
@@ -39,10 +40,24 @@ namespace FytSoa.Application.Cms.Doc
         /// <returns></returns>
         public async Task<List<CmsResCatDto>> GetListAsync(ScmSearchPageRequest param)
         {
-            var list = await _thisRepository.AsQueryable()
+            var list = await _thisRepository
+                .AsQueryable()
+                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Select<CmsResCatDto>()
                 .OrderByDescending(m => m.id)
                 .ToListAsync();
-            return list.Adapt<List<CmsResCatDto>>();
+            return list;
+        }
+
+        public async Task<List<OptionDvo>> GetOptionAsync(OptionRequest request)
+        {
+            var list = await _thisRepository
+                .AsQueryable()
+                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.id != request.id)
+                .Select(a => new OptionDvo { id = a.id, label = a.namec, value = a.id, parentId = a.pid })
+                .OrderByDescending(m => m.id)
+                .ToListAsync();
+            return list;
         }
 
         /// <summary>
@@ -55,6 +70,34 @@ namespace FytSoa.Application.Cms.Doc
         {
             var model = await _thisRepository.GetByIdAsync(id);
             return model.Adapt<CmsResCatDto>();
+        }
+
+        /// <summary>
+        /// 编辑读取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<CmsResCatDto> GetEditAsync(long id)
+        {
+            return await _thisRepository
+                .AsQueryable()
+                .Select<CmsResCatDto>()
+                .FirstAsync(m => m.id == id);
+        }
+
+        /// <summary>
+        /// 查看读取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<CmsResCatDto> GetViewAsync(long id)
+        {
+            return await _thisRepository
+                .AsQueryable()
+                .Select<CmsResCatDto>()
+                .FirstAsync(m => m.id == id);
         }
 
         /// <summary>
@@ -75,7 +118,7 @@ namespace FytSoa.Application.Cms.Doc
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> ModifyAsync(CmsResCatDto model)
+        public async Task<bool> UpdateAsync(CmsResCatDto model)
         {
             //model.ParentId = long.Parse(model.ParentIdList.Last());
             return await _thisRepository.UpdateAsync(model.Adapt<CmsResCatDao>());

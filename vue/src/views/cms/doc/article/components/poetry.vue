@@ -8,7 +8,8 @@
                             clearable></el-input>
                     </el-form-item>
                     <el-form-item label="分类" prop="cat_id">
-                        <sc-select v-model="formData.cat_id" placeholder="请输入分类" :data="types_list"></sc-select>
+                        <el-tree-select v-model="formData.cat_id" placeholder="请选择分类" :data="cat_list" collapse-tags
+                            check-strictly :style="{ width: '100%' }" />
                     </el-form-item>
                     <el-form-item label="国别" prop="nation_id">
                         <sc-select v-model="formData.nation_id" :data="nation_list" @change="getDynasty()"
@@ -56,11 +57,15 @@ export default {
             isSaveing: false,
             formData: this.def_data(),
             rules: {
-                codec: [
-                    { required: true, trigger: "blur", message: "编码不能为空" },
+                title: [
+                    { required: true, trigger: "blur", message: "标题不能为空" },
+                ],
+                content: [
+                    { required: true, trigger: "blur", message: "内容不能为空" },
                 ],
             },
             types_list: [this.$SCM.OPTION_ONE],
+            cat_list: [this.$SCM.OPTION_ONE],
             nation_list: [this.$SCM.OPTION_ONE],
             dynasty_list: [this.$SCM.OPTION_ONE],
             author_list: [this.$SCM.OPTION_ONE],
@@ -69,24 +74,31 @@ export default {
         };
     },
     mounted() {
+        this.init();
         this.getNation();
+        this.$SCM.list_dic(this.visible_list, 'article_visible', true);
     },
     methods: {
         def_data() {
             return {
                 id: '0',
                 types: '0',
-                title: '',
-                sub_title: '',
                 cat_id: '0',
+                title: '',
                 nation_id: '0',
                 dynasty_id: '0',
                 author_id: '0',
                 origin_id: '0',
-                style_id: '0',
-                origin_types: '0',
                 visible: '0',
             }
+        },
+        async init() {
+            var res = await this.$API.cmsrescat.option.get();
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.cat_list = this.$TOOL.changeTree(res.data);
         },
         async open(row) {
             if (!row || !row.id) {
@@ -104,7 +116,7 @@ export default {
                     this.isSaveing = true;
                     let res = null;
                     if (this.formData.id === '0') {
-                        res = await this.$API.cmsdocarticle.add.post(this.formData);
+                        res = await this.$API.cmsdocarticle.addpoetry.post(this.formData);
                     } else {
                         res = await this.$API.cmsdocarticle.update.put(this.formData);
                     }

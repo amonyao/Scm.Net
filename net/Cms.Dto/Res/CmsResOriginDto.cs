@@ -8,6 +8,8 @@ namespace Com.Scm.Cms.Doc
     /// </summary>
     public class CmsResOriginDto : ScmDataDto
     {
+        public const long SYS_ID = 1000000000000000001;
+
         /// <summary>
         /// 
         /// </summary>

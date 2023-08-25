@@ -1,21 +1,29 @@
 <template>
     <sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
-        <el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-            <el-form-item label="标题" prop="title">
-                <el-input v-model="formData.title" placeholder="请输入标题" :maxlength="256" show-word-limit
-                    clearable></el-input>
-            </el-form-item>
-            <el-form-item label="分类" prop="cat_id">
-                <el-input v-model="formData.cat_id" placeholder="请输入分类" :maxlength="20" show-word-limit
-                    clearable></el-input>
-            </el-form-item>
-            <el-form-item label="可见" prop="public_types">
-                <sc-select v-model="formData.public_types" placeholder="请输入可见"></sc-select>
-            </el-form-item>
-            <el-form-item label="内容" prop="content">
-                <el-input v-model="formData.content" type="textarea" placeholder="请输入内容" :maxlength="256" show-word-limit
-                    clearable :autosize="{ minRows: 6, maxRows: 10 }"></el-input>
-            </el-form-item>
+        <el-form ref="formRef" label-width="80px" :model="formData" :rules="rules">
+            <el-row>
+                <el-col :span="12">
+                    <el-form-item label="分类" prop="cat_id">
+                        <el-tree-select v-model="formData.cat_id" placeholder="请选择分类" :data="cat_list" collapse-tags
+                            check-strictly :style="{ width: '100%' }" />
+                    </el-form-item>
+                    <el-form-item label="可见" prop="visible">
+                        <sc-select v-model="formData.visible" :data="visible_list" placeholder="请输入可见"></sc-select>
+                    </el-form-item>
+                    <el-form-item label="批量添加" prop="batch">
+                        <el-switch v-model="formData.batch" />
+                    </el-form-item>
+                    <el-form-item label="换行数量" prop="blank" v-if="this.formData.batch">
+                        <el-input-number v-model="formData.blank"></el-input-number>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="内容" prop="content">
+                        <el-input v-model="formData.content" type="textarea" placeholder="请输入内容" :maxlength="256" :rows="16"
+                            show-word-limit clearable></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-row>
         </el-form>
 
         <template #footer>
@@ -36,44 +44,36 @@ export default {
             isSaveing: false,
             formData: this.def_data(),
             rules: {
-                codec: [
-                    { required: true, trigger: "blur", message: "编码不能为空" },
+                content: [
+                    { required: true, trigger: "blur", message: "内容不能为空" },
                 ],
             },
+            cat_list: [this.$SCM.OPTION_ONE],
+            visible_list: [this.$SCM.OPTION_ONE],
         };
     },
     mounted() {
+        this.init();
+        this.$SCM.list_dic(this.visible_list, 'article_visible', true);
     },
     methods: {
         def_data() {
             return {
-                id: 0,
-                key: '',
-                salt: '',
-                types: '',
-                title: '',
-                sub_title: '',
-                qty: '',
-                qty0: '',
-                fav_qty: '',
-                msg_qty: '',
-                cat_id: '',
-                nation_id: '',
-                dynasty_id: '',
-                author_id: '',
-                origin_id: '',
-                style_id: '',
-                image: '',
-                files: '',
-                back_color: '',
-                back_image: '',
-                text_color: '',
-                font_name: '',
-                font_size: '',
-                layout: '',
-                origin_types: '',
-                public_types: '',
+                id: '0',
+                types: '0',
+                cat_id: '0',
+                visible: '0',
+                batch: false,
+                blank: 1
             }
+        },
+        async init() {
+            var res = await this.$API.cmsrescat.option.get();
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.cat_list = this.$TOOL.changeTree(res.data);
         },
         async open(row) {
             if (!row || !row.id) {
@@ -90,15 +90,16 @@ export default {
                 if (valid) {
                     this.isSaveing = true;
                     let res = null;
-                    if (this.formData.id === 0) {
-                        res = await this.$API.cmsdocarticle.add.post(this.formData);
+                    if (this.formData.id === '0') {
+                        res = await this.$API.cmsdocarticle.addlitera.post(this.formData);
                     } else {
                         res = await this.$API.cmsdocarticle.update.put(this.formData);
                     }
                     this.isSaveing = false;
                     if (res.code == 200) {
                         this.$emit("complete");
-                        this.visible = false;
+                        this.formData.content = '';
+                        this.visible = this.formData.batch;
                         this.$message.success("保存成功");
                     } else {
                         this.$alert(res.message, "提示", { type: "error" });

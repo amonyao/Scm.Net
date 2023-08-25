@@ -1,4 +1,5 @@
 using Com.Scm.Cms.Doc.Article.Dvo;
+using Com.Scm.Cms.Res;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -9,6 +10,7 @@ using Com.Scm.Utils;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Com.Scm.Cms.Doc
 {
@@ -122,8 +124,79 @@ namespace Com.Scm.Cms.Doc
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(CmsDocArticleDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<CmsDocArticleDao>());
+        public async Task<bool> AddAsync(CmsDocArticleDto model)
+        {
+            return await _thisRepository.InsertAsync(model.Adapt<CmsDocArticleDao>());
+        }
+
+        /// <summary>
+        /// 新增诗词
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<int> AddPoetryAsync(CmsDocPoetryDto model)
+        {
+            var dao = model.Adapt<CmsDocArticleDao>();
+            dao.types = Enums.ArticleTypesEnum.Poetry;
+            dao.summary = model.content;
+
+            return await _thisRepository.InsertAsync(dao) ? 1 : 0;
+        }
+
+        /// <summary>
+        /// 新增网文
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<int> AddLiteraAsync(CmsDocLiteraDto model)
+        {
+            if (model == null)
+            {
+                return 0;
+            }
+
+            var qty = 0;
+            if (model.batch)
+            {
+                if (model.blank < 1)
+                {
+                    model.blank = 1;
+                }
+
+                var content = model.content.Replace("\r", "");
+                var array = new Regex(@"\n{" + model.blank + ",}").Split(content);
+                foreach (var item in array)
+                {
+                    qty += await CreateLiteraDaoAsync(model, item);
+                }
+            }
+            else
+            {
+                qty += await CreateLiteraDaoAsync(model, model.content);
+            }
+            return qty;
+        }
+
+        private async Task<int> CreateLiteraDaoAsync(CmsDocLiteraDto dto, string content)
+        {
+            var dao = new CmsDocArticleDao();
+            dao.types = Enums.ArticleTypesEnum.Litera;
+            dao.cat_id = dto.cat_id;
+            dao.nation_id = CmsResNationDto.SYS_ID;
+            dao.dynasty_id = CmsResDynastyDto.SYS_ID;
+            dao.author_id = CmsResAuthorDto.SYS_ID;
+            dao.origin_id = CmsResOriginDto.SYS_ID;
+            dao.visible = dto.visible;
+            dao.title = TextUtils.Left(content, 128);
+            dao.summary = content;
+
+            if (await _thisRepository.InsertAsync(dao))
+            {
+                return 1;
+            }
+
+            return 0;
+        }
 
         /// <summary>
         /// 更新

@@ -8,6 +8,8 @@ namespace Com.Scm.Cms.Res
     /// </summary>
     public class CmsResAuthorDto : ScmDataDto
     {
+        public const long SYS_ID = 1000000000000000001;
+
         /// <summary>
         /// 国别
         /// </summary>
