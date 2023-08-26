@@ -84,7 +84,7 @@
 6. 数据库配置：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
 
 ## 演示地址  
-【登录地址】[点击登录](http://oms.c-scm.cn)  
+【登录地址】[点击登录](http://www.c-scm.net)  
 【管理账号】
 用户：Admin@demo
 密码：123654  
