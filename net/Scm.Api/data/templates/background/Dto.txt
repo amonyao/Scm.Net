@@ -8,7 +8,7 @@ namespace Com.Scm.{NameSpace}
 	/// <summary>
 	/// {TableNameDescribe}
 	/// </summary>
-	public class {TableName}Dto : BaseDto
+	public class {TableName}Dto : ScmDto
 	{
 {AttributeList}
 	}

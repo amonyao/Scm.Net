@@ -132,4 +132,8 @@
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="data\generator\" />
+  </ItemGroup>
+
 </Project>

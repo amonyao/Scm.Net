@@ -25,14 +25,14 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<PageResult<{TableName}Dto>> GetPagesAsync(ScmSearchPageRequest request)
+    public async Task<PageResult<{TableName}Dvo>> GetPagesAsync(ScmSearchPageRequest request)
     {
         var result = await _thisRepository.AsQueryable()
             .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
             .WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
             .WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
             .OrderBy(m => m.id)
-            .Select<{TableName}Dto>()
+            .Select<{TableName}Dvo>()
             .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -44,20 +44,20 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<List<{TableName}Dto>> GetListAsync(ScmSearchRequest request)
+    public async Task<List<{TableName}Dvo>> GetListAsync(ScmSearchRequest request)
     {
         var result = await _thisRepository.AsQueryable()
             .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
             .WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
             .OrderBy(m => m.id)
-            .Select<{TableName}Dto>()
+            .Select<{TableName}Dvo>()
             .ToListAsync();
 
         Prepare(result);
         return result;
     }
 
-    private void Prepare(List<NationDto> list)
+    private void Prepare(List<{TableName}Dvo> list)
     {
         foreach (var item in list)
         {
@@ -72,10 +72,10 @@ public class {TableName}Service : ApiService
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<{TableName}Dto> GetAsync(long id)
+    public async Task<{TableName}Dvo> GetAsync(long id)
     {
         var model = await _thisRepository.GetByIdAsync(id);
-        return model.Adapt<{TableName}Dto>();
+        return model.Adapt<{TableName}Dvo>();
     }
 
     /// <summary>
@@ -84,11 +84,11 @@ public class {TableName}Service : ApiService
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<{TableName}Dto> GetEditAsync(long id)
+    public async Task<{TableName}Dvo> GetEditAsync(long id)
     {
         return await _thisRepository
             .AsQueryable()
-            .Select<{TableName}Dto>()
+            .Select<{TableName}Dvo>()
             .FirstAsync(m => m.id == id);
     }
 
@@ -98,11 +98,11 @@ public class {TableName}Service : ApiService
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<{TableName}Dto> GetViewAsync(long id)
+    public async Task<{TableName}Dvo> GetViewAsync(long id)
     {
         return await _thisRepository
             .AsQueryable()
-            .Select<{TableName}Dto>()
+            .Select<{TableName}Dvo>()
             .FirstAsync(m => m.id == id);
     }
 

@@ -150,7 +150,7 @@ namespace Com.Scm.Cms.Doc.Notes
 
         private string GetFile(long id)
         {
-            var path = _EnvConfig.GetRootPath("articles");
+            var path = _EnvConfig.GetDataPath("articles");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

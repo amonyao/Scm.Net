@@ -28,7 +28,7 @@
                         <div class="tit"><input v-model="formData.title" placeholder="请输入标题……" @change="changeTitle()" />
                         </div>
                         <Editor ref="editor" v-model="formData.content" :init="editor_config" class="doc-cnt"
-                            id="tinydemo-doc" />
+                            id="tinydemo-doc" api-key="jh10jljrhxrbvc2sbwx9maq9x1y1dy5yatkmh2tnv6gcd9gp" />
                     </div>
                 </el-main>
             </el-container>

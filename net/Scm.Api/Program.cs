@@ -75,6 +75,7 @@ namespace Com.Scm.Api
 
             // ´úÂëÉú³É
             var genConfig = AppUtils.GetConfig<GeneratorConfig>(GeneratorConfig.NAME);
+            genConfig.Prepare(envConfig);
             builder.Services.GeneratorSetup(genConfig);
 
             // Quartz
@@ -103,12 +104,12 @@ namespace Com.Scm.Api
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            if (!string.IsNullOrEmpty(envConfig.RootUri))
+            if (!string.IsNullOrEmpty(envConfig.DataUri))
             {
                 app.UseFileServer(new FileServerOptions
                 {
-                    FileProvider = new PhysicalFileProvider(envConfig.RootDir),
-                    RequestPath = envConfig.RootUri,
+                    FileProvider = new PhysicalFileProvider(envConfig.DataDir),
+                    RequestPath = envConfig.DataUri,
                 });
             }
 

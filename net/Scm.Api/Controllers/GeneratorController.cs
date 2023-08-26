@@ -51,7 +51,7 @@ namespace Com.Scm.Api.Controllers
                 var path = "/" + _generatorService.FileName.Replace(@"\", "/");
                 return File(path, "application/zip", "code.zip");
             }
-            return BadRequest("文件生成异常");
+            return BadRequest(_generatorService.Message);
         }
     }
 }

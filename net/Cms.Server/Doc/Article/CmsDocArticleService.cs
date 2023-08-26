@@ -256,7 +256,7 @@ namespace Com.Scm.Cms.Doc
 
         private string GetFile(long id)
         {
-            var path = _EnvConfig.GetRootPath("articles");
+            var path = _EnvConfig.GetDataPath("articles");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -337,6 +337,12 @@ namespace Com.Scm.Cms.Doc
             #endregion
 
             return response;
+        }
+
+        public async Task<string> UpgradeAsync()
+        {
+
+            return "";
         }
     }
 }
