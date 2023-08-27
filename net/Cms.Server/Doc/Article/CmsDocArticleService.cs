@@ -375,14 +375,14 @@ namespace Com.Scm.Cms.Doc
             }
             else
             {
-                var pair = await dailyRespository.AsQueryable()
+                var pairDao = await dailyRespository.AsQueryable()
                       .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                       .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
                       .FirstAsync();
                 var id = CmsDocArticleDto.SYS_ID;
-                if (pair != null)
+                if (pairDao != null)
                 {
-                    id = new Random().NextInt64(pair.min_id, pair.max_id);
+                    id = new Random().NextInt64(pairDao.min_id, pairDao.max_id);
                 }
 
                 articleDao = await _thisRepository.AsQueryable()
