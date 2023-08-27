@@ -10,6 +10,7 @@ namespace Com.Scm.Cms.Doc
     public class CmsDocArticleDto : ScmDataDto
     {
         public const long SYS_ID = 1000000000000000001;
+        public const int SUMMARY_SIZE = 1024;
 
         /// <summary>
         /// 键

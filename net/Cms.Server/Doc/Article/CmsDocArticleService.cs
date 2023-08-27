@@ -1,16 +1,20 @@
 using Com.Scm.Cms.Doc.Article.Dvo;
+using Com.Scm.Cms.Log;
 using Com.Scm.Cms.Res;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Filter;
+using Com.Scm.Jwt;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 using System.Text.RegularExpressions;
 
 namespace Com.Scm.Cms.Doc
@@ -23,13 +27,16 @@ namespace Com.Scm.Cms.Doc
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly JwtContextHolder _jwtContextHolder;
 
         public CmsDocArticleService(SugarRepository<CmsDocArticleDao> thisRepository,
             SugarRepository<UserDao> userRepository,
+            JwtContextHolder jwtContextHolder,
             EnvConfig config)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _jwtContextHolder = jwtContextHolder;
             _EnvConfig = config;
         }
 
@@ -338,5 +345,74 @@ namespace Com.Scm.Cms.Doc
 
             return response;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<DailyResponse> GetDailyAsync(DailyRequest request)
+        {
+            var dates = request.dates;
+            if (string.IsNullOrWhiteSpace(dates))
+            {
+                dates = TimeUtils.FormatDate(DateTime.Now);
+            }
+
+            var userId = UserDto.SYS_ID;
+            var token = _jwtContextHolder.GetToken();
+            if (token != null)
+            {
+                userId = token.user_id;
+            }
+
+            var dailyRespository = _thisRepository.Change<CmsLogUserDailyArticleDao>();
+            var dailyDao = await dailyRespository.GetFirstAsync(a => a.dates == dates && a.user_id == userId && a.row_status == Scm.Enums.ScmStatusEnum.Enabled);
+            CmsDocArticleDao articleDao;
+
+            if (dailyDao != null)
+            {
+                articleDao = await _thisRepository.GetByIdAsync(dailyDao.article_id);
+            }
+            else
+            {
+                var pair = await dailyRespository.AsQueryable()
+                      .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                      .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
+                      .FirstAsync();
+                var id = CmsDocArticleDto.SYS_ID;
+                if (pair != null)
+                {
+                    id = new Random().NextInt64(pair.min_id, pair.max_id);
+                }
+
+                articleDao = await _thisRepository.AsQueryable()
+                   .Where(a => a.id >= id && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                   .FirstAsync();
+
+                dailyDao = new CmsLogUserDailyArticleDao();
+                dailyDao.dates = dates;
+                dailyDao.user_id = userId;
+                dailyDao.article_id = articleDao.id;
+                await dailyRespository.InsertAsync(dailyDao);
+            }
+
+            var articleDvo = articleDao.Adapt<CmsDocArticleDvo>();
+            articleDvo.content = articleDvo.summary;
+            if (articleDao.files > 0)
+            {
+                articleDvo.content = CmsUtils.ReadFile(_EnvConfig.GetDataPath("articles"), articleDao.id);
+            }
+
+            var dailyDvo = new DailyResponse();
+            dailyDvo.dates = dates;
+            dailyDvo.article = articleDvo;
+
+            return dailyDvo;
+        }
+    }
+    public class DbIdPair
+    {
+        public long min_id { get; set; }
+        public long max_id { get; set; }
     }
 }

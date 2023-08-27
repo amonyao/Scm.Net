@@ -10,8 +10,8 @@
                 </div>
             </div>
             <div class="card_foot" :style="footStyle"></div>
-            <div id="app_info" :style="appStyle"></div>
-            <div id="cal_info" :style="calStyle"></div>
+            <div id="app_info" class="app_info" :style="appStyle"></div>
+            <div id="cal_info" class="cal_info" :style="calStyle"></div>
         </el-card>
     </div>
 </template>
@@ -280,10 +280,11 @@ export default {
 <style scoped>
 .page {
     height: 100%;
+    padding: 20px;
 }
 
 .card {
-    width: 600px;
+    width: 640px;
     margin: 0 auto;
 }
 

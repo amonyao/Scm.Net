@@ -193,15 +193,23 @@ namespace Com.Scm.Cms.Doc.Litera
             dao.author_id = CmsResAuthorDto.SYS_ID;
             dao.origin_id = CmsResOriginDto.SYS_ID;
             dao.visible = dto.visible;
-            dao.title = GetTitle(dto.content);
-            dao.summary = content;
+            dao.title = GetTitle(content);
 
-            if (await _thisRepository.InsertAsync(dao))
+            dao.files = content.Length > CmsDocArticleDto.SUMMARY_SIZE ? 1 : 0;
+            dao.summary = TextUtils.Left(content, CmsDocArticleDto.SUMMARY_SIZE);
+
+            var result = await _thisRepository.InsertAsync(dao);
+            if (!result)
             {
-                return 1;
+                return 0;
             }
 
-            return 0;
+            if (dao.files > 0)
+            {
+                CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
+            }
+
+            return 1;
         }
 
         /// <summary>
@@ -219,9 +227,17 @@ namespace Com.Scm.Cms.Doc.Litera
 
             dao = CommonUtils.Adapt(model, dao);
             dao.title = GetTitle(model.content);
-            dao.summary = model.content;
+
+            var content = model.content;
+            dao.files = content.Length > CmsDocArticleDto.SUMMARY_SIZE ? 1 : 0;
+            dao.summary = TextUtils.Left(content, CmsDocArticleDto.SUMMARY_SIZE);
 
             await _thisRepository.UpdateAsync(dao);
+
+            if (dao.files > 0)
+            {
+                CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
+            }
         }
 
         /// <summary>

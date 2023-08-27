@@ -1,8 +1,8 @@
 ﻿using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Doc.Daily.Dvo
+namespace Com.Scm.Cms.Doc.Article.Dvo
 {
-    public class DailyArticleDvo : ScmDataDvo
+    public class DailyResponse : ScmResponse
     {
         public string dates { get; set; }
 

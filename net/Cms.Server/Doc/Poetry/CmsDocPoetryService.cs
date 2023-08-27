@@ -144,9 +144,23 @@ namespace Com.Scm.Cms.Doc.Poetry
         {
             var dao = model.Adapt<CmsDocArticleDao>();
             dao.types = Enums.ArticleTypesEnum.Poetry;
-            dao.summary = model.content;
 
-            return await _thisRepository.InsertAsync(dao) ? 1 : 0;
+            var content = model.content;
+            dao.files = content.Length > CmsDocArticleDto.SUMMARY_SIZE ? 1 : 0;
+            dao.summary = TextUtils.Left(content, CmsDocArticleDto.SUMMARY_SIZE);
+
+            var result = await _thisRepository.InsertAsync(dao);
+            if (!result)
+            {
+                return 0;
+            }
+
+            if (dao.files > 0)
+            {
+                CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
+            }
+
+            return 1;
         }
 
         /// <summary>
@@ -163,9 +177,17 @@ namespace Com.Scm.Cms.Doc.Poetry
             }
 
             dao = CommonUtils.Adapt(model, dao);
-            dao.summary = model.content;
+
+            var content = model.content;
+            dao.files = content.Length > CmsDocArticleDto.SUMMARY_SIZE ? 1 : 0;
+            dao.summary = TextUtils.Left(content, CmsDocArticleDto.SUMMARY_SIZE);
 
             await _thisRepository.UpdateAsync(dao);
+
+            if (dao.files > 0)
+            {
+                CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
+            }
         }
 
         /// <summary>
