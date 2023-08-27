@@ -350,6 +350,7 @@ namespace Com.Scm.Cms.Doc
         /// 
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public async Task<DailyResponse> GetDailyAsync(DailyRequest request)
         {
             var dates = request.dates;
@@ -363,15 +364,24 @@ namespace Com.Scm.Cms.Doc
             if (token != null)
             {
                 userId = token.user_id;
+                if (IsValidId(userId))
+                {
+                    userId = UserDto.SYS_ID;
+                }
             }
 
             var dailyRespository = _thisRepository.Change<CmsLogUserDailyArticleDao>();
             var dailyDao = await dailyRespository.GetFirstAsync(a => a.dates == dates && a.user_id == userId && a.row_status == Scm.Enums.ScmStatusEnum.Enabled);
             CmsDocArticleDao articleDao;
 
+            var articleId = CmsDocArticleDto.SYS_ID;
             if (dailyDao != null)
             {
-                articleDao = await _thisRepository.GetByIdAsync(dailyDao.article_id);
+                articleId = dailyDao.article_id;
+                articleDao = await _thisRepository.AsQueryable()
+                    .ClearFilter()
+                    .Where(a => a.id == articleId && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                    .FirstAsync();
                 if (articleDao == null)
                 {
                     articleDao = new CmsDocArticleDao();
@@ -383,27 +393,26 @@ namespace Com.Scm.Cms.Doc
                       .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                       .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
                       .FirstAsync();
-                var id = CmsDocArticleDto.SYS_ID;
                 if (pairDao != null)
                 {
-                    id = new Random().NextInt64(pairDao.min_id, pairDao.max_id);
+                    articleId = new Random().NextInt64(pairDao.min_id, pairDao.max_id);
                 }
 
                 articleDao = await _thisRepository.AsQueryable()
                     .ClearFilter()
-                    .Where(a => a.id >= id && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                    .Where(a => a.id >= articleId && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                     .FirstAsync();
 
                 if (articleDao == null)
                 {
                     articleDao = new CmsDocArticleDao();
-                    articleDao.id = id;
+                    articleDao.id = CmsDocArticleDto.SYS_ID;
                 }
 
                 dailyDao = new CmsLogUserDailyArticleDao();
                 dailyDao.dates = dates;
                 dailyDao.user_id = userId;
-                dailyDao.article_id = id;
+                dailyDao.article_id = articleDao.id;
                 await dailyRespository.InsertAsync(dailyDao);
             }
 
