@@ -33,7 +33,7 @@ namespace Com.Scm.Cms.Doc.Litera
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<CmsDocArticleDto>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<CmsDocArticleDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.types == Enums.ArticleTypesEnum.Litera)
@@ -41,7 +41,7 @@ namespace Com.Scm.Cms.Doc.Litera
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<CmsDocArticleDto>()
+                .Select<CmsDocArticleDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -53,21 +53,21 @@ namespace Com.Scm.Cms.Doc.Litera
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<CmsDocArticleDto>> GetListAsync(ListRequest request)
+        public async Task<List<CmsDocArticleDvo>> GetListAsync(ListRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
-                .Select(a => new CmsDocArticleDto { id = a.id, key = a.key, salt = a.salt, title = a.title, create_time = a.create_time, update_time = a.update_time })
+                .Select(a => new CmsDocArticleDvo { id = a.id, key = a.key, title = a.title, create_time = a.create_time, update_time = a.update_time })
                 .ToListAsync();
 
             //Prepare(result);
             return result;
         }
 
-        private void Prepare(List<CmsDocArticleDto> list)
+        private void Prepare(List<CmsDocArticleDvo> list)
         {
             foreach (var item in list)
             {
@@ -106,11 +106,11 @@ namespace Com.Scm.Cms.Doc.Litera
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<CmsDocArticleDto> GetEditAsync(long id)
+        public async Task<CmsDocArticleDvo> GetEditAsync(long id)
         {
             var dto = await _thisRepository
                 .AsQueryable()
-                .Select<CmsDocArticleDto>()
+                .Select<CmsDocArticleDvo>()
                 .FirstAsync(m => m.id == id && m.types == Enums.ArticleTypesEnum.Litera);
 
             dto.content = dto.summary;
@@ -124,14 +124,27 @@ namespace Com.Scm.Cms.Doc.Litera
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<CmsDocArticleDto> GetViewAsync(long id)
+        public async Task<CmsDocArticleDvo> GetViewAsync(long id)
         {
             var dto = await _thisRepository
                 .AsQueryable()
-                .Select<CmsDocArticleDto>()
+                .Select<CmsDocArticleDvo>()
                 .FirstAsync(m => m.id == id && m.types == Enums.ArticleTypesEnum.Litera);
 
+            if (dto == null)
+            {
+                dto = new CmsDocArticleDvo();
+            }
             dto.content = dto.summary;
+            if (IsValidId(dto.style_id))
+            {
+                var styleDao = await _thisRepository.Change<CmsResStyleDao>()
+                    .GetByIdAsync(dto.style_id);
+                if (styleDao != null)
+                {
+                    dto.style = styleDao.style;
+                }
+            }
 
             return dto;
         }

@@ -64,7 +64,7 @@ namespace Com.Scm.Cms.Doc
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
-                .Select(a => new CmsDocArticleDto { id = a.id, key = a.key, salt = a.salt, title = a.title, create_time = a.create_time, update_time = a.update_time })
+                .Select(a => new CmsDocArticleDto { id = a.id, key = a.key, title = a.title, create_time = a.create_time, update_time = a.update_time })
                 .ToListAsync();
 
             //Prepare(result);
@@ -337,12 +337,6 @@ namespace Com.Scm.Cms.Doc
             #endregion
 
             return response;
-        }
-
-        public async Task<string> UpgradeAsync()
-        {
-
-            return "";
         }
     }
 }

@@ -16,12 +16,6 @@ namespace Com.Scm.Cms.Doc
         public string key { get; set; }
 
         /// <summary>
-        /// 盐
-        /// </summary>
-        [Required]
-        public char salt { get; set; }
-
-        /// <summary>
         /// 类型
         /// </summary>
         [Required]

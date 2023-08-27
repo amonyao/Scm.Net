@@ -1,60 +1,66 @@
-﻿internal class Program
-{
-    private static void Main(string[] args)
-    {
-        var dto1 = new ChildDto();
-        dto1.id = 1;
-        dto1.name = "name1";
-        dto1.time1 = DateTime.Now;
-        dto1.time2 = DateTime.Now;
+﻿using Com.Scm.Cjg;
+using Com.Scm.Cms.Doc;
+using Com.Scm.Utils;
+using SqlSugar;
 
-        var dto2 = new ChildDto();
-        dto2.id = 2;
-        DtoUtils.Adapt(dto1, dto2);
-        Console.WriteLine(dto2.ToString());
+internal class Program
+{
+    public static void Main(string[] args)
+    {
+        var config = new ConnectionConfig();
+        config.ConnectionString = "server=127.0.0.1;database=scm;uid=root;pwd=Scm.1234;charset='utf8';SslMode=None;";
+        config.DbType = DbType.MySql;
+        config.InitKeyType = InitKeyType.Attribute;
+
+        var sqlClient = new SqlSugar.SqlSugarClient(config);
+        while (true)
+        {
+            var qty = DoUpgrade(sqlClient);
+            if (qty < 1)
+            {
+                break;
+            }
+        }
+
+        Console.WriteLine("升级完成！");
     }
-}
 
-public class BaseDto
-{
-    public long id { get; set; }
-
-    public DateTime time1 { get; set; }
-}
-
-public class ChildDto : BaseDto
-{
-    public string name { get; set; }
-
-    public DateTime time2 { get; set; }
-}
-
-public class DtoUtils
-{
-    public static void Adapt<T>(object src, T dst)
+    public static int DoUpgrade(SqlSugarClient client)
     {
-        if (dst == null)
-        {
-            return;
-        }
+        var list = client.Queryable<CjgDocArticleSectionDao>()
+             .Where(a => a.row_status == 1)
+             .Take(100)
+             .ToList();
+        Console.WriteLine("读取数量：" + list.Count);
 
-        var dstType = dst.GetType();
-        var props = dstType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.DeclaredOnly);
-        if (props == null)
+        var qty = list.Count;
+        foreach (var item in list)
         {
-            return;
-        }
-
-        var srcType = src.GetType();
-        foreach (var prop in props)
-        {
-            var srcProp = srcType.GetProperty(prop.Name);
-            if (srcProp == null)
+            var dao = client.Queryable<CmsDocArticleDao>().First(a => a.id == item.article_id);
+            if (dao == null)
             {
                 continue;
             }
 
-            prop.SetValue(dst, srcProp.GetValue(src));
+            var content = item.content;
+            dao.summary = TextUtils.Left(content, 1024);
+            client.Updateable(dao).ExecuteCommand();
+
+            if (content.Length > 1024)
+            {
+                SaveFile(dao.id + ".txt", content);
+            }
+            item.row_status += 10;
+            client.Updateable(item).ExecuteCommand();
+        }
+        return qty;
+    }
+
+    public static void SaveFile(string filename, string content)
+    {
+        using (var writer = new StreamWriter(filename))
+        {
+            writer.Write(content);
         }
     }
 }

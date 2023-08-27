@@ -18,9 +18,10 @@ namespace Com.Scm.Cms.Doc
         private readonly SugarRepository<CmsResStyleDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public CmsResStyleService(SugarRepository<CmsResStyleDao> thisRepository)
+        public CmsResStyleService(SugarRepository<CmsResStyleDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
+            _userRepository = userRepository;
         }
 
         /// <summary>

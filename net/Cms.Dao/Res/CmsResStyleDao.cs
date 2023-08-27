@@ -1,4 +1,4 @@
-using Com.Scm.Dao.Unit;
+using Com.Scm.Dao;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ namespace Com.Scm.Cms.Doc
     /// 
     /// </summary>
     [SugarTable("cms_res_style")]
-    public class CmsResStyleDao : ScmUnitDataDao
+    public class CmsResStyleDao : ScmDataDao
     {
         /// <summary>
         /// 

@@ -21,7 +21,7 @@ namespace Com.Scm.Cms.Doc
         /// 盐
         /// </summary>
         [Required]
-        public char salt { get; set; }
+        public string salt { get; set; }
 
         /// <summary>
         /// 类型

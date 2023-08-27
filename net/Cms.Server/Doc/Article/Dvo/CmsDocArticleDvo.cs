@@ -14,11 +14,6 @@ namespace Com.Scm.Cms.Doc
         public string key { get; set; }
 
         /// <summary>
-        /// 盐
-        /// </summary>
-        public char salt { get; set; }
-
-        /// <summary>
         /// 类型
         /// </summary>
         public ArticleTypesEnum types { get; set; } = 0;
@@ -37,11 +32,6 @@ namespace Com.Scm.Cms.Doc
         /// 数量
         /// </summary>
         public int qty { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int qty0 { get; set; } = 0;
 
         /// <summary>
         /// 收藏数量
@@ -141,5 +131,9 @@ namespace Com.Scm.Cms.Doc
         /// 
         /// </summary>
         public string content { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string style { get; set; }
     }
 }
