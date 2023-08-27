@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-main>
-            <JsonEditorVue class="editor" v-model="data" @blur="validate" />
+            <JsonEditorVue class="editor" v-model="data" @blur="validate" language="cn" />
         </el-main>
     </el-container>
 </template>
