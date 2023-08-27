@@ -372,6 +372,10 @@ namespace Com.Scm.Cms.Doc
             if (dailyDao != null)
             {
                 articleDao = await _thisRepository.GetByIdAsync(dailyDao.article_id);
+                if (articleDao == null)
+                {
+                    articleDao = new CmsDocArticleDao();
+                }
             }
             else
             {
@@ -386,13 +390,20 @@ namespace Com.Scm.Cms.Doc
                 }
 
                 articleDao = await _thisRepository.AsQueryable()
-                   .Where(a => a.id >= id && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
-                   .FirstAsync();
+                    .ClearFilter()
+                    .Where(a => a.id >= id && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                    .FirstAsync();
+
+                if (articleDao == null)
+                {
+                    articleDao = new CmsDocArticleDao();
+                    articleDao.id = id;
+                }
 
                 dailyDao = new CmsLogUserDailyArticleDao();
                 dailyDao.dates = dates;
                 dailyDao.user_id = userId;
-                dailyDao.article_id = articleDao.id;
+                dailyDao.article_id = id;
                 await dailyRespository.InsertAsync(dailyDao);
             }
 

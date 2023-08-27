@@ -1,4 +1,4 @@
-using Com.Scm.Dao;
+using Com.Scm.Dao.Unit;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ namespace Com.Scm.Cms.Log
     /// 
     /// </summary>
     [SugarTable("cms_log_user_daily_article")]
-    public class CmsLogUserDailyArticleDao : ScmDataDao
+    public class CmsLogUserDailyArticleDao : ScmUnitDataDao
     {
         /// <summary>
         /// 
