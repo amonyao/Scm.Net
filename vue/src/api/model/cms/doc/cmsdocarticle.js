@@ -91,5 +91,12 @@ export default {
 		delete: async function (data) {
 			return await http.delete(this.url, data);
 		}
+	},
+	daily: {
+		url: `${config.API_URL}/cmsdocdaily`,
+		name: "每日推荐",
+		get: async function (data) {
+			return await http.get(this.url, data);
+		}
 	}
 }

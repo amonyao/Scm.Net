@@ -30,6 +30,9 @@ export default {
             calStyle: {},
             contentStyle: {},
             style: {},
+            param: {
+                datas: '',
+            }
         }
     },
     mounted() {
@@ -37,13 +40,18 @@ export default {
     },
     methods: {
         async next() {
-            var res = await this.$API.cmsdoclitera.view.get('1694902074548031488');
+            var res = await this.$API.cmsdocarticle.daily.get(this.param);
             if (!res || res.code != 200) {
                 return;
             }
 
-            this.article = res.data;
-            var style = res.data.style;
+            var data = res.data;
+            if (!data) {
+                return;
+            }
+            this.param.datas = data.datas;
+            this.article = data.article;
+            var style = this.article.style;
             if (style) {
                 this.style = eval('(' + style + ')');
             }

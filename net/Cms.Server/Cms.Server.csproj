@@ -34,6 +34,9 @@
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Dto">
+      <HintPath>..\Libs\Scm.Dto.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server">
       <HintPath>..\Libs\Scm.Server.dll</HintPath>
     </Reference>

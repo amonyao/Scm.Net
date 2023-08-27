@@ -9,6 +9,8 @@ namespace Com.Scm.Cms.Doc
     /// </summary>
     public class CmsDocArticleDto : ScmDataDto
     {
+        public const long SYS_ID = 1000000000000000001;
+
         /// <summary>
         /// 键
         /// </summary>
