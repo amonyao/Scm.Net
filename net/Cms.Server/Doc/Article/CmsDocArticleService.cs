@@ -389,10 +389,11 @@ namespace Com.Scm.Cms.Doc
             }
             else
             {
-                var pairDao = await dailyRespository.AsQueryable()
-                      .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
-                      .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
-                      .FirstAsync();
+                var pairDao = await _thisRepository.AsQueryable()
+                    .ClearFilter()
+                    .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                    .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
+                    .FirstAsync();
                 if (pairDao != null)
                 {
                     articleId = new Random().NextInt64(pairDao.min_id, pairDao.max_id);
@@ -426,8 +427,35 @@ namespace Com.Scm.Cms.Doc
             var dailyDvo = new DailyResponse();
             dailyDvo.dates = dates;
             dailyDvo.article = articleDvo;
+            articleDvo.style = await GetStyle(articleDao);
 
             return dailyDvo;
+        }
+
+        private async Task<string> GetStyle(CmsDocArticleDao articleDao)
+        {
+            var styleId = articleDao.style_id;
+            if (!IsValidId(styleId))
+            {
+                var catDao = await _thisRepository.Change<CmsResCatDao>()
+                    .AsQueryable()
+                    .ClearFilter()
+                    .FirstAsync(a => a.id == articleDao.cat_id);
+                if (catDao == null)
+                {
+                    return "";
+                }
+                styleId = catDao.style_id;
+            }
+
+            var styleDao = await _thisRepository.Change<CmsResStyleDao>()
+                .GetByIdAsync(styleId);
+            if (styleDao == null)
+            {
+                return "";
+            }
+
+            return styleDao.style;
         }
     }
     public class DbIdPair

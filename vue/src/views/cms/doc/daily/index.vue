@@ -1,17 +1,24 @@
 <template>
     <div class="page" :style="pageStyle">
         <el-card class="card" :style="cardStyle">
-            <div class="card_head" :style="headStyle">
-                {{ article.title }}
-            </div>
+            <div class="card_head" :style="headStyle" :class="{ hidden: !headStyle }"></div>
             <div class="card_body" :style="bodyStyle">
-                <div class="content" :style="contentStyle">
+                <div class="article_title" v-if="article.types != 20">
+                    {{ article.title }}
+                </div>
+                <div class="article_sub_title" v-if="article.sub_title">
+                    {{ article.sub_title }}
+                </div>
+                <div class="article_content" :style="contentStyle">
                     {{ article.content }}
                 </div>
+                <div class="article_origin" :class="{ hidden: true }">
+                    {{ article.origin }}
+                </div>
             </div>
-            <div class="card_foot" :style="footStyle"></div>
-            <div id="app_info" class="app_info" :style="appStyle"></div>
-            <div id="cal_info" class="cal_info" :style="calStyle"></div>
+            <div class="card_foot" :style="footStyle" :class="{ hidden: !footStyle }"></div>
+            <div id="app_info" class="app_info" :style="appStyle" :class="{ hidden: !appStyle }"></div>
+            <div id="cal_info" class="cal_info" :style="calStyle" :class="{ hidden: !calStyle }"></div>
         </el-card>
     </div>
 </template>
@@ -23,16 +30,17 @@ export default {
             article: {},
             pageStyle: {},
             cardStyle: {},
-            headStyle: {},
+            headStyle: null,
             bodyStyle: {},
-            footStyle: {},
-            appStyle: {},
-            calStyle: {},
+            footStyle: null,
+            appStyle: null,
+            calStyle: null,
             contentStyle: {},
             style: {},
             param: {
                 datas: '',
-            }
+            },
+            scale: 2
         }
     },
     mounted() {
@@ -62,6 +70,7 @@ export default {
                 return;
             }
 
+            //this.scale = style.scale || 1;
             this.parsePageStyle(style.page_style);
             this.parseCardStyle(style.card_style);
             this.parseHeadStyle(style.head_style);
@@ -198,7 +207,7 @@ export default {
                 obj.fontName = style.font_name;
             }
             if (style.font_size) {
-                obj.fontSize = style.font_size;
+                obj.fontSize = this.getSize(style.font_size);
             }
         },
         parseSize(obj, style) {
@@ -207,16 +216,16 @@ export default {
             }
 
             if (style.width) {
-                obj.width = style.width;
+                obj.width = this.getSize(style.width);
             }
             if (style.min_width) {
-                obj.minWidth = style.min_width;
+                obj.minWidth = this.getSize(style.min_width);
             }
             if (style.height) {
-                obj.height = style.height;
+                obj.height = this.getSize(style.height);
             }
             if (style.min_height) {
-                obj.minHeight = style.min_height;
+                obj.minHeight = this.getSize(style.min_height);
             }
         },
         parseBounds(obj, style) {
@@ -228,16 +237,16 @@ export default {
                 obj.position = style.position;
             }
             if (style.left) {
-                obj.left = style.left;
+                obj.left = this.getSize(style.left);
             }
             if (style.top) {
-                obj.top = style.top;
+                obj.top = this.getSize(style.top);
             }
             if (style.right) {
-                obj.right = style.right;
+                obj.right = this.getSize(style.right);
             }
             if (style.bottom) {
-                obj.bottom = style.bottom;
+                obj.bottom = this.getSize(style.bottom);
             }
         },
         parseMargin(obj, style) {
@@ -250,16 +259,16 @@ export default {
             }
             var margin = style.margin;
             if (margin.left) {
-                obj.marginLeft = margin.left;
+                obj.marginLeft = this.getSize(margin.left);
             }
             if (margin.top) {
-                obj.marginTop = margin.top;
+                obj.marginTop = this.getSize(margin.top);
             }
             if (margin.right) {
-                obj.marginRight = margin.right;
+                obj.marginRight = this.getSize(margin.right);
             }
             if (margin.bottom) {
-                obj.marginBottom = margin.bottom;
+                obj.marginBottom = this.getSize(margin.bottom);
             }
         },
         parseAlign(obj, style) {
@@ -273,42 +282,122 @@ export default {
             if (style.valign) {
                 obj.verticalAlign = style.valign;
             }
+        },
+        getSize(size) {
+            if (!size) {
+                return 0;
+            }
+
+            var reg = /\d+(\.\d+)?/
+            var arr = reg.exec(size);
+            var num = '0';
+            var unit = '';
+            if (arr.length > 1) {
+                num = arr[0];
+                unit = size.replace(num, '');
+            }
+
+            return num * this.scale + unit;
         }
     }
 }
 </script>
 <style scoped>
 .page {
-    height: 100%;
+    min-height: 100%;
     padding: 20px;
+    background-size: cover;
 }
 
 .card {
-    width: 640px;
+    color: #333;
+    width: 540px;
+    min-height: 600px;
+    margin: 0 auto;
+    position: relative;
+    font-family: '微软雅黑';
+    font-size: 14pt;
+    background-size: contain;
+}
+
+.card_head {}
+
+.card_body {
+    position: relative;
+    min-height: 400px;
+}
+
+.sections {}
+
+.article_title {
+    text-align: center;
+    font-size: 20pt;
+}
+
+.article_sub_title {
+    text-align: center;
+    font-size: 16pt;
+    color: #666;
+}
+
+.article_content {
+    /*flex 布局*/
+    display: flex;
+    /*实现垂直居中*/
+    align-items: center;
+    /*实现水平居中*/
+    justify-content: center;
+
+    text-align: justify;
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
 }
 
-.card_head {
-    display: none;
-}
-
-.card_body {
-    display: table;
-}
-
-.content {
-    display: table-cell;
+.article_origin {
+    text-align: right;
+    bottom: 0px;
+    color: #666;
 }
 
 .card_foot {
-    display: none;
+    position: absolute;
+    bottom: 0px;
 }
 
 .app_info {
-    position: relative;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    background-color: #989898;
 }
 
 .cal_info {
-    position: relative;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    bottom: 0;
+    right: 0;
+    background-color: #989898;
+}
+
+.flow {}
+
+.fixed {
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .card {
+        width: 100%;
+    }
 }
 </style>

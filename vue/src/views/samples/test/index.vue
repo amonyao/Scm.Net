@@ -4,15 +4,28 @@
             <sc-waterfall style="background-color: antiquewhite;" @showItem="showItem" v-slot="{ data }">
                 <img :data-src="data.src" :alt="data.names" :style="{ 'height': data._height + 'px' }">
             </sc-waterfall>
+            <waterfall :line-gap="200" :watch="items">
+                <!-- each component is wrapped by a waterfall slot -->
+                <waterfall-slot v-for="(item, index) in items" :width="item.width" :height="item.height" :order="index"
+                    :key="item.id">
+                    <!--
+                        your component
+                    -->
+                </waterfall-slot>
+            </waterfall>
         </el-main>
     </el-container>
 </template>
 <script>
 import scWaterfall from '@/components/scWaterfall'
+import Waterfall from '@/components/scWaterfall/waterfall.vue'
+import WaterfallSlot from '@/components/scWaterfall/waterfall-slot.vue'
 
 export default {
     components: {
         scWaterfall,
+        Waterfall,
+        WaterfallSlot
     },
     data() {
         return {
