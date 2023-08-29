@@ -57,7 +57,7 @@ export default {
                     table image media charmap emoticons hr pagebreak print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs | code',
                 fixed_toolbar_container: '.doc .toolbar',
                 custom_ui_selector: 'body',
-                placeholder: 'placeholder占位文字',
+                placeholder: '请输入您的内容',
                 //auto_focus: true,
                 toolbar_mode: 'floating',
                 toolbar_sticky: true,
@@ -118,8 +118,9 @@ export default {
                 return;
             }
 
-            this.formData = this.def_data();
-            this.init();
+            // this.formData = this.def_data();
+            // this.init();
+            this.$message.success("数据已保存！");
         },
         itemClick(item) {
             if (!item) {

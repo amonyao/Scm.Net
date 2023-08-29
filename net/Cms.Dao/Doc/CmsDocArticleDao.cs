@@ -166,5 +166,13 @@ namespace Com.Scm.Cms.Doc
         /// </summary>
         [Required, StringLength(1024)]
         public string summary { get; set; }
+
+        public override void PrepareCreate(long userId, long unitId = 0)
+        {
+            base.PrepareCreate(userId, unitId);
+
+            this.salt = new Random().Next(10000).ToString("d4");
+            this.key = this.id + this.salt;
+        }
     }
 }

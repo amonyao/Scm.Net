@@ -65,7 +65,7 @@ export default {
 		}
 	},
 	save: {
-		url: `${config.API_URL}/cmsdocnotes`,
+		url: `${config.API_URL}/cmsdocnotes/save`,
 		name: "保存",
 		post: async function (data) {
 			return await http.post(this.url, data);

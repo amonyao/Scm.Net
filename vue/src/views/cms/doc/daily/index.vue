@@ -1,6 +1,6 @@
 <template>
     <div class="page" :style="pageStyle">
-        <el-card class="card" :style="cardStyle">
+        <div class="card" :style="cardStyle">
             <div class="card_head" :style="headStyle" :class="{ hidden: !headStyle }"></div>
             <div class="card_body" :style="bodyStyle">
                 <div class="article_title" v-if="article.types != 20">
@@ -19,7 +19,7 @@
             <div class="card_foot" :style="footStyle" :class="{ hidden: !footStyle }"></div>
             <div id="app_info" class="app_info" :style="appStyle" :class="{ hidden: !appStyle }"></div>
             <div id="cal_info" class="cal_info" :style="calStyle" :class="{ hidden: !calStyle }"></div>
-        </el-card>
+        </div>
     </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
             param: {
                 datas: '',
             },
-            scale: 2
+            scale: this.$TOOL.isMobile() ? 1 : 2
         }
     },
     mounted() {
@@ -318,6 +318,11 @@ export default {
     font-family: '微软雅黑';
     font-size: 14pt;
     background-size: contain;
+    border-radius: 4px;
+    border: 1px solid #e4e7ed;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
 }
 
 .card_head {}

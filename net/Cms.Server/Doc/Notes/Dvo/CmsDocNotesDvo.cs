@@ -1,9 +1,8 @@
-﻿using Com.Scm.Dto;
-using System.ComponentModel.DataAnnotations;
+﻿using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Cms.Doc.Notes.Dvo
 {
-    public class CmsDocNotesDto : ScmDataDto
+    public class CmsDocNotesDvo : ScmDataDvo
     {
         /// <summary>
         /// 分类
@@ -18,7 +17,6 @@ namespace Com.Scm.Cms.Doc
         /// <summary>
         /// 文章内容
         /// </summary>
-        [Required]
         public string content { get; set; }
     }
 }

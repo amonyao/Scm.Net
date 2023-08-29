@@ -9,6 +9,11 @@ namespace Com.Scm.Cms.Doc
     public class CmsResCatDto : ScmDataDto
     {
         /// <summary>
+        /// 
+        /// </summary>
+        public const long SYS_ID = 1000000000000000001L;
+
+        /// <summary>
         /// 类目类型，同文章类型
         /// </summary>
         [Required]

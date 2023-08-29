@@ -1,4 +1,6 @@
 ﻿using Com.Scm.Cms.Doc.Article.Dvo;
+using Com.Scm.Cms.Doc.Notes.Dvo;
+using Com.Scm.Cms.Res;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -32,7 +34,7 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<CmsDocArticleDto>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<CmsDocNotesDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.types == Enums.ArticleTypesEnum.Notes)
@@ -40,7 +42,7 @@ namespace Com.Scm.Cms.Doc.Notes
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<CmsDocArticleDto>()
+                .Select<CmsDocNotesDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -52,21 +54,21 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<CmsDocArticleDto>> GetListAsync(ListRequest request)
+        public async Task<List<CmsDocNotesDvo>> GetListAsync(ListRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
-                .Select(a => new CmsDocArticleDto { id = a.id, key = a.key, title = a.title, create_time = a.create_time, update_time = a.update_time })
+                .Select<CmsDocNotesDvo>()
                 .ToListAsync();
 
             //Prepare(result);
             return result;
         }
 
-        private void Prepare(List<CmsDocArticleDto> list)
+        private void Prepare(List<CmsDocNotesDvo> list)
         {
             foreach (var item in list)
             {
@@ -143,9 +145,31 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(CmsDocArticleDto model)
+        public async Task<bool> AddAsync(CmsDocNotesDto model)
         {
-            return await _thisRepository.InsertAsync(model.Adapt<CmsDocArticleDao>());
+            var dao = model.Adapt<CmsDocArticleDao>();
+            if (IsValidId(dao.cat_id))
+            {
+                dao.cat_id = CmsResCatDto.SYS_ID;
+            }
+
+            dao.types = Enums.ArticleTypesEnum.Notes;
+            dao.nation_id = CmsResNationDto.SYS_ID;
+            dao.dynasty_id = CmsResDynastyDto.SYS_ID;
+            dao.author_id = CmsResAuthorDto.SYS_ID;
+            dao.origin_id = CmsResOriginDto.SYS_ID;
+            dao.style_id = CmsResStyleDto.SYS_ID;
+
+            var content = model.content;
+            dao.files = content.Length > CmsDocArticleDto.SUMMARY_SIZE ? 1 : 0;
+            dao.summary = TextUtils.Left(model.content, CmsDocArticleDto.SUMMARY_SIZE);
+
+            var qty = await _thisRepository.InsertAsync(dao);
+            if (dao.files > 0)
+            {
+                CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
+            }
+            return qty;
         }
 
         private string GetFile(long id)
@@ -202,7 +226,7 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(CmsDocArticleDto model)
+        public async Task UpdateAsync(CmsDocNotesDto model)
         {
             var dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)
@@ -211,7 +235,28 @@ namespace Com.Scm.Cms.Doc.Notes
             }
 
             dao = model.Adapt(dao);
+            if (!IsValidId(dao.cat_id))
+            {
+                dao.cat_id = CmsResCatDto.SYS_ID;
+            }
+
+            dao.types = Enums.ArticleTypesEnum.Notes;
+            dao.nation_id = CmsResNationDto.SYS_ID;
+            dao.dynasty_id = CmsResDynastyDto.SYS_ID;
+            dao.author_id = CmsResAuthorDto.SYS_ID;
+            dao.origin_id = CmsResOriginDto.SYS_ID;
+            dao.style_id = CmsResStyleDto.SYS_ID;
+
+            var content = model.content;
+            dao.files = content.Length > CmsDocArticleDto.SUMMARY_SIZE ? 1 : 0;
+            dao.summary = TextUtils.Left(model.content, CmsDocArticleDto.SUMMARY_SIZE);
+
             await _thisRepository.UpdateAsync(dao);
+
+            if (dao.files > 0)
+            {
+                CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
+            }
         }
 
         /// <summary>
