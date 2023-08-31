@@ -16,6 +16,7 @@ export default {
         return {
             apiObj: this.$API.cmsdocarticle.page,
             list: [],
+            imgWidth: 100,
             param: {
                 types_id: '0',
                 row_status: '1',
@@ -70,10 +71,16 @@ export default {
             return list;
         },
         preload(item) {
+            // 指定大小
+            if (item.height && item.width) {
+                this.calSize(item, item.width, item.height, this.imgWidth);
+                return;
+            }
+
             // 无图则把高度设置为0
             var src = item.src;
             if (!src) {
-                this.calSize(item, 0, 0, 0);
+                this.calSize(item, 0, 0, this.imgWidth);
                 return;
             }
 
@@ -114,6 +121,7 @@ export default {
                 tmp = Math.round(this.imgWidth * height / width);
             }
             item._dim = tmp;
+            console.log('size:' + def)
             // ++this.loadedCount;
             // // 当前图片都与处理完，则加载图片
             // if (this.apiData.length === this.loadedCount) {

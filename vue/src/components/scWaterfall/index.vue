@@ -12,7 +12,7 @@
                     'padding': imgGap + 'px'
                 }">
                 <slot name="item" :item="item" :index="index">
-                    <img :data-src="item.src" :alt="item.names" :style="{ 'height': item._dim + 'px', }">
+                    <img :data-src="item.src" :alt="item.names">
                     <div>
                         <label>这是说明文字</label>
                     </div>
@@ -192,13 +192,6 @@ export default {
                 }
 
                 if (index < this.loadedCount) {
-                    return;
-                }
-
-                // 指定大小
-                if (item.height && item.width) {
-                    item._dim = Math.round(this.imgWidth * item.height / item.width);
-                    this.calSize();
                     return;
                 }
 
