@@ -1,12 +1,10 @@
 <template>
-    <sc-waterfall></sc-waterfall>
+    adf
 </template>
 <script>
-import scWaterfall from '@/components/scWaterfall'
 
 export default {
     components: {
-        scWaterfall,
     },
     data() {
         return {

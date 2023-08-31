@@ -1,27 +1,17 @@
 <template>
     <div id="waterfall" ref="waterfall" @scroll="handleScroll">
-        <div class="waterfall-head">
-            <slot name="head"></slot>
-        </div>
-        <div class="waterfall-body" :style="{ 'width': bodyWidth }">
-            <div class="waterfall-item default-card-animation" v-for="(item, index) in objData" :key="getKey(item, index)"
-                ref="scWaterfallItem" :style="{
-                    'top': item.top + 'px',
-                    'left': item.left + 'px',
-                    'width': colWidth + 'px',
-                    'padding': imgGap + 'px'
-                }">
-                <slot name="item" :item="item" :index="index">
-                    <img :data-src="item.src" :alt="item.names" :style="{ 'height': item._dim + 'px', }">
-                    <div>
-                        <label>这是说明文字</label>
-                    </div>
-                </slot>
-            </div>
-        </div>
-        <div class="waterfall-foot" v-if="!hasMore">
-            <slot name="foot">
-                <div>没有更多数据了！</div>
+        <div class="waterfall-item default-card-animation" v-for="(item, index) in objData" :key="getKey(item, index)"
+            ref="scWaterfallItem" :style="{
+                'top': item.top + 'px',
+                'left': item.left + 'px',
+                'width': colWidth + 'px',
+                'padding': imgGap + 'px'
+            }">
+            <slot :item="item" :index="index">
+                <img :data-src="item.src" :alt="item.names" :style="{ 'height': item._dim + 'px', }">
+                <div>
+                    <label>这是说明文字</label>
+                </div>
             </slot>
         </div>
     </div>
@@ -30,24 +20,13 @@
 export default {
     props: {
         apiObj: { type: Object, default: () => { } },
-        data: { type: Array, default: () => [] },
+        list: { type: Array, default: () => [] },
         rowKey: { type: String, default: 'id', },//属性Key
+        imgSrc: { type: String, default: 'src', },//图片属性
         columnWidth: { type: Number, default: 300 },//列宽度
         columnCount: { type: Number, default: 0 },//列数量
         columnGap: { type: Number, default: 10 },//列间隙
-        direction: { type: Number, default: 1 },// 展示方向
-        align: { type: String, default: 'center' }// 对齐方式
-    },
-    watch: {
-        //监听从props里拿到值了
-        data() {
-            this.apiData = this.data;
-            console.log("child:" + this.apiData.length)
-            this.refresh();
-        },
-        apiObj() {
-            this.refresh();
-        },
+        direction: { type: Number, default: 1 }// 展示方向
     },
     data() {
         return {
@@ -61,7 +40,6 @@ export default {
             colWidth: 300,
             imgGap: 0,//图像间隙
             imgWidth: 0,
-            bodyWidth: '100%',
             reachBottomDistance: 20, // 滚动触底距离，触发加载新图片
             hasMore: true,// 是否还有更多数据
             isLoading: false,
@@ -70,13 +48,11 @@ export default {
             element: null,// 监控对象
             viewWidth: 0,
             viewHeight: 0,
-            leftPosition: 0,
-            footPosition: 0,
         }
     },
     mounted() {
-        // this.layout();
-        // this.load_img();
+        this.layout();
+        this.load_img();
         this.listen();
     },
     beforeDestroyed() {
@@ -98,11 +74,6 @@ export default {
             this.element = document.querySelector('#waterfall');
             // 监听元素
             this.observer.observe(this.element);
-        },
-        refresh() {
-            console.log('refresh')
-            this.layout();
-            this.load_img();
         },
         // 页面布局
         layout() {
@@ -132,7 +103,6 @@ export default {
             }
 
             this.imgWidth = this.colWidth - this.colGap * 2;
-            this.bodyWidth = ((this.colWidth + this.colGap) * this.colCount - this.colGap) + 'px';
 
             this.beginIndex = 0;
 
@@ -155,11 +125,9 @@ export default {
             });
         },
         async load_img() {
-            console.log("isloading:" + this.isLoading);
             if (this.isLoading) {
                 return;
             }
-            console.log("hasMore:" + this.hasMore);
             if (!this.hasMore) {
                 return;
             }
@@ -167,10 +135,15 @@ export default {
             this.isLoading = true;
             this.hasMore = false;
 
-            // if (this.data && this.data.length > 0) {
-            //     this.apiData = this.apiData.concat(this.data);
-            // }
-            console.log("load:" + this.apiData.length);
+            if (this.list && this.list.length > 0) {
+                this.apiData = this.apiData.concat(this.list);
+            }
+
+            // 测试数据
+            var testData = this.testData();
+            console.log('test:' + testData.length)
+            this.apiData = this.apiData.concat(testData);
+            this.hasMore = true;
 
             if (this.apiObj) {
                 var res = await this.apiObj.get();
@@ -182,6 +155,24 @@ export default {
 
             this.preLoad();
             this.isLoading = false;
+        },
+        testData() {
+            var imgArr = [{ 'src': 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', 'width': 595, 'height': 808 },
+            { 'src': 'https://fscdn.zto.com/fs8/M02/94/F3/wKhBD19OTuuAedCpAAIKGsFFPqc560.png', 'width': 595, 'height': 808 },
+            { 'src': 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', 'width': 188, 'height': 121 },
+            { 'src': 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', 'width': 1317, 'height': 845 },
+            { 'src': 'https://fscdn.zto.com/fs8/M02/94/F3/wKhBD19OTuuAedCpAAIKGsFFPqc560.png', 'width': 1349, 'height': 799 }];
+
+            var list = [];
+            for (let i = 0; i < 40; i++) {
+                var idx = Math.round(Math.random() * (imgArr.length - 1));
+                var img = imgArr[idx];
+                //var tmp = this.imgWidth * img.height / img.width;
+                img.height = (Math.random() * img.height) + 100;
+                list.push(img);
+            }
+
+            return list;
         },
         // 预加载 设置并保存图片宽高
         preLoad() {
@@ -197,17 +188,41 @@ export default {
 
                 // 指定大小
                 if (item.height && item.width) {
-                    item._dim = Math.round(this.imgWidth * item.height / item.width);
-                    this.calSize();
+                    this.calSize(this.apiData[index], item.width, item.height, this.imgWidth);
                     return;
                 }
 
-                this.$emit('preload', item);
-                this.calSize();
+                // 无图则把高度设置为0
+                var src = this.getSrc(item);
+                if (!src) {
+                    this.calSize(this.apiData[index], 0, 0, 0);
+                    return;
+                }
+
+                let img = new Image();
+                img.src = src;
+                img.onload = img.onerror = (e) => {
+                    var width = 0;
+                    var height = 0;
+                    if (e.type === "error") {
+                        this.apiData[index]._error = true;
+                    }
+                    else if (e.type === 'load') {
+                        width = img.width;
+                        height = img.height;
+                    }
+
+                    this.calSize(this.apiData[index], width, height, this.imgWidth);
+                }
             })
         },
         // 计算图片大小
-        calSize() {
+        calSize(item, width, height, def) {
+            var tmp = def;
+            if (width && height) {
+                tmp = Math.round(this.imgWidth * height / width);
+            }
+            item._dim = tmp;
             ++this.loadedCount;
             // 当前图片都与处理完，则加载图片
             if (this.apiData.length === this.loadedCount) {
@@ -256,7 +271,7 @@ export default {
                 divItem.style.left = left + "px";
                 // 当前图片在窗口内，则加载，这是用于后面的图片懒加载。viewHeight 为窗口高度
                 if (top < this.viewHeight) {
-                    this.$emit('showContent', divItem, this.objData[i]);
+                    this.showContent(divItem, this.objData[i]);
                 }
             }
             // 排列完之后，之后新增图片从这个索引开始预加载图片和排列，之前排列的图片无需在处理
@@ -264,6 +279,9 @@ export default {
         },
         getKey(item, index) {
             return item[this.rowKey] || index;
+        },
+        getSrc(item) {
+            return item[this.imgSrc] || item.src;
         },
         getColumn() {
             var min = this.colDim[0];
@@ -299,9 +317,23 @@ export default {
                 top = Number.parseFloat(top.slice(0, top.length - 2));
                 // 图片已到达可视范围，则加载
                 if (scrollTop + this.viewHeight > top) {
-                    this.$emit('showContent', imgBoxEl, null);
+                    this.showContent(imgBoxEl, null);
                 }
             })
+        },
+        // 明细展示
+        showContent(item) {
+            let img = item.children[0];
+            if (img) {
+                if (img.loaded) {
+                    return;
+                }
+
+                img.src = img.getAttribute("data-src");
+                img.style.opacity = 1;
+                img.style.transform = "scale(1)";
+                img.loaded = true;
+            }
         },
     }
 }
@@ -324,10 +356,6 @@ export default {
         }
     }
 
-    .waterfall-body {
-        background-color: rosybrown;
-    }
-
     .waterfall-item {
         position: absolute;
         border-radius: 10px;
@@ -344,12 +372,6 @@ export default {
             transition: all 0.6s;
             transition-delay: 0.1s;
         }
-    }
-
-    .waterfall-foot {
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
     }
 
     .default-card-animation {

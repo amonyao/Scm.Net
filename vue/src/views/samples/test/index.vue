@@ -18,14 +18,10 @@
 </template>
 <script>
 import scWaterfall from '@/components/scWaterfall'
-import Waterfall from '@/components/scWaterfall/waterfall.vue'
-import WaterfallSlot from '@/components/scWaterfall/waterfall-slot.vue'
 
 export default {
     components: {
         scWaterfall,
-        Waterfall,
-        WaterfallSlot
     },
     data() {
         return {
