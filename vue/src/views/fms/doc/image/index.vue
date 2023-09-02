@@ -96,17 +96,11 @@ export default {
 
 			let img = new Image();
 			img.src = src;
-			img.onload = img.onerror = (e) => {
-				var width = 0;
-				var height = 0;
-				if (e.type === "error") {
-					item._error = true;
-				} else if (e.type === "load") {
-					width = img.width;
-					height = img.height;
-				}
-
-				this.calSize(item, width, height, this.imgWidth);
+			img.onerror = () => {
+				item._error = true;
+			};
+			img.onload = () => {
+				this.calSize(item, img.width, img.height, this.imgWidth);
 			};
 		},
 		// 明细展示
@@ -130,11 +124,6 @@ export default {
 				tmp = Math.round((this.imgWidth * height) / width);
 			}
 			item._dim = tmp;
-			// ++this.loadedCount;
-			// // 当前图片都与处理完，则加载图片
-			// if (this.apiData.length === this.loadedCount) {
-			//     this.preloaded();
-			// }
 		},
 	},
 };
