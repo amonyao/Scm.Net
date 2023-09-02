@@ -435,7 +435,7 @@ namespace Com.Scm.Cms.Doc
         private async Task<string> GetStyle(CmsDocArticleDao articleDao)
         {
             var styleId = articleDao.style_id;
-            if (!IsValidId(styleId))
+            if (!IsNormalId(styleId))
             {
                 var catDao = await _thisRepository.Change<CmsResCatDao>()
                     .AsQueryable()
