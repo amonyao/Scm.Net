@@ -18,6 +18,7 @@ import scSelect from "./components/scSelect";
 import scDialog from "./components/scDialog";
 import scForm from "./components/scForm";
 import scTitle from "./components/scTitle";
+import scWaterfall from "./components/scWaterfall";
 import scWaterMark from "./components/scWaterMark";
 import scQrCode from "./components/scQrCode";
 import scSelectFilter from "./components/scSelectFilter";
@@ -60,6 +61,7 @@ export default {
 		app.component("scDialog", scDialog);
 		app.component("scForm", scForm);
 		app.component("scTitle", scTitle);
+		app.component("scWaterfall", scWaterfall);
 		app.component("scWaterMark", scWaterMark);
 		app.component("scQrCode", scQrCode);
 		app.component("scStatusIndicator", scStatusIndicator);
