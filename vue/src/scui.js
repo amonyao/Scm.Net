@@ -5,6 +5,7 @@ import http from "./utils/request";
 import scm from "./utils/scm";
 import { permission, rolePermission } from "./utils/permission";
 
+import scComment from "./components/scComment";
 import scTable from "./components/scTable";
 import scSearch from "./components/scSearch";
 import scFilterBar from "./components/scFilterBar";
@@ -48,6 +49,7 @@ export default {
 		app.config.globalProperties.$SCM = scm;
 
 		//注册全局组件
+		app.component("scComment", scComment);
 		app.component("scTable", scTable);
 		app.component("scSearch", scSearch);
 		app.component("scFilterBar", scFilterBar);
