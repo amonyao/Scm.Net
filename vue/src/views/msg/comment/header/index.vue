@@ -3,8 +3,8 @@
 		<scSearch>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="文章类型" prop="types">
-						<sc-select v-model="param.types" placeholder="请选择" :data="types_list" />
+					<el-form-item label="查询选项" prop="option_id">
+						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
@@ -34,6 +34,8 @@
 							@click="delete_list"></el-button>
 					</el-tooltip>
 				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-button icon="el-icon-edit" type="primary" @click="open_detail()">详情</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
@@ -80,36 +82,34 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.cmsdoclitera.page,
+			apiObj: this.$API.msgcommentheader.page,
 			list: [],
 			param: {
-				types: 20,
+				option_id: '',
 				row_status: '1',
 				create_time: '',
 				key: ''
 			},
 			selection: [],
 			column: [
-				{ label: "id", prop: "id", hide: true },
-				{ prop: 'key', label: '关键字', width: 100 },
-				{ prop: 'title', label: '主标题', width: 100 },
-				{ prop: 'qty', label: '点赞数量', width: 100 },
-				{ prop: 'fav_qty', label: '收藏数量', width: 100 },
-				{ prop: 'msg_qty', label: '留言数量', width: 100 },
-				{ prop: 'cat_id', label: '分类', width: 100 },
-				{ prop: 'author_names', label: '作者', width: 100 },
-				{ prop: 'row_status', label: '数据状态', width: 80 },
+				{ prop: "id", label: "id", hide: true },
+				{ prop: 'codes', label: '系统编码', width: 100 },
+				{ prop: 'codec', label: '评价编码', width: 100 },
+				{ prop: 'rid', label: '引用ID', width: 100 },
+				{ prop: 'remark', label: '主题说明', width: 100 },
+				{ prop: 'qty', label: '评论数量', width: 100 },
+				{ prop: 'score', label: '主题评分', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: "150", formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_time', label: '创建时间', width: "150", formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'create_time', label: '创建时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
-			row_status_list: [this.$SCM.OPTION_ALL],
-			types_list: [this.$SCM.OPTION_ALL],
+			row_status_list: [],
+			option_list: [],
 		};
 	},
 	mounted() {
-		this.$SCM.list_status(this.row_status_list, true);
+		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
 		complete() {
@@ -119,16 +119,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.cmsdoclitera.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.msgcommentheader.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.cmsdoclitera.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.msgcommentheader.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.cmsdoclitera.delete, row);
+			this.$SCM.delete_item(this, this.$API.msgcommentheader.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.cmsdoclitera.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.msgcommentheader.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -149,7 +149,20 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
-		}
+		},
+		open_detail() {
+			if (!this.selection || this.selection.length != 1) {
+				return;
+			}
+
+			this.open_newtab(this.selection[0]);
+		},
+		open_newtab(row) {
+			if (!row.id) {
+				return;
+			}
+			this.$router.push({ path: '/msg/comment/detail', query: { 'id': row.id } });
+		},
 	},
 };
 </script>

@@ -3,8 +3,8 @@
 		<scSearch>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="文章类型" prop="types">
-						<sc-select v-model="param.types" placeholder="请选择" :data="types_list" />
+					<el-form-item label="文章类型" prop="types_id">
+						<sc-select v-model="param.types_id" placeholder="请选择" :data="types_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
@@ -69,21 +69,16 @@
 				</template>
 			</scTable>
 		</el-main>
-		<edit ref="edit" @complete="complete" />
 	</el-container>
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 export default {
-	components: {
-		edit: defineAsyncComponent(() => import("./edit")),
-	},
 	data() {
 		return {
-			apiObj: this.$API.cmsdoclitera.page,
+			apiObj: this.$API.cmsdocarticledaily.page,
 			list: [],
 			param: {
-				types: 20,
+				types_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
@@ -91,13 +86,9 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
+				{ prop: 'dates', label: '日期', width: 100 },
 				{ prop: 'key', label: '关键字', width: 100 },
 				{ prop: 'title', label: '主标题', width: 100 },
-				{ prop: 'qty', label: '点赞数量', width: 100 },
-				{ prop: 'fav_qty', label: '收藏数量', width: 100 },
-				{ prop: 'msg_qty', label: '留言数量', width: 100 },
-				{ prop: 'cat_id', label: '分类', width: 100 },
-				{ prop: 'author_names', label: '作者', width: 100 },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 				{ prop: 'update_time', label: '更新时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
@@ -109,7 +100,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.$SCM.list_status(this.row_status_list, true);
+		this.$SCM.list_dic(this.types_list, 'article_type', true);
 	},
 	methods: {
 		complete() {
@@ -119,16 +110,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.cmsdoclitera.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.cmsdocarticledaily.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.cmsdoclitera.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.cmsdocarticledaily.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.cmsdoclitera.delete, row);
+			this.$SCM.delete_item(this, this.$API.cmsdocarticledaily.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.cmsdoclitera.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.cmsdocarticledaily.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -149,6 +140,15 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
+		},
+		getTypesNames(item) {
+			return this.$SCM.get_option_names(this.types_list, item, '-');
+		},
+		open_poetry(row) {
+			this.$refs.poetry.open(row);
+		},
+		open_litera(row) {
+			this.$refs.litera.open(row);
 		}
 	},
 };

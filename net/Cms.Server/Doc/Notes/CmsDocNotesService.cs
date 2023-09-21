@@ -72,7 +72,7 @@ namespace Com.Scm.Cms.Doc.Notes
         {
             foreach (var item in list)
             {
-                item.update_names = GetUserNames(_userRepository, item.update_user);
+                item.create_names = GetUserNames(_userRepository, item.create_user);
                 item.update_names = GetUserNames(_userRepository, item.update_user);
             }
         }

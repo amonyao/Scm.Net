@@ -50,3 +50,12 @@ ALTER TABLE scm.cms_doc_article MODIFY COLUMN visible TINYINT DEFAULT 0 NOT NULL
 
 ALTER TABLE scm.cms_doc_article ADD summary varchar(1024) NOT NULL;
 ALTER TABLE scm.cms_doc_article CHANGE summary summary varchar(1024) NOT NULL AFTER visible;
+
+ALTER TABLE scm.cjg_log_user_daily_article ADD `key` varchar(32) NULL;
+ALTER TABLE scm.cjg_log_user_daily_article CHANGE `key` `key` varchar(32) NULL AFTER article_id;
+ALTER TABLE scm.cjg_log_user_daily_article ADD title varchar(256) NULL;
+ALTER TABLE scm.cjg_log_user_daily_article CHANGE title title varchar(256) NULL AFTER `key`;
+update cjg_log_user_daily_article a,cms_doc_article b
+set a.`key` =b.`key` ,
+a.title =b.title 
+where a.article_id =b.id ;

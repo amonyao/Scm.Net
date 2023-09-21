@@ -45,12 +45,12 @@ namespace Com.Scm.Cms.Doc
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<CmsDocArticleDto>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<CmsDocArticleDto>> GetPagesAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
-                //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
+                .WhereIF(!string.IsNullOrEmpty(request.key), a => a.key == request.key)
                 .OrderBy(m => m.id)
                 .Select<CmsDocArticleDto>()
                 .ToPageAsync(request.page, request.limit);
@@ -82,7 +82,7 @@ namespace Com.Scm.Cms.Doc
         {
             foreach (var item in list)
             {
-                item.update_names = GetUserNames(_userRepository, item.update_user);
+                item.create_names = GetUserNames(_userRepository, item.create_user);
                 item.update_names = GetUserNames(_userRepository, item.update_user);
             }
         }
@@ -414,6 +414,8 @@ namespace Com.Scm.Cms.Doc
                 dailyDao.dates = dates;
                 dailyDao.user_id = userId;
                 dailyDao.article_id = articleDao.id;
+                dailyDao.key = articleDao.key;
+                dailyDao.title = articleDao.title;
                 await dailyRespository.InsertAsync(dailyDao);
             }
 

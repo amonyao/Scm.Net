@@ -91,6 +91,7 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
+				{ prop: 'key', label: '关键字', width: 100 },
 				{ prop: 'title', label: '主标题', width: 100 },
 				{ prop: 'qty', label: '点赞数量', width: 100 },
 				{ prop: 'fav_qty', label: '收藏数量', width: 100 },

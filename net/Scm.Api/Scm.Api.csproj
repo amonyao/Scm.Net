@@ -17,18 +17,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="data\generator\**" />
+    <Compile Remove="dev\generator\**" />
     <Compile Remove="images\**" />
     <Compile Remove="logs\**" />
     <Compile Remove="Quartz.Settings\**" />
     <Compile Remove="upload\Generator\**" />
+    <Content Remove="data\generator\**" />
+    <Content Remove="dev\generator\**" />
     <Content Remove="images\**" />
     <Content Remove="logs\**" />
     <Content Remove="Quartz.Settings\**" />
     <Content Remove="upload\Generator\**" />
+    <EmbeddedResource Remove="data\generator\**" />
+    <EmbeddedResource Remove="dev\generator\**" />
     <EmbeddedResource Remove="images\**" />
     <EmbeddedResource Remove="logs\**" />
     <EmbeddedResource Remove="Quartz.Settings\**" />
     <EmbeddedResource Remove="upload\Generator\**" />
+    <None Remove="data\generator\**" />
+    <None Remove="dev\generator\**" />
     <None Remove="images\**" />
     <None Remove="logs\**" />
     <None Remove="Quartz.Settings\**" />
@@ -133,10 +141,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Cms.Server\Cms.Server.csproj" />
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="data\generator\" />
   </ItemGroup>
 
 </Project>

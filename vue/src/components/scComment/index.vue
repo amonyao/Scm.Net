@@ -13,7 +13,7 @@
                 <div class="head">
                     <el-row>
                         <el-col :span="12">
-                            <h3>全部评论 {{ 14 }}</h3>
+                            <h3>全部评论 {{ comment.qty }}</h3>
                         </el-col>
                         <el-col :span="12" style="text-align: right;">
                             <el-radio-group v-model="sort">
@@ -25,26 +25,26 @@
                     </el-row>
                 </div>
                 <div class="sc-comment-list">
-                    <div class="sc-comment-item" v-for="item in comments" :key="item.id">
+                    <div class="sc-comment-item" v-for="item in list" :key="item.id">
                         <div class="left" width="60px">
-                            <el-avatar class="header-img" :size="40" :src="item.headImg"></el-avatar>
+                            <el-avatar class="header-img" :size="40" :src="getAvatar(item.avatar)"></el-avatar>
                         </div>
                         <div class="body">
                             <el-row>
                                 <el-col :span="20" style="text-align: left;">
-                                    {{ item.name }}
+                                    {{ item.namec }}
                                 </el-col>
                                 <el-col :span="4" style="text-align: right;">
                                     <el-icon>
                                         <Star />
                                     </el-icon>
-                                    {{ item.like }}
+                                    {{ item.likes }}
                                 </el-col>
                             </el-row>
                             <el-row>
                                 <el-col>
-                                    <div class="ref">
-                                        @用户名称:引用内容
+                                    <div class="ref" v-if="getReply(item.rid)">
+                                        @用户名称:{{ getReply(item.rid).comment }}
                                     </div>
                                     <div class="comment">
                                         {{ item.comment }}
@@ -53,11 +53,12 @@
                             </el-row>
                             <el-row>
                                 <el-col>
-                                    <el-button size="small" @click="showReplyInput(item)">
-                                        {{ item.commentNum }} 回复 &gt;
+                                    <el-button size="small" @click="showReplyInput(item)" v-if="showReply" style="margin-right: 10px;">
+                                        {{ item.reply }} 回复 &gt;
                                     </el-button>
                                     <span class="time">
-                                        <label style="line-height: 24px;">{{ item.time }}</label>
+                                        <label style="line-height: 24px;">{{ this.$TOOL.dateTimeFormat(item.create_time)
+                                        }}</label>
                                     </span>
                                 </el-col>
                             </el-row>
@@ -74,143 +75,72 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-const clickoutside = {
-    // 初始化指令
-    bind(el, binding) {
-        function documentHandler(e) {
-            // 这里判断点击的元素是否是本身，是本身，则返回
-            if (el.contains(e.target)) {
-                return false;
-            }
-            // 判断指令中是否绑定了函数
-            if (binding.expression) {
-                // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
-                binding.value(e);
-            }
-        }
-        // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
-        el.vueClickOutside = documentHandler;
-        document.addEventListener('click', documentHandler);
-    },
-    update() { },
-    unbind(el) {
-        // 解除事件监听
-        document.removeEventListener('click', el.vueClickOutside);
-        delete el.vueClickOutside;
-    },
-};
+import config from "@/config"
+
 export default {
     components: {
-    myComment: defineAsyncComponent(() => import("./comment.vue")),
-    ElementPlusIconsVue: ElementPlusIconsVue,
-},
-    name: 'ArticleComment',
+        myComment: defineAsyncComponent(() => import("./comment.vue")),
+    },
+    namec: '评论',
+    props: {
+        code: { type: String, default: '0' },
+        showReply: { type: Boolean, default: false },
+    },
     data() {
         return {
             sort: '0',
             to: '',
             toId: '0',
-            comments: ''
+            comment: {},
+            list: [],
         }
     },
-    directives: { clickoutside },
     mounted() {
         this.init();
     },
     methods: {
-        init() {
-            this.comments = [
-                {
-                    name: 'Lana Del Rey',
-                    id: 19870621,
-                    headImg: 'https://ae01.alicdn.com/kf/Hd60a3f7c06fd47ae85624badd32ce54dv.jpg',
-                    comment: '我发布一张新专辑Norman Fucking Rockwell,大家快来听啊',
-                    time: '2019年9月16日 18:43',
-                    commentNum: 2,
-                    like: 15,
-                    inputShow: false,
-                    reply: [
-                        {
-                            from: 'Taylor Swift',
-                            fromId: 19891221,
-                            fromHeadImg: 'https://ae01.alicdn.com/kf/H94c78935ffa64e7e977544d19ecebf06L.jpg',
-                            to: 'Lana Del Rey',
-                            toId: 19870621,
-                            comment: '我很喜欢你的新专辑！！',
-                            time: '2019年9月16日 18:43',
-                            commentNum: 1,
-                            like: 15,
-                            inputShow: false
-                        },
-                        {
-                            from: 'Ariana Grande',
-                            fromId: 1123,
-                            fromHeadImg: 'https://ae01.alicdn.com/kf/Hf6c0b4a7428b4edf866a9fbab75568e6U.jpg',
-                            to: 'Lana Del Rey',
-                            toId: 19870621,
-                            comment: '别忘记宣传我们的合作单曲啊',
-                            time: '2019年9月16日 18:43',
-                            commentNum: 0,
-                            like: 5,
-                            inputShow: false
+        async init() {
+            var res = await this.$API.msgcomment.view.get({ 'codec': this.code });
+            if (res == null || res.code != 200) {
+                return;
+            }
 
-                        }
-                    ]
-                },
-                {
-                    name: 'Taylor Swift',
-                    id: 19891221,
-                    headImg: 'https://ae01.alicdn.com/kf/H94c78935ffa64e7e977544d19ecebf06L.jpg',
-                    comment: '我发行了我的新专辑Lover',
-                    time: '2019年9月16日 18:43',
-                    commentNum: 1,
-                    like: 5,
-                    inputShow: false,
-                    reply: [
-                        {
-                            from: 'Lana Del Rey',
-                            fromId: 19870621,
-                            fromHeadImg: 'https://ae01.alicdn.com/kf/Hd60a3f7c06fd47ae85624badd32ce54dv.jpg',
-                            to: 'Taylor Swift',
-                            toId: 19891221,
-                            comment: '新专辑和speak now 一样棒！',
-                            time: '2019年9月16日 18:43',
-                            commentNum: 25,
-                            like: 5,
-                            inputShow: false
-
-                        }
-                    ]
-                },
-                {
-                    name: 'Norman Fucking Rockwell',
-                    id: 20190830,
-                    headImg: 'https://ae01.alicdn.com/kf/Hdd856ae4c81545d2b51fa0c209f7aa28Z.jpg',
-                    comment: 'Plz buy Norman Fucking Rockwell on everywhere',
-                    time: '2019年9月16日 18:43',
-                    commentNum: 0,
-                    like: 5,
-                    inputShow: false,
-                    reply: []
-                },
-            ];
+            this.comment = res.data;
+            this.list = res.data.details;
         },
         showReplyInput(item) {
+            this.toId = item.id;
+
             var reply = this.$refs.reply;
             if (!reply) {
                 return;
             }
 
-            this.toId = item.id;
-            reply.replyName = item.name;
+            reply.replyName = item.namec;
             reply.replyContent = item.comment;
         },
         _inputShow(i) {
-            return this.comments[i].inputShow
+            return this.list[i].inputShow
         },
-        saveComment(comment) {
-            alert(comment);
+        async saveComment(comment) {
+            var data = { 'codec': this.code, 'comment': comment, };
+            var res = await this.$API.msgcomment.save.post(data);
+            if (res == null || res.code != 200) {
+                return;
+            }
+            this.$message.success("保存成功");
+        },
+        getAvatar(avatar) {
+            return config.SERVER_URL + avatar;
+        },
+        getReply(rid) {
+            for (let index = 0; index < this.list.length; index++) {
+                const element = this.list[index];
+                if (element.id == rid) {
+                    return element;
+                }
+            }
+            return null;
         },
         dateStr(date) {
             //获取js 时间戳
@@ -316,7 +246,6 @@ export default {
 }
 
 .sc-comment-item .time {
-    margin-left: 10px;
     color: #666;
     padding-top: 4px;
 }
@@ -350,7 +279,7 @@ export default {
     text-overflow: ellipsis;
 }
 
-.author-title .author-info .author-name {
+.author-title .author-info .author-namec {
     color: #000;
     font-size: 18px;
     font-weight: bold;
