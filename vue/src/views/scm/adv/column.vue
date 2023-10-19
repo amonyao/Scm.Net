@@ -148,7 +148,7 @@ export default {
 						trigger: "blur",
 					},
 					{
-						pattern: /^\d+$/,
+						pattern: this.$SCM.regex_number,
 						message: "必须为数字",
 						trigger: "blur",
 					},
@@ -160,7 +160,7 @@ export default {
 						trigger: "blur",
 					},
 					{
-						pattern: /^\d+$/,
+						pattern: this.$SCM.regex_number,
 						message: "必须为数字",
 						trigger: "blur",
 					},

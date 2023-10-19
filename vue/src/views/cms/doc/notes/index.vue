@@ -8,11 +8,16 @@
                 </el-header>
                 <el-main class="guid">
                     <div class="list">
-                        <div v-for="item in article_list" @click="itemClick(item)" :key="item.id" class="list-item"
+                        <div v-for="item in article_list" :key="item.id" class="list-item"
                             :class="{ active: item.id == this.formData.id }">
-                            <div class="title">{{ item.title }}</div>
-                            <div class="sub-title">{{ item.sub_title }}</div>
-                            <div class="time">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+                            <div class="display" @click="itemClick(item)">
+                                <div class="title">{{ item.title }}</div>
+                                <div class="sub-title">{{ item.sub_title }}</div>
+                                <div class="time">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+                            </div>
+                            <div class="operate">
+                                <el-button type="danger" icon="el-icon-delete" circle @click="itemDelete(item)" />
+                            </div>
                         </div>
                     </div>
                 </el-main>
@@ -115,12 +120,13 @@ export default {
 
             var res = await this.$API.cmsdocnotes.save.post(this.formData);
             if (!res || res.code != 200) {
+                this.$message.error(res.message);
                 return;
             }
 
-            // this.formData = this.def_data();
-            // this.init();
+            this.formData.id = res.data.data;
             this.$message.success("数据已保存！");
+            this.search();
         },
         itemClick(item) {
             if (!item) {
@@ -128,6 +134,30 @@ export default {
             }
 
             this.readArticle(item.id);
+        },
+        itemDelete(item) {
+            if (!item || !item.id) {
+                return;
+            }
+
+            this.$confirm(
+                `确定要删除文章 ${item.title} 吗？`,
+                "提示",
+                {
+                    type: "warning",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                }
+            ).then(async () => {
+                var loading = this.$loading();
+                var res = await this.$API.cmsdocnotes.status.post({ 'ids': [item.id], 'status': 2 });
+                if (res.code == 200) {
+                    loading.close();
+                    this.search();
+                } else {
+                    this.$alert(res.message, "提示", { type: "error" });
+                }
+            }).catch(() => { });
         },
         async readArticle(id) {
             if (!id || id === '0') {
@@ -194,6 +224,7 @@ export default {
 .doc .list {
     overflow: scroll;
     background: var(--el-bg-color);
+    height: 100%;
 }
 
 .doc .list .active {
@@ -204,10 +235,17 @@ export default {
 .doc .list-item {
     padding: 10px;
     border-bottom: 1px dashed #eeee;
+    position: relative;
 }
 
 .doc .list-item:hover {
     background-color: lightskyblue;
     border-bottom-color: var(--el-bg-color);
+}
+
+.doc .list-item .operate {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 </style>

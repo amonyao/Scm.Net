@@ -83,28 +83,30 @@ namespace Com.Scm.Cms.Doc.Notes
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<CmsDocArticleDvo> GetAsync(long id)
+        public async Task<CmsDocNotesDvo> GetAsync(long id)
         {
-            var dvo = await _thisRepository
+            var dvo = new CmsDocNotesDvo();
+
+            var dao = await _thisRepository
                 .AsQueryable()
                 .Where(a => a.id == id)
-                .Select<CmsDocArticleDvo>()
                 .FirstAsync();
 
-            if (dvo == null)
+            if (dao != null)
             {
-                dvo = new CmsDocArticleDvo();
-            }
+                dvo.id = dao.id;
+                dvo.title = dao.title;
+                dvo.content = dao.summary;
 
-            dvo.content = dvo.summary;
-            if (dvo.files > 0)
-            {
-                var file = GetFile(dvo.id);
-                if (File.Exists(file))
+                if (dao.files > 0)
                 {
-                    using (var reader = File.OpenText(file))
+                    var file = GetFile(dao.id);
+                    if (File.Exists(file))
                     {
-                        dvo.content = reader.ReadToEnd();
+                        using (var reader = File.OpenText(file))
+                        {
+                            dvo.content = reader.ReadToEnd();
+                        }
                     }
                 }
             }
@@ -188,11 +190,19 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task SaveAsync(CmsDocNotesDto model)
+        public async Task<SaveResponse> SaveAsync(CmsDocNotesDto model)
         {
-            var content = model.content ?? "";
+            var response = new SaveResponse();
 
-            var dao = await _thisRepository.GetByIdAsync(model.id);
+            CmsDocArticleDao dao = null;
+            var content = model.content ?? "";
+            var tooLong = content.Length > 1024;
+
+            if (IsNormalId(model.id))
+            {
+                dao = await _thisRepository.GetByIdAsync(model.id);
+            }
+
             if (dao == null)
             {
                 dao = new CmsDocArticleDao();
@@ -200,18 +210,18 @@ namespace Com.Scm.Cms.Doc.Notes
                 dao.types = Enums.ArticleTypesEnum.Notes;
                 dao.title = model.title;
                 dao.summary = TextUtils.Left(content, 1024);
-                dao.files = content.Length > 1024 ? 1 : 0;
+                dao.files = tooLong ? 1 : 0;
                 await _thisRepository.InsertAsync(dao);
             }
             else
             {
                 dao.title = model.title;
                 dao.summary = TextUtils.Left(model.content, 1024);
-                dao.files = content.Length > 1024 ? 1 : 0;
+                dao.files = tooLong ? 1 : 0;
                 await _thisRepository.UpdateAsync(dao);
             }
 
-            if (content.Length > 1024)
+            if (tooLong)
             {
                 var file = GetFile(dao.id);
                 using (var writer = new StreamWriter(file))
@@ -219,6 +229,9 @@ namespace Com.Scm.Cms.Doc.Notes
                     await writer.WriteAsync(model.content);
                 }
             }
+
+            response.data = dao.id;
+            return response;
         }
 
         /// <summary>

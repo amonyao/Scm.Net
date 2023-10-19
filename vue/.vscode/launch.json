@@ -1,50 +1,57 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "启动程序：Chrome",
-      "request": "launch",
-      "type": "chrome",
-      "url": "http://localhost:2800",
-      "webRoot": "${workspaceFolder}/vue"
-    },
-    {
-      "name": "Attach to Chrome",
-      "port": 9222,
-      "request": "attach",
-      "type": "chrome",
-      "webRoot": "${workspaceFolder}/vue"
-    },
-    {
-      "name": "启动程序：Edge",
-      "request": "launch",
-      "type": "msedge",
-      "url": "http://localhost:2800",
-      "webRoot": "${workspaceFolder}/vue"
-    },
-    {
-      "name": "启动程序: firefox",
-      "request": "launch",
-      "type": "firefox",
-      "url": "http://localhost:2800",
-      // "firefoxExecutable": "D:\\Program Files\\Firefox\\firefox.exe",
-      "webRoot": "${workspaceFolder}/vue",
-      "pathMappings": [
-        {
-          "url": "webpack://c-scm/src/views/login",
-          "path": "${workspaceFolder}/src/views/login"
-        },
-        {
-          "url": "webpack://c-scm",
-          "path": "${workspaceFolder}"
-        }
-      ]
-    },
-    {
-      "name": "运行脚本：serve",
-      "command": "npm run serve",
-      "type": "node-terminal",
-      "request": "launch",
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "运行脚本：serve",
+			"command": "npm run serve",
+			"type": "node-terminal",
+			"request": "launch"
+		},
+		{
+			"name": "启动程序: firefox",
+			"request": "launch",
+			"type": "firefox",
+			"url": "http://localhost:2800",
+			"webRoot": "${workspaceFolder}/vue",
+			"pathMappings": [
+				{
+					"url": "webpack://c-scm/src/components/scComment",
+					"path": "${workspaceFolder}/src/views/scm/res/cat"
+				},
+				{
+					"url": "webpack://c-scm/src/components/scComment",
+					"path": "${workspaceFolder}/src/views/scm/res/cat"
+				},
+				{
+					"url": "webpack://c-scm/src/views/login",
+					"path": "${workspaceFolder}/src/views/login"
+				},
+				{
+					"url": "webpack://c-scm",
+					"path": "${workspaceFolder}"
+				}
+			]
+		},
+		{
+			"name": "启动程序：Chrome",
+			"request": "launch",
+			"type": "chrome",
+			"url": "http://localhost:2800",
+			"webRoot": "${workspaceFolder}/vue"
+		},
+		{
+			"name": "启动程序：Edge",
+			"request": "launch",
+			"type": "msedge",
+			"url": "http://localhost:2800",
+			"webRoot": "${workspaceFolder}/vue"
+		},
+		{
+			"name": "Attach to Chrome",
+			"port": 9222,
+			"request": "attach",
+			"type": "chrome",
+			"webRoot": "${workspaceFolder}/vue"
+		}
+	]
 }

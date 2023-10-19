@@ -69,10 +69,10 @@ export default {
 	data() {
 		return {
 			apiObj: this.$API.urorganize.list,
-			list: [],
 			param: {
 				key: "",
 			},
+			list: [],
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },

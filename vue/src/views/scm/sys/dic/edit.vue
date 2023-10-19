@@ -45,7 +45,7 @@ export default {
 				],
 				value: [
 					{ required: true, trigger: "blur", message: "字典值不能为空" },
-					{ required: true, pattern: /^\d+$/, message: "字典值不是有效数字" },
+					{ required: true, pattern: this.$SCM.regex_number, message: "字典值不是有效数字" },
 				],
 				namec: [
 					{ required: true, trigger: "blur", message: "字典名称不能为空" },
