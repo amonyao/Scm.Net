@@ -76,14 +76,14 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ label: "组织名称", prop: "namec", align: "left", width: 200 },
+				{ label: "组织名称", prop: "namec", align: "left", minWidth: 200 },
 				{ label: "组织编码", prop: "codec", width: "100" },
 				{ label: "负责人", prop: "leaderUser", width: "100" },
 				{ label: "电话", prop: "leaderMobile", width: "200" },
 				{ label: "状态", prop: "row_status", width: "80" },
 				{ label: "排序", prop: "od", width: "80" },
-				{ label: "更新时间", prop: "update_time", width: "150", formatter: this.$TOOL.dateTimeFormat },
-				{ label: "创建时间", prop: "create_time", width: "150", formatter: this.$TOOL.dateTimeFormat },
+				{ label: "更新时间", prop: "update_time", width: "160", formatter: this.$TOOL.dateTimeFormat },
+				{ label: "创建时间", prop: "create_time", width: "160", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},

@@ -106,12 +106,12 @@ export default {
 			selection: [],
 			column: [
 				{ prop: "id", label: "id", hide: true },
-				{ prop: "codec", label: "键", width: 240, align: "left", },
-				{ prop: "value", label: "值", width: 150, align: "left" },
+				{ prop: "codec", label: "键", width: 100, align: "left", },
+				{ prop: "value", label: "值", width: 100, align: "left" },
 				{ prop: "namec", label: "名称", width: 150, align: "left" },
 				{ prop: "od", label: "排序", width: 60, align: "right" },
-				{ prop: "remark", label: "备注", width: 160 },
-				{ prop: "row_status", label: "状态", width: 60 },
+				{ prop: "remark", label: "备注", minWidth: 160, align: 'left' },
+				{ prop: "row_status", label: "状态", width: 80 },
 				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};

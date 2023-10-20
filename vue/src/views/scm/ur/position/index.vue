@@ -80,10 +80,13 @@ export default {
 			column: [
 				{ label: "id", prop: "id", hide: true },
 				{ label: "岗位编号", prop: "codec", width: 120 },
-				{ label: "岗位名称", prop: "namec", align: "left" },
+				{ label: "岗位名称", prop: "namec", minWidth: 200, align: "left" },
 				{ label: "排序", prop: "od", width: "80" },
 				{ label: "状态", prop: "row_status", width: "80" },
-				{ label: "创建时间", prop: "create_time", width: "140", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ label: "更新时间", prop: "update_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ label: "更新人员", prop: "update_names", width: "100" },
+				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ label: "创建人员", prop: "create_names", width: "100" },
 			],
 		};
 	},

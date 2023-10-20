@@ -71,12 +71,12 @@ export default {
 					sortable: true,
 					hide: true,
 				},
-				{ prop: "title", label: "投票标题", width: 200 },
+				{ prop: "title", label: "投票标题", minWidth: 200, align: 'left' },
 				{ prop: "type", label: "投票类型", width: 100 },
 				{ prop: "tickRule", label: "勾选规则", width: 100 },
-				{ prop: "startTime", label: "开始时间", width: 180 },
-				{ prop: "endTime", label: "结束时间", width: 180 },
-				{ prop: "createTime", label: "创建时间", width: 180 },
+				{ prop: "startTime", label: "开始时间", width: 160 },
+				{ prop: "endTime", label: "结束时间", width: 160 },
+				{ prop: "createTime", label: "创建时间", width: 160 },
 			],
 			menuColumn: [
 				{

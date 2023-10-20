@@ -72,7 +72,7 @@ export default {
 		},
 	},
 	model: {
-		url: `${config.API_URL}/sysapp/AppInfo`,
+		url: `${config.API_URL}/devapp/AppInfo`,
 		name: "查询一条",
 		get: async function (params) {
 			return await http.get(this.url, params);

@@ -90,8 +90,8 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'namec', label: '名称', width: 200, align: 'left' },
 				{ prop: 'image', label: '图标', width: 100 },
+				{ prop: 'namec', label: '名称', minWidth: 200, align: 'left' },
 				{ prop: 'lv', label: '层级', width: 100 },
 				{ prop: 'od', label: '显示排序', width: 100 },
 				{ prop: 'qty', label: '引用数量', width: 100 },

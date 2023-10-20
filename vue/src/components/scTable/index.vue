@@ -12,16 +12,15 @@
 		<div class="scTable-table" :style="{ height: _table_height }">
 			<el-table v-bind="$attrs" :data="tableData" :row-key="rowKey" :key="toggleIndex" default-expand-all
 				ref="scTable" :height="height == 'auto' ? null : '100%'" :size="config.size" :border="config.border"
-				:stripe="config.stripe" :summary-method="
-					remoteSummary ? remoteSummaryMethod : summaryMethod
-				" @row-contextmenu="rowContextmenu" @sort-change="sortChange" @filter-change="filterChange">
+				:stripe="config.stripe" :summary-method="remoteSummary ? remoteSummaryMethod : summaryMethod
+					" @row-contextmenu="rowContextmenu" @sort-change="sortChange" @filter-change="filterChange">
 				<slot></slot>
 				<template v-for="(item, index) in userColumn" :key="index">
 					<el-table-column v-if="!item.hide" highlight-current-row
 						:align="item.align == null ? 'center' : item.align" :column-key="item.prop" :label="item.label"
-						:prop="item.prop" :min-width="item.width" :sortable="item.sortable" :fixed="item.fixed"
-						:filters="item.filters" :filter-method="remoteFilter || !item.filters ? null : filterHandler"
-						:show-overflow-tooltip="item.showOverflowTooltip">
+						:prop="item.prop" :width="item.width" :min-width="item.minWidth" :sortable="item.sortable"
+						:fixed="item.fixed" :filters="item.filters" :show-overflow-tooltip="item.showOverflowTooltip"
+						:filter-method="remoteFilter || !item.filters ? null : filterHandler">
 						<template #default="scope">
 							<slot :name="item.prop" v-bind="scope" :data="scope.row">
 								{{ item.formatter ? item.formatter(scope.row[item.prop]) : scope.row[item.prop] }}
@@ -448,7 +447,7 @@ export default {
 	height: calc(100% - 50px);
 }
 
-.el-table__header > th{
+.el-table__header>th {
 	background-color: #fafafa;
 }
 

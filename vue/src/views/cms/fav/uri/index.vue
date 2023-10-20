@@ -1,33 +1,13 @@
 <template>
 	<el-container>
-		<el-aside width="260px" v-loading="showGrouploading">
-			<el-container>
-				<el-header>
-					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
-					<el-button type="primary" round icon="el-icon-plus" class="add-column" @click="edit"></el-button>
-				</el-header>
-				<el-main class="nopadding">
-					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
-						:filter-node-method="groupFilterNode" @node-click="groupClick">
-						<template #default="{ node, data }">
-							<span class="custom-tree-node">
-								<span class="label">{{ node.label }}</span>
-								<span class="code">{{ data.code }}</span>
-								<span class="do">
-									<el-icon @click.stop="edit(data)"><el-icon-edit /></el-icon>
-									<el-icon @click.stop="remove(node, data)"><el-icon-delete /></el-icon>
-								</span>
-							</span>
-						</template>
-					</el-tree>
-				</el-main>
-			</el-container>
+		<el-aside width="260px">
+			<sc-cat @complete="cat_change" appId="1714913846931623936"></sc-cat>
 		</el-aside>
 
 		<el-container>
 			<el-header>
 				<div class="left-panel">
-					<el-button icon="el-icon-plus" type="primary" :disabled="!selectColumn.id" @click="open_dialog" />
+					<el-button icon="el-icon-plus" type="primary" :disabled="!selectCat.id" @click="open_dialog" />
 					<el-divider direction="vertical"></el-divider>
 					<el-button-group>
 						<el-tooltip content="启用">
@@ -52,8 +32,8 @@
 				</div>
 			</el-header>
 			<el-main class="nopadding">
-				<scTable ref="table" :api-obj="apiObj" :column="column" :params="defaultParam" row-key="id"
-					@menu-handle="menuHandle" @selection-change="selectionChange">
+				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+					@selection-change="selectionChange">
 					<!-- 固定列-选择列 -->
 					<el-table-column fixed type="selection" width="60" align="center" />
 					<el-table-column label="#" type="index" width="60"></el-table-column>
@@ -83,7 +63,6 @@
 				</scTable>
 			</el-main>
 			<edit ref="edit" @complete="complete" />
-			<column ref="column" @complete="columnComplete" />
 		</el-container>
 	</el-container>
 </template>
@@ -92,40 +71,33 @@ import { defineAsyncComponent } from "vue";
 export default {
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
-		column: defineAsyncComponent(() => import("./column")),
 	},
 	data() {
 		return {
 			apiObj: this.$API.cmsfavuri.page,
 			list: [],
-			showGrouploading: false,
-			groupFilterText: "",
-			group: [],
 			param: {
 				cat_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
 			},
-			defaultParam: { type: 1 },
-			selectColumn: {},
+			selectCat: {},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
 				{ prop: 'types', label: '类型', width: 80 },
-				{ prop: 'title', label: '标题', minWidth: 160 },
-				{ prop: 'remark', label: '备注', width: 100 },
-				{ prop: 'top', label: '置顶', width: 60 },
+				{ prop: 'title', label: '标题', minWidth: 140, align: 'left' },
+				{ prop: 'remark', label: '备注', width: 100, align: 'left' },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_time', label: '更新时间', width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'create_time', label: '创建时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_time', label: '创建时间', width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},
 	mounted() {
-		this.columnComplete();
 	},
 	methods: {
 		complete() {
@@ -148,14 +120,15 @@ export default {
 		},
 		open_dialog(row) {
 			if (row.id) {
+				row.cat_names = this.selectCat.label;
 				this.$refs.edit.open(row);
 				return;
 			}
-			if (this.selectColumn.id) {
-				this.$refs.edit.open(this.selectColumn, "add");
+			if (this.selectCat.id) {
+				this.$refs.edit.open({ cat_id: this.selectCat.id, cat_names: this.selectCat.label });
 				return;
 			}
-			this.$message.warning("请选择字典栏目，在添加字典值");
+			this.$message.warning("请选择分类");
 		},
 		selectionChange(selection) {
 			this.selection = selection;
@@ -174,72 +147,13 @@ export default {
 				return;
 			}
 		},
-		columnComplete() {
-			this.getGroup({ app: 0 });
-		},
-		//加载树数据
-		async getGroup(param) {
-			this.showGrouploading = true;
-			const res = await this.$API.scmrescat.list.get(param);
-			this.showGrouploading = false;
-			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
-			res.data.some((m) => {
-				_tree.push({
-					id: m.id,
-					value: m.id,
-					label: m.namec,
-					code: m.codec,
-					type: m.types,
-					parentId: m.parentId,
-				});
-			});
-			this.group = this.$TOOL.changeTree(_tree);
-		},
-		//树过滤
-		groupFilterNode(value, data) {
-			if (!value) return true;
-			return data.label.indexOf(value) !== -1;
-		},
-		//树点击事件
-		groupClick(data) {
-			if (data.id == 1) {
-				this.$refs.table.reload({ type: this.defaultParam.type });
-				return;
+		cat_change(obj) {
+			this.selectCat = obj;
+			if (obj) {
+				this.param.cat_id = obj.id;
 			}
-			var params = {
-				id: data.id,
-			};
-			this.selectColumn = data;
-			this.$refs.table.reload(params);
-		},
-		edit(row) {
-			if (row.id) {
-				this.$refs.column.open(row);
-			} else {
-				this.$refs.column.open({ type: this.defaultParam.type });
-			}
-		},
-		remove(node, data) {
-			this.$confirm(`确定要删除选中的 ${data.label} 项吗？`, "提示", {
-				type: "warning",
-				confirmButtonText: "确定",
-				cancelButtonText: "取消",
-			})
-				.then(async () => {
-					const loading = this.$loading();
-					var res = await this.$API.scmrescat.delete.delete(
-						data.id
-					);
-					if (res.code == 200) {
-						this.columnComplete();
-						loading.close();
-						this.$message.success("删除成功");
-					} else {
-						this.$alert(res.message, "提示", { type: "error" });
-					}
-				})
-				.catch(() => { });
-		},
+			this.search();
+		}
 	},
 };
 </script>

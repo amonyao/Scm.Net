@@ -1,9 +1,8 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="分类" prop="cat_id">
-				<el-input v-model="formData.cat_id" placeholder="请输入分类" :maxlength="20" show-word-limit
-					clearable></el-input>
+			<el-form-item label="类型" prop="cat_names">
+				<el-input v-model="formData.cat_names" disabled></el-input>
 			</el-form-item>
 			<el-form-item label="类型" prop="types">
 				<el-input v-model="formData.types" placeholder="请输入类型" :maxlength="4" show-word-limit clearable></el-input>
@@ -39,8 +38,11 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
-				codec: [
-					{ required: true, trigger: "blur", message: "编码不能为空" },
+				title: [
+					{ required: true, trigger: "blur", message: "标题不能为空" },
+				],
+				uri: [
+					{ required: true, trigger: "blur", message: "路径不能为空" },
 				],
 			},
 		};
@@ -52,6 +54,7 @@ export default {
 			return {
 				id: '0',
 				cat_id: '0',
+				cat_names: '',
 				types: '0',
 				title: '',
 				uri: '',
@@ -60,13 +63,19 @@ export default {
 			}
 		},
 		async open(row) {
-			if (!row || !row.id) {
+			if (!row) {
+				return;
+			}
+
+			if (!row.id) {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
 				var res = await this.$API.cmsfavuri.edit.get(row.id);
 				this.formData = res.data;
 			}
+			this.formData.cat_id = row.cat_id;
+			this.formData.cat_names = row.cat_names;
 			this.visible = true;
 		},
 		save() {

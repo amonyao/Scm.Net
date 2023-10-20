@@ -82,11 +82,11 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true, },
-				{ prop: "namec", label: "群组名称", align: "left", },
-				{ prop: "remark", label: "备注", align: "left", },
+				{ prop: "namec", label: "群组名称", width: 200, align: "left", },
+				{ prop: "remark", label: "备注", minWidth: 200, align: "left", },
 				{ prop: "row_status", label: "状态", width: "80", },
-				{ prop: "update_time", label: "更新时间", width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: "create_time", label: "创建时间", width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "update_time", label: "更新时间", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "create_time", label: "创建时间", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},
