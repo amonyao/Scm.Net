@@ -1,11 +1,11 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="类型" prop="cat_names">
+			<el-form-item label="分类" prop="cat_names">
 				<el-input v-model="formData.cat_names" disabled></el-input>
 			</el-form-item>
 			<el-form-item label="类型" prop="types">
-				<el-input v-model="formData.types" placeholder="请输入类型" :maxlength="4" show-word-limit clearable></el-input>
+				<sc-select v-model="formData.types" :data="types_list" placeholder="请选择类型"></sc-select>
 			</el-form-item>
 			<el-form-item label="标题" prop="title">
 				<el-input v-model="formData.title" placeholder="请输入标题" :maxlength="256" show-word-limit
@@ -45,9 +45,11 @@ export default {
 					{ required: true, trigger: "blur", message: "路径不能为空" },
 				],
 			},
+			types_list: []
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.types_list, 'fav_types', false);
 	},
 	methods: {
 		def_data() {
