@@ -4,13 +4,7 @@
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="所属园区" prop="area_id">
-						<sc-select v-model="param.area_id" placeholder="请选择" :data="area_list" @change="list_build()"/>
-					</el-form-item>
-					<el-form-item label="所属楼宇" prop="build_id">
-						<sc-select v-model="param.build_id" placeholder="请选择" :data="build_list" />
-					</el-form-item>
-					<el-form-item label="所属楼层" prop="floor_id">
-						<sc-select v-model="param.floor_id" placeholder="请选择" :data="floor_list" />
+						<sc-select v-model="param.area_id" placeholder="请选择" :data="area_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
@@ -86,12 +80,10 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.ymsfacroom.page,
+			apiObj: this.$API.ymsdevattendance.page,
 			list: [],
 			param: {
 				area_id: '0',
-				build_id: '0',
-				floor_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
@@ -99,11 +91,10 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'area_names', label: '所属园区', width: 100, align: 'left' },
-				{ prop: 'build_names', label: '所属楼宇', width: 100, align: 'left' },
-				{ prop: 'floor_names', label: '所属楼层', width: 100, align: 'left' },
-				{ prop: 'codec', label: '房间编码', width: 100, align: 'left' },
-				{ prop: 'namec', label: '房间名称', minWidth: 100, align: 'left' },
+				{ prop: 'area_names', label: '所属园区', width: 100 },
+				{ prop: 'build_names', label: '所属楼宇', width: 100 },
+				{ prop: 'codec', label: '考勤编码', width: 100 },
+				{ prop: 'namec', label: '考勤名称', minWidth: 100, align: 'left' },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
@@ -113,7 +104,6 @@ export default {
 			row_status_list: [this.$SCM.OPTION_ALL],
 			area_list: [this.$SCM.OPTION_ALL],
 			build_list: [this.$SCM.OPTION_ALL],
-			floor_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
@@ -128,16 +118,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.ymsfacroom.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.ymsdevattendance.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.ymsfacroom.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.ymsdevattendance.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.ymsfacroom.delete, row);
+			this.$SCM.delete_item(this, this.$API.ymsdevattendance.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.ymsfacroom.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.ymsdevattendance.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -166,10 +156,6 @@ export default {
 			this.param.build_id = '0';
 			this.$SCM.list_option(this.build_list, this.$API.ymsfacbuild.option, { pid: this.param.area_id }, true);
 		},
-		list_floor() {
-			this.param.floor_id = '0';
-			this.$SCM.list_option(this.floor_list, this.$API.ymsfacfloor.option, { pid: this.param.build_id }, true);
-		}
 	},
 };
 </script>

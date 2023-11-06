@@ -4,31 +4,26 @@ using Com.Scm.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
+using Com.Scm.Yms.Acs.Park.Dvo;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Yms.Fac
+namespace Com.Scm.Yms.Acs.Park
 {
     /// <summary>
-    /// 楼层服务接口
+    /// 停车管理服务接口
     /// </summary>
     [ApiExplorerSettings(GroupName = "yms")]
-    public class YmsFacFloorService : ApiService
+    public class YmsAcsParkService : ApiService
     {
-        private readonly SugarRepository<YmsFacFloorDao> _thisRepository;
+        private readonly SugarRepository<YmsAcsParkDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
-        private readonly SugarRepository<YmsFacAreaDao> _areaRepository;
-        private readonly SugarRepository<YmsFacBuildDao> _buildRepository;
 
-        public YmsFacFloorService(SugarRepository<YmsFacFloorDao> thisRepository,
-            SugarRepository<UserDao> userRepository,
-            SugarRepository<YmsFacAreaDao> areaRepository,
-            SugarRepository<YmsFacBuildDao> buildRepository)
+        public YmsAcsParkService(SugarRepository<YmsAcsParkDao> thisRepository,
+            SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
-            _areaRepository = areaRepository;
-            _buildRepository = buildRepository;
         }
 
         /// <summary>
@@ -36,14 +31,14 @@ namespace Com.Scm.Yms.Fac
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<YmsFacFloorDvo>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<YmsAcsParkDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<YmsFacFloorDvo>()
+                .Select<YmsAcsParkDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -55,44 +50,26 @@ namespace Com.Scm.Yms.Fac
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<YmsFacFloorDvo>> GetListAsync(ScmSearchRequest request)
+        public async Task<List<YmsAcsParkDvo>> GetListAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<YmsFacFloorDvo>()
+                .Select<YmsAcsParkDvo>()
                 .ToListAsync();
 
             Prepare(result);
             return result;
         }
 
-        private void Prepare(List<YmsFacFloorDvo> list)
+        private void Prepare(List<YmsAcsParkDvo> list)
         {
             foreach (var item in list)
             {
-                item.area_names = _areaRepository.GetById(item.area_id)?.names;
-                item.build_names = _buildRepository.GetById(item.build_id)?.names;
                 item.update_names = GetUserNames(_userRepository, item.update_user);
                 item.create_names = GetUserNames(_userRepository, item.create_user);
             }
-        }
-
-        /// <summary>
-        /// 下拉列表
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public async Task<List<OptionDvo>> GetOptionAsync(ScmOptionRequest request)
-        {
-            var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.build_id == request.pid)
-                .OrderBy(a => a.id)
-                .Select(a => new OptionDvo { id = a.id, label = a.names, value = a.id })
-                .ToListAsync();
-
-            return result;
         }
 
         /// <summary>
@@ -101,10 +78,10 @@ namespace Com.Scm.Yms.Fac
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<YmsFacFloorDvo> GetAsync(long id)
+        public async Task<YmsAcsParkDvo> GetAsync(long id)
         {
             var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<YmsFacFloorDvo>();
+            return model.Adapt<YmsAcsParkDvo>();
         }
 
         /// <summary>
@@ -113,11 +90,11 @@ namespace Com.Scm.Yms.Fac
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<YmsFacFloorDvo> GetEditAsync(long id)
+        public async Task<YmsAcsParkDvo> GetEditAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<YmsFacFloorDvo>()
+                .Select<YmsAcsParkDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -127,11 +104,11 @@ namespace Com.Scm.Yms.Fac
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<YmsFacFloorDvo> GetViewAsync(long id)
+        public async Task<YmsAcsParkDvo> GetViewAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<YmsFacFloorDvo>()
+                .Select<YmsAcsParkDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -140,15 +117,15 @@ namespace Com.Scm.Yms.Fac
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(YmsFacFloorDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<YmsFacFloorDao>());
+        public async Task<bool> AddAsync(YmsAcsParkDto model) =>
+            await _thisRepository.InsertAsync(model.Adapt<YmsAcsParkDao>());
 
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(YmsFacFloorDto model)
+        public async Task UpdateAsync(YmsAcsParkDto model)
         {
             var dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)

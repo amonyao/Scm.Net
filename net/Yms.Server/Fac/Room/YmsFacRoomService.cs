@@ -17,11 +17,21 @@ namespace Com.Scm.Yms.Fac
     {
         private readonly SugarRepository<YmsFacRoomDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly SugarRepository<YmsFacAreaDao> _areaRepository;
+        private readonly SugarRepository<YmsFacBuildDao> _buildRepository;
+        private readonly SugarRepository<YmsFacFloorDao> _floorRepository;
 
-        public YmsFacRoomService(SugarRepository<YmsFacRoomDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public YmsFacRoomService(SugarRepository<YmsFacRoomDao> thisRepository,
+            SugarRepository<UserDao> userRepository,
+            SugarRepository<YmsFacAreaDao> areaRepository,
+            SugarRepository<YmsFacBuildDao> buildRepository,
+            SugarRepository<YmsFacFloorDao> floorRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _areaRepository = areaRepository;
+            _buildRepository = buildRepository;
+            _floorRepository = floorRepository;
         }
 
         /// <summary>
@@ -65,6 +75,9 @@ namespace Com.Scm.Yms.Fac
         {
             foreach (var item in list)
             {
+                item.area_names = _areaRepository.GetById(item.area_id)?.names;
+                item.build_names = _buildRepository.GetById(item.build_id)?.names;
+                item.floor_names = _floorRepository.GetById(item.floor_id)?.names;
                 item.update_names = GetUserNames(_userRepository, item.update_user);
                 item.create_names = GetUserNames(_userRepository, item.create_user);
             }

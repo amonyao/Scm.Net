@@ -17,11 +17,15 @@ namespace Com.Scm.Yms.Fac
     {
         private readonly SugarRepository<YmsFacPortDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly SugarRepository<YmsFacAreaDao> _areaRepository;
 
-        public YmsFacPortService(SugarRepository<YmsFacPortDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public YmsFacPortService(SugarRepository<YmsFacPortDao> thisRepository,
+            SugarRepository<UserDao> userRepository,
+            SugarRepository<YmsFacAreaDao> areaRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _areaRepository = areaRepository;
         }
 
         /// <summary>
@@ -65,6 +69,7 @@ namespace Com.Scm.Yms.Fac
         {
             foreach (var item in list)
             {
+                item.area_names = _areaRepository.GetById(item.area_id)?.names;
                 item.update_names = GetUserNames(_userRepository, item.update_user);
                 item.create_names = GetUserNames(_userRepository, item.create_user);
             }

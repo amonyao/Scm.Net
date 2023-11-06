@@ -11,6 +11,7 @@ namespace Com.Scm.Yms.Fac
         /// 
         /// </summary>
         public long area_id { get; set; }
+        public string area_names { get; set; }
 
         /// <summary>
         /// 大门类型（出口、入口、出入口）

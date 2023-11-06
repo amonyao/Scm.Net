@@ -5,17 +5,14 @@
 				<sc-select v-model="formData.area_id" :data="area_list" @change="list_build()"></sc-select>
 			</el-form-item>
 			<el-form-item label="所属楼宇" prop="build_id">
-				<sc-select v-model="formData.build_id" :data="build_list" @change="list_floor()"></sc-select>
+				<sc-select v-model="formData.build_id" :data="build_list"></sc-select>
 			</el-form-item>
-			<el-form-item label="所属楼层" prop="floor_id">
-				<sc-select v-model="formData.floor_id" :data="floor_list"></sc-select>
-			</el-form-item>
-			<el-form-item label="房间编码" prop="codec">
-				<el-input v-model="formData.codec" placeholder="请输入房间编码" :maxlength="32" show-word-limit
+			<el-form-item label="考勤编码" prop="codec">
+				<el-input v-model="formData.codec" placeholder="请输入考勤编码" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="房间名称" prop="namec">
-				<el-input v-model="formData.namec" placeholder="请输入房间名称" :maxlength="32" show-word-limit
+			<el-form-item label="考勤名称" prop="namec">
+				<el-input v-model="formData.namec" placeholder="请输入考勤名称" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
 		</el-form>
@@ -39,15 +36,11 @@ export default {
 			formData: this.def_data(),
 			rules: {
 				codec: [
-					{ required: true, trigger: "blur", message: "房间编码不能为空" },
-				],
-				namec: [
-					{ required: true, trigger: "blur", message: "房间名称不能为空" },
+					{ required: true, trigger: "blur", message: "编码不能为空" },
 				],
 			},
 			area_list: [this.$SCM.OPTION_ONE],
 			build_list: [this.$SCM.OPTION_ONE],
-			floor_list: [this.$SCM.OPTION_ONE],
 		};
 	},
 	mounted() {
@@ -59,7 +52,6 @@ export default {
 				id: '0',
 				area_id: '0',
 				build_id: '0',
-				floor_id: '0',
 				codec: '',
 				namec: '',
 			}
@@ -69,7 +61,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.ymsfacroom.edit.get(row.id);
+				var res = await this.$API.ymsdevattendance.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -80,9 +72,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.ymsfacroom.add.post(this.formData);
+						res = await this.$API.ymsdevattendance.add.post(this.formData);
 					} else {
-						res = await this.$API.ymsfacroom.update.put(this.formData);
+						res = await this.$API.ymsdevattendance.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {
@@ -107,10 +99,6 @@ export default {
 			this.formData.build_id = '0';
 			this.$SCM.list_option(this.build_list, this.$API.ymsfacbuild.option, { pid: this.formData.area_id }, false);
 		},
-		list_floor() {
-			this.formData.floor_id = '0';
-			this.$SCM.list_option(this.floor_list, this.$API.ymsfacfloor.option, { pid: this.formData.build_id }, false);
-		}
 	},
 };
 </script>
