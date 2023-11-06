@@ -203,6 +203,11 @@ scm.list_status = async function (list, all) {
 	scm.list_dic(list, "status", all);
 };
 
+scm.list_option = async function (list, api, param, all) {
+	var res = await api.get(param);
+	scm.prepare(list, res, all);
+};
+
 scm.list_sex = async function (list, all) {
 	scm.list_dic(list, "sex", all);
 };

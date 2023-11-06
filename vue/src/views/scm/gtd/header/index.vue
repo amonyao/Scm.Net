@@ -1,0 +1,229 @@
+<template>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
+				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
+				<el-divider direction="vertical"></el-divider>
+				<el-button-group>
+					<el-tooltip content="启用">
+						<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
+							@click="status_list(1)"></el-button>
+					</el-tooltip>
+					<el-tooltip content="停用">
+						<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
+							@click="status_list(2)"></el-button>
+					</el-tooltip>
+					<el-tooltip content="删除">
+						<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
+							@click="delete_list"></el-button>
+					</el-tooltip>
+				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-radio-group v-model="model" @change="changeView()">
+					<el-radio-button label="0">列表</el-radio-button>
+					<el-radio-button label="1">表格</el-radio-button>
+					<el-radio-button label="2">三列</el-radio-button>
+					<el-radio-button label="3">四象限</el-radio-button>
+				</el-radio-group>
+			</div>
+			<div class="right-panel">
+				<div class="right-panel-search">
+					<el-input v-model="param.key" clearable placeholder="关键字" />
+					<el-button icon="el-icon-search" type="primary" @click="search" />
+				</div>
+			</div>
+		</el-header>
+		<el-main :class="{ nopadding: model == 1 }">
+			<div v-if="model == 1">
+				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+					@selection-change="selectionChange" :hide-pagination="true" :hide-do="true">
+					<el-table-column align="center" fixed type="selection" width="60" />
+					<el-table-column label="#" type="index" width="50"></el-table-column>
+					<el-table-column label="操作" align="center" fixed="right" width="140">
+						<template #default="scope">
+							<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
+								编辑
+							</el-button>
+							<el-divider direction="vertical" />
+							<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+								<template #reference>
+									<el-button text type="primary" size="small">删除</el-button>
+								</template>
+							</el-popconfirm>
+						</template>
+					</el-table-column>
+					<template #row_status="scope">
+						<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
+							<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
+								@change="status_item($event, scope.row)">
+							</el-switch>
+						</el-tooltip>
+					</template>
+				</scTable>
+			</div>
+			<div v-else-if="model == 2">
+				<el-row>
+					<el-col :span="8">
+						<el-card>
+							<handle ref="handle1" header="待办"></handle>
+						</el-card>
+					</el-col>
+					<el-col :span="8">
+						<el-card>
+							<handle ref="handle2" header="进行中" style="margin-left: 15px;margin-right: 15px;"></handle>
+						</el-card>
+					</el-col>
+					<el-col :span="8">
+						<el-card>
+							<handle ref="handle3" header="已完成"></handle>
+						</el-card>
+					</el-col>
+				</el-row>
+			</div>
+			<div v-else-if="model == 3">
+				<table>
+					<tr>
+						<td>
+							<handle ref="priority0" header="紧急且重要"></handle>
+						</td>
+						<td>
+							<handle ref="priority1" header="紧急不重要"></handle>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<handle ref="priority2" header="重要不紧急"></handle>
+						</td>
+						<td>
+							<handle ref="priority3" header="不重要不紧急"></handle>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div v-else>
+			</div>
+		</el-main>
+		<el-footer>
+			<div class="right-panel-search">
+				<el-input v-model="formData.title" clearable placeholder="请输入待办任务" />
+				<el-button icon="el-icon-send" type="primary" @click="create" />
+			</div>
+		</el-footer>
+		<edit ref="edit" @complete="complete" />
+	</el-container>
+</template>
+<script>
+import { defineAsyncComponent } from "vue";
+export default {
+	components: {
+		edit: defineAsyncComponent(() => import("./edit")),
+		handle: defineAsyncComponent(() => import("./handle")),
+		priority: defineAsyncComponent(() => import("./priority")),
+	},
+	data() {
+		return {
+			apiObj: this.$API.scmgtdheader.page,
+			list: [],
+			param: {
+				option_id: '0',
+				create_time: '',
+				key: ''
+			},
+			model: 1,
+			selection: [],
+			column: [
+				{ label: "id", prop: "id", hide: true },
+				{ prop: 'title', label: '标题', minWidth: 160 },
+				{ prop: 'priority', label: '优先级', width: 100 },
+				{ prop: 'remind', label: '提醒标识', width: 100 },
+				{ prop: 'notice', label: '提示方式', width: 100 },
+				{ prop: 'last_time', label: '上次提醒时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'next_time', label: '下次提醒时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'row_status', label: '数据状态', width: 80 },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100, },
+			],
+			formData: {
+				cat_id: '0',
+				title: '',
+			}
+		};
+	},
+	mounted() {
+		this.getData();
+	},
+	methods: {
+		complete() {
+			this.$refs.table.refresh();
+		},
+		search() {
+			this.$refs.table.upData(this.param);
+		},
+		async status_item(e, row) {
+			this.$SCM.status_item(this, this.$API.scmgtdheader.status, row, row.row_status);
+		},
+		status_list(status) {
+			this.$SCM.status_list(this, this.$API.scmgtdheader.status, this.selection, status);
+		},
+		async delete_item(row) {
+			this.$SCM.delete_item(this, this.$API.scmgtdheader.delete, row);
+		},
+		delete_list() {
+			this.$SCM.delete_list(this, this.$API.scmgtdheader.delete, this.selection);
+		},
+		open_dialog(row) {
+			this.$refs.edit.open(row);
+		},
+		selectionChange(selection) {
+			this.selection = selection;
+		},
+		menuHandle(obj) {
+			if (obj.command == "add") {
+				this.open_dialog();
+				return;
+			}
+			if (obj.command == "edit") {
+				this.open_dialog(obj.row);
+				return;
+			}
+			if (obj.command == "delete") {
+				this.delete_item(obj.row);
+				return;
+			}
+		},
+		async create() {
+			let res = await this.$API.scmgtdheader.add.post(this.formData);
+			if (res.code == 200) {
+				this.$emit("complete");
+				this.visible = false;
+				this.$message.success("保存成功");
+				this.formData.title = '';
+				this.search();
+			} else {
+				this.$alert(res.message, "提示", { type: "error" });
+			}
+		},
+		changeView() {
+		},
+		async getData() {
+			var res = await this.$API.scmgtdheader.list.get();
+			if (!res || res.code != 200) {
+				return;
+			}
+
+			this.list = res.data;
+		},
+		getList(key) {
+			var arr = [];
+			for (var i = 0; i < this.list.length; i += 1) {
+				if (this.list[i].handle == key) {
+					arr.push(this.list[i]);
+				}
+			}
+			return arr;
+		}
+	},
+};
+</script>

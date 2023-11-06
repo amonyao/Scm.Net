@@ -62,8 +62,24 @@ public class {TableName}Service : ApiService
         foreach (var item in list)
         {
             item.update_names = GetUserNames(_userRepository, item.update_user);
-            item.update_names = GetUserNames(_userRepository, item.update_user);
+            item.create_names = GetUserNames(_userRepository, item.create_user);
         }
+    }
+
+    /// <summary>
+    /// 下拉列表
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public async Task<List<OptionDvo>> GetOptionAsync(ScmOptionRequest request)
+    {
+        var result = await _thisRepository.AsQueryable()
+            .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+            .OrderBy(a => a.id)
+            .Select(a => new OptionDvo { id = a.id, label = a.names, value = a.id })
+            .ToListAsync();
+
+        return result;
     }
 
     /// <summary>

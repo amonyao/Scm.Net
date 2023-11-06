@@ -25,6 +25,7 @@ import scWaterMark from "./components/scWaterMark";
 import scQrCode from "./components/scQrCode";
 import scSelectFilter from "./components/scSelectFilter";
 import scFileImport from "./components/scFileImport";
+import scList from "./components/scList";
 
 import scStatusIndicator from "./components/scMini/scStatusIndicator";
 import scTrend from "./components/scMini/scTrend";
@@ -72,6 +73,7 @@ export default {
 		app.component("scTrend", scTrend);
 		app.component("scSelectFilter", scSelectFilter);
 		app.component("scFileImport", scFileImport);
+		app.component("scList", scList);
 
 		//注册全局指令
 		app.directive("auth", auth);

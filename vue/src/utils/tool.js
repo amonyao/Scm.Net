@@ -13,7 +13,7 @@ tool.trim = function (x) {
 	if (!x) {
 		return x;
 	}
-	return x.toString().replace(/^\s+|\s+$/gm, '');
+	return x.toString().replace(/^\s+|\s+$/gm, "");
 };
 
 /* localStorage */
@@ -85,7 +85,7 @@ tool.cookie = {
 		if (cfg.domain) {
 			cookieStr += `;domain=${cfg.domain}`;
 		}
-		cookieStr += ';samesite=none';
+		cookieStr += ";samesite=none";
 		document.cookie = cookieStr;
 	},
 	get(name) {
@@ -143,7 +143,11 @@ tool.objCopy = function (obj) {
 
 tool.dateTimeFormat = function (time) {
 	if (!time) {
-		return '';
+		return "";
+	}
+	time = eval(time);
+	if (time < 1) {
+		return "";
 	}
 
 	var date = new Date(eval(time));
@@ -153,11 +157,13 @@ tool.dateTimeFormat = function (time) {
 	var hour = date.getHours();
 	var minute = date.getMinutes();
 	var second = date.getSeconds();
-	return `${tool.lpad(year, 4)}-${tool.lpad(month)}-${tool.lpad(day)} ${tool.lpad(hour)}:${tool.lpad(minute)}:${tool.lpad(second)}`;
+	return `${tool.lpad(year, 4)}-${tool.lpad(month)}-${tool.lpad(
+		day
+	)} ${tool.lpad(hour)}:${tool.lpad(minute)}:${tool.lpad(second)}`;
 };
 
-tool.lpad = function (val, total = 2, str = '0') {
-	return val.toString().padStart(total, str)
+tool.lpad = function (val, total = 2, str = "0") {
+	return val.toString().padStart(total, str);
 };
 
 /* 日期格式化
@@ -178,7 +184,7 @@ tool.dateFormat = function (time, fmt = "yyyy-MM-dd hh:mm:ss") {
 	var M = date.getMonth() + 1;
 	var d = date.getDate();
 	var h24 = date.getHours();
-	var h12 = (h24 % 12);
+	var h12 = h24 % 12;
 	var m = date.getMinutes();
 	var s = date.getSeconds();
 	var q = Math.floor((date.getMonth() + 3) / 3);
@@ -192,17 +198,29 @@ tool.dateFormat = function (time, fmt = "yyyy-MM-dd hh:mm:ss") {
 		"m+": m, //分
 		"s+": s, //秒
 		"q+": q, //季度
-		"S": S, //毫秒
+		S: S, //毫秒
 	};
-	const week = ["\u65e5", "\u4e00", "\u4e8c", "\u4e09", "\u56db", "\u4e94", "\u516d"];
+	const week = [
+		"\u65e5",
+		"\u4e00",
+		"\u4e8c",
+		"\u4e09",
+		"\u56db",
+		"\u4e94",
+		"\u516d",
+	];
 	if (/(y+)/.test(fmt)) {
-		fmt = fmt.replace(
-			RegExp.$1,
-			(y + "").substr(4 - RegExp.$1.length)
-		);
+		fmt = fmt.replace(RegExp.$1, (y + "").substr(4 - RegExp.$1.length));
 	}
 	if (/(E+)/.test(fmt)) {
-		fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[E]);
+		fmt = fmt.replace(
+			RegExp.$1,
+			(RegExp.$1.length > 1
+				? RegExp.$1.length > 2
+					? "\u661f\u671f"
+					: "\u5468"
+				: "") + week[E]
+		);
 	}
 	for (var k in o) {
 		if (new RegExp("(" + k + ")").test(fmt)) {
@@ -380,12 +398,16 @@ tool.crypto = {
 };
 
 tool.randomString = function (length, upper) {
-	let result = '';
-	const characters = upper ? '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ' : '0123456789abcdefghijklmnopqrstuvwxyz';
+	let result = "";
+	const characters = upper
+		? "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		: "0123456789abcdefghijklmnopqrstuvwxyz";
 	const charactersLength = characters.length;
 
 	for (let i = 0; i < length; i++) {
-		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		result += characters.charAt(
+			Math.floor(Math.random() * charactersLength)
+		);
 	}
 
 	return result;
@@ -394,42 +416,42 @@ tool.randomString = function (length, upper) {
 tool.getBrowerInfo = function () {
 	var userAgent = window.navigator.userAgent;
 	var browerInfo = {
-		type: 'unknown',
-		version: 'unknown',
-		userAgent: userAgent
+		type: "unknown",
+		version: "unknown",
+		userAgent: userAgent,
 	};
 	if (document.documentMode) {
-		browerInfo.type = "IE"
-		browerInfo.version = document.documentMode + ''
+		browerInfo.type = "IE";
+		browerInfo.version = document.documentMode + "";
 	} else if (userAgent.indexOf("Firefox") > -1) {
-		browerInfo.type = "Firefox"
-		browerInfo.version = userAgent.match(/Firefox\/([\d.]+)/)[1]
+		browerInfo.type = "Firefox";
+		browerInfo.version = userAgent.match(/Firefox\/([\d.]+)/)[1];
 	} else if (userAgent.indexOf("Opera") > -1) {
-		browerInfo.type = "Opera"
-		browerInfo.version = userAgent.match(/Opera\/([\d.]+)/)[1]
+		browerInfo.type = "Opera";
+		browerInfo.version = userAgent.match(/Opera\/([\d.]+)/)[1];
 	} else if (userAgent.indexOf("Edg") > -1) {
-		browerInfo.type = "Edg"
-		browerInfo.version = userAgent.match(/Edg\/([\d.]+)/)[1]
+		browerInfo.type = "Edg";
+		browerInfo.version = userAgent.match(/Edg\/([\d.]+)/)[1];
 	} else if (userAgent.indexOf("Chrome") > -1) {
-		browerInfo.type = "Chrome"
-		browerInfo.version = userAgent.match(/Chrome\/([\d.]+)/)[1]
+		browerInfo.type = "Chrome";
+		browerInfo.version = userAgent.match(/Chrome\/([\d.]+)/)[1];
 	} else if (userAgent.indexOf("Safari") > -1) {
-		browerInfo.type = "Safari"
-		browerInfo.version = userAgent.match(/Safari\/([\d.]+)/)[1]
+		browerInfo.type = "Safari";
+		browerInfo.version = userAgent.match(/Safari\/([\d.]+)/)[1];
 	}
-	return browerInfo
+	return browerInfo;
 };
 
 tool.isSatisfyBrower = function () {
 	var minVer = {
-		"Chrome": 71,
-		"Firefox": 65,
-		"Safari": 12,
-		"Edg": 97,
-		"IE": 999
+		Chrome: 71,
+		Firefox: 65,
+		Safari: 12,
+		Edg: 97,
+		IE: 999,
 	};
 	var browerInfo = tool.getBrowerInfo();
-	var materVer = browerInfo.version.split('.')[0];
+	var materVer = browerInfo.version.split(".")[0];
 	return materVer >= minVer[browerInfo.type];
 };
 
