@@ -79,8 +79,8 @@
 					</template>
 				</scTable>
 			</el-main>
-			<dicHeader ref="dicHeader" @complete="headerComplete" />
-			<dicDetail ref="dicDetail" @complete="detailComplete" />
+			<qcsHeader ref="qcsHeader" @complete="headerComplete" />
+			<qcsDetail ref="qcsDetail" @complete="detailComplete" />
 		</el-container>
 	</el-container>
 </template>
@@ -88,32 +88,37 @@
 import { defineAsyncComponent } from "vue";
 export default {
 	components: {
-		dicDetail: defineAsyncComponent(() => import("./detail")),
-		dicHeader: defineAsyncComponent(() => import("./header")),
+		qcsDetail: defineAsyncComponent(() => import("./detail")),
+		qcsHeader: defineAsyncComponent(() => import("./header")),
 	},
 	data() {
 		return {
-			apiObj: this.$API.sysdicdetail.page,
+			apiObj: this.$API.scmqcsdetail.page,
 			list: [],
 			showGrouploading: false,
 			groupFilterText: "",
 			group: [],
 			param: {
-				key: "",
+				option_id: '0',
+				row_status: '1',
+				create_time: '',
+				key: ''
 			},
 			defaultParam: { type: 1 },
 			selectColumn: {},
 			selection: [],
 			column: [
-				{ prop: "id", label: "id", hide: true },
-				{ prop: "codec", label: "键", width: 100, align: "left", },
-				{ prop: "value", label: "值", width: 100, align: "left" },
-				{ prop: "namec", label: "名称", width: 150, align: "left" },
-				{ prop: "od", label: "排序", width: 60, align: "right" },
-				{ prop: "remark", label: "备注", minWidth: 160, align: 'left' },
-				{ prop: "row_status", label: "状态", width: 80 },
-				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
+				{ label: "id", prop: "id", hide: true },
+				{ prop: 'codec', label: '方案编码', width: 100 },
+				{ prop: 'namec', label: '方案名称', minWidth: 100, align: 'left' },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
+			row_status_list: [this.$SCM.OPTION_ALL],
+			option_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	watch: {
@@ -156,11 +161,11 @@ export default {
 		},
 		open_dialog(row) {
 			if (row.id) {
-				this.$refs.dicDetail.open(row);
+				this.$refs.qcsDetail.open(row);
 				return;
 			}
 			if (this.selectColumn.id) {
-				this.$refs.dicDetail.open(this.selectColumn, "add");
+				this.$refs.qcsDetail.open(this.selectColumn, "add");
 				return;
 			}
 			this.$message.warning("请选择字典栏目，在添加字典值");
@@ -188,7 +193,7 @@ export default {
 		//加载树数据
 		async getGroup(param) {
 			this.showGrouploading = true;
-			const res = await this.$API.sysdicheader.list.get(param);
+			const res = await this.$API.scmqcsheader.list.get(param);
 			this.showGrouploading = false;
 			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {
@@ -198,7 +203,7 @@ export default {
 					label: m.namec,
 					code: m.codec,
 					type: m.types,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.group = this.$TOOL.changeTree(_tree);
@@ -222,9 +227,9 @@ export default {
 		},
 		edit(row) {
 			if (row.id) {
-				this.$refs.dicHeader.open(row);
+				this.$refs.qcsHeader.open(row);
 			} else {
-				this.$refs.dicHeader.open({ type: this.defaultParam.type });
+				this.$refs.qcsHeader.open({ type: this.defaultParam.type });
 			}
 		},
 		remove(node, data) {

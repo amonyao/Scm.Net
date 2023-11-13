@@ -40,15 +40,7 @@ export default {
 			},
 			isSaveing: false,
 			visible: false,
-			formData: {
-				id: 0,
-				types: 1,
-				parentId: "",
-				parentIdList: [],
-				name: undefined,
-				isSystem: false,
-				sort: 1,
-			},
+			formData: this.get_data(),
 			rules: {
 				parentId: [
 					{
@@ -83,6 +75,17 @@ export default {
 	},
 	mounted() { },
 	methods: {
+		get_data() {
+			return {
+				id: 0,
+				types: 1,
+				parentId: "",
+				parentIdList: [],
+				name: undefined,
+				isSystem: false,
+				sort: 1,
+			};
+		},
 		async initTree(param) {
 			const t = await this.$API.sysdicheader.list.get(param);
 			let _tree = [
@@ -101,6 +104,7 @@ export default {
 		async open(row) {
 			this.defaultParam.type = row.type;
 			this.initTree({ type: this.defaultParam.type });
+
 			if (!row.id) {
 				this.mode = "add";
 				this.formData.types = row.type;
@@ -137,14 +141,7 @@ export default {
 			});
 		},
 		close() {
-			this.formData = {
-				id: 0,
-				parentId: "",
-				parentIdList: [],
-				namec: undefined,
-				isSystem: false,
-				sort: 1,
-			};
+			this.formData = this.get_data();
 			this.$refs.formRef.resetFields();
 			this.visible = false;
 		},

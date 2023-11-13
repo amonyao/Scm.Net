@@ -7,7 +7,7 @@
 						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list"/>
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -21,13 +21,17 @@
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
-					<el-tooltip content="通过">
+					<el-tooltip content="启用">
 						<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
-							@click="accept()"></el-button>
+							@click="status_list(1)"></el-button>
 					</el-tooltip>
-					<el-tooltip content="拒绝">
-						<el-button type="danger" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
-							@click="reject()"></el-button>
+					<el-tooltip content="停用">
+						<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
+							@click="status_list(2)"></el-button>
+					</el-tooltip>
+					<el-tooltip content="删除">
+						<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
+							@click="delete_list"></el-button>
 					</el-tooltip>
 				</el-button-group>
 			</div>
@@ -76,61 +80,58 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.ymsacsapply.page,
+			apiObj: this.$API.scmqcsqueue.page,
 			list: [],
-			param: {
+            param:{
 				option_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
-			},
+            },
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'types', label: '申请类型', width: 100 },
-				{ prop: 'area_id', label: '园区', width: 100 },
-				{ prop: 'build_id', label: '楼宇', width: 100 },
-				{ prop: 'floor_id', label: '楼层', width: 100 },
-				{ prop: 'room_id', label: '房间', width: 100 },
-				{ prop: 'merchant_id', label: '所属商户', width: 100 },
-				{ prop: 'codes', label: '系统代码', width: 100 },
-				{ prop: 'names', label: '系统名称', width: 100 },
-				{ prop: 'f_time', label: '起始时间', width: 100 },
-				{ prop: 't_time', label: '结束时间', width: 100 },
-				{ prop: 'reason', label: '申请原因', width: 100 },
-				{ prop: 'person', label: '入园人数', width: 100 },
-				{ prop: 'driver', label: '车辆信息', width: 100 },
-				{ prop: 'row_status', label: '数据状态', width: 80 },
-				{ prop: 'update_time', label: '更新时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'update_names', label: '更新人员', width: 100 },
-				{ prop: 'create_time', label: '创建时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'create_names', label: '创建人员', width: 100 },
+                { prop: 'header_id', label: '', width: 100 },
+                { prop: 'detail_id', label: '', width: 100 },
+                { prop: 'idx', label: '排队序号', width: 100 },
+                { prop: 'codec', label: '排队号码', width: 100 },
+                { prop: 'contact', label: '联系人', width: 100 },
+                { prop: 'label', label: '证件号码', width: 100 },
+                { prop: 'phone', label: '联系电话', width: 100 },
+                { prop: 'level', label: '优先级', width: 100 },
+                { prop: 'calling', label: '呼叫次数', width: 100 },
+                { prop: 'handle', label: '处理状态', width: 100 },
+                { prop: 'row_status', label: '数据状态', width: 100 },
+                { prop: 'update_time', label: '更新时间', width: 100 },
+                { prop: 'update_user', label: '更新人员', width: 100 },
+                { prop: 'create_time', label: '创建时间', width: 100 },
+                { prop: 'create_user', label: '创建人员', width: 100 },
+
 			],
 			row_status_list: [this.$SCM.OPTION_ALL],
 			option_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
-		this.$SCM.list_status(this.row_status_list, true);
 	},
 	methods: {
 		complete() {
 			this.$refs.table.refresh();
 		},
-		search() {
-			this.$refs.table.upData(this.param);
-		},
+        search(){
+            this.$refs.table.upData(this.param);
+        },
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.ymsacsapply.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmqcsqueue.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.ymsacsapply.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmqcsqueue.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.ymsacsapply.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmqcsqueue.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.ymsacsapply.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmqcsqueue.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -152,12 +153,6 @@ export default {
 				return;
 			}
 		},
-		accept() {
-
-		},
-		reject() {
-
-		}
 	},
 };
 </script>

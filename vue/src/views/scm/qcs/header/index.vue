@@ -79,8 +79,8 @@
 					</template>
 				</scTable>
 			</el-main>
-			<dicHeader ref="dicHeader" @complete="headerComplete" />
-			<dicDetail ref="dicDetail" @complete="detailComplete" />
+			<edit ref="edit" @complete="complete" />
+			<column ref="column" @complete="columnComplete" />
 		</el-container>
 	</el-container>
 </template>
@@ -88,32 +88,40 @@
 import { defineAsyncComponent } from "vue";
 export default {
 	components: {
-		dicDetail: defineAsyncComponent(() => import("./detail")),
-		dicHeader: defineAsyncComponent(() => import("./header")),
+		edit: defineAsyncComponent(() => import("./edit")),
+		column: defineAsyncComponent(() => import("./column")),
 	},
 	data() {
 		return {
-			apiObj: this.$API.sysdicdetail.page,
+			apiObj: this.$API.scmqcsheader.page,
 			list: [],
 			showGrouploading: false,
 			groupFilterText: "",
 			group: [],
 			param: {
-				key: "",
+				option_id: '0',
+				row_status: '1',
+				create_time: '',
+				key: ''
 			},
 			defaultParam: { type: 1 },
 			selectColumn: {},
 			selection: [],
 			column: [
-				{ prop: "id", label: "id", hide: true },
-				{ prop: "codec", label: "键", width: 100, align: "left", },
-				{ prop: "value", label: "值", width: 100, align: "left" },
-				{ prop: "namec", label: "名称", width: 150, align: "left" },
-				{ prop: "od", label: "排序", width: 60, align: "right" },
-				{ prop: "remark", label: "备注", minWidth: 160, align: 'left' },
-				{ prop: "row_status", label: "状态", width: 80 },
-				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
+				{ label: "id", prop: "id", hide: true },
+				{ prop: 'codes', label: '系统代码', width: 100 },
+				{ prop: 'codec', label: '方案编码', width: 100 },
+				{ prop: 'names', label: '系统名称', width: 100 },
+				{ prop: 'namec', label: '方案名称', width: 100 },
+				{ prop: 'qty', label: '队列数量', width: 100 },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 100 },
+				{ prop: 'update_user', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 100 },
+				{ prop: 'create_user', label: '创建人员', width: 100 },
 			],
+			row_status_list: [this.$SCM.OPTION_ALL],
+			option_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	watch: {
@@ -136,7 +144,7 @@ export default {
 		this.getGroup({ type: this.defaultParam.type });
 	},
 	methods: {
-		detailComplete() {
+		complete() {
 			this.$refs.table.refresh({ type: this.defaultParam.type });
 		},
 		search() {
@@ -156,11 +164,11 @@ export default {
 		},
 		open_dialog(row) {
 			if (row.id) {
-				this.$refs.dicDetail.open(row);
+				this.$refs.edit.open(row);
 				return;
 			}
 			if (this.selectColumn.id) {
-				this.$refs.dicDetail.open(this.selectColumn, "add");
+				this.$refs.edit.open(this.selectColumn, "add");
 				return;
 			}
 			this.$message.warning("请选择字典栏目，在添加字典值");
@@ -182,13 +190,13 @@ export default {
 				return;
 			}
 		},
-		headerComplete() {
+		columnComplete() {
 			this.getGroup({ type: this.defaultParam.type });
 		},
 		//加载树数据
 		async getGroup(param) {
 			this.showGrouploading = true;
-			const res = await this.$API.sysdicheader.list.get(param);
+			const res = await this.$API.scmqcsheader.list.get(param);
 			this.showGrouploading = false;
 			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {
@@ -222,9 +230,9 @@ export default {
 		},
 		edit(row) {
 			if (row.id) {
-				this.$refs.dicHeader.open(row);
+				this.$refs.column.open(row);
 			} else {
-				this.$refs.dicHeader.open({ type: this.defaultParam.type });
+				this.$refs.column.open({ type: this.defaultParam.type });
 			}
 		},
 		remove(node, data) {
@@ -239,7 +247,7 @@ export default {
 						data.id
 					);
 					if (res.code == 200) {
-						this.headerComplete();
+						this.columnComplete();
 						loading.close();
 						this.$message.success("删除成功");
 					} else {
