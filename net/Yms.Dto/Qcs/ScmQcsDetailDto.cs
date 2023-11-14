@@ -43,12 +43,17 @@ namespace Com.Scm.Qcs
         /// <summary>
         /// 当前号码
         /// </summary>
-        public int current { get; set; }
+        public int idx { get; set; }
 
         /// <summary>
         /// 号码前缀
         /// </summary>
         [StringLength(4)]
         public string prefix { get; set; }
+
+        /// <summary>
+        /// 数字长度
+        /// </summary>
+        public int length { get; set; }
     }
 }

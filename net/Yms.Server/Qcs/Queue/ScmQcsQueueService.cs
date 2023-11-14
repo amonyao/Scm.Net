@@ -1,6 +1,7 @@
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Exceptions;
 using Com.Scm.Qcs;
 using Com.Scm.Result;
 using Com.Scm.Service;
@@ -19,12 +20,18 @@ namespace Com.Scm.Yms.Qcs.Queue
     {
         private readonly SugarRepository<ScmQcsQueueDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly SugarRepository<ScmQcsHeaderDao> _headerRepository;
+        private readonly SugarRepository<ScmQcsDetailDao> _detailRepository;
 
         public ScmQcsQueueService(SugarRepository<ScmQcsQueueDao> thisRepository,
-            SugarRepository<UserDao> userRepository)
+            SugarRepository<UserDao> userRepository,
+            SugarRepository<ScmQcsHeaderDao> headerRepository,
+            SugarRepository<ScmQcsDetailDao> detailRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _headerRepository = headerRepository;
+            _detailRepository = detailRepository;
         }
 
         /// <summary>
@@ -32,12 +39,14 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<ScmQcsQueueDvo>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<ScmQcsQueueDvo>> GetPagesAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
+                .Where(a => a.detail_id == request.detail_id)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
-                //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
+                //.WhereIF(IsValidId(request.id), a => a.detail_id == request.id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
+                .OrderBy(m => m.lv, SqlSugar.OrderByType.Desc)
                 .OrderBy(m => m.id)
                 .Select<ScmQcsQueueDvo>()
                 .ToPageAsync(request.page, request.limit);
@@ -51,11 +60,14 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<ScmQcsQueueDvo>> GetListAsync(ScmSearchRequest request)
+        public async Task<List<ScmQcsQueueDvo>> GetListAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
+                .Where(a => a.detail_id == request.detail_id)
                 .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
+                //.WhereIF(IsValidId(request.id), a => a.detail_id == request.id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
+                .OrderBy(m => m.lv, SqlSugar.OrderByType.Desc)
                 .OrderBy(m => m.id)
                 .Select<ScmQcsQueueDvo>()
                 .ToListAsync();
@@ -118,8 +130,84 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(ScmQcsQueueDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<ScmQcsQueueDao>());
+        public async Task<bool> AddAsync(ScmQcsQueueDto model)
+        {
+            var dao = model.Adapt<ScmQcsQueueDao>();
+            return await _thisRepository.InsertAsync(dao);
+        }
+
+        /// <summary>
+        /// 取号
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ScmQcsQueueDvo> QueuingAsync(QueuingRequest request)
+        {
+            var detailDao = await _detailRepository.GetByIdAsync(request.id);
+            if (detailDao == null)
+            {
+                throw new BusinessException("无效的队列信息！");
+            }
+
+            // 累加取号
+            detailDao.qty += 1;
+
+            var dao = new ScmQcsQueueDao();
+            dao.header_id = detailDao.header_id;
+            dao.detail_id = detailDao.id;
+            dao.idx = detailDao.qty;
+            dao.codec = detailDao.GenCodec();
+            dao.handle = QcsQueueHandleEnums.Todo;
+            await _thisRepository.InsertAsync(dao);
+
+            await _detailRepository.UpdateAsync(detailDao);
+
+            return dao.Adapt<ScmQcsQueueDvo>();
+        }
+
+        /// <summary>
+        /// 叫号
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        [HttpGet]
+        public async Task<ScmQcsQueueDvo> CallingAsync(CallingRequest request)
+        {
+            if (request.dir == CallingDirEnums.Repeat)
+            {
+                var dao = await _thisRepository.GetFirstAsync(a => a.detail_id == request.id
+                    && a.handle == QcsQueueHandleEnums.Doing
+                    && a.row_status == Enums.ScmStatusEnum.Enabled, a => a.idx);
+
+                dao.qty += 1;
+                await _thisRepository.UpdateAsync(dao);
+                return dao.Adapt<ScmQcsQueueDvo>();
+            }
+
+            if (request.dir == CallingDirEnums.Forward)
+            {
+                var dao = await _thisRepository
+                    .AsQueryable()
+                    .Where(a => a.detail_id == request.id && a.handle == QcsQueueHandleEnums.Todo && a.row_status == Enums.ScmStatusEnum.Enabled)
+                    .OrderBy(a => a.lv, SqlSugar.OrderByType.Desc)
+                    .OrderBy(a => a.idx, SqlSugar.OrderByType.Asc)
+                    .FirstAsync();
+
+                dao.handle = QcsQueueHandleEnums.Doing;
+                dao.qty += 1;
+                await _thisRepository.UpdateAsync(dao);
+
+                var detailDao = await _detailRepository.GetByIdAsync(request.id);
+                detailDao.idx += 1;
+                await _detailRepository.UpdateAsync(detailDao);
+
+                return dao.Adapt<ScmQcsQueueDvo>();
+            }
+
+            throw new BusinessException("无效的队列信息！");
+        }
 
         /// <summary>
         /// 更新

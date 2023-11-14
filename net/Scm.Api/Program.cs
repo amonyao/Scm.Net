@@ -18,6 +18,7 @@ using Com.Scm.Uid;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
 using Microsoft.Extensions.FileProviders;
+using Scm.Api.Hubs;
 
 namespace Com.Scm.Api
 {
@@ -117,6 +118,7 @@ namespace Com.Scm.Api
 
             app.MapControllers().RequireAuthorization();
             app.MapHub<ChatHub>("/chathub");
+            app.MapHub<QcsHub>("/qcshub");
 
             app.Run();
         }

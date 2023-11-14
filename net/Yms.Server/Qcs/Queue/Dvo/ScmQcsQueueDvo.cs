@@ -30,7 +30,7 @@ namespace Com.Scm.Yms.Qcs.Queue.Dvo
         /// <summary>
         /// 联系人
         /// </summary>
-        public string contact { get; set; }
+        public string namec { get; set; }
 
         /// <summary>
         /// 证件号码
@@ -45,16 +45,16 @@ namespace Com.Scm.Yms.Qcs.Queue.Dvo
         /// <summary>
         /// 优先级
         /// </summary>
-        public int level { get; set; }
+        public int lv { get; set; }
 
         /// <summary>
         /// 呼叫次数
         /// </summary>
-        public int calling { get; set; }
+        public int qty { get; set; }
 
         /// <summary>
         /// 处理状态
         /// </summary>
-        public int handle { get; set; }
+        public QcsQueueHandleEnums handle { get; set; }
     }
 }

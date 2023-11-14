@@ -28,7 +28,8 @@ namespace Com.Scm.Api.Hubs
             var list = _cacheService.GetCache<List<ClientUser>>(KeyUtils.ONLINEUSERS);
             if (list != null)
             {
-                var now = list.FirstOrDefault(m => m.Id == long.Parse(user));
+                var userId = long.Parse(user);
+                var now = list.FirstOrDefault(m => m.Id == userId);
                 if (now != null)
                 {
                     Context.Items.Remove(now.ConnectionId);
@@ -39,6 +40,10 @@ namespace Com.Scm.Api.Hubs
             await Clients.All.SendAsync("ReceiveMessage", "out", user);
         }
 
+        /// <summary>
+        /// 连接
+        /// </summary>
+        /// <returns></returns>
         public override async Task OnConnectedAsync()
         {
             if (_accessor.HttpContext != null)

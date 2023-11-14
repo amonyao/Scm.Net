@@ -1,4 +1,5 @@
 using Com.Scm.Dto;
+using Com.Scm.Yms;
 using System.ComponentModel.DataAnnotations;
 
 namespace Com.Scm.Qcs
@@ -9,12 +10,12 @@ namespace Com.Scm.Qcs
     public class ScmQcsQueueDto : ScmDataDto
     {
         /// <summary>
-        /// 
+        /// 方案ID
         /// </summary>
         public long header_id { get; set; }
 
         /// <summary>
-        /// 
+        /// 队列ID
         /// </summary>
         public long detail_id { get; set; }
 
@@ -34,7 +35,7 @@ namespace Com.Scm.Qcs
         /// 联系人
         /// </summary>
         [StringLength(32)]
-        public string contact { get; set; }
+        public string namec { get; set; }
 
         /// <summary>
         /// 证件号码
@@ -52,19 +53,17 @@ namespace Com.Scm.Qcs
         /// 优先级
         /// </summary>
         [Required]
-        public int level { get; set; }
+        public int lv { get; set; }
 
         /// <summary>
         /// 呼叫次数
         /// </summary>
         [Required]
-        public int calling { get; set; }
+        public int qty { get; set; }
 
         /// <summary>
         /// 处理状态
         /// </summary>
-        public int handle { get; set; }
-
-
+        public QcsQueueHandleEnums handle { get; set; }
     }
 }

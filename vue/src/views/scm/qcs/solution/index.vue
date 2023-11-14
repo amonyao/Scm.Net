@@ -4,7 +4,7 @@
 			<el-container>
 				<el-header>
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
-					<el-button type="primary" round icon="el-icon-plus" class="add-column" @click="edit"></el-button>
+					<el-button type="primary" round icon="el-icon-plus" class="add-column" @click="editHeader"></el-button>
 				</el-header>
 				<el-main class="nopadding">
 					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
@@ -14,7 +14,7 @@
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
 								<span class="do">
-									<el-icon @click.stop="edit(data)"><el-icon-edit /></el-icon>
+									<el-icon @click.stop="editHeader(data)"><el-icon-edit /></el-icon>
 									<el-icon @click.stop="remove(node, data)"><el-icon-delete /></el-icon>
 								</span>
 							</span>
@@ -195,7 +195,7 @@ export default {
 			this.showGrouploading = true;
 			const res = await this.$API.scmqcsheader.list.get(param);
 			this.showGrouploading = false;
-			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
+			let _tree = [];//{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {
 				_tree.push({
 					id: m.id,
@@ -225,7 +225,7 @@ export default {
 			this.selectColumn = data;
 			this.$refs.table.reload(params);
 		},
-		edit(row) {
+		editHeader(row) {
 			if (row.id) {
 				this.$refs.qcsHeader.open(row);
 			} else {

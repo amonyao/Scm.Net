@@ -45,7 +45,7 @@ namespace Com.Scm.Qcs
         /// <summary>
         /// 当前号码
         /// </summary>
-        public int current { get; set; }
+        public int idx { get; set; }
 
         /// <summary>
         /// 号码前缀
@@ -53,6 +53,44 @@ namespace Com.Scm.Qcs
         [StringLength(4)]
         public string prefix { get; set; }
 
+        /// <summary>
+        /// 数字长度
+        /// </summary>
+        public int length { get; set; }
 
+        /// <summary>
+        /// 取号
+        /// </summary>
+        /// <param name="step"></param>
+        public void Add(int step)
+        {
+            this.qty += step;
+        }
+
+        /// <summary>
+        /// 叫号
+        /// </summary>
+        public void Next()
+        {
+            this.idx += 1;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GenCodec()
+        {
+            var codec = prefix;
+            if (length > 0)
+            {
+                codec += qty.ToString("D" + length);
+            }
+            else
+            {
+                codec += qty;
+            }
+            return codec;
+        }
     }
 }

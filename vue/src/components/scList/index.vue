@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="(item, index) in list" @click="onRightClick(item)" :key="index" class="list-item">
+        <div v-for="(item, index) in data" @click="itemClick(item)" :key="index" class="list-item">
             <slot name="item" :item="item" :index="index">
                 <div class="list-item-text">
                     <el-checkbox></el-checkbox>
@@ -15,13 +15,14 @@
 <script>
 export default {
     name: "ElList",
+    emits: ["change"],
     data() {
         return {
         }
     },
     //获取子组件传过来的激活tab
     props: {
-        list: { type: Array, default: function () { return []; } },
+        data: { type: Array, default: function () { return []; } },
         result: { type: Object, default: () => { } },
         width: { type: String, default: "" }
     },
@@ -33,10 +34,11 @@ export default {
                 return "width:" + this.width
             }
         },
-        onRightClick(item) {
-            if (item.onRightClick) {
-                item.onRightClick();
-            }
+        itemClick(item) {
+            // if (item.onRightClick) {
+            //     item.onRightClick();
+            // }
+            this.$emit("change", item);
         }
     }
 }
