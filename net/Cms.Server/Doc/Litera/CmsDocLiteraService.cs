@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace Com.Scm.Cms.Doc.Litera
 {
+    [ApiExplorerSettings(GroupName = "cms")]
     public class CmsDocLiteraService : ApiService
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;

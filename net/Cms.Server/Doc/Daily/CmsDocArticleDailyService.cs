@@ -6,10 +6,12 @@ using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Jwt;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
 namespace Com.Scm.Cms.Doc.Daily
 {
+    [ApiExplorerSettings(GroupName = "cms")]
     public class CmsDocArticleDailyService : ApiService
     {
         private readonly SugarRepository<CmsLogUserDailyArticleDao> _thisRepository;

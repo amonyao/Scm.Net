@@ -1,4 +1,5 @@
 using Com.Scm.Dao.Unit;
+using Com.Scm.Yms;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -59,6 +60,16 @@ namespace Com.Scm.Qcs
         public int length { get; set; }
 
         /// <summary>
+        /// 号码周期
+        /// </summary>
+        public QcsDetailCycleEnums cycle { get; set; }
+
+        /// <summary>
+        /// 上次标记
+        /// </summary>
+        public int last { get; set; } = -1;
+
+        /// <summary>
         /// 取号
         /// </summary>
         /// <param name="step"></param>
@@ -81,15 +92,37 @@ namespace Com.Scm.Qcs
         /// <returns></returns>
         public string GenCodec()
         {
+            var now = DateTime.Now;
+            var value = 0;
+            switch (cycle)
+            {
+                case QcsDetailCycleEnums.Hour:
+                    value = now.Hour;
+                    break;
+                case QcsDetailCycleEnums.Day:
+                    value = now.Day;
+                    break;
+                case QcsDetailCycleEnums.Week:
+                    value = (int)now.DayOfWeek;
+                    break;
+                case QcsDetailCycleEnums.Month:
+                    value = now.Month;
+                    break;
+                case QcsDetailCycleEnums.Season:
+                    value = now.Month / 3;
+                    break;
+                case QcsDetailCycleEnums.Year:
+                    value = now.Year;
+                    break;
+            }
+            if (last != value)
+            {
+                last = value;
+                qty = 0;
+            }
+
             var codec = prefix;
-            if (length > 0)
-            {
-                codec += qty.ToString("D" + length);
-            }
-            else
-            {
-                codec += qty;
-            }
+            codec += length > 0 ? qty.ToString("D" + length) : qty;
             return codec;
         }
     }

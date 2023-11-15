@@ -2,6 +2,7 @@ using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Exceptions;
+using Com.Scm.Jwt;
 using Com.Scm.Qcs;
 using Com.Scm.Result;
 using Com.Scm.Service;
@@ -20,17 +21,17 @@ namespace Com.Scm.Yms.Qcs.Queue
     {
         private readonly SugarRepository<ScmQcsQueueDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
-        private readonly SugarRepository<ScmQcsHeaderDao> _headerRepository;
+        private readonly JwtContextHolder _jwtContextHolder;
         private readonly SugarRepository<ScmQcsDetailDao> _detailRepository;
 
         public ScmQcsQueueService(SugarRepository<ScmQcsQueueDao> thisRepository,
             SugarRepository<UserDao> userRepository,
-            SugarRepository<ScmQcsHeaderDao> headerRepository,
+            JwtContextHolder jwtContextHolder,
             SugarRepository<ScmQcsDetailDao> detailRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
-            _headerRepository = headerRepository;
+            _jwtContextHolder = jwtContextHolder;
             _detailRepository = detailRepository;
         }
 
@@ -41,8 +42,10 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// <returns></returns>
         public async Task<PageResult<ScmQcsQueueDvo>> GetPagesAsync(SearchRequest request)
         {
+            var userId = _jwtContextHolder.GetToken().user_id;
+
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.detail_id == request.detail_id)
+                .Where(a => a.detail_id == request.detail_id && a.user_id == userId)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.id), a => a.detail_id == request.id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
@@ -62,8 +65,10 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// <returns></returns>
         public async Task<List<ScmQcsQueueDvo>> GetListAsync(SearchRequest request)
         {
+            var userId = _jwtContextHolder.GetToken().user_id;
+
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.detail_id == request.detail_id)
+                .Where(a => a.detail_id == request.detail_id && a.user_id == userId)
                 .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(IsValidId(request.id), a => a.detail_id == request.id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
@@ -175,11 +180,19 @@ namespace Com.Scm.Yms.Qcs.Queue
         [HttpGet]
         public async Task<ScmQcsQueueDvo> CallingAsync(CallingRequest request)
         {
+            var userId = _jwtContextHolder.GetToken().user_id;
+
             if (request.dir == CallingDirEnums.Repeat)
             {
                 var dao = await _thisRepository.GetFirstAsync(a => a.detail_id == request.id
+                    && a.user_id == userId
                     && a.handle == QcsQueueHandleEnums.Doing
                     && a.row_status == Enums.ScmStatusEnum.Enabled, a => a.idx);
+
+                if (dao == null)
+                {
+                    throw new BusinessException("暂无待叫号信息！");
+                }
 
                 dao.qty += 1;
                 await _thisRepository.UpdateAsync(dao);
@@ -195,6 +208,12 @@ namespace Com.Scm.Yms.Qcs.Queue
                     .OrderBy(a => a.idx, SqlSugar.OrderByType.Asc)
                     .FirstAsync();
 
+                if (dao == null)
+                {
+                    throw new BusinessException("暂无待叫号信息！");
+                }
+
+                dao.user_id = userId;
                 dao.handle = QcsQueueHandleEnums.Doing;
                 dao.qty += 1;
                 await _thisRepository.UpdateAsync(dao);

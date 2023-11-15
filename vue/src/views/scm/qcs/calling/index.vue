@@ -21,7 +21,6 @@
                     <div class="left-panel">
                         <el-button type="primary" plain :disabled="param.detail_id == '0'" @click="next()">下一位</el-button>
                         <el-button type="danger" plain :disabled="param.detail_id == '0'" @click="skip()">跳过</el-button>
-                        <el-button type="danger" plain @click="exportAll()">导出</el-button>
                     </div>
                     <div class="right-panel">
                         <div class="right-panel-search">
@@ -194,6 +193,7 @@ export default {
                 return;
             }
             this.sendMessage(res.data);
+            this.search();
         },
         skip() {
 

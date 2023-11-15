@@ -12,7 +12,7 @@ namespace Com.Scm.Cms.Doc
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "v1")]
+    [ApiExplorerSettings(GroupName = "cms")]
     public class CmsDocArticleTagService : ApiService
     {
         private readonly SugarRepository<CmsDocArticleTagDao> _thisRepository;

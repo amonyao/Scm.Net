@@ -12,7 +12,7 @@ namespace FytSoa.Application.Cms.Doc
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "v1")]
+    [ApiExplorerSettings(GroupName = "cms")]
     public class CmsResCatService : ApiService
     {
         private readonly SugarRepository<CmsResCatDao> _thisRepository;

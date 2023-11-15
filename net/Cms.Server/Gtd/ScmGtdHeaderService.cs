@@ -12,7 +12,7 @@ namespace Com.Scm.Gtd
     /// <summary>
     /// 待办服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "Gtd")]
+    [ApiExplorerSettings(GroupName = "gtd")]
     public class ScmGtdHeaderService : ApiService
     {
         private readonly SugarRepository<GtdHeaderDao> _thisRepository;

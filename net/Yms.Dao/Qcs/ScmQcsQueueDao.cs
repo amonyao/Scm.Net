@@ -67,5 +67,10 @@ namespace Com.Scm.Qcs
         /// 处理状态
         /// </summary>
         public QcsQueueHandleEnums handle { get; set; }
+
+        /// <summary>
+        /// 叫号人员
+        /// </summary>
+        public long user_id { get; set; }
     }
 }

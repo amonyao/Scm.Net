@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <div v-for="(item, index) in data" @click="itemClick(item)" :key="index" class="list-item">
+    <div class="sc-list">
+        <div v-for="(item, index) in data" @click="itemClick(item, index)" :key="index" class="sc-list-item"
+            :class="canSelected && selectedIndex == index ? 'active' : ''">
             <slot name="item" :item="item" :index="index">
                 <div class="list-item-text">
                     <el-checkbox></el-checkbox>
@@ -18,13 +19,16 @@ export default {
     emits: ["change"],
     data() {
         return {
+            selectedIndex: -1,
+            selectedItem: null,
         }
     },
     //获取子组件传过来的激活tab
     props: {
         data: { type: Array, default: function () { return []; } },
         result: { type: Object, default: () => { } },
-        width: { type: String, default: "" }
+        width: { type: String, default: "" },
+        canSelected: { type: Boolean, default: true },
     },
     created() {
     },
@@ -34,10 +38,12 @@ export default {
                 return "width:" + this.width
             }
         },
-        itemClick(item) {
-            // if (item.onRightClick) {
-            //     item.onRightClick();
-            // }
+        itemClick(item, index) {
+            if (this.selectedIndex == index) {
+                return;
+            }
+
+            this.selectedIndex = index;
             this.$emit("change", item);
         }
     }
@@ -45,8 +51,14 @@ export default {
 </script>
   
 <style scoped>
-.list-item {
+.sc-list {}
+
+.sc-list-item {
     padding: 10px;
     border-bottom: dashed 1px #ccc;
+}
+
+.sc-list .active {
+    background-color: lightblue;
 }
 </style>

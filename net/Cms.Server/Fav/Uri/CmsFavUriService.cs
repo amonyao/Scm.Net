@@ -13,7 +13,7 @@ namespace Com.Scm.Fav.Uri
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "v1")]
+    [ApiExplorerSettings(GroupName = "cms")]
     public class CmsFavUriService : ApiService
     {
         private readonly SugarRepository<CmsFavUriDao> _thisRepository;

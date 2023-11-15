@@ -29,7 +29,7 @@
 				<el-icon><el-icon-full-screen /></el-icon>最大化
 			</li>
 			<li @click="openWindow()">
-				<el-icon><el-icon-copy-document /></el-icon>在新的窗口中打开
+				<el-icon><el-icon-copy-document /></el-icon>在新窗口打开
 			</li>
 		</ul>
 	</transition>
