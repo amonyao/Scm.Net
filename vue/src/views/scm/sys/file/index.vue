@@ -1,6 +1,6 @@
 <template>
 	<el-container>
-		<el-aside width="220px" v-loading="showGrouploading">
+		<el-aside width="260px" v-loading="showGrouploading">
 			<el-container>
 				<el-header>
 					<el-select v-model="param.types" placeholder="请选择" @change="typeChange">

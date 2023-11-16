@@ -1,20 +1,64 @@
 <template>
 	<el-container>
-		<el-header>
-			111
-		</el-header>
-		<el-main class="nopadding">
-			<div class="page">
-				<scWaterfall :data="list" @preload="preload" @showContent="showContent" :columnCount="3">
-					<template #item="{ item }">
-						<img :data-src="item.src" :alt="item.names" :style="{ height: item._dim + 'px' }" />
-						<div>
-							<label>这是说明文字</label>
-						</div>
-					</template>
-				</scWaterfall>
-			</div>
-		</el-main>
+		<el-aside width="260px" v-loading="showGrouploading">
+			<el-container>
+				<el-header>
+					<el-select v-model="param.types" placeholder="请选择" @change="typeChange">
+						<el-option v-for="item in options" :key="item.value" :label="item.label"
+							:value="item.value"></el-option>
+					</el-select>
+				</el-header>
+				<el-main class="nopadding">
+					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group" :props="props"
+						:current-node-key="''" :highlight-current="true" :expand-on-click-node="false"
+						@node-click="groupClick">
+						<template #default="{ node, data }">
+							<span class="custom-tree-node">
+								<span class="label">{{ node.label }}</span>
+								<span class="do" v-if="data.routes">
+									<el-icon @click.stop="remove_tree(node, data)"><el-icon-delete /></el-icon>
+								</span>
+							</span>
+						</template>
+					</el-tree>
+				</el-main>
+			</el-container>
+		</el-aside>
+		<el-container>
+			<el-header>
+				<div class="left-panel">
+					<el-input v-model="param.path" :style="{ width: '360px' }">
+						<template #prepend>
+							<el-icon><el-icon-folder-opened /></el-icon>
+						</template>
+						<template #append>
+							<el-button icon="el-icon-refresh" @click="refresh" />
+						</template>
+					</el-input>
+				</div>
+				<div class="right-panel">
+					<el-button icon="el-icon-copy-document" plain type="success" :disabled="!selectFile"
+						v-copy="copyUrl">复制地址</el-button>
+					<el-button icon="el-icon-picture" plain type="success" :disabled="!selectFile"
+						@click="lookImg">查看原图</el-button>
+					<el-button icon="el-icon-delete" plain type="danger" :disabled="!selectFile" @click="file_del" />
+					<el-button icon="el-icon-download" plain type="primary" :disabled="!selectFile" @click="file_down" />
+					<el-button icon="el-icon-upload" plain type="primary" @click="open_dialog">本地上传</el-button>
+				</div>
+			</el-header>
+			<el-main class="nopadding" style="padding: 10px">
+				<div class="page">
+					<scWaterfall :data="list" @preload="preload" @showContent="showContent" :columnCount="3">
+						<template #item="{ item }">
+							<img :data-src="item.src" :alt="item.names" :style="{ height: item._dim + 'px' }" />
+							<div>
+								<label>这是说明文字</label>
+							</div>
+						</template>
+					</scWaterfall>
+				</div>
+			</el-main>
+		</el-container>
 	</el-container>
 </template>
 <script>
@@ -22,14 +66,36 @@ export default {
 	data() {
 		return {
 			apiObj: "",
+			showGrouploading: false,
+			groupFilterText: "",
+			group: [],
+			options: [
+				{
+					value: "0",
+					label: "所有文件",
+				},
+				{
+					value: "file",
+					label: "文件",
+				},
+				{
+					value: "image",
+					label: "图片",
+				},
+			],
+			props: {
+				label: "path",
+			},
 			list: [],
 			imgWidth: 100,
 			param: {
-				types_id: "0",
-				row_status: "1",
-				create_time: "",
-				key: "",
+				types: '0',
+				row_status: '1',
+				create_time: '',
+				key: '',
 			},
+			selectFile: undefined,
+			copyUrl: undefined,
 		};
 	},
 	mounted() {
@@ -124,6 +190,61 @@ export default {
 				tmp = Math.round((this.imgWidth * height) / width);
 			}
 			item._dim = tmp;
+		},
+        typeChange() {
+        },
+        groupClick() {
+
+        },
+		lookImg() {
+			this.showImageViewer = true;
+		},
+		file_del() {
+			this.$confirm(
+				`确定删除选中的 【${this.selectFile.name}】 吗？`,
+				"提示",
+				{
+					type: "warning",
+					confirmButtonText: "确定",
+					cancelButtonText: "取消",
+				}
+			)
+				.then(async () => {
+					const loading = this.$loading();
+					var res = await this.$API.sysfile.delFile.delete(
+						this.selectFile.fileName
+					);
+					if (res.code == 200) {
+						this.initFiles();
+						loading.close();
+						this.$message.success("删除成功");
+					} else {
+						this.$alert(res.message, "提示", { type: "error" });
+					}
+				})
+				.catch(() => { });
+		},
+		file_down() {
+			const fileData = this.serverApi + this.selectFile.fileName;
+			const url = window.URL.createObjectURL(
+				new Blob([fileData], {
+					type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8",
+				})
+			);
+			const link = document.createElement("a");
+			link.href = url;
+			link.setAttribute("download", this.selectFile.name);
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			window.URL.revokeObjectURL(url);
+		},
+		open_dialog() {
+			// this.$refs.upload.open(this.param.path);
+		},
+		refresh() {
+			// this.value = [];
+			// this.initFiles();
 		},
 	},
 };

@@ -126,6 +126,8 @@ export default {
 				if (this.formData.end_time) {
 					this.formData.end_time_txt = this.$TOOL.dateTimeFormat(this.formData.end_time);
 				}
+				this.formData.types = '' + this.formData.types;
+				this.formData.level = '' + this.formData.level;
 
 				this.defaultValues = res.data.users;
 			}
@@ -143,7 +145,7 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.syscalendar.add.post(
 							this.formData
 						);

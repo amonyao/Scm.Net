@@ -129,12 +129,12 @@ export default {
 	name: "calendar",
 	data() {
 		return {
+			apiObj: this.$API.uruser.simple,
 			stateMap: {
 				open: "open",
 				complete: "complete",
 				timeout: "timeout",
 			},
-			apiObj: this.$API.uruser.simple,
 			selectUser: {},
 			props: {
 				label: "namec",
