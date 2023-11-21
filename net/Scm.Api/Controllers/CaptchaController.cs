@@ -1,5 +1,6 @@
 using Com.Scm.Dsa.Cache;
 using Com.Scm.Filter;
+using Com.Scm.Image.SkiaSharp;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,9 +31,9 @@ public class CaptchaController : ApiController
         {
             identify = ServerUtils.GetIp();
         }
-        var code = await CaptchaUtils.GenerateRandomCaptchaAsync(4);
-        _CacheService.SetCache(KeyUtils.CAPTCHACODE + identify, code,300);
-        var captcha = await CaptchaUtils.GenerateCaptchaImageAsync(code);
-        return File(captcha.ms.ToArray(), "image/gif");
+
+        var result = new ImageEngine().GenCaptcha();
+        _CacheService.SetCache(KeyUtils.CAPTCHACODE + identify, result.Value, 300);
+        return File(result.Image, "image/gif");
     }
 }

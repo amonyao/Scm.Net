@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Cms.Doc.Poetry
 {
-    [ApiExplorerSettings(GroupName = "cms")]
+    [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocPoetryService : ApiService
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;

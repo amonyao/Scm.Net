@@ -2,7 +2,7 @@
 using Com.Scm.Api.Controllers;
 using Com.Scm.Config;
 using Com.Scm.Filter;
-using Com.Scm.Utils;
+using Com.Scm.Plugin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -164,8 +164,13 @@ namespace Scm.Api.Controllers
             var path = _Config.GetAvatarPath(file);
             if (!System.IO.File.Exists(path))
             {
-                var bytes = ImageUtils.DefaultAvatar();
-                return File(bytes, "image/png");
+                var engine = PluginFactory.GetPlugin<Com.Scm.Image.IPluginImage>("Com.Scm.Image.SkiaSharp.ImageEngine");
+                if (engine == null)
+                {
+                    return null;
+                }
+                var result = engine.GenAvatar();
+                return File(result.Image, "image/png");
             }
 
             using (var stream = System.IO.File.OpenRead(path))

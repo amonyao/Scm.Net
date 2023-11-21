@@ -13,7 +13,7 @@ namespace Com.Scm.Cms.Res
     /// <summary>
     /// 作者服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "cms")]
+    [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsResAuthorService : ApiService
     {
         private readonly SugarRepository<CmsResAuthorDao> _thisRepository;

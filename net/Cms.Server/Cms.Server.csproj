@@ -25,6 +25,9 @@
     <Reference Include="Scm.Common.Dto">
       <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Common.Image">
+      <HintPath>..\Libs\Scm.Common.Image.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Common.Text">
       <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
     </Reference>
@@ -36,6 +39,9 @@
     </Reference>
     <Reference Include="Scm.Dto">
       <HintPath>..\Libs\Scm.Dto.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Plugin">
+      <HintPath>..\Libs\Scm.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server">
       <HintPath>..\Libs\Scm.Server.dll</HintPath>

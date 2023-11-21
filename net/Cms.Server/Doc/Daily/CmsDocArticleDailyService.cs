@@ -11,7 +11,7 @@ using SqlSugar;
 
 namespace Com.Scm.Cms.Doc.Daily
 {
-    [ApiExplorerSettings(GroupName = "cms")]
+    [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocArticleDailyService : ApiService
     {
         private readonly SugarRepository<CmsLogUserDailyArticleDao> _thisRepository;

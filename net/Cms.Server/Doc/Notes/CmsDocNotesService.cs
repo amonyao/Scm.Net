@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Cms.Doc.Notes
 {
-    [ApiExplorerSettings(GroupName = "cms")]
+    [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocNotesService : ApiService
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;

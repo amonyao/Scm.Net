@@ -6,14 +6,17 @@ using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 
 namespace Com.Scm.Fav.Uri
 {
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "cms")]
+    [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsFavUriService : ApiService
     {
         private readonly SugarRepository<CmsFavUriDao> _thisRepository;
@@ -156,5 +159,137 @@ namespace Com.Scm.Fav.Uri
         {
             return await DeleteRecord(_thisRepository, ids.ToListLong());
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="address"></param>
+        [HttpGet]
+        [AllowAnonymous]
+        public async void ReadIcoAsync(string address)
+        {
+            string url = GetHost(address);
+
+            ReadIcon(url, "/favicon.ico");
+
+            var html = await ReadHtml(url);
+            if (string.IsNullOrEmpty(html))
+            {
+                return;
+            }
+
+            var regex = new Regex("<link\\b[^>]*/?>", RegexOptions.IgnoreCase);
+            var match = regex.Match(html);
+            while (match.Success)
+            {
+                var tag = match.Value;
+                if (tag.EndsWith("/>"))
+                {
+                    tag = tag.Substring(0, tag.Length - 1) + "/>";
+                }
+                //tag = tag.Replace("link ", "");
+
+                var link = TextUtils.AsXmlObject<LinkTag>(tag);
+                if (link == null)
+                {
+                    continue;
+                }
+                var rel = link.rel ?? "";
+                if (rel.ToLower().IndexOf("icon") < 0)
+                {
+                    continue;
+                }
+
+                var path = link.href;
+                ReadIcon(url, path);
+                break;
+            }
+        }
+
+        private string GetHost(string url)
+        {
+            var idx = url.IndexOf("://");
+            if (idx < 0)
+            {
+                url = "http://" + url;
+                idx = "http://".Length;
+            }
+
+            idx = url.IndexOf('/', idx + 1);
+            if (idx > 0)
+            {
+                return url.Substring(0, idx);
+            }
+
+            return url;
+        }
+
+        private bool IsPath2Host(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return false;
+            }
+
+            return url.StartsWith("//") || url.IndexOf("://") > 0;
+        }
+
+        private async Task<bool> ReadIcon(string url, string path)
+        {
+            if (!IsPath2Host(path))
+            {
+                url = url + path;
+            }
+
+            var client = new HttpClient();
+            try
+            {
+                using (var stream = await client.GetStreamAsync(url))
+                {
+                    byte[] buff = new byte[1024];
+                    int length = 0;
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        while ((length = stream.Read(buff, 0, buff.Length)) > 0)
+                        {
+                            memory.Write(buff, 0, length);
+                        }
+
+                        var arr = memory.ToArray();
+                        //info.functionIcon = Convert.ToBase64String(arr).Trim();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        private async Task<string> ReadHtml(string url)
+        {
+            try
+            {
+                return await new HttpClient().GetStringAsync(url);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return null;
+            }
+        }
+    }
+
+    [XmlRoot("link")]
+    public class LinkTag
+    {
+        [XmlAttribute("rel")]
+        public string rel { get; set; }
+        [XmlAttribute("href")]
+        public string href { get; set; }
+        [XmlAttribute("type")]
+        public string type { get; set; }
     }
 }

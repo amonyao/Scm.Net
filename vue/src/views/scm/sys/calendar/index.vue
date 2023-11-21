@@ -116,7 +116,7 @@
 				</el-main>
 			</el-container>
 		</el-aside>
-		<modify ref="modify" @complete="init" />
+		<edit ref="edit" @complete="list_data" />
 	</el-container>
 </template>
 
@@ -124,7 +124,7 @@
 import { defineAsyncComponent } from "vue";
 export default {
 	components: {
-		modify: defineAsyncComponent(() => import("./modify")),
+		edit: defineAsyncComponent(() => import("./edit")),
 	},
 	name: "calendar",
 	data() {
@@ -149,9 +149,7 @@ export default {
 			},
 			types_list: [],
 			level_list: [],
-			toDay: new Date(this.demoDay()),
-			resData: [],
-			groupTime: {},
+			toDay: this.demoDay(),
 			data: {},
 		};
 	},
@@ -182,8 +180,7 @@ export default {
 				m.beginTime = m.start_time != '0' ? this.$TOOL.dateFormat(eval(m.start_time), "yyyy-MM-dd") : '';
 				m.endTime = m.end_time != '0' ? this.$TOOL.dateFormat(eval(m.end_time), "yyyy-MM-dd") : '';
 			});
-			this.resData = res.data;
-			this.data = this.getGroup(this.resData, "beginTime");
+			this.data = this.getGroup(res.data, "beginTime");
 		},
 		getData(date) {
 			return this.data[date];
@@ -191,12 +188,12 @@ export default {
 		demoDay(n = 0) {
 			var curDate = new Date();
 			var oneDayTime = 24 * 60 * 60 * 1000;
-			var rDate = new Date(curDate.getTime() + oneDayTime * n);
-			return this.$TOOL.dateFormat(rDate, "yyyy-MM-dd");
+			return new Date(curDate.getTime() + oneDayTime * n);
 		},
 		userChange(val) {
-			this.selectUser = val;
+			///this.selectUser = val;
 			this.param.user_id = val.id;
+			this.list_data();
 		},
 		getGroup(data, key) {
 			let groups = {};
@@ -233,9 +230,9 @@ export default {
 		},
 		open(row) {
 			if (row.id) {
-				this.$refs.modify.open(row);
+				this.$refs.edit.open(row);
 			} else {
-				this.$refs.modify.open();
+				this.$refs.edit.open();
 			}
 		},
 		getTypesNames(types) {

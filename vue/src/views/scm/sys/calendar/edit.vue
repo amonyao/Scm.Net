@@ -26,7 +26,7 @@
 					placeholder="请选择结束时间" clearable>
 				</el-date-picker>
 			</el-form-item>
-			<el-form-item label="参与人" prop="users">
+			<el-form-item label="参与人员" prop="users">
 				<sc-table-select v-model="formData.users" :model-value="defaultValues" :apiObj="apiObj" :table-width="450"
 					:props="props" :style="{ width: '100%' }" multiple clearable collapse-tags collapse-tags-tooltip>
 					<el-table-column prop="headPic" label="头像" width="80">
@@ -167,6 +167,7 @@ export default {
 		},
 		close() {
 			this.formData = this.def_data();
+			this.defaultValues = [];
 			this.$refs.formRef.resetFields();
 			this.visible = false;
 		},

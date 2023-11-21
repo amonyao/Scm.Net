@@ -12,7 +12,7 @@ namespace Com.Scm.Cms.Doc
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "cms")]
+    [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsResStyleService : ApiService
     {
         private readonly SugarRepository<CmsResStyleDao> _thisRepository;

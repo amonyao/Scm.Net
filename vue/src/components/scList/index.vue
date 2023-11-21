@@ -15,7 +15,7 @@
 </template>
 <script>
 export default {
-    name: "ElList",
+    name: "ScList",
     emits: ["change"],
     data() {
         return {

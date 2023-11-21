@@ -136,6 +136,48 @@ tool.screen = function (element) {
 	}
 };
 
+/**
+ * 进入全页面显示
+ */
+tool.showFullPage = function (element) {
+	var style = element.style;
+	if (!style) {
+		return;
+	}
+
+	tool.saveOld(style, "position", "fixed");
+	tool.saveOld(style, "top", "0px");
+	tool.saveOld(style, "left", "0px");
+	tool.saveOld(style, "width", null);
+	tool.saveOld(style, "height", null);
+	tool.saveOld(style, "right", "0px");
+	tool.saveOld(style, "bottom", "0px");
+};
+/**
+ * 退出全页面显示
+ */
+tool.exitFullPage = function (element) {
+	var style = element.style;
+	if (!style) {
+		return;
+	}
+	tool.readOld(style, "position");
+	tool.readOld(style, "top");
+	tool.readOld(style, "left");
+	tool.readOld(style, "width");
+	tool.readOld(style, "height");
+	tool.readOld(style, "right");
+	tool.readOld(style, "bottom");
+};
+
+tool.saveOld = function (style, attr, val) {
+	style["old" + attr] = style[attr];
+	style[attr] = val;
+};
+tool.readOld = function (style, attr) {
+	style[attr] = style["old" + attr];
+};
+
 /* 复制对象 */
 tool.objCopy = function (obj) {
 	return JSON.parse(JSON.stringify(obj));
@@ -458,6 +500,77 @@ tool.isSatisfyBrower = function () {
 tool.isMobile = function () {
 	//var userAgent = window.navigator.userAgent;
 	return !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i);
+};
+
+/*
+ * 显示桌面通知
+ * @param {string} title - 消息标题
+ * @param {object} options - 消息配置
+ * @param {number} duration - 消息时长
+ * @param {function} onclick
+ * @param {function} onshow
+ * @param {function} onclose
+ * @param {function} onerror
+ * @return {object}
+ */
+tool.showNotify = async function (data) {
+	if (!data) {
+		return;
+	}
+
+	// 构造实例
+	function notify(data) {
+		var title = data.title || "";
+		var duration = data.duration || 5000;
+		var options = data.options || {};
+		options.requireInteraction = true;
+		let notification = new Notification(title, options);
+		setTimeout(() => notification.close(), duration);
+		// 绑定事件
+		let methods = ["onclick", "onshow", "onclose", "onerror"];
+		for (let i = 0; i < methods.length; i++) {
+			let method = methods[i];
+			if (typeof options[method] === "function") {
+				notification[method] = options[method];
+			}
+		}
+		return notification;
+	}
+
+	// 一些判断
+	if (window.Notification) {
+		if (Notification.permission === "granted") {
+			return notify(data);
+		} else if (Notification.permission === "default") {
+			let [err, status] = await Notification.requestPermission()
+				.then((status) => [null, status])
+				.catch((err) => [err, null]);
+			return err || status === "denied" ? Promise.reject() : notify(data);
+		}
+	}
+	return Promise.reject();
+};
+
+/**
+ * 显示滚动标题
+ * @param {object} data 消息内容
+ * @returns void
+ */
+tool.showTitle = function (data) {
+	if (!data) {
+		return;
+	}
+
+	var title = data.title || "";
+	function notify() {
+		var arr = title.split("");
+		arr.push(arr.shift());
+		title = arr.join("");
+		document.title = title;
+	}
+
+	// 滚动标题
+	setInterval(notify, 300);
 };
 
 export default tool;
