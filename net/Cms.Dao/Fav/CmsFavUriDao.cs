@@ -42,6 +42,11 @@ namespace Com.Scm.Fav
         public int top { get; set; }
 
         /// <summary>
+        /// 图标
+        /// </summary>
+        public string icon { get; set; }
+
+        /// <summary>
         /// 访问频次
         /// </summary>
         [Required]

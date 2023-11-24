@@ -1,15 +1,16 @@
+using Com.Scm.Cms.Fav.Uri;
 using Com.Scm.Cms.Fav.Uri.Dvo;
+using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Exceptions;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
 
 namespace Com.Scm.Fav.Uri
 {
@@ -22,10 +23,13 @@ namespace Com.Scm.Fav.Uri
         private readonly SugarRepository<CmsFavUriDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public CmsFavUriService(SugarRepository<CmsFavUriDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public CmsFavUriService(SugarRepository<CmsFavUriDao> thisRepository,
+            SugarRepository<UserDao> userRepository,
+            EnvConfig envConfig)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _EnvConfig = envConfig;
         }
 
         /// <summary>
@@ -119,8 +123,39 @@ namespace Com.Scm.Fav.Uri
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(CmsFavUriDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<CmsFavUriDao>());
+        public async Task<bool> AddAsync(CmsFavUriDto model)
+        {
+            model.TrimUri();
+            var dao = await _thisRepository.GetFirstAsync(a => a.uri == model.uri);
+            if (dao != null)
+            {
+                return true;
+            }
+
+            dao = model.Adapt<CmsFavUriDao>();
+            var result = await _thisRepository.InsertAsync(dao);
+            if (!result)
+            {
+                throw new BusinessException("数据添加异常，请重试！");
+            }
+
+            try
+            {
+                var reader = new FaviconReader();
+                result = await reader.Read(_EnvConfig.GetImagesPath("favicon"), dao.uri);
+                if (result)
+                {
+                    dao.icon = reader.FileName;
+                    await _thisRepository.UpdateAsync(dao);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessException(ex.Message);
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// 更新
@@ -129,13 +164,35 @@ namespace Com.Scm.Fav.Uri
         /// <returns></returns>
         public async Task UpdateAsync(CmsFavUriDto model)
         {
-            var dao = await _thisRepository.GetByIdAsync(model.id);
+            model.TrimUri();
+            var dao = await _thisRepository.GetFirstAsync(a => a.uri == model.uri && a.id != model.id);
+            if (dao != null)
+            {
+                return;
+            }
+
+            dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)
             {
                 return;
             }
 
-            dao = model.Adapt(dao);
+            dao = CommonUtils.Adapt(model, dao);
+            try
+            {
+                var reader = new FaviconReader();
+                var result = await reader.Read(_EnvConfig.GetImagesPath("favicon"), dao.uri);
+                if (result)
+                {
+                    dao.icon = reader.FileName;
+                    await _thisRepository.UpdateAsync(dao);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BusinessException(ex.Message);
+            }
+
             await _thisRepository.UpdateAsync(dao);
         }
 
@@ -160,136 +217,11 @@ namespace Com.Scm.Fav.Uri
             return await DeleteRecord(_thisRepository, ids.ToListLong());
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="address"></param>
         [HttpGet]
         [AllowAnonymous]
-        public async void ReadIcoAsync(string address)
+        public async Task<bool> ReadIcoAsync(string uri)
         {
-            string url = GetHost(address);
-
-            ReadIcon(url, "/favicon.ico");
-
-            var html = await ReadHtml(url);
-            if (string.IsNullOrEmpty(html))
-            {
-                return;
-            }
-
-            var regex = new Regex("<link\\b[^>]*/?>", RegexOptions.IgnoreCase);
-            var match = regex.Match(html);
-            while (match.Success)
-            {
-                var tag = match.Value;
-                if (tag.EndsWith("/>"))
-                {
-                    tag = tag.Substring(0, tag.Length - 1) + "/>";
-                }
-                //tag = tag.Replace("link ", "");
-
-                var link = TextUtils.AsXmlObject<LinkTag>(tag);
-                if (link == null)
-                {
-                    continue;
-                }
-                var rel = link.rel ?? "";
-                if (rel.ToLower().IndexOf("icon") < 0)
-                {
-                    continue;
-                }
-
-                var path = link.href;
-                ReadIcon(url, path);
-                break;
-            }
+            return await new FaviconReader().Read(_EnvConfig.GetImagesPath("favicon"), uri);
         }
-
-        private string GetHost(string url)
-        {
-            var idx = url.IndexOf("://");
-            if (idx < 0)
-            {
-                url = "http://" + url;
-                idx = "http://".Length;
-            }
-
-            idx = url.IndexOf('/', idx + 1);
-            if (idx > 0)
-            {
-                return url.Substring(0, idx);
-            }
-
-            return url;
-        }
-
-        private bool IsPath2Host(string url)
-        {
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return false;
-            }
-
-            return url.StartsWith("//") || url.IndexOf("://") > 0;
-        }
-
-        private async Task<bool> ReadIcon(string url, string path)
-        {
-            if (!IsPath2Host(path))
-            {
-                url = url + path;
-            }
-
-            var client = new HttpClient();
-            try
-            {
-                using (var stream = await client.GetStreamAsync(url))
-                {
-                    byte[] buff = new byte[1024];
-                    int length = 0;
-                    using (MemoryStream memory = new MemoryStream())
-                    {
-                        while ((length = stream.Read(buff, 0, buff.Length)) > 0)
-                        {
-                            memory.Write(buff, 0, length);
-                        }
-
-                        var arr = memory.ToArray();
-                        //info.functionIcon = Convert.ToBase64String(arr).Trim();
-                    }
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
-        }
-
-        private async Task<string> ReadHtml(string url)
-        {
-            try
-            {
-                return await new HttpClient().GetStringAsync(url);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                return null;
-            }
-        }
-    }
-
-    [XmlRoot("link")]
-    public class LinkTag
-    {
-        [XmlAttribute("rel")]
-        public string rel { get; set; }
-        [XmlAttribute("href")]
-        public string href { get; set; }
-        [XmlAttribute("type")]
-        public string type { get; set; }
     }
 }

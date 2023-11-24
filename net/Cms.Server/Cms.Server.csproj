@@ -43,6 +43,9 @@
     <Reference Include="Scm.Plugin">
       <HintPath>..\Libs\Scm.Plugin.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Plugin.Image.SkiaSharp">
+      <HintPath>..\Libs\Scm.Plugin.Image.SkiaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server">
       <HintPath>..\Libs\Scm.Server.dll</HintPath>
     </Reference>

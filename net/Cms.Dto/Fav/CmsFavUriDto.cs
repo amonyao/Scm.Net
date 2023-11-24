@@ -33,6 +33,8 @@ namespace Com.Scm.Fav
         [StringLength(1024)]
         public string uri { get; set; }
 
+        public string icon { get; set; }
+
         /// <summary>
         /// 置顶
         /// </summary>
@@ -50,5 +52,27 @@ namespace Com.Scm.Fav
         /// </summary>
         [StringLength(1024)]
         public string remark { get; set; }
+
+        public void TrimUri()
+        {
+            if (string.IsNullOrEmpty(uri))
+            {
+                return;
+            }
+
+            if (uri.StartsWith("//"))
+            {
+                uri = "http:" + uri;
+            }
+            if (uri.IndexOf("://") < 0)
+            {
+                uri = "http://" + uri;
+            }
+
+            if (uri.EndsWith("/"))
+            {
+                uri = uri.Substring(0, uri.Length - 1);
+            }
+        }
     }
 }

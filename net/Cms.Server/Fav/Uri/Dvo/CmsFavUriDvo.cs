@@ -28,6 +28,8 @@ namespace Com.Scm.Cms.Fav.Uri.Dvo
         /// </summary>
         public string uri { get; set; }
 
+        public string icon { get; set; }
+
         /// <summary>
         /// 置顶
         /// </summary>

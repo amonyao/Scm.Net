@@ -23,6 +23,12 @@
 								@click="delete_list"></el-button>
 						</el-tooltip>
 					</el-button-group>
+					<el-divider direction="vertical"></el-divider>
+					<el-radio-group v-model="view">
+						<el-radio-button label="1">表格</el-radio-button>
+						<el-radio-button label="2">列表</el-radio-button>
+						<el-radio-button label="3">格子</el-radio-button>
+					</el-radio-group>
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
@@ -33,7 +39,7 @@
 			</el-header>
 			<el-main class="nopadding">
 				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-					@selection-change="selectionChange">
+					@selection-change="selectionChange" :hidePagination="true" :hideDo="true" v-if="view == 1">
 					<!-- 固定列-选择列 -->
 					<el-table-column fixed type="selection" width="60" align="center" />
 					<el-table-column label="#" type="index" width="60"></el-table-column>
@@ -61,6 +67,14 @@
 						</el-tooltip>
 					</template>
 				</scTable>
+				<scList v-if="view == 2" :data="list">
+					<template #item="{ item }">
+						<el-link :href="item.uri" :title="item.title" target="_blank">
+							<el-image :src="getImg(item)" style="width: 16px; height: 16px" />
+							<div style="padding-left: 5px;line-height: 16px;">{{ item.title }}</div>
+						</el-link>
+					</template>
+				</scList>
 			</el-main>
 			<edit ref="edit" @complete="complete" />
 		</el-container>
@@ -75,13 +89,14 @@ export default {
 	data() {
 		return {
 			apiObj: this.$API.cmsfavuri.page,
-			list: [],
 			param: {
 				cat_id: '0',
 				row_status: '1',
 				create_time: '',
 				key: ''
 			},
+			view: 2,
+			list: [],
 			selectCat: {},
 			selection: [],
 			column: [
@@ -98,13 +113,18 @@ export default {
 		};
 	},
 	mounted() {
+		this.search();
 	},
 	methods: {
 		complete() {
-			this.$refs.table.refresh();
+			this.search();
 		},
-		search() {
-			this.$refs.table.upData(this.param);
+		async search() {
+			var res = await this.$API.cmsfavuri.list.get(this.param);
+			if (!res || res.code != 200) {
+				return;
+			}
+			this.list = res.data;
 		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.cmsfavuri.status, row, row.row_status);
@@ -153,6 +173,9 @@ export default {
 				this.param.cat_id = obj.id;
 			}
 			this.search();
+		},
+		getImg(item) {
+			return this.$CONFIG.SERVER_URL + '/dev/images/favicon/' + item.icon;
 		}
 	},
 };
