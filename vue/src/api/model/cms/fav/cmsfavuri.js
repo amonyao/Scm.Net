@@ -71,4 +71,11 @@ export default {
 			return await http.get(this.url, data);
 		},
 	},
+	open: {
+		url: `${config.API_URL}/cmsfavuri/open/`,
+		name: "打开",
+		get: async function (data) {
+			return await http.get(this.url + data);
+		},
+	},
 };

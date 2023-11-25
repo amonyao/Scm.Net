@@ -9,7 +9,6 @@ using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Mapster;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Fav.Uri
@@ -59,7 +58,8 @@ namespace Com.Scm.Fav.Uri
         public async Task<List<CmsFavUriDvo>> GetListAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key) || a.uri.Contains(request.key))
                 .OrderBy(m => m.id)
                 .Select<CmsFavUriDvo>()
@@ -98,6 +98,8 @@ namespace Com.Scm.Fav.Uri
         [HttpGet("{id}")]
         public async Task<CmsFavUriDvo> GetEditAsync(long id)
         {
+            new RedirectResult("");
+
             return await _thisRepository
                 .AsQueryable()
                 .Select<CmsFavUriDvo>()
@@ -217,11 +219,23 @@ namespace Com.Scm.Fav.Uri
             return await DeleteRecord(_thisRepository, ids.ToListLong());
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<bool> ReadIcoAsync(string uri)
+        /// <summary>
+        /// 访问链接
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<bool> OpenAsync(long id)
         {
-            return await new FaviconReader().Read(_EnvConfig.GetImagesPath("favicon"), uri);
+            var dao = await _thisRepository.GetByIdAsync(id);
+            if (dao == null)
+            {
+                return false;
+            }
+
+            dao.qty += 1;
+            await _thisRepository.UpdateAsync(dao);
+            return true;
         }
     }
 }

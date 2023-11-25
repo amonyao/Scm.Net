@@ -9,21 +9,6 @@
 				<div class="left-panel">
 					<el-button icon="el-icon-plus" type="primary" :disabled="!selectCat.id" @click="open_dialog" />
 					<el-divider direction="vertical"></el-divider>
-					<el-button-group>
-						<el-tooltip content="启用">
-							<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
-								@click="status_list(1)"></el-button>
-						</el-tooltip>
-						<el-tooltip content="停用">
-							<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
-								@click="status_list(2)"></el-button>
-						</el-tooltip>
-						<el-tooltip content="删除">
-							<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
-								@click="delete_list"></el-button>
-						</el-tooltip>
-					</el-button-group>
-					<el-divider direction="vertical"></el-divider>
 					<el-radio-group v-model="view">
 						<el-radio-button label="1">表格</el-radio-button>
 						<el-radio-button label="2">列表</el-radio-button>
@@ -38,7 +23,7 @@
 				</div>
 			</el-header>
 			<el-main class="nopadding">
-				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+				<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
 					@selection-change="selectionChange" :hidePagination="true" :hideDo="true" v-if="view == 1">
 					<!-- 固定列-选择列 -->
 					<el-table-column fixed type="selection" width="60" align="center" />
@@ -57,7 +42,8 @@
 						</template>
 					</el-table-column>
 					<template #title="scope">
-						<el-link type="primary" :href="scope.row.uri" target="_blank">{{ scope.row.title }}</el-link>
+						<el-link type="primary" :href="scope.row.uri" target="_blank" @click="openUri(item)">{{
+							scope.row.title }}</el-link>
 					</template>
 					<template #row_status="scope">
 						<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
@@ -67,11 +53,11 @@
 						</el-tooltip>
 					</template>
 				</scTable>
-				<scList v-if="view == 2" :data="list">
+				<scList v-if="view == 2" :data="list" @editItem="editItem" @removeItem="removeItem">
 					<template #item="{ item }">
-						<el-link :href="item.uri" :title="item.title" target="_blank">
+						<el-link :href="item.uri" :title="item.title" target="_blank" @click="openUri(item)">
 							<el-image :src="getImg(item)" style="width: 16px; height: 16px" />
-							<div style="padding-left: 5px;line-height: 16px;">{{ item.title }}</div>
+							<div style="padding-left: 5px;line-height: 20px;">{{ item.title }}</div>
 						</el-link>
 					</template>
 				</scList>
@@ -88,7 +74,6 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.cmsfavuri.page,
 			param: {
 				cat_id: '0',
 				row_status: '1',
@@ -175,7 +160,20 @@ export default {
 			this.search();
 		},
 		getImg(item) {
-			return this.$CONFIG.SERVER_URL + '/dev/images/favicon/' + item.icon;
+			return this.$CONFIG.SERVER_URL + '/data/images/favicon/' + (item.icon || '0');
+		},
+		async openUri(item) {
+			var res = await this.$API.cmsfavuri.open.get(item.id);
+			if (!res || res.code != 200) {
+				return false;
+			}
+			return res.data;
+		},
+		editItem(item) {
+			this.open_dialog(item);
+		},
+		removeItem(item) {
+			alert(item.title);
 		}
 	},
 };
