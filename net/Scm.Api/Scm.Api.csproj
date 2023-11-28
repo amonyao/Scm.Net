@@ -146,6 +146,9 @@
     <Reference Include="Scm.Server.Quartz">
       <HintPath>..\Libs\Scm.Server.Quartz.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Server.Share">
+      <HintPath>..\Libs\Scm.Server.Share.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server.Swagger">
       <HintPath>..\Libs\Scm.Server.Swagger.dll</HintPath>
     </Reference>

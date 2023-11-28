@@ -2,6 +2,8 @@
 {
     public class CmsUtils
     {
+        public const long APP_ID = 1714913846931623936L;
+
         public static void SaveFile(string path, long id, string content)
         {
             var file = Path.Combine(path, id + ".txt");

@@ -11,6 +11,9 @@ using SqlSugar;
 
 namespace Com.Scm.Cms.Doc.Daily
 {
+    /// <summary>
+    /// 每日推荐
+    /// </summary>
     [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocArticleDailyService : ApiService
     {

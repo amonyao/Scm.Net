@@ -1,7 +1,7 @@
 <template>
     <div class="sc-list">
         <div v-for="(item, index) in data" @click="itemClick(item, index)" :key="index" class="sc-list-item"
-            :class="canSelected && selectedIndex == index ? 'active' : ''">
+            :style="{ width: 100 / columns + '%' }" :class="canSelected && selectedIndex == index ? 'active' : ''">
             <slot name="item" :item="item" :index="index">
                 <div class="list-item-text">
                     <el-checkbox></el-checkbox>
@@ -36,6 +36,7 @@ export default {
         hideDo: { type: Boolean, default: false },
         hideEdit: { type: Boolean, default: false },
         hideRemove: { type: Boolean, default: false },
+        columns: { type: Number, default: 1 },
     },
     created() {
     },
@@ -64,7 +65,14 @@ export default {
 </script>
   
 <style scoped>
-.sc-list {}
+.sc-list {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
 .sc-list .active {
     background-color: lightblue;
@@ -72,13 +80,12 @@ export default {
 
 .sc-list-item {
     display: flex;
-    flex: 1;
+    /* flex: 1; */
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
     height: 100%;
     padding: 10px;
-    border-bottom: dashed 1px #ccc;
 }
 
 .sc-list-item .opt {

@@ -13,6 +13,7 @@ using Com.Scm.Newton;
 using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
 using Com.Scm.Service;
+using Com.Scm.Share;
 using Com.Scm.Swagger;
 using Com.Scm.Uid;
 using Com.Scm.Uid.Config;
@@ -37,6 +38,11 @@ namespace Com.Scm.Api
             var envConfig = AppUtils.GetConfig<EnvConfig>(EnvConfig.NAME) ?? new EnvConfig();
             envConfig.Prepare(builder);
             builder.Services.AddSingleton(envConfig);
+
+            //  ˝æ›≈‰÷√
+            var dataConfig = AppUtils.GetConfig<DataConfig>(DataConfig.NAME) ?? new DataConfig();
+            dataConfig.Prepare(builder.Environment);
+            builder.Services.AddSingleton(dataConfig);
 
             // øÁ”Ú∑√Œ 
             builder.Services.CorsSetup();
@@ -91,6 +97,7 @@ namespace Com.Scm.Api
             builder.Services.AddScoped<IDicService, ScmDicService>();
             builder.Services.AddScoped<ICfgService, ScmCfgService>();
             builder.Services.AddScoped<ISecService, ScmSecService>();
+            builder.Services.AddScoped<IShareService, ShareService>();
 
             // Mapper
             builder.Services.AddMapperProfile();

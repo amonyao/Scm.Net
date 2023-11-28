@@ -12,7 +12,7 @@
     "@microsoft/signalr": "^6.0.4",
     "@tinymce/tinymce-vue": "5.0.0",
     "axios": "0.27.2",
-    "codemirror": "^5.65.5",
+    "codemirror": "^5.65.16",
     "core-js": "3.24.1",
     "cropperjs": "1.5.12",
     "crypto-js": "4.1.1",

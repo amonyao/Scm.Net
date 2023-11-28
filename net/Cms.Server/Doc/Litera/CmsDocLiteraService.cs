@@ -14,6 +14,9 @@ using System.Text.RegularExpressions;
 
 namespace Com.Scm.Cms.Doc.Litera
 {
+    /// <summary>
+    /// 网文
+    /// </summary>
     [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocLiteraService : ApiService
     {

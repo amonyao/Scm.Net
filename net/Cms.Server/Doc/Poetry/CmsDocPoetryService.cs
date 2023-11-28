@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Cms.Doc.Poetry
 {
+    /// <summary>
+    /// 诗词
+    /// </summary>
     [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocPoetryService : ApiService
     {

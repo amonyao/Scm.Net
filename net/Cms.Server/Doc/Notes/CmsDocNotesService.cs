@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Cms.Doc.Notes
 {
+    /// <summary>
+    /// 记事
+    /// </summary>
     [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsDocNotesService : ApiService
     {

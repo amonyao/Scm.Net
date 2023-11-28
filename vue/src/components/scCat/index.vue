@@ -45,7 +45,7 @@ export default {
         data: { type: Object, default: () => { } },
         params: { type: Object, default: () => ({}) }
     },
-    emits: ['complete'],
+    emits: ['change'],
     data() {
         return {
             loading: false,
@@ -78,12 +78,12 @@ export default {
         //树点击事件
         nodeClick(data) {
             if (data.id == 1) {
-                this.$emit('complete', { app: this.appId });
+                this.$emit('change', { app: this.appId });
                 return;
             }
 
             this.selectCat = data;
-            this.$emit('complete', this.selectCat);
+            this.$emit('change', this.selectCat);
         },
         remove(node, data) {
             this.$confirm(`确定要删除选中的 ${data.label} 项吗？`, "提示", {

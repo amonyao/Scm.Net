@@ -1,7 +1,7 @@
 <template>
 	<el-container>
 		<el-aside width="260px">
-			<sc-cat @complete="cat_change" appId="1714913846931623936"></sc-cat>
+			<sc-cat @change="cat_change" appId="1714913846931623936"></sc-cat>
 		</el-aside>
 
 		<el-container>
@@ -55,10 +55,12 @@
 				</scTable>
 				<scList v-if="view == 2" :data="list" @editItem="editItem" @removeItem="removeItem">
 					<template #item="{ item }">
-						<el-link :href="item.uri" :title="item.title" target="_blank" @click="openUri(item)">
-							<el-image :src="getImg(item)" style="width: 16px; height: 16px" />
-							<div style="padding-left: 5px;line-height: 20px;">{{ item.title }}</div>
-						</el-link>
+						<div class="list-item">
+							<el-link :href="item.uri" :title="item.title" target="_blank" @click="openUri(item)">
+								<el-image :src="getImg(item)" style="width: 16px; height: 16px" />
+								<div style="padding-left: 5px;line-height: 20px;">{{ item.title }}</div>
+							</el-link>
+						</div>
 					</template>
 				</scList>
 			</el-main>
@@ -178,3 +180,8 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.list-item {
+	border-bottom: dashed 1px #ccc;
+}
+</style>
