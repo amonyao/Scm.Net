@@ -27,6 +27,7 @@ import scSelectFilter from "./components/scSelectFilter";
 import scFileImport from "./components/scFileImport";
 import scList from "./components/scList";
 import scPanel from "./components/scPanel";
+import scSummary from "./components/scSummary";
 
 import scStatusIndicator from "./components/scMini/scStatusIndicator";
 import scTrend from "./components/scMini/scTrend";
@@ -76,6 +77,7 @@ export default {
 		app.component("scFileImport", scFileImport);
 		app.component("scList", scList);
 		app.component("scPanel", scPanel);
+		app.component("scSummary", scSummary);
 
 		//注册全局指令
 		app.directive("auth", auth);

@@ -1,14 +1,13 @@
 <template>
 	<el-container>
 		<el-main>
-			<sc-list :data="list">
-				<template #item="{ item }">
-					<div class="list-item-text">
-						{{ item.title }}
-					</div>
-					<span>{{ item.summary }}</span>
-				</template>
-			</sc-list>
+			<el-card>
+				<sc-list :data="list" :hideDo="true">
+					<template #item="{ item }">
+						<sc-summary :title="item.title" :summary="item.summary" @click="openItem(item)"></sc-summary>
+					</template>
+				</sc-list>
+			</el-card>
 		</el-main>
 	</el-container>
 </template>
@@ -16,12 +15,8 @@
 export default {
 	data() {
 		return {
-			apiObj: this.$API.cmsdocarticleshare.page,
 			list: [],
 			param: {
-				types: 20,
-				row_status: '1',
-				create_time: '',
 				key: ''
 			},
 		};
@@ -35,10 +30,10 @@ export default {
 			if (!res || res.code != 200) {
 				return;
 			}
-			this.list = res.data;
+			this.list = res.data.items;
 		},
-		selectionChange(selection) {
-			this.selection = selection;
+		openItem(item) {
+			this.$router.push({ path: '/cms/doc/items', query: { 'id': item.ref_id } });
 		},
 	},
 };

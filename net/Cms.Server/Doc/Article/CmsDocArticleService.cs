@@ -384,7 +384,7 @@ namespace Com.Scm.Cms.Doc
                     .FirstAsync();
                 if (articleDao == null)
                 {
-                    articleDao = new CmsDocArticleDao();
+                    articleDao = GetDefaultArticle();
                 }
             }
             else
@@ -406,8 +406,7 @@ namespace Com.Scm.Cms.Doc
 
                 if (articleDao == null)
                 {
-                    articleDao = new CmsDocArticleDao();
-                    articleDao.id = CmsDocArticleDto.SYS_ID;
+                    articleDao = GetDefaultArticle();
                 }
 
                 dailyDao = new CmsLogUserDailyArticleDao();
@@ -419,19 +418,53 @@ namespace Com.Scm.Cms.Doc
                 await dailyRespository.InsertAsync(dailyDao);
             }
 
+            var dailyDvo = new DailyResponse();
+            dailyDvo.dates = dates;
+            dailyDvo.article = await ReadArticle(articleDao);
+
+            return dailyDvo;
+        }
+
+        /// <summary>
+        /// 根据ID读取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<CmsDocArticleDvo> GetItemsAsync(long id)
+        {
+            var articleDao = await _thisRepository.GetByIdAsync(id);
+            return await ReadArticle(articleDao);
+        }
+
+        private CmsDocArticleDao GetDefaultArticle()
+        {
+            var articleDao = new CmsDocArticleDao();
+            articleDao.id = CmsDocArticleDto.SYS_ID;
+            return articleDao;
+        }
+
+        /// <summary>
+        /// 读取文章详情
+        /// </summary>
+        /// <param name="articleDao"></param>
+        /// <returns></returns>
+        private async Task<CmsDocArticleDvo> ReadArticle(CmsDocArticleDao articleDao)
+        {
+            if (articleDao == null)
+            {
+                articleDao = GetDefaultArticle();
+            }
+
             var articleDvo = articleDao.Adapt<CmsDocArticleDvo>();
             articleDvo.content = articleDvo.summary;
             if (articleDao.files > 0)
             {
                 articleDvo.content = CmsUtils.ReadFile(_EnvConfig.GetDataPath("articles"), articleDao.id);
             }
-
-            var dailyDvo = new DailyResponse();
-            dailyDvo.dates = dates;
-            dailyDvo.article = articleDvo;
             articleDvo.style = await GetStyle(articleDao);
 
-            return dailyDvo;
+            return articleDvo;
         }
 
         private async Task<string> GetStyle(CmsDocArticleDao articleDao)

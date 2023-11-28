@@ -62,7 +62,7 @@ export default {
                 id: '0',
                 types: '0',
                 cat_id: '0',
-                visible: '1',
+                visible: '20',
                 batch: false,
                 blank: 1
             }

@@ -68,17 +68,13 @@ export default {
 .sc-list {
     width: 100%;
     height: auto;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: wrap;
 }
 
 .sc-list .active {
     background-color: lightblue;
 }
 
-.sc-list-item {
+.sc-list .sc-list-item {
     display: flex;
     /* flex: 1; */
     align-items: center;

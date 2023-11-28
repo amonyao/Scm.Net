@@ -4,9 +4,11 @@ using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Enums;
 using Com.Scm.Filter;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Share;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,14 +24,17 @@ namespace Com.Scm.Cms.Doc.Litera
     {
         private readonly SugarRepository<CmsDocArticleDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly IShareService _shareService;
 
         public CmsDocLiteraService(SugarRepository<CmsDocArticleDao> thisRepository,
             SugarRepository<UserDao> userRepository,
-            EnvConfig config)
+            EnvConfig config,
+            IShareService shareService)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _EnvConfig = config;
+            _shareService = shareService;
         }
 
         /// <summary>
@@ -213,6 +218,18 @@ namespace Com.Scm.Cms.Doc.Litera
                 CmsUtils.SaveFile(_EnvConfig.GetDataPath("articles"), dao.id, content);
             }
 
+            if (dto.visible >= Enums.VisibleEnum.Public)
+            {
+                var shareDto = new ShareHeaderDto();
+                shareDto.app_id = CmsUtils.APP_ID;
+                shareDto.ref_id = dao.id;
+                shareDto.title = GetTitle(content);
+                shareDto.summary = GetSummary(content);
+                shareDto.types = (ShareTypesEnums)((int)dto.visible / 10);
+                shareDto.modes = (ShareModesEnums)((int)dto.visible % 10);
+                await _shareService.SaveShareData(shareDto);
+            }
+
             return 1;
         }
 
@@ -309,6 +326,16 @@ namespace Com.Scm.Cms.Doc.Litera
         private string GetTitle(string content)
         {
             return TextUtils.Left(content, 128);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        private string GetSummary(string content)
+        {
+            return TextUtils.Left(content, 256);
         }
     }
 }

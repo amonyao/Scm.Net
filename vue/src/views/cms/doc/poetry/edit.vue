@@ -89,7 +89,7 @@ export default {
                 dynasty_id: '0',
                 author_id: '0',
                 origin_id: '0',
-                visible: '1',
+                visible: '20',
             }
         },
         async init() {
