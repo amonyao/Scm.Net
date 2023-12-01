@@ -270,6 +270,7 @@ scm.get_option_names = function (options, key, def) {
 	if (!options) {
 		return def;
 	}
+	key = "" + key;
 	var obj = options.find((item) => {
 		return item.value == key;
 	});

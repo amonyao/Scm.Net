@@ -10,13 +10,8 @@
 
 <template>
 	<transition name="el-zoom-in-top">
-		<div
-			v-if="visible"
-			ref="contextmenu"
-			class="sc-contextmenu"
-			:style="{ left: left + 'px', top: top + 'px' }"
-			@contextmenu.prevent="fun"
-		>
+		<div v-if="visible" ref="contextmenu" class="sc-contextmenu" :style="{ left: left + 'px', top: top + 'px' }"
+			@contextmenu.prevent="fun">
 			<ul class="sc-contextmenu__menu">
 				<slot></slot>
 			</ul>
@@ -47,7 +42,7 @@ export default {
 			}
 		},
 	},
-	mounted() {},
+	mounted() { },
 	methods: {
 		cm(e) {
 			let sp = this.$refs.contextmenu;
@@ -98,6 +93,7 @@ export default {
 	z-index: 3000;
 	font-size: 12px;
 }
+
 .sc-contextmenu__menu {
 	display: inline-block;
 	min-width: 120px;
@@ -108,14 +104,16 @@ export default {
 	list-style-type: none;
 	padding: 10px 0;
 }
-.sc-contextmenu__menu > hr {
+
+.sc-contextmenu__menu>hr {
 	margin: 5px 0;
 	border: none;
 	height: 1px;
 	font-size: 0px;
 	background-color: var(--el-border-color-light);
 }
-.sc-contextmenu__menu > li {
+
+.sc-contextmenu__menu>li {
 	margin: 0;
 	cursor: pointer;
 	line-height: 30px;
@@ -127,25 +125,30 @@ export default {
 	text-decoration: none;
 	position: relative;
 }
-.sc-contextmenu__menu > li:hover {
+
+.sc-contextmenu__menu>li:hover {
 	background-color: #ecf5ff;
 	color: #66b1ff;
 }
-.sc-contextmenu__menu > li.disabled {
+
+.sc-contextmenu__menu>li.disabled {
 	cursor: not-allowed;
 	color: #bbb;
 	background: transparent;
 }
+
 .sc-contextmenu__icon {
 	display: inline-block;
 	width: 14px;
 	font-size: 14px;
 	margin-right: 10px;
 }
+
 .sc-contextmenu__suffix {
 	margin-left: 40px;
 	color: #999;
 }
+
 .sc-contextmenu__menu li ul {
 	position: absolute;
 	top: 0px;
@@ -153,11 +156,12 @@ export default {
 	display: none;
 	margin: -11px 0;
 }
+
 .dark .sc-contextmenu li {
 	color: var(--el-text-color-primary);
 }
-.dark .sc-contextmenu__menu > li:hover {
+
+.dark .sc-contextmenu__menu>li:hover {
 	background-color: var(--el-table-border);
 	color: var(--el-text-color-primary);
-}
-</style>
+}</style>

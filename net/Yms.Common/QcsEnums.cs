@@ -5,8 +5,17 @@ namespace Com.Scm.Yms
     public enum QcsQueueHandleEnums
     {
         None = 0,
+        /// <summary>
+        /// 待叫号
+        /// </summary>
         Todo = 1,
+        /// <summary>
+        /// 服务中
+        /// </summary>
         Doing = 2,
+        /// <summary>
+        /// 已完成
+        /// </summary>
         Done = 3,
     }
 

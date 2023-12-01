@@ -84,13 +84,15 @@ export default {
                 { label: "优先级", prop: "level", width: "120", align: "left" },
                 { label: "所属部门", prop: "OrganizeObj", align: "left", width: "200" },
                 { label: "呼叫次数", prop: "calling", width: "80" },
-                { label: "处理状态", prop: "handle", width: "120" },
+                { label: "处理状态", prop: "handle", width: "120", formatter: this.getHandle },
                 { label: "更新时间", prop: "update_time", width: "160", formatter: this.$TOOL.dateTimeFormat },
                 { label: "创建时间", prop: "create_time", width: "160", formatter: this.$TOOL.dateTimeFormat },
             ],
+            handle_list: [],
         };
     },
     mounted() {
+        this.$SCM.list_dic(this.handle_list, 'qcs_handle', true);
         this.initTree({});
         this.init();
     },
@@ -135,7 +137,7 @@ export default {
         },
         async initTree(param) {
             const t = await this.$API.scmqcsheader.list.get(param);
-            let _tree = [{ 'id': '1', value: '0', label: '请选择' }];
+            let _tree = [{ 'id': '1', value: '0', label: '请选择', parentId: '0' }];
             t.data.some((m) => {
                 _tree.push({
                     id: m.id,
@@ -178,7 +180,7 @@ export default {
             });
         },
         sendMessage(dvo) {
-            this.$message.success("取号成功：" + dvo.codec);
+            this.$message.success("叫号成功：" + dvo.codec);
             if (dvo) {
                 this.connection.invoke("SendMessage", dvo.detail_id);
             }
@@ -190,6 +192,7 @@ export default {
 
             var res = await this.$API.scmqcsqueue.calling.get({ id: this.param.detail_id, dir: 3 });
             if (!res || res.code != 200) {
+                this.$message.error(res.message);
                 return;
             }
             this.sendMessage(res.data);
@@ -197,6 +200,9 @@ export default {
         },
         skip() {
 
+        },
+        getHandle(handle) {
+            return this.$SCM.get_option_names(this.handle_list, handle, '');
         }
     },
 };
