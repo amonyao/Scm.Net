@@ -19,7 +19,7 @@
 				<el-switch v-model="formData.remind" active-text="开启" />
 			</el-form-item>
 			<el-form-item label="表达式" prop="cron" v-if="formData.remind">
-				<sc-cron v-model="formData.cron" placeholder="请输入Cron定时规则" clearable></sc-cron>
+				<sc-cron v-model="formData.cron" placeholder="请输入Cron定时规则" :shortcuts="crons" clearable></sc-cron>
 			</el-form-item>
 			<el-form-item label="提示方式" prop="notice" v-if="formData.remind">
 				<sc-select v-model="formData.notice" :data="notice_list" placeholder="请输入提示方式"></sc-select>
@@ -60,8 +60,20 @@ export default {
 			},
 			priority_list: [this.$SCM.OPTION_ONE],
 			notice_list: [this.$SCM.OPTION_ONE],
-			handle_list: [this.$SCM.OPTION_ONE]
+			handle_list: [this.$SCM.OPTION_ONE],
+			crons: [],
 		};
+	},
+	created() {
+		var now = new Date();
+		var weeks = ['日', '一', '二', '三', '四', '五', '六'];
+		var hour = now.getHours();
+		var month = now.getMonth() + 1;
+		var date = now.getDate();
+		this.crons.push({ 'value': '0 0 ' + hour + ' * * ?', 'text': '每天' + hour + '时' });
+		this.crons.push({ 'value': '0 0 ' + hour + ' ' + date + ' * ?', 'text': '每月' + date + '日' + hour + '时' });
+		this.crons.push({ 'value': '0 0 ' + hour + ' ? * ' + now.getDay(), 'text': '每周星期' + weeks[now.getDay()] + hour + '时' });
+		this.crons.push({ 'value': '0 0 ' + hour + ' ' + date + ' ' + month + ' ?', 'text': '每年' + month + '月' + date + '日' + hour + '时' });
 	},
 	mounted() {
 		this.$SCM.list_dic(this.priority_list, 'gtd_priority', false);
