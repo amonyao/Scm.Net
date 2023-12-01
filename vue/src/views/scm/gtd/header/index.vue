@@ -4,26 +4,11 @@
 			<div class="left-panel">
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
 				<el-divider direction="vertical"></el-divider>
-				<el-button-group>
-					<el-tooltip content="启用">
-						<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
-							@click="status_list(1)"></el-button>
-					</el-tooltip>
-					<el-tooltip content="停用">
-						<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
-							@click="status_list(2)"></el-button>
-					</el-tooltip>
-					<el-tooltip content="删除">
-						<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
-							@click="delete_list"></el-button>
-					</el-tooltip>
-				</el-button-group>
-				<el-divider direction="vertical"></el-divider>
 				<el-radio-group v-model="model" @change="changeView()">
-					<el-radio-button label="0">列表</el-radio-button>
 					<el-radio-button label="1">表格</el-radio-button>
-					<el-radio-button label="2">三列</el-radio-button>
-					<el-radio-button label="3">四象限</el-radio-button>
+					<el-radio-button label="2">列表</el-radio-button>
+					<el-radio-button label="3">三列</el-radio-button>
+					<el-radio-button label="4">四象限</el-radio-button>
 				</el-radio-group>
 			</div>
 			<div class="right-panel">
@@ -34,8 +19,8 @@
 			</div>
 		</el-header>
 		<el-main :class="{ nopadding: model == 1 }">
-			<div v-if="model == 1">
-				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+			<div v-if="model == 1" class="div_panel">
+				<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
 					@selection-change="selectionChange" :hide-pagination="true" :hide-do="true">
 					<el-table-column align="center" fixed type="selection" width="60" />
 					<el-table-column label="#" type="index" width="50"></el-table-column>
@@ -52,61 +37,151 @@
 							</el-popconfirm>
 						</template>
 					</el-table-column>
-					<template #row_status="scope">
-						<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
-							<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
-								@change="status_item($event, scope.row)">
-							</el-switch>
-						</el-tooltip>
-					</template>
 				</scTable>
 			</div>
-			<div v-else-if="model == 2">
-				<el-row>
+			<div v-else-if="model == 2" class="div_panel">
+				<sc-list :data="list" :hide-do="true" class="gtd-list" :canSelected="true">
+					<template #item="{ item }">
+						<div class="gtd-item">
+							<div class="thumb">
+								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							</div>
+							<div style="width: 100%;" @click="itemClick(item)">
+								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+								<div class="summary">{{ item.create_time }}</div>
+							</div>
+						</div>
+					</template>
+				</sc-list>
+			</div>
+			<div v-else-if="model == 3" class="div_panel">
+				<el-row class="gtd-row3">
 					<el-col :span="8">
-						<el-card>
-							<handle ref="handle1" header="待办"></handle>
-						</el-card>
+						<sc-list :data="handleList1" :hide-do="true" class="gtd-list" :canSelected="true" header="待办">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb">
+										<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ item.create_time }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
 					</el-col>
 					<el-col :span="8">
-						<el-card>
-							<handle ref="handle2" header="进行中" style="margin-left: 15px;margin-right: 15px;"></handle>
-						</el-card>
+						<sc-list :data="handleList2" :hide-do="true" class="gtd-list" :canSelected="true" header="进行中">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb">
+										<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ item.create_time }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
 					</el-col>
 					<el-col :span="8">
-						<el-card>
-							<handle ref="handle3" header="已完成"></handle>
-						</el-card>
+						<sc-list :data="handleList3" :hide-do="true" class="gtd-list" :canSelected="true" header="已完成">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb">
+										<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ item.create_time }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
 					</el-col>
 				</el-row>
 			</div>
-			<div v-else-if="model == 3">
+			<div v-else-if="model == 4" class="div_panel">
 				<table>
 					<tr>
 						<td>
-							<handle ref="priority0" header="紧急且重要"></handle>
+							<sc-list ref="priority1" :data="priorityList1" :hide-do="true" class="gtd-list"
+								:canSelected="true" header="紧急且重要">
+								<template #item="{ item }">
+									<div class="gtd-item">
+										<div class="thumb">
+											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+										</div>
+										<div style="width: 100%;" @click="itemClick(item)">
+											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+											<div class="summary">{{ item.create_time }}</div>
+										</div>
+									</div>
+								</template>
+							</sc-list>
 						</td>
 						<td>
-							<handle ref="priority1" header="紧急不重要"></handle>
+							<sc-list ref="priority2" :data="priorityList2" :hide-do="true" class="gtd-list"
+								:canSelected="true" header="紧急不重要">
+								<template #item="{ item }">
+									<div class="gtd-item">
+										<div class="thumb">
+											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+										</div>
+										<div style="width: 100%;" @click="itemClick(item)">
+											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+											<div class="summary">{{ item.create_time }}</div>
+										</div>
+									</div>
+								</template>
+							</sc-list>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<handle ref="priority2" header="重要不紧急"></handle>
+							<sc-list ref="priority3" :data="priorityList3" :hide-do="true" class="gtd-list"
+								:canSelected="true" header="不紧急但重要">
+								<template #item="{ item }">
+									<div class="gtd-item">
+										<div class="thumb">
+											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+										</div>
+										<div style="width: 100%;" @click="itemClick(item)">
+											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+											<div class="summary">{{ item.create_time }}</div>
+										</div>
+									</div>
+								</template>
+							</sc-list>
 						</td>
 						<td>
-							<handle ref="priority3" header="不重要不紧急"></handle>
+							<sc-list ref="priority4" :data="priorityList4" :hide-do="true" class="gtd-list"
+								:canSelected="true" header="不紧急不重要">
+								<template #item="{ item }">
+									<div class="gtd-item">
+										<div class="thumb">
+											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+										</div>
+										<div style="width: 100%;" @click="itemClick(item)">
+											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+											<div class="summary">{{ item.create_time }}</div>
+										</div>
+									</div>
+								</template>
+							</sc-list>
 						</td>
 					</tr>
 				</table>
 			</div>
-			<div v-else>
+			<div v-else class="div_panel">
 			</div>
 		</el-main>
 		<el-footer>
 			<div class="right-panel-search">
-				<el-input v-model="formData.title" clearable placeholder="请输入待办任务" />
-				<el-button icon="el-icon-send" type="primary" @click="create" />
+				<el-input v-model="formData.title" clearable placeholder="请输入待办任务" @keydown="keydown" />
+				<el-button icon="el-icon-plus" type="primary" @click="create" />
 			</div>
 		</el-footer>
 		<edit ref="edit" @complete="complete" />
@@ -122,14 +197,20 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.scmgtdheader.page,
 			list: [],
+			handleList1: [],
+			handleList2: [],
+			handleList3: [],
+			priorityList1: [],
+			priorityList2: [],
+			priorityList3: [],
+			priorityList4: [],
 			param: {
 				option_id: '0',
 				create_time: '',
 				key: ''
 			},
-			model: 1,
+			model: 2,
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
@@ -139,7 +220,6 @@ export default {
 				{ prop: 'notice', label: '提示方式', width: 100 },
 				{ prop: 'last_time', label: '上次提醒时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'next_time', label: '下次提醒时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
-				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
@@ -152,14 +232,11 @@ export default {
 		};
 	},
 	mounted() {
-		this.getData();
+		this.search();
 	},
 	methods: {
 		complete() {
-			this.$refs.table.refresh();
-		},
-		search() {
-			this.$refs.table.upData(this.param);
+			this.search();
 		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.scmgtdheader.status, row, row.row_status);
@@ -193,6 +270,12 @@ export default {
 				return;
 			}
 		},
+		keydown(e) {
+			if (e.keyCode != 13) {
+				return;
+			}
+			this.create();
+		},
 		async create() {
 			let res = await this.$API.scmgtdheader.add.post(this.formData);
 			if (res.code == 200) {
@@ -207,23 +290,145 @@ export default {
 		},
 		changeView() {
 		},
-		async getData() {
+		itemClick(item) {
+			this.$refs.edit.open(item);
+		},
+		async search() {
 			var res = await this.$API.scmgtdheader.list.get();
 			if (!res || res.code != 200) {
 				return;
 			}
 
 			this.list = res.data;
-		},
-		getList(key) {
-			var arr = [];
-			for (var i = 0; i < this.list.length; i += 1) {
-				if (this.list[i].handle == key) {
-					arr.push(this.list[i]);
-				}
+			this.handleList1.length = 0;
+			this.handleList2.length = 0;
+			this.handleList3.length = 0;
+			this.priorityList1.length = 0;
+			this.priorityList2.length = 0;
+			this.priorityList3.length = 0;
+			this.priorityList4.length = 0;
+			for (let index = 0; index < this.list.length; index++) {
+				const element = this.list[index];
+				this.checkHandle(element);
+				this.checkLevel(element);
 			}
-			return arr;
+		},
+		checkHandle(element) {
+			if (element.handle == 1) {
+				this.handleList1.push(element);
+				return;
+			}
+			if (element.handle == 2) {
+				this.handleList2.push(element);
+				return;
+			}
+			if (element.handle == 3) {
+				element.checked = true;
+				this.handleList3.push(element);
+				return;
+			}
+		},
+		checkLevel(element) {
+			if (element.priority == 1) {
+				this.priorityList1.push(element);
+				return;
+			}
+			if (element.priority == 2) {
+				this.priorityList2.push(element);
+				return;
+			}
+			if (element.priority == 3) {
+				this.priorityList3.push(element);
+				return;
+			}
+			if (element.priority == 4) {
+				this.priorityList4.push(element);
+				return;
+			}
+		},
+		async changeHandle(item) {
+			if (!item) {
+				return false;
+			}
+			var handle = item.handle;
+			if (handle == 1) {
+				handle = 3;
+			} else if (handle == 3) {
+				handle = 1;
+			}
+			else {
+				return false;
+			}
+
+			var res = await this.$API.scmgtdheader.handle.post({ 'id': item.id, 'handle': handle });
+			if (!res || res.code != 200) {
+				return false;
+			}
+
+			this.search();
+			return false;
 		}
 	},
 };
 </script>
+<style>
+.div_panel {
+	height: 100%;
+	overflow: hidden;
+}
+
+.div_panel table {
+	width: 100%;
+	height: 100%;
+}
+
+.div table>td {
+	padding: 10px;
+}
+
+.gtd-list {
+	background-color: var(--bg-color);
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.gtd-row3 {
+	height: 100%;
+}
+
+.gtd-col3 {
+	height: 100%;
+}
+
+.gtd-item {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.gtd-item .thumb {
+	width: 20px;
+	height: 32px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.gtd-item .title {
+	color: var(--el-text-color-primary);
+	font-size: var(--el-font-size-base);
+	font-weight: bold;
+	line-height: 1.3;
+}
+
+.gtd-item .summary {
+	color: var(--el-text-color-regular);
+	font-size: var(--el-font-size-base);
+	line-height: 1.3;
+	margin-top: 5px;
+}
+
+.gtd-done {
+	text-decoration: line-through;
+	color: var(--el-text-color-regular);
+}
+</style>

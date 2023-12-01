@@ -14,7 +14,7 @@
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="排序" prop="od">
-				<el-slider v-model="formData.od" :max="100" :step="1"></el-slider>
+				<el-input-number v-model="formData.od"></el-input-number>
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" type="textarea" placeholder="请输入备注" :maxlength="100" show-word-limit

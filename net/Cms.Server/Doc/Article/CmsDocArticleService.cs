@@ -433,7 +433,11 @@ namespace Com.Scm.Cms.Doc
         [HttpGet("{id}")]
         public async Task<CmsDocArticleDvo> GetItemsAsync(long id)
         {
-            var articleDao = await _thisRepository.GetByIdAsync(id);
+            var articleDao = await _thisRepository
+                .AsQueryable()
+                .ClearFilter()
+                .Where(a => a.id == id)
+                .FirstAsync();
             return await ReadArticle(articleDao);
         }
 

@@ -10,10 +10,21 @@
         /// </summary>
         None = 0,
         /// <summary>
-        /// 默认
+        /// 紧急且重要
         /// </summary>
-        Normal = 1,
-
+        Level1 = 1,
+        /// <summary>
+        /// 紧急不重要
+        /// </summary>
+        Level2 = 2,
+        /// <summary>
+        /// 不紧急但重要
+        /// </summary>
+        Level3 = 3,
+        /// <summary>
+        /// 不重要不紧急
+        /// </summary>
+        Level4 = 4,
     }
 
     /// <summary>
@@ -22,6 +33,14 @@
     public enum GtdRemindEnum
     {
         None = 0,
+        /// <summary>
+        /// 不提醒
+        /// </summary>
+        Close = 1,
+        /// <summary>
+        /// 提醒
+        /// </summary>
+        Open = 2
     }
 
     /// <summary>

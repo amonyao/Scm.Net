@@ -26,25 +26,15 @@ namespace Com.Scm.Gtd
         public string title { get; set; }
 
         /// <summary>
+        /// 优先级
+        /// </summary>
+        public GtdPriorityEnum priority { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [StringLength(1024)]
         public string remark { get; set; }
-
-        /// <summary>
-        /// 紧急性
-        /// </summary>
-        public int urgent { get; set; }
-
-        /// <summary>
-        /// 重要性
-        /// </summary>
-        public int important { get; set; }
-
-        /// <summary>
-        /// 优先级
-        /// </summary>
-        public GtdPriorityEnum priority { get; set; }
 
         /// <summary>
         /// 提醒标识
@@ -73,7 +63,7 @@ namespace Com.Scm.Gtd
         public long next_time { get; set; }
 
         /// <summary>
-        /// 
+        /// 作业状态
         /// </summary>
         public GtdHandleEnum handle { get; set; }
     }

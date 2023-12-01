@@ -1,7 +1,7 @@
 using Com.Scm.Cms.Enums;
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Gtd
+namespace Com.Scm.Cms.Gtd.Dvo
 {
     /// <summary>
     /// 待办
@@ -27,16 +27,6 @@ namespace Com.Scm.Gtd
         /// 备注
         /// </summary>
         public string remark { get; set; }
-
-        /// <summary>
-        /// 紧急性
-        /// </summary>
-        public int urgent { get; set; }
-
-        /// <summary>
-        /// 重要性
-        /// </summary>
-        public int important { get; set; }
 
         /// <summary>
         /// 优先级

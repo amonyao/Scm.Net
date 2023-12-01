@@ -1,6 +1,9 @@
+using Com.Scm.Cms.Enums;
+using Com.Scm.Cms.Gtd.Dvo;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Enums;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
@@ -29,13 +32,14 @@ namespace Com.Scm.Gtd
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<GtdHeaderDvo>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<GtdHeaderDvo>> GetPagesAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
-                //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
+                .WhereIF(request.handle != GtdHandleEnum.None, a => a.handle == request.handle)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
-                .OrderBy(m => m.id)
+                .OrderBy(a => a.handle, SqlSugar.OrderByType.Asc)
+                .OrderBy(a => a.id)
                 .Select<GtdHeaderDvo>()
                 .ToPageAsync(request.page, request.limit);
 
@@ -48,12 +52,13 @@ namespace Com.Scm.Gtd
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<GtdHeaderDvo>> GetListAsync(ScmSearchRequest request)
+        public async Task<List<GtdHeaderDvo>> GetListAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == ScmStatusEnum.Enabled)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
-                .OrderBy(m => m.id)
+                .OrderBy(a => a.handle, SqlSugar.OrderByType.Asc)
+                .OrderBy(a => a.id)
                 .Select<GtdHeaderDvo>()
                 .ToListAsync();
 
@@ -115,8 +120,10 @@ namespace Com.Scm.Gtd
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(GtdHeaderDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<GtdHeaderDao>());
+        public async Task<bool> AddAsync(GtdHeaderDto model)
+        {
+            return await _thisRepository.InsertAsync(model.Adapt<GtdHeaderDao>());
+        }
 
         /// <summary>
         /// 更新
@@ -132,6 +139,23 @@ namespace Com.Scm.Gtd
             }
 
             dao = model.Adapt(dao);
+            await _thisRepository.UpdateAsync(dao);
+        }
+
+        /// <summary>
+        /// 更新状态
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task ChangeHandleAsync(GtdHeaderDto model)
+        {
+            var dao = await _thisRepository.GetByIdAsync(model.id);
+            if (dao == null)
+            {
+                return;
+            }
+
+            dao.handle = model.handle;
             await _thisRepository.UpdateAsync(dao);
         }
 

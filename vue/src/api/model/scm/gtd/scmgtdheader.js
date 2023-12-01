@@ -71,4 +71,11 @@ export default {
 			return await http.get(this.url, data);
 		},
 	},
+	handle: {
+		url: `${config.API_URL}/scmgtdheader/ChangeHandle`,
+		name: "更新状态",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		},
+	},
 };

@@ -6,24 +6,23 @@
 					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="优先级" prop="priority">
-				<el-input v-model="formData.priority" placeholder="请输入优先级" :maxlength="4" show-word-limit
-					clearable></el-input>
+				<sc-select v-model="formData.priority" :data="priority_list" placeholder="请输入优先级"></sc-select>
 			</el-form-item>
-			<el-form-item label="提醒标识" prop="remind">
-				<el-input v-model="formData.remind" placeholder="请输入提醒标识" :maxlength="4" show-word-limit
-					clearable></el-input>
-			</el-form-item>
-			<el-form-item label="表达式" prop="cron">
-				<el-input v-model="formData.cron" placeholder="请输入表达式" :maxlength="128" show-word-limit
-					clearable></el-input>
-			</el-form-item>
-			<el-form-item label="提示方式" prop="notice">
-				<el-input v-model="formData.notice" placeholder="请输入提示方式" :maxlength="20" show-word-limit
-					clearable></el-input>
+			<el-form-item label="进度" prop="handle">
+				<sc-select v-model="formData.handle" :data="handle_list" placeholder="请输入提示方式"></sc-select>
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" type="textarea" rows="6" placeholder="请输入备注" :maxlength="1024"
 					show-word-limit clearable></el-input>
+			</el-form-item>
+			<el-form-item label="提醒标识" prop="remind">
+				<el-switch v-model="formData.remind" active-text="开启" />
+			</el-form-item>
+			<el-form-item label="表达式" prop="cron" v-if="formData.remind">
+				<sc-cron v-model="formData.cron" placeholder="请输入Cron定时规则" clearable></sc-cron>
+			</el-form-item>
+			<el-form-item label="提示方式" prop="notice" v-if="formData.remind">
+				<sc-select v-model="formData.notice" :data="notice_list" placeholder="请输入提示方式"></sc-select>
 			</el-form-item>
 		</el-form>
 
@@ -36,7 +35,11 @@
 	</el-drawer>
 </template>
 <script>
+import scCron from "@/components/scCron";
 export default {
+	components: {
+		scCron,
+	},
 	data() {
 		return {
 			mode: "add",
@@ -45,13 +48,25 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
-				codec: [
-					{ required: true, trigger: "blur", message: "编码不能为空" },
+				title: [
+					{ required: true, trigger: "blur", message: "标题不能为空" },
+				],
+				priority: [
+					{ required: true, trigger: "blur", pattern: '^[1-9]+$', message: "优先级不能为空" },
+				],
+				handle: [
+					{ required: true, trigger: "blur", pattern: '^[1-9]+$', message: "进度不能为空" },
 				],
 			},
+			priority_list: [this.$SCM.OPTION_ONE],
+			notice_list: [this.$SCM.OPTION_ONE],
+			handle_list: [this.$SCM.OPTION_ONE]
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.priority_list, 'gtd_priority', false);
+		this.$SCM.list_dic(this.notice_list, 'gtd_notice', false);
+		this.$SCM.list_dic(this.handle_list, 'gtd_handle', false);
 	},
 	methods: {
 		def_data() {
@@ -65,6 +80,7 @@ export default {
 				remind: '0',
 				cron: '',
 				notice: '0',
+				handle: '1',
 			}
 		},
 		async open(row) {
@@ -74,6 +90,9 @@ export default {
 				this.mode = "edit";
 				var res = await this.$API.scmgtdheader.edit.get(row.id);
 				this.formData = res.data;
+				this.formData.priority = '' + this.formData.priority;
+				this.formData.notice = '' + this.formData.notice;
+				this.formData.handle = '' + this.formData.handle;
 			}
 			this.visible = true;
 		},

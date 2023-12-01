@@ -34,16 +34,6 @@ namespace Com.Scm.Gtd
         public string remark { get; set; }
 
         /// <summary>
-        /// 紧急性
-        /// </summary>
-        public int urgent { get; set; }
-
-        /// <summary>
-        /// 重要性
-        /// </summary>
-        public int important { get; set; }
-
-        /// <summary>
         /// 优先级
         /// </summary>
         public GtdPriorityEnum priority { get; set; }
