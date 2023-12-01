@@ -27,13 +27,13 @@
 		<el-main>
 			<el-container>
 				<div class="list-body">
-					<el-card>
-						<sc-list :data="list">
-							<template #item="{ item }">
-								<el-button @click="queuing(item)">{{ item.namec }}</el-button>
-							</template>
-						</sc-list>
-					</el-card>
+					<sc-list :header="header" :data="list" :hide-do="true" class="qcs-list" :can-selected="false">
+						<template #item="{ item }">
+							<el-button type="primary" @click="queuing(item)" style="width: 100%; height: 50px;">
+								{{ item.namec }}
+							</el-button>
+						</template>
+					</sc-list>
 				</div>
 			</el-container>
 		</el-main>
@@ -49,6 +49,7 @@ export default {
 			group: [],
 			defaultParam: { type: 1 },
 			list: [],
+			header: '',
 		};
 	},
 	mounted() {
@@ -122,6 +123,7 @@ export default {
 			var params = {
 				id: data.id,
 			};
+			this.header = data.label;
 			this.listDetail(params);
 		},
 		// 获取队列
@@ -167,6 +169,13 @@ export default {
 </script>
 <style scoped>
 .list-body {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 	align-items: center;
+}
+
+.qcs-list {
+	width: 600px;
 }
 </style>
