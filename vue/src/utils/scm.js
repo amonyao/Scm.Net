@@ -249,7 +249,6 @@ scm.list_dic = async function (list, key, all, useCatch) {
 
 	var data = useCatch ? scm.catch[key] : null;
 	if (data == null) {
-		console.log("list_dic:key:" + key);
 		var res = await http.get(`${config.API_URL}/scmdic/option/` + key);
 		if (!res || res.code != 200) {
 			return;

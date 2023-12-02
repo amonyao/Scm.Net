@@ -46,7 +46,6 @@ export default {
     mounted() {
         //this.$SCM.list_dic(this.types_list, 'article_type', true);
         this.list = this.testData();
-        console.log("parent:" + this.list.length)
     },
     methods: {
         complete() {
@@ -121,7 +120,6 @@ export default {
                 tmp = Math.round(this.imgWidth * height / width);
             }
             item._dim = tmp;
-            console.log('size:' + def)
             // ++this.loadedCount;
             // // 当前图片都与处理完，则加载图片
             // if (this.apiData.length === this.loadedCount) {

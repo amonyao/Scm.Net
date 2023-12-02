@@ -39,7 +39,6 @@ export default {
 		},
 		async save() {
 			var nodes = this.$refs.tree.getCheckedNodes();
-			console.log("nodes", nodes);
 			if (nodes.length == 0) {
 				this.$message.warning("请选择要授权的角色");
 				return;

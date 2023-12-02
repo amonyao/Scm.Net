@@ -112,7 +112,6 @@ export default {
 			const res = await this.$API.sysquartz.list.get();
 			if (res.code == 200) {
 				this.list = res.data;
-				console.log('list', this.list)
 			}
 		},
 		add(row) {

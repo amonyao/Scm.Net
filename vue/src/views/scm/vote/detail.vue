@@ -35,7 +35,6 @@ export default {
 		async open(row) {
 			var res = await this.$API.sysvote.model.get(row.id);
 			this.model = res.data;
-			console.log('data', res.data)
 			res.data.items.forEach(item => {
 				this.counts += item.count
 			});

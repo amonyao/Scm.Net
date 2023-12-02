@@ -117,7 +117,6 @@ export default {
                 return;
             }
 
-            console.log('resize');
             this.layout();
             this.$nextTick(() => {
                 // 对每个元素进行排列

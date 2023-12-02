@@ -37,9 +37,6 @@ export default {
             calStyle: null,
             contentStyle: {},
             style: {},
-            param: {
-                datas: '',
-            },
             scale: this.$TOOL.isMobile() ? 1 : 2
         }
     },
@@ -176,8 +173,9 @@ export default {
             if (style.background_image) {
                 var image = style.background_image;
                 if (image.path) {
-                    obj.backgroundImage = "url('" + this.$CONFIG.SERVER_URL + image.path + "')";
+                    var path = "url('" + this.$CONFIG.SERVER_URL + image.path + "')"
                     console.log(obj.backgroundImage)
+                    obj.backgroundImage = path;
                 }
                 if (image.repeat) {
                     obj.backgroundRepeat = image.repeat;

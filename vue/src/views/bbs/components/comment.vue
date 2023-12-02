@@ -37,7 +37,6 @@ export default {
         },
         myFocus() {
             this.btnShow = true;
-            console.log('ok')
         },
         myBlur() {
             this.btnShow = !!this.comment;

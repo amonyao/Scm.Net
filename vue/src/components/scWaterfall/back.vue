@@ -117,7 +117,6 @@ export default {
                 return;
             }
 
-            console.log('resize');
             this.layout();
             this.$nextTick(() => {
                 // 对每个元素进行排列
@@ -141,7 +140,6 @@ export default {
 
             // 测试数据
             var testData = this.testData();
-            console.log('test:' + testData.length)
             this.apiData = this.apiData.concat(testData);
             this.hasMore = true;
 

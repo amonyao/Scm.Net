@@ -83,7 +83,6 @@ export default {
 				element.value = element.id;
 				this.format_list.push(element);
 			});
-			console.log(this.format_list.length)
 		},
 		async getFonts() {
 			var res = await this.$API.toolsbarcode.fonts.get();

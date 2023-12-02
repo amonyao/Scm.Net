@@ -149,7 +149,6 @@ export default {
 			})
 			//重组对象
 			filterRouter.forEach(item => {
-				console.log(item)
 				if (!item) {
 					return;
 				}

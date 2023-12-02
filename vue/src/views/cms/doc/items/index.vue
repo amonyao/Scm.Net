@@ -23,11 +23,11 @@ export default {
                 return;
             }
 
-            var data = res.data;
-            if (!data) {
+            var article = res.data;
+            if (!article) {
                 return;
             }
-            this.$refs.card.showArticle(res.data);
+            this.$refs.card.showArticle(article);
         },
     },
 };

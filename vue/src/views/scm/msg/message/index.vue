@@ -168,7 +168,6 @@ export default {
 			this.category[0].children[3].sum = res.data.recycleCount;
 		},
 		typeClick(data) {
-			console.log(data);
 			if (data.type == "level") {
 				this.$refs.table.upData({ status: data.value });
 			}
