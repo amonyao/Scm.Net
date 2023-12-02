@@ -48,7 +48,7 @@
 							</div>
 							<div style="width: 100%;" @click="itemClick(item)">
 								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-								<div class="summary">{{ item.create_time }}</div>
+								<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 							</div>
 						</div>
 					</template>
@@ -65,7 +65,7 @@
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-										<div class="summary">{{ item.create_time }}</div>
+										<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 									</div>
 								</div>
 							</template>
@@ -80,7 +80,7 @@
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-										<div class="summary">{{ item.create_time }}</div>
+										<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 									</div>
 								</div>
 							</template>
@@ -95,7 +95,7 @@
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-										<div class="summary">{{ item.create_time }}</div>
+										<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 									</div>
 								</div>
 							</template>
@@ -116,7 +116,7 @@
 										</div>
 										<div style="width: 100%;" @click="itemClick(item)">
 											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ item.create_time }}</div>
+											<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 										</div>
 									</div>
 								</template>
@@ -132,7 +132,7 @@
 										</div>
 										<div style="width: 100%;" @click="itemClick(item)">
 											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ item.create_time }}</div>
+											<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 										</div>
 									</div>
 								</template>
@@ -150,7 +150,7 @@
 										</div>
 										<div style="width: 100%;" @click="itemClick(item)">
 											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ item.create_time }}</div>
+											<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 										</div>
 									</div>
 								</template>
@@ -166,7 +166,7 @@
 										</div>
 										<div style="width: 100%;" @click="itemClick(item)">
 											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ item.create_time }}</div>
+											<div class="summary">{{ this.$SCM.dateTimeFormat(item.create_time) }}</div>
 										</div>
 									</div>
 								</template>
