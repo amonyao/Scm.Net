@@ -71,7 +71,7 @@ export default {
 			tabIndex: 0,
 			isSaveing: false,
 			formData: {
-				id: 0,
+				id: '0',
 				title: undefined,
 				refused: 1,
 				icon: undefined,
@@ -227,7 +227,7 @@ export default {
 				if (!valid) return;
 				this.isSaveing = true;
 				let res = null;
-				if (this.formData.id === 0) {
+				if (this.formData.id === '0') {
 					res = await this.$API.sysworkflow.add.post(this.formData);
 				} else {
 					res = await this.$API.sysworkflow.update.put(this.formData);

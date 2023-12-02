@@ -37,10 +37,10 @@ export default {
 			formData: this.def_data(),
 			rules: {
 				parentId: [
-					{ required: true, trigger: "change", message: "请选择所属角色" },
+					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属角色" },
 				],
 				data: [
-					{ required: true, trigger: "blur", message: "请选择数据权限" },
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_INT, message: "请选择数据权限" },
 				],
 				namec: [
 					{ required: true, trigger: "blur", message: "请输入角色名称" },
@@ -62,10 +62,10 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
-				parentId: undefined,
+				id: '0',
+				parentId: '0',
 				namec: undefined,
-				data: '0',
+				data: 0,
 				remark: undefined,
 				od: 1,
 			}
@@ -73,7 +73,7 @@ export default {
 		async initTree() {
 			const t = await this.$API.urrole.list.get();
 			let _tree = [
-				{ id: "1", value: "0", label: "角色组", parentId: "0" },
+				{ id: "1", value: "0", label: "请选择", parentId: "0" },
 			];
 			t.data.some((m) => {
 				_tree.push({
@@ -87,7 +87,7 @@ export default {
 		},
 		async open(row) {
 			this.initTree();
-			if (!row) {
+			if (!row || !row.id) {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
@@ -101,7 +101,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.urrole.add.post(this.formData);
 					} else {
 						res = await this.$API.urrole.update.put(this.formData);

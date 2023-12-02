@@ -4,17 +4,12 @@
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="查询选项" prop="option_id">
-						<el-select v-model="param.option_id" clearable placeholder="请选择" multiple>
-							<el-option v-for="item in param.option_list" :key="item.value" :label="item.label"
-								:value="item.value">
-							</el-option>
-						</el-select>
+						<sc-select v-model="param.option_id" :data="option_list" clearable placeholder="请选择" multiple>
+						</sc-select>
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<el-select v-model="param.row_status" clearable placeholder="请选择">
-							<el-option v-for="item in statusList" :key="item.value" :label="item.label" :value="item.value">
-							</el-option>
-						</el-select>
+						<sc-select v-model="param.row_status" :data="statusList" clearable placeholder="请选择">
+						</sc-select>
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -92,7 +87,7 @@ export default {
 			list: [],
 			param: {
 				option_id: "",
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ""
 			},

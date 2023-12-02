@@ -69,12 +69,12 @@ namespace Com.Scm.Cms.Res
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<OptionDvo>> GetOptionAsync(OptionRequest request)
+        public async Task<List<ResOptionDvo>> GetOptionAsync(OptionRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.dynasty_id == request.dynasty_id)
                 .OrderBy(a => a.id)
-                .Select(a => new OptionDvo { id = a.id, label = a.names, value = a.id })
+                .Select(a => new ResOptionDvo { id = a.id, label = a.names, value = a.id })
                 .ToListAsync();
 
             return result;

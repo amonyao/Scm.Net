@@ -60,7 +60,7 @@ export default {
 		def_data() {
 			return {
 				id: '0',
-				types: '0',
+				types: 0,
 				name: '',
 				title: '',
 				content: '',

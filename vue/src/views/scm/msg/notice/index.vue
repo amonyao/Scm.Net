@@ -159,7 +159,7 @@ export default {
 				readed: 0,
 				limit: 20,
 			},
-			infoModel: { id: 0 },//当前对象
+			infoModel: { id: '0' },//当前对象
 			lookType: 0, // 0=默认 1=详情 2=创建
 			isReader: true,//是否收件人
 			isSender: false,//是否发件人
@@ -192,12 +192,12 @@ export default {
 		//新建通知
 		addNew() {
 			this.lookType = 2;
-			this.infoModel = { id: 0, user: null };
+			this.infoModel = { id: '0', user: null };
 		},
 		//回复通知
 		goReply(user) {
 			this.lookType = 2;
-			this.infoModel = { id: 0, user: user };
+			this.infoModel = { id: '0', user: user };
 		},
 		//添加完成通知
 		sendComplete() {

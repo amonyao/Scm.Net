@@ -70,7 +70,7 @@ export default {
 	data() {
 		return {
 			formData: {
-				id: 0,
+				id: '0',
 				title: "",
 				content: "",
 				recipients: [],
@@ -131,7 +131,7 @@ export default {
 			});
 			this.formData.operate = operate;
 			let res = null;
-			if (this.formData.id === 0) {
+			if (this.formData.id === '0') {
 				res = await this.$API.sysnotice.add.post(this.formData);
 			} else {
 				res = await this.$API.sysnotice.update.put(this.formData);
@@ -148,7 +148,7 @@ export default {
 		clearForm() {
 			this.erceipt = [];
 			this.formData = {
-				id: 0,
+				id: '0',
 				title: "",
 				content: "",
 				recipients: [],

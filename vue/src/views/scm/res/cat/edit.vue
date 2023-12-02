@@ -42,7 +42,7 @@ export default {
 			formData: this.def_data(),
 			rules: {
 				app: [
-					{ required: true, trigger: "change", pattern: this.$SCM.regex_id, message: "请选择应用", },
+					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择应用", },
 				],
 				pid: [
 					{ required: true, trigger: "change", message: "请选择上级", },

@@ -60,7 +60,7 @@ export default {
 	methods: {
 		def_data(){
 			return {
-				id: 0,
+				id: '0',
 				types:'', 
 content:'', 
 qty:'', 
@@ -82,7 +82,7 @@ qty:'',
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.cmsrestag.add.post(this.formData);
 					} else {
 						res = await this.$API.cmsrestag.update.put(this.formData);

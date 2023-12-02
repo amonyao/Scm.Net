@@ -63,6 +63,8 @@ export default {
 				id: '0',
 				cat_id: '0',
 				user_id: '0',
+				types: 0,
+				data: 0,
 				key: undefined,
 				value: undefined,
 				remark: undefined,
@@ -76,8 +78,8 @@ export default {
 				this.mode = type;
 				var res = await this.$API.syscfgconfig.model.get(row.id);
 				this.formData = res.data;
-				this.formData.types = '' + this.formData.types;
-				this.formData.data = '' + this.formData.data;
+				// this.formData.types = '' + this.formData.types;
+				// this.formData.data = '' + this.formData.data;
 			}
 			this.visible = true;
 		},

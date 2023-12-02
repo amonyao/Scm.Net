@@ -84,7 +84,7 @@ export default {
 			list: [],
 			param: {
 				nation_id: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},
@@ -108,13 +108,9 @@ export default {
 	},
 	mounted() {
 		this.$SCM.list_status(this.row_status_list);
-		this.$API.cmsresnation.list_option({}, this.nation_list, true);
+		this.$SCM.list_option(this.nation_list, this.$API.cmsresnation.option, {}, true);
 	},
 	methods: {
-		async init() {
-			var res = await this.$API.cmsresnation.option.get();
-			this.$SCM.prepare(this.nation_list, res, true);
-		},
 		complete() {
 			this.$refs.table.refresh();
 		},

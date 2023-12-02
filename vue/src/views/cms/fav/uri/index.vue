@@ -53,7 +53,7 @@
 						</el-tooltip>
 					</template>
 				</scTable>
-				<scList v-if="view == 2" :data="list" @editItem="editItem" @removeItem="removeItem">
+				<scList v-if="view == 2" :data="list" @editItem="editItem" @removeItem="removeItem" style="height: 100%;">
 					<template #item="{ item }">
 						<div class="list-item">
 							<el-link :href="item.uri" :title="item.title" target="_blank" @click="openUri(item)">
@@ -78,7 +78,7 @@ export default {
 		return {
 			param: {
 				cat_id: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},

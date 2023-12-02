@@ -109,7 +109,7 @@ export default {
 			isSaveing: false,
 			visible: false,
 			formData: {
-				id: 0,
+				id: '0',
 				parentIdList: [],
 				name: undefined,
 				flag: undefined,
@@ -148,7 +148,7 @@ export default {
 						trigger: "blur",
 					},
 					{
-						pattern: this.$SCM.regex_number,
+						pattern: this.$SCM.REGEX_NUMBER,
 						message: "必须为数字",
 						trigger: "blur",
 					},
@@ -160,7 +160,7 @@ export default {
 						trigger: "blur",
 					},
 					{
-						pattern: this.$SCM.regex_number,
+						pattern: this.$SCM.REGEX_NUMBER,
 						message: "必须为数字",
 						trigger: "blur",
 					},
@@ -210,7 +210,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.sysadvcolumn.add.post(
 							this.formData
 						);
@@ -232,7 +232,7 @@ export default {
 		},
 		close() {
 			this.formData = {
-				id: 0,
+				id: '0',
 				parentIdList: [],
 				name: undefined,
 				flag: undefined,

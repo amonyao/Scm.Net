@@ -7,19 +7,12 @@
                     <el-button type="primary" round icon="el-icon-search" class="add-column" @click="search()"></el-button>
                 </el-header>
                 <el-main class="guid">
-                    <div class="list">
-                        <div v-for="item in article_list" :key="item.id" class="list-item"
-                            :class="{ active: item.id == this.formData.id }">
-                            <div class="display" @click="itemClick(item)">
-                                <div class="title">{{ item.title }}</div>
-                                <div class="sub-title">{{ item.sub_title }}</div>
-                                <div class="time">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-                            </div>
-                            <div class="operate">
-                                <el-button type="danger" icon="el-icon-delete" circle @click="itemDelete(item)" />
-                            </div>
-                        </div>
-                    </div>
+                    <sc-list :data="article_list" :hide-edit="true" style="height: 100%;" @removeItem="itemDelete">
+                        <template #item="{ item }">
+                            <sc-summary :title="item.title" :summary="this.$TOOL.dateTimeFormat(item.create_time)"
+                                @click="itemClick(item)"></sc-summary>
+                        </template>
+                    </sc-list>
                 </el-main>
             </el-container>
         </el-aside>
@@ -219,33 +212,6 @@ export default {
 
 .doc .guid {
     background-color: var(--el-bg-color);
-}
-
-.doc .list {
-    overflow: scroll;
-    background: var(--el-bg-color);
-    height: 100%;
-}
-
-.doc .list .active {
-    background-color: dodgerblue;
-    border-bottom-color: var(--el-bg-color);
-}
-
-.doc .list-item {
-    padding: 10px;
-    border-bottom: 1px dashed #eeee;
-    position: relative;
-}
-
-.doc .list-item:hover {
-    background-color: lightskyblue;
-    border-bottom-color: var(--el-bg-color);
-}
-
-.doc .list-item .operate {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    padding: 0px;
 }
 </style>

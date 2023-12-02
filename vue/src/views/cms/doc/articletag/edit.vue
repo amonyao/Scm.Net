@@ -60,7 +60,7 @@ export default {
 	methods: {
 		def_data(){
 			return {
-				id: 0,
+				id: '0',
 				article_id:'', 
 tag_id:'', 
 od:'', 
@@ -82,7 +82,7 @@ od:'',
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.cmsdocarticletag.add.post(this.formData);
 					} else {
 						res = await this.$API.cmsdocarticletag.update.put(this.formData);

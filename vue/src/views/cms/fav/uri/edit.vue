@@ -38,6 +38,9 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
+				types: [
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_INT, message: "请选择类型" },
+				],
 				title: [
 					{ required: true, trigger: "blur", message: "标题不能为空" },
 				],
@@ -57,7 +60,7 @@ export default {
 				id: '0',
 				cat_id: '0',
 				cat_names: '',
-				types: '0',
+				types: 0,
 				title: '',
 				uri: '',
 				top: '0',

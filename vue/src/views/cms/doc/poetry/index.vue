@@ -84,7 +84,7 @@ export default {
 			list: [],
 			param: {
 				types: 10,
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},
@@ -151,7 +151,7 @@ export default {
 			}
 		},
 		getTypesNames(item) {
-			return this.$SCM.get_option_names(this.types_list, item, '-');
+			return this.$SCM.get_dic_names(this.types_list, item, '-');
 		},
 		open_poetry(row) {
 			this.$refs.poetry.open(row);

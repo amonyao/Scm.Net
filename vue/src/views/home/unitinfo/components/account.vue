@@ -37,7 +37,7 @@ export default {
 	data() {
 		return {
 			form: {
-				id: 0,
+				id: '0',
 				account: "fytsoa@outlook.com",
 				name: "FytSoa",
 				headPic: "",

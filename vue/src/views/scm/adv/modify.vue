@@ -167,7 +167,7 @@ export default {
 			isSaveing: false,
 			visible: false,
 			formData: {
-				id: 0,
+				id: '0',
 				columnId: 0,
 				title: undefined,
 				target: "_blank",
@@ -256,7 +256,7 @@ export default {
 					}
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.sysadvinfo.add.post(
 							this.formData
 						);
@@ -278,7 +278,7 @@ export default {
 		},
 		close() {
 			this.formData = {
-				id: 0,
+				id: '0',
 				columnId: 0,
 				title: undefined,
 				target: "_blank",

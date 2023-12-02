@@ -89,7 +89,7 @@ export default {
 			param: {
 				nation_id: '0',
 				dynasty_id: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},
@@ -116,6 +116,7 @@ export default {
 		};
 	},
 	mounted() {
+		this.$SCM.list_status(this.row_status_list, true);
 		this.getNation();
 	},
 	methods: {
@@ -157,17 +158,16 @@ export default {
 				return;
 			}
 		},
-		async getNation() {
-			var res = await this.$API.cmsresnation.option.get();
-			this.$SCM.prepare(this.nation_list, res, true);
+		getNation() {
+			this.$SCM.list_option(this.nation_list, this.$API.cmsresnation.option, {}, true);
 		},
-		async getDynasty() {
+		getDynasty() {
 			if (!this.param.nation_id) {
 				return;
 			}
 
-			var res = await this.$API.cmsresdynasty.option.get({ 'nation_id': this.param.nation_id });
-			this.$SCM.prepare(this.dynasty_list, res, true);
+			this.param.dynasty_id = '0';
+			this.$SCM.list_option(this.dynasty_list, this.$API.cmsresdynasty.option, { 'nation_id': this.param.nation_id }, true);
 		}
 	},
 };

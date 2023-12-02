@@ -80,7 +80,7 @@ export default {
 			apiObj: this.$API.ymsfacarea.page,
 			list: [],
 			param: {
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},

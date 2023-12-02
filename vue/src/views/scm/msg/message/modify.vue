@@ -39,7 +39,7 @@ export default {
 			isSaveing: false,
 			visible: false,
 			formData: {
-				id: 0,
+				id: '0',
 			},
 			users: [],
 			rules: {},
@@ -72,7 +72,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.sysmessage.add.post(this.formData);
 					} else {
 						res = await this.$API.sysmessage.update.put(this.formData);
@@ -90,7 +90,7 @@ export default {
 		},
 		close() {
 			this.formData = {
-				id: 0,
+				id: '0',
 				number: undefined,
 				name: undefined,
 				sort: 1,

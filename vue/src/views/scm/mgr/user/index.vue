@@ -105,7 +105,7 @@ export default {
 			param: {
 				unit_id: '0',
 				role_id: '0',
-				row_status: '0',
+				row_status: 0,
 				key: '',
 			},
 			selection: [],
@@ -125,13 +125,13 @@ export default {
 				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 			unit_list: [],
-			role_list: [],
+			role_list: [this.$SCM.OPTION_ALL],
 			row_status_list: [],
 		};
 	},
 	mounted() {
 		this.getUnit();
-		this.$SCM.list_status(this.row_status_list);
+		this.$SCM.list_status(this.row_status_list, true);
 	},
 	methods: {
 		complete() {
@@ -197,13 +197,13 @@ export default {
 				}
 			}).catch(() => { });
 		},
-		async getUnit() {
-			let res = await this.$API.mgrunit.option.get(0);
-			this.$SCM.prepare(this.unit_list, res, true);
+		getUnit() {
+			this.$SCM.list_option(this.unit_list, this.$API.mgrunit.option, {}, false);
 		},
 		changeUnit() {
 			if (this.param.unit_id == '0') {
 				this.role_list.length = 0;
+				this.role_list.push(this.$SCM.OPTION_ALL);
 				return;
 			}
 			this.getRole();

@@ -42,10 +42,8 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// <returns></returns>
         public async Task<PageResult<ScmQcsQueueDvo>> GetPagesAsync(SearchRequest request)
         {
-            var userId = _jwtContextHolder.GetToken().user_id;
-
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.detail_id == request.detail_id && a.user_id == userId)
+                .Where(a => a.detail_id == request.detail_id)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.id), a => a.detail_id == request.id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))

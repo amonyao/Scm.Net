@@ -88,11 +88,11 @@ export default {
 				cat_id: '0',
 				title: '',
 				remark: '',
-				priority: '0',
-				remind: '0',
+				priority: 0,
+				remind: 0,
 				cron: '',
-				notice: '0',
-				handle: '1',
+				notice: 0,
+				handle: 1,
 			}
 		},
 		async open(row) {
@@ -102,9 +102,9 @@ export default {
 				this.mode = "edit";
 				var res = await this.$API.scmgtdheader.edit.get(row.id);
 				this.formData = res.data;
-				this.formData.priority = '' + this.formData.priority;
-				this.formData.notice = '' + this.formData.notice;
-				this.formData.handle = '' + this.formData.handle;
+				// this.formData.priority = '' + this.formData.priority;
+				// this.formData.notice = '' + this.formData.notice;
+				// this.formData.handle = '' + this.formData.handle;
 			}
 			this.visible = true;
 		},

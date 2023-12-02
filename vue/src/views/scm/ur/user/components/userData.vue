@@ -37,14 +37,14 @@ export default {
         def_data() {
             return {
                 id: '0',
-                data: '0'
+                data: 0
             };
         },
         async open(row) {
             if (!row || !row.id) {
                 return;
             }
-            row.data = '' + row.data;
+            // row.data = '' + row.data;
             this.formData = row;
             this.visible = true;
         },

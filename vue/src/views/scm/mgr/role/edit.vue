@@ -1,7 +1,7 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="700px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="所属机构" prop="parentId">
+			<el-form-item label="所属机构" prop="unit_id">
 				<el-select v-model="formData.unit_id" placeholder="请选择所属机构" :style="{ width: '100%' }">
 					<el-option v-for="item in unit_list" :key="item.id" :label="item.label" :value="item.id">
 					</el-option>
@@ -36,20 +36,8 @@ export default {
 			formData: this.def_data(),
 			unit_list: [],
 			rules: {
-				unit_id: [
-					{
-						required: true,
-						message: "请选择所属机构",
-						trigger: "change",
-					},
-				],
-				namec: [
-					{
-						required: true,
-						message: "请输入角色名称",
-						trigger: "blur",
-					},
-				],
+				unit_id: [{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属机构", },],
+				namec: [{ required: true, trigger: "blur", message: "请输入角色名称", },],
 				remark: [],
 			},
 		};
@@ -58,17 +46,15 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
-				unit_id: 0,
-				parentId: 0,
+				id: '0',
+				unit_id: '0',
 				namec: undefined,
 				remark: undefined,
 				od: 1,
 			};
 		},
-		async initUnit() {
-			let unitRes = await this.$API.mgrunit.option.get(0);
-			this.unit_list = this.$SCM.option_one(unitRes.data);
+		initUnit() {
+			this.$SCM.list_option(this.unit_list, this.$API.mgrunit.option, 0, false);
 		},
 		async open(row) {
 			this.initUnit();
@@ -86,7 +72,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.mgrrole.add.post(this.formData);
 					} else {
 						res = await this.$API.mgrrole.update.put(this.formData);
@@ -110,11 +96,3 @@ export default {
 	},
 };
 </script>
-<style scoped>
-.cur-tip {
-	display: inline-block;
-	padding-left: 10px;
-	color: #666;
-	font-size: 12px;
-}
-</style>

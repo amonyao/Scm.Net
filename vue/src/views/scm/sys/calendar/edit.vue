@@ -101,8 +101,8 @@ export default {
 			return {
 				id: '0',
 				title: '',
-				types: '0',
-				level: '0',
+				types: 0,
+				level: 0,
 				start_time: '0',
 				start_time_txt: null,
 				end_time: '0',
@@ -117,8 +117,8 @@ export default {
 				this.mode = "edit";
 				var res = await this.$API.syscalendar.model.get(row.id);
 
-				res.data.level = '' + res.data.level;
-				res.data.types = '' + res.data.types;
+				// res.data.level = '' + res.data.level;
+				// res.data.types = '' + res.data.types;
 				this.formData = res.data;
 				if (this.formData.start_time) {
 					this.formData.start_time_txt = this.$TOOL.dateTimeFormat(this.formData.start_time);
@@ -126,8 +126,8 @@ export default {
 				if (this.formData.end_time) {
 					this.formData.end_time_txt = this.$TOOL.dateTimeFormat(this.formData.end_time);
 				}
-				this.formData.types = '' + this.formData.types;
-				this.formData.level = '' + this.formData.level;
+				// this.formData.types = '' + this.formData.types;
+				// this.formData.level = '' + this.formData.level;
 
 				this.defaultValues = res.data.users;
 			}

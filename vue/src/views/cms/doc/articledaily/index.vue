@@ -79,7 +79,7 @@ export default {
 			list: [],
 			param: {
 				types_id: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},
@@ -100,6 +100,7 @@ export default {
 		};
 	},
 	mounted() {
+		this.$SCM.list_status(this.row_status_list, true);
 		this.$SCM.list_dic(this.types_list, 'article_type', true);
 	},
 	methods: {
@@ -142,7 +143,7 @@ export default {
 			}
 		},
 		getTypesNames(item) {
-			return this.$SCM.get_option_names(this.types_list, item, '-');
+			return this.$SCM.get_dic_names(this.types_list, item, '-');
 		},
 		open_poetry(row) {
 			this.$refs.poetry.open(row);

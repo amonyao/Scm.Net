@@ -236,10 +236,10 @@ export default {
 			}
 		},
 		getTypesNames(types) {
-			return this.$SCM.get_option_names(this.types_list, types, '未知');
+			return this.$SCM.get_dic_names(this.types_list, types, '未知');
 		},
 		getLevelNames(types) {
-			return this.$SCM.get_option_names(this.level_list, types, '未知');
+			return this.$SCM.get_dic_names(this.level_list, types, '未知');
 		}
 	},
 };

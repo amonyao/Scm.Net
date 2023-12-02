@@ -32,6 +32,9 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
+				merchant_id: [
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择商户" },
+				],
 				codec: [
 					{ required: true, trigger: "blur", message: "租客编码不能为空" },
 				],

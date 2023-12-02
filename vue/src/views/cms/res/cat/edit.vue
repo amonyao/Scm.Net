@@ -41,7 +41,7 @@ export default {
 					{ required: true, trigger: "blur", message: "名称不能为空" },
 				],
 				pid: [
-					{ required: true, trigger: "blur", message: "请选择上级节点" },
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择上级节点" },
 				],
 			},
 		};
@@ -66,7 +66,13 @@ export default {
 				return;
 			}
 
-			this.cat_list = this.$TOOL.changeTree(res.data);
+			let _tree = [
+				{ id: "1", value: "0", label: "请选择", parentId: "0" },
+			];
+			res.data.some((m) => {
+				_tree.push(m);
+			});
+			this.cat_list = this.$TOOL.changeTree(_tree);
 		},
 		async open(row) {
 			if (!row || !row.id) {

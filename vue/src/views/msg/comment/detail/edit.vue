@@ -46,7 +46,7 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
+				id: '0',
 				comment_id: '',
 				score: '',
 				comment: '',
@@ -70,7 +70,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.msgcommentdetail.add.post(this.formData);
 					} else {
 						res = await this.$API.msgcommentdetail.update.put(this.formData);

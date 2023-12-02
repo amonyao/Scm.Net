@@ -44,7 +44,7 @@ export default {
 
 .sc-summary .title {
     color: var(--el-text-color-primary);
-    font-size: 18px;
+    font-size: var(--el-font-size-base);
     line-height: 1.3;
 }
 

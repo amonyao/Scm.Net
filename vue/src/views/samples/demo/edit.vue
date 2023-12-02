@@ -39,7 +39,7 @@ export default {
 			visible: false,
 			isSaveing: false,
 			formData: {
-				id: 0,
+				id: '0',
 				option_id: 0,
 				text: ''
 			},
@@ -72,7 +72,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.samplesdemo.add.post(this.formData);
 					} else {
 						res = await this.$API.samplesdemo.save.put(this.formData);
@@ -90,7 +90,7 @@ export default {
 		},
 		close() {
 			this.formData = {
-				id: 0,
+				id: '0',
 				option_id: 0,
 				text: ''
 			};

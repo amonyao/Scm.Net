@@ -54,7 +54,7 @@ export default {
 	},
 	mounted() {
 		this.getGroup({ type: this.defaultParam.type });
-		this.init();
+		//this.init();
 	},
 	methods: {
 		complete() {

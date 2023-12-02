@@ -16,6 +16,6 @@ export default {
 	},
 	props: {
 		label: 'label',					//映射label显示字段
-		value: 'id',					//映射value值字段
+		value: 'value',					//映射value值字段
 	}
 }

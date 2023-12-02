@@ -94,7 +94,7 @@ export default {
     mounted() {
         this.$SCM.list_dic(this.handle_list, 'qcs_handle', true);
         this.initTree({});
-        this.init();
+        //this.init();
     },
     methods: {
         complete() {
@@ -202,7 +202,7 @@ export default {
 
         },
         getHandle(handle) {
-            return this.$SCM.get_option_names(this.handle_list, handle, '');
+            return this.$SCM.get_dic_names(this.handle_list, handle, '');
         }
     },
 };

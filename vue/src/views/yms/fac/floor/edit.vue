@@ -36,6 +36,12 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
+				area_id: [
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择园区" },
+				],
+				build_id: [
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择楼宇" },
+				],
 				codec: [
 					{ required: true, trigger: "blur", message: "楼层编码不能为空" },
 				],

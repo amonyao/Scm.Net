@@ -93,7 +93,7 @@ export default {
 				types: '0',
 				handle: '0',
 				result: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},
@@ -167,13 +167,13 @@ export default {
 			}
 		},
 		getTypesNames(types) {
-			return this.$SCM.get_option_names(this.types_list, types, '');
+			return this.$SCM.get_dic_names(this.types_list, types, '');
 		},
 		getHandleNames(handle) {
-			return this.$SCM.get_option_names(this.handle_list, handle, '');
+			return this.$SCM.get_dic_names(this.handle_list, handle, '');
 		},
 		getResultNames(result) {
-			return this.$SCM.get_option_names(this.result_list, result, '');
+			return this.$SCM.get_dic_names(this.result_list, result, '');
 		},
 		dateTimeFormat(time) {
 			if (!time || time == '0') {

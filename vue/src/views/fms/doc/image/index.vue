@@ -90,7 +90,7 @@ export default {
 			imgWidth: 100,
 			param: {
 				types: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: '',
 			},

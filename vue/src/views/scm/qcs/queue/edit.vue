@@ -1,15 +1,23 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="700px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="上级群组" prop="pid">
-				<el-tree-select v-model="formData.pid" placeholder="请选择上级群组" :data="pid_list" collapse-tags check-strictly
-					default-expand-all />
+			<el-form-item label="方案" prop="detail_id">
+				<sc-select v-model="formData.detail_id" placeholder="请选择方案" :data="detail_list" />
 			</el-form-item>
-			<el-form-item label="群组编码" prop="codec">
-				<el-input v-model="formData.codec" clearable :maxlength="30" placeholder="请输入群组编码" show-word-limit />
+			<el-form-item label="状态" prop="handle">
+				<sc-select v-model="formData.handle" placeholder="请选择状态" :data="handle_list" />
 			</el-form-item>
-			<el-form-item label="群组名称" prop="namec">
-				<el-input v-model="formData.namec" clearable :maxlength="30" placeholder="请输入群组名称" show-word-limit />
+			<el-form-item label="姓名" prop="namec">
+				<el-input v-model="formData.namec" clearable :maxlength="30" placeholder="请输入姓名" show-word-limit />
+			</el-form-item>
+			<el-form-item label="证件" prop="label">
+				<el-input v-model="formData.label" clearable :maxlength="30" placeholder="请输入证件" show-word-limit />
+			</el-form-item>
+			<el-form-item label="电话" prop="phone">
+				<el-input v-model="formData.phone" clearable :maxlength="30" placeholder="请输入电话" show-word-limit />
+			</el-form-item>
+			<el-form-item label="优先级" prop="lv">
+				<el-input v-model="formData.lv" clearable :maxlength="30" placeholder="请输入优先级" show-word-limit />
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" :autosize="{ minRows: 2, maxRows: 4 }" :maxlength="500"
@@ -36,55 +44,41 @@ export default {
 			visible: false,
 			formData: this.def_data(),
 			rules: {
-				pid: [
-					{ required: true, trigger: "change", message: "请选择所属群组", },
+				detail_id: [
+					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择方案", },
 				],
-				namec: [
-					{ required: true, trigger: "blur", message: "请输入群组名称", },
+				handle: [
+					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_INT, message: "请选择状态", },
 				],
-				remark: [],
 			},
-			pid_list: [],
-			pidProps: {
-				multiple: false,
-				checkStrictly: true,
-				expandTrigger: "hover",
-			},
+			detail_list: [this.$SCM.OPTION_ONE],
+			handle_list: [this.$SCM.OPTION_ONE],
 		};
 	},
-	mounted() { },
+	mounted() {
+		this.$SCM.list_dic(this.handle_list, 'qcs_handle', false);
+		this.$SCM.list_option(this.detail_list, this.$API.scmqcsdetail.option, {}, false);
+	},
 	methods: {
 		def_data() {
 			return {
 				id: '0',
-				pid: this.$SCM.SYS_ID,
-				namec: '',
-				remark: '',
+				detail_id: '0',
+				contact: '',
+				label: '',
+				phone: '',
+				level: '0',
+				handle: 0
 			}
 		},
-		async initTree() {
-			const t = await this.$API.urgroup.list.get();
-			let _tree = [
-				{ id: this.$SCM.SYS_ID, value: this.$SCM.SYS_ID, label: "（默认）", parentId: "0" },
-			];
-			t.data.some((m) => {
-				_tree.push({
-					id: m.id,
-					value: m.id,
-					label: m.names,
-					parentId: m.pid,
-				});
-			});
-			this.pid_list = this.$TOOL.changeTree(_tree);
-		},
 		async open(row) {
-			this.initTree();
 			if (!row) {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.urgroup.model.get(row.id);
+				var res = await this.$API.scmqcsqueue.edit.get(row.id);
 				this.formData = res.data;
+				// this.formData.handle = '' + this.formData.handle;
 			}
 			this.visible = true;
 		},
@@ -94,9 +88,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.urgroup.add.post(this.formData);
+						res = await this.$API.scmqcsqueue.add.post(this.formData);
 					} else {
-						res = await this.$API.urgroup.update.put(this.formData);
+						res = await this.$API.scmqcsqueue.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

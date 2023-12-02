@@ -150,7 +150,7 @@ export default {
 	methods: {
 		def_data(){
 			return {
-				id: 0,
+				id: '0',
 				types:'', 
 area_id:'', 
 build_id:'', 
@@ -182,7 +182,7 @@ driver:'',
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.ymsacsapply.add.post(this.formData);
 					} else {
 						res = await this.$API.ymsacsapply.update.put(this.formData);

@@ -87,7 +87,7 @@ export default {
 		},
 		close() {
 			this.formData = {
-				id: 0,
+				id: '0',
 				parentId: 0,
 				namec: undefined,
 				remark: undefined,

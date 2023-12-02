@@ -101,7 +101,7 @@ export default {
 			list: [],
 			param: {
 				unit_id: '0',
-				row_status: '0',
+				row_status: 0,
 				key: '',
 			},
 			selection: [],
@@ -120,7 +120,7 @@ export default {
 	},
 	mounted() {
 		this.getUnit();
-		this.$SCM.list_status(this.row_status_list);
+		this.$SCM.list_status(this.row_status_list, true);
 	},
 	methods: {
 		complete() {

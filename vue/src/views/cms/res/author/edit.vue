@@ -46,10 +46,10 @@ export default {
 			formData: this.def_data(),
 			rules: {
 				nation_id: [
-					{ required: true, trigger: "blur", message: "请选择国别" },
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择国别" },
 				],
 				dynasty_id: [
-					{ required: true, trigger: "blur", message: "请选择朝代" },
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择朝代" },
 				],
 				codec: [
 					{ required: true, trigger: "blur", message: "编码不能为空" },
@@ -115,16 +115,15 @@ export default {
 			this.visible = false;
 		},
 		async getNation() {
-			var res = await this.$API.cmsresnation.option.get();
-			this.$SCM.prepare(this.nation_list, res, false);
+			this.$SCM.list_option(this.nation_list, this.$API.cmsresnation.option, {}, false);
 		},
 		async getDynasty() {
 			if (!this.formData.nation_id) {
 				return;
 			}
 
-			var res = await this.$API.cmsresdynasty.option.get({ 'nation_id': this.formData.nation_id });
-			this.$SCM.prepare(this.dynasty_list, res, false);
+			this.formData.dynasty_id = '0';
+			this.$SCM.list_option(this.dynasty_list, this.$API.cmsresdynasty.option, { 'nation_id': this.formData.nation_id }, false);
 		}
 	},
 };

@@ -50,6 +50,13 @@ export default {
 			return await http.put(this.url, data);
 		},
 	},
+	update: {
+		url: `${config.API_URL}/scmqcsqueue`,
+		name: "保存",
+		put: async function (data) {
+			return await http.put(this.url, data);
+		},
+	},
 	status: {
 		url: `${config.API_URL}/scmqcsqueue/status`,
 		name: "状态",

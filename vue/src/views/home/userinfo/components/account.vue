@@ -32,7 +32,7 @@ export default {
 	data() {
 		return {
 			form: {
-				id: 0,
+				id: '0',
 				names: "",
 				namec: "",
 				headPic: "",

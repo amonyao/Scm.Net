@@ -45,7 +45,7 @@ export default {
 				],
 				value: [
 					{ required: true, trigger: "blur", message: "字典值不能为空" },
-					{ required: true, pattern: this.$SCM.regex_number, message: "字典值不是有效数字" },
+					{ required: true, pattern: this.$SCM.REGEX_NUMBER, message: "字典值不是有效数字" },
 				],
 				namec: [
 					{ required: true, trigger: "blur", message: "字典名称不能为空" },
@@ -64,7 +64,7 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
+				id: '0',
 				tag: 1,
 				dic_header_id: 0,
 				namec: undefined,
@@ -90,7 +90,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.sysdicdetail.add.post(this.formData);
 					} else {
 						res = await this.$API.sysdicdetail.update.put(this.formData);

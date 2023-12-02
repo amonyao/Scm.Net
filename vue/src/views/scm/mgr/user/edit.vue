@@ -145,11 +145,8 @@ export default {
 				sex: [
 					{ required: true, trigger: "change", message: "性别不能为空", },
 				],
-				organizeId: [
-					{ required: true, trigger: "change", message: "请选择所属部门", },
-				],
-				postGroup: [
-					{ required: true, trigger: "change", message: "请选择所属岗位", },
+				unit_id: [
+					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属机构", },
 				],
 				roleGroup: [
 					{ required: true, trigger: "change", message: "请择选所属角色", },
@@ -157,9 +154,9 @@ export default {
 				email: [],
 				remark: [],
 			},
-			unitList: [],
-			roleList: [],
-			sex_list: [],
+			unitList: [this.$SCM.OPTION_ONE],
+			roleList: [this.$SCM.OPTION_ONE],
+			sex_list: [this.$SCM.OPTION_ONE_INT],
 			roleProps: { multiple: true, expandTrigger: "hover" },
 			isUpHeadpic: false,
 			headPicfileList: [],
@@ -171,18 +168,18 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
+				id: '0',
 				unit_id: '0',
 				names: "",
 				namec: "",
 				pass: "",
 				cellphone: "",
 				telephone: "",
-				sex: "0",
+				sex: 0,
 				email: "",
 				remark: "",
 				avatar: undefined,
-				roleGroup: undefined,
+				roleGroup: ['0'],
 				loginCount: 0,
 			}
 		},
@@ -194,17 +191,17 @@ export default {
 				this.$message.warning(res.message);
 			}
 		},
-		async getUnit() {
-			const unit = await this.$API.mgrunit.option.get();
-			this.unitList = unit.data;
+		getUnit() {
+			this.$SCM.list_option(this.unitList, this.$API.mgrunit.option, {}, false);
 		},
 		async getRole() {
 			const role = await this.$API.mgrrole.option.get(this.formData.unit_id);
 			this.roleList = this.$TOOL.changeTree(role.data);
 		},
 		changeUnit() {
-			if (this.formData.unit_id == 0) {
-				this.roleList = [];
+			if (this.formData.unit_id == '0') {
+				this.roleList.length = 0;
+				this.roleList.push(this.$SCM.OPTION_ONE);
 				return;
 			}
 			this.getRole();
@@ -212,7 +209,7 @@ export default {
 		async open(row) {
 			this.getUnit();
 
-			if (!row) {
+			if (!row || !row.id) {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
@@ -237,7 +234,7 @@ export default {
 					);
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.mgruser.add.post(this.formData);
 					} else {
 						res = await this.$API.mgruser.update.put(

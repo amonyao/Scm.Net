@@ -124,7 +124,7 @@ export default {
         def_data() {
             return {
                 id: '0',
-                types: '0',
+                types: 0,
                 sys: '',
                 date: '',
                 time: new Date(),
@@ -145,7 +145,7 @@ export default {
             } else {
                 this.mode = "edit";
                 var res = await this.$API.devversion.edit.get(row.id);
-                res.data.types = '' + res.data.types;
+                //res.data.types = '' + res.data.types;
                 if (res.data.date) {
                     res.data.time = new Date(res.data.date);
                 }

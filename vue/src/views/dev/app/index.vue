@@ -83,8 +83,8 @@ export default {
 			apiObj: this.$API.devapp.page,
 			list: [],
 			param: {
-				types: '0',
-				row_status: '1',
+				types: 0,
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},

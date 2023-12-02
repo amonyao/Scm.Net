@@ -84,7 +84,7 @@ export default {
 			list: [],
 			param: {
 				merchant_id: '0',
-				row_status: '1',
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},

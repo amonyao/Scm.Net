@@ -39,7 +39,7 @@ export default {
 			isSaveing: false,
 			visible: false,
 			formData: {
-				id: 0,
+				id: '0',
 				codec: undefined,
 				namec: undefined,
 				od: 1,
@@ -98,7 +98,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.ur_position.add.post(this.formData);
 					} else {
 						res = await this.$API.ur_position.update.put(this.formData);
@@ -116,7 +116,7 @@ export default {
 		},
 		close() {
 			this.formData = {
-				id: 0,
+				id: '0',
 				codec: undefined,
 				namec: undefined,
 				od: 1,

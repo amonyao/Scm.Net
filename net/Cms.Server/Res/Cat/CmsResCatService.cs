@@ -49,12 +49,12 @@ namespace FytSoa.Application.Cms.Doc
             return list;
         }
 
-        public async Task<List<OptionDvo>> GetOptionAsync(OptionRequest request)
+        public async Task<List<ResOptionDvo>> GetOptionAsync(OptionRequest request)
         {
             var list = await _thisRepository
                 .AsQueryable()
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.id != request.id)
-                .Select(a => new OptionDvo { id = a.id, label = a.namec, value = a.id, parentId = a.pid })
+                .Select(a => new ResOptionDvo { id = a.id, label = a.namec, value = a.id, parentId = a.pid })
                 .OrderByDescending(m => m.id)
                 .ToListAsync();
             return list;

@@ -38,7 +38,7 @@ export default {
 			formData: this.def_data(),
 			rules: {
 				nation_id: [
-					{ required: true, trigger: "blur", message: "请选择国别" },
+					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择国别" },
 				],
 				codec: [
 					{ required: true, trigger: "blur", message: "编码不能为空" },
@@ -51,12 +51,12 @@ export default {
 		};
 	},
 	mounted() {
-		this.$API.cmsresnation.list_option({}, this.nation_list, false);
+		this.$SCM.list_option(this.nation_list, this.$API.cmsresnation.option, {}, false);
 	},
 	methods: {
 		def_data() {
 			return {
-				id: 0,
+				id: '0',
 				nation_id: '0',
 				od: '',
 				codec: '',
@@ -79,7 +79,7 @@ export default {
 				if (valid) {
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.cmsresdynasty.add.post(this.formData);
 					} else {
 						res = await this.$API.cmsresdynasty.update.put(this.formData);

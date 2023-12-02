@@ -186,13 +186,13 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				id: 0,
+				id: '0',
 				names: "",
 				namec: "",
 				pass: "",
 				cellphone: "",
 				telephone: "",
-				sex: '0',
+				sex: 0,
 				email: "",
 				status: true,
 				remark: "",
@@ -244,7 +244,7 @@ export default {
 				this.mode = "edit";
 				var res = await this.$API.uruser.model.get(row.id);
 				res.data.avatar = this.$CONFIG.SERVER_URL + res.data.avatar;
-				res.data.sex = '' + res.data.sex;
+				// res.data.sex = '' + res.data.sex;
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -264,7 +264,7 @@ export default {
 					);
 					this.isSaveing = true;
 					let res = null;
-					if (this.formData.id === 0) {
+					if (this.formData.id === '0') {
 						res = await this.$API.uruser.add.post(this.formData);
 					} else {
 						res = await this.$API.uruser.update.put(

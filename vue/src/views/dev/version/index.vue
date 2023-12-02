@@ -91,8 +91,8 @@ export default {
 			apiObj: this.$API.devversion.page,
 			list: [],
 			param: {
-				types: '0',
-				row_status: '1',
+				types: 0,
+				row_status: 1,
 				create_time: '',
 				key: ''
 			},
@@ -174,7 +174,7 @@ export default {
 			}
 		},
 		getTypesNames(types) {
-			return this.$SCM.get_option_names(this.types_list, types, '');
+			return this.$SCM.get_dic_names(this.types_list, types, '');
 		}
 	},
 };
