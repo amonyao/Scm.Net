@@ -305,7 +305,7 @@ export default {
 }
 
 .login_note__content {
-	color: #666;
+	/* color: #666; */
 }
 
 .login-header {

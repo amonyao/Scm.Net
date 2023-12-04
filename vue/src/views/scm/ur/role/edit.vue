@@ -125,11 +125,3 @@ export default {
 	},
 };
 </script>
-<style scoped>
-.cur-tip {
-	display: inline-block;
-	padding-left: 10px;
-	color: #666;
-	font-size: 12px;
-}
-</style>

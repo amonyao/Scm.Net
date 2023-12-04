@@ -173,8 +173,12 @@ export default {
             if (style.background_image) {
                 var image = style.background_image;
                 if (image.path) {
-                    var path = "url('" + this.$CONFIG.SERVER_URL + image.path + "')"
-                    console.log(obj.backgroundImage)
+                    var path = image.path;
+                    if (path == 'qr_image') {
+                        path = '/data/articles/qr_image.png';
+                    }
+                    path = "url('" + this.$CONFIG.SERVER_URL + path + "')";
+                    console.log(path);
                     obj.backgroundImage = path;
                 }
                 if (image.repeat) {
