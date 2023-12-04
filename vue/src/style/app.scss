@@ -28,43 +28,43 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 .layout-setting i {font-size: 18px;color: #fff;}
 
 /* 头部 */
-.adminui-header {height: 58px;background: #222b45;color: #fff;display: flex;justify-content:space-between;}
-.adminui-header-left {display: flex;align-items: center;padding-left:20px;}
-.adminui-header-right {display: flex;align-items: center;}
-.adminui-header .logo-bar {font-size: 20px;font-weight: bold;display: flex;align-items: center;}
-.adminui-header .logo-bar .logo {margin-right: 10px;width: 35px;height: 35px;}
-.adminui-header .nav {display: flex;height: 100%;margin-left: 40px;}
-.adminui-header .nav li {padding:0 10px;margin: 0 10px 0 0;font-size: 14px;color: rgba(255, 255, 255, 0.6);list-style: none;height: 100%;display: flex;align-items: center;cursor: pointer;}
-.adminui-header .nav li i {margin-right: 5px;}
-.adminui-header .nav li:hover {color: #fff;}
-.adminui-header .nav li.active {background: rgba(255, 255, 255, 0.1);color: #fff;}
-.adminui-header .user-bar .panel-item:hover {background: rgba(255, 255, 255, 0.1)!important;}
-.adminui-header .user-bar .user label{color: #fff;}
+.scmui-header {height: 58px;background: #222b45;color: #fff;display: flex;justify-content:space-between;}
+.scmui-header-left {display: flex;align-items: center;padding-left:20px;}
+.scmui-header-right {display: flex;align-items: center;}
+.scmui-header .logo-bar {font-size: 20px;font-weight: bold;display: flex;align-items: center;}
+.scmui-header .logo-bar .logo {margin-right: 10px;width: 35px;height: 35px;}
+.scmui-header .nav {display: flex;height: 100%;margin-left: 40px;}
+.scmui-header .nav li {padding:0 10px;margin: 0 10px 0 0;font-size: 14px;color: rgba(255, 255, 255, 0.6);list-style: none;height: 100%;display: flex;align-items: center;cursor: pointer;}
+.scmui-header .nav li i {margin-right: 5px;}
+.scmui-header .nav li:hover {color: #fff;}
+.scmui-header .nav li.active {background: rgba(255, 255, 255, 0.1);color: #fff;}
+.scmui-header .user-bar .panel-item:hover {background: rgba(255, 255, 255, 0.1)!important;}
+.scmui-header .user-bar .user label{color: #fff;}
 
 /* 左侧菜单 */
 .scmui-side-split {width:65px;flex-shrink:0;background: #222b45;display: flex;flex-flow: column;}
 .scmui-side-split-top {height: 49px;}
 .scmui-side-split-top a {display: inline-block;width: 100%;height: 100%;display: flex;align-items: center;justify-content: center;}
 .scmui-side-split-top .logo {height:30px;vertical-align: bottom;}
-.adminui-side-split-scroll {overflow: auto;overflow-x:hidden;height: 100%;flex: 1;}
+.scmui-side-split-scroll {overflow: auto;overflow-x:hidden;height: 100%;flex: 1;}
 .scmui-side-split li {cursor: pointer;width: 65px;height: 65px;color: #fff;text-align: center;display: flex;flex-direction: column;align-items: center;justify-content: center;}
 .scmui-side-split li i {font-size: 18px;}
 .scmui-side-split li p {margin-top:5px;}
 .scmui-side-split li:hover {background: rgba(255, 255, 255, 0.1);}
 .scmui-side-split li.active {background: #409EFF;}
 
-.adminui-side-split-scroll::-webkit-scrollbar-thumb {background-color: rgba(255, 255, 255, 0.4);border-radius:5px;}
-.adminui-side-split-scroll::-webkit-scrollbar-thumb:hover {background-color: rgba(255, 255, 255, 0.5);}
-.adminui-side-split-scroll::-webkit-scrollbar-track {background-color: rgba(255, 255, 255, 0);}
-.adminui-side-split-scroll::-webkit-scrollbar-track:hover {background-color: rgba(255, 255, 255, 0);}
+.scmui-side-split-scroll::-webkit-scrollbar-thumb {background-color: rgba(255, 255, 255, 0.4);border-radius:5px;}
+.scmui-side-split-scroll::-webkit-scrollbar-thumb:hover {background-color: rgba(255, 255, 255, 0.5);}
+.scmui-side-split-scroll::-webkit-scrollbar-track {background-color: rgba(255, 255, 255, 0);}
+.scmui-side-split-scroll::-webkit-scrollbar-track:hover {background-color: rgba(255, 255, 255, 0);}
 
 .scmui-side {display: flex;flex-flow: column;flex-shrink:0;width:210px;background: #fff;box-shadow: 2px 0 8px 0 rgba(29,35,41,.05);border-right: 1px solid #e6e6e6;transition:width 0.3s;}
-.adminui-side-top {border-bottom: 1px solid #ebeef5;height:50px;line-height: 50px;}
-.adminui-side-top h2 {padding:0 20px;font-size: 17px;color: #3c4a54;}
-.adminui-side-scroll {overflow: auto;overflow-x:hidden;flex: 1;}
-.adminui-side-bottom {border-top: 1px solid #ebeef5;height:51px;cursor: pointer;display: flex;align-items: center;justify-content: center;}
-.adminui-side-bottom i {font-size: 16px;}
-.adminui-side-bottom:hover {color: var(--el-color-primary);}
+.scmui-side-top {border-bottom: 1px solid #ebeef5;height:50px;line-height: 50px;}
+.scmui-side-top h2 {padding:0 20px;font-size: 17px;color: #3c4a54;}
+.scmui-side-scroll {overflow: auto;overflow-x:hidden;flex: 1;}
+.scmui-side-bottom {border-top: 1px solid #ebeef5;height:51px;cursor: pointer;display: flex;align-items: center;justify-content: center;}
+.scmui-side-bottom i {font-size: 16px;}
+.scmui-side-bottom:hover {color: var(--el-color-primary);}
 .scmui-side.isCollapse {width: 65px;}
 .el-menu .menu-tag {position: absolute;height: 18px;line-height: 18px;background: var(--el-color-danger);font-size: 12px;color: #fff;right: 20px;border-radius:18px;padding:0 6px;}
 .el-menu .el-sub-menu__title .menu-tag {right: 40px;}
@@ -73,31 +73,31 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 /* 右侧内容 */
 .scmui-body {flex: 1;display: flex;flex-flow: column;}
 
-.adminui-topbar {height: 50px;border-bottom: 1px solid #ebeef5;background: #fff;box-shadow: 0 1px 4px rgba(0,21,41,.08);display: flex;justify-content:space-between;}
-.adminui-topbar .left-panel {display: flex;align-items: center;}
-.adminui-topbar .right-panel {display: flex;align-items: center;}
+.scmui-topbar {height: 50px;border-bottom: 1px solid #ebeef5;background: #fff;box-shadow: 0 1px 4px rgba(0,21,41,.08);display: flex;justify-content:space-between;}
+.scmui-topbar .left-panel {display: flex;align-items: center;}
+.scmui-topbar .right-panel {display: flex;align-items: center;}
 
 .right-panel-search {display: flex;align-items: center;}
 .right-panel-search > * + * {margin-left:10px;}
 
-.adminui-tags {height:35px;background: #fff;border-bottom: 1px solid #e6e6e6;}
-.adminui-tags ul {display: flex;overflow: hidden;}
-.adminui-tags li {cursor: pointer;display: inline-block;float: left;height:34px;line-height: 34px;position: relative;flex-shrink: 0;}
-.adminui-tags li::after {content: " ";width:1px;height:100%;position: absolute;right:0px;background-image: linear-gradient(#fff, #e6e6e6);}
-.adminui-tags li a {display: inline-block;padding:0 10px;width:100%;height:100%;color: #999;text-decoration:none;display: flex;align-items: center;}
-.adminui-tags li i {margin-left:10px;border-radius: 3px;width:18px;height:18px;display: flex;align-items: center;justify-content: center;}
-.adminui-tags li i:hover {background: rgba(0,0,0,.2);color: #fff;}
-.adminui-tags li:hover {background: #ecf5ff;}
-.adminui-tags li.active {background: #409EFF;}
-.adminui-tags li.active a {color: #fff;}
-.adminui-tags li.sortable-ghost {opacity: 0;}
+.scmui-tags {height:35px;background: #fff;border-bottom: 1px solid #e6e6e6;}
+.scmui-tags ul {display: flex;overflow: hidden;}
+.scmui-tags li {cursor: pointer;display: inline-block;float: left;height:34px;line-height: 34px;position: relative;flex-shrink: 0;}
+.scmui-tags li::after {content: " ";width:1px;height:100%;position: absolute;right:0px;background-image: linear-gradient(#fff, #e6e6e6);}
+.scmui-tags li a {display: inline-block;padding:0 10px;width:100%;height:100%;color: #999;text-decoration:none;display: flex;align-items: center;}
+.scmui-tags li i {margin-left:10px;border-radius: 3px;width:18px;height:18px;display: flex;align-items: center;justify-content: center;}
+.scmui-tags li i:hover {background: rgba(0,0,0,.2);color: #fff;}
+.scmui-tags li:hover {background: #ecf5ff;}
+.scmui-tags li.active {background: #409EFF;}
+.scmui-tags li.active a {color: #fff;}
+.scmui-tags li.sortable-ghost {opacity: 0;}
 
-.adminui-main {overflow: auto;background-color: #f6f8f9;flex: 1;}
+.scmui-main {overflow: auto;background-color: #f6f8f9;flex: 1;}
 
 /*页面最大化*/
 .scmui.main-maximize {
 	.main-maximize-exit {display: block;}
-	.scmui-side-split, .scmui-side, .adminui-header, .adminui-topbar, .adminui-tags {display: none;}
+	.scmui-side-split, .scmui-side, .scmui-header, .scmui-topbar, .scmui-tags {display: none;}
 }
 .main-maximize-exit {display: none;position: fixed;z-index: 3000;top:-20px;left:50%;margin-left: -20px;border-radius: 50%;width: 40px;height: 40px;cursor: pointer;background: rgba(0,0,0,0.2);text-align: center;}
 .main-maximize-exit i {font-size: 14px;margin-top: 22px;color: #fff;}

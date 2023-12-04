@@ -2,7 +2,7 @@ import store from "@/store";
 import { nextTick } from "vue";
 
 export function beforeEach(to, from) {
-	var adminMain = document.querySelector("#adminui-main");
+	var adminMain = document.querySelector("#scmui-main");
 	if (!adminMain) {
 		return false;
 	}
@@ -13,7 +13,7 @@ export function beforeEach(to, from) {
 }
 
 export function afterEach(to) {
-	var adminMain = document.querySelector("#adminui-main");
+	var adminMain = document.querySelector("#scmui-main");
 	if (!adminMain) {
 		return false;
 	}

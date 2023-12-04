@@ -1,5 +1,5 @@
 <template>
-	<div class="adminui-tags">
+	<div class="scmui-tags">
 		<ul ref="tags">
 			<li v-for="tag in tagList" v-bind:key="tag"
 				:class="[isActive(tag) ? 'active' : '', tag.meta.affix ? 'affix' : '',]"

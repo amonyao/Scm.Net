@@ -1,8 +1,8 @@
 <template>
 	<!-- 通栏布局 -->
 	<template v-if="layout == 'header'">
-		<header class="adminui-header">
-			<div class="adminui-header-left">
+		<header class="scmui-header">
+			<div class="scmui-header-left">
 				<div class="logo-bar">
 					<img class="logo" src="img/logo.png">
 					<span>{{ $CONFIG.APP_NAME }}</span>
@@ -17,17 +17,17 @@
 					</li>
 				</ul>
 			</div>
-			<div class="adminui-header-right">
+			<div class="scmui-header-right">
 				<userbar></userbar>
 			</div>
 		</header>
 		<section class="scmui-wrapper">
 			<div v-if="!ismobile && nextMenu.length > 0 || !pmenu.component"
 				:class="menuIsCollapse ? 'scmui-side isCollapse' : 'scmui-side'">
-				<div v-if="!menuIsCollapse" class="adminui-side-top">
+				<div v-if="!menuIsCollapse" class="scmui-side-top">
 					<h2>{{ pmenu.meta.title }}</h2>
 				</div>
-				<div class="adminui-side-scroll">
+				<div class="scmui-side-scroll">
 					<el-scrollbar>
 						<el-menu :default-active="active" router :collapse="menuIsCollapse"
 							:unique-opened="$CONFIG.MENU_UNIQUE_OPENED">
@@ -35,7 +35,7 @@
 						</el-menu>
 					</el-scrollbar>
 				</div>
-				<div class="adminui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
+				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
 					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 			<div class="scmui-body el-container">
 				<Topbar v-if="!ismobile"></Topbar>
 				<Tags v-if="!ismobile && layoutTags"></Tags>
-				<div class="adminui-main" id="adminui-main">
+				<div class="scmui-main" id="scmui-main">
 					<router-view v-slot="{ Component }">
 						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
 							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
@@ -57,20 +57,20 @@
 
 	<!-- 经典布局 -->
 	<template v-else-if="layout == 'menu'">
-		<header class="adminui-header">
-			<div class="adminui-header-left">
+		<header class="scmui-header">
+			<div class="scmui-header-left">
 				<div class="logo-bar">
 					<img class="logo" src="img/logo.png">
 					<span>{{ $CONFIG.APP_NAME }}</span>
 				</div>
 			</div>
-			<div class="adminui-header-right">
+			<div class="scmui-header-right">
 				<userbar></userbar>
 			</div>
 		</header>
 		<section class="scmui-wrapper">
 			<div v-if="!ismobile" :class="menuIsCollapse ? 'scmui-side isCollapse' : 'scmui-side'">
-				<div class="adminui-side-scroll">
+				<div class="scmui-side-scroll">
 					<el-scrollbar>
 						<el-menu :default-active="active" router :collapse="menuIsCollapse"
 							:unique-opened="$CONFIG.MENU_UNIQUE_OPENED">
@@ -78,7 +78,7 @@
 						</el-menu>
 					</el-scrollbar>
 				</div>
-				<div class="adminui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
+				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
 					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 			<div class="scmui-body el-container">
 				<Topbar v-if="!ismobile"></Topbar>
 				<Tags v-if="!ismobile && layoutTags"></Tags>
-				<div class="adminui-main" id="adminui-main">
+				<div class="scmui-main" id="scmui-main">
 					<router-view v-slot="{ Component }">
 						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
 							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
@@ -100,15 +100,15 @@
 
 	<!-- 功能坞布局 -->
 	<template v-else-if="layout == 'dock'">
-		<header class="adminui-header">
-			<div class="adminui-header-left">
+		<header class="scmui-header">
+			<div class="scmui-header-left">
 				<div class="logo-bar">
 					<img class="logo" src="img/logo.png">
 					<span>{{ $CONFIG.APP_NAME }}</span>
 				</div>
 			</div>
-			<div class="adminui-header-right">
-				<div v-if="!ismobile" class="adminui-header-menu">
+			<div class="scmui-header-right">
+				<div v-if="!ismobile" class="scmui-header-menu">
 					<el-menu mode="horizontal" :default-active="active" router background-color="#222b45" text-color="#fff"
 						active-text-color="var(--el-color-primary)">
 						<NavMenu :navMenus="menu"></NavMenu>
@@ -121,7 +121,7 @@
 		<section class="scmui-wrapper">
 			<div class="scmui-body el-container">
 				<Tags v-if="!ismobile && layoutTags"></Tags>
-				<div class="adminui-main" id="adminui-main">
+				<div class="scmui-main" id="scmui-main">
 					<router-view v-slot="{ Component }">
 						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
 							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
@@ -142,7 +142,7 @@
 						<img class="logo" :title="$CONFIG.APP_NAME" src="img/logo-r.png">
 					</router-link>
 				</div>
-				<div class="adminui-side-split-scroll">
+				<div class="scmui-side-split-scroll">
 					<el-scrollbar>
 						<ul>
 							<li v-for="item in menu" :key="item" :class="pmenu.path == item.path ? 'active' : ''"
@@ -158,10 +158,10 @@
 			</div>
 			<div v-if="!ismobile && nextMenu.length > 0 || !pmenu.component"
 				:class="menuIsCollapse ? 'scmui-side isCollapse' : 'scmui-side'">
-				<div v-if="!menuIsCollapse" class="adminui-side-top">
+				<div v-if="!menuIsCollapse" class="scmui-side-top">
 					<h2>{{ pmenu.meta.title }}</h2>
 				</div>
-				<div class="adminui-side-scroll">
+				<div class="scmui-side-scroll">
 					<el-scrollbar>
 						<el-menu :default-active="active" router :collapse="menuIsCollapse"
 							:unique-opened="$CONFIG.MENU_UNIQUE_OPENED">
@@ -169,7 +169,7 @@
 						</el-menu>
 					</el-scrollbar>
 				</div>
-				<div class="adminui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
+				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
 					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
 				</div>
 			</div>
@@ -179,7 +179,7 @@
 					<userbar></userbar>
 				</Topbar>
 				<Tags v-if="!ismobile && layoutTags"></Tags>
-				<div class="adminui-main" id="adminui-main">
+				<div class="scmui-main" id="scmui-main">
 					<router-view v-slot="{ Component }">
 						<keep-alive :include="this.$store.state.keepAlive.keepLiveRoute">
 							<component :is="Component" :key="$route.fullPath" v-if="$store.state.keepAlive.routeShow" />
