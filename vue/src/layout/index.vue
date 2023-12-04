@@ -21,9 +21,9 @@
 				<userbar></userbar>
 			</div>
 		</header>
-		<section class="aminui-wrapper">
+		<section class="scmui-wrapper">
 			<div v-if="!ismobile && nextMenu.length > 0 || !pmenu.component"
-				:class="menuIsCollapse ? 'aminui-side isCollapse' : 'aminui-side'">
+				:class="menuIsCollapse ? 'scmui-side isCollapse' : 'scmui-side'">
 				<div v-if="!menuIsCollapse" class="adminui-side-top">
 					<h2>{{ pmenu.meta.title }}</h2>
 				</div>
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
-			<div class="aminui-body el-container">
+			<div class="scmui-body el-container">
 				<Topbar v-if="!ismobile"></Topbar>
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
@@ -68,8 +68,8 @@
 				<userbar></userbar>
 			</div>
 		</header>
-		<section class="aminui-wrapper">
-			<div v-if="!ismobile" :class="menuIsCollapse ? 'aminui-side isCollapse' : 'aminui-side'">
+		<section class="scmui-wrapper">
+			<div v-if="!ismobile" :class="menuIsCollapse ? 'scmui-side isCollapse' : 'scmui-side'">
 				<div class="adminui-side-scroll">
 					<el-scrollbar>
 						<el-menu :default-active="active" router :collapse="menuIsCollapse"
@@ -83,7 +83,7 @@
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
-			<div class="aminui-body el-container">
+			<div class="scmui-body el-container">
 				<Topbar v-if="!ismobile"></Topbar>
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
@@ -118,8 +118,8 @@
 				<userbar></userbar>
 			</div>
 		</header>
-		<section class="aminui-wrapper">
-			<div class="aminui-body el-container">
+		<section class="scmui-wrapper">
+			<div class="scmui-body el-container">
 				<Tags v-if="!ismobile && layoutTags"></Tags>
 				<div class="adminui-main" id="adminui-main">
 					<router-view v-slot="{ Component }">
@@ -135,9 +135,9 @@
 
 	<!-- 默认布局 -->
 	<template v-else>
-		<section class="aminui-wrapper">
-			<div v-if="!ismobile" class="aminui-side-split">
-				<div class="aminui-side-split-top">
+		<section class="scmui-wrapper">
+			<div v-if="!ismobile" class="scmui-side-split">
+				<div class="scmui-side-split-top">
 					<router-link :to="$CONFIG.DASHBOARD_URL">
 						<img class="logo" :title="$CONFIG.APP_NAME" src="img/logo-r.png">
 					</router-link>
@@ -157,7 +157,7 @@
 				</div>
 			</div>
 			<div v-if="!ismobile && nextMenu.length > 0 || !pmenu.component"
-				:class="menuIsCollapse ? 'aminui-side isCollapse' : 'aminui-side'">
+				:class="menuIsCollapse ? 'scmui-side isCollapse' : 'scmui-side'">
 				<div v-if="!menuIsCollapse" class="adminui-side-top">
 					<h2>{{ pmenu.meta.title }}</h2>
 				</div>
@@ -174,7 +174,7 @@
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
-			<div class="aminui-body el-container">
+			<div class="scmui-body el-container">
 				<Topbar>
 					<userbar></userbar>
 				</Topbar>
