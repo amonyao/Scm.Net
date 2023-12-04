@@ -23,10 +23,10 @@
                 </el-header>
                 <el-main>
                     <div class="box">
-                        <div class="tit"><input v-model="formData.title" placeholder="请输入标题……" @change="changeTitle()" />
+                        <div class="tit"><input v-model="formData.title" placeholder="请输入标题……" @keydown="changeTitle" />
                         </div>
-                        <Editor ref="editor" v-model="formData.content" :init="editor_config" class="doc-cnt"
-                            id="tinydemo-doc" api-key="jh10jljrhxrbvc2sbwx9maq9x1y1dy5yatkmh2tnv6gcd9gp" />
+                        <Editor ref="editor" v-model="formData.content" :init="editor_config" class="doc-cnt" id="editor"
+                            api-key="jh10jljrhxrbvc2sbwx9maq9x1y1dy5yatkmh2tnv6gcd9gp" />
                     </div>
                 </el-main>
             </el-container>
@@ -46,6 +46,7 @@ export default {
             },
             formData: this.def_data(),
             article_list: [],
+            loading: false,
             editor_config: {
                 language: 'zh_CN',
                 menubar: false,
@@ -77,7 +78,12 @@ export default {
                     editor.selection.getRng().collapse(false);
                     editor.focus();
                 },
-                save_onsavecallback: this.saveArticle
+                save_onsavecallback: this.saveArticle,
+                setup: (editor) => {
+                    editor.on('setContent', () => {
+                        this.newDocument();
+                    });
+                },
             },
         }
     },
@@ -103,8 +109,15 @@ export default {
 
             this.article_list = res.data;
         },
-        changeTitle() {
-            //this.$refs.editor.focus();
+        changeTitle(e) {
+            if (e.keyCode != 13) {
+                return true;
+            }
+            var dom = document.getElementById('editor');
+            if (dom) {
+                dom.focus();
+            }
+            return false;
         },
         async saveArticle() {
             if (!this.formData.title) {
@@ -157,8 +170,10 @@ export default {
                 return;
             }
 
+            this.loading = true;
             var res = await this.$API.cmsdocnotes.model.get(id);
             if (!res || res.code != 200) {
+                this.loading = false;
                 return;
             }
 
