@@ -1,48 +1,44 @@
 <template>
-	<el-container>
-		<el-aside width="320px">
-			<el-container>
-				<el-main>
-					<el-form ref="form" :model="formData" label-width="auto" label-position="top">
-						<el-form-item label="编码方案">
-							<sc-select v-model="formData.format" :data="format_list"></sc-select>
-						</el-form-item>
-						<el-form-item label="条码位置">
-							<sc-select v-model="formData.position" :data="position_list"></sc-select>
-						</el-form-item>
-						<el-form-item label="字体名称">
-							<sc-select v-model="formData.fontName" :data="font_list"></sc-select>
-						</el-form-item>
-						<el-form-item label="字体大小">
-							<el-input-number v-model="formData.fontSize"></el-input-number>
-						</el-form-item>
-						<el-form-item label="条码">
-							<el-input v-model="formData.meta" placeholder="请输入条码，多个请以空格或换行分隔，扫描文字请以/分隔。如：12345678/这是测试文字"
-								type="textarea" rows="10"></el-input>
-						</el-form-item>
-						<el-form-item>
-							<el-button @click="genBarcode()">生成</el-button>
-						</el-form-item>
-					</el-form>
-				</el-main>
-			</el-container>
-		</el-aside>
-		<el-main>
-			<el-card class="barcode-list">
-				<div v-if="barcodes && barcodes.length > 0">
-					<div v-for="barcode in barcodes" :key="barcode" class="barcode-item">
-						<el-image :src="genImageUrl(barcode)" />
-						<div class="barcode-text">{{ barcode }}</div>
+		<el-container>
+			<el-aside width="240px" style="padding: 15px;">
+				<el-form ref="form" :model="formData" label-width="auto" label-position="top">
+					<el-form-item label="编码方案">
+						<sc-select v-model="formData.format" :data="format_list"></sc-select>
+					</el-form-item>
+					<el-form-item label="条码位置">
+						<sc-select v-model="formData.position" :data="position_list"></sc-select>
+					</el-form-item>
+					<el-form-item label="字体名称">
+						<sc-select v-model="formData.fontName" :data="font_list"></sc-select>
+					</el-form-item>
+					<el-form-item label="字体大小">
+						<el-input-number v-model="formData.fontSize"></el-input-number>
+					</el-form-item>
+					<el-form-item label="条码">
+						<el-input v-model="formData.meta" placeholder="请输入条码，多个请以空格或换行分隔，扫描文字请以/分隔。如：12345678/这是测试文字"
+							type="textarea" rows="10"></el-input>
+					</el-form-item>
+					<el-form-item>
+						<el-button @click="genBarcode()">生成</el-button>
+					</el-form-item>
+				</el-form>
+			</el-aside>
+			<el-main>
+				<el-card class="barcode-list">
+					<div v-if="barcodes && barcodes.length > 0">
+						<div v-for="barcode in barcodes" :key="barcode" class="barcode-item">
+							<el-image :src="genImageUrl(barcode)" />
+							<div class="barcode-text">{{ barcode }}</div>
+						</div>
 					</div>
-				</div>
-				<div v-else>
-					<el-empty>
-						请在左侧输入条码内容。
-					</el-empty>
-				</div>
-			</el-card>
-		</el-main>
-	</el-container>
+					<div v-else>
+						<el-empty>
+							请在左侧输入条码内容。
+						</el-empty>
+					</div>
+				</el-card>
+			</el-main>
+		</el-container>
 </template>
 <script>
 export default {
@@ -120,7 +116,8 @@ export default {
 </script>
 <style scoped>
 .barcode-list {
-	width: 842px;
+	width: 100%;
+	max-width: 842px;
 	margin: 0 auto;
 }
 

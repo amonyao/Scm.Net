@@ -1,27 +1,29 @@
 <template>
-    <div ref="fullScreen" class="dd">
-        <div class="sc-panel panel-default">
-            <div class="sc-head">
-                <el-row>
-                    <el-col :span="16">
-                        <div class="title">{{ title }}</div>
-                    </el-col>
-                    <el-col :span="8" style="text-align: right;">
-                        <el-button type="default" icon="el-icon-full-screen" circle @click="showFullPage()"
-                            v-show="!fullScreen && !fullPage" title="全窗口显示"></el-button>
-                        <el-button type="default" icon="el-icon-full-screen" circle @click="exitFullPage()"
-                            v-show="!fullScreen && fullPage" title="退出全窗口"></el-button>
-                        <el-button type="default" icon="el-icon-full-screen" circle @click="showFullScreen()"
-                            v-show="!fullScreen" title="全屏幕显示"></el-button>
-                        <el-button type="default" icon="el-icon-full-screen" circle @click="exitFullScreen()"
-                            v-show="fullScreen" title="退出全屏幕"></el-button>
-                        <el-button type="default" icon="el-icon-info-filled" circle @click="showDrawer()" title="帮助"></el-button>
-                    </el-col>
-                </el-row>
-                <slot name="head"></slot>
+    <div ref="scPanel" class="sc-panel">
+        <div class="sc-panel_base panel-default">
+            <div class="sc-panel_header">
+                <div class="title">
+                    {{ title }}
+                </div>
+                <div>
+                    <slot name="header"></slot>
+                    <el-button type="default" icon="el-icon-full-screen" circle @click="showFullPage()"
+                        v-show="!fullScreen && !fullPage" title="全窗口显示"></el-button>
+                    <el-button type="default" icon="el-icon-full-screen" circle @click="exitFullPage()"
+                        v-show="!fullScreen && fullPage" title="退出全窗口"></el-button>
+                    <el-button type="default" icon="el-icon-monitor" circle @click="showFullScreen()"
+                        v-show="!fullScreen" title="全屏幕显示"></el-button>
+                    <el-button type="default" icon="el-icon-monitor" circle @click="exitFullScreen()"
+                        v-show="fullScreen" title="退出全屏幕"></el-button>
+                    <el-button type="default" icon="el-icon-info-filled" circle @click="showDrawer()"
+                        title="帮助"></el-button>
+                </div>
             </div>
-            <div class="sc-body">
+            <div class="sc-panel_body">
                 <slot></slot>
+            </div>
+            <div class="sc-panel_footer">
+                <slot name="footer"></slot>
             </div>
         </div>
     </div>
@@ -50,19 +52,19 @@ export default {
             this.drawer = true;
         },
         showFullPage() {
-            this.$TOOL.showFullPage(this.$refs.fullScreen);
+            this.$TOOL.showFullPage(this.$refs.scPanel);
             this.fullPage = true;
         },
         exitFullPage() {
-            this.$TOOL.exitFullPage(this.$refs.fullScreen);
+            this.$TOOL.exitFullPage(this.$refs.scPanel);
             this.fullPage = false;
         },
         showFullScreen() {
-            this.$TOOL.screen(this.$refs.fullScreen);
+            this.$TOOL.screen(this.$refs.scPanel);
             this.fullScreen = true;
         },
         exitFullScreen() {
-            this.$TOOL.screen(this.$refs.fullScreen);
+            this.$TOOL.screen(this.$refs.scPanel);
             this.fullScreen = false;
         }
     }
@@ -70,13 +72,13 @@ export default {
 </script>
   
 <style scoped>
-.dd {
+.sc-panel {
     height: 100%;
     padding: 15px;
     background-color: white;
 }
 
-.sc-panel {
+.sc-panel_base {
     height: 100%;
     margin: 0px;
     background-color: #fff;
@@ -84,9 +86,12 @@ export default {
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.sc-head {
+.sc-panel_header {
     margin: 0px;
     padding: 10px 15px;
     border: 0px;
@@ -94,6 +99,20 @@ export default {
     border-radius: 0px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sc-panel_body {
+    flex-basis: 100%;
+    margin: 15px;
+}
+
+.sc-panel_footer {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between; */
 }
 
 .title {
@@ -103,7 +122,7 @@ export default {
     font-size: 18px;
 }
 
-.sc-panel .sc-body {
+.sc-panel_base .sc-body {
     padding: 15px;
 }
 
@@ -111,7 +130,7 @@ export default {
     border-color: #ddd;
 }
 
-.panel-default>.sc-head {
+.panel-default>.sc-panel_header {
     color: #333;
     background-color: #f5f5f5;
     border-color: #ddd;

@@ -1,21 +1,23 @@
 <template>
     <sc-panel :title="title" :remark="remark">
-        <el-card style="margin-bottom: 15px;" shadow="hover">
-            <el-descriptions style="width: 500px;">
-                <el-descriptions-item label="总计">{{ total }}</el-descriptions-item>
-                <el-descriptions-item label="数字">{{ noQty }}</el-descriptions-item>
-                <el-descriptions-item label=""></el-descriptions-item>
+        <textarea v-model="text" style="height: 100%;width: 100%;" />
+        <template #footer>
+            <el-card shadow="hover">
+                <el-descriptions style="width: 500px;">
+                    <el-descriptions-item label="总计">{{ total }}</el-descriptions-item>
+                    <el-descriptions-item label="数字">{{ noQty }}</el-descriptions-item>
+                    <el-descriptions-item label=""></el-descriptions-item>
 
-                <el-descriptions-item label="英文合计">{{ enChar + enSign }}</el-descriptions-item>
-                <el-descriptions-item label="英文字符">{{ enChar }}</el-descriptions-item>
-                <el-descriptions-item label="英文符号">{{ enSign }}</el-descriptions-item>
+                    <el-descriptions-item label="英文合计">{{ enChar + enSign }}</el-descriptions-item>
+                    <el-descriptions-item label="英文字符">{{ enChar }}</el-descriptions-item>
+                    <el-descriptions-item label="英文符号">{{ enSign }}</el-descriptions-item>
 
-                <el-descriptions-item label="中文合计">{{ cnChar + cnSign }}</el-descriptions-item>
-                <el-descriptions-item label="中文字符">{{ cnChar }}</el-descriptions-item>
-                <el-descriptions-item label="中文符号">{{ cnSign }}</el-descriptions-item>
-            </el-descriptions>
-        </el-card>
-        <el-input v-model="text" type="textarea" rows="20"></el-input>
+                    <el-descriptions-item label="中文合计">{{ cnChar + cnSign }}</el-descriptions-item>
+                    <el-descriptions-item label="中文字符">{{ cnChar }}</el-descriptions-item>
+                    <el-descriptions-item label="中文符号">{{ cnSign }}</el-descriptions-item>
+                </el-descriptions>
+            </el-card>
+        </template>
     </sc-panel>
 </template>
 <script>
