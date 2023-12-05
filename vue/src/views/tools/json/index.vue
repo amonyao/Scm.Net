@@ -114,7 +114,7 @@ export default {
                     return true;
                 }
                 if (this.format == 'sql') {
-                    code = this.minify ? vkbeautify.sqlmin(code) : vkbeautify.css(code, indent);
+                    code = this.minify ? vkbeautify.sqlmin(code) : vkbeautify.sql(code, indent);
                     this.setValue(code);
                     return true;
                 }
