@@ -4,10 +4,7 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="终端类型" prop="types">
-                        <el-select v-model="formData.types" style="width: 100%;" placeholder="请选择终端类型">
-                            <el-option v-for="item in typeList" :key="item.id" :label="item.label"
-                                :value="item.value"></el-option>
-                        </el-select>
+                        <sc-select v-model="formData.types" style="width: 100%;" :data="typeList"></sc-select>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">

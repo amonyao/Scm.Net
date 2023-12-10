@@ -23,11 +23,9 @@
 							</el-col>
 							<el-col :span="12">
 								<el-form-item label="审批被拒后重新提交" prop="refused">
-									<el-select v-model="formData.refused" placeholder="请选择审批被拒后重新提交" clearable
-										:style="{ width: '100%' }">
-										<el-option v-for="(item, index) in refusedOptions" :key="index" :label="item.label"
-											:value="item.value" :disabled="item.disabled"></el-option>
-									</el-select>
+									<sc-select v-model="formData.refused" placeholder="请选择审批被拒后重新提交" clearable
+										:style="{ width: '100%' }" :data="refusedOptions">
+									</sc-select>
 								</el-form-item>
 							</el-col>
 							<el-col :span="12">

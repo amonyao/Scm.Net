@@ -3,10 +3,13 @@
         <el-aside width="260px" v-loading="menuloading">
             <el-container>
                 <el-header>
-                    <el-input v-model="menuFilter" clearable placeholder="输入关键字进行过滤" />
-                    <el-button icon="el-icon-search" type="primary" @click="search" />
+                    <sc-select v-model="param.db_id" :data="db_list" @change="changeDb"></sc-select>
                 </el-header>
                 <el-main style="background-color: #FFFFFF;">
+                    <div class="filter">
+                        <el-input v-model="menuFilter" clearable placeholder="输入关键字进行过滤" />
+                        <el-button icon="el-icon-search" type="primary" @click="search" />
+                    </div>
                     <el-tabs>
                         <el-tab-pane label="表结构">
                             <el-scrollbar>
@@ -30,12 +33,12 @@
                         </el-tab-pane>
                         <el-tab-pane label="命令集">
                             <el-scrollbar>
-                                <ul class="order-list">
-                                    <li v-for="item in commitsList" :key="item.createTime" @click="copySQLOrder(item)">
-                                        <img src="@/assets/order.png">
-                                        {{ item.title }}
-                                    </li>
-                                </ul>
+                                <sc-list :data="presql_list" @change="changeItem" @editItem="editItem"
+                                    @removeItem="deleteItem">
+                                    <template #item="{ item }">
+                                        {{ item.namec }}
+                                    </template>
+                                </sc-list>
                             </el-scrollbar>
                         </el-tab-pane>
                     </el-tabs>
@@ -53,6 +56,8 @@
                         </el-button-group>
                         <el-divider direction="vertical"></el-divider>
                         <el-button type="success" plain icon="el-icon-delete" @click="format()">美化</el-button>
+                        <el-divider direction="vertical"></el-divider>
+                        <el-button type="default" plain icon="el-icon-delete" @click="saveAs()">保存</el-button>
                     </div>
                     <div class="right-panel">
                         <div class="right-panel-search">
@@ -60,7 +65,7 @@
                     </div>
                 </el-header>
                 <el-main class="nopadding">
-                    <div ref="editor" class="editor"></div>
+                    <div ref="sqlEditor" class="sqlEditor"></div>
                     <div class="tables-result" :style="{ height: `${tablesHeight}px` }">
                         <el-tabs type="border-card" style="height: 99%">
                             <el-tab-pane label="信息">
@@ -92,9 +97,11 @@
             </el-container>
         </el-main>
     </el-container>
+    <edit ref="edit" @complete="complete" />
 </template>
   
 <script>
+import { defineAsyncComponent } from "vue";
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
@@ -103,20 +110,27 @@ import { vkbeautify } from "vkbeautify";
 
 export default {
     name: 'SQL',
+    components: {
+        edit: defineAsyncComponent(() => import("./edit")),
+    },
     data() {
         return {
             menuloading: false,//列表加载标记
             menuFilter: '',//列表过滤条件
-            winHeight: 0,
             tablesHeight: 0,
             foldIndex: [], // 记录展开状态的表结构，存入index
             treeData: [], // 左侧展示的表结构
-            tableList: [],// 所有表格信息
-            runResult: '暂无数据', // 运行结果提示
+            db_list: [],//数据库列表
+            table_list: [],// 所有表格信息
+            presql_list: [],//预定义脚本
             runType: 0, // 运行结果类型，0无结果、1成功、2警告、3异常
+            runResult: '暂无数据', // 运行结果提示
             tableData: [], // 运行结果的表数据展示
             columns: [], // 运行的表结构，对象元素，{label: '', value: ''}
             sqlEditor: null,
+            param: {
+                db_id: '0'
+            },
             options: {
                 theme: '',
                 // lineNumbers: true,
@@ -125,7 +139,6 @@ export default {
             },
             code: '', // 实时输入的代码
             runLoading: false, // 运行加载状态
-            commitsList: [],
             errMsg: {
                 sqlMessage: '',
                 errno: '',
@@ -133,13 +146,10 @@ export default {
                 code: '',
                 sqlState: ''
             },
-            editor: null
         }
     },
-    created() {
-        this.queryTables()
-    },
     mounted() {
+        this.$SCM.list_option(this.db_list, this.$API.devdb.option, {}, false);
         this.init();
     },
     methods: {
@@ -148,16 +158,33 @@ export default {
                 extensions: [basicSetup, javascript(), sql()]
             })
 
-            this.editor = new EditorView({
+            this.sqlEditor = new EditorView({
                 state: startState,
-                parent: this.$refs.editor
+                parent: this.$refs.sqlEditor
             })
         },
         getValue() {
-            return this.editor.state.doc.toString();
+            return this.sqlEditor.state.doc.toString();
+        },
+        getLine() {
+            return '';//this.sqlEditor.state.doc.line(n + 1).text;
+        },
+        getCursor() {
+            return this.sqlEditor.state.selection.main.head;
+        },
+        getSelection() {
+            var selection = this.sqlEditor.state.selection.main;
+            return this.sqlEditor.state.sliceDoc(selection.from, selection.to);
         },
         setValue(value) {
-            this.editor.dispatch({ changes: { from: 0, to: this.editor.state.doc.length, insert: value } });
+            this.sqlEditor.dispatch({ changes: { from: 0, to: this.sqlEditor.state.doc.length, insert: value } });
+        },
+        changeDb() {
+            this.queryTables();
+            this.queryPresql();
+        },
+        complete() {
+            this.queryPresql();
         },
         onFoldTable(index) {
             // 表结构折叠事件
@@ -169,12 +196,12 @@ export default {
             }
         },
         search() {
-            if (!this.tableList) {
+            if (!this.table_list) {
                 return;
             }
             this.treeData = []
             const tips = {}
-            this.tableList.forEach(async (table) => {
+            this.table_list.forEach(async (table) => {
                 if (table.name && table.name.indexOf(this.menuFilter) >= 0) {
                     const treeObj = {
                         table: table.name,
@@ -206,15 +233,36 @@ export default {
             this.code = code;
             this.setValue(vkbeautify.sql(code));
         },
-        runCode() {
-            var code = this.getValue().trim();
-            // 格式化代码
-            if (code === '') {
+        saveAs() {
+            var code = this.getCode();
+            if (!code) {
                 this.$message.warning('请先编辑 SQL 命令！')
-                return
+                return;
             }
-            this.code = code;
-            this.executeSql();
+
+            this.$refs.edit.open({ db_id: this.param.db_id, sql: code });
+        },
+        getCode() {
+            var code = this.getSelection().trim();
+            if (code) {
+                return code;
+            }
+
+            code = this.getLine().trim();
+            if (code) {
+                return code;
+            }
+
+            return this.getValue().trim();
+        },
+        runCode() {
+            var code = this.getCode();
+            if (!code) {
+                this.$message.warning('请先编辑 SQL 命令！')
+                return;
+            }
+
+            this.executeSql(code);
         },
         stopRun() {
 
@@ -269,9 +317,9 @@ export default {
             // })
 
             // // 代码输入的双向绑定
-            // this.sqlEditor.on('change', (editor) => {
+            // this.sqlEditor.on('change', (sqlEditor) => {
             //     // 这里要用多一个载体去获取值,不然会重复赋值卡顿
-            //     this.code = editor.getValue()
+            //     this.code = sqlEditor.getValue()
             //     if (this.$emit) {
             //         this.$emit('input', this.code)
             //     }
@@ -281,9 +329,9 @@ export default {
             // 复制命令
             this.setValue(item.sql)
         },
-        async executeSql() {
+        async executeSql(code) {
             // 执行SQL语句
-            var code = this.$TOOL.trim(this.code || '');
+            code = this.$TOOL.trim(code || '');
             if (code === '') {
                 this.$message.warning('请先编辑 SQL 命令！')
                 return
@@ -294,7 +342,7 @@ export default {
             this.runResult = '执行中...'
             this.runType = 0
             this.errMsg = {}
-            const res = await this.$API.devsql.execute.post({ sql: code });
+            const res = await this.$API.devsql.execute.post({ id: this.param.id, sql: code });
             if (res == null || res.code != 200) {
                 return;
             }
@@ -320,7 +368,7 @@ export default {
                 else {
                     this.runType = 1
                     this.runResult = `执行成功！${data.qty}行数据受影响`
-                    this.queryTables()
+                    this.queryTables();
                 }
             } else {
                 this.runType = 3
@@ -335,13 +383,13 @@ export default {
         async queryTables() {
             this.menuloading = true;
             // 查询所有表
-            const res = await this.$API.devsql.list.get();
+            const res = await this.$API.devsql.table.get(this.param);
             if (res.code != 200) {
                 this.menuloading = false;
                 return;
             }
 
-            this.tableList = res.data;
+            this.table_list = res.data;
             const data = res.data;
             if (data != null && data.length > 0) {
                 this.treeData = []
@@ -369,18 +417,64 @@ export default {
                 //this.setHintOptions(tips)
             }
             this.menuloading = false;
+        },
+        async queryPresql() {
+            this.menuloading = true;
+            // 查询所有表
+            const res = await this.$API.devsql.presql.get(this.param);
+            if (res.code != 200) {
+                this.menuloading = false;
+                return;
+            }
+
+            this.presql_list = res.data;
+            this.menuloading = false;
+        },
+        changeItem(item) {
+            this.setValue(item.sql);
+        },
+        editItem(item) {
+            this.$refs.edit.open(item);
+        },
+        refresh() {
+
+        },
+        deleteItem(item) {
+            this.$confirm(`确认要执行删除操作吗？`, "提示", {
+                type: "warning",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+            })
+                .then(async () => {
+                    var loading = this.$loading();
+                    var res = this.$API.devsql.delete.delete({ ids: item.id });
+                    if (res.code == 200) {
+                        this.queryPresql();
+                        loading.close();
+                        this.$message.success("操作成功。");
+                    } else {
+                        this.$alert(res.message, "提示", { type: "error" });
+                    }
+                })
+                .catch(() => { });
         }
     }
 }
 </script>
 <style scoped>
-.editor {
+.filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sqlEditor {
     width: 100%;
     height: 360px;
 }
 </style>
 <style>
-.cm-editor {
+.cm-sqlEditor {
     height: 100%;
     width: 100%;
 }

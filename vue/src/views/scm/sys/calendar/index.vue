@@ -15,9 +15,8 @@
 					</sc-table-select>
 				</div>
 				<div class="right-panel">
-					<el-select v-model="param.types" placeholder="日程类型" style="width: 160px">
-						<el-option v-for="item in types_list" :key="item.value" :label="item.label" :value="item.id" />
-					</el-select>
+					<sc-select v-model="param.types" placeholder="日程类型" style="width: 160px" :data="types_list">
+					</sc-select>
 					<el-select v-model="param.level" placeholder="日程级别" style="width: 160px">
 						<el-option v-for="item in level_list" :key="item.value" :label="item.label" :value="item.id">
 							<span style="float: left">{{ item.label }}</span>
@@ -101,7 +100,7 @@
 									<el-popover placement="top-start" v-for="(row, uindex) in task.user" :key="uindex"
 										:title="row.fullName" trigger="hover">
 										<template #reference>
-											<el-avatar size="small" :src="$CONFIG.SERVER_URL + row.headPic" />
+											<el-avatar size="small" :src="$CONFIG.SERVER_URL + row.avatar" />
 										</template>
 										<p>{{ row.mobile }}</p>
 										<p>{{ row.email }}</p>

@@ -9,7 +9,8 @@
 
 <template>
 	<el-select v-bind="$attrs" :loading="loading">
-		<el-option v-for="item in options" :key="item[props.value]" :label="item[props.label]" :value="item[props.value]">
+		<el-option v-for="item in options" :key="item[props.value]" :label="item[props.label]" :value="item[props.value]"
+			:disabled="item.disabled">
 			<slot name="option" :data="item"></slot>
 		</el-option>
 	</el-select>

@@ -3,10 +3,8 @@
         <el-aside width="260px" v-loading="showGrouploading">
             <el-container>
                 <el-header>
-                    <el-select v-model="param.types" placeholder="请选择" @change="typeChange">
-                        <el-option v-for="item in options" :key="item.value" :label="item.label"
-                            :value="item.value"></el-option>
-                    </el-select>
+                    <sc-select v-model="param.types" placeholder="请选择" @change="typeChange" :data="options">
+                    </sc-select>
                 </el-header>
                 <el-main class="nopadding">
                     <el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group" :props="props"

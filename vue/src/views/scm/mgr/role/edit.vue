@@ -2,10 +2,8 @@
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="700px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
 			<el-form-item label="所属机构" prop="unit_id">
-				<el-select v-model="formData.unit_id" placeholder="请选择所属机构" :style="{ width: '100%' }">
-					<el-option v-for="item in unit_list" :key="item.id" :label="item.label" :value="item.id">
-					</el-option>
-				</el-select>
+				<sc-select v-model="formData.unit_id" :data="unit_list">
+				</sc-select>
 			</el-form-item>
 			<el-form-item label="角色名称" prop="namec">
 				<el-input v-model="formData.namec" clearable :maxlength="30" placeholder="请输入角色名称" show-word-limit
@@ -96,3 +94,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.el-select {
+	width: 100%;
+}
+</style>

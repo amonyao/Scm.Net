@@ -5,7 +5,7 @@
                 {{ header }}
             </div>
         </slot>
-        <div class="sc-list_body">
+        <div class="sc-list_body" :style="{ padding: this.padding + 'px' }">
             <div v-for="(item, index) in data" @click="itemClick(item, index)" :key="index" class="sc-list-item"
                 :style="{ width: 100 / columns + '%' }" :class="canSelected && selectedIndex == index ? 'active' : ''">
                 <slot name="item" :item="item" :index="index">
@@ -52,6 +52,7 @@ export default {
         hideEdit: { type: Boolean, default: false },
         hideRemove: { type: Boolean, default: false },
         columns: { type: Number, default: 1 },
+        padding: { type: Number, default: 0 }
     },
     created() {
     },
@@ -114,7 +115,6 @@ export default {
 }
 
 .sc-list_body {
-    padding: 15px;
     overflow-y: auto;
 }
 

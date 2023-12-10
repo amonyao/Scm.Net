@@ -1668,6 +1668,76 @@
             首页展示方式
             </summary>
         </member>
+        <member name="T:Com.Scm.Dev.DbDao">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.namec">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.host">
+            <summary>
+            主机
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.port">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.schame">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.user">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.pass">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.charset">
+            <summary>
+            字符集
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.DbDao.od">
+            <summary>
+            显示排序
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dev.SqlDao">
+            <summary>
+            SQL
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.SqlDao.db_id">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.SqlDao.namec">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.SqlDao.sql">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dev.SqlDao.qty">
+            <summary>
+            执行次数
+            </summary>
+        </member>
         <member name="T:Com.Scm.Msg.CommentDetailDao">
             <summary>
             

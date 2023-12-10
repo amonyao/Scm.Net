@@ -29,9 +29,9 @@
 			<el-form-item label="参与人员" prop="users">
 				<sc-table-select v-model="formData.users" :model-value="defaultValues" :apiObj="apiObj" :table-width="450"
 					:props="props" :style="{ width: '100%' }" multiple clearable collapse-tags collapse-tags-tooltip>
-					<el-table-column prop="headPic" label="头像" width="80">
+					<el-table-column prop="avatar" label="头像" width="80">
 						<template #default="scope">
-							<el-avatar :src="$CONFIG.SERVER_URL + scope.row.headPic" size="small"></el-avatar>
+							<el-avatar :src="$CONFIG.SERVER_URL + scope.row.avatar" size="small"></el-avatar>
 						</template>
 					</el-table-column>
 					<el-table-column prop="namec" label="姓名" width="180"></el-table-column>

@@ -94,7 +94,7 @@
 					<div class="notice-item" v-for="(it, index) in list" :key="index" :class="it.checked ? 'active' : ''"
 						@click="goInfo(it)">
 						<div class="item-avatar">
-							<el-avatar :src="resHead(it.send_user.headPic)" size="small"></el-avatar>
+							<el-avatar :src="resHead(it.send_user.avatar)" size="small"></el-avatar>
 							<el-checkbox size="large" v-model="it.checked" @change="itemChange(it)" />
 						</div>
 						<div class="item-info">

@@ -16,10 +16,9 @@
 				</el-col>
 				<el-col :span="12">
 					<el-form-item label="任务类型" prop="types">
-						<el-select v-model="formData.types" placeholder="请选择任务类型" clearable :style="{ width: '100%' }">
-							<el-option v-for="(item, index) in triggerTypeOptions" :key="index" :label="item.label"
-								:value="item.value" :disabled="item.disabled"></el-option>
-						</el-select>
+						<sc-select v-model="formData.types" placeholder="请选择任务类型" clearable :style="{ width: '100%' }"
+							:data="triggerTypeOptions">
+						</sc-select>
 					</el-form-item>
 				</el-col>
 				<el-col :span="12">

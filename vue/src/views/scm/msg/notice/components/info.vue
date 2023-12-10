@@ -3,7 +3,7 @@
 		<div class="notice-main-title">{{ model.title }}</div>
 		<div class="notice-main-user">
 			<div class="user-main">
-				<el-avatar :src="resHead(model.sendUser?.headPic)" size="default"></el-avatar>
+				<el-avatar :src="resHead(model.sendUser?.avatar)" size="default"></el-avatar>
 				<div class="user-role">
 					<h4>{{ model.sendUser?.fullName }}</h4>
 					<p>{{ model.sendUser?.loginAccount }}</p>

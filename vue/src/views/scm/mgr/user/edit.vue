@@ -59,11 +59,9 @@
 						</el-col>
 						<el-col :span="12">
 							<el-form-item label="所属机构" prop="unit_id">
-								<el-select v-model="formData.unit_id" placeholder="请选择所属机构" :change="changeUnit()"
-									:style="{ width: '100%' }">
-									<el-option v-for="item in unitList" :key="item.id" :label="item.label" :value="item.id">
-									</el-option>
-								</el-select>
+								<sc-select v-model="formData.unit_id" placeholder="请选择所属机构" :change="changeUnit()"
+									:style="{ width: '100%' }" :data="unitList">
+								</sc-select>
 							</el-form-item>
 						</el-col>
 						<el-col :span="12">

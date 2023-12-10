@@ -11,14 +11,10 @@
 				<el-input v-model="form.namec"></el-input>
 			</el-form-item>
 			<el-form-item label="性别">
-				<el-select v-model="form.sex" placeholder="请选择">
-					<el-option label="保密" value="1"></el-option>
-					<el-option label="男" value="2"></el-option>
-					<el-option label="女" value="3"></el-option>
-				</el-select>
+				<sc-select v-model="form.sex" placeholder="请选择" :data="sex_list"></sc-select>
 			</el-form-item>
 			<el-form-item label="个性签名">
-				<el-input v-model="form.summary" type="textarea"></el-input>
+				<el-input v-model="form.remark" type="textarea"></el-input>
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="saveBasic">保存</el-button>
@@ -31,24 +27,30 @@
 export default {
 	data() {
 		return {
+			sex_list: [],
 			form: {
 				id: '0',
-				names: "",
-				namec: "",
-				headPic: "",
+				names: "admin@user",
+				namec: "系统管理员",
+				avatar: "",
 				sex: 1,
-				summary: "",
+				remark: "",
 				role: [],
 				post: [],
 			},
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.sex_list, 'sex', false);
 		this.init();
 	},
 	methods: {
 		async init() {
 			const res = await this.$API.login.user.get();
+			if (!res || res.code != 200) {
+				return;
+			}
+
 			this.form = res.data;
 		},
 		async saveBasic() {
@@ -68,5 +70,3 @@ export default {
 	},
 };
 </script>
-
-<style></style>
