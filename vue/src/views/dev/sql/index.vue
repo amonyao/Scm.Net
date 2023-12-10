@@ -342,7 +342,7 @@ export default {
             this.runResult = '执行中...'
             this.runType = 0
             this.errMsg = {}
-            const res = await this.$API.devsql.execute.post({ id: this.param.id, sql: code });
+            const res = await this.$API.devsql.execute.post({ db_id: this.param.db_id, sql: code });
             if (res == null || res.code != 200) {
                 return;
             }
