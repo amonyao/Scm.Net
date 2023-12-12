@@ -66,7 +66,7 @@ const signalR = require("@microsoft/signalr");
 export default {
     data() {
         return {
-            apiObj: this.$API.scmqcsqueue.page,
+            apiObj: this.$API.scmqcsqueue.calling_list,
             tree: [],
             list: [],
             param: {
@@ -181,7 +181,11 @@ export default {
         },
         sendMessage(dvo) {
             this.$message.success("叫号成功：" + dvo.codec);
-            if (dvo) {
+            if (!dvo) {
+                return;
+            }
+
+            if (this.connection) {
                 this.connection.invoke("SendMessage", dvo.detail_id);
             }
         },

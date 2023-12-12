@@ -36,9 +36,23 @@ export default {
 			return await http.get(this.url, data);
 		},
 	},
+	queuing_list: {
+		url: `${config.API_URL}/scmqcsqueue/queuinglist`,
+		name: "取号列表",
+		get: async function (data) {
+			return await http.get(this.url, data);
+		},
+	},
 	calling: {
 		url: `${config.API_URL}/scmqcsqueue/calling`,
 		name: "叫号",
+		get: async function (data) {
+			return await http.get(this.url, data);
+		},
+	},
+	calling_list: {
+		url: `${config.API_URL}/scmqcsqueue/callinglist`,
+		name: "叫号列表",
 		get: async function (data) {
 			return await http.get(this.url, data);
 		},

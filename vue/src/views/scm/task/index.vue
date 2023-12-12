@@ -105,8 +105,8 @@ export default {
 				{ prop: "status", label: "执行状态", align: "left", },
 				{ prop: "remark", label: "备注", align: "left", },
 				{ prop: "row_status", label: "数据状态", width: "80", },
-				{ prop: "update_time", label: "更新时间", width: "150", sortable: true, },
-				{ prop: "create_time", label: "创建时间", width: "150", sortable: true, },
+				{ prop: "update_time", label: "更新时间", width: 160, sortable: true, },
+				{ prop: "create_time", label: "创建时间", width: 160, sortable: true, },
 			],
 		};
 	},

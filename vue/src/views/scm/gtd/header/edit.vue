@@ -52,10 +52,10 @@ export default {
 					{ required: true, trigger: "blur", message: "标题不能为空" },
 				],
 				priority: [
-					{ required: true, trigger: "blur", pattern: '^[1-9]+$', message: "优先级不能为空" },
+					{ required: true, trigger: "blur", type: "number", min: 1, message: "优先级不能为空" },
 				],
 				handle: [
-					{ required: true, trigger: "blur", pattern: '^[1-9]+$', message: "进度不能为空" },
+					{ required: true, trigger: "blur", type: "number", min: 1, message: "进度不能为空" },
 				],
 			},
 			priority_list: [this.$SCM.OPTION_ONE],

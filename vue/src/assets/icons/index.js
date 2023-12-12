@@ -1,30 +1,72 @@
+export { default as Alipay } from "./Alipay.vue";
+export { default as Android } from "./Android.vue";
+
 export { default as BugFill } from "./BugFill.vue";
 export { default as BugLine } from "./BugLine.vue";
 
+export { default as Barcode } from "./Barcode.vue";
+
+export { default as Calling } from "./Calling.vue";
 export { default as Camera } from "./Camera.vue";
+export { default as Chrome } from "./Chrome.vue";
 export { default as Code } from "./Code.vue";
 
+export { default as DingTalk } from "./DingTalk.vue";
 export { default as Download } from "./Download.vue";
 
-export { default as FileExcel } from "./FileExcel.vue";
-export { default as FileWord } from "./FileWord.vue";
+export { default as FileDoc } from "./FileDoc.vue";
+export { default as FileDocFill } from "./FileDocFill.vue";
 export { default as FilePpt } from "./FilePpt.vue";
+export { default as FilePptFill } from "./FilePptFill.vue";
+export { default as FileXls } from "./FileXls.vue";
+export { default as FileXlsFill } from "./FileXlsFill.vue";
 export { default as Finger } from "./Finger.vue";
+export { default as Firefox } from "./Firefox.vue";
+export { default as Flag } from "./Flag.vue";
+export { default as FlagFill } from "./FlagFill.vue";
+export { default as Flower } from "./Flower.vue";
+export { default as FlowerFill } from "./FlowerFill.vue";
+export { default as FullPage } from "./FullPage.vue";
+export { default as FullPageExit } from "./FullPageExit.vue";
 export { default as FullScreen } from "./FullScreen.vue";
 export { default as FullScreenExit } from "./FullScreenExit.vue";
 
 export { default as Heart } from "./Heart.vue";
 export { default as HeartFill } from "./HeartFill.vue";
 
+export { default as Ios } from "./Ios.vue";
+
 export { default as KeyDown } from "./KeyDown.vue";
 export { default as KeyEnter } from "./KeyEnter.vue";
 export { default as KeyEsc } from "./KeyEsc.vue";
 export { default as KeyUp } from "./KeyUp.vue";
 
-export { default as Organization } from "./Organization.vue";
+export { default as Macos } from "./Macos.vue";
+export { default as MicrosoftEdge } from "./MicrosoftEdge.vue";
+export { default as MicrosoftIe } from "./MicrosoftIe.vue";
+export { default as MicrosoftOffice } from "./MicrosoftOffice.vue";
 
+export { default as Organization } from "./Organization.vue";
+export { default as OrganizationFill } from "./OrganizationFill.vue";
+
+export { default as Qq } from "./QQ.vue";
+export { default as QrCode } from "./QrCode.vue";
+export { default as Queuing } from "./Queuing.vue";
+
+export { default as SandClock } from "./SandClock.vue";
+export { default as Scan } from "./Scan.vue";
+export { default as Script } from "./Script.vue";
+export { default as Send } from "./Send.vue";
+export { default as SendFill } from "./SendFill.vue";
 export { default as Share } from "./Share.vue";
 export { default as ShareFill } from "./ShareFill.vue";
+export { default as Solution } from "./Solution.vue";
+export { default as Star } from "./Star.vue";
+export { default as StarFill } from "./StarFill.vue";
+export { default as StarHalf } from "./StarHalf.vue";
+
+export { default as Tenpay } from "./Tenpay.vue";
+export { default as Terminal } from "./Terminal.vue";
 
 export { default as ThumbsDown } from "./ThumbsDown.vue";
 export { default as ThumbsDownFill } from "./ThumbsDownFill.vue";
@@ -36,3 +78,4 @@ export { default as Upload } from "./Upload.vue";
 export { default as Vue } from "./Vue.vue";
 
 export { default as Wechat } from "./Wechat.vue";
+export { default as Windows } from "./Windows.vue";

@@ -52,7 +52,7 @@
 				<el-popover v-if="!hideExcel" placement="top" ref="excelPover" title="导出Excel设置" :width="400"
 					trigger="click" :hide-after="0">
 					<template #reference>
-						<el-button icon="sc-icon-file-excel" circle style="margin-left: 15px"></el-button>
+						<el-button icon="sc-icon-file-xls" circle style="margin-left: 15px"></el-button>
 					</template>
 					<columnExcel :column="column" :data="tableData" @excelCancel="excelCancel"></columnExcel>
 				</el-popover>

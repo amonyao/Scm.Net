@@ -105,10 +105,9 @@ export default {
 				{ prop: 'od', label: '显示排序', width: 80 },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
-				{ prop: 'update_time', label: '更新时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_time', label: '更新时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
-				{ prop: 'create_time', label: '创建时间', width: "150", sortable: true, formatter: this.$TOOL.dateTimeFormat },
-
+				{ prop: 'create_time', label: '创建时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 			row_status_list: [this.$SCM.OPTION_ALL],
 			nation_list: [this.$SCM.OPTION_ALL],

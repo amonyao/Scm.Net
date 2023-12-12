@@ -160,7 +160,11 @@ export default {
 		},
 		sendMessage(dvo) {
 			this.$message.success("取号成功：" + dvo.codec);
-			if (dvo) {
+			if (!dvo) {
+				return;
+			}
+
+			if (this.connection) {
 				this.connection.invoke("SendMessage", dvo.detail_id);
 			}
 		},

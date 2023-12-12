@@ -145,7 +145,7 @@ namespace Com.Scm.Yms.Qcs.Queue
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ScmQcsQueueDvo> QueuingAsync(QueuingRequest request)
+        public async Task<ScmQcsQueueDvo> GetQueuingAsync(QueuingRequest request)
         {
             var detailDao = await _detailRepository.GetByIdAsync(request.id);
             if (detailDao == null)
@@ -170,13 +170,31 @@ namespace Com.Scm.Yms.Qcs.Queue
         }
 
         /// <summary>
+        /// 查询已叫号
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<PageResult<ScmQcsQueueDvo>> GetQueuingListAsync(SearchRequest request)
+        {
+            var result = await _thisRepository.AsQueryable()
+                .Where(a => a.detail_id == request.detail_id)
+                .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
+                .Select<ScmQcsQueueDvo>()
+                .ToPageAsync(request.page, request.limit);
+
+            Prepare(result.Items);
+            return result;
+        }
+
+        /// <summary>
         /// 叫号
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="BusinessException"></exception>
         [HttpGet]
-        public async Task<ScmQcsQueueDvo> CallingAsync(CallingRequest request)
+        public async Task<ScmQcsQueueDvo> GetCallingAsync(CallingRequest request)
         {
             var userId = _jwtContextHolder.GetToken().user_id;
 
@@ -224,6 +242,28 @@ namespace Com.Scm.Yms.Qcs.Queue
             }
 
             throw new BusinessException("无效的队列信息！");
+        }
+
+        /// <summary>
+        /// 查询已叫号
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<PageResult<ScmQcsQueueDvo>> GetCallingListAsync(SearchRequest request)
+        {
+            var token = _jwtContextHolder.GetToken();
+            var userId = token.user_id;
+
+            var result = await _thisRepository.AsQueryable()
+                .Where(a => a.detail_id == request.detail_id && a.user_id == userId)
+                .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .OrderBy(m => m.lv, SqlSugar.OrderByType.Desc)
+                .OrderBy(m => m.id)
+                .Select<ScmQcsQueueDvo>()
+                .ToPageAsync(request.page, request.limit);
+
+            Prepare(result.Items);
+            return result;
         }
 
         /// <summary>
