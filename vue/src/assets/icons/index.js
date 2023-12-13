@@ -48,6 +48,8 @@ export { default as KeyEnter } from "./KeyEnter.vue";
 export { default as KeyEsc } from "./KeyEsc.vue";
 export { default as KeyUp } from "./KeyUp.vue";
 
+export { default as Lang } from "./Lang.vue";
+
 export { default as Macos } from "./Macos.vue";
 export { default as MacosFill } from "./MacosFill.vue";
 export { default as MicrosoftEdge } from "./MicrosoftEdge.vue";

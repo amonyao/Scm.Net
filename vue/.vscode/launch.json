@@ -15,18 +15,6 @@
 			"webRoot": "${workspaceFolder}/vue",
 			"pathMappings": [
 				{
-					"url": "webpack://c-scm/src/components/scComment",
-					"path": "${workspaceFolder}/src/views/scm/res/cat"
-				},
-				{
-					"url": "webpack://c-scm/src/components/scComment",
-					"path": "${workspaceFolder}/src/views/scm/res/cat"
-				},
-				{
-					"url": "webpack://c-scm/src/views/login",
-					"path": "${workspaceFolder}/src/views/login"
-				},
-				{
 					"url": "webpack://c-scm",
 					"path": "${workspaceFolder}"
 				}

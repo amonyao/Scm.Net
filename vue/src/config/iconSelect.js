@@ -331,6 +331,7 @@ export default {
 				"sc-icon-key-enter",
 				"sc-icon-key-esc",
 				"sc-icon-key-up",
+				"sc-icon-lang",
 				"sc-icon-macos",
 				"sc-icon-macos-fill",
 				"sc-icon-microsoft-edge",
