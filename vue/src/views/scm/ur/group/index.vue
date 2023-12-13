@@ -27,9 +27,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
-				<!-- 固定列-选择列 -->
+			<scTable ref="table" :api-obj="apiObj" :column="column" hide-pagination is-tree row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column fixed type="selection" width="60" />
 				<el-table-column align="center" fixed="right" label="操作" width="140">
 					<template #default="scope">
@@ -39,7 +38,7 @@
 						<el-divider direction="vertical" />
 						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row, scope.$index)">
 							<template #reference>
-								<el-button text :disabled="scope.row.isSystem" type="primary" size="small">删除</el-button>
+								<el-button text type="primary" size="small">删除</el-button>
 							</template>
 						</el-popconfirm>
 					</template>
@@ -56,11 +55,6 @@
 						{{ data.isSystem ? "是" : "否" }}
 					</el-tag>
 				</template>
-				<template #maxLength="{ data }">
-					<el-tag type="info">
-						{{ data.maxLength == 0 ? "不限制" : data.maxLength }}
-					</el-tag>
-				</template>
 			</scTable>
 		</el-main>
 		<edit ref="edit" @complete="complete" />
@@ -74,7 +68,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.urgroup.page,
+			apiObj: this.$API.urgroup.list,
 			list: [],
 			param: {
 				key: '',
@@ -84,7 +78,7 @@ export default {
 				{ label: "id", prop: "id", hide: true, },
 				{ prop: "namec", label: "群组名称", width: 200, align: "left", },
 				{ prop: "remark", label: "备注", minWidth: 200, align: "left", },
-				{ prop: "row_status", label: "状态", width: "80", },
+				{ prop: "row_status", label: "数据状态", width: "80", },
 				{ prop: "update_time", label: "更新时间", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: "create_time", label: "创建时间", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],

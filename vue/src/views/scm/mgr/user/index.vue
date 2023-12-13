@@ -118,20 +118,22 @@ export default {
 				{ label: "系统名称", prop: "names", width: "120", align: "left", },
 				{ label: "展示姓名", prop: "namec", width: "120", align: "left", },
 				{ label: "所属机构", prop: "unit_names", align: "left", width: "200", },
-				{ label: "性别", prop: "sex", width: "80", },
+				{ label: "性别", prop: "sex", width: "80", formatter: this.getSexNames },
 				{ label: "手机号码", prop: "cellphone", width: "120", align: "right" },
 				{ label: "固话", prop: "telephone", width: "120", align: "right" },
-				{ label: "状态", prop: "row_status", width: "80" },
+				{ label: "数据状态", prop: "row_status", width: "80" },
 				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
 			unit_list: [],
 			role_list: [this.$SCM.OPTION_ALL],
 			row_status_list: [],
+			sex_list: [],
 		};
 	},
 	mounted() {
 		this.getUnit();
 		this.$SCM.list_status(this.row_status_list, true);
+		this.$SCM.list_sex(this.sex_list, true);
 	},
 	methods: {
 		complete() {
@@ -198,7 +200,7 @@ export default {
 			}).catch(() => { });
 		},
 		getUnit() {
-			this.$SCM.list_option(this.unit_list, this.$API.mgrunit.option, {}, false);
+			this.$SCM.list_option(this.unit_list, this.$API.mgrunit.option, {}, true);
 		},
 		changeUnit() {
 			if (this.param.unit_id == '0') {
@@ -227,6 +229,9 @@ export default {
 		open_role(row) {
 			this.$refs.role.open(row);
 		},
+		getSexNames(key) {
+			return this.$SCM.get_dic_names(this.sex_list, key, '');
+		}
 	},
 };
 </script>

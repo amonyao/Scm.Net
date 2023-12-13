@@ -84,7 +84,7 @@ export default {
 				{ label: "id", prop: "id", hide: true },
 				{ label: "角色名称", prop: "namec", width: 200, align: "left" },
 				{ label: "备注", prop: "remark", minWidth: 200, align: "left" },
-				{ label: "状态", prop: "row_status", width: "80" },
+				{ label: "数据状态", prop: "row_status", width: "80" },
 				{ label: "更新时间", prop: "update_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],

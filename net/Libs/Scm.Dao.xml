@@ -1172,6 +1172,20 @@
             
             </summary>
         </member>
+        <member name="M:Com.Scm.Dao.Ur.GroupDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.GroupDao.PrepareUpdate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
         <member name="T:Com.Scm.Dao.Ur.OrganizeDao">
             <summary>
             组织机构表
@@ -1182,9 +1196,14 @@
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.ParentId">
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.pid">
             <summary>
             父节点
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.names">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Ur.OrganizeDao.namec">
@@ -1197,12 +1216,7 @@
             机构编码
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.ParentIdList">
-            <summary>
-            父节点集合
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.Layer">
+        <member name="P:Com.Scm.Dao.Ur.OrganizeDao.lv">
             <summary>
             部门层级
             </summary>
@@ -1228,6 +1242,13 @@
             </summary>
         </member>
         <member name="M:Com.Scm.Dao.Ur.OrganizeDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.OrganizeDao.PrepareUpdate(System.Int64,System.Int64)">
             <summary>
             
             </summary>
@@ -1322,14 +1343,9 @@
             角色名称
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Ur.RoleDao.ParentId">
+        <member name="P:Com.Scm.Dao.Ur.RoleDao.pid">
             <summary>
             角色父节点
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.RoleDao.ParentIdList">
-            <summary>
-            父节点结合
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Ur.RoleDao.lv">
@@ -1527,6 +1543,13 @@
             </summary>
         </member>
         <member name="M:Com.Scm.Dao.Ur.UserDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="M:Com.Scm.Dao.Ur.UserDao.PrepareUpdate(System.Int64,System.Int64)">
             <summary>
             
             </summary>

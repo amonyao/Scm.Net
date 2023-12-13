@@ -14,6 +14,9 @@ export { default as Code } from "./Code.vue";
 export { default as DingTalk } from "./DingTalk.vue";
 export { default as Download } from "./Download.vue";
 
+export { default as Email } from "./Email.vue";
+export { default as EmailFill } from "./EmailFill.vue";
+
 export { default as FileDoc } from "./FileDoc.vue";
 export { default as FileDocFill } from "./FileDocFill.vue";
 export { default as FilePpt } from "./FilePpt.vue";
@@ -35,6 +38,10 @@ export { default as Heart } from "./Heart.vue";
 export { default as HeartFill } from "./HeartFill.vue";
 
 export { default as Ios } from "./Ios.vue";
+export { default as IosFill } from "./IosFill.vue";
+
+export { default as JavaScript } from "./JavaScript.vue";
+export { default as Json } from "./Json.vue";
 
 export { default as KeyDown } from "./KeyDown.vue";
 export { default as KeyEnter } from "./KeyEnter.vue";
@@ -42,6 +49,7 @@ export { default as KeyEsc } from "./KeyEsc.vue";
 export { default as KeyUp } from "./KeyUp.vue";
 
 export { default as Macos } from "./Macos.vue";
+export { default as MacosFill } from "./MacosFill.vue";
 export { default as MicrosoftEdge } from "./MicrosoftEdge.vue";
 export { default as MicrosoftIe } from "./MicrosoftIe.vue";
 export { default as MicrosoftOffice } from "./MicrosoftOffice.vue";
@@ -74,8 +82,12 @@ export { default as ThumbsUp } from "./ThumbsUp.vue";
 export { default as ThumbsUpFill } from "./ThumbsUpFill.vue";
 
 export { default as Upload } from "./Upload.vue";
+export { default as UserGroup } from "./UserGroup.vue";
 
 export { default as Vue } from "./Vue.vue";
 
 export { default as Wechat } from "./Wechat.vue";
+export { default as Wifi } from "./Wifi.vue";
 export { default as Windows } from "./Windows.vue";
+
+export { default as Xml } from "./Xml.vue";

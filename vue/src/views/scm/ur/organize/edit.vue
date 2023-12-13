@@ -2,40 +2,55 @@
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" :destroy-on-close="true" width="800px"
 		@close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="所属组织" prop="parentId">
-				<el-tree-select v-model="formData.parentId" :data="parentIdOptions" :default-expand-all="true"
-					:check-strictly="true" :style="{ width: '100%' }" />
-			</el-form-item>
 			<el-row>
-				<el-col :span="12">
+				<el-col>
+					<el-form-item label="所属组织" prop="pid">
+						<el-tree-select v-model="formData.pid" :data="parentIdOptions" :default-expand-all="true"
+							:check-strictly="true" :style="{ width: '100%' }" />
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col>
 					<el-form-item label="组织名称" prop="namec">
 						<el-input v-model="formData.namec" placeholder="请输入组织名称" clearable></el-input>
 					</el-form-item>
 				</el-col>
-				<el-col :span="12">
+			</el-row>
+			<el-row>
+				<el-col>
 					<el-form-item label="组织编号">
 						<el-input v-model="formData.codec" placeholder="请输入组织编号" clearable></el-input>
 					</el-form-item>
 				</el-col>
-				<el-col :span="12">
+			</el-row>
+			<el-row>
+				<el-col>
 					<el-form-item label="组织负责人" prop="leaderUser">
 						<el-input v-model="formData.leaderUser" placeholder="请输入组织负责人" clearable></el-input></el-form-item>
 				</el-col>
-				<el-col :span="12">
+			</el-row>
+			<el-row>
+				<el-col>
 					<el-form-item label="联系电话" prop="leaderMobile">
 						<el-input v-model="formData.leaderMobile" placeholder="请输入联系电话" clearable></el-input>
 					</el-form-item>
 				</el-col>
-				<el-col :span="12">
+			</el-row>
+			<el-row>
+				<el-col>
 					<el-form-item label="联系邮箱" prop="leaderEmail">
 						<el-input v-model="formData.leaderEmail" placeholder="请输入联系邮箱" clearable></el-input>
 					</el-form-item>
 				</el-col>
 			</el-row>
-
-			<el-form-item label="排序" prop="od" required>
-				<el-slider v-model="formData.od" :max="100" show-input :step="1" />
-			</el-form-item>
+			<el-row>
+				<el-col>
+					<el-form-item label="排序" prop="od" required>
+						<el-input-number v-model="formData.od" :min="0" />
+					</el-form-item>
+				</el-col>
+			</el-row>
 		</el-form>
 
 		<template #footer>
@@ -57,12 +72,9 @@ export default {
 			visible: false,
 			formData: this.def_data(),
 			rules: {
-				parentId: [
-					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属组织", },
-				],
-				parentIdList: [
-					{ required: true, type: "array", trigger: "change", message: "请至少选择一个所属组织", },
-				],
+				// pid: [
+				// 	{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属组织", },
+				// ],
 				namec: [
 					{ required: true, trigger: "blur", message: "请输入组织名称", },
 				],
@@ -86,7 +98,7 @@ export default {
 		def_data() {
 			return {
 				id: '0',
-				parentId: undefined,
+				pid: undefined,
 				namec: "",
 				leaderUser: "",
 				leaderMobile: "",
@@ -96,13 +108,13 @@ export default {
 		},
 		async initTree() {
 			const t = await this.$API.urorganize.list.get();
-			let _tree = [{ id: "1", value: "0", label: "请选择", parentId: "0" }];
+			let _tree = [{ id: "1", value: "0", label: "（默认）", parentId: "0" }];
 			t.data.some((m) => {
 				_tree.push({
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.parentIdOptions = this.$TOOL.changeTree(_tree);

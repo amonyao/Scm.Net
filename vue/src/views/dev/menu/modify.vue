@@ -190,7 +190,7 @@ export default {
 		//简单化菜单
 		treeToMap(tree) {
 			let _tree = [
-				{ id: "1", value: "0", label: "顶级菜单", parentId: "0" },
+				{ id: "1", value: "0", label: "（默认）", parentId: "0" },
 			];
 			tree.some((m) => {
 				_tree.push({

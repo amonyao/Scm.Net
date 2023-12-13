@@ -10,7 +10,7 @@
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="排序" prop="od" required>
-				<el-slider v-model="formData.od" :max="100" :step="1"></el-slider>
+				<el-input-number v-model="formData.od" :min="0"></el-input-number>
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" type="textarea" placeholder="请输入备注" :maxlength="500" show-word-limit
@@ -28,7 +28,7 @@
 </template>
 <script>
 export default {
-    emits: ['complete'],
+	emits: ['complete'],
 	data() {
 		return {
 			mode: "add",

@@ -57,7 +57,7 @@ export default {
 		def_data() {
 			return {
 				id: '0',
-				pid: this.$SCM.SYS_ID,
+				pid: '0',
 				namec: '',
 				remark: '',
 			}
@@ -65,13 +65,13 @@ export default {
 		async initTree() {
 			const t = await this.$API.urgroup.list.get();
 			let _tree = [
-				{ id: this.$SCM.SYS_ID, value: this.$SCM.SYS_ID, label: "（默认）", parentId: "0" },
+				{ id: '1', value: '0', label: "（默认）", parentId: "0" },
 			];
 			t.data.some((m) => {
 				_tree.push({
 					id: m.id,
 					value: m.id,
-					label: m.names,
+					label: m.namec,
 					parentId: m.pid,
 				});
 			});

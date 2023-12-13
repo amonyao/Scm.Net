@@ -1,8 +1,8 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="700px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="所属角色" prop="parentId">
-				<el-tree-select v-model="formData.parentId" placeholder="请选择所属角色" :data="parentIdOptions" collapse-tags
+			<el-form-item label="所属角色" prop="pid">
+				<el-tree-select v-model="formData.pid" placeholder="请选择所属角色" :data="parentIdOptions" collapse-tags
 					check-strictly default-expand-all />
 			</el-form-item>
 			<el-form-item label="角色名称" prop="namec">
@@ -36,12 +36,12 @@ export default {
 			visible: false,
 			formData: this.def_data(),
 			rules: {
-				parentId: [
-					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属角色" },
-				],
-				data: [
-					{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_INT, message: "请选择数据权限" },
-				],
+				// pid: [
+				// 	{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属角色" },
+				// ],
+				// data: [
+				// 	{ required: true, trigger: "blur", pattern: this.$SCM.REGEX_INT, message: "请选择数据权限" },
+				// ],
 				namec: [
 					{ required: true, trigger: "blur", message: "请输入角色名称" },
 				],
@@ -63,7 +63,7 @@ export default {
 		def_data() {
 			return {
 				id: '0',
-				parentId: '0',
+				pid: '0',
 				namec: undefined,
 				data: 0,
 				remark: undefined,
@@ -73,14 +73,14 @@ export default {
 		async initTree() {
 			const t = await this.$API.urrole.list.get();
 			let _tree = [
-				{ id: "1", value: "0", label: "请选择", parentId: "0" },
+				{ id: "1", value: "0", label: "（默认）", parentId: "0" }
 			];
 			t.data.some((m) => {
 				_tree.push({
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.parentIdOptions = this.$TOOL.changeTree(_tree);

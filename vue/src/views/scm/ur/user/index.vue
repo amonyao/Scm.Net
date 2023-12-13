@@ -114,12 +114,13 @@ export default {
 				{ label: "登录账户", prop: "names", width: "120", align: "left" },
 				{ label: "展示姓名", prop: "namec", width: "120", align: "left" },
 				{ label: "所属部门", prop: "OrganizeObj", align: "left", width: "200" },
-				{ label: "性别", prop: "sex", width: "80" },
+				{ label: "性别", prop: "sex", width: "80", formatter: this.getSexNames },
 				{ label: "手机号码", prop: "cellphone", width: "120" },
 				{ label: "固话", prop: "telephone", width: "120" },
-				{ label: "状态", prop: "row_status", width: "80" },
+				{ label: "数据状态", prop: "row_status", width: "80" },
 				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
+			sex_list: [],
 		};
 	},
 	watch: {
@@ -129,6 +130,7 @@ export default {
 	},
 	mounted() {
 		this.getRole();
+		this.$SCM.list_sex(this.sex_list, true);
 	},
 	methods: {
 		complete() {
@@ -244,6 +246,9 @@ export default {
 			};
 			this.$refs.table.reload(params);
 		},
+		getSexNames(key) {
+			return this.$SCM.get_dic_names(this.sex_list, key, '');
+		}
 	},
 };
 </script>

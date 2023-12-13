@@ -71,7 +71,7 @@ export default {
 					width: 150,
 					showOverflowTooltip: true,
 				},
-				{ prop: "status", label: "状态", width: 100 },
+				{ prop: "status", label: "数据状态", width: 100 },
 				{ prop: "createTime", label: "创建时间", width: 180 },
 				{ prop: "createUser", label: "创建人", width: 100 },
 				{ prop: "updateTime", label: "修改时间", width: 180 },

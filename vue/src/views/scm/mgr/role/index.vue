@@ -108,8 +108,9 @@ export default {
 			column: [
 				{ label: "id", prop: "id", hide: true, },
 				{ label: "角色名称", prop: "namec", width: 200, align: "left", },
+				{ label: "所属机构", prop: "unit_id", width: 200, align: "left", formatter: this.getUnitNames },
 				{ label: "备注", prop: "remark", minWidth: 200, align: "left", },
-				{ label: "状态", prop: "row_status", width: "80", },
+				{ label: "数据状态", prop: "row_status", width: "80", },
 				{ label: "更新时间", prop: "update_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
 			],
@@ -168,6 +169,9 @@ export default {
 		open_auth(row) {
 			this.$refs.auth.open(row);
 		},
+		getUnitNames(key) {
+			return this.$SCM.get_option_names(this.unit_list, key, '');
+		}
 	},
 };
 </script>

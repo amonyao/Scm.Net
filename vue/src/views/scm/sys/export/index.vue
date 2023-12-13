@@ -110,7 +110,7 @@ export default {
 				{ prop: "codec", label: "用户编码", width: 140, align: "left", },
 				{ prop: "names", label: "说明", width: 240, align: "left", },
 				{ prop: "file", label: "文件名称", width: 240, align: "left", },
-				{ prop: "row_status", label: "状态", width: 60 },
+				{ prop: "row_status", label: "数据状态", width: 60 },
 				{ prop: "update_time", label: "更新时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
 				{ prop: "create_time", label: "创建时间", width: 160, align: "right", formatter: this.$TOOL.dateTimeFormat },
 			],

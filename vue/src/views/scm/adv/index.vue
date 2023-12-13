@@ -191,7 +191,7 @@ export default {
 					showOverflowTooltip: true,
 				},
 				{ prop: "sort", label: "权重", width: 100 },
-				{ prop: "status", label: "状态", width: 100 },
+				{ prop: "status", label: "数据状态", width: 100 },
 				{ prop: "createTime", label: "创建时间", width: 180 },
 			],
 		};

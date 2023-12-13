@@ -12,11 +12,11 @@
 				</div>
 				<div class="user-else-info">
 					<p class="last-login">
-						上次登录：{{ formData.upLoginTime }}
+						上次登录：{{ this.$TOOL.dateTimeFormat(formData.last_time) }}
 					</p>
 					<el-row>
 						<el-col :span="8">
-							<span>{{ formData.loginCount }}</span>
+							<span>{{ formData.login_count }}</span>
 							<p>次数</p>
 						</el-col>
 						<el-col :span="8">
@@ -33,64 +33,63 @@
 			<el-container><el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
 					<el-row>
 						<el-col :span="12">
-							<el-form-item label="员工工号" prop="codec">
-								<el-input v-model="formData.codec" placeholder="请输入员工工号" :maxlength="32" show-word-limit
-									clearable :style="{ width: '100%' }"></el-input>
+							<el-form-item label="所属机构" prop="unit_id">
+								<sc-select v-model="formData.unit_id" placeholder="请选择所属机构" :change="changeUnit()"
+									:data="unitList">
+								</sc-select>
+							</el-form-item>
+						</el-col>
+						<el-col :span="12">
+							<el-form-item label="登录账号" prop="codec">
+								<el-input v-model="formData.codec" placeholder="请输入登录账号" :maxlength="32" show-word-limit
+									clearable></el-input>
 							</el-form-item>
 						</el-col>
 						<el-col :span="12">
 							<el-form-item label="展示姓名" prop="namec">
 								<el-input v-model="formData.namec" placeholder="请输入展示姓名" :maxlength="32" show-word-limit
-									clearable :style="{ width: '100%' }"></el-input>
+									clearable></el-input>
 							</el-form-item>
 						</el-col>
 						<el-col :span="12">
-							<el-form-item label="登录账号" prop="names">
-								<el-input v-model="formData.names" placeholder="请输入登录账号" :maxlength="32" show-word-limit
-									clearable :style="{ width: '100%' }"></el-input>
-							</el-form-item>
-						</el-col>
-						<el-col :span="12">
-							<el-form-item label="登录密码" prop="pass">
-								<el-input v-model="formData.pass" placeholder="请输入登录密码" :maxlength="32"
-									:disabled="formData.id != 0" show-word-limit clearable show-password
-									:style="{ width: '100%' }"></el-input>
-							</el-form-item>
-						</el-col>
-						<el-col :span="12">
-							<el-form-item label="所属机构" prop="unit_id">
-								<sc-select v-model="formData.unit_id" placeholder="请选择所属机构" :change="changeUnit()"
-									:style="{ width: '100%' }" :data="unitList">
-								</sc-select>
-							</el-form-item>
-						</el-col>
-						<el-col :span="12">
-							<el-form-item label="所属角色" prop="roleGroup">
-								<el-tree-select v-model="formData.roleGroup" placeholder="请选择所属角色" :data="roleList" multiple
-									collapse-tags check-strictly :style="{ width: '100%' }" />
-							</el-form-item>
-						</el-col>
-						<el-col :span="12">
-							<el-form-item label="手机" prop="cellphone">
-								<el-input v-model="formData.cellphone" placeholder="请输入手机" :maxlength="11" clearable
-									:style="{ width: '100%' }"></el-input>
-							</el-form-item>
-						</el-col>
-						<el-col :span="12">
-							<el-form-item label="固话" prop="telephone">
-								<el-input v-model="formData.telephone" placeholder="请输入固话" :maxlength="11" clearable
-									:style="{ width: '100%' }"></el-input>
-							</el-form-item>
-						</el-col>
-						<el-col :span="12">
-							<el-form-item label="邮箱" prop="email">
-								<el-input v-model="formData.email" placeholder="请输入邮箱" :maxlength="50" show-word-limit
-									clearable :style="{ width: '100%' }"></el-input>
+							<el-form-item label="员工简称" prop="names">
+								<el-input v-model="formData.names" placeholder="请输入员工简称" :maxlength="32" show-word-limit
+									clearable></el-input>
 							</el-form-item>
 						</el-col>
 						<el-col :span="12">
 							<el-form-item label="性别" prop="sex">
 								<sc-select v-model="formData.sex" :data="sex_list" />
+							</el-form-item>
+						</el-col>
+						<el-col :span="12">
+							<el-form-item label="登录密码" prop="pass">
+								<el-input v-model="formData.pass" placeholder="请输入登录密码" :maxlength="32"
+									:disabled="formData.id != 0" show-word-limit clearable show-password></el-input>
+							</el-form-item>
+						</el-col>
+						<el-col :span="12">
+							<el-form-item label="所属角色" prop="role_list">
+								<el-tree-select v-model="formData.role_list" placeholder="请选择所属角色" :data="roleList" multiple
+									collapse-tags check-strictly />
+							</el-form-item>
+						</el-col>
+						<el-col :span="12">
+							<el-form-item label="手机" prop="cellphone">
+								<el-input v-model="formData.cellphone" placeholder="请输入手机" :maxlength="11"
+									clearable></el-input>
+							</el-form-item>
+						</el-col>
+						<el-col :span="12">
+							<el-form-item label="固话" prop="telephone">
+								<el-input v-model="formData.telephone" placeholder="请输入固话" :maxlength="11"
+									clearable></el-input>
+							</el-form-item>
+						</el-col>
+						<el-col :span="12">
+							<el-form-item label="邮箱" prop="email">
+								<el-input v-model="formData.email" placeholder="请输入邮箱" :maxlength="50" show-word-limit
+									clearable></el-input>
 							</el-form-item>
 						</el-col>
 					</el-row>
@@ -99,8 +98,7 @@
 						<el-col>
 							<el-form-item label="描述" prop="remark">
 								<el-input v-model="formData.remark" type="textarea" placeholder="请输入描述" :maxlength="200"
-									show-word-limit :autosize="{ minRows: 3, maxRows: 3 }"
-									:style="{ width: '100%' }"></el-input>
+									show-word-limit :autosize="{ minRows: 3, maxRows: 3 }"></el-input>
 							</el-form-item>
 						</el-col>
 					</el-row>
@@ -128,11 +126,11 @@ export default {
 			visible: false,
 			formData: this.def_data(),
 			rules: {
-				names: [
-					{ required: true, trigger: "blur", message: "请输入登录账号", },
+				codec: [
+					{ required: true, trigger: "blur", message: "请输入员工编码", },
 				],
 				namec: [
-					{ required: true, trigger: "blur", message: "请输入姓名", },
+					{ required: true, trigger: "blur", message: "请输入展示姓名", },
 				],
 				pass: [
 					{ required: true, trigger: "blur", message: "请输入登录密码", },
@@ -141,12 +139,12 @@ export default {
 					{ required: true, trigger: "blur", message: "请输入手机号码", },
 				],
 				sex: [
-					{ required: true, trigger: "change", message: "性别不能为空", },
+					{ required: true, trigger: "change", type: 'number', min: 1, message: "性别不能为空", },
 				],
 				unit_id: [
 					{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属机构", },
 				],
-				roleGroup: [
+				role_list: [
 					{ required: true, trigger: "change", message: "请择选所属角色", },
 				],
 				email: [],
@@ -177,8 +175,9 @@ export default {
 				email: "",
 				remark: "",
 				avatar: undefined,
-				roleGroup: ['0'],
-				loginCount: 0,
+				role_list: ['0'],
+				last_time: 0,
+				login_count: 0,
 			}
 		},
 		upSuccess(res) {
@@ -193,8 +192,16 @@ export default {
 			this.$SCM.list_option(this.unitList, this.$API.mgrunit.option, {}, false);
 		},
 		async getRole() {
-			const role = await this.$API.mgrrole.option.get(this.formData.unit_id);
-			this.roleList = this.$TOOL.changeTree(role.data);
+			const res = await this.$API.mgrrole.option.get(this.formData.unit_id);
+			if (!res || res.code != 200) {
+				return;
+			}
+
+			var data = [];
+			res.data.forEach(element => {
+				data.push(element);
+			});
+			this.roleList = this.$TOOL.changeTree(data);
 		},
 		changeUnit() {
 			if (this.formData.unit_id == '0') {
@@ -211,7 +218,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.mgruser.model.get(row.id);
+				var res = await this.$API.mgruser.edit.get(row.id);
 				res.data.avatar = this.$CONFIG.SERVER_URL + res.data.avatar;
 				this.formData = res.data;
 			}
@@ -366,5 +373,10 @@ export default {
 
 [data-theme="dark"] .select-img .bg-gray {
 	background: transparent;
+}
+
+.el-input,
+el-selec {
+	width: 100%;
 }
 </style>

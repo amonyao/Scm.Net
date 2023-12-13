@@ -58,4 +58,18 @@ export default {
 			return await http.put(this.url, data);
 		}
 	},
+	unitWord: {
+		url: `${config.API_URL}/operator/unitword`,
+		name: "查询机构信息",
+		get: async function (data = {}) {
+			return await http.get(this.url, data);
+		}
+	},
+	unitBasic: {
+		url: `${config.API_URL}/operator/unitbasic`,
+		name: "修改登录机构基本信息",
+		put: async function (data = {}) {
+			return await http.put(this.url, data);
+		}
+	},
 }

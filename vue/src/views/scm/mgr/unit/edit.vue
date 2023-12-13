@@ -1,22 +1,25 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
+			<el-form-item label="机构编码" prop="codec">
+				<el-input v-model="formData.codec" placeholder="请输入机构编码" :maxlength="32" show-word-limit clearable></el-input>
+			</el-form-item>
 			<el-form-item label="机构全称" prop="namec">
-				<el-input v-model="formData.namec" placeholder="请输入" :maxlength="32" show-word-limit clearable></el-input>
+				<el-input v-model="formData.namec" placeholder="请输入机构全称" :maxlength="32" show-word-limit clearable></el-input>
 			</el-form-item>
 			<el-form-item label="机构简称" prop="names">
-				<el-input v-model="formData.names" placeholder="请输入" :maxlength="32" show-word-limit clearable></el-input>
+				<el-input v-model="formData.names" placeholder="请输入机构简称" :maxlength="32" show-word-limit clearable></el-input>
 			</el-form-item>
 			<el-form-item label="固话" prop="telephone">
-				<el-input v-model="formData.telephone" placeholder="请输入" :maxlength="24" show-word-limit
+				<el-input v-model="formData.telephone" placeholder="请输入固话" :maxlength="24" show-word-limit
 					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="联系人" prop="contact">
 				<el-input v-model="formData.contact" placeholder="请输入联系人" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="手机" prop="cellphone">
-				<el-input v-model="formData.cellphone" placeholder="请输入手机号码" :maxlength="16" show-word-limit
+			<el-form-item label="联系手机" prop="cellphone">
+				<el-input v-model="formData.cellphone" placeholder="请输入联系手机" :maxlength="16" show-word-limit
 					clearable></el-input>
 			</el-form-item>
 		</el-form>
@@ -39,14 +42,17 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
+				codec: [
+					{ required: true, trigger: "blur", message: "请输入机构编码", },
+				],
 				namec: [
-					{ required: true, trigger: "blur", message: "请输入姓名", },
+					{ required: true, trigger: "blur", message: "请输入机构全称", },
 				],
 				contact: [
 					{ required: true, trigger: "blur", message: "请输入联系人", },
 				],
 				cellphone: [
-					{ required: true, trigger: "blur", message: "请输入联系人号码", },
+					{ required: true, trigger: "blur", message: "请输入联系手机", },
 				],
 			},
 		};
@@ -54,9 +60,10 @@ export default {
 	mounted() {
 	},
 	methods: {
-		def_data(){
+		def_data() {
 			return {
 				id: '0',
+				codec: '',
 				names: '',
 				namec: '',
 				contact: '',
