@@ -127,6 +127,11 @@
             资源菜单表
             </summary>
         </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.unit_id">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Com.Scm.Dao.Dev.MenuDao.codec">
             <summary>
             权限标识
@@ -140,11 +145,6 @@
         <member name="P:Com.Scm.Dao.Dev.MenuDao.ParentId">
             <summary>
             父节点
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Dev.MenuDao.ParentIdList">
-            <summary>
-            父节点集合组
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Dev.MenuDao.Layer">
@@ -187,6 +187,11 @@
             排序
             </summary>
         </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.visible">
+            <summary>
+            是否显示
+            </summary>
+        </member>
         <member name="P:Com.Scm.Dao.Dev.MenuDao.fullpage">
             <summary>
             是否全屏
@@ -195,11 +200,6 @@
         <member name="P:Com.Scm.Dao.Dev.MenuDao.types">
             <summary>
             菜单类型
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Dev.MenuDao.api">
-            <summary>
-            接口权限
             </summary>
         </member>
         <member name="T:Com.Scm.Dao.Dev.SysMenuApiUrl">

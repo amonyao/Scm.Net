@@ -5,7 +5,7 @@
 				:default-expanded-keys="['系统日志']" current-node-key="系统日志" :highlight-current="true"
 				:expand-on-click-node="false" @node-click="typeClick">
 				<template #default="{ node, data }">
-					<span class="custom-tree-node mess-tag">
+					<span class="scmui-tree-node mess-tag">
 						<span>
 							<component class="mess-icon" :is="data.icon"></component>
 							{{ node.label }}
@@ -295,15 +295,6 @@ export default {
 };
 </script>
 <style>
-.custom-tree-node {
-	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	font-size: 14px;
-	padding-right: 8px;
-}
-
 .mess-tag .el-tag {
 	height: 18px;
 	padding: 0 5px;

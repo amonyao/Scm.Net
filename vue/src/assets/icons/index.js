@@ -17,10 +17,20 @@ export { default as Download } from "./Download.vue";
 export { default as Email } from "./Email.vue";
 export { default as EmailFill } from "./EmailFill.vue";
 
+export { default as File } from "./File.vue";
+export { default as FileAudio } from "./FileAudio.vue";
+export { default as FileAudioFill } from "./FileAudioFill.vue";
+export { default as FileByte } from "./FileByte.vue";
 export { default as FileDoc } from "./FileDoc.vue";
 export { default as FileDocFill } from "./FileDocFill.vue";
+export { default as FileImage } from "./FileImage.vue";
+export { default as FileMedia } from "./FileMedia.vue";
 export { default as FilePpt } from "./FilePpt.vue";
 export { default as FilePptFill } from "./FilePptFill.vue";
+export { default as FileScript } from "./FileScript.vue";
+export { default as FileText } from "./FileText.vue";
+export { default as FileVedio } from "./FileVedio.vue";
+export { default as FileVedioFill } from "./FileVedioFill.vue";
 export { default as FileXls } from "./FileXls.vue";
 export { default as FileXlsFill } from "./FileXlsFill.vue";
 export { default as Finger } from "./Finger.vue";
@@ -56,6 +66,12 @@ export { default as MicrosoftEdge } from "./MicrosoftEdge.vue";
 export { default as MicrosoftIe } from "./MicrosoftIe.vue";
 export { default as MicrosoftOffice } from "./MicrosoftOffice.vue";
 
+export { default as OfficeExcel } from "./OfficeExcel.vue";
+export { default as OfficeExcelFill } from "./OfficeExcelFill.vue";
+export { default as OfficePowerPoint } from "./OfficePowerPoint.vue";
+export { default as OfficePowerPointFill } from "./OfficePowerPointFill.vue";
+export { default as OfficeWord } from "./OfficeWord.vue";
+export { default as OfficeWordFill } from "./OfficeWordFill.vue";
 export { default as Organization } from "./Organization.vue";
 export { default as OrganizationFill } from "./OrganizationFill.vue";
 
@@ -86,6 +102,7 @@ export { default as ThumbsUpFill } from "./ThumbsUpFill.vue";
 export { default as Upload } from "./Upload.vue";
 export { default as UserGroup } from "./UserGroup.vue";
 
+export { default as VisualStudio } from "./VisualStudio.vue";
 export { default as Vue } from "./Vue.vue";
 
 export { default as Wechat } from "./Wechat.vue";

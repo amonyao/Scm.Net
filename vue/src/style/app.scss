@@ -105,3 +105,11 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 
 /*定宽页面*/
 .sc-page {width: 1230px;margin: 0 auto;}
+
+.scmui-item-node {display: flex;flex: 1;align-items: center;justify-content: space-between;font-size: 14px;padding-right: 24px;height: 100%;}
+.scmui-item-node .code {font-size: 12px;color: #999;}
+.scmui-item-node .opt {display: none;}
+.scmui-item-node .opt i {margin-left: 5px;color: #999;}
+.scmui-item-node .opt i:hover {color: #333;}
+.scmui-item-node:hover .code {display: none;}
+.scmui-item-node:hover .opt {display: inline-block;}

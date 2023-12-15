@@ -27,10 +27,10 @@
 						@node-click="groupClick"
 					>
 						<template #default="{ node, data }">
-							<span class="custom-tree-node">
+							<span class="scmui-item-node">
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
-								<span class="do">
+								<span class="opt">
 									<el-icon @click.stop="edit(data)"
 										><el-icon-edit
 									/></el-icon>
@@ -344,36 +344,7 @@ export default {
 	},
 };
 </script>
-<style>
-.custom-tree-node {
-	display: flex;
-	flex: 1;
-	align-items: center;
-	justify-content: space-between;
-	font-size: 14px;
-	padding-right: 24px;
-	height: 100%;
-}
-.custom-tree-node .code {
-	font-size: 12px;
-	color: #999;
-}
-.custom-tree-node .do {
-	display: none;
-}
-.custom-tree-node .do i {
-	margin-left: 5px;
-	color: #999;
-}
-.custom-tree-node .do i:hover {
-	color: #333;
-}
-.custom-tree-node:hover .code {
-	display: none;
-}
-.custom-tree-node:hover .do {
-	display: inline-block;
-}
+<style scoped>
 .add-column {
 	padding: 8px !important;
 	margin: 8px;

@@ -11,9 +11,9 @@
                         :current-node-key="''" :highlight-current="true" :expand-on-click-node="false"
                         @node-click="groupClick">
                         <template #default="{ node, data }">
-                            <span class="custom-tree-node">
+                            <span class="scmui-item-node">
                                 <span class="label">{{ node.label }}</span>
-                                <span class="do" v-if="data.routes">
+                                <span class="opt" v-if="data.routes">
                                     <el-icon @click.stop="remove_tree(node, data)"><el-icon-delete /></el-icon>
                                 </span>
                             </span>

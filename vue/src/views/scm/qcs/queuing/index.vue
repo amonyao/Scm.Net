@@ -10,10 +10,10 @@
 					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
 						:filter-node-method="groupFilterNode" @node-click="groupClick">
 						<template #default="{ node, data }">
-							<span class="custom-tree-node">
+							<span class="scmui-item-node">
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
-								<span class="do">
+								<span class="opt">
 									<el-icon><el-icon-edit /></el-icon>
 									<el-icon><el-icon-delete /></el-icon>
 								</span>

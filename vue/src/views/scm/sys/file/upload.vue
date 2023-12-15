@@ -1,37 +1,18 @@
 <template>
-	<sc-dialog
-		v-model="visible"
-		show-fullscreen
-		:title="titleMap[mode]"
-		width="600px"
-		@close="close"
-	>
-		<el-form
-			ref="formRef"
-			label-width="auto"
-			label-position="top"
-			:model="formData"
-			:rules="rules"
-		>
+	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="600px" @close="close">
+		<el-form ref="formRef" label-width="auto" label-position="top" :model="formData" :rules="rules">
 			<el-form-item label="上传目录" prop="path">
-				<el-input
-					v-model="newDic"
-					show-word-limit
-					clearable
-					:style="{ width: '100%' }"
-				></el-input>
+				<el-input v-model="formData.path" show-word-limit clearable :style="{ width: '100%' }"></el-input>
 				<div class="el-form-item-msg">
 					可自定义添加目录，系统会自动创建，例如/upload/{video}
 				</div>
 			</el-form-item>
-			<sc-upload-file v-model="form.file" :new-dic="newDic" :limit="1" drag :on-success="uploadSuccess" :show-file-list="false">
-				<el-icon class="el-icon--upload"
-					><el-icon-upload-filled
-				/></el-icon>
+			<el-upload ref="upload" class="upload-demo" drag :autoUpload="false" :httpRequest="httpRequest">
+				<el-icon class="el-icon--upload"><el-icon-upload-filled /></el-icon>
 				<div class="el-upload__text">
 					你可以将文件拖拽到特定区域以进行上传 <em>点击上传</em>
 				</div>
-			</sc-upload-file>
+			</el-upload>
 			<div class="el-upload__tip">大小不超过100MB</div>
 		</el-form>
 
@@ -53,23 +34,37 @@ export default {
 			},
 			isSaveing: false,
 			visible: false,
-			path: undefined,
 			rules: {},
-			form: {
-				file: "",
+			formData: {
+				path: '',
+				type: 1
 			},
-			newDic:""
 		};
 	},
-	mounted() {},
+	mounted() { },
 	methods: {
 		async open(row) {
 			this.visible = true;
-			this.newDic = row;
+			this.formData.path = row;
 		},
-		uploadSuccess(){
-			this.$emit("complete");
-			this.visible = false;
+		async save() {
+			this.$refs.formRef.validate(valid => {
+				if (valid) {
+					this.$refs.upload.submit();
+				}
+			})
+		},
+		async httpRequest(param) {
+			var form = new FormData();
+			form.append('file', param.file);
+			form.append('path', this.formData.path);
+			form.append('type', 1);
+			let config = {
+				headers: {
+					'Content-Type': 'multipart/form-data'
+				}
+			};
+			await this.$API.sysfile.upload.post(this.formData, config);
 		},
 		close() {
 			this.visible = false;

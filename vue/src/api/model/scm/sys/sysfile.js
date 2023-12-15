@@ -2,7 +2,7 @@ import config from "@/config";
 import http from "@/utils/request";
 export default {
 	list: {
-		url: `${config.API_URL}/sysfile/directory`,
+		url: `${config.API_URL}/sysfile/folders`,
 		name: "列表",
 		get: async function (params) {
 			return await http.get(this.url, params);
@@ -15,18 +15,18 @@ export default {
 			return await http.get(this.url, params);
 		},
 	},
-	upload: {
-		url: `${config.API_URL}/sysfile/uploading`,
-		name: "文件上传",
-		post: async function (data, path) {
-			return await http.post(this.url + "?path=" + path, data);
+	view: {
+		url: `${config.API_URL}/sysfile/view`,
+		name: "查看",
+		get: async function (params) {
+			return await http.get(this.url + params);
 		},
 	},
-	uploadFile: {
-		url: `${config.API_URL}/sysfile/uploading`,
-		name: "附件上传",
-		post: async function (data, config = {}, path) {
-			return await http.post(this.url + "?path=" + path, data, config);
+	upload: {
+		url: `${config.API_URL}/sysfile/upload`,
+		name: "文件上传",
+		post: async function (data, config) {
+			return await http.post(this.url, data, config);
 		},
 	},
 	delFile: {
@@ -36,8 +36,8 @@ export default {
 			return await http.delete(this.url + "?path=" + params);
 		},
 	},
-	delDirectory: {
-		url: `${config.API_URL}/sysfile/directory`,
+	delFolder: {
+		url: `${config.API_URL}/sysfile/folder`,
 		name: "删除目录",
 		delete: async function (params) {
 			return await http.delete(this.url + "?path=" + params);
@@ -120,20 +120,14 @@ export default {
 		url: `${config.API_URL}/sysfile/uploading`,
 		name: "通知附件",
 		post: async function (data) {
-			return await http.post(
-				this.url + "?path=/upload/notice/",
-				data
-			);
+			return await http.post(this.url + "?path=/upload/notice/", data);
 		},
 	},
 	wocorder: {
 		url: `${config.API_URL}/sysfile/uploading`,
 		name: "工单附件",
 		post: async function (data) {
-			return await http.post(
-				this.url + "?path=/upload/woc-order/",
-				data
-			);
+			return await http.post(this.url + "?path=/upload/woc-order/", data);
 		},
 	},
 };
