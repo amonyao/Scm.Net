@@ -9,6 +9,7 @@ export { default as Barcode } from "./Barcode.vue";
 export { default as Calling } from "./Calling.vue";
 export { default as Camera } from "./Camera.vue";
 export { default as Chrome } from "./Chrome.vue";
+export { default as Close } from "./Close.vue";
 export { default as Code } from "./Code.vue";
 
 export { default as DingTalk } from "./DingTalk.vue";
@@ -16,6 +17,8 @@ export { default as Download } from "./Download.vue";
 
 export { default as Email } from "./Email.vue";
 export { default as EmailFill } from "./EmailFill.vue";
+export { default as Error } from "./Error.vue";
+export { default as ErrorFill } from "./ErrorFill.vue";
 
 export { default as File } from "./File.vue";
 export { default as FileAudio } from "./FileAudio.vue";
@@ -47,6 +50,8 @@ export { default as FullScreenExit } from "./FullScreenExit.vue";
 export { default as Heart } from "./Heart.vue";
 export { default as HeartFill } from "./HeartFill.vue";
 
+export { default as Info } from "./Info.vue";
+export { default as InfoFill } from "./InfoFill.vue";
 export { default as Ios } from "./Ios.vue";
 export { default as IosFill } from "./IosFill.vue";
 
@@ -77,6 +82,8 @@ export { default as OrganizationFill } from "./OrganizationFill.vue";
 
 export { default as Qq } from "./QQ.vue";
 export { default as QrCode } from "./QrCode.vue";
+export { default as Question } from "./Question.vue";
+export { default as QuestionFill } from "./QuestionFill.vue";
 export { default as Queuing } from "./Queuing.vue";
 
 export { default as SandClock } from "./SandClock.vue";
@@ -90,6 +97,8 @@ export { default as Solution } from "./Solution.vue";
 export { default as Star } from "./Star.vue";
 export { default as StarFill } from "./StarFill.vue";
 export { default as StarHalf } from "./StarHalf.vue";
+export { default as Success } from "./Success.vue";
+export { default as SuccessFill } from "./SuccessFill.vue";
 
 export { default as Tenpay } from "./Tenpay.vue";
 export { default as Terminal } from "./Terminal.vue";
@@ -105,6 +114,8 @@ export { default as UserGroup } from "./UserGroup.vue";
 export { default as VisualStudio } from "./VisualStudio.vue";
 export { default as Vue } from "./Vue.vue";
 
+export { default as Warning } from "./Warning.vue";
+export { default as WarningFill } from "./WarningFill.vue";
 export { default as Wechat } from "./Wechat.vue";
 export { default as Wifi } from "./Wifi.vue";
 export { default as Windows } from "./Windows.vue";

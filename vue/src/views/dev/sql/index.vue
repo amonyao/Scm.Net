@@ -69,17 +69,16 @@
                     <div class="tables-result" :style="{ height: `${tablesHeight}px` }">
                         <el-tabs type="border-card" style="height: 99%">
                             <el-tab-pane label="信息">
-                                <span v-if="runType === 0" class="el-icon-info" style="color: #909399;"></span>
-                                <span v-if="runType === 1" class="el-icon-success" style="color: #67C23A;"></span>
-                                <span v-if="runType === 2" class="el-icon-warning" style="color: #E6A23C;"></span>
-                                <span v-if="runType === 3" class="el-icon-error" style="color: #F56C6C;"></span>
+                                <el-icon>
+                                    <ScIconInfoFill color="#909399" v-if="runType === 0" />
+                                    <ScIconSuccessFill color="#67C23A" v-if="runType === 1" />
+                                    <ScIconWarningFill color="#F56C6C" v-if="runType === 2" />
+                                    <ScIconErrorFill color="#F56C6C" v-if="runType === 3" />
+                                </el-icon>
                                 {{ runResult }}
                                 <template v-if="runType === 3">
-                                    <div class="error-message"><b>message：</b>{{ errMsg.sqlMessage }}</div>
-                                    <div class="error-message"><b>errno：</b>{{ errMsg.errno }}</div>
-                                    <div class="error-message"><b>sql：</b>"{{ errMsg.sql }}"</div>
-                                    <div class="error-message"><b>code：</b>{{ errMsg.code }}</div>
-                                    <div class="error-message"><b>sqlState：</b>{{ errMsg.sqlState }}</div>
+                                    <div class="error-message"><b>脚本：</b>"{{ errMsg.sql }}"</div>
+                                    <div class="error-message"><b>异常：</b>{{ errMsg.message }}</div>
                                 </template>
                             </el-tab-pane>
                             <el-tab-pane label="结果">
@@ -140,9 +139,9 @@ export default {
             code: '', // 实时输入的代码
             runLoading: false, // 运行加载状态
             errMsg: {
-                sqlMessage: '',
-                errno: '',
                 sql: '',
+                message: '',
+                errno: '',
                 code: '',
                 sqlState: ''
             },
@@ -333,7 +332,7 @@ export default {
             // 执行SQL语句
             code = this.$TOOL.trim(code || '');
             if (code === '') {
-                this.$message.warning('请先编辑 SQL 命令！')
+                this.$message.warning('请先编辑 SQL 命令！');
                 return
             }
             this.runLoading = true
@@ -344,6 +343,7 @@ export default {
             this.errMsg = {}
             const res = await this.$API.devsql.execute.post({ db_id: this.param.db_id, sql: code });
             if (res == null || res.code != 200) {
+                this.$message.warning('服务器响应异常，请稍后重试！');
                 return;
             }
 
@@ -373,7 +373,8 @@ export default {
             } else {
                 this.runType = 3
                 this.runResult = '执行失败！'
-                this.errMsg = data.message
+                this.errMsg.message = data.message;
+                this.errMsg.sql = code;
             }
             this.runLoading = false
         },
