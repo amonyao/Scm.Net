@@ -19,7 +19,7 @@
 			</div>
 		</el-header>
 		<el-main :class="{ nopadding: model == 1 }">
-			<div v-if="model == 1" class="div_panel">
+			<div v-if="model == 1" class="grid_row">
 				<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
 					@selection-change="selectionChange" :hide-pagination="true" :hide-do="true">
 					<el-table-column align="center" fixed type="selection" width="60" />
@@ -39,8 +39,8 @@
 					</el-table-column>
 				</scTable>
 			</div>
-			<div v-else-if="model == 2" class="div_panel">
-				<sc-list :data="list" :hide-do="true" class="gtd-list" :canSelected="true">
+			<div v-else-if="model == 2" class="grid_row">
+				<sc-list :data="list" :hide-do="true" class="gtd-list col3" :canSelected="true">
 					<template #item="{ item }">
 						<div class="gtd-item">
 							<div class="thumb">
@@ -54,128 +54,110 @@
 					</template>
 				</sc-list>
 			</div>
-			<div v-else-if="model == 3" class="div_panel">
-				<el-row class="gtd-row3">
-					<el-col :span="8">
-						<sc-list :data="handleList1" :hide-do="true" class="gtd-list" :canSelected="true" header="待办">
-							<template #item="{ item }">
-								<div class="gtd-item">
-									<div class="thumb">
-										<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-									</div>
-									<div style="width: 100%;" @click="itemClick(item)">
-										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-									</div>
-								</div>
-							</template>
-						</sc-list>
-					</el-col>
-					<el-col :span="8">
-						<sc-list :data="handleList2" :hide-do="true" class="gtd-list" :canSelected="true" header="进行中">
-							<template #item="{ item }">
-								<div class="gtd-item">
-									<div class="thumb">
-										<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-									</div>
-									<div style="width: 100%;" @click="itemClick(item)">
-										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-									</div>
-								</div>
-							</template>
-						</sc-list>
-					</el-col>
-					<el-col :span="8">
-						<sc-list :data="handleList3" :hide-do="true" class="gtd-list" :canSelected="true" header="已完成">
-							<template #item="{ item }">
-								<div class="gtd-item">
-									<div class="thumb">
-										<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-									</div>
-									<div style="width: 100%;" @click="itemClick(item)">
-										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-									</div>
-								</div>
-							</template>
-						</sc-list>
-					</el-col>
-				</el-row>
+			<div v-else-if="model == 3" class="grid_row">
+				<sc-list :data="handleList1" :hide-do="true" class="gtd-list col3" :canSelected="true" header="待办">
+					<template #item="{ item }">
+						<div class="gtd-item">
+							<div class="thumb">
+								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							</div>
+							<div style="width: 100%;" @click="itemClick(item)">
+								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+							</div>
+						</div>
+					</template>
+				</sc-list>
+				<sc-list :data="handleList2" :hide-do="true" class="gtd-list col3" :canSelected="true" header="进行中">
+					<template #item="{ item }">
+						<div class="gtd-item">
+							<div class="thumb">
+								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							</div>
+							<div style="width: 100%;" @click="itemClick(item)">
+								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+							</div>
+						</div>
+					</template>
+				</sc-list>
+				<sc-list :data="handleList3" :hide-do="true" class="gtd-list col3" :canSelected="true" header="已完成">
+					<template #item="{ item }">
+						<div class="gtd-item">
+							<div class="thumb">
+								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							</div>
+							<div style="width: 100%;" @click="itemClick(item)">
+								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+							</div>
+						</div>
+					</template>
+				</sc-list>
 			</div>
-			<div v-else-if="model == 4" class="div_panel">
-				<table>
-					<tr>
-						<td>
-							<sc-list ref="priority1" :data="priorityList1" :hide-do="true" class="gtd-list"
-								:canSelected="true" header="紧急且重要">
-								<template #item="{ item }">
-									<div class="gtd-item">
-										<div class="thumb">
-											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-										</div>
-										<div style="width: 100%;" @click="itemClick(item)">
-											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-										</div>
-									</div>
-								</template>
-							</sc-list>
-						</td>
-						<td>
-							<sc-list ref="priority2" :data="priorityList2" :hide-do="true" class="gtd-list"
-								:canSelected="true" header="紧急不重要">
-								<template #item="{ item }">
-									<div class="gtd-item">
-										<div class="thumb">
-											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-										</div>
-										<div style="width: 100%;" @click="itemClick(item)">
-											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-										</div>
-									</div>
-								</template>
-							</sc-list>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<sc-list ref="priority3" :data="priorityList3" :hide-do="true" class="gtd-list"
-								:canSelected="true" header="不紧急但重要">
-								<template #item="{ item }">
-									<div class="gtd-item">
-										<div class="thumb">
-											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-										</div>
-										<div style="width: 100%;" @click="itemClick(item)">
-											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-										</div>
-									</div>
-								</template>
-							</sc-list>
-						</td>
-						<td>
-							<sc-list ref="priority4" :data="priorityList4" :hide-do="true" class="gtd-list"
-								:canSelected="true" header="不紧急不重要">
-								<template #item="{ item }">
-									<div class="gtd-item">
-										<div class="thumb">
-											<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
-										</div>
-										<div style="width: 100%;" @click="itemClick(item)">
-											<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-											<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-										</div>
-									</div>
-								</template>
-							</sc-list>
-						</td>
-					</tr>
-				</table>
+			<div v-else-if="model == 4" class="grid_row">
+				<div class="grid_col">
+					<sc-list ref="priority1" :data="priorityList1" :hide-do="true" class="gtd-list row2_top"
+						:canSelected="true" header="紧急且重要">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb">
+									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+					<sc-list ref="priority2" :data="priorityList2" :hide-do="true" class="gtd-list row2_bot"
+						:canSelected="true" header="紧急不重要">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb">
+									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+				</div>
+				<div class="grid_col">
+					<sc-list ref="priority3" :data="priorityList3" :hide-do="true" class="gtd-list row2_top"
+						:canSelected="true" header="不紧急但重要">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb">
+									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+					<sc-list ref="priority4" :data="priorityList4" :hide-do="true" class="gtd-list row2_bot"
+						:canSelected="true" header="不紧急不重要">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb">
+									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+				</div>
 			</div>
-			<div v-else class="div_panel">
+			<div v-else class="grid_row">
 			</div>
 		</el-main>
 		<el-footer>
@@ -192,8 +174,8 @@ import { defineAsyncComponent } from "vue";
 export default {
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
-		handle: defineAsyncComponent(() => import("./handle")),
-		priority: defineAsyncComponent(() => import("./priority")),
+		// handle: defineAsyncComponent(() => import("./handle")),
+		// priority: defineAsyncComponent(() => import("./priority")),
 	},
 	data() {
 		return {
@@ -350,15 +332,16 @@ export default {
 			if (!item) {
 				return false;
 			}
-			var handle = item.handle;
-			if (handle == 1) {
-				handle = 3;
-			} else if (handle == 3) {
-				handle = 1;
-			}
-			else {
-				return false;
-			}
+			// var handle = item.handle;
+			// if (handle == 1) {
+			// 	handle = 3;
+			// } else if (handle == 3) {
+			// 	handle = 1;
+			// }
+			// else {
+			// 	return false;
+			// }
+			var handle = item.checked ? 3 : 1;
 
 			var res = await this.$API.scmgtdheader.handle.post({ 'id': item.id, 'handle': handle });
 			if (!res || res.code != 200) {
@@ -372,18 +355,23 @@ export default {
 };
 </script>
 <style>
-.div_panel {
+.grid_row {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	align-items: stretch;
 	height: 100%;
 	overflow: hidden;
+	margin: 0 -5px;
 }
 
-.div_panel table {
-	width: 100%;
-	height: 100%;
-}
-
-.div table>td {
-	padding: 10px;
+.grid_col {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+	flex-basis: 100%;
+	margin: 0 5px;
 }
 
 .gtd-list {
@@ -392,12 +380,16 @@ export default {
 	overflow-y: scroll;
 }
 
-.gtd-row3 {
-	height: 100%;
+.col3 {
+	margin: 0 5px;
 }
 
-.gtd-col3 {
-	height: 100%;
+.row2_top {
+	margin-bottom: 5px;
+}
+
+.row2_bot {
+	margin-top: 5px;
 }
 
 .gtd-item {
@@ -427,7 +419,7 @@ export default {
 	margin-top: 5px;
 }
 
-.gtd-done {
+.gtd-item .gtd-done {
 	text-decoration: line-through;
 	color: var(--el-text-color-regular);
 }

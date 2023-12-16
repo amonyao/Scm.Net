@@ -43,9 +43,9 @@ namespace Com.Scm.Yms.Qcs.Queue
         public async Task<PageResult<ScmQcsQueueDvo>> GetPagesAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.detail_id == request.detail_id)
+                .WhereIF(IsValidId(request.detail_id), a => a.detail_id == request.detail_id)
+                .WhereIF(request.handle != QcsQueueHandleEnums.None, a => a.handle == request.handle)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
-                //.WhereIF(IsValidId(request.id), a => a.detail_id == request.id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.lv, SqlSugar.OrderByType.Desc)
                 .OrderBy(m => m.id)

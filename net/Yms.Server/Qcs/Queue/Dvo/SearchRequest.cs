@@ -6,5 +6,7 @@ namespace Com.Scm.Yms.Qcs.Queue.Dvo
     {
         public long header_id { get; set; }
         public long detail_id { get; set; }
+
+        public QcsQueueHandleEnums handle { get; set; }
     }
 }

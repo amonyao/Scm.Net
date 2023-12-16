@@ -5,7 +5,8 @@
                 {{ header }}
             </div>
         </slot>
-        <div class="sc-list_body" :style="{ padding: this.padding + 'px' }">
+        <el-empty :description="emptyText" :image-size="100" v-if="isEmpty()"></el-empty>
+        <div class="sc-list_body" :style="{ padding: this.padding + 'px' }" v-else>
             <div v-for="(item, index) in data" @click="itemClick(item, index)" :key="index" class="sc-list-item"
                 :style="{ width: 100 / columns + '%' }" :class="canSelected && selectedIndex == index ? 'active' : ''">
                 <slot name="item" :item="item" :index="index">
@@ -52,7 +53,8 @@ export default {
         hideEdit: { type: Boolean, default: false },
         hideRemove: { type: Boolean, default: false },
         columns: { type: Number, default: 1 },
-        padding: { type: Number, default: 0 }
+        padding: { type: Number, default: 0 },
+        emptyText: { type: String, default: "" },
     },
     created() {
     },
@@ -75,6 +77,9 @@ export default {
         },
         itemRemove(item, index) {
             this.$emit('removeItem', item, index);
+        },
+        isEmpty() {
+            return this.data == null || this.data.length < 1;
         }
     }
 }
@@ -111,7 +116,7 @@ export default {
     border-bottom: 0;
     font-size: 17px;
     font-weight: bold;
-    padding: 15px 20px 0px 20px;
+    padding: 15px 20px;
 }
 
 .sc-list_body {

@@ -55,16 +55,21 @@ export default {
 			})
 		},
 		async httpRequest(param) {
-			var form = new FormData();
-			form.append('file', param.file);
-			form.append('path', this.formData.path);
-			form.append('type', 1);
+			const data = new FormData();
+			data.append('file', param.file);
+			data.append('filesize', param.file.size);
+			data.append('filetime', param.file.lastModified);
+			data.append('path', this.formData.path);
+			data.append('type', 1);
+			for (const key in param.data) {
+				data.append(key, param.data[key]);
+			}
 			let config = {
 				headers: {
 					'Content-Type': 'multipart/form-data'
 				}
 			};
-			await this.$API.sysfile.upload.post(this.formData, config);
+			await this.$API.sysfile.upload.post(data, config);
 		},
 		close() {
 			this.visible = false;

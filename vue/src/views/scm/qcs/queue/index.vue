@@ -4,11 +4,15 @@
             <template #search>
                 <el-form ref="formRef" label-width="100px" :model="param" :inline="true">
                     <el-form-item label="排队方案" prop="detail_id">
-                        <sc-select v-model="param.detail_id" :data="detail_list" clearable placeholder="请选择">
+                        <sc-select v-model="param.detail_id" :data="detail_list" placeholder="请选择">
+                        </sc-select>
+                    </el-form-item>
+                    <el-form-item label="排队状态" prop="handle">
+                        <sc-select v-model="param.handle" :data="handle_list" placeholder="请选择">
                         </sc-select>
                     </el-form-item>
                     <el-form-item label="数据状态" prop="row_status">
-                        <sc-select v-model="param.row_status" :data="statusList" clearable placeholder="请选择">
+                        <sc-select v-model="param.row_status" :data="statusList" placeholder="请选择">
                         </sc-select>
                     </el-form-item>
                     <el-form-item label="创建时间" prop="create_time">
@@ -87,6 +91,7 @@ export default {
             list: [],
             param: {
                 detail_id: '0',
+                handle: 0,
                 row_status: 1,
                 create_time: '',
                 key: ""
@@ -98,6 +103,7 @@ export default {
             column: [
                 { label: "id", prop: "id", hide: true },
                 { label: "号码", prop: "codec", width: "120", align: 'left' },
+                { label: "方案", prop: "detail_id", width: "120", align: 'left', formatter: this.getDetailNames },
                 { label: "姓名", prop: "namec", width: "120", align: "left" },
                 { label: "证件", prop: "label", minWidth: "120", align: "left" },
                 { label: "电话", prop: "phone", width: "120", align: "left" },
@@ -111,7 +117,7 @@ export default {
     },
     mounted() {
         this.$SCM.list_status(this.statusList, true);
-        this.$SCM.list_dic(this.handle_list, 'qcs_handle', false);
+        this.$SCM.list_dic(this.handle_list, 'qcs_handle', true);
         this.$SCM.list_option(this.detail_list, this.$API.scmqcsdetail.option, {}, true);
     },
     methods: {
@@ -155,6 +161,9 @@ export default {
         },
         getHandle(handle) {
             return this.$SCM.get_dic_names(this.handle_list, handle, '');
+        },
+        getDetailNames(detailId) {
+            return this.$SCM.get_option_names(this.detail_list, detailId, '');
         }
     },
 };
