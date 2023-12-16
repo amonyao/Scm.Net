@@ -1,5 +1,8 @@
 export { default as Alipay } from "./Alipay.vue";
 export { default as Android } from "./Android.vue";
+export { default as AndroidFill } from "./AndroidFill.vue";
+export { default as Apple } from "./Apple.vue";
+export { default as AppleFill } from "./AppleFill.vue";
 
 export { default as BugFill } from "./BugFill.vue";
 export { default as BugLine } from "./BugLine.vue";
@@ -9,6 +12,7 @@ export { default as Barcode } from "./Barcode.vue";
 export { default as Calling } from "./Calling.vue";
 export { default as Camera } from "./Camera.vue";
 export { default as Chrome } from "./Chrome.vue";
+export { default as ChromeFill } from "./ChromeFill.vue";
 export { default as Close } from "./Close.vue";
 export { default as Code } from "./Code.vue";
 
@@ -46,6 +50,8 @@ export { default as FullPage } from "./FullPage.vue";
 export { default as FullPageExit } from "./FullPageExit.vue";
 export { default as FullScreen } from "./FullScreen.vue";
 export { default as FullScreenExit } from "./FullScreenExit.vue";
+
+export { default as Google } from "./Google.vue";
 
 export { default as Heart } from "./Heart.vue";
 export { default as HeartFill } from "./HeartFill.vue";
@@ -100,6 +106,7 @@ export { default as StarHalf } from "./StarHalf.vue";
 export { default as Success } from "./Success.vue";
 export { default as SuccessFill } from "./SuccessFill.vue";
 
+export { default as Taobao } from "./Taobao.vue";
 export { default as Tenpay } from "./Tenpay.vue";
 export { default as Terminal } from "./Terminal.vue";
 
@@ -119,5 +126,6 @@ export { default as WarningFill } from "./WarningFill.vue";
 export { default as Wechat } from "./Wechat.vue";
 export { default as Wifi } from "./Wifi.vue";
 export { default as Windows } from "./Windows.vue";
+export { default as WindowsFill } from "./WindowsFill.vue";
 
 export { default as Xml } from "./Xml.vue";

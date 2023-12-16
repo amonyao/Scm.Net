@@ -9,11 +9,8 @@ public class JwtMiddleware
     private readonly List<string> _ignoreUrl = new()
     {
         "swagger",
-        "/api/exammaterial/upload",
-        "/fytapiui",
         "/chathub",
         "/api-config",
-        "/fyt",
         "/upload/"
     };
     private readonly RequestDelegate _next;
@@ -60,12 +57,15 @@ public class JwtMiddleware
                 {
                     id = jwtToken.id,
                     user_id = jwtToken.user_id,
+                    user_codes = jwtToken.user_codes,
                     user_name = jwtToken.user_name,
                     unit_id = jwtToken.unit_id,
+                    unit_codes = jwtToken.unit_codes,
                     unit_name = jwtToken.unit_name,
-                    Role = "Admin",
-                    RoleArray = jwtToken.RoleArray,
-                    time = DateTime.Now
+                    //Role = "Admin",
+                    //RoleArray = jwtToken.RoleArray,
+                    time = DateTime.Now,
+                    data = jwtToken.data,
                 });
                 context.Response.Headers.Add("X-Refresh-Token", newToken);
             }
