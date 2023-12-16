@@ -98,8 +98,6 @@ namespace Com.Scm.Fav.Uri
         [HttpGet("{id}")]
         public async Task<CmsFavUriDvo> GetEditAsync(long id)
         {
-            new RedirectResult("");
-
             return await _thisRepository
                 .AsQueryable()
                 .Select<CmsFavUriDvo>()
