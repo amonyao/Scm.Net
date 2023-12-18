@@ -35,6 +35,7 @@ export { default as EmailFill } from "./EmailFill.vue";
 export { default as Error } from "./Error.vue";
 export { default as ErrorFill } from "./ErrorFill.vue";
 
+export { default as Feedback } from "./Feedback.vue";
 export { default as File } from "./File.vue";
 export { default as FileAudio } from "./FileAudio.vue";
 export { default as FileAudioFill } from "./FileAudioFill.vue";

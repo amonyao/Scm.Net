@@ -323,6 +323,7 @@ export default {
 				"sc-icon-email-fill",
 				"sc-icon-error",
 				"sc-icon-error-fill",
+				"sc-icon-feedback",
 				"sc-icon-file",
 				"sc-icon-file-audio",
 				"sc-icon-file-audio-fill",

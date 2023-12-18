@@ -191,9 +191,9 @@
 		</section>
 	</template>
 
-	<div class="main-maximize-exit" @click="exitMaximize"><el-icon><el-icon-close /></el-icon></div>
+	<div class="main-maximize-exit" @click="exitMaximize"><el-icon title="退出全屏"><el-icon-close /></el-icon></div>
 
-	<div class="layout-setting" @click="openSetting"><el-icon><el-icon-brush-filled /></el-icon></div>
+	<div class="layout-setting" @click="openSetting"><el-icon title="用户反馈"><sc-icon-feedback /></el-icon></div>
 
 	<el-drawer title="用户反馈" v-model="settingDialog" :size="400" append-to-body destroy-on-close>
 		<feedback></feedback>
