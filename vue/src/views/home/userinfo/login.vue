@@ -178,7 +178,7 @@ export default {
 				return false;
 			}
 			//获取菜单
-			var menu = await this.$API.devmenu.authority.get();
+			var menu = await this.$API.sysmenu.authority.get();
 			if (menu.code == 200) {
 				if (menu.data.length == 0) {
 					this.islogin = false;

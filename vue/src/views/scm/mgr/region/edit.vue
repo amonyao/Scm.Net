@@ -60,9 +60,7 @@ export default {
 				],
 				codec: [
 					{ required: true, trigger: "blur", message: "请输入城市编码" },
-				],
-				lng: [],
-				lat: [],
+				]
 			}
 		};
 	},
@@ -74,7 +72,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.sysregion.model.get(row.id);
+				var res = await this.$API.mgrregion.edit.get(row.id);
 				this.formData = res.data;
 			}
 			
@@ -89,9 +87,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.sysregion.add.post(this.formData);
+						res = await this.$API.mgrregion.add.post(this.formData);
 					} else {
-						res = await this.$API.sysregion.update.put(this.formData);
+						res = await this.$API.mgrregion.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

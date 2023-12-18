@@ -43,8 +43,11 @@
 				<sc-list :data="list" :hide-do="true" class="gtd-list col3" :canSelected="true">
 					<template #item="{ item }">
 						<div class="gtd-item">
-							<div class="thumb">
-								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							<div class="thumb" @click.stop="changeHandle(item)">
+								<el-icon size="24px" class="check-icon">
+									<ScIconSquare v-if="item.handle == 1" />
+									<ScIconCheckSquare v-if="item.handle == 3" />
+								</el-icon>
 							</div>
 							<div style="width: 100%;" @click="itemClick(item)">
 								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -58,8 +61,11 @@
 				<sc-list :data="handleList1" :hide-do="true" class="gtd-list col3" :canSelected="true" header="待办">
 					<template #item="{ item }">
 						<div class="gtd-item">
-							<div class="thumb">
-								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							<div class="thumb" @click.stop="changeHandle(item)">
+								<el-icon size="24px" class="check-icon">
+									<ScIconSquare v-if="item.handle == 1" />
+									<ScIconCheckSquare v-if="item.handle == 3" />
+								</el-icon>
 							</div>
 							<div style="width: 100%;" @click="itemClick(item)">
 								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -71,8 +77,11 @@
 				<sc-list :data="handleList2" :hide-do="true" class="gtd-list col3" :canSelected="true" header="进行中">
 					<template #item="{ item }">
 						<div class="gtd-item">
-							<div class="thumb">
-								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							<div class="thumb" @click.stop="changeHandle(item)">
+								<el-icon size="24px" class="check-icon">
+									<ScIconSquare v-if="item.handle == 1" />
+									<ScIconCheckSquare v-if="item.handle == 3" />
+								</el-icon>
 							</div>
 							<div style="width: 100%;" @click="itemClick(item)">
 								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -84,8 +93,11 @@
 				<sc-list :data="handleList3" :hide-do="true" class="gtd-list col3" :canSelected="true" header="已完成">
 					<template #item="{ item }">
 						<div class="gtd-item">
-							<div class="thumb">
-								<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+							<div class="thumb" @click.stop="changeHandle(item)">
+								<el-icon size="24px" class="check-icon">
+									<ScIconSquare v-if="item.handle == 1" />
+									<ScIconCheckSquare v-if="item.handle == 3" />
+								</el-icon>
 							</div>
 							<div style="width: 100%;" @click="itemClick(item)">
 								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -101,8 +113,11 @@
 						:canSelected="true" header="紧急且重要">
 						<template #item="{ item }">
 							<div class="gtd-item">
-								<div class="thumb">
-									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -115,8 +130,11 @@
 						:canSelected="true" header="紧急不重要">
 						<template #item="{ item }">
 							<div class="gtd-item">
-								<div class="thumb">
-									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -131,8 +149,11 @@
 						:canSelected="true" header="不紧急但重要">
 						<template #item="{ item }">
 							<div class="gtd-item">
-								<div class="thumb">
-									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -145,8 +166,11 @@
 						:canSelected="true" header="不紧急不重要">
 						<template #item="{ item }">
 							<div class="gtd-item">
-								<div class="thumb">
-									<el-checkbox v-model="item.checked" @change="changeHandle(item)"></el-checkbox>
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -332,16 +356,16 @@ export default {
 			if (!item) {
 				return false;
 			}
-			// var handle = item.handle;
-			// if (handle == 1) {
-			// 	handle = 3;
-			// } else if (handle == 3) {
-			// 	handle = 1;
-			// }
-			// else {
-			// 	return false;
-			// }
-			var handle = item.checked ? 3 : 1;
+
+			var handle = item.handle;
+			if (handle == 1) {
+				handle = 3;
+			} else if (handle == 3) {
+				handle = 1;
+			}
+			else {
+				return false;
+			}
 
 			var res = await this.$API.scmgtdheader.handle.post({ 'id': item.id, 'handle': handle });
 			if (!res || res.code != 200) {
@@ -354,7 +378,7 @@ export default {
 	},
 };
 </script>
-<style>
+<style scoped>
 .grid_row {
 	display: flex;
 	justify-content: space-between;
@@ -403,6 +427,7 @@ export default {
 	height: 32px;
 	margin-left: 10px;
 	margin-right: 10px;
+	line-height: 32px;
 }
 
 .gtd-item .title {
@@ -422,5 +447,9 @@ export default {
 .gtd-item .gtd-done {
 	text-decoration: line-through;
 	color: var(--el-text-color-regular);
+}
+
+.check-icon {
+	cursor: pointer;
 }
 </style>

@@ -1891,6 +1891,16 @@
             区域表
             </summary>
         </member>
+        <member name="P:Com.Scm.Sys.RegionDao.codes">
+            <summary>
+            城市编号
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.codec">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Com.Scm.Sys.RegionDao.names">
             <summary>
             区域简称
@@ -1906,7 +1916,7 @@
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Sys.RegionDao.ParentId">
+        <member name="P:Com.Scm.Sys.RegionDao.pid">
             <summary>
             所属上级
             </summary>
@@ -1914,16 +1924,6 @@
         <member name="P:Com.Scm.Sys.RegionDao.lv">
             <summary>
             层级
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.RegionDao.codes">
-            <summary>
-            城市编号
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.RegionDao.codec">
-            <summary>
-            
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.RegionDao.lng">
@@ -1941,14 +1941,14 @@
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Sys.RegionDao.p_status">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="P:Com.Scm.Sys.RegionDao.od">
             <summary>
             排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.RegionDao.p_status">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Com.Scm.Sys.Tasks.TaskDao">

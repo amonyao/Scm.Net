@@ -57,11 +57,4 @@ export default {
 			return await http.put(this.url, data);
 		},
 	},
-	authority: {
-		url: `${config.API_URL}/devmenu/authoritymenu`,
-		name: "获得权限",
-		get: async function () {
-			return await http.get(this.url);
-		},
-	},
 };

@@ -140,20 +140,20 @@ export default {
 			this.listRegion(this.currTab.content.id);
 		},
 		async sort(m) {
-			await this.$API.sysregion.sort.post(m);
+			await this.$API.mgrregion.sort.post(m);
 			this.$refs.table.refresh();
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysregion.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.mgrregion.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysregion.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.mgrregion.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysregion.delete, row);
+			this.$SCM.delete_item(this, this.$API.mgrregion.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysregion.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.mgrregion.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(this.currTab, row);
@@ -202,7 +202,7 @@ export default {
 			//this.listRegion(activeName);
 		},
 		async listRegion(pid) {
-			var res = await this.$API.sysregion.list.get({ "id": pid });
+			var res = await this.$API.mgrregion.list.get({ "id": pid });
 			this.list = res.data;
 		},
 		open_newtab(row) {

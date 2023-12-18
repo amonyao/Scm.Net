@@ -16,10 +16,10 @@
 					</el-form-item>
 					<el-form-item label="类型" prop="types">
 						<el-radio-group v-model="form.types">
-							<el-radio-button label="menu">菜单</el-radio-button>
-							<el-radio-button label="iframe">Iframe</el-radio-button>
-							<el-radio-button label="link">外链</el-radio-button>
-							<el-radio-button label="button">按钮</el-radio-button>
+							<el-radio-button label="1">菜单</el-radio-button>
+							<el-radio-button label="2">Iframe</el-radio-button>
+							<el-radio-button label="3">外链</el-radio-button>
+							<el-radio-button label="4">按钮</el-radio-button>
 						</el-radio-group>
 					</el-form-item>
 					<el-form-item label="别名" prop="codec">
@@ -119,7 +119,7 @@ export default {
 		return {
 			form: {
 				id: "0",
-				types: "menu",
+				types: 1,
 				tenantId: 0,
 				parentId: "",
 				parentIdList: [],
@@ -146,7 +146,7 @@ export default {
 					{ required: true, trigger: "change", message: "请选择上级菜单", type: "array" },
 				],
 				types: [
-					{ required: true, trigger: "change", message: "菜单类型不能为空" },
+					{ required: true, trigger: "change", type: 'number', min: 1, message: "菜单类型不能为空" },
 				],
 				namec: [
 					{ required: true, trigger: "blur", message: "请输入菜单名称" },

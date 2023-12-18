@@ -475,7 +475,7 @@ export default {
 }
 </style>
 <style>
-.cm-sqlEditor {
+.cm-editor {
     height: 100%;
     width: 100%;
 }
