@@ -26,8 +26,9 @@
 						<scEcharts height="100%" :option="logsChartOption"></scEcharts>
 					</el-header>
 					<el-main class="nopadding">
-						<scTable ref="table" :apiObj="apiObj" stripe :column="column" highlightCurrentRow
-							:hide-context-menu="false" @selection-change="selectionChange" @row-click="rowClick">
+						<scTable ref="table" :tableName="tableName" :apiObj="apiObj" stripe :column="column"
+							highlightCurrentRow :hide-context-menu="false" @selection-change="selectionChange"
+							@row-click="rowClick">
 							<el-table-column fixed type="selection" width="60" />
 							<template #levelName="{ data }">
 								<el-icon v-if="data.level == '1'" style="color: #409eff"><el-icon-info-filled /></el-icon>
@@ -62,6 +63,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'log_api',
 			infoDrawer: false,
 			logsChartOption: {
 				color: ["#409eff", "#e6a23c", "#78e853", "#f56c6c", "#9e87ff"],

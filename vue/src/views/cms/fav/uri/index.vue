@@ -23,8 +23,9 @@
 				</div>
 			</el-header>
 			<el-main class="nopadding">
-				<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
-					@selection-change="selectionChange" :hidePagination="true" :hideDo="true" v-if="view == 1">
+				<scTable ref="table" :tableName="tableName" :data="list" :column="column" row-key="id"
+					@menu-handle="menuHandle" @selection-change="selectionChange" :hidePagination="true" :hideDo="true"
+					v-if="view == 1">
 					<!-- 固定列-选择列 -->
 					<el-table-column fixed type="selection" width="60" align="center" />
 					<el-table-column label="#" type="index" width="60"></el-table-column>
@@ -76,6 +77,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'cms_fav_uri',
 			param: {
 				cat_id: '0',
 				row_status: 1,

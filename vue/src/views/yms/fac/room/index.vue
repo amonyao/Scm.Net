@@ -4,7 +4,7 @@
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="所属园区" prop="area_id">
-						<sc-select v-model="param.area_id" placeholder="请选择" :data="area_list" @change="list_build()"/>
+						<sc-select v-model="param.area_id" placeholder="请选择" :data="area_list" @change="list_build()" />
 					</el-form-item>
 					<el-form-item label="所属楼宇" prop="build_id">
 						<sc-select v-model="param.build_id" placeholder="请选择" :data="build_list" />
@@ -49,8 +49,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -86,6 +86,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'yms_fac_room',
 			apiObj: this.$API.ymsfacroom.page,
 			list: [],
 			param: {

@@ -357,4 +357,49 @@ scm.get_option_names = function (options, key, def) {
 	return obj ? obj.label : "";
 };
 
+scm.get_table = async function (key, def) {
+	if (!key) {
+		return def;
+	}
+	var res = await http.get(`${config.API_URL}/systable/` + key);
+	if (!res || res.code != 200) {
+		return def;
+	}
+
+	var data = res.data;
+	if (!data) {
+		return def;
+	}
+	return scm.make_table(data.details, def);
+};
+scm.make_table = function (dst, src) {
+	if (!dst || dst.length < 1) {
+		return src;
+	}
+	var tmp = [];
+	dst.forEach((dstObj) => {
+		for (var i = 0; i < src.length; i += 1) {
+			var srcObj = src[i];
+			if (dstObj.prop == srcObj.prop) {
+				tmp.push(Object.assign(srcObj, dstObj));
+				break;
+			}
+		}
+	});
+	return tmp;
+};
+scm.save_table = async function (key, cfg) {
+	if (!key || !cfg) {
+		return false;
+	}
+	var res = await http.post(`${config.API_URL}/systable/save`, {
+		codec: key,
+		details: cfg,
+	});
+	if (!res || res.code != 200) {
+		return false;
+	}
+	return true;
+};
+
 export default scm;

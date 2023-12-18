@@ -1,8 +1,8 @@
 <template>
 	<el-container>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" :hidePagination="true" :hide-context-menu="false"
-				row-key="id" @selection-change="selectionChange">
+			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" :hidePagination="true"
+				:hide-context-menu="false" row-key="id" @selection-change="selectionChange">
 				<!-- 固定列-选择列 -->
 				<el-table-column fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
@@ -24,6 +24,7 @@ const signalR = require("@microsoft/signalr");
 export default {
 	data() {
 		return {
+			tableName: 'log_online',
 			apiObj: this.$API.logonline.list,
 			list: [],
 			param: {

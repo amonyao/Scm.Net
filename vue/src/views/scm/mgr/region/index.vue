@@ -35,8 +35,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :data="list" :column="column" row-key="id" hide-pagination @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :data="list" :column="column" row-key="id" hide-pagination
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<!-- 固定列-选择列 -->
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50" />
@@ -91,6 +91,7 @@ export default {
 	data() {
 		let defTab = { title: '国别', name: '1000000000000000002', content: { 'id': '1000000000000000002' } };
 		return {
+			tableName: 'scm_mgr_region',
 			list: [],
 			param: {
 				key: "",

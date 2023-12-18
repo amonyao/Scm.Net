@@ -1,6 +1,7 @@
 //数据表格配置
 
 import tool from "@/utils/tool";
+import scm from "@/utils/scm";
 
 export default {
 	successCode: 200, //请求完成代码
@@ -32,11 +33,9 @@ export default {
 	 */
 	columnSettingSave: function (tableName, column) {
 		return new Promise((resolve) => {
-			setTimeout(() => {
-				//这里为了演示使用了session和setTimeout演示，开发时应用数据请求
-				tool.session.set(tableName, column);
-				resolve(true);
-			}, 1000);
+			tool.session.set(tableName, column);
+			scm.save_table(tableName, column);
+			resolve(true);
 		});
 	},
 	/**
@@ -47,12 +46,12 @@ export default {
 	columnSettingGet: function (tableName, column) {
 		return new Promise((resolve) => {
 			//这里为了演示使用了session和setTimeout演示，开发时应用数据请求
-			const userColumn = tool.session.get(tableName);
-			if (userColumn) {
-				resolve(userColumn);
-			} else {
-				resolve(column);
+			var userColumn = tool.session.get(tableName);
+			if (!userColumn) {
+				userColumn = scm.get_table(tableName, column);
+				tool.session.set(tableName, userColumn);
 			}
+			resolve(userColumn);
 		});
 	},
 	/**
@@ -62,11 +61,9 @@ export default {
 	 */
 	columnSettingReset: function (tableName, column) {
 		return new Promise((resolve) => {
-			//这里为了演示使用了session和setTimeout演示，开发时应用数据请求
-			setTimeout(() => {
-				tool.session.remove(tableName);
-				resolve(column);
-			}, 1000);
+			tool.session.remove(tableName);
+			scm.save_table(tableName, null);
+			resolve(column);
 		});
 	},
 	changeTree: function (data) {

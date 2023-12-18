@@ -7,7 +7,7 @@
 						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list"/>
+						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
@@ -43,8 +43,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -80,33 +80,34 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'yms_acs_park',
 			apiObj: this.$API.ymsacspark.page,
 			list: [],
-            param:{
+			param: {
 				option_id: '0',
 				row_status: 1,
 				create_time: '',
 				key: ''
-            },
+			},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-                { prop: 'types', label: '入园类型', width: 100 },
-                { prop: 'area_id', label: '园区', width: 100 },
-                { prop: 'build_id', label: '楼宇', width: 100 },
-                { prop: 'floor_id', label: '楼层', width: 100 },
-                { prop: 'room_id', label: '房间', width: 100 },
-                { prop: 'merchant_id', label: '所属商户', width: 100 },
-                { prop: 'codes', label: '系统代码', width: 100 },
-                { prop: 'names', label: '系统名称', width: 100 },
-                { prop: 'f_time', label: '起始时间', width: 100 },
-                { prop: 't_time', label: '结束时间', width: 100 },
-                { prop: 'driver', label: '车辆信息', width: 100 },
-                { prop: 'row_status', label: '数据状态', width: 100 },
-                { prop: 'update_time', label: '更新时间', width: 100 },
-                { prop: 'update_user', label: '更新人员', width: 100 },
-                { prop: 'create_time', label: '创建时间', width: 100 },
-                { prop: 'create_user', label: '创建人员', width: 100 },
+				{ prop: 'types', label: '入园类型', width: 100 },
+				{ prop: 'area_id', label: '园区', width: 100 },
+				{ prop: 'build_id', label: '楼宇', width: 100 },
+				{ prop: 'floor_id', label: '楼层', width: 100 },
+				{ prop: 'room_id', label: '房间', width: 100 },
+				{ prop: 'merchant_id', label: '所属商户', width: 100 },
+				{ prop: 'codes', label: '系统代码', width: 100 },
+				{ prop: 'names', label: '系统名称', width: 100 },
+				{ prop: 'f_time', label: '起始时间', width: 100 },
+				{ prop: 't_time', label: '结束时间', width: 100 },
+				{ prop: 'driver', label: '车辆信息', width: 100 },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 100 },
+				{ prop: 'update_user', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 100 },
+				{ prop: 'create_user', label: '创建人员', width: 100 },
 
 			],
 			row_status_list: [this.$SCM.OPTION_ALL],
@@ -119,9 +120,9 @@ export default {
 		complete() {
 			this.$refs.table.refresh();
 		},
-        search(){
-            this.$refs.table.upData(this.param);
-        },
+		search() {
+			this.$refs.table.upData(this.param);
+		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.ymsacspark.status, row, row.row_status);
 		},
