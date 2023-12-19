@@ -1956,7 +1956,7 @@
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Sys.SysTableDetailDao.table_id">
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.header_id">
             <summary>
             
             </summary>
@@ -2019,11 +2019,6 @@
         <member name="P:Com.Scm.Sys.SysTableHeaderDao.names">
             <summary>
             视图名称
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Sys.SysTableHeaderDao.json">
-            <summary>
-            JSON数据
             </summary>
         </member>
         <member name="P:Com.Scm.Sys.SysTableHeaderDao.row_delete">

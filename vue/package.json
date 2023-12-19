@@ -25,7 +25,6 @@
     "echarts": "5.3.3",
     "element-plus": "2.2.33",
     "file-saver": "^2.0.5",
-    "json-editor-vue3": "^1.0.8",
     "nprogress": "0.2.0",
     "qrcodejs2": "0.0.2",
     "sortablejs": "1.15.0",
