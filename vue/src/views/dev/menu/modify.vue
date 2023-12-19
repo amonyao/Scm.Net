@@ -16,10 +16,10 @@
 					</el-form-item>
 					<el-form-item label="类型" prop="types">
 						<el-radio-group v-model="form.types">
-							<el-radio-button label="1">菜单</el-radio-button>
-							<el-radio-button label="2">Iframe</el-radio-button>
-							<el-radio-button label="3">外链</el-radio-button>
-							<el-radio-button label="4">按钮</el-radio-button>
+							<el-radio-button :label="1">菜单</el-radio-button>
+							<el-radio-button :label="2">Iframe</el-radio-button>
+							<el-radio-button :label="3">外链</el-radio-button>
+							<el-radio-button :label="4">按钮</el-radio-button>
 						</el-radio-group>
 					</el-form-item>
 					<el-form-item label="别名" prop="codec">
