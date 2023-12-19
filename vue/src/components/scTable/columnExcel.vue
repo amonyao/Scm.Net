@@ -1,10 +1,6 @@
 <template>
 	<div>
-		<div
-			v-if="usercolumn.length > 0"
-			class="setting-column"
-			v-loading="isSave"
-		>
+		<div v-if="usercolumn.length > 0" class="setting-column" v-loading="isSave">
 			<div class="setting-column__title">
 				<span class="move_b"></span>
 				<span class="show_b">显示</span>
@@ -14,21 +10,14 @@
 				<ul>
 					<li v-for="item in usercolumn" :key="item.prop">
 						<span class="move_b">
-							<el-tag class="move" style="cursor: move"
-								><el-icon-d-caret
-									style="width: 1em; height: 1em"
-							/></el-tag>
+							<el-tag class="move" style="cursor: move">
+								<el-icon-d-caret style="width: 1em; height: 1em" />
+							</el-tag>
 						</span>
 						<span class="show_b">
-							<el-switch
-								v-model="item.hide"
-								:active-value="false"
-								:inactive-value="true"
-							></el-switch>
+							<el-switch v-model="item.hide" :active-value="false" :inactive-value="true"></el-switch>
 						</span>
-						<span class="name_b" :title="item.prop">{{
-							item.label
-						}}</span>
+						<span class="name_b" :title="item.prop">{{ item.label }}</span>
 					</li>
 				</ul>
 			</div>
@@ -37,11 +26,7 @@
 				<el-button @click="save" type="primary">确定导出</el-button>
 			</div>
 		</div>
-		<el-empty
-			v-else
-			description="暂无可配置的列"
-			:image-size="80"
-		></el-empty>
+		<el-empty v-else description="暂无可配置的列" :image-size="80"></el-empty>
 	</div>
 </template>
 
@@ -54,8 +39,8 @@ export default {
 		Sortable,
 	},
 	props: {
-		column: { type: Object, default: () => {} },
-		data: { type: Object, default: () => {} },
+		column: { type: Object, default: () => { } },
+		data: { type: Object, default: () => { } },
 	},
 	data() {
 		return {
@@ -87,52 +72,60 @@ export default {
 		},
 		save() {
 			this.excelcolumn = this.usercolumn;
-            let fields={}
-            this.excelcolumn.forEach(item => {
-                if(!item.hide){
-                    eval("fields."+item.prop+"='"+item.label+"';");
-                }
-            });
-            Export(JSON.parse(JSON.stringify(this.data || [])), fields, "文档-"+new Date().getTime());
-            this.$message.success("导出成功");
+			let fields = {}
+			this.excelcolumn.forEach(item => {
+				if (!item.hide) {
+					eval("fields." + item.prop + "='" + item.label + "';");
+				}
+			});
+			Export(JSON.parse(JSON.stringify(this.data || [])), fields, "文档-" + new Date().getTime());
+			this.$message.success("导出成功");
 		},
 	},
 };
 </script>
 
 <style scoped>
-.setting-column {
-}
+.setting-column {}
+
 .print-main {
 	display: none;
 }
+
 .setting-column__title {
 	border-bottom: 1px solid #ebeef5;
 	padding-bottom: 15px;
 }
+
 .setting-column__title span {
 	display: inline-block;
 	font-weight: bold;
 	color: #909399;
 	font-size: 12px;
 }
+
 .setting-column__title span.move_b {
 	width: 30px;
 	margin-right: 15px;
 }
+
 .setting-column__title span.show_b {
 	width: 60px;
 }
+
 .setting-column__title span.name_b {
 	width: 140px;
 }
+
 .setting-column__title span.width_b {
 	width: 60px;
 	margin-right: 15px;
 }
+
 .setting-column__title span.sortable_b {
 	width: 60px;
 }
+
 .setting-column__title span.fixed_b {
 	width: 60px;
 }
@@ -141,23 +134,28 @@ export default {
 	max-height: 314px;
 	overflow: auto;
 }
+
 .setting-column__list li {
 	list-style: none;
 	margin: 10px 0;
 	display: flex;
 	align-items: center;
 }
-.setting-column__list li > span {
+
+.setting-column__list li>span {
 	display: inline-block;
 	font-size: 12px;
 }
+
 .setting-column__list li span.move_b {
 	width: 30px;
 	margin-right: 15px;
 }
+
 .setting-column__list li span.show_b {
 	width: 60px;
 }
+
 .setting-column__list li span.name_b {
 	width: 140px;
 	white-space: nowrap;
@@ -165,16 +163,20 @@ export default {
 	overflow: hidden;
 	cursor: default;
 }
+
 .setting-column__list li span.width_b {
 	width: 60px;
 	margin-right: 15px;
 }
+
 .setting-column__list li span.sortable_b {
 	width: 60px;
 }
+
 .setting-column__list li span.fixed_b {
 	width: 60px;
 }
+
 .setting-column__list li.ghost {
 	opacity: 0.3;
 }

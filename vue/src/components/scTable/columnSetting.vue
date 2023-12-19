@@ -1,5 +1,5 @@
 <template>
-	<div v-if="usercolumn.length>0" class="setting-column" v-loading="isSave">
+	<div v-if="usercolumn.length > 0" class="setting-column" v-loading="isSave">
 		<div class="setting-column__title">
 			<span class="move_b"></span>
 			<span class="show_b">显示</span>
@@ -12,7 +12,9 @@
 			<ul>
 				<li v-for="item in usercolumn" :key="item.prop">
 					<span class="move_b">
-						<el-tag class="move" style="cursor: move;"><el-icon-d-caret style="width: 1em; height: 1em;"/></el-tag>
+						<el-tag class="move" style="cursor: move;">
+							<el-icon-d-caret style="width: 1em; height: 1em;" />
+						</el-tag>
 					</span>
 					<span class="show_b">
 						<el-switch v-model="item.hide" :active-value="false" :inactive-value="true"></el-switch>
@@ -39,59 +41,59 @@
 </template>
 
 <script>
-	import Sortable from 'sortablejs'
+import Sortable from 'sortablejs'
 
-	export default {
-		components: {
-			Sortable
-		},
-		props: {
-			column: { type: Object, default: () => {} }
-		},
-		data() {
-			return {
-				isSave: false,
-				usercolumn: JSON.parse(JSON.stringify(this.column||[]))
-			}
-		},
-		watch:{
-			usercolumn: {
-				handler(){
-					this.$emit('userChange', this.usercolumn)
-				},
-				deep: true
-			}
-		},
-		mounted() {
-			this.usercolumn.length>0 && this.rowDrop()
-		},
-		methods: {
-			rowDrop(){
-				const _this = this
-				const tbody = this.$refs.list.querySelector('ul')
-				Sortable.create(tbody, {
-					handle: ".move",
-					animation: 300,
-					ghostClass: "ghost",
-					onEnd({ newIndex, oldIndex }) {
-						const tableData = _this.usercolumn
-						const currRow = tableData.splice(oldIndex, 1)[0]
-						tableData.splice(newIndex, 0, currRow)
-					}
-				})
+export default {
+	components: {
+		Sortable
+	},
+	props: {
+		column: { type: Object, default: () => { } }
+	},
+	data() {
+		return {
+			isSave: false,
+			usercolumn: JSON.parse(JSON.stringify(this.column || []))
+		}
+	},
+	watch: {
+		usercolumn: {
+			handler() {
+				this.$emit('userChange', this.usercolumn)
 			},
-			backDefaul(){
-				this.$emit('back', this.usercolumn)
-			},
-			save(){
-				this.$emit('save', this.usercolumn)
-			}
+			deep: true
+		}
+	},
+	mounted() {
+		this.usercolumn.length > 0 && this.rowDrop()
+	},
+	methods: {
+		rowDrop() {
+			const _this = this
+			const tbody = this.$refs.list.querySelector('ul')
+			Sortable.create(tbody, {
+				handle: ".move",
+				animation: 300,
+				ghostClass: "ghost",
+				onEnd({ newIndex, oldIndex }) {
+					const tableData = _this.usercolumn
+					const currRow = tableData.splice(oldIndex, 1)[0]
+					tableData.splice(newIndex, 0, currRow)
+				}
+			})
+		},
+		backDefaul() {
+			this.$emit('back', this.usercolumn)
+		},
+		save() {
+			this.$emit('save', this.usercolumn)
 		}
 	}
+}
 </script>
 
 <style scoped>
-	.setting-column {}
+.setting-column {}
 
 	.setting-column__title {border-bottom: 1px solid #EBEEF5;padding-bottom:15px;}
 	.setting-column__title span {display: inline-block;font-weight: bold;color: #909399;font-size: 12px;}
@@ -114,7 +116,7 @@
 	.setting-column__list li.ghost {opacity: 0.3;}
 
 	.setting-column__bottom {border-top: 1px solid #EBEEF5;padding-top:15px;text-align: right;}
-	
+
 	.dark .setting-column__title {border-color: var(--el-border-color-light);}
 	.dark .setting-column__bottom {border-color: var(--el-border-color-light);}
 </style>

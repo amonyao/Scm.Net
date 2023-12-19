@@ -389,7 +389,7 @@ scm.make_table = function (dst, src) {
 	return tmp;
 };
 scm.save_table = async function (key, cfg) {
-	if (!key || !cfg) {
+	if (!key) {
 		return false;
 	}
 	var res = await http.post(`${config.API_URL}/systable/save`, {

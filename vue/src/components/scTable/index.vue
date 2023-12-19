@@ -201,6 +201,7 @@ export default {
 		} else {
 			this.userColumn = this.column;
 		}
+
 		//判断是否静态数据
 		if (this.apiObj) {
 			this.getData();

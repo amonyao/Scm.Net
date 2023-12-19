@@ -1951,6 +1951,93 @@
             
             </summary>
         </member>
+        <member name="T:Com.Scm.Sys.SysTableDetailDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.table_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.od">
+            <summary>
+            显示排序
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.label">
+            <summary>
+            显示标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.prop">
+            <summary>
+            数据字段
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.hide">
+            <summary>
+            是否隐藏
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.width">
+            <summary>
+            列宽
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.align">
+            <summary>
+            对齐
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableDetailDao.sortable">
+            <summary>
+            是否排序
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Sys.SysTableHeaderDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableHeaderDao.user_id">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableHeaderDao.codes">
+            <summary>
+            系统代码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableHeaderDao.codec">
+            <summary>
+            视图编码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableHeaderDao.names">
+            <summary>
+            视图名称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableHeaderDao.json">
+            <summary>
+            JSON数据
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.SysTableHeaderDao.row_delete">
+            <summary>
+            删除标记
+            </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.SysTableHeaderDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
         <member name="T:Com.Scm.Sys.Tasks.TaskDao">
             <summary>
             

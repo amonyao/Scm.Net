@@ -31,40 +31,37 @@ export default {
 	 * @tableName scTable组件的props->tableName
 	 * @column 用户配置好的列
 	 */
-	columnSettingSave: function (tableName, column) {
-		return new Promise((resolve) => {
-			tool.session.set(tableName, column);
-			scm.save_table(tableName, column);
-			resolve(true);
-		});
+	columnSettingSave: async function (tableName, column) {
+		tool.session.set(tableName, column);
+		await scm.save_table(tableName, column);
+		return true;
 	},
 	/**
 	 * 获取自定义列
 	 * @tableName scTable组件的props->tableName
 	 * @column 组件接受到的props->column
 	 */
-	columnSettingGet: function (tableName, column) {
-		return new Promise((resolve) => {
-			//这里为了演示使用了session和setTimeout演示，开发时应用数据请求
-			var userColumn = tool.session.get(tableName);
+	columnSettingGet: async function (tableName, column) {
+		//这里为了演示使用了session和setTimeout演示，开发时应用数据请求
+		var userColumn = tool.session.get(tableName);
+		if (!userColumn) {
+			userColumn = await scm.get_table(tableName, column);
 			if (!userColumn) {
-				userColumn = scm.get_table(tableName, column);
-				tool.session.set(tableName, userColumn);
+				userColumn = column;
 			}
-			resolve(userColumn);
-		});
+			tool.session.set(tableName, userColumn);
+		}
+		return userColumn;
 	},
 	/**
 	 * 重置自定义列
 	 * @tableName scTable组件的props->tableName
 	 * @column 组件接受到的props->column
 	 */
-	columnSettingReset: function (tableName, column) {
-		return new Promise((resolve) => {
-			tool.session.remove(tableName);
-			scm.save_table(tableName, null);
-			resolve(column);
-		});
+	columnSettingReset: async function (tableName, column) {
+		tool.session.remove(tableName);
+		await scm.save_table(tableName, null);
+		return column;
 	},
 	changeTree: function (data) {
 		if (data.length > 0) {
