@@ -1,0 +1,23 @@
+{
+  "id": "4381973",
+  "name": "ScIcon",
+  "font_family": "scfont",
+  "css_prefix_text": "sc-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "35334823",
+      "name": "edge",
+      "font_class": "edge",
+      "unicode": "e84b",
+      "unicode_decimal": 59467
+    },
+    {
+      "icon_id": "35821718",
+      "name": "提醒",
+      "font_class": "tixing",
+      "unicode": "e6de",
+      "unicode_decimal": 59102
+    }
+  ]
+}

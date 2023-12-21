@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "scfont"; /* Project id 4381973 */
+  src: url('iconfont.woff2?t=1703066349367') format('woff2'),
+       url('iconfont.woff?t=1703066349367') format('woff'),
+       url('iconfont.ttf?t=1703066349367') format('truetype');
+}
+
+.scfont {
+  font-family: "scfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sc-edge:before {
+  content: "\e84b";
+}
+
+.sc-tixing:before {
+  content: "\e6de";
+}
+
