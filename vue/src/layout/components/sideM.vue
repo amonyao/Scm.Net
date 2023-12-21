@@ -124,7 +124,7 @@
 </script>
 
 <style scoped>
-	.mobile-nav-button {position: fixed;bottom:10px;left:10px;z-index: 10;width: 50px;height: 50px;background: #409EFF;box-shadow: 0 2px 12px 0 rgba(64, 158, 255, 1);border-radius: 50%;display: flex;align-items: center;justify-content: center;}
+	.mobile-nav-button {position: fixed;bottom:60px;left:10px;z-index: 10;width: 50px;height: 50px;background: #409EFF;box-shadow: 0 2px 12px 0 rgba(64, 158, 255, 1);border-radius: 50%;display: flex;align-items: center;justify-content: center;}
 	.mobile-nav-button i {color: #fff;font-size: 20px;}
 
 	.mobile-nav {background: #212d3d;}

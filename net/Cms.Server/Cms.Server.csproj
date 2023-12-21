@@ -62,6 +62,7 @@
 
   <ItemGroup>
     <Folder Include="Doc\Litera\Dvo\" />
+    <Folder Include="Doc\Vlog\" />
   </ItemGroup>
 
 </Project>

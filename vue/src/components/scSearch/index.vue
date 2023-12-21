@@ -22,7 +22,7 @@
                 <div class="right-panel-search" v-if="!isExpand">
                     <el-input v-model="key" clearable placeholder="关键字" />
                     <el-button icon="el-icon-search" type="primary" @click="doSearch" />
-                    <el-button icon="el-icon-caret-top" @click="doExpand">展开</el-button>
+                    <el-button icon="el-icon-caret-top" @click="doExpand" v-if="expandVisible">展开</el-button>
                 </div>
                 <div class="right-panel-search" v-else>
                     <el-button icon="el-icon-caret-bottom" @click="doExpand">合并</el-button>
@@ -36,10 +36,9 @@
 export default {
     emits: ['search'],
     props: {
-        visible: { type: Boolean, default: true },
-        searchVisible: { type: Boolean, default: true },
+        expandVisible: { type: Boolean, default: false },
+        searchVisible: { type: Boolean, default: false },
         filterVisible: { type: Boolean, default: true },
-        queryParam: { type: Object, default: null }
     },
     data() {
         return {

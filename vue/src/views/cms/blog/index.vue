@@ -68,7 +68,7 @@ export default {
 <style>
 .blog {
     max-width: 960px;
-    margin: 0 auto;
+    margin: 10px auto;
     background-color: #fff;
 }
 

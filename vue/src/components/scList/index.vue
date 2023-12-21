@@ -1,33 +1,36 @@
 <template>
     <div class="sc-list">
         <slot name="header">
-            <div class="sc-list_header" v-if="header">
-                {{ header }}
-            </div>
+            <div class="sc-list_header" v-if="header">{{ header }}</div>
         </slot>
         <el-empty :description="emptyText" :image-size="100" v-if="isEmpty()"></el-empty>
         <div class="sc-list_body" :style="{ padding: this.padding + 'px' }" v-else>
-            <div v-for="(item, index) in data" @click="itemClick(item, index)" :key="index" class="sc-list-item"
-                :style="{ width: 100 / columns + '%' }" :class="canSelected && selectedIndex == index ? 'active' : ''">
+            <div v-for="(item, index) in data" :key="index" @click="itemClick(item, index)" class="sc-list-item"
+                :class="{ active: canSelected && selectedIndex == index }" :style="{ width: 100 / columns + '%' }">
                 <slot name="item" :item="item" :index="index">
-                    <div class="list-item-text">
-                        <el-checkbox></el-checkbox>
-                        {{ item.title }}
+                    <div class="sc-list-item_label">
+                        <el-icon>
+                            <ElIconFolder />
+                        </el-icon>
+                        {{ item.label }}
                     </div>
-                    <div>结束时间</div>
-                    <img :src="item.icon" alt="" class="cm-img-03" v-if="item.icon">
+                    <div class="sc-list-item_value">
+                        <span v-if="item.value">{{ item.value }}</span>
+                        <el-tag round v-if="item.count">{{ item.count }}</el-tag>
+                    </div>
                 </slot>
                 <span class="opt" v-if="!hideDo">
-                    <el-icon @click.stop="itemEdit(item, index)" v-if="!hideEdit" title="编辑"><el-icon-edit /></el-icon>
-                    <el-icon @click.stop="itemRemove(item, index)" v-if="!hideRemove"
-                        title="删除"><el-icon-delete /></el-icon>
+                    <el-icon @click.stop="itemEdit(item, index)" v-if="!hideEdit" title="编辑">
+                        <el-icon-edit />
+                    </el-icon>
+                    <el-icon @click.stop="itemRemove(item, index)" v-if="!hideRemove" title="删除">
+                        <el-icon-delete />
+                    </el-icon>
                 </span>
             </div>
         </div>
         <slot name="footer">
-            <div class="sc-list_footer" v-if="footer">
-                {{ footer }}
-            </div>
+            <div class="sc-list_footer" v-if="footer">{{ footer }}</div>
         </slot>
     </div>
 </template>
@@ -102,6 +105,12 @@ export default {
     height: 100%;
     padding: 10px;
     background-color: var(--el-fill-color-blank);
+}
+
+.sc-list .sc-list-item .sc-list-item_label {}
+
+.sc-list .sc-list-item .sc-list-item_value {
+    color: gray;
 }
 
 .sc-list .active {
