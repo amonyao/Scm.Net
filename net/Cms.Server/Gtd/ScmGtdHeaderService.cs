@@ -36,6 +36,7 @@ namespace Com.Scm.Gtd
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(request.handle != GtdHandleEnum.None, a => a.handle == request.handle)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .OrderBy(a => a.handle, SqlSugar.OrderByType.Asc)
@@ -56,6 +57,8 @@ namespace Com.Scm.Gtd
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.row_status == ScmStatusEnum.Enabled)
+                .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
+                .WhereIF(request.handle != GtdHandleEnum.None, a => a.handle == request.handle)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .OrderBy(a => a.handle, SqlSugar.OrderByType.Asc)
                 .OrderBy(a => a.id)
@@ -73,18 +76,6 @@ namespace Com.Scm.Gtd
                 item.update_names = GetUserNames(_userRepository, item.update_user);
                 item.create_names = GetUserNames(_userRepository, item.create_user);
             }
-        }
-
-        /// <summary>
-        /// 根据主键查询
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<GtdHeaderDvo> GetAsync(long id)
-        {
-            var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<GtdHeaderDvo>();
         }
 
         /// <summary>
@@ -122,7 +113,16 @@ namespace Com.Scm.Gtd
         /// <returns></returns>
         public async Task<bool> AddAsync(GtdHeaderDto model)
         {
-            return await _thisRepository.InsertAsync(model.Adapt<GtdHeaderDao>());
+            if (string.IsNullOrEmpty(model.title))
+            {
+                return false;
+            }
+
+            var dao = model.Adapt<GtdHeaderDao>();
+            dao.handle = GtdHandleEnum.Todo;
+            dao.priority = GtdPriorityEnum.Level4;
+
+            return await _thisRepository.InsertAsync(dao);
         }
 
         /// <summary>

@@ -1,196 +1,201 @@
 <template>
 	<el-container>
-		<el-header>
-			<div class="left-panel">
-				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
-				<el-divider direction="vertical"></el-divider>
-				<el-radio-group v-model="model" @change="changeView()">
-					<el-radio-button label="1">表格</el-radio-button>
-					<el-radio-button label="2">列表</el-radio-button>
-					<el-radio-button label="3">三列</el-radio-button>
-					<el-radio-button label="4">四象限</el-radio-button>
-				</el-radio-group>
-			</div>
-			<div class="right-panel">
+		<el-aside width="260px">
+			<sc-cat @change="cat_change" appId="1714913846931623936"></sc-cat>
+		</el-aside>
+		<el-container>
+			<el-header>
+				<div class="left-panel">
+					<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
+					<el-divider direction="vertical"></el-divider>
+					<el-radio-group v-model="model" @change="changeView()">
+						<el-radio-button label="1">表格</el-radio-button>
+						<el-radio-button label="2">列表</el-radio-button>
+						<el-radio-button label="3">三列</el-radio-button>
+						<el-radio-button label="4">四象限</el-radio-button>
+					</el-radio-group>
+				</div>
+				<div class="right-panel">
+					<div class="right-panel-search">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+						<el-button icon="el-icon-search" type="primary" @click="search" />
+					</div>
+				</div>
+			</el-header>
+			<el-main :class="{ nopadding: model == 1 }">
+				<div v-if="model == 1" class="grid_row">
+					<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
+						@selection-change="selectionChange" :hide-pagination="true" :hide-do="true">
+						<el-table-column align="center" fixed type="selection" width="60" />
+						<el-table-column label="#" type="index" width="50"></el-table-column>
+						<el-table-column label="操作" align="center" fixed="right" width="140">
+							<template #default="scope">
+								<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
+									编辑
+								</el-button>
+								<el-divider direction="vertical" />
+								<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+									<template #reference>
+										<el-button text type="primary" size="small">删除</el-button>
+									</template>
+								</el-popconfirm>
+							</template>
+						</el-table-column>
+					</scTable>
+				</div>
+				<div v-else-if="model == 2" class="grid_row">
+					<sc-list :data="list" :hide-do="true" class="gtd-list col3" :canSelected="true">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+				</div>
+				<div v-else-if="model == 3" class="grid_row">
+					<sc-list :data="handleList1" :hide-do="true" class="gtd-list col3" :canSelected="true" header="待办">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+					<sc-list :data="handleList2" :hide-do="true" class="gtd-list col3" :canSelected="true" header="进行中">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+					<sc-list :data="handleList3" :hide-do="true" class="gtd-list col3" :canSelected="true" header="已完成">
+						<template #item="{ item }">
+							<div class="gtd-item">
+								<div class="thumb" @click.stop="changeHandle(item)">
+									<el-icon size="24px" class="check-icon">
+										<ScIconSquare v-if="item.handle == 1" />
+										<ScIconCheckSquare v-if="item.handle == 3" />
+									</el-icon>
+								</div>
+								<div style="width: 100%;" @click="itemClick(item)">
+									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+								</div>
+							</div>
+						</template>
+					</sc-list>
+				</div>
+				<div v-else-if="model == 4" class="grid_row">
+					<div class="grid_col">
+						<sc-list ref="priority1" :data="priorityList1" :hide-do="true" class="gtd-list row2_top"
+							:canSelected="true" header="紧急且重要">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb" @click.stop="changeHandle(item)">
+										<el-icon size="24px" class="check-icon">
+											<ScIconSquare v-if="item.handle == 1" />
+											<ScIconCheckSquare v-if="item.handle == 3" />
+										</el-icon>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
+						<sc-list ref="priority2" :data="priorityList2" :hide-do="true" class="gtd-list row2_bot"
+							:canSelected="true" header="紧急不重要">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb" @click.stop="changeHandle(item)">
+										<el-icon size="24px" class="check-icon">
+											<ScIconSquare v-if="item.handle == 1" />
+											<ScIconCheckSquare v-if="item.handle == 3" />
+										</el-icon>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
+					</div>
+					<div class="grid_col">
+						<sc-list ref="priority3" :data="priorityList3" :hide-do="true" class="gtd-list row2_top"
+							:canSelected="true" header="不紧急但重要">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb" @click.stop="changeHandle(item)">
+										<el-icon size="24px" class="check-icon">
+											<ScIconSquare v-if="item.handle == 1" />
+											<ScIconCheckSquare v-if="item.handle == 3" />
+										</el-icon>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
+						<sc-list ref="priority4" :data="priorityList4" :hide-do="true" class="gtd-list row2_bot"
+							:canSelected="true" header="不紧急不重要">
+							<template #item="{ item }">
+								<div class="gtd-item">
+									<div class="thumb" @click.stop="changeHandle(item)">
+										<el-icon size="24px" class="check-icon">
+											<ScIconSquare v-if="item.handle == 1" />
+											<ScIconCheckSquare v-if="item.handle == 3" />
+										</el-icon>
+									</div>
+									<div style="width: 100%;" @click="itemClick(item)">
+										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
+										<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
+									</div>
+								</div>
+							</template>
+						</sc-list>
+					</div>
+				</div>
+				<div v-else class="grid_row">
+				</div>
+			</el-main>
+			<el-footer>
 				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button icon="el-icon-search" type="primary" @click="search" />
+					<el-input v-model="formData.title" clearable placeholder="请输入待办任务" @keydown="keydown" />
+					<el-button icon="el-icon-plus" type="primary" @click="create" />
 				</div>
-			</div>
-		</el-header>
-		<el-main :class="{ nopadding: model == 1 }">
-			<div v-if="model == 1" class="grid_row">
-				<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
-					@selection-change="selectionChange" :hide-pagination="true" :hide-do="true">
-					<el-table-column align="center" fixed type="selection" width="60" />
-					<el-table-column label="#" type="index" width="50"></el-table-column>
-					<el-table-column label="操作" align="center" fixed="right" width="140">
-						<template #default="scope">
-							<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
-								编辑
-							</el-button>
-							<el-divider direction="vertical" />
-							<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
-								<template #reference>
-									<el-button text type="primary" size="small">删除</el-button>
-								</template>
-							</el-popconfirm>
-						</template>
-					</el-table-column>
-				</scTable>
-			</div>
-			<div v-else-if="model == 2" class="grid_row">
-				<sc-list :data="list" :hide-do="true" class="gtd-list col3" :canSelected="true">
-					<template #item="{ item }">
-						<div class="gtd-item">
-							<div class="thumb" @click.stop="changeHandle(item)">
-								<el-icon size="24px" class="check-icon">
-									<ScIconSquare v-if="item.handle == 1" />
-									<ScIconCheckSquare v-if="item.handle == 3" />
-								</el-icon>
-							</div>
-							<div style="width: 100%;" @click="itemClick(item)">
-								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-							</div>
-						</div>
-					</template>
-				</sc-list>
-			</div>
-			<div v-else-if="model == 3" class="grid_row">
-				<sc-list :data="handleList1" :hide-do="true" class="gtd-list col3" :canSelected="true" header="待办">
-					<template #item="{ item }">
-						<div class="gtd-item">
-							<div class="thumb" @click.stop="changeHandle(item)">
-								<el-icon size="24px" class="check-icon">
-									<ScIconSquare v-if="item.handle == 1" />
-									<ScIconCheckSquare v-if="item.handle == 3" />
-								</el-icon>
-							</div>
-							<div style="width: 100%;" @click="itemClick(item)">
-								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-							</div>
-						</div>
-					</template>
-				</sc-list>
-				<sc-list :data="handleList2" :hide-do="true" class="gtd-list col3" :canSelected="true" header="进行中">
-					<template #item="{ item }">
-						<div class="gtd-item">
-							<div class="thumb" @click.stop="changeHandle(item)">
-								<el-icon size="24px" class="check-icon">
-									<ScIconSquare v-if="item.handle == 1" />
-									<ScIconCheckSquare v-if="item.handle == 3" />
-								</el-icon>
-							</div>
-							<div style="width: 100%;" @click="itemClick(item)">
-								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-							</div>
-						</div>
-					</template>
-				</sc-list>
-				<sc-list :data="handleList3" :hide-do="true" class="gtd-list col3" :canSelected="true" header="已完成">
-					<template #item="{ item }">
-						<div class="gtd-item">
-							<div class="thumb" @click.stop="changeHandle(item)">
-								<el-icon size="24px" class="check-icon">
-									<ScIconSquare v-if="item.handle == 1" />
-									<ScIconCheckSquare v-if="item.handle == 3" />
-								</el-icon>
-							</div>
-							<div style="width: 100%;" @click="itemClick(item)">
-								<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-								<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-							</div>
-						</div>
-					</template>
-				</sc-list>
-			</div>
-			<div v-else-if="model == 4" class="grid_row">
-				<div class="grid_col">
-					<sc-list ref="priority1" :data="priorityList1" :hide-do="true" class="gtd-list row2_top"
-						:canSelected="true" header="紧急且重要">
-						<template #item="{ item }">
-							<div class="gtd-item">
-								<div class="thumb" @click.stop="changeHandle(item)">
-									<el-icon size="24px" class="check-icon">
-										<ScIconSquare v-if="item.handle == 1" />
-										<ScIconCheckSquare v-if="item.handle == 3" />
-									</el-icon>
-								</div>
-								<div style="width: 100%;" @click="itemClick(item)">
-									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-								</div>
-							</div>
-						</template>
-					</sc-list>
-					<sc-list ref="priority2" :data="priorityList2" :hide-do="true" class="gtd-list row2_bot"
-						:canSelected="true" header="紧急不重要">
-						<template #item="{ item }">
-							<div class="gtd-item">
-								<div class="thumb" @click.stop="changeHandle(item)">
-									<el-icon size="24px" class="check-icon">
-										<ScIconSquare v-if="item.handle == 1" />
-										<ScIconCheckSquare v-if="item.handle == 3" />
-									</el-icon>
-								</div>
-								<div style="width: 100%;" @click="itemClick(item)">
-									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-								</div>
-							</div>
-						</template>
-					</sc-list>
-				</div>
-				<div class="grid_col">
-					<sc-list ref="priority3" :data="priorityList3" :hide-do="true" class="gtd-list row2_top"
-						:canSelected="true" header="不紧急但重要">
-						<template #item="{ item }">
-							<div class="gtd-item">
-								<div class="thumb" @click.stop="changeHandle(item)">
-									<el-icon size="24px" class="check-icon">
-										<ScIconSquare v-if="item.handle == 1" />
-										<ScIconCheckSquare v-if="item.handle == 3" />
-									</el-icon>
-								</div>
-								<div style="width: 100%;" @click="itemClick(item)">
-									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-								</div>
-							</div>
-						</template>
-					</sc-list>
-					<sc-list ref="priority4" :data="priorityList4" :hide-do="true" class="gtd-list row2_bot"
-						:canSelected="true" header="不紧急不重要">
-						<template #item="{ item }">
-							<div class="gtd-item">
-								<div class="thumb" @click.stop="changeHandle(item)">
-									<el-icon size="24px" class="check-icon">
-										<ScIconSquare v-if="item.handle == 1" />
-										<ScIconCheckSquare v-if="item.handle == 3" />
-									</el-icon>
-								</div>
-								<div style="width: 100%;" @click="itemClick(item)">
-									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
-									<div class="summary">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
-								</div>
-							</div>
-						</template>
-					</sc-list>
-				</div>
-			</div>
-			<div v-else class="grid_row">
-			</div>
-		</el-main>
-		<el-footer>
-			<div class="right-panel-search">
-				<el-input v-model="formData.title" clearable placeholder="请输入待办任务" @keydown="keydown" />
-				<el-button icon="el-icon-plus" type="primary" @click="create" />
-			</div>
-		</el-footer>
-		<edit ref="edit" @complete="complete" />
+			</el-footer>
+			<edit ref="edit" @complete="complete" />
+		</el-container>
 	</el-container>
 </template>
 <script>
@@ -212,11 +217,12 @@ export default {
 			priorityList3: [],
 			priorityList4: [],
 			param: {
-				option_id: '0',
+				cat_id: '0',
 				create_time: '',
 				key: ''
 			},
 			model: 2,
+			selectCat: {},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
@@ -276,6 +282,14 @@ export default {
 				return;
 			}
 		},
+		cat_change(obj) {
+			this.selectCat = obj;
+			if (obj) {
+				this.param.cat_id = obj.id;
+				this.formData.cat_id = obj.id;
+			}
+			this.search();
+		},
 		keydown(e) {
 			if (e.keyCode != 13) {
 				return;
@@ -300,7 +314,7 @@ export default {
 			this.$refs.edit.open(item);
 		},
 		async search() {
-			var res = await this.$API.scmgtdheader.list.get();
+			var res = await this.$API.scmgtdheader.list.get(this.param);
 			if (!res || res.code != 200) {
 				return;
 			}

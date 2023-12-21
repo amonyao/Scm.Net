@@ -17,7 +17,7 @@
             <el-tree ref="list" class="menu" node-key="id" default-expand-all :data="list" :filter-node-method="filterNode"
                 @node-click="nodeClick">
                 <template #default="{ node, data }">
-                    <span class="scmui-item-node">
+                    <span class="scmui-item-node" :class="{ active: selectCat.id == data.id }">
                         <span class="label">{{ node.label }}</span>
                         <span class="code">{{ data.code }}</span>
                         <span class="opt">
@@ -137,5 +137,10 @@ export default {
 .add-column {
     padding: 8px !important;
     margin: 8px;
+}
+
+.active {
+    color: blue;
+    font-weight: bold;
 }
 </style>
