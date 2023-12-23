@@ -14,10 +14,10 @@
             <el-button type="primary" round icon="el-icon-plus" class="add-column" @click="edit"></el-button>
         </el-header>
         <el-main class="nopadding">
-            <el-tree ref="list" class="menu" node-key="id" default-expand-all :data="list" :filter-node-method="filterNode"
-                @node-click="nodeClick">
+            <el-tree ref="list" class="menu" node-key="value" :default-expand-all="expandAll" :data="list"
+                :current-node-key="selectVal" :filter-node-method="filterNode" @node-click="nodeClick">
                 <template #default="{ node, data }">
-                    <span class="scmui-item-node" :class="{ active: selectCat.id == data.id }">
+                    <span class="scmui-item-node">
                         <span class="label">{{ node.label }}</span>
                         <span class="code">{{ data.code }}</span>
                         <span class="opt">
@@ -42,8 +42,10 @@ export default {
     props: {
         appId: { type: String, default: '0' },
         showAll: { type: Boolean, default: false },
+        expandAll: { type: Boolean, default: false },
         data: { type: Object, default: () => { } },
-        params: { type: Object, default: () => ({}) }
+        params: { type: Object, default: () => ({}) },
+        defaultValue: { type: String, default: '0' },
     },
     emits: ['change'],
     data() {
@@ -51,7 +53,9 @@ export default {
             loading: false,
             key: "",
             list: [],
-            selectCat: {},
+            all: { id: "1", value: "0", label: "所有", parentId: "0" },
+            selectVal: '',
+            selectCat: null,
         }
     },
     watch: {
@@ -60,6 +64,7 @@ export default {
         },
     },
     created() {
+        this.selectVal = this.defaultValue;
         this.getData({ app: this.appId })
     },
     methods: {
@@ -77,12 +82,13 @@ export default {
         },
         //树点击事件
         nodeClick(data) {
-            if (data.id == 1) {
+            if (data.value == '0') {
                 this.$emit('change', { app: this.appId });
                 return;
             }
 
             this.selectCat = data;
+            this.selectVal = data.value;
             this.$emit('change', this.selectCat);
         },
         remove(node, data) {
@@ -113,7 +119,7 @@ export default {
             this.loading = false;
             let _tree = [];
             if (this.showAll) {
-                _tree.push({ id: "1", value: "0", label: "所有", parentId: "0" });
+                _tree.push(this.all);
             }
             res.data.some((m) => {
                 _tree.push({
@@ -137,10 +143,5 @@ export default {
 .add-column {
     padding: 8px !important;
     margin: 8px;
-}
-
-.active {
-    color: blue;
-    font-weight: bold;
 }
 </style>

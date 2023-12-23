@@ -447,9 +447,9 @@
             留言消息表
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.ColumnId">
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.user_id">
             <summary>
-            栏目Id
+            收件人ID
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.types">
@@ -467,14 +467,9 @@
             邮箱信息
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.mobile">
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.phone">
             <summary>
             手机号码
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.tags">
-            <summary>
-            留言标签
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.remark">
@@ -487,9 +482,9 @@
             是否已读
             </summary>
         </member>
-        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.user_id">
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.is_del">
             <summary>
-            收件人ID
+            回收站
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Msg.Message.MessageDao.row_delete">
@@ -497,9 +492,29 @@
             是否删除
             </summary>
         </member>
-        <member name="T:Com.Scm.Dao.Msg.Notice.NoticeSenderDao">
+        <member name="T:Com.Scm.Dao.Msg.Message.MessageTagDao">
             <summary>
             
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageTagDao.message_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageTagDao.tag_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Msg.Message.MessageTagDao.label">
+            <summary>
+            冗余
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Msg.Notice.NoticeSenderDao">
+            <summary>
+            发件人
             </summary>
         </member>
         <member name="P:Com.Scm.Dao.Msg.Notice.NoticeSenderDao.notice_id">
@@ -515,6 +530,26 @@
         <member name="P:Com.Scm.Dao.Msg.Notice.NoticeSenderDao.handle">
             <summary>
             消息状态
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Res.Tag.TagDao">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Res.Tag.TagDao.app">
+            <summary>
+            应用标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Res.Tag.TagDao.label">
+            <summary>
+            应用标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Res.Tag.TagDao.qty">
+            <summary>
+            引用数量
             </summary>
         </member>
         <member name="T:Com.Scm.Dao.Sys.Adv.SysAdvColumn">
@@ -2167,7 +2202,7 @@
         </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeAttachmentDao">
             <summary>
-            通知文件
+            附件
             </summary>
         </member>
         <member name="P:Scm.Dao.Msg.Notice.NoticeAttachmentDao.notice_id">
@@ -2187,7 +2222,7 @@
         </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeDao">
             <summary>
-            通知模块
+            邮件
             </summary>
         </member>
         <member name="P:Scm.Dao.Msg.Notice.NoticeDao.send_user">
@@ -2222,8 +2257,7 @@
         </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeReaderDao">
             <summary>
-            收件相关：
-            已读模块
+            收件人（是否已读）
             </summary>
         </member>
         <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.notice_id">
@@ -2263,7 +2297,7 @@
         </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeRecipientDao">
             <summary>
-            
+            收件人
             </summary>
         </member>
         <member name="P:Scm.Dao.Msg.Notice.NoticeRecipientDao.notice_id">
@@ -2283,7 +2317,7 @@
         </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeSummaryDao">
             <summary>
-            
+            邮件统计
             </summary>
         </member>
         <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.total">

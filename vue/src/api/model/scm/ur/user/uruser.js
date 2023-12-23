@@ -22,13 +22,6 @@ export default {
 			return await http.post(this.url, data);
 		},
 	},
-	model: {
-		url: `${config.API_URL}/uruser/`,
-		name: "查询一条",
-		get: async function (params) {
-			return await http.get(this.url + params);
-		},
-	},
 	edit: {
 		url: `${config.API_URL}/uruser/edit/`,
 		name: "编辑",
@@ -41,6 +34,13 @@ export default {
 		name: "查看",
 		get: async function (params) {
 			return await http.get(this.url + params);
+		},
+	},
+	option: {
+		url: `${config.API_URL}/uruser/option`,
+		name: "列表",
+		get: async function (data) {
+			return await http.get(this.url, data);
 		},
 	},
 	update: {

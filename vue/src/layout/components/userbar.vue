@@ -121,6 +121,10 @@ export default {
 				limit: 10,
 				status: 2,
 			});
+			if (!res || res.code != 200) {
+				return;
+			}
+
 			this.msgList = res.data.items;
 		},
 		//个人信息

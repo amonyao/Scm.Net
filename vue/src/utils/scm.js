@@ -301,6 +301,28 @@ scm.get_dic_names = function (list, key, def) {
 };
 
 /**
+ * 获取分类列表
+ * @param {*} list
+ * @param {*} param
+ * @param {*} all
+ */
+scm.list_cat = async function (list, param, all) {
+	var res = await http.get(`${config.API_URL}/rescat/option`, param);
+	scm.prepare(list, res, all);
+};
+
+/**
+ * 获取标签列表
+ * @param {*} list
+ * @param {*} param
+ * @param {*} all
+ */
+scm.list_tag = async function (list, app, all) {
+	var res = await http.get(`${config.API_URL}/restag/option/` + app);
+	scm.prepare(list, res, all);
+};
+
+/**
  * 获取下拉选项
  * @param {*} list
  * @param {*} api
@@ -310,6 +332,24 @@ scm.get_dic_names = function (list, key, def) {
 scm.list_option = async function (list, api, param, all) {
 	var res = await api.get(param);
 	scm.prepare(list, res, all);
+};
+
+/**
+ * 获取列表名称
+ * @param {Array} options 字典列表
+ * @param {String} key 字典键
+ * @param {String} def 默认值
+ * @returns
+ */
+scm.get_option_names = function (options, key, def) {
+	if (!options) {
+		return def;
+	}
+	key = "" + key;
+	var obj = options.find((item) => {
+		return item.value == key;
+	});
+	return obj ? obj.label : "";
 };
 
 /**
@@ -337,24 +377,6 @@ scm.list_region = async function (list, pid, all) {
 
 	var res = await http.get(`${config.API_URL}/sysregion/option/` + pid);
 	scm.prepare(list, res, all);
-};
-
-/**
- * 获取列表名称
- * @param {Array} options 字典列表
- * @param {String} key 字典键
- * @param {String} def 默认值
- * @returns
- */
-scm.get_option_names = function (options, key, def) {
-	if (!options) {
-		return def;
-	}
-	key = "" + key;
-	var obj = options.find((item) => {
-		return item.value == key;
-	});
-	return obj ? obj.label : "";
 };
 
 scm.get_table = async function (key, def) {

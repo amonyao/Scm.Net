@@ -1,19 +1,17 @@
 <template>
 	<el-container>
 		<el-aside width="240px">
-			<el-tree ref="category" class="menu" node-key="label" default-expand-all :data="category"
-				:default-expanded-keys="['系统日志']" current-node-key="系统日志" :highlight-current="true"
-				:expand-on-click-node="false" @node-click="typeClick">
+			<el-tree ref="category" class="menu" node-key="value" default-expand-all :data="category_list"
+				:current-node-key="param.cat" :highlight-current="true" :expand-on-click-node="false"
+				@node-click="typeClick">
 				<template #default="{ node, data }">
-					<span class="scmui-tree-node mess-tag">
+					<span class="scmui-tree-node msg-tag">
 						<span>
-							<component class="mess-icon" :is="data.icon"></component>
+							<component class="msg-icon" :is="data.icon"></component>
 							{{ node.label }}
 						</span>
 						<span v-if="data.sum > 0">
-							<el-tag type="danger" effect="dark" size="small">
-								{{ data.sum }}
-							</el-tag>
+							<el-tag type="danger" effect="dark" size="small">{{ data.sum }}</el-tag>
 						</span>
 					</span>
 				</template>
@@ -43,6 +41,9 @@
 					@menu-handle="menuHandle" @selection-change="selectionChange">
 					<el-table-column fixed type="selection" width="60" />
 					<el-table-column label="#" type="index" width="50"></el-table-column>
+					<template #title="{ data }">
+						<el-link type="primary" @click="read(data)">{{ data.title }}</el-link>
+					</template>
 					<template #isread="{ data }">
 						<el-tag disable-transitions :type="data.isread ? 'success' : 'danger'">
 							{{ data.isread ? "是" : "否" }}
@@ -50,53 +51,70 @@
 					</template>
 				</scTable>
 			</el-main>
-			<modify ref="modify" @complete="complete" />
+			<edit ref="edit" @complete="complete" />
 		</el-container>
 	</el-container>
+	<el-drawer v-model="viewVisible" title="消息详情">
+		<el-container>
+			<el-main>
+				<el-form ref="viewRef" label-width="100px" :model="formData">
+					<el-form-item label="消息标题" prop="title">
+						<el-input v-model="selectedItem.title" readonly></el-input>
+					</el-form-item>
+					<el-form-item label="消息内容" prop="remark">
+						<el-input v-model="selectedItem.remark" type="textarea" :rows="15" readonly></el-input>
+					</el-form-item>
+				</el-form>
+			</el-main>
+		</el-container>
+	</el-drawer>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
 	components: {
-		modify: defineAsyncComponent(() => import("./modify")),
+		edit: defineAsyncComponent(() => import("./edit")),
 	},
 	data() {
 		return {
 			apiObj: this.$API.sysmessage.page,
+			types_list: [],
 			list: [],
 			param: {
-				key: "",
+				cat: 'msg10',
+				key: '',
 			},
 			selection: [],
-			category: [
+			category_list: [
 				{
-					label: "消息",
+					label: "消息状态",
+					value: 'msg',
 					children: [
 						{
 							label: "所有消息",
 							type: "level",
-							value: "0",
+							value: 'msg10',
 							sum: 0,
 							icon: "el-icon-bell",
 						},
 						{
 							label: "已读消息",
 							type: "level",
-							value: "1",
+							value: 'msg11',
 							sum: 0,
 							icon: "el-icon-circle-check",
 						},
 						{
 							label: "未读消息",
 							type: "level",
-							value: "2",
+							value: 'msg12',
 							sum: 0,
 							icon: "el-icon-mute-notification",
 						},
 						{
 							label: "回收站",
 							type: "level",
-							value: "3",
+							value: 'msg13',
 							sum: 0,
 							icon: "el-icon-delete",
 						},
@@ -104,78 +122,65 @@ export default {
 				},
 				{
 					label: "消息标签",
-					children: [
-						{
-							label: "全部",
-							type: "tag",
-							value: "",
-							sum: 0,
-							icon: "el-icon-star",
-						},
-						{
-							label: "工作",
-							type: "tag",
-							value: "工作",
-							sum: 0,
-							icon: "el-icon-star",
-						},
-						{
-							label: "通知",
-							type: "tag",
-							value: "通知",
-							sum: 0,
-							icon: "el-icon-star",
-						},
-						{
-							label: "需求",
-							type: "tag",
-							value: "需求",
-							sum: 0,
-							icon: "el-icon-star",
-						},
-						{
-							label: "其它",
-							type: "tag",
-							value: "其它",
-							sum: 0,
-							icon: "el-icon-star",
-						},
-					],
+					value: 'tag',
+					children: [],
 				},
 			],
 			column: [
 				{ prop: "id", label: "id", hide: true },
-				{ prop: "title", label: "留言标题", width: 200, align: "left", showOverflowTooltip: true },
-				{ prop: "types", label: "类型", width: 100 },
+				{ prop: "title", label: "消息标题", width: 200, align: "left", showOverflowTooltip: true },
+				{ prop: "types", label: "类型", width: 100, formatter: this.getTypesNames },
 				{ prop: "email", label: "邮箱信息", width: 180 },
-				{ prop: "mobile", label: "手机号码", width: 130 },
-				{ prop: "tags", label: "留言标签", width: 200 },
-				{ prop: "remark", label: "留言内容", showOverflowTooltip: true },
+				{ prop: "phone", label: "电话号码", width: 130 },
+				{ prop: "tags", label: "消息标签", width: 200 },
+				{ prop: "remark", label: "消息内容", minWidth: 200, showOverflowTooltip: true },
 				{ prop: "isread", label: "是否已读", width: 100 },
 				{ prop: "create_names", label: "发送人员", width: 100 },
-				{ prop: "create_time", label: "发送时间", width: 180, sortable: true, formatter: this.$TOOL.dateTimeFormat }
+				{ prop: "create_time", label: "发送时间", width: 180, formatter: this.$TOOL.dateTimeFormat }
 			],
+			selectedItem: null,
+			viewVisible: false,
 		};
 	},
 	mounted() {
+		this.$SCM.list_dic(this.types_list, 'message_type', true);
+		this.initTags();
 		this.initTotal();
 	},
 	methods: {
+		async initTags() {
+			var res = await this.$API.scmrestag.option.get('1714913846931623936');
+			if (!res || res.code != 200) {
+				return;
+			}
+
+			var list = [{ 'id': 1, label: '全部', value: 'tag10' }];
+			res.data.forEach(element => {
+				element.sum = 0;
+				element.icon = 'el-icon-star';
+				list.push(element);
+			});
+
+			if (this.category_list.length > 1) {
+				this.category_list[1].children = list;
+			}
+		},
 		async initTotal() {
 			var res = await this.$API.sysmessage.total.get();
-			this.category[0].children[0].sum = res.data.allCount;
-			this.category[0].children[2].sum = res.data.unReadCount;
-			this.category[0].children[3].sum = res.data.recycleCount;
+			this.category_list[0].children[0].sum = res.data.allCount;
+			this.category_list[0].children[2].sum = res.data.unReadCount;
+			this.category_list[0].children[3].sum = res.data.recycleCount;
 		},
 		typeClick(data) {
-			if (data.type == "level") {
-				this.$refs.table.upData({ status: data.value });
+			if (data.value == 'msg' || data.value == 'tag') {
+				return;
 			}
-			if (data.type == "tag") {
-				this.$refs.table.upData({ key: data.value });
-			}
+
+			this.param.cat = data.value;
+			this.$refs.table.upData(this.param);
 		},
 		complete() {
+			this.initTotal();
 			this.$refs.table.refresh();
 		},
 		search() {
@@ -195,9 +200,9 @@ export default {
 		},
 		open_dialog(row) {
 			if (row.id) {
-				this.$refs.modify.open(row);
+				this.$refs.edit.open(row);
 			} else {
-				this.$refs.modify.open();
+				this.$refs.edit.open();
 			}
 		},
 		selectionChange(selection) {
@@ -241,6 +246,10 @@ export default {
 				})
 				.catch(() => { });
 		},
+		read(data) {
+			this.selectedItem = data;
+			this.viewVisible = true;
+		},
 		all_read() {
 			this.$confirm(`确定要设为全部已读吗？`, "提示", {
 				type: "warning",
@@ -249,11 +258,7 @@ export default {
 			})
 				.then(async () => {
 					const loading = this.$loading();
-					let ids = [];
-					this.selection.forEach((element) => {
-						ids.push(element.id);
-					});
-					var res = await this.$API.sysmessage.read.put(ids);
+					var res = await this.$API.sysmessage.read_all.put();
 					loading.close();
 					if (res.code == 200) {
 						this.initTotal();
@@ -291,16 +296,20 @@ export default {
 				})
 				.catch(() => { });
 		},
+		getTypesNames(types) {
+			return this.$SCM.get_dic_names(this.types_list, types, '');
+		}
 	},
 };
 </script>
 <style>
-.mess-tag .el-tag {
+.msg-tag .el-tag {
 	height: 18px;
 	padding: 0 5px;
+	margin-left: 5px;
 }
 
-.mess-icon {
+.msg-icon {
 	width: 16px;
 	height: 16px;
 	vertical-align: middle;
