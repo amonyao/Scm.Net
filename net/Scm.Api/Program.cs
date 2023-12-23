@@ -97,6 +97,8 @@ namespace Com.Scm.Api
             builder.Services.AddScoped<IDicService, ScmDicService>();
             builder.Services.AddScoped<ICfgService, ScmCfgService>();
             builder.Services.AddScoped<ISecService, ScmSecService>();
+            builder.Services.AddScoped<ICatService, ScmCatService>();
+            builder.Services.AddScoped<ITagService, ScmTagService>();
             builder.Services.AddScoped<IShareService, ShareService>();
 
             // Mapper

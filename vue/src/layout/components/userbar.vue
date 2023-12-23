@@ -119,7 +119,7 @@ export default {
 			const res = await this.$API.sysmessage.page.get({
 				page: 1,
 				limit: 10,
-				status: 2,
+				cat: 'msg12'
 			});
 			if (!res || res.code != 200) {
 				return;

@@ -130,7 +130,7 @@ scm.delete_list = function (dom, http, list) {
 			list.forEach((element) => {
 				ids.push(element.id);
 			});
-			var res = http.delete(ids.join(","));
+			var res = await http.delete(ids.join(","));
 			if (res.code == 200) {
 				dom.$refs.table.refresh();
 				loading.close();

@@ -15,13 +15,6 @@ export default {
 			return await http.post(this.url, data);
 		},
 	},
-	model: {
-		url: `${config.API_URL}/sysmessage/`,
-		name: "查询一条",
-		get: async function (params) {
-			return await http.get(this.url + params);
-		},
-	},
 	total: {
 		url: `${config.API_URL}/sysmessage/total`,
 		name: "汇总消息数量",
@@ -67,8 +60,15 @@ export default {
 	recycle: {
 		url: `${config.API_URL}/sysmessage/recycle`,
 		name: "删除到回收站",
-		delete: async function (params) {
-			return await http.delete(this.url + "?ids=" + params);
+		put: async function (params) {
+			return await http.put(this.url, params);
+		},
+	},
+	unread: {
+		url: `${config.API_URL}/sysmessage/unread`,
+		name: "未读",
+		get: async function (params) {
+			return await http.get(this.url, params);
 		},
 	},
 };

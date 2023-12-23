@@ -22,9 +22,9 @@
 				<div class="left-panel">
 					<el-button icon="el-icon-plus" type="primary" @click="open_dialog" />
 					<el-button icon="el-icon-delete" plain type="danger" :disabled="selection.length == 0"
-						@click="delete_list" />
+						@click="delete_list" title="删除" />
 					<el-button icon="el-icon-takeaway-box" plain type="danger" :disabled="selection.length == 0"
-						@click="recycle_del" />
+						@click="recycle_del" title="移到回收站" />
 					<el-button icon="el-icon-circle-check" plain type="success" @click="all_read">全部已读</el-button>
 					<el-button icon="el-icon-circle-check" plain type="success" :disabled="selection.length == 0"
 						@click="set_read">设为已读</el-button>
@@ -154,7 +154,7 @@ export default {
 				return;
 			}
 
-			var list = [{ 'id': 1, label: '全部', value: 'tag10' }];
+			var list = [{ 'id': 1, label: '全部', value: 'tag10', sum: 0, icon: 'el-icon-star' }];
 			res.data.forEach(element => {
 				element.sum = 0;
 				element.icon = 'el-icon-star';
@@ -232,9 +232,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.sysmessage.recycle.delete(
-						ids.join(",")
-					);
+					var res = await this.$API.sysmessage.recycle.put(ids);
 					loading.close();
 					if (res.code == 200) {
 						this.initTotal();
