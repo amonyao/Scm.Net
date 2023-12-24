@@ -13,8 +13,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" :hidePagination="true" :hideDo="true"
-				:hide-context-menu="false" @selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				:hidePagination="true" :hideDo="true" :hide-context-menu="false" @selection-change="selectionChange">
 				<!-- 固定列-选择列 -->
 				<el-table-column fixed type="selection" width="60" align="center" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
@@ -47,6 +47,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'dev_code_gen',
 			apiObj: this.$API.devgen.list,
 			list: [],
 			param: {

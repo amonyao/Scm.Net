@@ -1,5 +1,5 @@
-using Com.Scm.Api.Hubs;
 using Com.Scm.Dsa.Cache;
+using Com.Scm.Hubs;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

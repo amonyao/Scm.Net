@@ -57,7 +57,7 @@
 	<el-drawer v-model="viewVisible" title="消息详情">
 		<el-container>
 			<el-main>
-				<el-form ref="viewRef" label-width="100px" :model="formData">
+				<el-form ref="viewRef" label-width="100px" :model="selectedItem">
 					<el-form-item label="消息标题" prop="title">
 						<el-input v-model="selectedItem.title" readonly></el-input>
 					</el-form-item>
@@ -149,7 +149,7 @@ export default {
 	},
 	methods: {
 		async initTags() {
-			var res = await this.$API.scmrestag.option.get('1714913846931623936');
+			var res = await this.$API.scmrestag.option.get(this.$API.sysmessage.SYS_ID);
 			if (!res || res.code != 200) {
 				return;
 			}
@@ -244,9 +244,23 @@ export default {
 				})
 				.catch(() => { });
 		},
-		read(data) {
+		async read(data) {
 			this.selectedItem = data;
 			this.viewVisible = true;
+
+			if (data.isread) {
+				return;
+			}
+
+			var ids = [];
+			ids.push(data.id);
+			var res = await this.$API.sysmessage.read.put(ids);
+			if (!res || res.code != 200) {
+				return;
+			}
+
+			data.isread = true;
+			this.category_list[0].children[2].sum -= 1;
 		},
 		all_read() {
 			this.$confirm(`确定要设为全部已读吗？`, "提示", {
@@ -295,7 +309,7 @@ export default {
 				.catch(() => { });
 		},
 		getTypesNames(types) {
-			return this.$SCM.get_dic_names(this.types_list, types, '');
+			return this.$SCM.get_dic_names(this.types_list, types, '-');
 		}
 	},
 };

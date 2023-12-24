@@ -30,7 +30,7 @@ const DEFAULT_CONFIG = {
 	SERVER_URL: process.env.VUE_APP_API_BASEURL,
 
 	//SignalR地址
-	SignalR_URL: process.env.VUE_APP_API_BASEURL + "/chathub",
+	SignalR_URL: process.env.VUE_APP_API_BASEURL + "/scmhub",
 
 	// 默认用户
 	DEF_USER: process.env.DEF_USER,

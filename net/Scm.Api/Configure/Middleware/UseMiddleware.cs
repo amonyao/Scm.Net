@@ -34,7 +34,7 @@ public static class UseMiddleware
         /*app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapHub<ChatHub>("/chatHub");
+            endpoints.MapHub<ScmHub>("/scmhub");
         });*/
     }
 }

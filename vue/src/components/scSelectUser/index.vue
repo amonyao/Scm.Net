@@ -5,9 +5,7 @@
 				@close="delResUser(it)">
 				{{ it.namec }}
 			</el-tag>
-			<span v-if="resUser.length == 0" class="placeholder">{{
-				placeholder
-			}}</span>
+			<span v-if="resUser.length == 0" class="placeholder">{{ placeholder }}</span>
 		</div>
 		<div class="sel-append">
 			<el-button icon="el-icon-finished" @click="dialogOpen" />
@@ -87,7 +85,7 @@ export default {
 		return {
 			param: {
 				key: "",
-				orgId: 0,
+				organize_id: '0',
 				page: 1,
 				limit: 20,
 			},
@@ -151,7 +149,7 @@ export default {
 		//树点击事件
 		groupClick(data) {
 			this.user = {};
-			this.param.orgId = data.value;
+			this.param.organize_id = data.value;
 			this.initUser();
 		},
 		userChange(e, m) {

@@ -1,7 +1,7 @@
 <template>
 	<el-container>
 		<el-aside width="260px">
-			<sc-cat @change="cat_change" appId="1714913846931623936"></sc-cat>
+			<sc-cat @change="cat_change" :appId="this.$API.cmsfavuri.SYS_ID"></sc-cat>
 		</el-aside>
 
 		<el-container>

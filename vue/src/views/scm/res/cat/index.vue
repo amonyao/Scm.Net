@@ -43,8 +43,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" hide-pagination is-tree row-key="id"
-				@menu-handle="menuHandle" @selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" hide-pagination is-tree
+				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="操作" align="center" fixed="right" width="140">
 					<template #default="scope">
@@ -79,6 +79,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: '',
 			apiObj: this.$API.scmrescat.list,
 			param: {
 				app: '0',

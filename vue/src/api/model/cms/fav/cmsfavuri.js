@@ -1,6 +1,7 @@
 import config from "@/config";
 import http from "@/utils/request";
 export default {
+	SYS_ID: "1731504311294365696",
 	page: {
 		url: `${config.API_URL}/cmsfavuri/pages`,
 		name: "查询",

@@ -18,6 +18,8 @@ namespace Com.Scm.Gtd
     [ApiExplorerSettings(GroupName = "gtd")]
     public class ScmGtdHeaderService : ApiService
     {
+        public const long SYS_ID = 1738391109933076480;
+
         private readonly SugarRepository<GtdHeaderDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 

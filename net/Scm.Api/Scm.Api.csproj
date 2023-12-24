@@ -149,6 +149,9 @@
     <Reference Include="Scm.Server.Share">
       <HintPath>..\Libs\Scm.Server.Share.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Server.SignalR">
+      <HintPath>..\Libs\Scm.Server.SignalR.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server.Swagger">
       <HintPath>..\Libs\Scm.Server.Swagger.dll</HintPath>
     </Reference>

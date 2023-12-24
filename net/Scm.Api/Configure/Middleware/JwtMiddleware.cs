@@ -9,7 +9,7 @@ public class JwtMiddleware
     private readonly List<string> _ignoreUrl = new()
     {
         "swagger",
-        "/chathub",
+        "/scmhub",
         "/api-config",
         "/upload/"
     };

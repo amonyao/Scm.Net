@@ -3,15 +3,15 @@
 		<div class="notice-main-title">{{ model.title }}</div>
 		<div class="notice-main-user">
 			<div class="user-main">
-				<el-avatar :src="resHead(model.sendUser?.avatar)" size="default"></el-avatar>
+				<el-avatar :src="resHead(model.sender?.avatar)" size="default"></el-avatar>
 				<div class="user-role">
-					<h4>{{ model.sendUser?.fullName }}</h4>
-					<p>{{ model.sendUser?.loginAccount }}</p>
+					<h4>{{ model.sender?.namec }}</h4>
+					<p>{{ model.sender?.names }}</p>
 				</div>
 			</div>
 			<div class="user-time">
 				<el-button icon="el-icon-back" size="small" @click="reply" type="primary">回复</el-button>
-				<p>{{ model.create_time }}</p>
+				<p>{{ this.$TOOL.dateTimeFormat(model.create_time) }}</p>
 			</div>
 		</div>
 		<div class="notice-file">
@@ -26,22 +26,16 @@
 export default {
 	components: {},
 	props: {
-		model: {
-			type: Object,
-			default: () => {
-				return { title: "", content: "" };
-			},
-		},
+		model: { type: Object, default: () => { return { title: "", content: "" } } },
 	},
 	data() {
 		return {};
 	},
 	mounted() {
-
 	},
 	methods: {
 		reply() {
-			this.$emit("reply", this.model.sendUser);
+			this.$emit("reply", this.model.sender);
 		},
 		resHead(img) {
 			if (img && img.indexOf("http") == -1) {

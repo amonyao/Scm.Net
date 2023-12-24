@@ -1,5 +1,4 @@
 using Com.Scm.Api.Filters;
-using Com.Scm.Api.Hubs;
 using Com.Scm.Api.Middleware;
 using Com.Scm.Config;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -7,6 +6,7 @@ using Com.Scm.Email.Config;
 using Com.Scm.Generator;
 using Com.Scm.Generator.Config;
 using Com.Scm.Helper;
+using Com.Scm.Hubs;
 using Com.Scm.Ioc;
 using Com.Scm.Mapper;
 using Com.Scm.Newton;
@@ -19,7 +19,6 @@ using Com.Scm.Uid;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
 using Microsoft.Extensions.FileProviders;
-using Scm.Api.Hubs;
 
 namespace Com.Scm.Api
 {
@@ -126,8 +125,7 @@ namespace Com.Scm.Api
             app.UseSetup();
 
             app.MapControllers().RequireAuthorization();
-            app.MapHub<ChatHub>("/chathub");
-            app.MapHub<QcsHub>("/qcshub");
+            app.MapHub<ScmHub>("/scmhub");
 
             app.Run();
         }

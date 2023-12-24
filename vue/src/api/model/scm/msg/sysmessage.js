@@ -1,6 +1,7 @@
 import config from "@/config";
 import http from "@/utils/request";
 export default {
+	SYS_ID: "1714913846931623936",
 	page: {
 		url: `${config.API_URL}/sysmessage/pages`,
 		name: "列表",

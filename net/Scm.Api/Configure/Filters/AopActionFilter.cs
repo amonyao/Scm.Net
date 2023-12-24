@@ -26,7 +26,7 @@ public class AopActionFilter : IAsyncActionFilter
     {
         "api/sysfile/",
         "api/captcha",
-        "/chathub",
+        "/scmhub",
         "login"
     };
 

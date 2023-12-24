@@ -18,12 +18,12 @@ tool.trim = function (x) {
 
 /* localStorage */
 tool.data = {
-	set(table, settings) {
-		var _set = JSON.stringify(settings);
-		return localStorage.setItem(table, _set);
+	set(key, obj) {
+		var _set = JSON.stringify(obj);
+		return localStorage.setItem(key, _set);
 	},
-	get(table) {
-		var data = localStorage.getItem(table);
+	get(key) {
+		var data = localStorage.getItem(key);
 		try {
 			data = JSON.parse(data);
 		} catch (err) {
@@ -31,8 +31,8 @@ tool.data = {
 		}
 		return data;
 	},
-	remove(table) {
-		return localStorage.removeItem(table);
+	remove(key) {
+		return localStorage.removeItem(key);
 	},
 	clear() {
 		return localStorage.clear();
@@ -41,12 +41,12 @@ tool.data = {
 
 /*sessionStorage*/
 tool.session = {
-	set(table, settings) {
-		var _set = JSON.stringify(settings);
-		return sessionStorage.setItem(table, _set);
+	set(key, obj) {
+		var _set = JSON.stringify(obj);
+		return sessionStorage.setItem(key, _set);
 	},
-	get(table) {
-		var data = sessionStorage.getItem(table);
+	get(key) {
+		var data = sessionStorage.getItem(key);
 		try {
 			data = JSON.parse(data);
 		} catch (err) {
@@ -54,8 +54,8 @@ tool.session = {
 		}
 		return data;
 	},
-	remove(table) {
-		return sessionStorage.removeItem(table);
+	remove(key) {
+		return sessionStorage.removeItem(key);
 	},
 	clear() {
 		return sessionStorage.clear();
@@ -64,7 +64,7 @@ tool.session = {
 
 /*cookie*/
 tool.cookie = {
-	set(name, value, config = {}) {
+	set(key, value, config = {}) {
 		var cfg = {
 			expires: null,
 			path: null,
@@ -73,7 +73,7 @@ tool.cookie = {
 			httpOnly: false,
 			...config,
 		};
-		var cookieStr = `${name}=${escape(value)}`;
+		var cookieStr = `${key}=${escape(value)}`;
 		if (cfg.expires) {
 			var exp = new Date();
 			exp.setTime(exp.getTime() + parseInt(cfg.expires) * 1000);
@@ -85,12 +85,12 @@ tool.cookie = {
 		if (cfg.domain) {
 			cookieStr += `;domain=${cfg.domain}`;
 		}
-		cookieStr += ";samesite=none";
+		cookieStr += ";samesite=Lax";
 		document.cookie = cookieStr;
 	},
-	get(name) {
+	get(key) {
 		var arr = document.cookie.match(
-			new RegExp("(^| )" + name + "=([^;]*)(;|$)")
+			new RegExp("(^| )" + key + "=([^;]*)(;|$)")
 		);
 		if (arr != null) {
 			return unescape(arr[2]);
@@ -98,10 +98,10 @@ tool.cookie = {
 			return null;
 		}
 	},
-	remove(name) {
+	remove(key) {
 		var exp = new Date();
 		exp.setTime(exp.getTime() - 1);
-		document.cookie = `${name}=;expires=${exp.toGMTString()}`;
+		document.cookie = `${key}=;expires=${exp.toGMTString()};SameSite=Lax;`;
 	},
 };
 

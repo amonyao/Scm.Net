@@ -42,8 +42,8 @@
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<!-- 固定列-选择列 -->
 				<el-table-column fixed type="selection" width="60" />
 				<el-table-column align="center" fixed="right" label="操作" width="140">
@@ -91,6 +91,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'scm_task',
 			apiObj: this.$API.sysquartz.page,
 			list: [],
 			param: {

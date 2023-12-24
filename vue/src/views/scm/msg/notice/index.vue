@@ -2,17 +2,17 @@
 	<el-container>
 		<el-header>
 			<div class="left-panel">
-				<h3 class="notice-ft">文件夹</h3>
 				<el-button icon="el-icon-edit" type="primary" @click="addNew">新建通知</el-button>
 				<el-button icon="el-icon-files" type="primary" :disabled="list.length == 0 || !isReader"
 					@click="setRead">全部标记已读</el-button>
-				<el-button icon="el-icon-delete" plain type="danger" :disabled="selection.length == 0" @click="batchDel" />
+				<el-button icon="el-icon-delete" plain type="danger" :disabled="selection.length == 0"
+					@click="batchDel">删除</el-button>
 				<el-button icon="el-icon-files" type="info" :disabled="selection.length == 0"
 					@click="archives">存档</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
-					<el-input v-model="param.key" :indeterminate="isIndeterminateModel" clearable placeholder="关键字" />
+					<el-input v-model="param.key" clearable placeholder="关键字" />
 					<el-button icon="el-icon-search" type="primary" @click="search" />
 				</div>
 			</div>
@@ -23,9 +23,7 @@
 					<el-menu-item index="1" @click="searchFolder(1)">
 						<el-icon><el-icon-message /></el-icon>
 						<span>收件箱</span>
-						<el-tag type="plain" round v-if="summary.unread > 0">{{
-							summary.unread
-						}}</el-tag>
+						<el-tag type="plain" round v-if="summary.unread > 0">{{ summary.unread }}</el-tag>
 					</el-menu-item>
 					<el-menu-item index="2" @click="searchFolder(2)">
 						<el-icon><el-icon-position /></el-icon>
@@ -33,24 +31,18 @@
 					</el-menu-item>
 					<el-menu-item index="3" @click="searchStatus(1)">
 						<el-icon><el-icon-finished /></el-icon>
-						<span>草稿</span>
-						<el-tag type="plain" round v-if="summary.draft > 0">{{
-							summary.draft
-						}}</el-tag>
+						<span>草稿箱</span>
+						<el-tag type="plain" round v-if="summary.draft > 0">{{ summary.draft }}</el-tag>
 					</el-menu-item>
 					<el-menu-item index="4" @click="searchStatus(2)">
 						<el-icon><el-icon-delete /></el-icon>
 						<span>已删除</span>
-						<el-tag type="plain" round v-if="summary.delete > 0">{{
-							summary.delete
-						}}</el-tag>
+						<el-tag type="plain" round v-if="summary.delete > 0">{{ summary.delete }}</el-tag>
 					</el-menu-item>
 					<el-menu-item index="5" @click="searchStatus(3)">
 						<el-icon><el-icon-takeaway-box /></el-icon>
-						<span>存档</span>
-						<el-tag type="plain" round v-if="summary.archive > 0">{{
-							summary.archive
-						}}</el-tag>
+						<span>已存档</span>
+						<el-tag type="plain" round v-if="summary.archive > 0">{{ summary.archive }}</el-tag>
 					</el-menu-item>
 					<el-divider>
 						<el-icon><el-icon-star-filled /></el-icon>
@@ -62,9 +54,7 @@
 					<el-menu-item index="7" @click="searchReaded(1)">
 						<el-icon><el-icon-message /></el-icon>
 						<span>未读</span>
-						<el-tag type="plain" round v-if="summary.unread > 0">{{
-							summary.unread
-						}}</el-tag>
+						<el-tag type="plain" round v-if="summary.unread > 0">{{ summary.unread }}</el-tag>
 					</el-menu-item>
 					<el-menu-item index="8" @click="searchReaded(2)">
 						<el-icon><el-icon-message-box /></el-icon>
@@ -94,12 +84,12 @@
 					<div class="notice-item" v-for="(it, index) in list" :key="index" :class="it.checked ? 'active' : ''"
 						@click="goInfo(it)">
 						<div class="item-avatar">
-							<el-avatar :src="resHead(it.send_user.avatar)" size="small"></el-avatar>
+							<el-avatar :src="resHead(it.sender.avatar)" size="small"></el-avatar>
 							<el-checkbox size="large" v-model="it.checked" @change="itemChange(it)" />
 						</div>
 						<div class="item-info">
 							<div class="item-uname" :class="it.unread ? 'unread' : ''">
-								<h3 class="uname">{{ it.send_user.namec }}-({{ it.send_user.names }})</h3>
+								<h3 class="uname">{{ it.sender.namec }}-({{ it.sender.names }})</h3>
 								<div class="item-tool">
 									<el-tooltip :content="it.unread ? '标记为已读' : '标记为未读'" placement="top">
 										<el-icon @click.stop="setSignRead(it)"><el-icon-message /></el-icon></el-tooltip>
@@ -131,7 +121,7 @@
 					<p>请选择左侧通知内容查看~</p>
 				</div>
 				<info ref="info" v-show="lookType == 1" :model="infoModel" @reply="goReply" />
-				<add ref="add" v-show="lookType == 2" :model="infoModel" @addComplete="sendComplete" />
+				<edit ref="edit" v-show="lookType == 2" :model="infoModel" @addComplete="sendComplete" />
 			</el-main>
 		</el-container>
 	</el-container>
@@ -141,26 +131,24 @@ import { defineAsyncComponent } from "vue";
 export default {
 	components: {
 		info: defineAsyncComponent(() => import("./components/info")),
-		add: defineAsyncComponent(() => import("./components/add")),
+		edit: defineAsyncComponent(() => import("./components/edit")),
 	},
 	data() {
-		// 0默认，1收件箱，2发件箱
-		// 0默认，1草稿，2删除，3归档
 		return {
 			apiObj: this.$API.sysnotice.page,
 			summary: {},//汇总信息
 			list: [],//消息列表
 			param: {
 				key: "",
-				page: 1,
 				type: 1,
-				folder: 0,
-				status: 0,
+				folder: 0,// 0默认，1收件箱，2发件箱
+				status: 0,// 0默认，1草稿，2删除，3归档
 				readed: 0,
+				page: 1,
 				limit: 20,
 			},
 			infoModel: { id: '0' },//当前对象
-			lookType: 0, // 0=默认 1=详情 2=创建
+			lookType: 0, // 0=默认 1=详情 2=编辑
 			isReader: true,//是否收件人
 			isSender: false,//是否发件人
 			selectRadio: false,
@@ -175,6 +163,10 @@ export default {
 	methods: {
 		async init() {
 			var res = await this.$API.sysnotice.page.get(this.param);
+			if (!res || res.code != 200) {
+				return;
+			}
+
 			this.list = res.data.items;
 		},
 		async initTotal() {
@@ -185,6 +177,10 @@ export default {
 		async goInfo(m) {
 			let http = this.isSender ? this.$API.sysnotice.edit : this.$API.sysnotice.view;
 			var res = await http.get(m.id);
+			if (!res || res.code != 200) {
+				return;
+			}
+
 			this.infoModel = res.data;
 			this.lookType = this.isSender && this.infoModel.handle == 1 ? 2 : 1;
 			this.initTotal();
@@ -202,6 +198,9 @@ export default {
 		//添加完成通知
 		sendComplete() {
 			this.initTotal();
+		},
+		search() {
+
 		},
 		searchFolder(folder) {
 			this.param.folder = folder;
@@ -258,7 +257,7 @@ export default {
 			return img;
 		},
 		resTime(t) {
-			const date = new Date(t);
+			const date = new Date(eval(t));
 			const month = date.getMonth() + 1;
 			const strDate = date.getDate();
 			return month + "月" + strDate + "日";

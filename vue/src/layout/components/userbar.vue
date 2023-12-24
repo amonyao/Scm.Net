@@ -20,7 +20,7 @@
 			<el-badge :hidden="msgList.length == 0" :value="msgList.length" class="badge" type="danger">
 				<el-icon><el-icon-chat-dot-round /></el-icon>
 			</el-badge>
-			<el-drawer title="新消息" v-model="msg" :size="400" append-to-body destroy-on-close>
+			<el-drawer title="新消息" v-model="msgVisible" :size="400" append-to-body destroy-on-close>
 				<el-container>
 					<el-main class="nopadding">
 						<el-scrollbar>
@@ -82,6 +82,7 @@
 
 <script>
 import config from "@/config"
+import socket from "@/utils/socket"
 import search from "./search.vue";
 import tasks from "./tasks.vue";
 
@@ -101,7 +102,8 @@ export default {
 			show_avatar: true,
 			searchVisible: false,
 			tasksVisible: false,
-			msg: false,
+			msgQty: 0,
+			msgVisible: false,
 			msgList: [],
 		};
 	},
@@ -113,9 +115,19 @@ export default {
 		this.avatar = config.SERVER_URL + userInfo.avatar;
 		this.show_avatar = this.avatar != null && this.avatar != '';
 		this.init();
+		this.listMsg();
 	},
 	methods: {
 		async init() {
+			socket.open_wss("ReceiveMessage", (res) => {
+				if (!res || !res.success) {
+					return;
+				}
+
+				this.listMsg();
+			});
+		},
+		async listMsg() {
 			const res = await this.$API.sysmessage.page.get({
 				page: 1,
 				limit: 10,
@@ -126,6 +138,7 @@ export default {
 			}
 
 			this.msgList = res.data.items;
+			this.msgQty = this.msgList.length;
 		},
 		//个人信息
 		handleUser(command) {
@@ -174,7 +187,8 @@ export default {
 		},
 		//显示短消息
 		showMsg() {
-			this.msg = true;
+			this.listMsg();
+			this.msgVisible = true;
 		},
 		getTime(time) {
 			return this.$TOOL.dateTimeFormat(time);

@@ -20,7 +20,6 @@
 	</el-container>
 </template>
 <script>
-const signalR = require("@microsoft/signalr");
 export default {
 	data() {
 		return {
@@ -31,30 +30,12 @@ export default {
 				key: "",
 			},
 			selection: [],
+			connection: null,
 			column: [
-				{
-					label: "id",
-					prop: "id",
-					width: "200",
-					sortable: true,
-					hide: true,
-				},
-				{
-					label: "用户名",
-					prop: "name",
-					width: 200,
-				},
-				{
-					label: "连接编号",
-					prop: "connectionId",
-					align: "left",
-				},
-				{
-					label: "登录时间",
-					prop: "time",
-					width: "180",
-					sortable: true,
-				},
+				{ label: "id", prop: "id", width: "200", sortable: true, hide: true },
+				{ label: "用户名", prop: "name", width: 200, },
+				{ label: "连接编号", prop: "connectionId", align: "left", },
+				{ label: "登录时间", prop: "time", width: "180", sortable: true, },
 			],
 		};
 	},
@@ -63,16 +44,7 @@ export default {
 	},
 	methods: {
 		init() {
-			let token = this.$TOOL.data.get("TOKEN");
-			this.connection = new signalR.HubConnectionBuilder()
-				.withUrl(this.$CONFIG.SignalR_URL, {
-					accessTokenFactory: () => token,
-				})
-				.configureLogging(signalR.LogLevel.Error)
-				.withAutomaticReconnect()
-				.build();
-			this.connection.start().catch((err) => console.error(err));
-			this.connection.on("ReceiveMessage", (out, user) => {
+			this.$SOCKET.open_wss("ReceiveKickout", (out, user) => {
 				const userInfo = this.$TOOL.data.get("USER_INFO");
 				if (userInfo != null && out == "out" && userInfo.id == user) {
 					this.$TOOL.data.clear();
@@ -88,7 +60,7 @@ export default {
 				this.$alert("自己不能踢自己", "提示", { type: "error" });
 				return;
 			}
-			await this.connection.invoke("SendKickOut", row.id);
+			await this.$SOCKET.open_wss("SendKickOut", row.id);
 			const that = this;
 			setTimeout(() => {
 				that.$refs.table.refresh();

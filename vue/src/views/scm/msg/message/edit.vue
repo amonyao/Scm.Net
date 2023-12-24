@@ -49,7 +49,7 @@ export default {
 	},
 	mounted() {
 		this.$SCM.list_option(this.user_list, this.$API.uruser.option, {}, false);
-		this.$SCM.list_tag(this.tags_list, '1714913846931623936', false);
+		this.$SCM.list_tag(this.tags_list, this.$API.sysmessage.SYS_ID, false);
 	},
 	methods: {
 		def_data() {
