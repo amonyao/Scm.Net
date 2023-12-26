@@ -2,7 +2,7 @@
 	<el-container>
 		<el-main>
 			<el-card>
-				<sc-list :data="list" :hideDo="true">
+				<sc-list :data="list">
 					<template #item="{ item }">
 						<sc-summary :title="item.title" :summary="item.summary" @click="openItem(item)"></sc-summary>
 					</template>

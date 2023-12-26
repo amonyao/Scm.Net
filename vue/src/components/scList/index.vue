@@ -9,9 +9,7 @@
                 :class="{ active: canSelected && selectedIndex == index }" :style="{ width: 100 / columns + '%' }">
                 <slot name="item" :item="item" :index="index">
                     <div class="sc-list-item_label">
-                        <el-icon>
-                            <ElIconFolder />
-                        </el-icon>
+                        <sc-icon :icon="icon"></sc-icon>
                         {{ item.label }}
                     </div>
                     <div class="sc-list-item_value">
@@ -19,11 +17,11 @@
                         <el-tag round v-if="item.count">{{ item.count }}</el-tag>
                     </div>
                 </slot>
-                <span class="opt" v-if="!hideDo">
-                    <el-icon @click.stop="itemEdit(item, index)" v-if="!hideEdit" title="编辑">
+                <span class="opt" v-if="showOpt">
+                    <el-icon @click.stop="itemEdit(item, index)" v-if="showEdit" title="编辑">
                         <el-icon-edit />
                     </el-icon>
-                    <el-icon @click.stop="itemRemove(item, index)" v-if="!hideRemove" title="删除">
+                    <el-icon @click.stop="itemRemove(item, index)" v-if="showDrop" title="删除">
                         <el-icon-delete />
                     </el-icon>
                 </span>
@@ -37,7 +35,7 @@
 <script>
 export default {
     name: "ScList",
-    emits: ["change", "editItem", "removeItem"],
+    emits: ["change", "editItem", "dropItem"],
     data() {
         return {
             selectedIndex: -1,
@@ -48,13 +46,13 @@ export default {
     props: {
         header: { type: String, default: '' },
         footer: { type: String, default: '' },
+        icon: { type: String, default: '' },
         data: { type: Array, default: function () { return []; } },
-        result: { type: Object, default: () => { } },
         width: { type: String, default: "" },
         canSelected: { type: Boolean, default: true },
-        hideDo: { type: Boolean, default: false },
-        hideEdit: { type: Boolean, default: false },
-        hideRemove: { type: Boolean, default: false },
+        showOpt: { type: Boolean, default: false },
+        showEdit: { type: Boolean, default: false },
+        showDrop: { type: Boolean, default: false },
         columns: { type: Number, default: 1 },
         padding: { type: Number, default: 0 },
         emptyText: { type: String, default: "" },
@@ -79,7 +77,7 @@ export default {
             this.$emit('editItem', item, index);
         },
         itemRemove(item, index) {
-            this.$emit('removeItem', item, index);
+            this.$emit('dropItem', item, index);
         },
         isEmpty() {
             return this.data == null || this.data.length < 1;

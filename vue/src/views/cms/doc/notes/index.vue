@@ -7,7 +7,7 @@
                     <el-button type="primary" round icon="el-icon-search" class="add-column" @click="search()"></el-button>
                 </el-header>
                 <el-main class="guid">
-                    <sc-list :data="article_list" :hide-edit="true" style="height: 100%;" @removeItem="itemDelete">
+                    <sc-list :data="article_list" style="height: 100%;" @dropItem="itemDelete">
                         <template #item="{ item }">
                             <sc-summary :title="item.title" :summary="this.$TOOL.dateTimeFormat(item.create_time)"
                                 @click="itemClick(item)"></sc-summary>

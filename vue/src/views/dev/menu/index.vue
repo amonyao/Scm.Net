@@ -28,7 +28,7 @@
 		</el-aside>
 		<el-container>
 			<el-main class="nopadding" style="padding: 20px" ref="main">
-				<modify ref="modify" :menu="sourceLst" @complete="getMenu"></modify>
+				<edit ref="edit" :menu="sourceLst" @complete="getMenu"></edit>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -36,12 +36,12 @@
 
 <script>
 let newMenuIndex = 1;
-import modify from "./modify";
+import edit from "./edit";
 
 export default {
 	name: "settingMenu",
 	components: {
-		modify,
+		edit,
 	},
 	data() {
 		return {
@@ -80,7 +80,7 @@ export default {
 		//树点击
 		menuClick(data, node) {
 			var pid = node.level == 1 ? undefined : node.parent.data.id;
-			this.$refs.modify.setData(data, pid);
+			this.$refs.edit.setData(data, pid);
 			this.$refs.main.$el.scrollTop = 0;
 		},
 		//树过滤
@@ -122,7 +122,7 @@ export default {
 			this.$refs.menu.append(newMenuData, node);
 			this.$refs.menu.setCurrentKey(newMenuData.id);
 			var pid = node ? node.data.id : "0";
-			this.$refs.modify.setData(newMenuData, pid);
+			this.$refs.edit.setData(newMenuData, pid);
 		},
 		//删除菜单
 		async delMenu() {
@@ -158,7 +158,7 @@ export default {
 				CheckedNodes.forEach((item) => {
 					var node = this.$refs.menu.getNode(item);
 					if (node.isCurrent) {
-						this.$refs.modify.setData({ id: "0" });
+						this.$refs.edit.setData({ id: "0" });
 					}
 					this.$refs.menu.remove(item);
 				});

@@ -10,7 +10,11 @@
 <template>
 	<div class="sc-icon-select">
 		<div class="sc-icon-select__wrapper" :class="{ hasValue: value }" @click="open">
-			<el-input :prefix-icon="value || 'el-icon-plus'" v-model="value" :disabled="disabled" readonly></el-input>
+			<el-input v-model="value" :disabled="disabled" readonly>
+				<template #prefix>
+					<sc-icon :icon="value || 'sc-reduce-btn'" style="margin: 0px;" :size="16"></sc-icon>
+				</template>
+			</el-input>
 		</div>
 		<el-dialog title="图标选择器" v-model="dialogVisible" :width="760" destroy-on-close append-to-body>
 			<div class="sc-icon-select__dialog" style="margin: -20px 0 -10px 0">
@@ -25,18 +29,22 @@
 						<template #label>
 							{{ item.name }}
 							<el-tag size="small" type="info">
-								{{ item.icons.length }}
+								{{ item.size }}
 							</el-tag>
 						</template>
 						<div class="sc-icon-select__list">
 							<el-scrollbar>
-								<ul @click="selectIcon">
+								<ul>
 									<el-empty v-if="item.icons.length == 0" :image-size="100" description="未查询到相关图标" />
-									<li v-for="icon in item.icons" :key="icon">
-										<span :data-icon="icon"></span>
-										<el-icon>
-											<component :is="icon" />
-										</el-icon>
+									<li v-for="icon in item.icons" :key="icon" @click="selectIcon(icon)">
+										<div class="icon-item">
+											<div class="icon-info">
+												<span :class="getIcon(icon)"></span>
+											</div>
+											<div class="icon-desc">
+												{{ icon.desc }}
+											</div>
+										</div>
 									</li>
 								</ul>
 							</el-scrollbar>
@@ -90,11 +98,11 @@ export default {
 			}
 			this.dialogVisible = true;
 		},
-		selectIcon(e) {
-			if (e.target.tagName != "SPAN") {
+		selectIcon(icon) {
+			if (!icon) {
 				return false;
 			}
-			this.value = e.target.dataset.icon;
+			this.value = this.getIcon(icon);
 			this.dialogVisible = false;
 		},
 		clear() {
@@ -102,16 +110,17 @@ export default {
 			this.dialogVisible = false;
 		},
 		search(text) {
+			var filterData = config.icons;
 			if (text) {
-				const filterData = JSON.parse(JSON.stringify(config.icons));
 				filterData.forEach((t) => {
-					t.icons = t.icons.filter((n) => n.includes(text));
+					t.icons = t.icons.filter((n) => n.name.includes(text));
 				});
-				this.data = filterData;
-			} else {
-				this.data = JSON.parse(JSON.stringify(config.icons));
 			}
+			this.data = filterData;
 		},
+		getIcon(icon) {
+			return 'scfont sc-' + icon.name + '-line';// (this.mode ? '-fill' : '-line');
+		}
 	},
 };
 </script>
@@ -162,16 +171,6 @@ export default {
 	position: relative;
 }
 
-.sc-icon-select__list li span {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 1;
-	cursor: pointer;
-}
-
 .sc-icon-select__list li i {
 	display: inline-block;
 	width: 100%;
@@ -191,5 +190,37 @@ export default {
 
 .sc-icon-select__list li:hover i {
 	color: var(--el-color-primary);
+}
+
+.icon-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+
+.icon-item .icon-info {
+	text-align: center;
+	flex-basis: 100%;
+	display: flex;
+	align-items: center;
+	-webkit-transition: font-size 0.25s linear, width 0.25s linear;
+	-moz-transition: font-size 0.25s linear, width 0.25s linear;
+	transition: font-size 0.25s linear, width 0.25s linear;
+	font-size: 32px;
+}
+
+.icon-item .icon-desc {
+	color: #666;
+	text-align: center;
+	width: 100%;
+	padding: 2px 8px;
+	display: block;
+	word-break: keep-all;
+	white-space: nowrap;
+	overflow: hidden;
 }
 </style>

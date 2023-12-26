@@ -54,7 +54,7 @@
 						</el-tooltip>
 					</template>
 				</scTable>
-				<scList v-if="view == 2" :data="list" @editItem="editItem" @removeItem="removeItem" style="height: 100%;">
+				<scList v-if="view == 2" :data="list" :showOpt="true" :showEdit="true" :showDrop="true" @editItem="editItem" @dropItem="removeItem" style="height: 100%;">
 					<template #item="{ item }">
 						<div class="list-item">
 							<el-link :href="item.uri" :title="item.title" target="_blank" @click="openUri(item)">

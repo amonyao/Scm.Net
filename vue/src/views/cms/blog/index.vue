@@ -1,7 +1,7 @@
 <template>
     <div class="blog">
         <div class="blog-guid">
-            <sc-list :data="group" :hideDo="true"></sc-list>
+            <sc-list :data="group"></sc-list>
         </div>
         <div class="blog-body">
             <div class="blog-head">
