@@ -193,7 +193,7 @@
 
 	<div class="main-maximize-exit" @click="exitMaximize"><el-icon title="退出全屏"><el-icon-close /></el-icon></div>
 
-	<div class="layout-setting" @click="openSetting"><el-icon title="用户反馈"><sc-icon-feedback /></el-icon></div>
+	<div class="layout-setting" @click="openSetting"><sc-icon myicon="sc-feedback-line" title="用户反馈"></sc-icon></div>
 
 	<el-drawer title="用户反馈" v-model="settingDialog" :size="400" append-to-body destroy-on-close>
 		<feedback></feedback>

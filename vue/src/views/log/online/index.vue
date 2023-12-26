@@ -20,6 +20,8 @@
 	</el-container>
 </template>
 <script>
+import socket from "@/utils/socket"
+
 export default {
 	data() {
 		return {
@@ -44,7 +46,7 @@ export default {
 	},
 	methods: {
 		init() {
-			this.$SOCKET.open_wss("ReceiveKickout", (out, user) => {
+			socket.open_wss("ReceiveKickout", (out, user) => {
 				const userInfo = this.$TOOL.data.get("USER_INFO");
 				if (userInfo != null && out == "out" && userInfo.id == user) {
 					this.$TOOL.data.clear();
@@ -60,7 +62,7 @@ export default {
 				this.$alert("自己不能踢自己", "提示", { type: "error" });
 				return;
 			}
-			await this.$SOCKET.open_wss("SendKickOut", row.id);
+			await socket.send_msg("SendKickOut", row.id);
 			const that = this;
 			setTimeout(() => {
 				that.$refs.table.refresh();

@@ -1,12 +1,15 @@
-using Com.Scm.Cms.Enums;
-using Com.Scm.Dvo;
+﻿using Com.Scm.Cms.Enums;
+using Com.Scm.Dao.Unit;
+using SqlSugar;
+using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Cms.Gtd.Dvo
+namespace Com.Scm.Cms.Gtd
 {
     /// <summary>
-    /// 待办
+    /// 待办（明细）
     /// </summary>
-    public class GtdHeaderDvo : ScmDataDvo
+    [SugarTable("scm_gtd_detail")]
+    public class GtdDetailDao : ScmUnitDataDao
     {
         /// <summary>
         /// 
@@ -16,16 +19,23 @@ namespace Com.Scm.Cms.Gtd.Dvo
         /// <summary>
         /// 
         /// </summary>
-        public long cat_id { get; set; }
+        public long header_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public long time { get; set; }
 
         /// <summary>
         /// 标题
         /// </summary>
+        [StringLength(256)]
         public string title { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [StringLength(1024)]
         public string remark { get; set; }
 
         /// <summary>
@@ -39,24 +49,9 @@ namespace Com.Scm.Cms.Gtd.Dvo
         public GtdRemindEnum remind { get; set; }
 
         /// <summary>
-        /// 表达式
-        /// </summary>
-        public string cron { get; set; }
-
-        /// <summary>
         /// 提示方式
         /// </summary>
         public GtdNoticeEnum notice { get; set; }
-
-        /// <summary>
-        /// 上次提醒时间
-        /// </summary>
-        public long last_time { get; set; }
-
-        /// <summary>
-        /// 下次提醒时间
-        /// </summary>
-        public long next_time { get; set; }
 
         /// <summary>
         /// 

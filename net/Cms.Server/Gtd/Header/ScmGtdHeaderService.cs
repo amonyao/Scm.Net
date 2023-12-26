@@ -1,16 +1,17 @@
 using Com.Scm.Cms.Enums;
-using Com.Scm.Cms.Gtd.Dvo;
+using Com.Scm.Cms.Gtd.Header.Dvo;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Enums;
+using Com.Scm.Gtd;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Gtd
+namespace Com.Scm.Cms.Gtd.Header
 {
     /// <summary>
     /// 待办服务接口

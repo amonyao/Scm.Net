@@ -1,15 +1,12 @@
 using Com.Scm.Cms.Enums;
-using Com.Scm.Dao.Unit;
-using SqlSugar;
-using System.ComponentModel.DataAnnotations;
+using Com.Scm.Dvo;
 
-namespace Com.Scm.Gtd
+namespace Com.Scm.Cms.Gtd.Header.Dvo
 {
     /// <summary>
-    /// 待办（头档）
+    /// 待办
     /// </summary>
-    [SugarTable("scm_gtd_header")]
-    public class GtdHeaderDao : ScmUnitDataDao
+    public class GtdHeaderDvo : ScmDataDvo
     {
         /// <summary>
         /// 
@@ -24,13 +21,11 @@ namespace Com.Scm.Gtd
         /// <summary>
         /// 标题
         /// </summary>
-        [StringLength(256)]
         public string title { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
-        [StringLength(1024)]
         public string remark { get; set; }
 
         /// <summary>
@@ -46,7 +41,6 @@ namespace Com.Scm.Gtd
         /// <summary>
         /// 表达式
         /// </summary>
-        [StringLength(128)]
         public string cron { get; set; }
 
         /// <summary>

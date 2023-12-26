@@ -1,5 +1,6 @@
 <template>
-    <el-button v-bind="$attrs"></el-button>
+    <el-button v-bind="$attrs">
+    </el-button>
 </template>
 
 <script>

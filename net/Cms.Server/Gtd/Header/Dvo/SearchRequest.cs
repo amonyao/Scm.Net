@@ -1,7 +1,7 @@
 ﻿using Com.Scm.Cms.Enums;
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Gtd.Dvo
+namespace Com.Scm.Cms.Gtd.Header.Dvo
 {
     public class SearchRequest : ScmSearchPageRequest
     {

@@ -34,7 +34,7 @@
                         <el-tab-pane label="命令集">
                             <el-scrollbar>
                                 <sc-list :data="presql_list" @change="changeItem" @editItem="editItem"
-                                    @removeItem="deleteItem">
+                                    @dropItem="deleteItem">
                                     <template #item="{ item }">
                                         {{ item.namec }}
                                     </template>

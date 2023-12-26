@@ -2,8 +2,7 @@
 	<el-container>
 		<el-aside width="220px">
 			<el-tree ref="category" class="menu" node-key="label" default-expand-all :data="category"
-				:default-expanded-keys="['系统日志']" current-node-key="系统日志" :highlight-current="true"
-				:expand-on-click-node="false" @node-click="typeClick">
+				current-node-key="info" :highlight-current="true" :expand-on-click-node="false" @node-click="typeClick">
 			</el-tree>
 		</el-aside>
 		<el-container>
@@ -110,9 +109,9 @@ export default {
 				{ label: "id", prop: "id", hide: true },
 				{ prop: "levelName", label: "级别", width: 60 },
 				{ prop: "ip", label: "IP", width: 120 },
-				{ prop: "operate_time", label: "操作时间", width: 150, align: 'left', formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "operate_time", label: "操作时间", width: 160, align: 'left', formatter: this.$TOOL.dateTimeFormat },
 				{ prop: "operate_user", label: "操作用户", width: 120 },
-				{ prop: "url", label: "操作地址", showOverflowTooltip: true, align: 'left' },
+				{ prop: "url", label: "操作地址", minWidth: 200, align: 'left', showOverflowTooltip: true },
 				{ prop: "method", label: "提交类型", width: 80 },
 				{ prop: "browser", label: "浏览器", width: 100 },
 				{ prop: "agent", label: "用户代理", width: 100, showOverflowTooltip: true },

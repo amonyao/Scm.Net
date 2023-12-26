@@ -1,25 +1,46 @@
 <template>
-    <div class="blog">
-        <div class="blog-guid">
-            <sc-list :data="group" :hideDo="true"></sc-list>
-        </div>
-        <div class="blog-body">
-            <div class="blog-head">
-                <el-tabs v-model="param.types" @tab-click="clickType">
-                    <el-tab-pane label="推荐" :name="1" />
-                    <el-tab-pane label="最新" :name="2" />
-                    <el-tab-pane label="最热" :name="3" />
-                </el-tabs>
-            </div>
-            <div class="blog-list">
-                <div v-for="(item, index) in list" :key="index" class="blog-item" @click="clickItem(i)">
-                    <el-image class="icon" :src="item.image" fit="fill" />
-                    <div class="blog-info">
-                        <div class="blog-dd">
-                            <div class="title">{{ item.title }}</div>
-                            <div class="time">{{ this.$TOOL.dateTimeFormat(item.time) }}</div>
+    <div class="doc-content-wrapper" style="background-color: white;">
+        <div class="doc-content-container">
+            <div class="doc-content">
+                <div>
+                    <h1>h1标题</h1>
+                    <p>内容</p>
+                    <h2>h2标题</h2>
+                    <div class="example">
+                        <div class="example-showcase">
                         </div>
-                        <div class="summary">{{ item.summary }}</div>
+                        <el-divider style="margin: 0px;" />
+                        <div class="op-btns">
+                            <i class="el-icon op-btn el-tooltip__trigger el-tooltip__trigger" aria-label="复制代码" tabindex="0"
+                                role="button" style="font-size: 16px;">
+                                <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                                    <path fill="currentColor"
+                                        d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z">
+                                    </path>
+                                </svg>
+                            </i>
+                            <i class="el-icon op-btn el-tooltip__trigger el-tooltip__trigger" style="font-size: 16px;"
+                                @click="viewCode">
+                                <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em">
+                                    <path fill="currentColor"
+                                        d="m23 12l-7.071 7.071l-1.414-1.414L20.172 12l-5.657-5.657l1.414-1.414L23 12zM3.828 12l5.657 5.657l-1.414 1.414L1 12l7.071-7.071l1.414 1.414L3.828 12z">
+                                    </path>
+                                </svg>
+                            </i>
+                        </div>
+                        <div class="example-source-wrapper" v-show="codeVisible">
+                            <div class="example-source language-vue">
+                                <highlightjs language="JavaScript" :autodetect="false" :code="code"></highlightjs>
+                            </div>
+                        </div>
+                        <div class="example-float-control" tabindex="0" role="button" v-show="codeVisible"
+                            @click="viewCode">
+                            <i class="el-icon" style="font-size: 16px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                    <path fill="currentColor" d="M512 320 192 704h639.936z"></path>
+                                </svg>
+                            </i><span>隐藏源代码</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -27,116 +48,79 @@
     </div>
 </template>
 <script>
+import '@/assets/code.scss';
+
+//import 'highlight.js/styles/atom-one-dark.css'
+import 'highlight.js/styles/stackoverflow-light.css';
+import 'highlight.js/lib/common';
+import hljsVuePlugin from '@highlightjs/vue-plugin';
+
 export default {
     components: {
+        highlightjs: hljsVuePlugin.component
     },
     data() {
         return {
-            showGrouploading: false,
-            group: [],
-            list: [],
-            param: {
-                cat_id: '0',
-                types: 1,
-                key: "",
-            }
-        };
-    },
-    mounted() {
-        this.loadCat();
-        this.loadList();
-    },
-    methods: {
-        async loadCat() {
-            for (var i = 0; i < 10; i += 1) {
-                this.group.push({ id: i, label: '分类' + i, value: 'value' + i, time: 0, count: i + 3 });
-            }
-        },
-        async loadList() {
-            for (var i = 0; i < 10; i += 1) {
-                this.list.push({ id: i, title: '标题' + i, summary: 'summary' + i, time: 1703145253000 });
-            }
-        },
-        clickType() {
-        },
-        clickItem(item) {
-            alert(item);
+            code: `<template>
+  <el-row class="mb-4">
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
+  </el-row>
+
+  <el-row class="mb-4">
+    <el-button plain>Plain</el-button>
+    <el-button type="primary" plain>Primary</el-button>
+    <el-button type="success" plain>Success</el-button>
+    <el-button type="info" plain>Info</el-button>
+    <el-button type="warning" plain>Warning</el-button>
+    <el-button type="danger" plain>Danger</el-button>
+  </el-row>
+
+  <el-row class="mb-4">
+    <el-button round>Round</el-button>
+    <el-button type="primary" round>Primary</el-button>
+    <el-button type="success" round>Success</el-button>
+    <el-button type="info" round>Info</el-button>
+    <el-button type="warning" round>Warning</el-button>
+    <el-button type="danger" round>Danger</el-button>
+  </el-row>
+
+  <el-row>
+    <el-button :icon="Search" circle />
+    <el-button type="primary" :icon="Edit" circle />
+    <el-button type="success" :icon="Check" circle />
+    <el-button type="info" :icon="Message" circle />
+    <el-button type="warning" :icon="Star" circle />
+    <el-button type="danger" :icon="Delete" circle />
+  </el-row>
+</template>
+
+&lt;script setup>
+import {
+  Check,
+  Delete,
+  Edit,
+  Message,
+  Search,
+  Star,
+} from "@element-plus/icons-vue"
+< /script>`,
+            codeVisible: false,
         }
     },
-};
+    mounted() {
+    },
+    methods: {
+        viewCode() {
+            this.codeVisible = !this.codeVisible;
+        },
+        copyCode() {
+
+        }
+    },
+}
 </script>
-<style>
-.blog {
-    max-width: 960px;
-    margin: 0 auto;
-    background-color: #fff;
-}
-
-.blog-guid {
-    float: left;
-    width: 250px;
-    height: 300px;
-    padding-left: 10px;
-}
-
-.blog-body {
-    width: 700px;
-    min-height: 840px;
-    margin-left: 260px;
-    border-left: 1px dotted #ccc;
-}
-
-.blog-head {
-    margin: 0 10px;
-}
-
-.blog-list {
-    margin: 0 10px;
-}
-
-.blog-item {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    margin: 10px 5px;
-}
-
-.blog-item .icon {
-    width: 64px;
-    height: 64px;
-}
-
-.blog-info {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    flex-basis: 100%;
-    margin-left: 10px;
-}
-
-.blog-dd {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-.blog-dd .time {
-    color: #999;
-}
-
-.blog-info .title {
-    font-weight: bold;
-    line-height: 24px;
-    overflow: hidden;
-}
-
-.blog-info .summary {
-    color: #999;
-    flex-basis: 100%;
-}
-</style>
-<style>
-.el-tabs__header {
-    margin: 0px;
-}
-</style>

@@ -12,6 +12,7 @@ import scFileImport from "./components/scFileImport";
 import scFilterBar from "./components/scFilterBar";
 import scForm from "./components/scForm";
 import scFormTable from "./components/scFormTable";
+import scIcon from "./components/scIcon";
 import scList from "./components/scList";
 import scPageHeader from "./components/scPageHeader";
 import scPanel from "./components/scPanel";
@@ -55,6 +56,7 @@ export default {
 		//注册全局组件
 		app.component("scComment", scComment);
 		app.component("scCat", scCat);
+		app.component("scIcon", scIcon);
 		app.component("scTable", scTable);
 		app.component("scSearch", scSearch);
 		app.component("scFilterBar", scFilterBar);

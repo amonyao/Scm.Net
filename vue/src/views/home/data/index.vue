@@ -29,19 +29,21 @@
             <el-col>
                 <el-card shadow="never">
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                        <el-tab-pane label="我的待办" name="todo">
+                        <el-tab-pane name="todo">
+                            <template #label>
+                                <el-badge :value="12">
+                                    我的待办
+                                </el-badge>
+                            </template>
                             <myTask></myTask>
                         </el-tab-pane>
-                        <el-tab-pane label="我的已办" name="done">
+                        <el-tab-pane label="系统消息" name="task">
                             <myTask></myTask>
                         </el-tab-pane>
                         <el-tab-pane label="行政公告" name="note">
                             <myTask></myTask>
                         </el-tab-pane>
                         <el-tab-pane label="新闻资讯" name="news">
-                            <myTask></myTask>
-                        </el-tab-pane>
-                        <el-tab-pane label="系统消息" name="task">
                             <myTask></myTask>
                         </el-tab-pane>
                     </el-tabs>
