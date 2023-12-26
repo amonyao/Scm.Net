@@ -1,8 +1,8 @@
 @font-face {
   font-family: "scfont"; /* Project id 4381973 */
-  src: url('iconfont.woff2?t=1703551263587') format('woff2'),
-       url('iconfont.woff?t=1703551263587') format('woff'),
-       url('iconfont.ttf?t=1703551263587') format('truetype');
+  src: url('iconfont.woff2?t=1703587462411') format('woff2'),
+       url('iconfont.woff?t=1703587462411') format('woff'),
+       url('iconfont.ttf?t=1703587462411') format('truetype');
 }
 
 .scfont {
@@ -10,6 +10,114 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.sc-key-fill:before {
+  content: "\eb64";
+}
+
+.sc-key-line:before {
+  content: "\eb66";
+}
+
+.sc-aim-2-line:before {
+  content: "\eb2f";
+}
+
+.sc-aim-line:before {
+  content: "\eb32";
+}
+
+.sc-alarm-clock-line:before {
+  content: "\e891";
+}
+
+.sc-alarm-clock-fill:before {
+  content: "\eaee";
+}
+
+.sc-user-fill:before {
+  content: "\e878";
+}
+
+.sc-user-line:before {
+  content: "\e882";
+}
+
+.sc-crown-1-fill:before {
+  content: "\eb5d";
+}
+
+.sc-crown-2-line1:before {
+  content: "\eb63";
+}
+
+.sc-menu-line:before {
+  content: "\eb4c";
+}
+
+.sc-menu-fill:before {
+  content: "\eb57";
+}
+
+.sc-phone-line1:before {
+  content: "\e8a5";
+}
+
+.sc-phone-fill:before {
+  content: "\e8a6";
+}
+
+.sc-folder-open-line:before {
+  content: "\e94b";
+}
+
+.sc-delete-line:before {
+  content: "\e94c";
+}
+
+.sc-format-painter-line:before {
+  content: "\e950";
+}
+
+.sc-gift-line:before {
+  content: "\e955";
+}
+
+.sc-Printer:before {
+  content: "\e95d";
+}
+
+.sc-setting-line:before {
+  content: "\e95f";
+}
+
+.sc-delete-fill:before {
+  content: "\e966";
+}
+
+.sc-folder-open-fill:before {
+  content: "\e968";
+}
+
+.sc-format-painter-fill:before {
+  content: "\eb06";
+}
+
+.sc-gift-fill:before {
+  content: "\eb08";
+}
+
+.sc-printer-fill:before {
+  content: "\eb34";
+}
+
+.sc-setting-fill:before {
+  content: "\eb38";
+}
+
+.sc-cherry-line:before {
+  content: "\e84b";
 }
 
 .sc-team-line:before {
@@ -196,10 +304,6 @@
   content: "\eda0";
 }
 
-.sc-infrared-thermometer-fill:before {
-  content: "\eda1";
-}
-
 .sc-health-book-fill:before {
   content: "\eda2";
 }
@@ -242,10 +346,6 @@
 
 .sc-nurse-line:before {
   content: "\ed93";
-}
-
-.sc-infrared-thermometer-line:before {
-  content: "\ed94";
 }
 
 .sc-health-book-line:before {
@@ -456,7 +556,7 @@
   content: "\ed65";
 }
 
-.sc-facebook-box-fill:before {
+.sc-facebook-square-fill:before {
   content: "\ed66";
 }
 
@@ -720,7 +820,7 @@
   content: "\ed21";
 }
 
-.sc-facebook-box-line:before {
+.sc-facebook-square-line:before {
   content: "\ed22";
 }
 
@@ -1248,7 +1348,7 @@
   content: "\ec96";
 }
 
-.sc-twitter-x-fill:before {
+.sc-x-fill:before {
   content: "\ec97";
 }
 
@@ -1796,10 +1896,6 @@
   content: "\ec0a";
 }
 
-.sc-subway-wifi-fill:before {
-  content: "\ec0b";
-}
-
 .sc-signpost-line:before {
   content: "\ec0c";
 }
@@ -1954,10 +2050,6 @@
 
 .sc-truck-line:before {
   content: "\ebed";
-}
-
-.sc-subway-wifi-line:before {
-  content: "\ebee";
 }
 
 .sc-book-3-line:before {
@@ -2340,10 +2432,6 @@
   content: "\eb83";
 }
 
-.sc-folder-2-fill:before {
-  content: "\eb84";
-}
-
 .sc-file-word-2-fill:before {
   content: "\eb85";
 }
@@ -2368,20 +2456,12 @@
   content: "\eb8a";
 }
 
-.sc-folder-4-fill:before {
-  content: "\eb77";
-}
-
 .sc-file-transfer-fill:before {
   content: "\eb78";
 }
 
 .sc-file-user-line:before {
   content: "\eb79";
-}
-
-.sc-folder-3-line:before {
-  content: "\eb7a";
 }
 
 .sc-file-pdf-line:before {
@@ -2416,16 +2496,8 @@
   content: "\eb6e";
 }
 
-.sc-folder-2-line:before {
-  content: "\eb6f";
-}
-
 .sc-file-transfer-line:before {
   content: "\eb70";
-}
-
-.sc-folder-6-line:before {
-  content: "\eb71";
 }
 
 .sc-file-user-fill:before {
@@ -2448,28 +2520,8 @@
   content: "\eb76";
 }
 
-.sc-folder-chart-fill:before {
-  content: "\eb63";
-}
-
-.sc-folder-check-line:before {
-  content: "\eb64";
-}
-
 .sc-file-unknow-fill:before {
   content: "\eb65";
-}
-
-.sc-folder-info-line:before {
-  content: "\eb66";
-}
-
-.sc-folder-chart-2-fill:before {
-  content: "\eb67";
-}
-
-.sc-file-shred-fill:before {
-  content: "\eb68";
 }
 
 .sc-file-shield-fill:before {
@@ -2506,10 +2558,6 @@
 
 .sc-folder-fill:before {
   content: "\eb5c";
-}
-
-.sc-folder-6-fill:before {
-  content: "\eb5d";
 }
 
 .sc-folder-download-fill:before {
@@ -2568,10 +2616,6 @@
   content: "\eb56";
 }
 
-.sc-folder-4-line:before {
-  content: "\eb57";
-}
-
 .sc-folder-add-fill:before {
   content: "\eb46";
 }
@@ -2594,10 +2638,6 @@
 
 .sc-folder-received-fill:before {
   content: "\eb4b";
-}
-
-.sc-folders-fill:before {
-  content: "\eb4c";
 }
 
 .sc-file-word-line:before {
@@ -2644,16 +2684,8 @@
   content: "\eb45";
 }
 
-.sc-folder-open-line:before {
-  content: "\eb32";
-}
-
 .sc-file-ppt-2-fill:before {
   content: "\eb33";
-}
-
-.sc-file-shred-line:before {
-  content: "\eb34";
 }
 
 .sc-folder-shield-2-fill:before {
@@ -2666,10 +2698,6 @@
 
 .sc-folder-video-line:before {
   content: "\eb37";
-}
-
-.sc-folder-5-line:before {
-  content: "\eb38";
 }
 
 .sc-folder-shield-line:before {
@@ -2690,10 +2718,6 @@
 
 .sc-folder-history-line:before {
   content: "\eb2e";
-}
-
-.sc-folder-open-fill:before {
-  content: "\eb2f";
 }
 
 .sc-folder-settings-fill:before {
@@ -2864,16 +2888,8 @@
   content: "\eb05";
 }
 
-.sc-folder-transfer-line:before {
-  content: "\eb06";
-}
-
 .sc-sticky-note-line:before {
   content: "\eb07";
-}
-
-.sc-folder-shield-fill:before {
-  content: "\eb08";
 }
 
 .sc-survey-line:before {
@@ -2926,10 +2942,6 @@
 
 .sc-english-input:before {
   content: "\eaed";
-}
-
-.sc-code-view:before {
-  content: "\eaee";
 }
 
 .sc-bring-forward:before {
@@ -3548,7 +3560,7 @@
   content: "\ea55";
 }
 
-.sc-gift-fill:before {
+.sc-gift-1-fill:before {
   content: "\ea56";
 }
 
@@ -3772,7 +3784,7 @@
   content: "\ea2e";
 }
 
-.sc-gift-line:before {
+.sc-gift-1-line:before {
   content: "\ea17";
 }
 
@@ -3884,7 +3896,7 @@
   content: "\ea00";
 }
 
-.sc-vip-crown-2-fill:before {
+.sc-crown-2-fill:before {
   content: "\ea01";
 }
 
@@ -3944,7 +3956,7 @@
   content: "\e9f6";
 }
 
-.sc-vip-crown-fill:before {
+.sc-crown-3-fill:before {
   content: "\e9f7";
 }
 
@@ -3960,7 +3972,7 @@
   content: "\e9fa";
 }
 
-.sc-vip-crown-2-line:before {
+.sc-crown-2-line:before {
   content: "\e9fb";
 }
 
@@ -3980,11 +3992,11 @@
   content: "\e9e6";
 }
 
-.sc-vip-diamond-line:before {
+.sc-diamond-1-line:before {
   content: "\e9e7";
 }
 
-.sc-vip-diamond-fill:before {
+.sc-diamond-1-fill:before {
   content: "\e9e8";
 }
 
@@ -4108,7 +4120,7 @@
   content: "\e9d5";
 }
 
-.sc-vip-crown-line:before {
+.sc-crown-3-line:before {
   content: "\e9d6";
 }
 
@@ -4500,10 +4512,6 @@
   content: "\e978";
 }
 
-.sc-layout-left-2-line:before {
-  content: "\e95f";
-}
-
 .sc-layout-right-fill:before {
   content: "\e960";
 }
@@ -4528,16 +4536,8 @@
   content: "\e965";
 }
 
-.sc-layout-left-2-fill:before {
-  content: "\e966";
-}
-
 .sc-layout-grid-line:before {
   content: "\e967";
-}
-
-.sc-layout-bottom-2-line:before {
-  content: "\e968";
 }
 
 .sc-layout-bottom-line:before {
@@ -4562,10 +4562,6 @@
 
 .sc-crosshair-line:before {
   content: "\e954";
-}
-
-.sc-layout-right-2-line:before {
-  content: "\e955";
 }
 
 .sc-layout-row-fill:before {
@@ -4596,10 +4592,6 @@
   content: "\e95c";
 }
 
-.sc-layout-right-2-fill:before {
-  content: "\e95d";
-}
-
 .sc-layout-masonry-fill:before {
   content: "\e95e";
 }
@@ -4628,14 +4620,6 @@
   content: "\e94a";
 }
 
-.sc-layout-top-2-line:before {
-  content: "\e94b";
-}
-
-.sc-layout-top-2-fill:before {
-  content: "\e94c";
-}
-
 .sc-octagon-fill:before {
   content: "\e94d";
 }
@@ -4646,10 +4630,6 @@
 
 .sc-layout-row-line:before {
   content: "\e94f";
-}
-
-.sc-layout-bottom-2-fill:before {
-  content: "\e950";
 }
 
 .sc-layout-2-line:before {
@@ -4936,7 +4916,7 @@
   content: "\e8f9";
 }
 
-.sc-code-s-slash-fill:before {
+.sc-code-2-fill:before {
   content: "\e8fa";
 }
 
@@ -5000,7 +4980,7 @@
   content: "\e8ef";
 }
 
-.sc-code-s-slash-line:before {
+.sc-code-2-line:before {
   content: "\e8f0";
 }
 
@@ -5012,11 +4992,11 @@
   content: "\e8f2";
 }
 
-.sc-code-s-line:before {
+.sc-code-1-line:before {
   content: "\e8f3";
 }
 
-.sc-code-s-fill:before {
+.sc-code-1-fill:before {
   content: "\e8f4";
 }
 
@@ -5864,7 +5844,7 @@
   content: "\e7a2";
 }
 
-.sc-home-line1:before {
+.sc-home-1-line:before {
   content: "\e7a3";
 }
 
@@ -5928,7 +5908,7 @@
   content: "\e799";
 }
 
-.sc-store-fill1:before {
+.sc-store-4-fill:before {
   content: "\e79a";
 }
 
@@ -5944,7 +5924,7 @@
   content: "\e79d";
 }
 
-.sc-home-fill1:before {
+.sc-home-1-fill:before {
   content: "\e79e";
 }
 
@@ -5996,7 +5976,7 @@
   content: "\e792";
 }
 
-.sc-store-line:before {
+.sc-store-4-line:before {
   content: "\e793";
 }
 
@@ -6516,7 +6496,7 @@
   content: "\e704";
 }
 
-.sc-printer-fill:before {
+.sc-printer-1-fill:before {
   content: "\e705";
 }
 
@@ -6780,7 +6760,7 @@
   content: "\e6c6";
 }
 
-.sc-printer-line:before {
+.sc-printer-1-line:before {
   content: "\e6c7";
 }
 
@@ -7684,10 +7664,6 @@
   content: "\e85e";
 }
 
-.sc-code:before {
-  content: "\e891";
-}
-
 .sc-company-fill:before {
   content: "\e892";
 }
@@ -7764,14 +7740,6 @@
   content: "\e8a4";
 }
 
-.sc-home-fill:before {
-  content: "\e8a5";
-}
-
-.sc-home-line:before {
-  content: "\e8a6";
-}
-
 .sc-global:before {
   content: "\e8a7";
 }
@@ -7780,7 +7748,7 @@
   content: "\e8a8";
 }
 
-.sc-user-defined:before {
+.sc-palette-1-line:before {
   content: "\e88d";
 }
 
@@ -7792,7 +7760,7 @@
   content: "\e88f";
 }
 
-.sc-vip-fill:before {
+.sc-crown-fill:before {
   content: "\e890";
 }
 
@@ -7884,7 +7852,7 @@
   content: "\e874";
 }
 
-.sc-store:before {
+.sc-store-line:before {
   content: "\e876";
 }
 
@@ -7916,11 +7884,11 @@
   content: "\e88b";
 }
 
-.sc-user-defined-fill:before {
+.sc-palette-1-fill:before {
   content: "\e88c";
 }
 
-.sc-vip:before {
+.sc-crown-line:before {
   content: "\e873";
 }
 
@@ -7930,10 +7898,6 @@
 
 .sc-gongyinglianfuwu:before {
   content: "\e877";
-}
-
-.sc-haiyunyouxianquan:before {
-  content: "\e878";
 }
 
 .sc-rencaishuangxuanhui:before {
@@ -7964,10 +7928,6 @@
   content: "\e881";
 }
 
-.sc-wangpuzhuangxiu:before {
-  content: "\e882";
-}
-
 .sc-gift-3-line:before {
   content: "\e883";
 }
@@ -7976,7 +7936,7 @@
   content: "\e884";
 }
 
-.sc-diamond:before {
+.sc-diamond-2-line:before {
   content: "\e885";
 }
 
