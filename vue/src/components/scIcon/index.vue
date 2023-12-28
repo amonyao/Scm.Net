@@ -16,7 +16,6 @@ export default {
     },
     computed: {
         scIcon: function () {
-            console.log('scIcon:' + this.icon);
             if (!this.icon || !this.icon.startsWith('sc-')) {
                 return 'scfont sc-menu-line';
             }

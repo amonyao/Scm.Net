@@ -10,11 +10,9 @@
 <template>
 	<div class="sc-icon-select">
 		<div class="sc-icon-select__wrapper" :class="{ hasValue: value }" @click="open">
-			<el-input v-model="value" :disabled="disabled" readonly>
-				<template #prefix>
-					<sc-icon :icon="value || 'sc-reduce-btn'" style="margin: 0px;" :size="16"></sc-icon>
-				</template>
-			</el-input>
+			<el-button style="padding: 7px;">
+				<sc-icon :icon="value || 'sc-reduce-btn'" style="margin: 0px;" :size="16"></sc-icon>
+			</el-button>
 		</div>
 		<el-dialog title="图标选择器" v-model="dialogVisible" :width="760" destroy-on-close append-to-body>
 			<div class="sc-icon-select__dialog" style="margin: -20px 0 -10px 0">
@@ -72,6 +70,7 @@ export default {
 		return {
 			value: "",
 			dialogVisible: false,
+			mode: '',
 			data: [],
 			searchText: "",
 		};
@@ -102,7 +101,7 @@ export default {
 			if (!icon) {
 				return false;
 			}
-			this.value = this.getIcon(icon);
+			this.value = this.getName(icon);
 			this.dialogVisible = false;
 		},
 		clear() {
@@ -118,8 +117,17 @@ export default {
 			}
 			this.data = filterData;
 		},
+		getName(icon) {
+			var name = icon.name;
+			if (icon.type == 'both') {
+				name += (this.mode ? '-fill' : '-line');
+			} else if (icon.type) {
+				name += '-' + icon.type;
+			}
+			return 'sc-' + name;
+		},
 		getIcon(icon) {
-			return 'scfont sc-' + icon.name + '-line';// (this.mode ? '-fill' : '-line');
+			return 'scfont ' + this.getName(icon);
 		}
 	},
 };

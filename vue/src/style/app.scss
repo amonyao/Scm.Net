@@ -14,6 +14,7 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 /* 大布局样式 */
 .scmui {display: flex;flex-flow: column;}
 .scmui-wrapper {display: flex;flex:1;overflow: auto;}
+.scfont {--color: inherit;height: 1em;width: 1em;line-height: 1em;display: inline-flex;justify-content: center;align-items: center;position: relative;fill: currentColor;color: var(--color);font-size: inherit;}
 
 /* 全局滚动条样式 */
 .scrollable {-webkit-overflow-scrolling: touch;}
@@ -50,6 +51,7 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 .scmui-side-split li {cursor: pointer;width: 65px;height: 65px;color: #fff;text-align: center;display: flex;flex-direction: column;align-items: center;justify-content: center;}
 .scmui-side-split li i {font-size: 18px;}
 .scmui-side-split li p {margin-top:5px;}
+.scmui-side-split li span {font-size: 18px;}
 .scmui-side-split li:hover {background: rgba(255, 255, 255, 0.1);}
 .scmui-side-split li.active {background: #409EFF;}
 
@@ -64,11 +66,13 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 .scmui-side-scroll {overflow: auto;overflow-x:hidden;flex: 1;}
 .scmui-side-bottom {border-top: 1px solid #ebeef5;height:51px;cursor: pointer;display: flex;align-items: center;justify-content: center;}
 .scmui-side-bottom i {font-size: 16px;}
+.scmui-side-bottom span {font-size: 16px;}
 .scmui-side-bottom:hover {color: var(--el-color-primary);}
 .scmui-side.isCollapse {width: 65px;}
 .el-menu .menu-tag {position: absolute;height: 18px;line-height: 18px;background: var(--el-color-danger);font-size: 12px;color: #fff;right: 20px;border-radius:18px;padding:0 6px;}
 .el-menu .el-sub-menu__title .menu-tag {right: 40px;}
 .el-menu--horizontal > li .menu-tag {display: none;}
+.el-sub-menu .scfont,.el-menu-item .scfont {margin-right: 5px;width: var(--el-menu-icon-width);text-align: center;font-size: 18px;vertical-align: middle}
 
 /* 右侧内容 */
 .scmui-body {flex: 1;display: flex;flex-flow: column;}

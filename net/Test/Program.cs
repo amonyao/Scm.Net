@@ -1,12 +1,13 @@
 ﻿using Com.Scm.Utils;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
+using Test;
 
 internal class Program
 {
     public static void Main(string[] args)
     {
-        new Program().ReadIcoAsync("www.baidu.com");
+        new IconTool().Gen("D:\\js.js", "D:\\css.css");
         Console.WriteLine("升级完成！");
     }
 

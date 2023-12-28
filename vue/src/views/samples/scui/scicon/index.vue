@@ -97,7 +97,13 @@ export default {
 			this.isExpand = !this.isExpand;
 		},
 		getIcon(icon) {
-			return 'scfont sc-' + icon.name + (this.mode ? '-fill' : '-line');
+			var name = icon.name;
+			if (icon.type == 'both') {
+				name += (this.mode ? '-fill' : '-line');
+			} else if (icon.type) {
+				name += '-' + icon.type;
+			}
+			return 'scfont sc-' + name;
 		},
 		copyCode(e, icon) {
 			this.value = icon.name;
