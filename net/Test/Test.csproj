@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SixLabors.Fonts" Version="2.0.1" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.123" />
   </ItemGroup>
 

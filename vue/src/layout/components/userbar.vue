@@ -8,17 +8,17 @@
 		</div>
 		<el-divider direction="vertical"></el-divider>
 		<div class="panel-item hidden-sm-and-down" @click="search" title="搜索">
-			<el-icon><el-icon-search /></el-icon>
+			<sc-icon icon="sc-search" />
 		</div>
 		<div class="screen panel-item hidden-sm-and-down" @click="screen" title="全屏显示">
-			<el-icon><el-icon-full-screen /></el-icon>
+			<sc-icon icon="sc-fullscreen" />
 		</div>
 		<div class="tasks panel-item" @click="tasks" title="任务中心">
-			<el-icon><el-icon-sort /></el-icon>
+			<sc-icon icon="sc-sorting-vertical" />
 		</div>
 		<div class="msg panel-item" @click="showMsg" title="新消息">
 			<el-badge :hidden="msgList.length == 0" :value="msgList.length" class="badge" type="danger">
-				<el-icon><el-icon-chat-dot-round /></el-icon>
+				<sc-icon icon="sc-message-2-line" />
 			</el-badge>
 			<el-drawer title="新消息" v-model="msgVisible" :size="400" append-to-body destroy-on-close>
 				<el-container>

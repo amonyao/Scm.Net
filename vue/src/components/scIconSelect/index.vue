@@ -18,8 +18,17 @@
 			<div class="sc-icon-select__dialog" style="margin: -20px 0 -10px 0">
 				<el-form :rules="{}">
 					<el-form-item prop="searchText">
-						<el-input class="sc-icon-select__search-input" prefix-icon="el-icon-search" v-model="searchText"
-							placeholder="搜索" size="large" clearable />
+						<el-input class="sc-icon-select__search-input" v-model="searchText" placeholder="搜索" clearable>
+							<template #prepend>
+								<sc-icon icon="sc-search" />
+							</template>
+							<template #append>
+								<el-select v-model="mode" placeholder="Select" style="width: 115px">
+									<el-option label="线型" :value="0" />
+									<el-option label="填充" :value="1" />
+								</el-select>
+							</template>
+						</el-input>
 					</el-form-item>
 				</el-form>
 				<el-tabs>
@@ -34,7 +43,7 @@
 							<el-scrollbar>
 								<ul>
 									<el-empty v-if="item.icons.length == 0" :image-size="100" description="未查询到相关图标" />
-									<li v-for="icon in item.icons" :key="icon" @click="selectIcon(icon)">
+									<li v-for="icon in item.icons" :key="icon" @click="selectIcon(icon)" :title="icon.desc">
 										<div class="icon-item">
 											<div class="icon-info">
 												<span :class="getIcon(icon)"></span>
@@ -70,7 +79,7 @@ export default {
 		return {
 			value: "",
 			dialogVisible: false,
-			mode: '',
+			mode: 0,
 			data: [],
 			searchText: "",
 		};
@@ -109,11 +118,15 @@ export default {
 			this.dialogVisible = false;
 		},
 		search(text) {
-			var filterData = config.icons;
+			var filterData = [];
 			if (text) {
-				filterData.forEach((t) => {
-					t.icons = t.icons.filter((n) => n.name.includes(text));
+				config.icons.forEach((t) => {
+					var icons = t.icons.filter((n) => n.desc.includes(text));
+					var cat = { name: t.name, icons: icons, size: icons.length };
+					filterData.push(cat);
 				});
+			} else {
+				filterData = config.icons;
 			}
 			this.data = filterData;
 		},

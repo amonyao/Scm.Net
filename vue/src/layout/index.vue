@@ -10,9 +10,7 @@
 				<ul v-if="!ismobile" class="nav">
 					<li v-for="item in menu" :key="item" :class="pmenu.path == item.path ? 'active' : ''"
 						@click="showMenu(item)">
-						<el-icon>
-							<component :is="item.meta.icon || el-icon-menu" />
-						</el-icon>
+						<sc-icon :icon="item.meta.icon || 'sc-menu-fill'"></sc-icon>
 						<span>{{ item.meta.title }}</span>
 					</li>
 				</ul>
@@ -36,7 +34,7 @@
 					</el-scrollbar>
 				</div>
 				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
-					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
+					<sc-icon :icon="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
@@ -79,7 +77,7 @@
 					</el-scrollbar>
 				</div>
 				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
-					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
+					<sc-icon :icon="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
@@ -168,7 +166,7 @@
 					</el-scrollbar>
 				</div>
 				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
-					<el-icon><el-icon-expand v-if="menuIsCollapse" /><el-icon-fold v-else /></el-icon>
+					<sc-icon :icon="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
@@ -189,9 +187,9 @@
 		</section>
 	</template>
 
-	<div class="main-maximize-exit" @click="exitMaximize"><el-icon title="退出全屏"><el-icon-close /></el-icon></div>
+	<div class="main-maximize-exit" @click="exitMaximize"><sc-icon title="退出全屏" icon="close" /></div>
 
-	<div class="layout-setting" @click="openSetting"><sc-icon myicon="sc-feedback-line" title="用户反馈"></sc-icon></div>
+	<div class="layout-setting" @click="openSetting"><sc-icon icon="sc-feedback-line" title="用户反馈"></sc-icon></div>
 
 	<el-drawer title="用户反馈" v-model="settingDialog" :size="400" append-to-body destroy-on-close>
 		<feedback></feedback>

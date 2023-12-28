@@ -84,18 +84,38 @@ namespace Test
             foreach (var key in newDict.Keys)
             {
                 var icon = oldIcons.Find(key);
+                var val = newDict[key];
+                var type = GenType(val);
                 if (icon == null)
                 {
-                    otherCat.Add(new Icon { name = key, desc = key, type = newDict[key] });
+                    otherCat.Add(new Icon { name = key, desc = key, val = newDict[key], type = type });
                     continue;
                 }
 
-                icon.type = newDict[key];
+                icon.val = newDict[key];
+                icon.type = type;
                 newIcons.Add(icon);
             }
 
             File.WriteAllText("D:\\old.json", TextUtils.ToJsonString(oldIcons));
             File.WriteAllText("D:\\new.json", TextUtils.ToJsonString(newIcons));
+        }
+
+        private static string GenType(int val)
+        {
+            if (val == 3)
+            {
+                return "both";
+            }
+            if (val == 2)
+            {
+                return "fill";
+            }
+            if (val == 1)
+            {
+                return "line";
+            }
+            return "";
         }
     }
 
@@ -171,6 +191,7 @@ namespace Test
         public string name { get; set; }
         public string namee { get; set; }
         public List<Icon> icons { get; set; }
+        public int size { get; set; }
 
         public void Add(Icon icon)
         {
@@ -179,6 +200,7 @@ namespace Test
                 icons = new List<Icon>();
             }
             icons.Add(icon);
+            size = icons.Count;
         }
     }
 
@@ -186,7 +208,10 @@ namespace Test
     {
         public string name { get; set; }
         public string desc { get; set; }
-        public int type { get; set; }
+        public string type { get; set; }
+
+        [JsonIgnore]
+        public int val { get; set; }
 
         [JsonIgnore]
         public string cat_name { get; set; }

@@ -1,5 +1,5 @@
 <template>
-    <span :class="scIcon" :style="{ 'fontSize': scSize, 'color': color }"></span>
+    <i :class="scIcon" :style="{ 'fontSize': scSize, 'color': color }"></i>
 </template>
 <script>
 export default {
