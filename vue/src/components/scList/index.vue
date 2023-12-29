@@ -6,7 +6,7 @@
         <el-empty :description="emptyText" :image-size="100" v-if="isEmpty()"></el-empty>
         <div class="sc-list_body" :style="{ padding: this.padding + 'px' }" v-else>
             <div v-for="(item, index) in data" :key="index" @click="itemClick(item, index)" class="sc-list-item"
-                :class="{ active: canSelected && selectedIndex == index }" :style="{ width: 100 / columns + '%' }">
+                :class="{ active: canSelected && currIndex == index }" :style="{ width: 100 / columns + '%' }">
                 <slot name="item" :item="item" :index="index">
                     <div class="sc-list-item_label">
                         <sc-icon :icon="icon"></sc-icon>
@@ -34,8 +34,8 @@ export default {
     emits: ["change", "editItem", "dropItem"],
     data() {
         return {
-            selectedIndex: -1,
-            selectedItem: null,
+            currIndex: -1,
+            currItem: null,
         }
     },
     //获取子组件传过来的激活tab
@@ -46,6 +46,7 @@ export default {
         data: { type: Array, default: function () { return []; } },
         width: { type: String, default: "" },
         canSelected: { type: Boolean, default: true },
+        selectedIndex: { type: Number, default: 0 },
         showOpt: { type: Boolean, default: false },
         showEdit: { type: Boolean, default: false },
         showDrop: { type: Boolean, default: false },
@@ -55,6 +56,9 @@ export default {
     },
     created() {
     },
+    mounted() {
+        this.currIndex = this.selectedIndex;
+    },
     methods: {
         getWidth() {
             if (this.width) {
@@ -62,12 +66,12 @@ export default {
             }
         },
         itemClick(item, index) {
-            if (this.selectedIndex == index) {
+            if (this.currIndex == index) {
                 return;
             }
 
-            this.selectedIndex = index;
-            this.$emit("change", item);
+            this.currIndex = index;
+            this.$emit("change", item, index);
         },
         itemEdit(item, index) {
             this.$emit('editItem', item, index);

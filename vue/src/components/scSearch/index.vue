@@ -39,12 +39,20 @@ export default {
         expandVisible: { type: Boolean, default: false },
         searchVisible: { type: Boolean, default: false },
         filterVisible: { type: Boolean, default: true },
+        syncSearch: { type: Boolean, default: false },
     },
     data() {
         return {
             isExpand: false,
             key: ''
         }
+    },
+    watch: {
+        key(val) {
+            if (this.syncSearch) {
+                this.$emit('search', val);
+            }
+        },
     },
     methods: {
         doSearch() {

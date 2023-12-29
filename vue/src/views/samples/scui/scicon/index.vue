@@ -1,51 +1,50 @@
 <template>
 	<el-container>
 		<el-header style="height: auto;">
-			<sc-search @search="search">
+			<sc-search @search="search" :syncSearch="true">
 				<template #filter>
 					<label>图标格式：</label>
 					<el-switch v-model="mode" active-text="填充" inactive-text="线型" />
 					<label>图标大小：</label>
 					<el-slider v-model="size" :min="16" :max="128" :step="4" style="width: 120px;"></el-slider>
 					<label>图标颜色：</label>
-					<el-color-picker v-model="color" show-alpha :predefine="predefineColors" />
-					<div :style="{ 'fontSize': size + 'px', 'color': color }">
-						<span class="scfont sc-tixing"></span>
-					</div>
+					<el-color-picker v-model="color" :predefine="predefineColors" />
 				</template>
 			</sc-search>
 		</el-header>
 		<el-main class="nopadding">
-			<el-tabs>
-				<el-tab-pane v-for="item in filterData" :key="item.name" lazy>
-					<template #label>
-						{{ item.name }}
-						<el-tag size="small" type="info">
-							{{ item.size }}
-						</el-tag>
-					</template>
-					<div class="icon-list">
-						<el-scrollbar>
-							<ul @click="selectIcon">
-								<el-empty v-if="item.icons.length == 0" :image-size="100" description="未查询到相关图标" />
-								<el-row>
-									<el-col :xs="6" :sm="6" :md="4" :lg="3" :xl="3" v-for="icon in item.icons" :key="icon">
-										<div class="icon-item" :class="{ active: value == icon.name }" :title="icon.desc"
-											@click="copyCode($event, icon)">
-											<div class="icon-info" :style="{ 'fontSize': size + 'px', 'color': color }">
-												<span :class="getIcon(icon)"></span>
-											</div>
-											<div class="icon-desc">
-												{{ icon.desc }}
-											</div>
+			<el-container>
+				<el-aside style="width: 240px;">
+					<sc-list :data="filterData" @change="changeSet">
+						<template #item="{ item }">
+							{{ item.name }}
+							<el-tag size="small" type="info">
+								{{ item.size }}
+							</el-tag>
+						</template>
+					</sc-list>
+				</el-aside>
+				<el-main>
+					<el-scrollbar>
+						<div class="icon-list">
+							<el-empty v-if="!hasIcons()" :image-size="100" description="未查询到相关图标" />
+							<el-row v-else>
+								<el-col :xs="6" :sm="6" :md="4" :lg="3" :xl="3" v-for="(icon, index) in iconSet.icons"
+									:key="index">
+									<div class="icon-item" :title="icon.desc" @click="copyCode(icon)">
+										<div class="icon-info" :style="{ 'fontSize': size + 'px', 'color': color }">
+											<span :class="getIcon(icon)"></span>
 										</div>
-									</el-col>
-								</el-row>
-							</ul>
-						</el-scrollbar>
-					</div>
-				</el-tab-pane>
-			</el-tabs>
+										<div class="icon-desc">
+											{{ icon.desc }}
+										</div>
+									</div>
+								</el-col>
+							</el-row>
+						</div>
+					</el-scrollbar>
+				</el-main>
+			</el-container>
 		</el-main>
 	</el-container>
 </template>
@@ -60,10 +59,9 @@ export default {
 			param: {
 				key: ''
 			},
-			isExpand: false,
 			mode: false,
 			size: 24,
-			color: '#000000',
+			color: '#1a2947',
 			predefineColors: [
 				'#ffffff',
 				'#cccccc',
@@ -84,8 +82,8 @@ export default {
 			],
 			data: [],
 			filterData: [],
-			value: null,
-			icons: {},
+			iconSet: {},
+			index: 0,
 		};
 	},
 	watch: {
@@ -96,29 +94,36 @@ export default {
 	mounted() {
 		this.data.push(...config.icons);
 		this.filterData = this.data;
+		this.iconSet = this.filterData[this.index];
 	},
 	methods: {
-		expand() {
-			this.isExpand = !this.isExpand;
+		changeSet(set, index) {
+			this.iconSet = set;
+			this.index = index;
 		},
-		getIcon(icon) {
+		hasIcons() {
+			return this.iconSet && this.iconSet.icons && this.iconSet.icons.length > 0;
+		},
+		getName(icon) {
 			var name = icon.name;
 			if (icon.type == 'both') {
 				name += (this.mode ? '-fill' : '-line');
 			} else if (icon.type) {
 				name += '-' + icon.type;
 			}
-			return 'scfont sc-' + name;
+			return 'sc-' + name;
 		},
-		copyCode(e, icon) {
-			this.value = icon.name;
-			var code = '<span class="' + this.getIcon(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
+		getIcon(icon) {
+			return 'scfont ' + this.getName(icon);
+		},
+		copyCode(icon) {
+			//var code = '<span class="' + this.getIcon(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
+			var code = '<sc-icon icon="' + this.getName(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
 			clipboardy.write(code);
 			this.$message.success('复制成功！');
 		},
 		search(key) {
 			var filterData = [];
-			console.log('key:' + key);
 			if (key) {
 				this.data.forEach((t) => {
 					var icons = t.icons.filter((n) => n.desc.includes(key));
@@ -129,6 +134,7 @@ export default {
 				filterData = config.icons;
 			}
 			this.filterData = filterData;
+			this.iconSet = this.filterData[this.index];
 		}
 	},
 };
@@ -175,7 +181,7 @@ export default {
 }
 
 .icon-list .icon-item .icon-desc {
-	color: #666;
+	color: #afb7c7;
 	text-align: center;
 	width: 100%;
 	padding: 2px 8px;
