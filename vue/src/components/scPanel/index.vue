@@ -7,16 +7,22 @@
                 </div>
                 <div>
                     <slot name="header"></slot>
-                    <el-button type="default" icon="el-icon-full-screen" circle @click="showFullPage()"
-                        v-show="!fullScreen && !fullPage" title="全窗口显示"></el-button>
-                    <el-button type="default" icon="el-icon-full-screen" circle @click="exitFullPage()"
-                        v-show="!fullScreen && fullPage" title="退出全窗口"></el-button>
-                    <el-button type="default" icon="el-icon-monitor" circle @click="showFullScreen()"
-                        v-show="!fullScreen" title="全屏幕显示"></el-button>
-                    <el-button type="default" icon="el-icon-monitor" circle @click="exitFullScreen()"
-                        v-show="fullScreen" title="退出全屏幕"></el-button>
-                    <el-button type="default" icon="el-icon-info-filled" circle @click="showDrawer()"
-                        title="帮助"></el-button>
+                    <el-button type="default" circle @click="showFullPage()" v-show="!fullScreen && !fullPage"
+                        title="全窗口显示">
+                        <sc-icon icon="sc-fullscreen" />
+                    </el-button>
+                    <el-button type="default" circle @click="exitFullPage()" v-show="!fullScreen && fullPage" title="退出全窗口">
+                        <sc-icon icon="sc-fullscreen-exit" />
+                    </el-button>
+                    <el-button type="default" circle @click="showFullScreen()" v-show="!fullScreen" title="全屏幕显示">
+                        <sc-icon icon="sc-fullpage" />
+                    </el-button>
+                    <el-button type="default" circle @click="exitFullScreen()" v-show="fullScreen" title="退出全屏幕">
+                        <sc-icon icon="sc-fullpage-exit" />
+                    </el-button>
+                    <el-button type="default" circle @click="showDrawer()" title="帮助">
+                        <sc-icon icon="sc-info" />
+                    </el-button>
                 </div>
             </div>
             <div class="sc-panel_body">

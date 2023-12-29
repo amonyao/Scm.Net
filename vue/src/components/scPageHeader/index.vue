@@ -10,9 +10,7 @@
 <template>
 	<div class="sc-page-header">
 		<div v-if="icon" class="sc-page-header__icon">
-			<span>
-				<el-icon><component :is="icon" /></el-icon>
-			</span>
+			<sc-icon :icon="icon"/>
 		</div>
 		<div class="sc-page-header__title">
 			<h2>{{ title }}</h2>

@@ -4,7 +4,9 @@
 			<el-container>
 				<el-header>
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
-					<el-button type="primary" round icon="el-icon-search" class="add-column"></el-button>
+					<el-button type="primary" round class="add-column">
+						<sc-icon icon="sc-search" />
+					</el-button>
 				</el-header>
 				<el-main class="nopadding">
 					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
@@ -14,8 +16,8 @@
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
 								<span class="opt">
-									<el-icon><el-icon-edit /></el-icon>
-									<el-icon><el-icon-delete /></el-icon>
+									<sc-icon icon="sc-edit-line" />
+									<sc-icon icon="sc-delete-line" />
 								</span>
 							</span>
 						</template>

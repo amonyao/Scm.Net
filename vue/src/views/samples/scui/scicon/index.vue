@@ -88,6 +88,11 @@ export default {
 			icons: {},
 		};
 	},
+	watch: {
+		searchText(val) {
+			this.search(val);
+		},
+	},
 	mounted() {
 		this.data.push(...config.icons);
 		this.filterData = this.data;
@@ -112,23 +117,18 @@ export default {
 			this.$message.success('复制成功！');
 		},
 		search(key) {
-			this.param.key = key;
-			if (!this.param.key) {
-				this.filterData = this.data;
-				return;
-			}
-
-			this.filterData = [];
-			this.data.forEach(group => {
-				var list = [];
-				var icons = group.icons;
-				icons.forEach(arr => {
-					if (arr.desc && arr.desc.indexOf(this.param.key) >= 0) {
-						list.push(arr)
-					}
+			var filterData = [];
+			console.log('key:' + key);
+			if (key) {
+				this.data.forEach((t) => {
+					var icons = t.icons.filter((n) => n.desc.includes(key));
+					var cat = { name: t.name, icons: icons, size: icons.length };
+					filterData.push(cat);
 				});
-				this.filterData.push({ name: group.name, icons: list, size: list.length });
-			});
+			} else {
+				filterData = config.icons;
+			}
+			this.filterData = filterData;
 		}
 	},
 };

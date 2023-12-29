@@ -8,7 +8,7 @@
 				</div>
 			</el-form-item>
 			<el-upload ref="upload" class="upload-demo" drag :autoUpload="false" :httpRequest="httpRequest">
-				<el-icon class="el-icon--upload"><el-icon-upload-filled /></el-icon>
+				<sc-icon class="el-icon--upload" icon="sc-file-upload-line" />
 				<div class="el-upload__text">
 					你可以将文件拖拽到特定区域以进行上传 <em>点击上传</em>
 				</div>

@@ -4,7 +4,9 @@
 			<el-container>
 				<el-header>
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
-					<el-button type="primary" round icon="el-icon-plus" class="add-column" @click="editHeader"></el-button>
+					<el-button type="primary" round class="add-column" @click="editHeader">
+						<sc-icon icon="sc-plus" />
+					</el-button>
 				</el-header>
 				<el-main class="nopadding">
 					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
@@ -14,8 +16,8 @@
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
 								<span class="opt">
-									<el-icon @click.stop="editHeader(data)"><el-icon-edit /></el-icon>
-									<el-icon @click.stop="remove(node, data)"><el-icon-delete /></el-icon>
+									<sc-icon icon="sc-edit-line" @click.stop="editHeader(data)" />
+									<sc-icon icon="sc-delete-line" @click.stop="remove(node, data)" />
 								</span>
 							</span>
 						</template>
@@ -27,27 +29,32 @@
 		<el-container>
 			<el-header>
 				<div class="left-panel">
-					<el-button icon="el-icon-plus" type="primary" :disabled="!selectColumn.id" @click="open_dialog" />
+					<el-button type="primary" :disabled="!selectColumn.id" @click="open_dialog">
+						<sc-icon icon="sc-plus" />
+					</el-button>
 					<el-divider direction="vertical"></el-divider>
 					<el-button-group>
 						<el-tooltip content="启用">
-							<el-button type="primary" icon="el-icon-circle-check" plain :disabled="selection.length == 0"
-								@click="status_list(1)"></el-button>
+							<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)">
+								<sc-icon icon="sc-check-circle-line" />
+							</el-button>
 						</el-tooltip>
 						<el-tooltip content="停用">
-							<el-button type="primary" icon="el-icon-circle-close" plain :disabled="selection.length == 0"
-								@click="status_list(2)"></el-button>
+							<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)">
+								<sc-icon icon="sc-pause-circle-line" />
+							</el-button>
 						</el-tooltip>
 						<el-tooltip content="删除">
-							<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
-								@click="delete_list"></el-button>
+							<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list">
+								<sc-icon icon="sc-close-circle-line" />
+							</el-button>
 						</el-tooltip>
 					</el-button-group>
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
-						<el-button icon="el-icon-search" type="primary" @click="search" />
+						<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
 					</div>
 				</div>
 			</el-header>

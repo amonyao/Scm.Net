@@ -8,7 +8,7 @@
                 <el-main style="background-color: #FFFFFF;">
                     <div class="filter">
                         <el-input v-model="menuFilter" clearable placeholder="输入关键字进行过滤" />
-                        <el-button icon="el-icon-search" type="primary" @click="search" />
+                        <el-button type="primary" @click="search"><sc-icon icon="sc-search"/></el-button>
                     </div>
                     <el-tabs>
                         <el-tab-pane label="表结构">

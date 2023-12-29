@@ -16,9 +16,7 @@
 						<el-menu-item-group v-for="group in menu" :key="group.groupName" :title="group.groupName">
 							<el-menu-item v-for="item in group.list" :key="item.component" :index="item.component"
 								@click="openPage">
-								<el-icon v-if="item.icon">
-									<component :is="item.icon" />
-								</el-icon>
+								<sc-icon v-if="item.icon" :icon="item.icon" />
 								<template #title>
 									<span>{{ item.title }}</span>
 								</template>
@@ -61,22 +59,22 @@ export default {
 					groupName: "基本设置",
 					list: [
 						{
-							icon: "el-icon-postcard",
+							icon: "sc-profile-line",
 							title: "账号信息",
 							component: "account",
 						},
 						{
-							icon: "el-icon-operation",
+							icon: "sc-settings-3-line",
 							title: "个人设置",
 							component: "seting",
 						},
 						{
-							icon: "el-icon-lock",
+							icon: "sc-pass-pending-line",
 							title: "修改密码",
 							component: "password",
 						},
 						{
-							icon: "el-icon-bell",
+							icon: "sc-bell-line",
 							title: "通知设置",
 							component: "pushSettings",
 						},
@@ -86,12 +84,12 @@ export default {
 					groupName: "数据管理",
 					list: [
 						{
-							icon: "el-icon-coin",
+							icon: "sc-database-2-line",
 							title: "存储空间信息",
 							component: "space",
 						},
 						{
-							icon: "el-icon-clock",
+							icon: "sc-alarm-clock-line",
 							title: "操作日志",
 							component: "logs",
 						},

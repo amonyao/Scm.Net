@@ -2,9 +2,7 @@
     <div class="sc-text-viewer" v-if="visible">
         <div class="sc-text-viewer_mask"></div>
         <span class="el-image-viewer__btn el-image-viewer__close" @click="close">
-            <el-icon>
-                <ElIconClose />
-            </el-icon>
+            <sc-icon icon="sc-close-circle-line" />
         </span>
         <div class="sc-text-viewer_body">
             <div class="sc-text-viewer_title">

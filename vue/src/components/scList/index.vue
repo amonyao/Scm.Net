@@ -18,12 +18,8 @@
                     </div>
                 </slot>
                 <span class="opt" v-if="showOpt">
-                    <el-icon @click.stop="itemEdit(item, index)" v-if="showEdit" title="编辑">
-                        <el-icon-edit />
-                    </el-icon>
-                    <el-icon @click.stop="itemRemove(item, index)" v-if="showDrop" title="删除">
-                        <el-icon-delete />
-                    </el-icon>
+                    <sc-icon icon="sc-edit-line" @click.stop="itemEdit(item, index)" v-if="showEdit" title="编辑" />
+                    <sc-icon icon="sc-delete-line" @click.stop="itemRemove(item, index)" v-if="showDrop" title="删除" />
                 </span>
             </div>
         </div>

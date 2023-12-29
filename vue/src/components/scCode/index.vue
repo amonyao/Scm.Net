@@ -78,7 +78,7 @@ export default {
     height: 2.5rem;
 }
 
-.example .op-btns .el-icon:hover {
+.example .op-btns .sc-icon:hover {
     color: var(--el-text-color-primary);
 }
 

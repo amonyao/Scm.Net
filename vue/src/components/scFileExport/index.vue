@@ -30,8 +30,12 @@
 							</el-form-item>
 							<slot name="form" :formData="formData"></slot>
 						</el-form>
-						<el-button v-if="async" type="primary" size="large" icon="el-icon-plus" style="width: 100%;" @click="download" :loading="asyncLoading">发起导出任务</el-button>
-						<el-button v-else type="primary" size="large" icon="el-icon-download" style="width: 100%;" @click="download">下 载</el-button>
+						<el-button v-if="async" type="primary" size="large" style="width: 100%;" @click="download" :loading="asyncLoading">
+							<sc-icon icon="sc-plus"/>发起导出任务
+						</el-button>
+						<el-button v-else type="primary" size="large" style="width: 100%;" @click="download">
+							<sc-icon icon="sc-file-download-line"/>下 载
+						</el-button>
 					</el-tab-pane>
 					<el-tab-pane label="列设置" v-if="columnData.length>0" lazy>
 						<columnSet :column="columnData"></columnSet>

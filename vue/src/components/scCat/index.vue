@@ -11,7 +11,9 @@
     <el-container v-loading="loading">
         <el-header>
             <el-input placeholder="输入关键字进行过滤" v-model="key" clearable></el-input>
-            <el-button type="primary" round icon="el-icon-plus" class="add-column" @click="edit"></el-button>
+            <el-button type="primary" round class="add-column" @click="edit">
+                <sc-icon icon="sc-plus"/>
+            </el-button>
         </el-header>
         <el-main class="nopadding">
             <el-tree ref="list" class="menu" node-key="value" :default-expand-all="expandAll" :data="list"
@@ -21,8 +23,8 @@
                         <span class="label">{{ node.label }}</span>
                         <span class="code">{{ data.code }}</span>
                         <span class="opt">
-                            <el-icon @click.stop="edit(data)"><el-icon-edit /></el-icon>
-                            <el-icon @click.stop="remove(node, data)"><el-icon-delete /></el-icon>
+                            <sc-icon @click.stop="edit(data)" icon="sc-edit-line"></sc-icon>
+                            <sc-icon @click.stop="remove(node, data)" icon="sc-icon"></sc-icon>
                         </span>
                     </span>
                 </template>

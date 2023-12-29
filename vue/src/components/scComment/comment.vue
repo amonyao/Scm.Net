@@ -15,8 +15,8 @@
             <div v-if="btnShow" style="padding-top: 5px;">
                 <el-row>
                     <el-col :span="16" style="text-align: left;">
-                        <el-button plain icon="el-icon-flag">表情</el-button>
-                        <el-button plain icon="el-icon-picture">图片</el-button>
+                        <sc-icon icon="sc-smile-line">表情</sc-icon>
+                        <sc-icon icon="sc-picture-line">图片</sc-icon>
                     </el-col>
                     <el-col :span="8" style="text-align: right;">
                         <el-button @click="sendComment" type="primary">发表评论</el-button>

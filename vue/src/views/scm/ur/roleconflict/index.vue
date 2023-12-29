@@ -2,83 +2,42 @@
 	<el-container>
 		<el-header>
 			<div class="left-panel">
-				<el-button
-					icon="el-icon-plus"
-					type="primary"
-					@click="open_dialog"
-				/>
-				<el-button
-					icon="el-icon-delete"
-					plain
-					type="danger"
-					:disabled="selection.length == 0"
-					@click="batch_del"
-				/>
+				<el-button type="primary" @click="open_dialog">
+					<sc-icon icon="sc-plus" />
+				</el-button>
+				<el-button plain type="danger" :disabled="selection.length == 0" @click="batch_del">
+					<sc-icon icon="sc-close" />
+				</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
-					<el-input
-						v-model="param.key"
-						clearable
-						placeholder="关键字"
-					/>
-					<el-button
-						icon="el-icon-search"
-						type="primary"
-						@click="search"
-					/>
+					<el-input v-model="param.key" clearable placeholder="关键字" />
+					<el-button type="primary" @click="search">
+						<sc-icon icon="sc-search" />
+					</el-button>
 				</div>
 			</div>
 		</el-header>
 		<el-main class="nopadding">
-			<scTable
-				ref="table"
-				:api-obj="apiObj"
-				:column="column"
-				row-key="id"
-				@menu-handle="menuHandle"
-				@selection-change="selectionChange"
-			>
+			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+				@selection-change="selectionChange">
 				<!-- 固定列-选择列 -->
-				<el-table-column
-					fixed
-					type="selection"
-					align="center"
-					width="60"
-				/>
-				<el-table-column
-					align="center"
-					fixed="right"
-					label="操作"
-					width="140"
-				>
+				<el-table-column fixed type="selection" align="center" width="60" />
+				<el-table-column align="center" fixed="right" label="操作" width="140">
 					<template #default="scope">
-						<el-button
-							text
-							type="primary"
-							size="small"
-							@click="open_dialog(scope.row)"
-						>
+						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
 							编辑
 						</el-button>
 						<el-divider direction="vertical" />
-						<el-popconfirm
-							title="确定删除吗？"
-							@confirm="table_del(scope.row, scope.$index)"
-						>
+						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
 							<template #reference>
-								<el-button text type="primary" size="small"
-									>删除</el-button
-								>
+								<el-button text type="primary" size="small">删除</el-button>
 							</template>
 						</el-popconfirm>
 					</template>
 				</el-table-column>
 				<template #status="{ data }">
-					<el-tag
-						disable-transitions
-						:type="data.status ? 'success' : 'danger'"
-					>
+					<el-tag disable-transitions :type="data.status ? 'success' : 'danger'">
 						{{ data.status ? "正常" : "停用" }}
 					</el-tag>
 				</template>
@@ -127,7 +86,7 @@ export default {
 			],
 		};
 	},
-	mounted() {},
+	mounted() { },
 	methods: {
 		complete() {
 			this.$refs.table.refresh();
@@ -173,7 +132,7 @@ export default {
 						this.$alert(res.message, "提示", { type: "error" });
 					}
 				})
-				.catch(() => {});
+				.catch(() => { });
 		},
 		open_dialog(row) {
 			if (row.id) {

@@ -2,7 +2,7 @@
 <template>
 	<el-table ref="table" :data="columnData" row-key="prop" style="width: 100%" border>
 	    <el-table-column prop="" label="排序" width="60">
-			<el-tag class="move" style="cursor: move;"><el-icon style="cursor: move;"><el-icon-d-caret/></el-icon></el-tag>
+			<el-tag class="move" style="cursor: move;"><sc-icon style="cursor: move;" icon="sc-expand-up-down-fill"></sc-icon></el-tag>
 		</el-table-column>
 	    <el-table-column prop="label" label="列名">
 			<template #default="scope">

@@ -25,7 +25,7 @@
                     <div class="right-panel">
                         <div class="right-panel-search">
                             <el-input v-model="param.key" clearable placeholder="登录账号" />
-                            <el-button icon="el-icon-search" type="primary" @click="search" />
+                            <el-button type="primary" @click="search"><sc-icon icon="sc-search"/></el-button>
                         </div>
                     </div>
                 </el-header>

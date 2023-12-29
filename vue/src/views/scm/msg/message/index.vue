@@ -20,19 +20,26 @@
 		<el-container>
 			<el-header>
 				<div class="left-panel">
-					<el-button icon="el-icon-plus" type="primary" @click="open_dialog" />
-					<el-button icon="el-icon-delete" plain type="danger" :disabled="selection.length == 0"
-						@click="delete_list" title="删除" />
-					<el-button icon="el-icon-takeaway-box" plain type="danger" :disabled="selection.length == 0"
-						@click="recycle_del" title="移到回收站" />
-					<el-button icon="el-icon-circle-check" plain type="success" @click="all_read">全部已读</el-button>
-					<el-button icon="el-icon-circle-check" plain type="success" :disabled="selection.length == 0"
-						@click="set_read">设为已读</el-button>
+					<el-button type="primary" @click="open_dialog">
+						<sc-icon icon="sc-plus" />
+					</el-button>
+					<el-button plain type="danger" :disabled="selection.length == 0" @click="delete_list" title="删除">
+						<sc-icon icon="sc-close-circle-line" />
+					</el-button>
+					<el-button plain type="danger" :disabled="selection.length == 0" @click="recycle_del" title="移到回收站">
+						<sc-icon icon="sc-delete-line" />
+					</el-button>
+					<el-button plain type="success" @click="all_read">
+						<sc-icon icon="sc-close-circle-line" />全部已读
+					</el-button>
+					<el-button plain type="success" :disabled="selection.length == 0" @click="set_read">
+						<sc-icon icon="sc-close-circle-line" />设为已读
+					</el-button>
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
-						<el-button icon="el-icon-search" type="primary" @click="search" />
+						<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
 					</div>
 				</div>
 			</el-header>
@@ -95,28 +102,28 @@ export default {
 							type: "level",
 							value: 'msg10',
 							sum: 0,
-							icon: "el-icon-bell",
+							icon: "sc-bell-line",
 						},
 						{
 							label: "已读消息",
 							type: "level",
 							value: 'msg11',
 							sum: 0,
-							icon: "el-icon-circle-check",
+							icon: "sc-mail-check-line",
 						},
 						{
 							label: "未读消息",
 							type: "level",
 							value: 'msg12',
 							sum: 0,
-							icon: "el-icon-mute-notification",
+							icon: "sc-mail-unread-line",
 						},
 						{
 							label: "回收站",
 							type: "level",
 							value: 'msg13',
 							sum: 0,
-							icon: "el-icon-delete",
+							icon: "sc-delete-line",
 						},
 					],
 				},
@@ -154,10 +161,10 @@ export default {
 				return;
 			}
 
-			var list = [{ 'id': 1, label: '全部', value: 'tag10', sum: 0, icon: 'el-icon-star' }];
+			var list = [{ 'id': 1, label: '全部', value: 'tag10', sum: 0, icon: 'sc-star-line' }];
 			res.data.forEach(element => {
 				element.sum = 0;
-				element.icon = 'el-icon-star';
+				element.icon = 'sc-star-line';
 				list.push(element);
 			});
 
