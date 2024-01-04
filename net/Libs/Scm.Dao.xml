@@ -1896,6 +1896,71 @@
             评分次数
             </summary>
         </member>
+        <member name="T:Com.Scm.Msg.Feedback.FeedbackDetailDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackDetailDao.header_id">
+            <summary>
+            反馈ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackDetailDao.content">
+            <summary>
+            回复内容
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackDetailDao.system_reply">
+            <summary>
+            是否有新回复
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackDetailDao.customer_reply">
+            <summary>
+            是否有客户回复
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Msg.Feedback.FeedbackHeaderDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.types">
+            <summary>
+            反馈类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.remark">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.handle">
+            <summary>
+            处理状态
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.resolved">
+            <summary>
+            解决状态
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.system_reply">
+            <summary>
+            是否有新回复
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.customer_reply">
+            <summary>
+            是否有客户回复
+            </summary>
+        </member>
         <member name="T:Com.Scm.Res.Cat.CatDao">
             <summary>
             类别
