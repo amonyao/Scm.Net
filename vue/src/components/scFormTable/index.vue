@@ -34,10 +34,10 @@ import Sortable from "sortablejs";
 export default {
 	props: {
 		modelValue: { type: Array, default: () => [] },
+		isAdd: { type: Boolean, default: true },
 		addTemplate: { type: Object, default: () => { } },
 		placeholder: { type: String, default: "暂无数据" },
 		dragSort: { type: Boolean, default: false },
-		isAdd: { type: Boolean, default: true },
 		tableHeight: { type: Object, default: null }
 	},
 	data() {

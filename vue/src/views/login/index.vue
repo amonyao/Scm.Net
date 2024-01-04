@@ -128,12 +128,16 @@ export default {
 			showWechatLogin: false,
 			isWechatLoginResult: false,
 			theme: {
-				image: 'img/bg21.jpg',
-				size: 'cover',
-				positionx: 'center',
-				positiony: 'center',
-				repeat: 'no-repeat',
-				mask: 'rgba(0, 0, 0, 0.1)'
+				page: {
+					"backgroundImage": "url('img/bg1.jpg')",
+					"backgroundColor": "",
+					"backgroundSize": "cover",
+					"backgroundPosition": "center center",
+					"backgroundRepeat": "no-repeat"
+				},
+				mask: {
+					"backgroundColor": "rgba(0,0,0,0.5)"
+				}
 			}
 		};
 	},
@@ -192,7 +196,7 @@ export default {
 		},
 		wechatLogin() {
 			this.showWechatLogin = true;
-			this.WechatLoginCode = "FytSoa-823677237287236-" + new Date().getTime();
+			this.WechatLoginCode = "Scm-823677237287236-" + new Date().getTime();
 			this.isWechatLoginResult = false;
 			setTimeout(() => {
 				this.isWechatLoginResult = true;

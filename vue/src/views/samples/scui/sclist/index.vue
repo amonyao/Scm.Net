@@ -117,12 +117,6 @@ export default{
     mounted() {
     },
     methods: {
-        viewCode() {
-            this.codeVisible = !this.codeVisible;
-        },
-        copyCode() {
-
-        }
     },
 }
 </script>

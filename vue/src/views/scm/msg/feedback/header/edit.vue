@@ -1,24 +1,19 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="应用类型" prop="types">
-				<sc-select v-model="formData.types" :data="app_types_list"></sc-select>
-			</el-form-item>
-			<el-form-item label="应用代码" prop="name">
-				<el-input v-model="formData.name" placeholder="请输入应用代码" :maxlength="16" show-word-limit
+			<el-form-item label="反馈类型" prop="types">
+				<el-input v-model="formData.types" placeholder="请输入反馈类型" :maxlength="4" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="应用名称" prop="title">
-				<el-input v-model="formData.title" placeholder="请输入应用标题" :maxlength="32" show-word-limit
+			<el-form-item label="标题" prop="title">
+				<el-input v-model="formData.title" placeholder="请输入标题" :maxlength="128" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="应用简介" prop="content">
-				<el-input v-model="formData.content" placeholder="请输入应用说明" :maxlength="1024" show-word-limit clearable
-					type="textarea" rows="6"></el-input>
+			<el-form-item label="内容" prop="remark">
+				<el-input v-model="formData.remark" placeholder="请输入内容" :maxlength="1024" show-word-limit
+					clearable></el-input>
 			</el-form-item>
-
 		</el-form>
-
 		<template #footer>
 			<el-button @click="close">取 消</el-button>
 			<el-button :loading="isSaveing" type="primary" @click="save">
@@ -36,34 +31,18 @@ export default {
 			visible: false,
 			isSaveing: false,
 			formData: this.def_data(),
-			rules: {
-				types: [
-					{ required: true, trigger: "change", message: "请选择应用类型", },
-				],
-				name: [
-					{ required: true, trigger: "blur", message: "请输入应用代码", },
-				],
-				title: [
-					{ required: true, trigger: "blur", message: "请输入应用名称", },
-				],
-				content: [
-					{ required: true, trigger: "blur", message: "请输入应用简介", },
-				],
-			},
-			app_types_list: [],
+			rules: {},
 		};
 	},
 	mounted() {
-		this.$SCM.list_dic(this.app_types_list, 'app_types', false);
 	},
 	methods: {
 		def_data() {
 			return {
 				id: '0',
 				types: 0,
-				name: '',
 				title: '',
-				content: '',
+				remark: '',
 			}
 		},
 		async open(row) {
@@ -71,7 +50,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.devapp.edit.get(row.id);
+				var res = await this.$API.msgfeedbackheader.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -82,9 +61,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.devapp.add.post(this.formData);
+						res = await this.$API.msgfeedbackheader.add.post(this.formData);
 					} else {
-						res = await this.$API.devapp.update.put(this.formData);
+						res = await this.$API.msgfeedbackheader.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

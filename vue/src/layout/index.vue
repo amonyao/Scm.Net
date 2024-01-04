@@ -189,11 +189,8 @@
 
 	<div class="main-maximize-exit" @click="exitMaximize"><sc-icon title="退出全屏" icon="close" /></div>
 
-	<div class="layout-setting" @click="openSetting"><sc-icon icon="sc-feedback-line" title="用户反馈"></sc-icon></div>
-
-	<el-drawer title="用户反馈" v-model="settingDialog" :size="400" append-to-body destroy-on-close>
-		<feedback></feedback>
-	</el-drawer>
+	<div class="layout-setting" @click="openFeedback"><sc-icon icon="sc-feedback-line" title="用户反馈"></sc-icon></div>
+	<feedback ref="feedback"></feedback>
 </template>
 
 <script>
@@ -220,7 +217,6 @@ export default {
 	},
 	data() {
 		return {
-			settingDialog: false,
 			menu: [],
 			nextMenu: [],
 			pmenu: {},
@@ -260,8 +256,8 @@ export default {
 		}
 	},
 	methods: {
-		openSetting() {
-			this.settingDialog = true;
+		openFeedback() {
+			this.$refs.feedback.open();
 		},
 		onLayoutResize() {
 			this.$store.commit("SET_ismobile", document.body.clientWidth < 992)

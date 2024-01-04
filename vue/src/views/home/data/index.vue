@@ -29,12 +29,7 @@
             <el-col>
                 <el-card shadow="never">
                     <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-                        <el-tab-pane name="todo">
-                            <template #label>
-                                <el-badge :value="12">
-                                    我的待办
-                                </el-badge>
-                            </template>
+                        <el-tab-pane label="我的待办" name="todo">
                             <myTask></myTask>
                         </el-tab-pane>
                         <el-tab-pane label="系统消息" name="task">

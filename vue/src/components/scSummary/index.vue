@@ -1,9 +1,9 @@
 <template>
     <div class="sc-summary">
-        <div v-if="image" class="thumb"><img :src="image" /></div>
+        <div v-if="image" class="thumb"><el-avatar :size="50" :src="image" /></div>
         <div>
             <div class="title">{{ title }}</div>
-            <div class="summary">{{ summary }}</div>
+            <div class="summary" v-html="summary"></div>
         </div>
     </div>
 </template>
@@ -35,21 +35,23 @@ export default {
 }
 
 .sc-summary .thumb {
-    width: 32px;
-    height: 32px;
+    width: 56px;
+    height: 56px;
     background-color: lightgray;
     border-radius: var(--el-border-radius-base);
     margin-right: 10px;
 }
 
 .sc-summary .title {
-    color: var(--el-text-color-primary);
+    color: #aaa;
+    /* var(--el-text-color-primary); */
     font-size: var(--el-font-size-base);
     line-height: 1.3;
 }
 
 .sc-summary .summary {
-    color: var(--el-text-color-regular);
+    /* color: var(--el-text-color-regular); */
+    color: var(--el-text-color-primary);
     font-size: var(--el-font-size-base);
     line-height: 1.3;
 }
