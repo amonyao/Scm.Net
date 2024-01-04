@@ -12,9 +12,9 @@
 				</el-main>
 			</el-container>
 		</el-aside>
-		<el-container>
-			<el-header>
-				<div class="left-panel">
+		<el-container class="is-vertical">
+			<sc-search>
+				<template #filter>
 					<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus" /></el-button>
 					<el-divider direction="vertical"></el-divider>
 					<el-button-group>
@@ -38,14 +38,8 @@
 					<el-button type="primary" plain :disabled="selection.length == 0" @click="userRole">分配角色</el-button>
 					<el-button type="danger" plain :disabled="selection.length != 1" @click="pwdreset">密码重置</el-button>
 					<el-button type="danger" plain @click="exportAll()">导出</el-button>
-				</div>
-				<div class="right-panel">
-					<div class="right-panel-search">
-						<el-input v-model="param.key" clearable placeholder="登录账号" />
-						<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
-					</div>
-				</div>
-			</el-header>
+				</template>
+			</sc-search>
 			<el-main class="nopadding">
 				<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
 					@menu-handle="menuHandle" @selection-change="selectionChange">

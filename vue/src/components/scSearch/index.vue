@@ -2,8 +2,7 @@
     <el-header style="height: auto;">
         <div class="sc_search">
             <div class="sc-search_params" v-show="isExpand">
-                <el-form label-width="100px" :inline="true">
-                    <slot name="search"></slot>
+                <slot name="search">
                     <el-form-item label="搜索内容">
                         <el-input v-model="key" clearable placeholder="关键字" />
                     </el-form-item>
@@ -12,14 +11,12 @@
                             <sc-icon icon="sc-search" />查询
                         </el-button>
                     </el-form-item>
-                </el-form>
+                </slot>
             </div>
             <div class="sc-search_filter">
                 <div class="left-panel">
-                    <el-space :size="15">
-                        <slot name="filter">
-                        </slot>
-                    </el-space>
+                    <slot name="filter">
+                    </slot>
                 </div>
                 <div class="right-panel">
                     <div class="right-panel-search" v-if="!isExpand">

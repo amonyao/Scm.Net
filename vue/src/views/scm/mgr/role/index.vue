@@ -1,6 +1,6 @@
 <template>
-	<el-container>
-		<scSearch>
+	<el-container class="is-vertical">
+		<sc-search>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :rules="rules" :inline="true">
 					<el-form-item label="机构" prop="unit_id">
@@ -16,9 +16,7 @@
 					</el-form-item>
 				</el-form>
 			</template>
-		</scSearch>
-		<el-header>
-			<div class="left-panel">
+			<template #filter>
 				<el-button type="primary" @click="open_dialog">
 					<sc-icon icon="sc-plus" />
 				</el-button>
@@ -40,14 +38,8 @@
 						</el-button>
 					</el-tooltip>
 				</el-button-group>
-			</div>
-			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="角色名称" />
-					<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
-				</div>
-			</div>
-		</el-header>
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" hide-pagination is-tree
 				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">

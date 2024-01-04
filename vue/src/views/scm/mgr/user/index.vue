@@ -1,6 +1,6 @@
 <template>
-	<el-container>
-		<scSearch>
+	<el-container class="is-vertical">
+		<sc-search>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="机构" prop="unit_id">
@@ -20,9 +20,7 @@
 					</el-form-item>
 				</el-form>
 			</template>
-		</scSearch>
-		<el-header>
-			<div class="left-panel">
+			<template #filter>
 				<el-button type="primary" @click="open_dialog">
 					<sc-icon icon="sc-plus" />
 				</el-button>
@@ -46,14 +44,8 @@
 				</el-button-group>
 				<el-divider direction="vertical"></el-divider>
 				<el-button type="danger" plain :disabled="selection.length != 1" @click="pwdreset">密码重置</el-button>
-			</div>
-			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="登录账号" />
-					<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
-				</div>
-			</div>
-		</el-header>
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
 				@menu-handle="menuHandle" @selection-change="selectionChange">

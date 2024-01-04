@@ -1,6 +1,6 @@
 <template>
-	<el-container>
-		<scSearch>
+	<el-container class="is-vertical">
+		<sc-search>
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="查询选项" prop="types">
@@ -15,18 +15,10 @@
 					</el-form-item>
 				</el-form>
 			</template>
-		</scSearch>
-		<el-header>
-			<div class="left-panel">
+			<template #filter>
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
-			</div>
-			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button icon="el-icon-search" type="primary" @click="search" />
-				</div>
-			</div>
-		</el-header>
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
 				@selection-change="selectionChange">

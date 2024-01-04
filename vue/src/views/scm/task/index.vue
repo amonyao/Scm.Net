@@ -25,7 +25,7 @@
 				<el-button-group>
 					<el-tooltip content="暂停">
 						<el-button type="primary" plain :disabled="selection.length == 0" @click="pause_job">
-							<sc-icon icon="sc-check-circle-line" />
+							<sc-icon icon="sc-pause-circle-line" />
 						</el-button>
 					</el-tooltip>
 					<el-tooltip content="执行">

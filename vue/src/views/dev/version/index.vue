@@ -2,17 +2,27 @@
 	<el-container class="is-vertical">
 		<scSearch :expandVisible="true" @search="search">
 			<template #search>
-				<el-form-item label="终端类型" prop="types">
-					<sc-select v-model="param.types" :data="types_list" placeholder="请选择终端类型" />
-				</el-form-item>
-				<el-form-item label="数据状态" prop="row_status">
-					<sc-select v-model="param.row_status" :data="row_status_list" placeholder="请选择数据状态" />
-				</el-form-item>
-				<el-form-item label="创建时间" prop="create_time">
-					<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-						start-placeholder="开始日期" end-placeholder="结束日期">
-					</el-date-picker>
-				</el-form-item>
+				<el-form :model="param" :inline="true">
+					<el-form-item label="终端类型" prop="types">
+						<sc-select v-model="param.types" :data="types_list" placeholder="请选择终端类型" />
+					</el-form-item>
+					<el-form-item label="数据状态" prop="row_status">
+						<sc-select v-model="param.row_status" :data="row_status_list" placeholder="请选择数据状态" />
+					</el-form-item>
+					<el-form-item label="创建时间" prop="create_time">
+						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+							start-placeholder="开始日期" end-placeholder="结束日期">
+						</el-date-picker>
+					</el-form-item>
+					<el-form-item label="搜索内容">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="search">
+							<sc-icon icon="sc-search" />查询
+						</el-button>
+					</el-form-item>
+				</el-form>
 			</template>
 			<template #filter>
 				<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus" /></el-button>

@@ -1,31 +1,28 @@
 <template>
-	<el-container>
-		<el-header>
-			<div class="left-panel">
-				<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus"/></el-button>
+	<el-container class="is-vertical">
+		<sc-search>
+			<template #filter>
+				<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
-						<el-button type="primary" plain :disabled="selection.length == 0"
-							@click="status_list(1)"><sc-icon icon="sc-check-circle-line"/></el-button>
+						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)">
+							<sc-icon icon="sc-check-circle-line" />
+						</el-button>
 					</el-tooltip>
 					<el-tooltip content="停用">
-						<el-button type="primary" plain :disabled="selection.length == 0"
-							@click="status_list(2)"><sc-icon icon="sc-pause-circle-line"/></el-button>
+						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)">
+							<sc-icon icon="sc-pause-circle-line" />
+						</el-button>
 					</el-tooltip>
 					<el-tooltip content="删除">
-						<el-button type="danger" plain :disabled="selection.length == 0"
-							@click="delete_list"><sc-icon icon="sc-close-circle-line"/></el-button>
+						<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list">
+							<sc-icon icon="sc-close-circle-line" />
+						</el-button>
 					</el-tooltip>
 				</el-button-group>
-			</div>
-			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="组织名称" />
-					<el-button type="primary" @click="search"><sc-icon icon="sc-search"/></el-button>
-				</div>
-			</div>
-		</el-header>
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" hide-pagination is-tree
 				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
