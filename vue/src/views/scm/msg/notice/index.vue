@@ -6,16 +6,16 @@
 				<el-button icon="el-icon-files" type="primary" :disabled="list.length == 0 || !isReader"
 					@click="setRead">全部标记已读</el-button>
 				<el-button plain type="danger" :disabled="selection.length == 0" @click="batchDel">
-					<sc-icon icon="sc-delete-line" />删除
+					<sc-icon name="sc-delete-line" />删除
 				</el-button>
 				<el-button type="info" :disabled="selection.length == 0" @click="archives">
-					<sc-icon icon="sc-archive-line" />存档
+					<sc-icon name="sc-archive-line" />存档
 				</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
 					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
+					<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
 				</div>
 			</div>
 		</el-header>

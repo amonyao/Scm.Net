@@ -5,7 +5,7 @@
 				<el-header>
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
 					<el-button type="primary" round class="add-column">
-						<sc-icon icon="sc-search" />
+						<sc-icon name="sc-search" />
 					</el-button>
 				</el-header>
 				<el-main class="nopadding">
@@ -16,8 +16,8 @@
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
 								<span class="opt">
-									<sc-icon icon="sc-edit-line" />
-									<sc-icon icon="sc-delete-line" />
+									<sc-icon name="sc-edit-line" />
+									<sc-icon name="sc-delete-line" />
 								</span>
 							</span>
 						</template>

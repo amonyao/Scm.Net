@@ -8,7 +8,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="doSearch">
-                            <sc-icon icon="sc-search" />查询
+                            <sc-icon name="sc-search" />查询
                         </el-button>
                     </el-form-item>
                 </slot>
@@ -22,15 +22,15 @@
                     <div class="right-panel-search" v-if="!isExpand">
                         <el-input v-model="key" clearable placeholder="关键字" />
                         <el-button type="primary" @click="doSearch">
-                            <sc-icon icon="sc-search" />
+                            <sc-icon name="sc-search" />
                         </el-button>
                         <el-button @click="doExpand" v-if="expandVisible">
-                            <sc-icon icon="sc-arrow-up-2-fill" />展开
+                            <sc-icon name="sc-arrow-up-2-fill" />展开
                         </el-button>
                     </div>
                     <div class="right-panel-search" v-else>
                         <el-button @click="doExpand">
-                            <sc-icon icon="sc-arrow-down-2-fill" />合并
+                            <sc-icon name="sc-arrow-down-2-fill" />合并
                         </el-button>
                     </div>
                 </div>

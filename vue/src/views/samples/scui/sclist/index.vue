@@ -18,7 +18,7 @@
                         <sc-list :data="example2.data" icon="sc-folder-open-line">
                             <template #header>
                                 <div style="font-size: 17px;padding: 15px 20px;">
-                                    <sc-icon icon="palette-line"></sc-icon>
+                                    <sc-icon name="palette-line"></sc-icon>
                                     颜色
                                 </div>
                             </template>

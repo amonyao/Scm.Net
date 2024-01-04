@@ -2,7 +2,7 @@
 	<el-container class="is-vertical">
 		<sc-search>
 			<template #filter>
-				<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus" /></el-button>
+				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
@@ -20,7 +20,7 @@
 				</el-button-group>
 				<el-divider direction="vertical"></el-divider>
 				<el-button type="primary" @click="resetData()">
-					<sc-icon icon="sc-plus" />
+					<sc-icon name="sc-plus" />
 				</el-button>
 			</template>
 		</sc-search>

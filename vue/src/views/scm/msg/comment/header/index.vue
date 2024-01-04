@@ -18,7 +18,7 @@
 		</scSearch>
 		<el-header>
 			<div class="left-panel">
-				<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus" /></el-button>
+				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
@@ -36,13 +36,13 @@
 				</el-button-group>
 				<el-divider direction="vertical"></el-divider>
 				<el-button type="primary" @click="open_detail()">
-					<sc-icon icon="sc-edit-line" />详情
+					<sc-icon name="sc-edit-line" />详情
 				</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
 					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
+					<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
 				</div>
 			</div>
 		</el-header>

@@ -53,7 +53,7 @@
 					trigger="click" :hide-after="0">
 					<template #reference>
 						<el-button circle style="margin-left: 15px">
-							<sc-icon icon="sc-icon-file-xls" />
+							<sc-icon name="sc-icon-file-xls" />
 						</el-button>
 					</template>
 					<columnExcel :column="column" :data="tableData" @excelCancel="excelCancel"></columnExcel>

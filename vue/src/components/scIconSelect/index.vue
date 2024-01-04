@@ -11,7 +11,7 @@
 	<div class="sc-icon-select">
 		<div class="sc-icon-select__wrapper" :class="{ hasValue: value }" @click="open">
 			<el-button style="padding: 7px;">
-				<sc-icon :icon="value || 'sc-reduce-btn'" style="margin: 0px;" :size="16"></sc-icon>
+				<sc-icon :name="value || 'sc-reduce-btn'" style="margin: 0px;" :size="16"></sc-icon>
 			</el-button>
 		</div>
 		<el-dialog title="图标选择器" v-model="dialogVisible" :width="760" destroy-on-close append-to-body>
@@ -20,7 +20,7 @@
 					<el-form-item prop="searchText">
 						<el-input class="sc-icon-select__search-input" v-model="searchText" placeholder="搜索" clearable>
 							<template #prepend>
-								<sc-icon icon="sc-search" />
+								<sc-icon name="sc-search" />
 							</template>
 							<template #append>
 								<el-select v-model="mode" placeholder="Select" style="width: 115px">

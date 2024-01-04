@@ -9,7 +9,7 @@
                 :class="{ active: canSelected && currIndex == index }" :style="{ width: 100 / columns + '%' }">
                 <slot name="item" :item="item" :index="index">
                     <div class="sc-list-item_label">
-                        <sc-icon :icon="icon"></sc-icon>
+                        <sc-icon :name="icon"></sc-icon>
                         {{ item.label }}
                     </div>
                     <div class="sc-list-item_value">
@@ -18,8 +18,8 @@
                     </div>
                 </slot>
                 <span class="opt" v-if="showOpt">
-                    <sc-icon icon="sc-edit-line" @click.stop="itemEdit(item, index)" v-if="showEdit" title="编辑" />
-                    <sc-icon icon="sc-delete-line" @click.stop="itemRemove(item, index)" v-if="showDrop" title="删除" />
+                    <sc-icon name="sc-edit-line" @click.stop="itemEdit(item, index)" v-if="showEdit" title="编辑" />
+                    <sc-icon name="sc-delete-line" @click.stop="itemRemove(item, index)" v-if="showDrop" title="删除" />
                 </span>
             </div>
         </div>

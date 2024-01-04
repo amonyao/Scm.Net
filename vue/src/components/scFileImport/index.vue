@@ -19,7 +19,7 @@
 				:show-file-list="false" :http-request="request" :before-upload="before" :on-progress="progress"
 				:on-success="success" :on-error="error">
 				<slot name="uploader">
-					<sc-icon icon="sc-file-upload-line"/>
+					<sc-icon name="sc-file-upload-line"/>
 					<div class="el-upload__text">
 						将文件拖到此处或 <em>点击选择文件上传</em>
 					</div>

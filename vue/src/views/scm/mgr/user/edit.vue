@@ -20,7 +20,7 @@
 							<p>次数</p>
 						</el-col>
 						<el-col :span="8">
-							<span><sc-icon icon="sc-check-cirrcle-fill" /></span>
+							<span><sc-icon name="sc-check-cirrcle-fill" /></span>
 							<p>状态</p>
 						</el-col>
 						<el-col :span="8">

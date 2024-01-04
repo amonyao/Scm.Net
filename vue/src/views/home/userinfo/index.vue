@@ -16,7 +16,7 @@
 						<el-menu-item-group v-for="group in menu" :key="group.groupName" :title="group.groupName">
 							<el-menu-item v-for="item in group.list" :key="item.component" :index="item.component"
 								@click="openPage">
-								<sc-icon v-if="item.icon" :icon="item.icon" />
+								<sc-icon v-if="item.icon" :name="item.icon" />
 								<template #title>
 									<span>{{ item.title }}</span>
 								</template>

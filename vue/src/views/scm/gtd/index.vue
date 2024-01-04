@@ -6,7 +6,7 @@
 		<el-container>
 			<el-header>
 				<div class="left-panel">
-					<el-button type="primary" @click="open_dialog()"><sc-icon icon="sc-plus" /></el-button>
+					<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 					<el-divider direction="vertical"></el-divider>
 					<el-radio-group v-model="model" @change="changeView()">
 						<el-radio-button label="1">表格</el-radio-button>
@@ -18,7 +18,7 @@
 				<div class="right-panel">
 					<div class="right-panel-search">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
-						<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
+						<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
 					</div>
 				</div>
 			</el-header>
@@ -48,8 +48,8 @@
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
-									<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-									<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+									<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+									<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -64,8 +64,8 @@
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
-									<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-									<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+									<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+									<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -78,8 +78,8 @@
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
-									<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-									<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+									<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+									<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -92,8 +92,8 @@
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
-									<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-									<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+									<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+									<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 								</div>
 								<div style="width: 100%;" @click="itemClick(item)">
 									<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -110,8 +110,8 @@
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
-										<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -125,8 +125,8 @@
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
-										<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -142,8 +142,8 @@
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
-										<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -157,8 +157,8 @@
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
-										<sc-icon icon="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon icon="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
+										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -175,7 +175,7 @@
 			<el-footer>
 				<div class="right-panel-search">
 					<el-input v-model="formData.title" clearable placeholder="请输入待办任务" @keydown="keydown" />
-					<el-button type="primary" @click="create"><sc-icon icon="sc-plus" /></el-button>
+					<el-button type="primary" @click="create"><sc-icon name="sc-plus" /></el-button>
 				</div>
 			</el-footer>
 			<edit ref="edit" @complete="complete" />

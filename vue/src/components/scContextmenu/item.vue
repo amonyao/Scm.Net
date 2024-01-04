@@ -12,11 +12,11 @@
 	<li :class="disabled ? 'disabled' : ''" @click.stop="liClick" @mouseenter="openSubmenu($event)"
 		@mouseleave="closeSubmenu($event)">
 		<span class="title">
-			<sc-icon class="sc-contextmenu__icon" :icon="icon" v-if="icon"></sc-icon>
+			<sc-icon class="sc-contextmenu__icon" :name="icon" v-if="icon" />
 			{{ title }}
 		</span>
 		<span class="sc-contextmenu__suffix">
-			<sc-icon v-if="$slots.default" icon="sc-arrow-right-2-fill"></sc-icon>
+			<sc-icon v-if="$slots.default" name="sc-arrow-right-2-fill" />
 			<template v-else>{{ suffix }}</template>
 		</span>
 		<ul v-if="$slots.default" class="sc-contextmenu__menu">

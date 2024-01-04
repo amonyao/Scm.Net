@@ -21,25 +21,25 @@
 			<el-header>
 				<div class="left-panel">
 					<el-button type="primary" @click="open_dialog">
-						<sc-icon icon="sc-plus" />
+						<sc-icon name="sc-plus" />
 					</el-button>
 					<el-button plain type="danger" :disabled="selection.length == 0" @click="delete_list" title="删除">
-						<sc-icon icon="sc-close-circle-line" />
+						<sc-icon name="sc-close-circle-line" />
 					</el-button>
 					<el-button plain type="danger" :disabled="selection.length == 0" @click="recycle_del" title="移到回收站">
-						<sc-icon icon="sc-delete-line" />
+						<sc-icon name="sc-delete-line" />
 					</el-button>
 					<el-button plain type="success" @click="all_read">
-						<sc-icon icon="sc-close-circle-line" />全部已读
+						<sc-icon name="sc-close-circle-line" />全部已读
 					</el-button>
 					<el-button plain type="success" :disabled="selection.length == 0" @click="set_read">
-						<sc-icon icon="sc-close-circle-line" />设为已读
+						<sc-icon name="sc-close-circle-line" />设为已读
 					</el-button>
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
-						<el-button type="primary" @click="search"><sc-icon icon="sc-search" /></el-button>
+						<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
 					</div>
 				</div>
 			</el-header>

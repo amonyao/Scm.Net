@@ -118,7 +118,7 @@ export default {
 		},
 		copyCode(icon) {
 			//var code = '<span class="' + this.getIcon(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
-			var code = '<sc-icon icon="' + this.getName(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
+			var code = '<sc-icon name="' + this.getName(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
 			clipboardy.write(code);
 			this.$message.success('复制成功！');
 		},

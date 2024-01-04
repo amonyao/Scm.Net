@@ -19,23 +19,23 @@
 		<el-header>
 			<div class="left-panel">
 				<el-button type="primary" @click="open_dialog()">
-					<sc-icon icon="sc-plus" />
+					<sc-icon name="sc-plus" />
 				</el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
 						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)">
-							<sc-icon icon="sc-check-circle-line" />
+							<sc-icon name="sc-check-circle-line" />
 						</el-button>
 					</el-tooltip>
 					<el-tooltip content="停用">
 						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)">
-							<sc-icon icon="sc-pause-circle-line" />
+							<sc-icon name="sc-pause-circle-line" />
 						</el-button>
 					</el-tooltip>
 					<el-tooltip content="删除">
 						<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list">
-							<sc-icon icon="sc-close-circle-line" />
+							<sc-icon name="sc-close-circle-line" />
 						</el-button>
 					</el-tooltip>
 				</el-button-group>
@@ -44,7 +44,7 @@
 				<div class="right-panel-search">
 					<el-input v-model="param.key" clearable placeholder="关键字" />
 					<el-button type="primary" @click="search">
-						<sc-icon icon="sc-search" />
+						<sc-icon name="sc-search" />
 					</el-button>
 				</div>
 			</div>

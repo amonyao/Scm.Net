@@ -3,17 +3,17 @@
 		<el-header>
 			<div class="left-panel">
 				<el-button type="primary" @click="open_dialog">
-					<sc-icon icon="sc-plus" />
+					<sc-icon name="sc-plus" />
 				</el-button>
 				<el-button plain type="danger" :disabled="selection.length == 0" @click="batch_del">
-					<sc-icon icon="sc-close" />
+					<sc-icon name="sc-close" />
 				</el-button>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">
 					<el-input v-model="param.key" clearable placeholder="关键字" />
 					<el-button type="primary" @click="search">
-						<sc-icon icon="sc-search" />
+						<sc-icon name="sc-search" />
 					</el-button>
 				</div>
 			</div>

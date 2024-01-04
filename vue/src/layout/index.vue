@@ -10,7 +10,7 @@
 				<ul v-if="!ismobile" class="nav">
 					<li v-for="item in menu" :key="item" :class="pmenu.path == item.path ? 'active' : ''"
 						@click="showMenu(item)">
-						<sc-icon :icon="item.meta.icon || 'sc-menu-fill'"></sc-icon>
+						<sc-icon :name="item.meta.icon || 'sc-menu-fill'"></sc-icon>
 						<span>{{ item.meta.title }}</span>
 					</li>
 				</ul>
@@ -34,7 +34,7 @@
 					</el-scrollbar>
 				</div>
 				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
-					<sc-icon :icon="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
+					<sc-icon :name="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
@@ -77,7 +77,7 @@
 					</el-scrollbar>
 				</div>
 				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
-					<sc-icon :icon="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
+					<sc-icon :name="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
@@ -145,7 +145,7 @@
 						<ul>
 							<li v-for="item in menu" :key="item" :class="pmenu.path == item.path ? 'active' : ''"
 								@click="showMenu(item)">
-								<sc-icon :icon="item.meta.icon || 'sc-menu-fill'"></sc-icon>
+								<sc-icon :name="item.meta.icon || 'sc-menu-fill'"></sc-icon>
 								<p>{{ item.meta.title }}</p>
 							</li>
 						</ul>
@@ -166,7 +166,7 @@
 					</el-scrollbar>
 				</div>
 				<div class="scmui-side-bottom" @click="$store.commit('TOGGLE_menuIsCollapse')">
-					<sc-icon :icon="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
+					<sc-icon :name="menuIsCollapse ? 'sc-menu-show' : 'sc-menu-hide'"></sc-icon>
 				</div>
 			</div>
 			<Side-m v-if="ismobile"></Side-m>
@@ -187,9 +187,9 @@
 		</section>
 	</template>
 
-	<div class="main-maximize-exit" @click="exitMaximize"><sc-icon title="退出全屏" icon="close" /></div>
+	<div class="main-maximize-exit" @click="exitMaximize"><sc-icon title="退出全屏" name="close" /></div>
 
-	<div class="layout-setting" @click="openFeedback"><sc-icon icon="sc-feedback-line" title="用户反馈"></sc-icon></div>
+	<div class="layout-setting" @click="openFeedback"><sc-icon name="sc-feedback-line" title="用户反馈" /></div>
 	<feedback ref="feedback"></feedback>
 </template>
 

@@ -35,7 +35,7 @@
                                     {{ item.namec }}
                                 </el-col>
                                 <el-col :span="4" style="text-align: right;">
-                                    <sc-icon icon="sc-star-line"></sc-icon>
+                                    <sc-icon name="sc-star-line"/>
                                     {{ item.likes }}
                                 </el-col>
                             </el-row>
