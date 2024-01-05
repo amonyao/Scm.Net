@@ -1,15 +1,15 @@
 <template>
-    <i :class="scIcon" :style="{ 'fontSize': scSize, 'color': color }">{{ name }}</i>
+    <i :class="scIcon" :style="{ 'fontSize': scSize, 'color': color }">{{ scName() }}</i>
 </template>
 <script>
 export default {
     props: {
-        set: { type: String, defaul: 'sc' },//图标集：sc,md
-        name: { type: String, defaul: '' },//图标名称
-        size: { type: Number, defaul: 16 },//图标大小
-        type: { type: String, defaul: 'Outlined' },//风格：Filled、Outlined、Round、Sharp
-        color: { type: String, defaul: '#f00' },//颜色
-        title: { type: String, defaul: '' },//提示
+        set: { type: String, default: 'sc' },//图标集：sc,md
+        name: { type: String, default: '' },//图标名称
+        size: { type: Number, default: 16 },//图标大小
+        type: { type: String, default: 'Outlined' },//风格：Filled、Outlined、Round、Sharp
+        color: { type: String, default: '' },//颜色
+        title: { type: String, default: '' },//提示
     },
     computed: {
         scIcon: function () {
@@ -29,5 +29,14 @@ export default {
             return this.size ? this.size + 'px' : '';
         }
     },
+    methods: {
+        scName() {
+            console.log(this.set)
+            if (this.set != 'sc') {
+                return this.name;
+            }
+            return '';
+        }
+    }
 }
 </script>

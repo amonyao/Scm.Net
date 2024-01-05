@@ -93,6 +93,7 @@ namespace Com.Scm.Api
             var emailConfig = AppUtils.GetConfig<EmailConfig>(EmailConfig.NAME) ?? new EmailConfig();
             builder.Services.AddSingleton(emailConfig);
 
+            builder.Services.AddScoped<ILogService, ScmLogService>();
             builder.Services.AddScoped<IDicService, ScmDicService>();
             builder.Services.AddScoped<ICfgService, ScmCfgService>();
             builder.Services.AddScoped<ISecService, ScmSecService>();
