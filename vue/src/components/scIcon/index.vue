@@ -31,7 +31,6 @@ export default {
     },
     methods: {
         scName() {
-            console.log(this.set)
             if (this.set != 'sc') {
                 return this.name;
             }

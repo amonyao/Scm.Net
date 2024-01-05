@@ -12,10 +12,13 @@
 				</div>
 				<div class="common-header-right">
 					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info" @click="configDark"
-						:title="$t('login.themeTitle')"></el-button>
+						:title="$t('login.themeTitle')">
+					</el-button>
 					<el-dropdown trigger="click" placement="bottom-end" @command="configLang"
 						:title="$t('login.langTitle')">
-						<el-button circle icon="sc-icon-lang"></el-button>
+						<el-button circle>
+							<sc-icon name="sc-translate" />
+						</el-button>
 						<template #dropdown>
 							<el-dropdown-menu>
 								<el-dropdown-item v-for="item in lang" :key="item.value" :command="item"

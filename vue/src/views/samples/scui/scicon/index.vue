@@ -1,17 +1,15 @@
 <template>
-	<el-container>
-		<el-header style="height: auto;">
-			<sc-search @search="search" :syncSearch="true">
-				<template #filter>
-					<label>图标格式：</label>
-					<el-switch v-model="mode" active-text="填充" inactive-text="线型" />
-					<label>图标大小：</label>
-					<el-slider v-model="size" :min="16" :max="128" :step="4" style="width: 120px;"></el-slider>
-					<label>图标颜色：</label>
-					<el-color-picker v-model="color" :predefine="predefineColors" />
-				</template>
-			</sc-search>
-		</el-header>
+	<el-container class="is-vertical">
+		<sc-search @search="search" :syncSearch="true">
+			<template #filter>
+				<label>图标格式：</label>
+				<el-switch v-model="mode" active-text="填充" inactive-text="线型" />
+				<label>图标大小：</label>
+				<el-slider v-model="size" :min="16" :max="128" :step="4" style="width: 120px;"></el-slider>
+				<label>图标颜色：</label>
+				<el-color-picker v-model="color" :predefine="predefineColors" />
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<el-container>
 				<el-aside style="width: 240px;">
@@ -119,7 +117,7 @@ export default {
 		copyCode(icon) {
 			//var code = '<span class="' + this.getIcon(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
 			var code = '<sc-icon name="' + this.getName(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
-			clipboardy.write(code);
+			clipboardy.writeSync(code);
 			this.$message.success('复制成功！');
 		},
 		search(key) {

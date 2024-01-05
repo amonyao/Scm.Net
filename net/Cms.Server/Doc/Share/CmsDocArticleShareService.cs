@@ -3,7 +3,6 @@ using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Jwt;
 using Com.Scm.Result;
 using Com.Scm.Service;
-using Com.Scm.Share;
 using Com.Scm.Share.Dvo;
 using Com.Scm.Ur;
 
@@ -15,13 +14,18 @@ namespace Com.Scm.Cms.Doc.Share
     public class CmsDocArticleShareService : ApiService
     {
         private readonly SugarRepository<CmsDocArticleDao> _articleRepository;
-        private readonly IShareService _shareService;
+        private readonly SugarRepository<CmsDocShareHeaderDao> _headerRepository;
+        private readonly SugarRepository<CmsDocShareDetailDao> _detailRepository;
         private readonly JwtContextHolder _contextHolder;
 
-        public CmsDocArticleShareService(SugarRepository<CmsDocArticleDao> articleRepository, IShareService shareService, JwtContextHolder contextHolder)
+        public CmsDocArticleShareService(SugarRepository<CmsDocArticleDao> articleRepository,
+            SugarRepository<CmsDocShareHeaderDao> headerRepository,
+            SugarRepository<CmsDocShareDetailDao> detailRepository,
+            JwtContextHolder contextHolder)
         {
             _articleRepository = articleRepository;
-            _shareService = shareService;
+            _headerRepository = headerRepository;
+            _detailRepository = detailRepository;
             _contextHolder = contextHolder;
         }
 
@@ -41,7 +45,11 @@ namespace Com.Scm.Cms.Doc.Share
                 userId = token.user_id;
             }
 
-            return await _shareService.GetPagesShareData(request, CmsUtils.APP_ID, unitId, userId);
+            return await _headerRepository
+                .AsQueryable()
+                .OrderBy(a => a.id, SqlSugar.OrderByType.Desc)
+                .Select<ShareHeaderDvo>()
+                .ToPageAsync(request.page, request.limit);
         }
     }
 }

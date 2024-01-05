@@ -7,6 +7,7 @@ import tool from "@/utils/tool";
 import systemRouter from "./systemRouter";
 import userRoutes from "@/config/route";
 import { beforeEach, afterEach } from "./scrollBehavior";
+import http from "@/utils/request";
 
 //系统路由
 const routes = systemRouter;
@@ -17,7 +18,7 @@ const routes_404 = {
 	hidden: true,
 	component: () => import(/* webpackChunkName: "404" */ "@/layout/other/404"),
 };
-let routes_404_r = () => { };
+let routes_404_r = () => {};
 
 const router = createRouter({
 	history: createWebHashHistory(),
@@ -72,8 +73,8 @@ router.beforeEach(async (to, from, next) => {
 		let userMenu = treeFilter(userRoutes, (node) => {
 			return node.meta.role
 				? node.meta.role.filter(
-					(item) => userInfo.role.indexOf(item) > -1
-				).length > 0
+						(item) => userInfo.role.indexOf(item) > -1
+				  ).length > 0
 				: true;
 		});
 		let menu = [...userMenu, ...apiMenu];
@@ -95,6 +96,7 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach((to, from) => {
 	afterEach(to, from);
 	NProgress.done();
+	recordPv(to);
 });
 
 router.onError((error) => {
@@ -111,12 +113,23 @@ router.sc_getMenu = () => {
 	let userInfo = tool.data.get("USER_INFO");
 	let userMenu = treeFilter(userRoutes, (node) => {
 		return node.meta.role
-			? node.meta.role.filter((item) => userInfo.role.indexOf(item) > -1).length > 0
+			? node.meta.role.filter((item) => userInfo.role.indexOf(item) > -1)
+					.length > 0
 			: true;
 	});
 	var menu = [...userMenu, ...apiMenu];
 	return menu;
 };
+
+async function recordPv(to) {
+	var url = to.fullPath;
+	//var title = to.meta.title;
+	// 记录访问信息
+	var res = await http.post(`${config.API_URL}/syspv`, { url: url });
+	if (!res || res.code != 200) {
+		console.log("pv error");
+	}
+}
 
 //转换
 function filterAsyncRouter(routerMap) {

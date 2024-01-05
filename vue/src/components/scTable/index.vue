@@ -40,35 +40,36 @@
 					@size-change="paginationSizeChange" @current-change="paginationChange" />
 			</div>
 			<div class="scTable-do" v-if="!hideDo">
-				<el-button v-if="!hideRefresh" @click="refresh" icon="el-icon-refresh" circle
-					style="margin-left: 15px"></el-button>
+				<el-button v-if="!hideRefresh" @click="refresh" icon="el-icon-refresh" circle title="刷新"></el-button>
 				<el-popover v-if="!hidePrint" placement="top" ref="printPover" title="打印列设置" :width="400" trigger="click"
 					:hide-after="0">
 					<template #reference>
-						<el-button icon="el-icon-printer" circle style="margin-left: 15px"></el-button>
+						<el-button circle title="打印列设置">
+							<sc-icon name="sc-printer-line" />
+						</el-button>
 					</template>
 					<columnPrint :column="column" :data="tableData" @printCancel="printCancel"></columnPrint>
 				</el-popover>
 				<el-popover v-if="!hideExcel" placement="top" ref="excelPover" title="导出Excel设置" :width="400"
 					trigger="click" :hide-after="0">
 					<template #reference>
-						<el-button circle style="margin-left: 15px">
-							<sc-icon name="sc-icon-file-xls" />
+						<el-button circle title="导出Excel设置">
+							<sc-icon name="sc-file-excel-line" />
 						</el-button>
 					</template>
 					<columnExcel :column="column" :data="tableData" @excelCancel="excelCancel"></columnExcel>
 				</el-popover>
-				<el-popover v-if="column" placement="top" title="列设置" :width="500" trigger="click" :hide-after="0"
+				<el-popover v-if="column" placement="top" title="显示列设置" :width="500" trigger="click" :hide-after="0"
 					@show="customColumnShow = true" @after-leave="customColumnShow = false">
 					<template #reference>
-						<el-button icon="el-icon-set-up" circle style="margin-left: 15px"></el-button>
+						<el-button icon="el-icon-set-up" circle title="显示列设置"></el-button>
 					</template>
 					<columnSetting v-if="customColumnShow" ref="columnSetting" @userChange="columnSettingChange"
 						@save="columnSettingSave" @back="columnSettingBack" :column="userColumn"></columnSetting>
 				</el-popover>
 				<el-popover v-if="!hideSetting" placement="top" title="表格设置" :width="400" trigger="click" :hide-after="0">
 					<template #reference>
-						<el-button icon="el-icon-setting" circle style="margin-left: 15px"></el-button>
+						<el-button icon="el-icon-setting" circle title="表格设置"></el-button>
 					</template>
 					<el-form label-width="80px" label-position="left">
 						<el-form-item label="表格尺寸">
@@ -464,6 +465,10 @@ export default {
 
 .scTable-do {
 	white-space: nowrap;
+}
+
+.scTable-do .el-button {
+	margin-left: 15px;
 }
 
 .scTable:deep(.el-table__footer) .cell {

@@ -11,11 +11,8 @@
                     <sc-code :code="example2.code" title="带图标" desc="用于显示一个列表数据，可以指定图标。">
                         <sc-list :data="example2.data" icon="sc-folder-open-line" />
                     </sc-code>
-                    <sc-code :code="example2.code" title="显示头信息" desc="用于显示一个列表数据，可以指定图标。">
-                        <sc-list :data="example2.data" icon="sc-folder-open-line" header="颜色" />
-                    </sc-code>
-                    <sc-code :code="example2.code" title="显示头信息" desc="用于显示一个列表数据，可以指定图标。">
-                        <sc-list :data="example2.data" icon="sc-folder-open-line">
+                    <sc-code :code="example3.code" title="显示头信息" desc="用于显示一个列表数据，可以指定图标。">
+                        <sc-list :data="example3.data" icon="sc-folder-open-line">
                             <template #header>
                                 <div style="font-size: 17px;padding: 15px 20px;">
                                     <sc-icon name="palette-line"></sc-icon>
@@ -24,8 +21,8 @@
                             </template>
                         </sc-list>
                     </sc-code>
-                    <sc-code :code="example2.code" title="显示尾信息" desc="用于显示一个列表数据，可以指定图标。">
-                        <sc-list :data="example2.data" icon="sc-folder-open-line" header="颜色">
+                    <sc-code :code="example4.code" title="显示尾信息" desc="用于显示一个列表数据，可以指定图标。">
+                        <sc-list :data="example4.data" icon="sc-folder-open-line" header="颜色">
                             <template #footer>
                                 <div style="text-align: right;padding: 5px; color: #999;">共3种可用颜色</div>
                             </template>
@@ -60,6 +57,7 @@ export default {
     },
     data() {
         return {
+            // 基础用法
             example1: {
                 code: `\x3csc-list :data="list" /\x3e
 \x3cscript\x3e 
@@ -79,8 +77,61 @@ export default{
                 { id: 3, label: '蓝色', value: '3' }
                 ],
             },
+            // 带图标
             example2: {
                 code: `\x3csc-list :data="list" icon="sc-folder-open-line" /\x3e
+\x3cscript\x3e 
+export default{
+    data(){
+        return {
+            list:[{ id: 1, label: '红色', value: '1' },
+                { id: 2, label: '黄色', value: '2' },
+                { id: 3, label: '蓝色', value: '3' }
+            ]
+        }
+    }
+}
+\x3c/script\x3e`,
+                data: [{ id: 1, label: '红色', value: '1' },
+                { id: 2, label: '黄色', value: '2' },
+                { id: 3, label: '蓝色', value: '3' }
+                ]
+            },
+            // 带图标
+            example3: {
+                code: `\x3csc-list :data="list" icon="sc-folder-open-line" \x3e
+    <template #header>
+        <div style="font-size: 17px;padding: 15px 20px;">
+            <sc-icon name="palette-line"></sc-icon>
+            颜色
+        </div>
+    </template>
+</sc-list>
+\x3cscript\x3e 
+export default{
+    data(){
+        return {
+            list:[{ id: 1, label: '红色', value: '1' },
+                { id: 2, label: '黄色', value: '2' },
+                { id: 3, label: '蓝色', value: '3' }
+            ]
+        }
+    }
+}
+\x3c/script\x3e`,
+                data: [{ id: 1, label: '红色', value: '1' },
+                { id: 2, label: '黄色', value: '2' },
+                { id: 3, label: '蓝色', value: '3' }
+                ]
+            },
+            // 带图标
+            example4: {
+                code: `\x3csc-list :data="list" icon="sc-folder-open-line" header="颜色">
+        <template #footer>
+            <div style="text-align: right;padding: 5px; color: #999;">共3种可用颜色</div>
+        </template>
+    </sc-list>
+</sc-code>
 \x3cscript\x3e 
 export default{
     data(){

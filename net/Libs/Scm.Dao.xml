@@ -1062,6 +1062,56 @@
             <param name="tag"></param>
             <returns></returns>
         </member>
+        <member name="T:Com.Scm.Dao.Sys.PvDetailDao">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvDetailDao.date">
+            <summary>
+            日期：格式(yyyy-MM-dd)
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvDetailDao.user_id">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvDetailDao.url">
+            <summary>
+            页面
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvDetailDao.time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="T:Com.Scm.Dao.Sys.PvHeaderDao">
+            <summary>
+            页面访问统计
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvHeaderDao.date">
+            <summary>
+            日期：格式(yyyy-MM-dd)
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvHeaderDao.user_id">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvHeaderDao.url">
+            <summary>
+            页面
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Dao.Sys.PvHeaderDao.qty">
+            <summary>
+            数量
+            </summary>
+        </member>
         <member name="T:Com.Scm.Dao.Sys.SchedulerDao">
             <summary>
             
@@ -1929,6 +1979,11 @@
         <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.types">
             <summary>
             反馈类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.url">
+            <summary>
+            网址
             </summary>
         </member>
         <member name="P:Com.Scm.Msg.Feedback.FeedbackHeaderDao.title">
