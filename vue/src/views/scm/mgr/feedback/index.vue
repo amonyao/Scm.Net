@@ -1,9 +1,12 @@
 <template>
 	<el-container class="is-vertical">
-		<sc-search>
+		<sc-search :expandVisible="true" :searchVisible="true" @search="search">
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="查询选项" prop="types">
+					<el-form-item label="所属机构" prop="unit_id">
+						<sc-select v-model="param.unit_id" placeholder="请选择" :data="unit_list" />
+					</el-form-item>
+					<el-form-item label="反馈类型" prop="types">
 						<sc-select v-model="param.types" placeholder="请选择" :data="types_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
@@ -13,6 +16,14 @@
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
 							start-placeholder="开始日期" end-placeholder="结束日期" />
 					</el-form-item>
+					<el-form-item label="搜索内容">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="search">
+							<sc-icon name="sc-search" />查询
+						</el-button>
+					</el-form-item>
 				</el-form>
 			</template>
 			<template #filter>
@@ -20,8 +31,8 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="70">
@@ -39,10 +50,12 @@
 export default {
 	data() {
 		return {
+			tableName: 'mgr_feedback',
 			apiObj: this.$API.mgrfeedback.page,
 			list: [],
 			param: {
-				types: '',
+				unit_id: '0',
+				types: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
@@ -50,6 +63,7 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
+				{ prop: 'unit_id', label: '机构', width: 100, formatter: this.getUnitNames },
 				{ prop: 'types', label: '反馈类型', width: 100, formatter: this.getTypesNames },
 				{ prop: 'title', label: '标题', width: 100 },
 				{ prop: 'remark', label: '内容', width: 100 },
@@ -63,11 +77,13 @@ export default {
 			],
 			row_status_list: [],
 			types_list: [],
+			unit_list: [],
 		};
 	},
 	mounted() {
 		this.$SCM.list_status(this.row_status_list);
 		this.$SCM.list_dic(this.types_list, 'feedback_type', true);
+		this.$SCM.list_option(this.unit_list, this.$API.mgrunit.option, 0, true);
 	},
 	methods: {
 		complete() {
@@ -99,8 +115,10 @@ export default {
 				return;
 			}
 		},
+		getUnitNames(unitId) {
+			return this.$SCM.get_option_names(this.unit_list, unitId, '');
+		},
 		getTypesNames(types) {
-			console.log('types:' + types);
 			return this.$SCM.get_dic_names(this.types_list, types, '');
 		}
 	},

@@ -14,7 +14,7 @@
                 </slot>
             </div>
             <div class="sc-search_filter">
-                <div class="left-panel">
+                <div class="left-panel" v-if="filterVisible">
                     <slot name="filter">
                     </slot>
                 </div>
@@ -51,7 +51,7 @@ export default {
     data() {
         return {
             param: {},
-            isExpand: false,
+            isExpand: this.searchVisible,
             key: ''
         }
     },
@@ -82,7 +82,7 @@ export default {
 }
 
 .sc-search_params {
-    border-bottom: 1px dashed #999;
+    border-bottom: 1px dashed var(--el-border-color-light);
     margin-bottom: 15px;
 }
 

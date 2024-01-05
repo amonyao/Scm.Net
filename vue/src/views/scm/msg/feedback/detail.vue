@@ -4,6 +4,10 @@
 			<el-col>
 				<div class="feed">
 					<div class="item">
+						<span>反馈网址：</span>
+						{{ header.url }}
+					</div>
+					<div class="item">
 						<span>反馈事项：</span>
 						{{ header.title }}
 					</div>
