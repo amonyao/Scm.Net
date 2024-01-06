@@ -14,6 +14,14 @@
 							start-placeholder="开始日期" end-placeholder="结束日期">
 						</el-date-picker>
 					</el-form-item>
+					<el-form-item label="搜索内容">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="search">
+							<sc-icon name="sc-search" />查询
+						</el-button>
+					</el-form-item>
 				</el-form>
 			</template>
 			<template #filter>

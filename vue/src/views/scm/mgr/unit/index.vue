@@ -2,6 +2,26 @@
 	<el-container class="is-vertical">
 		<sc-search @search="search">
 			<template #search>
+				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
+					<el-form-item label="数据状态" prop="row_status">
+						<sc-select v-model="param.row_status" clearable placeholder="请选择" :data="row_status_list" />
+					</el-form-item>
+					<el-form-item label="创建时间" prop="create_time">
+						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+							start-placeholder="开始日期" end-placeholder="结束日期">
+						</el-date-picker>
+					</el-form-item>
+					<el-form-item label="搜索内容">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="search">
+							<sc-icon name="sc-search" />查询
+						</el-button>
+					</el-form-item>
+				</el-form>
+			</template>
+			<template #filter>
 				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
@@ -29,7 +49,7 @@
 		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
-					 @menu-handle="menuHandle" @selection-change="selectionChange">
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -48,7 +68,7 @@
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
-								   @change="status_item($event, scope.row)">
+							@change="status_item($event, scope.row)">
 						</el-switch>
 					</el-tooltip>
 				</template>
@@ -58,92 +78,95 @@
 	</el-container>
 </template>
 <script>
-	import { defineAsyncComponent } from "vue";
-	export default {
-		components: {
-			edit: defineAsyncComponent(() => import("./edit")),
+import { defineAsyncComponent } from "vue";
+export default {
+	components: {
+		edit: defineAsyncComponent(() => import("./edit")),
+	},
+	data() {
+		return {
+			tableName: 'scm_mgr_unit',
+			apiObj: this.$API.mgrunit.page,
+			list: [],
+			param: {
+				row_status: 0,
+				key: ""
+			},
+			selection: [],
+			column: [
+				{ label: "id", prop: "id", hide: true },
+				{ prop: 'codes', label: '系统代码', width: 100, align: 'left' },
+				{ prop: 'codec', label: '机构编码', width: 100, align: 'left' },
+				{ prop: 'names', label: '机构简称', width: 100, align: 'left' },
+				{ prop: 'namec', label: '机构全称', minWidth: 100, align: 'left' },
+				{ prop: 'telephone', label: '固话', width: 140, align: 'left' },
+				{ prop: 'contact', label: '联系人', width: 100, align: 'left' },
+				{ prop: 'cellphone', label: '联系手机', width: 140, align: 'left' },
+				{ prop: 'row_status', label: '状态', width: 80 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+			],
+			row_status_list: [],
+		};
+	},
+	mounted() {
+		this.$SCM.list_status(this.row_status_list, true);
+	},
+	methods: {
+		complete() {
+			this.$refs.table.refresh();
 		},
-		data() {
-			return {
-				tableName: 'scm_mgr_unit',
-				apiObj: this.$API.mgrunit.page,
-				list: [],
-				param: {
-					key: ""
-				},
-				selection: [],
-				column: [
-					{ label: "id", prop: "id", hide: true },
-					{ prop: 'codes', label: '系统代码', width: 100, align: 'left' },
-					{ prop: 'codec', label: '机构编码', width: 100, align: 'left' },
-					{ prop: 'names', label: '机构简称', width: 100, align: 'left' },
-					{ prop: 'namec', label: '机构全称', minWidth: 100, align: 'left' },
-					{ prop: 'telephone', label: '固话', width: 140, align: 'left' },
-					{ prop: 'contact', label: '联系人', width: 100, align: 'left' },
-					{ prop: 'cellphone', label: '联系手机', width: 140, align: 'left' },
-					{ prop: 'row_status', label: '状态', width: 80 },
-					{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
-					{ prop: 'create_names', label: '创建人员', width: 100 },
-					{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
-					{ prop: 'update_names', label: '更新人员', width: 100 },
-				],
-			};
+		search() {
+			this.$refs.table.upData(this.param);
 		},
-		mounted() {
+		async status_item(e, row) {
+			this.$SCM.status_item(this, this.$API.mgrunit.status, row, row.row_status);
 		},
-		methods: {
-			complete() {
-				this.$refs.table.refresh();
-			},
-			search() {
-				this.$refs.table.upData(this.param);
-			},
-			async status_item(e, row) {
-				this.$SCM.status_item(this, this.$API.mgrunit.status, row, row.row_status);
-			},
-			status_list(status) {
-				this.$SCM.status_list(this, this.$API.mgrunit.status, this.selection, status);
-			},
-			async delete_item(row) {
-				this.$SCM.delete_item(this, this.$API.mgrunit.delete, row);
-			},
-			delete_list() {
-				this.$SCM.delete_list(this, this.$API.mgrunit.delete, this.selection);
-			},
-			open_dialog(row) {
-				this.$refs.edit.open(row);
-			},
-			selectionChange(selection) {
-				this.selection = selection;
-			},
-			menuHandle(obj) {
-				if (obj.command == "add") {
-					this.open_dialog();
-					return;
-				}
-				if (obj.command == "edit") {
-					this.open_dialog(obj.row);
-					return;
-				}
-				if (obj.command == "delete") {
-					this.delete_item(obj.row);
-					return;
-				}
-			},
-			resetData() {
-				if (!this.selection) {
-					return;
-				}
+		status_list(status) {
+			this.$SCM.status_list(this, this.$API.mgrunit.status, this.selection, status);
+		},
+		async delete_item(row) {
+			this.$SCM.delete_item(this, this.$API.mgrunit.delete, row);
+		},
+		delete_list() {
+			this.$SCM.delete_list(this, this.$API.mgrunit.delete, this.selection);
+		},
+		open_dialog(row) {
+			this.$refs.edit.open(row);
+		},
+		selectionChange(selection) {
+			this.selection = selection;
+		},
+		menuHandle(obj) {
+			if (obj.command == "add") {
+				this.open_dialog();
+				return;
+			}
+			if (obj.command == "edit") {
+				this.open_dialog(obj.row);
+				return;
+			}
+			if (obj.command == "delete") {
+				this.delete_item(obj.row);
+				return;
+			}
+		},
+		resetData() {
+			if (!this.selection) {
+				return;
+			}
 
-				var row = this.selection[0];
-				var res = this.$API.mgrunit.resetData.get(row.id);
-				if (res == null) {
-					return;
-				}
-			},
-			clearData() {
-
-			},
+			var row = this.selection[0];
+			var res = this.$API.mgrunit.resetData.get(row.id);
+			if (res == null) {
+				return;
+			}
 		},
-	};
+		clearData() {
+
+		},
+	},
+};
 </script>
