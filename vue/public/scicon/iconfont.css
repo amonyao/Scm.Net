@@ -1,8 +1,8 @@
 @font-face {
   font-family: "scfont"; /* Project id 4381973 */
-  src: url('iconfont.woff2?t=1703756182795') format('woff2'),
-       url('iconfont.woff?t=1703756182795') format('woff'),
-       url('iconfont.ttf?t=1703756182795') format('truetype');
+  src: url('iconfont.woff2?t=1704509191184') format('woff2'),
+       url('iconfont.woff?t=1704509191184') format('woff'),
+       url('iconfont.ttf?t=1704509191184') format('truetype');
 }
 
 .scfont {
@@ -11,6 +11,42 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.sc-camera-line:before {
+  content: "\e727";
+}
+
+.sc-camera-fill:before {
+  content: "\e73d";
+}
+
+.sc-folder-check-line:before {
+  content: "\e6ee";
+}
+
+.sc-star-line:before {
+  content: "\e80b";
+}
+
+.sc-star-fill:before {
+  content: "\eaf2";
+}
+
+.sc-minus:before {
+  content: "\e7fd";
+}
+
+.sc-plus:before {
+  content: "\eab8";
+}
+
+.sc-close:before {
+  content: "\edc1";
+}
+
+.sc-check:before {
+  content: "\edcf";
 }
 
 .sc-bad-fill:before {
@@ -103,14 +139,6 @@
 
 .sc-keyboard-line:before {
   content: "\f2b8";
-}
-
-.sc-delete-2-fill:before {
-  content: "\e656";
-}
-
-.sc-delete-2-line:before {
-  content: "\e727";
 }
 
 .sc-place:before {
@@ -537,16 +565,12 @@
   content: "\edd0";
 }
 
-.sc-copy-document:before {
+.sc-layer:before {
   content: "\edd1";
 }
 
 .sc-presentation-3-line:before {
   content: "\edd2";
-}
-
-.sc-edit:before {
-  content: "\edd3";
 }
 
 .sc-goblet-2-line:before {
@@ -581,7 +605,7 @@
   content: "\ed57";
 }
 
-.sc-indent-decrease-2:before {
+.sc-indent-decrease-line:before {
   content: "\e647";
 }
 
@@ -729,10 +753,6 @@
   content: "\edcd";
 }
 
-.sc-skull-2-fill:before {
-  content: "\edce";
-}
-
 .sc-user-shared-fill:before {
   content: "\edc5";
 }
@@ -755,10 +775,6 @@
 
 .sc-user-voice-line:before {
   content: "\edca";
-}
-
-.sc-criminal-fill:before {
-  content: "\edbf";
 }
 
 .sc-user-smile-fill:before {
@@ -933,10 +949,6 @@
   content: "\ed92";
 }
 
-.sc-nurse-line:before {
-  content: "\ed93";
-}
-
 .sc-health-book-line:before {
   content: "\ed95";
 }
@@ -967,10 +979,6 @@
 
 .sc-stethoscope-fill:before {
   content: "\ed8f";
-}
-
-.sc-nurse-fill:before {
-  content: "\ed90";
 }
 
 .sc-stethoscope-line:before {
@@ -2765,7 +2773,7 @@
   content: "\ebb1";
 }
 
-.sc-file-excel-2-line:before {
+.sc-excel-line:before {
   content: "\ebb2";
 }
 
@@ -2845,7 +2853,7 @@
   content: "\eb9e";
 }
 
-.sc-file-excel-2-fill:before {
+.sc-excel-fill:before {
   content: "\eb8b";
 }
 

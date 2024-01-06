@@ -57,6 +57,12 @@ export default {
             isSaveing: false,
             formData: this.def_data(),
             rules: {
+                cat_id: [
+                    { required: true, trigger: "blur", pattern: this.$SCM.REGEX_ID, message: "请选择分类" },
+                ],
+                visible: [
+                    { required: true, trigger: "blur", type: 'number', min: 1, message: "请选择可见" },
+                ],
                 title: [
                     { required: true, trigger: "blur", message: "标题不能为空" },
                 ],
@@ -82,14 +88,14 @@ export default {
         def_data() {
             return {
                 id: '0',
-                types: '0',
+                types: 10,
                 cat_id: '0',
                 title: '',
                 nation_id: '0',
                 dynasty_id: '0',
                 author_id: '0',
                 origin_id: '0',
-                visible: '20',
+                visible: 20,
             }
         },
         async init() {
@@ -98,7 +104,11 @@ export default {
                 return;
             }
 
-            this.cat_list = this.$TOOL.changeTree(res.data);
+            let _tree = [{ id: "1", value: "0", label: "请选择", parentId: "0" }];
+            res.data.some((m) => {
+                _tree.push(m);
+            });
+            this.cat_list = this.$TOOL.changeTree(_tree);
         },
         async open(row) {
             if (!row || !row.id) {

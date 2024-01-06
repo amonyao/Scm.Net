@@ -9,17 +9,19 @@
 
 <template>
 	<div class="sc-dialog" ref="scDialog">
-		<el-dialog ref="dialog" v-model="dialogVisible" :fullscreen="isFullscreen" v-bind="$attrs" :show-close="false" draggable>
+		<el-dialog ref="dialog" v-model="dialogVisible" :fullscreen="isFullscreen" v-bind="$attrs" :show-close="false"
+			draggable>
 			<template #header>
 				<slot name="title">
 					<span class="el-dialog__title">{{ title }}</span>
 				</slot>
 				<div class="sc-dialog__headerbtn">
-					<button v-if="showFullscreen" aria-label="fullscreen" @click="setFullscreen">
-						<sc-icon v-if="isFullscreen" class="el-dialog__close" name="sc-arrow-left-down-line"></sc-icon>
-						<sc-icon v-else class="el-dialog__close" name="sc-fullscreen"></sc-icon>
+					<button v-if="showFullscreen" aria-label="fullscreen" @click="setFullscreen"
+						:title="isFullscreen ? '退出全屏' : '全屏显示'">
+						<sc-icon v-if="isFullscreen" class="el-dialog__close" name="sc-fullpage-exit"></sc-icon>
+						<sc-icon v-else class="el-dialog__close" name="sc-fullpage"></sc-icon>
 					</button>
-					<button v-if="showClose" aria-label="close" @click="closeDialog">
+					<button v-if="showClose" aria-label="close" @click="closeDialog" title="关闭窗口">
 						<sc-icon class="el-dialog__close" name="sc-close"></sc-icon>
 					</button>
 				</div>

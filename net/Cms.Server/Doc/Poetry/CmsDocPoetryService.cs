@@ -43,7 +43,7 @@ namespace Com.Scm.Cms.Doc.Poetry
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
-                .OrderBy(m => m.id)
+                .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
                 .Select<CmsDocArticleDto>()
                 .ToPageAsync(request.page, request.limit);
 

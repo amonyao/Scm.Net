@@ -6,6 +6,69 @@
   "description": "这是一个针对Scm.NET开源项目的图标项目。详情请参见：http://c-scm.net/",
   "glyphs": [
     {
+      "icon_id": "38783175",
+      "name": "camera-line",
+      "font_class": "camera-line",
+      "unicode": "e727",
+      "unicode_decimal": 59175
+    },
+    {
+      "icon_id": "38783174",
+      "name": "camera-fill",
+      "font_class": "camera-fill",
+      "unicode": "e73d",
+      "unicode_decimal": 59197
+    },
+    {
+      "icon_id": "38783150",
+      "name": "folder-check-line",
+      "font_class": "folder-check-line",
+      "unicode": "e6ee",
+      "unicode_decimal": 59118
+    },
+    {
+      "icon_id": "4766954",
+      "name": "star-line",
+      "font_class": "star-line",
+      "unicode": "e80b",
+      "unicode_decimal": 59403
+    },
+    {
+      "icon_id": "4936673",
+      "name": "star-fill",
+      "font_class": "star-fill",
+      "unicode": "eaf2",
+      "unicode_decimal": 60146
+    },
+    {
+      "icon_id": "4767099",
+      "name": "minus",
+      "font_class": "minus",
+      "unicode": "e7fd",
+      "unicode_decimal": 59389
+    },
+    {
+      "icon_id": "7834345",
+      "name": "plus",
+      "font_class": "plus",
+      "unicode": "eab8",
+      "unicode_decimal": 60088
+    },
+    {
+      "icon_id": "29649824",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "edc1",
+      "unicode_decimal": 60865
+    },
+    {
+      "icon_id": "29649858",
+      "name": "check",
+      "font_class": "check",
+      "unicode": "edcf",
+      "unicode_decimal": 60879
+    },
+    {
       "icon_id": "34452963",
       "name": "bad-fill",
       "font_class": "bad-fill",
@@ -165,20 +228,6 @@
       "font_class": "keyboard-line",
       "unicode": "f2b8",
       "unicode_decimal": 62136
-    },
-    {
-      "icon_id": "13519368",
-      "name": "delete-2-fill",
-      "font_class": "delete-2-fill",
-      "unicode": "e656",
-      "unicode_decimal": 58966
-    },
-    {
-      "icon_id": "13519374",
-      "name": "delete-2-line",
-      "font_class": "delete-2-line",
-      "unicode": "e727",
-      "unicode_decimal": 59175
     },
     {
       "icon_id": "13519532",
@@ -924,8 +973,8 @@
     },
     {
       "icon_id": "21823746",
-      "name": "copy-document",
-      "font_class": "copy-document",
+      "name": "layer",
+      "font_class": "layer",
       "unicode": "edd1",
       "unicode_decimal": 60881
     },
@@ -935,13 +984,6 @@
       "font_class": "presentation-3-line",
       "unicode": "edd2",
       "unicode_decimal": 60882
-    },
-    {
-      "icon_id": "21823762",
-      "name": "edit",
-      "font_class": "edit",
-      "unicode": "edd3",
-      "unicode_decimal": 60883
     },
     {
       "icon_id": "21823763",
@@ -1001,8 +1043,8 @@
     },
     {
       "icon_id": "13184643",
-      "name": "indent-decrease-2",
-      "font_class": "indent-decrease-2",
+      "name": "indent-decrease-line",
+      "font_class": "indent-decrease-line",
       "unicode": "e647",
       "unicode_decimal": 58951
     },
@@ -1259,13 +1301,6 @@
       "unicode_decimal": 60877
     },
     {
-      "icon_id": "38673716",
-      "name": "skull-2-fill",
-      "font_class": "skull-2-fill",
-      "unicode": "edce",
-      "unicode_decimal": 60878
-    },
-    {
       "icon_id": "38673700",
       "name": "user-shared-fill",
       "font_class": "user-shared-fill",
@@ -1306,13 +1341,6 @@
       "font_class": "user-voice-line",
       "unicode": "edca",
       "unicode_decimal": 60874
-    },
-    {
-      "icon_id": "38673717",
-      "name": "criminal-fill",
-      "font_class": "criminal-fill",
-      "unicode": "edbf",
-      "unicode_decimal": 60863
     },
     {
       "icon_id": "38673718",
@@ -1616,13 +1644,6 @@
       "unicode_decimal": 60818
     },
     {
-      "icon_id": "38672410",
-      "name": "nurse-line",
-      "font_class": "nurse-line",
-      "unicode": "ed93",
-      "unicode_decimal": 60819
-    },
-    {
       "icon_id": "38672412",
       "name": "health-book-line",
       "font_class": "health-book-line",
@@ -1677,13 +1698,6 @@
       "font_class": "stethoscope-fill",
       "unicode": "ed8f",
       "unicode_decimal": 60815
-    },
-    {
-      "icon_id": "38672422",
-      "name": "nurse-fill",
-      "font_class": "nurse-fill",
-      "unicode": "ed90",
-      "unicode_decimal": 60816
     },
     {
       "icon_id": "38672423",
@@ -4823,8 +4837,8 @@
     },
     {
       "icon_id": "38671878",
-      "name": "file-excel-2-line",
-      "font_class": "file-excel-2-line",
+      "name": "excel-line",
+      "font_class": "excel-line",
       "unicode": "ebb2",
       "unicode_decimal": 60338
     },
@@ -4963,8 +4977,8 @@
     },
     {
       "icon_id": "38671900",
-      "name": "file-excel-2-fill",
-      "font_class": "file-excel-2-fill",
+      "name": "excel-fill",
+      "font_class": "excel-fill",
       "unicode": "eb8b",
       "unicode_decimal": 60299
     },
