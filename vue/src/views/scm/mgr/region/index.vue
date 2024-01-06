@@ -1,15 +1,13 @@
 <template>
-	<el-container>
-		<scSearch>
+	<el-container class="is-vertical">
+		<sc-search @search="search">
 			<template #search>
 				<el-tabs v-model="editableTabsValue" type="card" closable @tab-change="changeTab" @tab-remove="removeTab"
-					style="padding-left: 18px;padding-right: 18px;padding-bottom: 0px;">
+						 style="padding-left: 18px;padding-right: 18px;padding-bottom: 0px;">
 					<el-tab-pane v-for="item in editableTabs" :key="item.name" :label="item.title" :name="item.name" />
 				</el-tabs>
 			</template>
-		</scSearch>
-		<el-header>
-			<div class="left-panel">
+			<template #filter>
 				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
@@ -29,17 +27,11 @@
 						</el-button>
 					</el-tooltip>
 				</el-button-group>
-			</div>
-			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
-				</div>
-			</div>
-		</el-header>
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :data="list" :column="column" row-key="id" hide-pagination
-				@menu-handle="menuHandle" @selection-change="selectionChange">
+					 @menu-handle="menuHandle" @selection-change="selectionChange">
 				<!-- 固定列-选择列 -->
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50" />
@@ -62,19 +54,19 @@
 				</el-table-column>
 				<template #od="{ data }">
 					<el-link style="color: #5cd29d" :underline="false"
-						@click="sort({ parent: data.parentId, id: data.id, type: 0, })">
+							 @click="sort({ parent: data.parentId, id: data.id, type: 0, })">
 						<el-icon><el-icon-top /></el-icon>
 					</el-link>
 					<el-divider direction="vertical" />
 					<el-link style="color: #5cd29d" :underline="false"
-						@click="sort({ parent: data.parentId, id: data.id, type: 1, })">
+							 @click="sort({ parent: data.parentId, id: data.id, type: 1, })">
 						<el-icon><el-icon-bottom /></el-icon>
 					</el-link>
 				</template>
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
-							@change="status_item($event, scope.row)">
+								   @change="status_item($event, scope.row)">
 						</el-switch>
 					</el-tooltip>
 				</template>

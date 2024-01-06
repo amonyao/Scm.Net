@@ -1,6 +1,6 @@
 <template>
 	<el-container class="is-vertical">
-		<sc-search>
+		<sc-search @search="search">
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="机构" prop="unit_id">
@@ -8,15 +8,23 @@
 					</el-form-item>
 					<el-form-item label="所属角色" prop="role_id">
 						<el-tree-select v-model="param.role_id" placeholder="请选择所属角色" :data="role_list" collapse-tags
-							check-strictly default-expand-all :style="{ width: '100%' }" />
+										check-strictly default-expand-all :style="{ width: '100%' }" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" clearable placeholder="请选择" :data="row_status_list" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-							start-placeholder="开始日期" end-placeholder="结束日期">
+										start-placeholder="开始日期" end-placeholder="结束日期">
 						</el-date-picker>
+					</el-form-item>
+					<el-form-item label="搜索内容">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="search">
+							<sc-icon name="sc-search" />查询
+						</el-button>
 					</el-form-item>
 				</el-form>
 			</template>

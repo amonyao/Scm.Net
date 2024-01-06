@@ -1,6 +1,6 @@
 <template>
 	<el-container class="is-vertical">
-		<sc-search>
+		<sc-search @search="search">
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :rules="rules" :inline="true">
 					<el-form-item label="机构" prop="unit_id">

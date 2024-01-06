@@ -13,7 +13,7 @@
 			</el-container>
 		</el-aside>
 		<el-container class="is-vertical">
-			<sc-search>
+			<sc-search @search="search">
 				<template #filter>
 					<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 					<el-divider direction="vertical"></el-divider>

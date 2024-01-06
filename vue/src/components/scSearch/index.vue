@@ -3,14 +3,16 @@
         <div class="sc_search">
             <div class="sc-search_params" v-show="isExpand">
                 <slot name="search">
-                    <el-form-item label="搜索内容">
-                        <el-input v-model="key" clearable placeholder="关键字" />
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="doSearch">
-                            <sc-icon name="sc-search" />查询
-                        </el-button>
-                    </el-form-item>
+                    <el-form ref="formRef" label-width="100px" :model="param" :inline="true">
+                        <el-form-item label="搜索内容">
+                            <el-input v-model="key" clearable placeholder="关键字" />
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @click="doSearch">
+                                <sc-icon name="sc-search" />查询
+                            </el-button>
+                        </el-form-item>
+                    </el-form>
                 </slot>
             </div>
             <div class="sc-search_filter">
@@ -43,15 +45,15 @@
 export default {
     emits: ['search'],
     props: {
-        expandVisible: { type: Boolean, default: false },
-        searchVisible: { type: Boolean, default: false },
+        expandVisible: { type: Boolean, default: true },
+        searchVisible: { type: Boolean, default: true },
         filterVisible: { type: Boolean, default: true },
         syncSearch: { type: Boolean, default: false },
     },
     data() {
         return {
             param: {},
-            isExpand: this.searchVisible,
+            isExpand: false,
             key: ''
         }
     },

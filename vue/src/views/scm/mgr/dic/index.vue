@@ -27,7 +27,7 @@
 		</el-aside>
 
 		<el-container class="is-vertical">
-			<sc-search>
+			<sc-search @search="search">
 				<template #filter>
 					<el-button type="primary" :disabled="!selectColumn.id" @click="open_dialog">
 						<sc-icon name="sc-plus" />

@@ -36,6 +36,7 @@ export default {
 			visible: false,
 			isSaveing: false,
 			formData: this.def_data(),
+			cat_list: [],
 			rules: {
 				namec: [
 					{ required: true, trigger: "blur", message: "名称不能为空" },
@@ -54,7 +55,6 @@ export default {
 			return {
 				id: '0',
 				types: '0',
-				od: '0',
 				namec: '',
 				pid: '0',
 				style_id: '',
@@ -67,7 +67,7 @@ export default {
 			}
 
 			let _tree = [
-				{ id: "1", value: "0", label: "请选择", parentId: "0" },
+				{ id: "1", value: "1000000000000000001", label: "（默认）", parentId: "0" },
 			];
 			res.data.some((m) => {
 				_tree.push(m);

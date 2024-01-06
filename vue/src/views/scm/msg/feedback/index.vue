@@ -1,6 +1,6 @@
 <template>
-	<el-container>
-		<scSearch>
+	<el-container class="is-vertical">
+		<sc-search @search="search">
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
 					<el-form-item label="查询选项" prop="types">
@@ -11,25 +11,25 @@
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-							start-placeholder="开始日期" end-placeholder="结束日期" />
+										start-placeholder="开始日期" end-placeholder="结束日期" />
+					</el-form-item>
+					<el-form-item label="搜索内容">
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+					</el-form-item>
+					<el-form-item>
+						<el-button type="primary" @click="search">
+							<sc-icon name="sc-search" />查询
+						</el-button>
 					</el-form-item>
 				</el-form>
 			</template>
-		</scSearch>
-		<el-header>
-			<div class="left-panel">
+			<template #filter>
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
-			</div>
-			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button icon="el-icon-search" type="primary" @click="search" />
-				</div>
-			</div>
-		</el-header>
+			</template>
+		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
-				@menu-handle="menuHandle" @selection-change="selectionChange">
+					 @menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="70">
