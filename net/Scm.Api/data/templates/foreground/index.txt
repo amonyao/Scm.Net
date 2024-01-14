@@ -83,21 +83,22 @@ export default {
 			apiObj: this.$API.{TableName}.page,
 			list: [],
             param:{
-				option_id: '0',
-				row_status: '1',
+				option_id: '',
+				row_status: 1,
 				create_time: '',
 				key: ''
             },
 			selection: [],
 			column: [
-				{ label: "id", prop: "id", hide: true },
+				{ prop: "id", label: "id", hide: true },
 {Column}
 			],
-			row_status_list: [this.$SCM.OPTION_ALL],
-			option_list: [this.$SCM.OPTION_ALL],
+			row_status_list: [],
+			option_list: [],
 		};
 	},
 	mounted() {
+		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
 		complete() {

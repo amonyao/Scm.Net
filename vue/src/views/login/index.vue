@@ -132,7 +132,6 @@ export default {
 			isWechatLoginResult: false,
 			theme: {
 				page: {
-					"backgroundImage": "url('img/bg1.jpg')",
 					"backgroundColor": "",
 					"backgroundSize": "cover",
 					"backgroundPosition": "center center",

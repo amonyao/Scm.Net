@@ -9,8 +9,19 @@
 
 	<ItemGroup>
 	  <Folder Include="Cfg\" />
-	  <Folder Include="Doc\" />
-	  <Folder Include="Res\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="SqlSugarCore" Version="5.1.4.132" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Scm.Common.Uid">
+	    <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Scm.Server.Dao">
+	    <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

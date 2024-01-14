@@ -21,18 +21,14 @@ export default {
 			visible: false,
 			isSaveing: false,
 			formData: this.def_data(),
-			rules: {
-				codec: [
-					{ required: true, trigger: "blur", message: "编码不能为空" },
-				],
-			},
+			rules: {},
 		};
 	},
 	mounted() {
 	},
 	methods: {
-		def_data(){
-			return {
+	    def_data(){
+		    return {
 				id: '0',
 				{formData}
 			}

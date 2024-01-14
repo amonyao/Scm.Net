@@ -1,4 +1,5 @@
 using Com.Scm.Dao;
+using Com.Scm.Uid;
 using SqlSugar;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +10,19 @@ namespace Com.Scm.{NameSpace}
 	/// {TableNameDescribe}
 	/// </summary>
 	[SugarTable("{DataTable}")]
-	public class {TableName}Dao : ScmDao
+	public class {TableName}Dao : ScmDataDao
 	{
 {AttributeList}
+
+        public override void PrepareCreate(long userId, long unitId = 0)
+        {
+            base.PrepareCreate(userId, unitId);
+
+            if (string.IsNullOrWhiteSpace(names))
+            {
+                names = namef;
+            }
+            codes = UidHelper.NextCodes("{DataTable}");
+        }
 	}
 }

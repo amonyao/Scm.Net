@@ -85,7 +85,7 @@ export default {
 			const data = {
 				user: this.form.user,
 				pass: pass,
-				salt: time,
+				time: time,
 				code: this.form.code,
 				key: this.form.codeKey,
 			};

@@ -123,6 +123,10 @@ router.sc_getMenu = () => {
 
 async function recordPv(to) {
 	var url = to.fullPath;
+	if (url == "/login") {
+		return;
+	}
+
 	//var title = to.meta.title;
 	// 记录访问信息
 	var res = await http.post(`${config.API_URL}/syspv`, { url: url });

@@ -9,8 +9,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Cfg\" />
-	  <Folder Include="Doc\" />
-	  <Folder Include="Res\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Scm.Common.Dto">
+	    <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

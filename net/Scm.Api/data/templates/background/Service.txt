@@ -1,5 +1,8 @@
+using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Enums;
+using Com.Scm.Exceptions;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
@@ -15,9 +18,17 @@ namespace Com.Scm.{NameSpace}
 public class {TableName}Service : ApiService 
 {
     private readonly SugarRepository<{TableName}Dao> _thisRepository;
-    public {TableName}Service(SugarRepository<{TableName}Dao> thisRepository)
+    private readonly SugarRepository<UserDao> _userRepository;
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public {TableName}Service(SugarRepository<{TableName}Dao> thisRepository, SugarRepository<UserDao> userRepository)
     {
-        _thisRepository = thisRepository;
+            _thisRepository = thisRepository;
+            _userRepository = userRepository;
     }
     
     /// <summary>
@@ -25,18 +36,18 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<PageResult<{TableName}Dvo>> GetPagesAsync(ScmSearchPageRequest request)
+    public async Task<PageResult<{TableName}Dvo>> GetPagesAsync(BaseSearchPageRequest request)
     {
         var result = await _thisRepository.AsQueryable()
             .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
             .WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
             .WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
-            .OrderBy(m => m.id)
+            .OrderBy(a => a.id)
             .Select<{TableName}Dvo>()
             .ToPageAsync(request.page, request.limit);
 
-            Prepare(result.Items);
-            return result;
+        Prepare(result.Items);
+        return result;
     }
 
     /// <summary>
@@ -44,42 +55,33 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<List<{TableName}Dvo>> GetListAsync(ScmSearchRequest request)
+    public async Task<List<{TableName}Dvo>> GetListAsync(BaseSearchRequest request)
     {
         var result = await _thisRepository.AsQueryable()
-            .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+            .Where(a => a.row_status == ScmStatusEnum.Enabled)
             .WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
-            .OrderBy(m => m.id)
+            .OrderBy(a => a.id)
             .Select<{TableName}Dvo>()
             .ToListAsync();
 
         Prepare(result);
         return result;
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="list"></param>
     private void Prepare(List<{TableName}Dvo> list)
     {
         foreach (var item in list)
         {
-            item.update_names = GetUserNames(_userRepository, item.update_user);
-            item.create_names = GetUserNames(_userRepository, item.create_user);
+            var updateDao = _userRepository.GetById(item.update_user);
+            item.update_names = updateDao?.names;
+
+            var createDao = _userRepository.GetById(item.create_user);
+            item.create_names = createDao?.names;
         }
-    }
-
-    /// <summary>
-    /// 下拉列表
-    /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
-    public async Task<List<OptionDvo>> GetOptionAsync(ScmOptionRequest request)
-    {
-        var result = await _thisRepository.AsQueryable()
-            .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
-            .OrderBy(a => a.id)
-            .Select(a => new OptionDvo { id = a.id, label = a.names, value = a.id })
-            .ToListAsync();
-
-        return result;
     }
 
     /// <summary>
@@ -88,10 +90,10 @@ public class {TableName}Service : ApiService
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<{TableName}Dvo> GetAsync(long id)
+    public async Task<{TableName}Dto> GetAsync(long id)
     {
         var model = await _thisRepository.GetByIdAsync(id);
-        return model.Adapt<{TableName}Dvo>();
+        return model.Adapt<{TableName}Dto>();
     }
 
     /// <summary>
@@ -100,11 +102,11 @@ public class {TableName}Service : ApiService
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async Task<{TableName}Dvo> GetEditAsync(long id)
+    public async Task<{TableName}Dto> GetEditAsync(long id)
     {
         return await _thisRepository
             .AsQueryable()
-            .Select<{TableName}Dvo>()
+            .Select<{TableName}Dto>()
             .FirstAsync(m => m.id == id);
     }
 
@@ -127,8 +129,26 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    public async Task<bool> AddAsync({TableName}Dto model) =>
-        await _thisRepository.InsertAsync(model.Adapt<{TableName}Dao>());
+    public async Task<bool> AddAsync({TableName}Dto model)
+    {
+        var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec);
+        if (dao != null)
+        {
+            throw new BusinessException($"已存在编码为{model.codec}的{TableNameDescribe}！");
+        }
+
+        if (string.IsNullOrWhiteSpace(model.names))
+        {
+            model.names = model.namec;
+        }
+        dao = await _thisRepository.GetFirstAsync(a => a.names == model.names);
+        if (dao != null)
+        {
+            throw new BusinessException($"已存在简称为{model.names}的{TableNameDescribe}！");
+        }
+
+        return await _thisRepository.InsertAsync(model.Adapt<{TableName}Dao>());
+    }
 
     /// <summary>
     /// 更新
@@ -137,12 +157,26 @@ public class {TableName}Service : ApiService
     /// <returns></returns>
     public async Task UpdateAsync({TableName}Dto model)
     {
-        var dao = await _thisRepository.GetByIdAsync(model.id);
-        if (dao == null)
+        var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec && a.id != model.id);
+        if (dao != null)
         {
-            return;
+            throw new BusinessException($"已存在编码为{model.codec}的{TableNameDescribe}！");
         }
 
+        if (string.IsNullOrWhiteSpace(model.names))
+        {
+            model.names = model.namec;
+        }
+        dao = await _thisRepository.GetFirstAsync(a => a.names == model.names && a.id != model.id);
+        if (dao != null)
+        {
+            throw new BusinessException($"已存在简称为{model.names}的{TableNameDescribe}！");
+        }
+
+        dao = await _thisRepository.GetByIdAsync(model.id);
+        if(dao==null){
+            throw new BusinessException($"无效的数据信息，更新失败！");
+        }
         dao = model.Adapt(dao);
         await _thisRepository.UpdateAsync(dao);
     }

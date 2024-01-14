@@ -1,8 +1,9 @@
-using Com.Scm.Cjg.Res;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Res;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Text;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +13,10 @@ namespace FytSoa.Application.{NameSpace}
 /// 服务接口
 /// </summary>
 [ApiExplorerSettings(GroupName = "{Version}")]
-public class {TableName}Service : ApiService
+public class {TableName}Service : ApplicationService
 {
-    private readonly SugarRepository<{TableName}Dao> _thisRepository;
-    public {TableName}Service(SugarRepository<{TableName}Dao> thisRepository)
+    private readonly SugarRepository<{TableName}> _thisRepository;
+    public {TableName}Service(SugarRepository<{TableName}> thisRepository)
     {
         _thisRepository = thisRepository;
     }
@@ -23,26 +24,29 @@ public class {TableName}Service : ApiService
     /// <summary>
     /// 查询所有——分页
     /// </summary>
-    /// <param name="request"></param>
+    /// <param name="param"></param>
     /// <returns></returns>
-    public async Task<PageResult<{TableName}Dto>> GetPagesAsync(ScmSearchPageRequest request)
+    public async Task<PageResult<{TableName}Dvo>> GetPagesAsync(PageParam param)
     {
         var query = await _thisRepository.AsQueryable()
-            .OrderByDescending(m => m.id)
-            .ToPageAsync(request.page, request.limit);
-        return query.Adapt<PageResult<{TableName}Dto>>();
+            .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+            .OrderBy(m=>m.id)
+            .Select<{TableName}Dvo>()
+            .ToPageAsync(param.Page, param.Limit);
+        return query;
     }
 
     /// <summary>
     /// 查询所有
     /// </summary>
     /// <returns></returns>
-    public async Task<List<{TableName}Dto>> GetListAsync(WhereParam param)
+    public async Task<List<{TableName}Dvo>> GetListAsync(WhereParam param)
     {
         var list = await _thisRepository.AsQueryable()
-            .OrderByDescending(m => m.id)
-            .ToListAsync();
-        return list.Adapt<List<{TableName}Dto>>();
+                    .OrderBy(m=>m.Id)
+                    .Select<{TableName}Dvo>()
+                    .ToListAsync();
+        return list;
     }
 
     /// <summary>
@@ -55,6 +59,34 @@ public class {TableName}Service : ApiService
     {
         var model = await _thisRepository.GetByIdAsync(id);
         return model.Adapt<{TableName}Dto>();
+    }
+
+    /// <summary>
+    /// 编辑读取
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public async Task<{TableName}Dto> GetEditAsync(long id)
+    {
+        return await _thisRepository
+            .AsQueryable()
+            .Select<{TableName}Dto>()
+            .FirstAsync(m => m.id == id);
+    }
+
+    /// <summary>
+    /// 查看读取
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public async Task<{TableName}Dvo> GetViewAsync(long id)
+    {
+        return await _thisRepository
+            .AsQueryable()
+            .Select<{TableName}Dvo>()
+            .FirstAsync(m => m.id == id);
     }
 
     /// <summary>
@@ -75,7 +107,7 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    public async Task<bool> ModifyAsync({TableName}Dto model)
+    public async Task<bool> UpdateAsync({TableName}Dto model)
     {
         model.ParentId = long.Parse(model.ParentIdList.Last());
         return await _thisRepository.UpdateAsync(model.Adapt<{TableName}Dao>());
@@ -88,7 +120,7 @@ public class {TableName}Service : ApiService
     /// <returns></returns>
     [HttpDelete]
     public async Task<bool> DeleteAsync([FromBody]List<long> ids) => 
-        await _thisRepository.DeleteAsync(m=>ids.Contains(m.id));
+        await _thisRepository.DeleteAsync(m=>ids.Contains(m.Id));
 
     /// <summary>
     /// 自定义排序
