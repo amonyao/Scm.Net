@@ -99,7 +99,7 @@ export default {
 			user: {
 				id: '0',
 				account: "user@c-scm.net",
-				name: "user",
+				namec: "user",
 				avatar: "",
 				sex: "男",
 				summary: "",
