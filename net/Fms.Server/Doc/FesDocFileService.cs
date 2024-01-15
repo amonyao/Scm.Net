@@ -1,8 +1,13 @@
+using Com.Scm;
+using Com.Scm.Cms;
+using Com.Scm.Config;
+using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Fes.Doc;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Utils;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,9 +20,16 @@ namespace FytSoa.Application.Fes.Doc
     public class FesDocFileService : ApiService
     {
         private readonly SugarRepository<FileDao> _thisRepository;
-        public FesDocFileService(SugarRepository<FileDao> thisRepository)
+        private readonly SugarRepository<UserDao> _userRepository;
+        private readonly EnvConfig _envConfig;
+
+        public FesDocFileService(SugarRepository<FileDao> thisRepository,
+            SugarRepository<UserDao> userRepository,
+            EnvConfig envConfig)
         {
             _thisRepository = thisRepository;
+            _userRepository = userRepository;
+            _envConfig = envConfig;
         }
 
         /// <summary>
@@ -46,18 +58,6 @@ namespace FytSoa.Application.Fes.Doc
                         .Select<FileDvo>()
                         .ToListAsync();
             return list;
-        }
-
-        /// <summary>
-        /// 根据主键查询
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<FileDto> GetAsync(long id)
-        {
-            var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<FileDto>();
         }
 
         /// <summary>
@@ -109,12 +109,98 @@ namespace FytSoa.Application.Fes.Doc
         }
 
         /// <summary>
-        /// 删除,支持多个
+        /// 批量删除记录
         /// </summary>
         /// <param name="ids">逗号分隔</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<bool> DeleteAsync([FromBody] List<long> ids) =>
-            await _thisRepository.DeleteAsync(m => ids.Contains(m.id));
+        public async Task<int> DeleteAsync(string ids)
+        {
+            return await DeleteRecord(_thisRepository, ids.ToListLong());
+        }
+
+        /// <summary>
+        /// 文件上传
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ScmUploadResponse> UploadAsync([FromForm] ScmUploadRequest request)
+        {
+            var response = new ScmUploadResponse();
+
+            //判断是否上传了文件内容
+            if (request.file == null)
+            {
+                response.SetFailure("上传内容为空！");
+                return response;
+            }
+
+            var memory = new MemoryStream();
+            request.file.CopyTo(memory);
+
+            var hash = request.hash;
+            if (hash == null)
+            {
+                hash = SecUtils.Md5(memory.ToArray());
+            }
+            request.hash = hash;
+
+            var dao = await _thisRepository.GetFirstAsync(a => a.hash == hash);
+            if (dao != null)
+            {
+                response.AddResult(new ScmUploadResult { file = dao.namec, path = dao.path });
+                response.SetSuccess("文件上传成功！");
+                return response;
+            }
+
+            await SaveFile(request, response, memory);
+            return response;
+        }
+
+        private async Task SaveFile(ScmUploadRequest request, ScmUploadResponse response, Stream memory)
+        {
+            #region 保存文件
+            var path = request.path ?? "/";
+            if (!path.EndsWith("/"))
+            {
+                path += "/";
+            }
+
+            var namec = request.file.FileName;
+            var exts = Path.GetExtension(namec);
+            if (!string.IsNullOrEmpty(exts))
+            {
+                exts = exts.ToLower();
+            }
+
+            var names = FesUtils.NextFileId().ToString() + exts;
+            path += names;
+
+            var filePath = _envConfig.GetUploadPath(path);
+
+            using (var stream = File.OpenWrite(filePath))
+            {
+                memory.Position = 0;
+                //将文件内容复制到流中
+                await memory.CopyToAsync(stream);
+            }
+            response.AddResult(new ScmUploadResult { file = names, path = path });
+
+            var fileDao = new FileDao();
+            fileDao.codec = "";
+            fileDao.namec = namec;
+            fileDao.names = names;
+            fileDao.path = path;
+            fileDao.exts = exts;
+            fileDao.hash = request.hash;
+            fileDao.size = request.file_size;
+            fileDao.file_create_time = TimeUtils.GetUnixTime();
+            fileDao.file_modify_time = fileDao.file_create_time;
+            await _thisRepository.InsertAsync(fileDao);
+            #endregion
+
+            response.SetSuccess("文件上传成功！");
+        }
     }
 }

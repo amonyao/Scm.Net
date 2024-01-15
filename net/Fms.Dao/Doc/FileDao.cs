@@ -1,4 +1,4 @@
-using Com.Scm.Dao;
+using Com.Scm.Dao.Unit;
 using Com.Scm.Uid;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ namespace Com.Scm.Fes.Doc
     /// 图片数据
     /// </summary>
     [SugarTable("fes_doc_file")]
-    public class FileDao : ScmDataDao
+    public class FileDao : ScmUnitDataDao
     {
         /// <summary>
         /// 类别

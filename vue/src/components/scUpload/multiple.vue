@@ -47,12 +47,12 @@ export default {
 		apiObj: { type: Object, default: () => { } },
 		name: { type: String, default: config.filename },
 		data: { type: Object, default: () => { } },
-		accept: { type: String, default: "image/gif, image/jpeg, image/png" },
 		maxSize: { type: Number, default: config.maxSizeFile },
-		limit: { type: Number, default: 0 },
 		autoUpload: { type: Boolean, default: true },
 		showFileList: { type: Boolean, default: true },
 		multiple: { type: Boolean, default: true },
+		limit: { type: Number, default: 0 },
+		accept: { type: String, default: "image/gif, image/jpeg, image/png" },
 		disabled: { type: Boolean, default: false },
 		draggable: { type: Boolean, default: false },
 		onSuccess: {
@@ -221,7 +221,8 @@ export default {
 				apiObj = this.apiObj;
 			}
 			const data = new FormData();
-			data.append(param.filename, param.file);
+            data.append('file', param.file);
+            data.append('file_name', param.filename);
 			for (const key in param.data) {
 				data.append(key, param.data[key]);
 			}

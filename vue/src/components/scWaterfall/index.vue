@@ -4,8 +4,8 @@
             <slot name="head"></slot>
         </div>
         <div class="sc-waterfall-body" :class="this.align" :style="{ width: bodyWidth, height: maxHeight + colGap + 'px' }">
-            <div class="sc-waterfall-item default-card-animation" v-for="(item, index) in objData" :key="getKey(item, index)"
-                ref="scWaterfallItem" :style="{
+            <div class="sc-waterfall-item default-card-animation" v-for="(item, index) in objData"
+                :key="getKey(item, index)" ref="scWaterfallItem" :style="{
                     top: item.top + 'px',
                     left: item.left + 'px',
                     width: colWidth + 'px',
@@ -29,6 +29,7 @@
 </template>
 <script>
 export default {
+    emits: ['preload', 'showContent'],
     props: {
         apiObj: { type: Object, default: () => { } },
         data: { type: Array, default: () => [] },
@@ -254,7 +255,7 @@ export default {
                 divItem.style.left = left + "px";
                 // 当前图片在窗口内，则加载，这是用于后面的图片懒加载。viewHeight 为窗口高度
                 if (top < this.viewHeight) {
-                    this.$emit("showContent", divItem, this.objData[i]);
+                    this.showContent(divItem, this.objData[i]);
                 }
             }
             // 排列完之后，之后新增图片从这个索引开始预加载图片和排列，之前排列的图片无需在处理
@@ -310,10 +311,13 @@ export default {
                 top = Number.parseFloat(top.slice(0, top.length - 2));
                 // 图片已到达可视范围，则加载
                 if (scrollTop + this.viewHeight > top) {
-                    this.$emit("showContent", imgBoxEl, null);
+                    this.showContent(imgBoxEl, null);
                 }
             });
         },
+        showContent(div, dat) {
+            this.$emit("showContent", div, dat);
+        }
     },
 };
 </script>

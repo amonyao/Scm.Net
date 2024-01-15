@@ -64,4 +64,11 @@ export default {
 			return await http.delete(this.url, data);
 		},
 	},
+	upload: {
+		url: `${config.API_URL}/fesdocfile/upload`,
+		name: "上传",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		},
+	},
 };

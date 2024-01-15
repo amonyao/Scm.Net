@@ -7,7 +7,6 @@ using Com.Scm.Samples.Demo.Dto;
 using Com.Scm.Samples.Demo.Dvo;
 using Com.Scm.Service;
 using Com.Scm.Utils;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MiniExcelLibs;
 
@@ -164,9 +163,9 @@ namespace Com.Scm.Samples.Demo
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<UploadResponse> UploadAsync([FromForm] UploadRequest request)
+        public async Task<ScmUploadResponse> UploadAsync([FromForm] ScmUploadRequest request)
         {
-            var response = new UploadResponse();
+            var response = new ScmUploadResponse();
 
             //判断是否上传了文件内容
             if (request.file == null)
@@ -186,10 +185,11 @@ namespace Com.Scm.Samples.Demo
                 //将文件内容复制到流中
                 await request.file.CopyToAsync(stream);
             }
-            response.file = fileName;
-            response.SetSuccess("文件上传成功！");
+
+            response.AddResult(new ScmUploadResult { file = fileName });
             #endregion
 
+            response.SetSuccess("文件上传成功！");
             return response;
         }
 

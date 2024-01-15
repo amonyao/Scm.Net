@@ -1,11 +1,9 @@
-using Com.Scm.Dvo;
-
 namespace Com.Scm.Fes.Doc
 {
     /// <summary>
     /// 图片数据
     /// </summary>
-    public class ImageDvo : ScmDataDvo
+    public class ImageDvo : FileDvo
     {
         /// <summary>
         /// 宽

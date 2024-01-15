@@ -11,6 +11,10 @@ namespace Com.Scm.Samples.Demo.Dvo
         /// <summary>
         /// 
         /// </summary>
+        public string path { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public IFormFile file { get; set; }
         /// <summary>
         /// 

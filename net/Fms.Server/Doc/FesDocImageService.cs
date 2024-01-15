@@ -4,10 +4,12 @@ using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
+using Com.Scm.Filter;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Fes.Doc
@@ -18,6 +20,7 @@ namespace Com.Scm.Fes.Doc
     [ApiExplorerSettings(GroupName = "Fes")]
     public class FesDocImageService : ApiService
     {
+        private readonly SugarRepository<FileDao> _fileRepository;
         private readonly SugarRepository<ImageDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
         private readonly EnvConfig _envConfig;
@@ -27,10 +30,13 @@ namespace Com.Scm.Fes.Doc
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public FesDocImageService(SugarRepository<ImageDao> thisRepository,
+        public FesDocImageService(
+            SugarRepository<FileDao> fileRepository,
+            SugarRepository<ImageDao> thisRepository,
             SugarRepository<UserDao> userRepository,
             EnvConfig envConfig)
         {
+            _fileRepository = fileRepository;
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _envConfig = envConfig;
@@ -43,7 +49,7 @@ namespace Com.Scm.Fes.Doc
         /// <returns></returns>
         public async Task<PageResult<ImageDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
-            var result = await _thisRepository.AsQueryable()
+            var result = await _fileRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
@@ -62,7 +68,7 @@ namespace Com.Scm.Fes.Doc
         /// <returns></returns>
         public async Task<List<ImageDvo>> GetListAsync(ScmSearchRequest request)
         {
-            var result = await _thisRepository.AsQueryable()
+            var result = await _fileRepository.AsQueryable()
                 .Where(a => a.row_status == ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(a => a.id)
@@ -86,6 +92,14 @@ namespace Com.Scm.Fes.Doc
 
                 var createDao = _userRepository.GetById(item.create_user);
                 item.create_names = createDao?.names;
+
+                var dao = _thisRepository.GetById(item.id);
+                if (dao != null)
+                {
+                    item.width = dao.width;
+                    item.height = dao.height;
+                    item.exif = dao.exif;
+                }
             }
         }
 
@@ -94,11 +108,29 @@ namespace Com.Scm.Fes.Doc
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<ImageDto> GetAsync(long id)
+        [HttpGet("{id}"), AllowAnonymous, NoJsonResult]
+        public async Task<IActionResult> GetAsync(long id)
         {
-            var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<ImageDto>();
+            var dao = await _fileRepository
+                .AsQueryable()
+                .ClearFilter()
+                .Where(a => a.id == id)
+                .FirstAsync();
+
+            if (dao != null)
+            {
+                var file = _envConfig.GetUploadPath(dao.path);
+                if (File.Exists(file))
+                {
+                    using (var stream = File.OpenRead(file))
+                    {
+                        var bytes = new byte[stream.Length];
+                        await stream.ReadAsync(bytes, 0, bytes.Length);
+                        return new FileContentResult(bytes, "image/png");
+                    }
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -174,41 +206,6 @@ namespace Com.Scm.Fes.Doc
         public async Task<int> DeleteAsync(string ids)
         {
             return await DeleteRecord(_thisRepository, ids.ToListLong());
-        }
-
-        /// <summary>
-        /// 文件上传
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ScmUploadResponse> UploadAsync([FromForm] ScmUploadRequest request)
-        {
-            var response = new ScmUploadResponse();
-
-            //判断是否上传了文件内容
-            if (request.file == null)
-            {
-                response.SetFailure("上传内容为空！");
-                return response;
-            }
-
-            #region 保存文件
-            var fileName = request.file.FileName;
-            var ext = Path.GetExtension(fileName);
-            fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
-
-            var path = _envConfig.GetUploadPath(fileName);
-            using (var stream = File.OpenWrite(path))
-            {
-                //将文件内容复制到流中
-                await request.file.CopyToAsync(stream);
-            }
-            response.AddResult(new ScmUploadResult { file = fileName, path = _envConfig.ToUri(path) });
-            response.SetSuccess("文件上传成功！");
-            #endregion
-
-            return response;
         }
     }
 }

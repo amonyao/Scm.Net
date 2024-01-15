@@ -15,6 +15,13 @@ export default {
 			return await http.get(this.url + params);
 		},
 	},
+	model: {
+		url: `${config.API_URL}/fesdocimage/`,
+		name: "查看",
+		get: async function (params) {
+			return await http.get(this.url + params);
+		},
+	},
 	view: {
 		url: `${config.API_URL}/fesdocimage/view/`,
 		name: "查看",

@@ -1,3 +1,4 @@
+using Com.Scm.Dao.Unit;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +8,7 @@ namespace Com.Scm.Fes.Doc
     /// 图片数据
     /// </summary>
     [SugarTable("fes_doc_image")]
-    public class ImageDao : FileDao
+    public class ImageDao : ScmUnitDataDao
     {
         /// <summary>
         /// 宽

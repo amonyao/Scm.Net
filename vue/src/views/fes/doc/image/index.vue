@@ -46,38 +46,29 @@
 			<el-main class="nopadding" style="padding: 10px">
 				<el-scrollbar ref="scrollbar">
 					<el-empty v-if="files.length == 0" description="无数据" :image-size="80"></el-empty>
-					<sc-waterfall></sc-waterfall>
-					<div v-for="(item, index) in files" :key="index" class="sc-file-select__item"
-						:class="{ active: value.includes(index + item.name) }" @click="select(index + item.name, item)"
-						:title="item.name">
-						<div class="sc-file-select__item__file">
-							<div class="sc-file-select__item__select">
-								<el-icon><el-icon-check /></el-icon>
+					<sc-waterfall :data="files" @preload="preload" @showContent="showContent">
+						<template #item="{ item }">
+							<img class="img" :data-src="serverApi + item.id" :alt="item.namec"
+								:style="{ 'height': item._dim + 'px', }" />
+							<div>
+								<label>{{ item.namec }}</label>
 							</div>
-							<div class="sc-file-select__item__box"></div>
-							<el-image v-if="item.type == 3" :src="serverApi + item.uri"
-								:preview-src-list="[serverApi + item.uri]" fit="contain" lazy></el-image>
-							<div v-else class="item-file item-file-doc">
-								<el-icon class="el-icon--upload">
-									<el-icon-document />
-								</el-icon>
-							</div>
-						</div>
-						<p :title="item.name">{{ item.name }}</p>
-					</div>
+						</template>
+					</sc-waterfall>
 				</el-scrollbar>
 			</el-main>
 			<el-image-viewer @close="closeImgViewer" :url-list="previewList" v-if="showImageViewer" />
 			<sc-text-viewer ref="textViewer" />
-			<upload ref="upload" @complete="complete" />
+			<sc-upload ref="upload" @complete="complete" :api-obj="this.$API.fesdocfile.upload" :multiple="true" />
 		</el-container>
 	</el-container>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
+
 export default {
 	components: {
-		upload: defineAsyncComponent(() => import("./upload")),
+		scUpload: defineAsyncComponent(() => import("@/components/scUpload")),
 		scTextViewer: defineAsyncComponent(() => import("@/components/scTextViewer")),
 	},
 	data() {
@@ -99,10 +90,11 @@ export default {
 			selectedUrl: undefined,//文件绝对路径
 			showImageViewer: false,
 			showTextViewer: false,
+            imgWidth: 100,
 		};
 	},
 	mounted() {
-		this.serverApi = this.$API.mgrfile.view.url + '?file=';
+		this.serverApi = this.$API.fesdocimage.model.url;
 		this.init();
 		this.initFiles();
 		this.$SCM.list_dic(this.type_list, 'file_type', true);
@@ -119,12 +111,12 @@ export default {
 		async initFiles() {
 			this.previewList = [];
 			this.value = [];
-			const res = await this.$API.mgrfile.files.get(this.param);
+			const res = await this.$API.fesdocimage.page.get(this.param);
 			if (!res || res.code != 200) {
 				return;
 			}
 
-			this.files = res.data;
+			this.files = res.data.items;
 		},
 		refresh() {
 			this.value = [];
@@ -191,7 +183,7 @@ export default {
 			)
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.mgrfile.delFolder.delete(data.uri);
+					var res = await this.$API.fesdocimage.delFolder.delete(data.uri);
 					loading.close();
 					if (res.code == 200) {
 						this.param.path = "/upload/";
@@ -216,7 +208,7 @@ export default {
 			)
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.mgrfile.delFile.delete(this.selectedFile.uri);
+					var res = await this.$API.fesdocimage.delFile.delete(this.selectedFile.uri);
 					if (res.code == 200) {
 						this.initFiles();
 						loading.close();
@@ -241,6 +233,63 @@ export default {
 			link.click();
 			document.body.removeChild(link);
 			window.URL.revokeObjectURL(url);
+		},
+		preload(item) {
+			// 指定大小
+			if (item.height && item.width) {
+				this.calSize(item, item.width, item.height, this.imgWidth);
+				return;
+			}
+
+			// 无图则把高度设置为0
+			var src = item.src;
+			if (!src) {
+				this.calSize(item, 0, 0, this.imgWidth);
+				return;
+			}
+
+			let img = new Image();
+			img.src = src;
+			img.onload = img.onerror = (e) => {
+				var width = 0;
+				var height = 0;
+				if (e.type === "error") {
+					item._error = true;
+				}
+				else if (e.type === 'load') {
+					width = img.width;
+					height = img.height;
+				}
+
+				this.calSize(item, width, height, this.imgWidth);
+			}
+		},
+		// 明细展示
+		showContent(item) {
+			let img = item.children[0];
+			if (img) {
+				if (img.loaded) {
+					return;
+				}
+
+				img.src = img.getAttribute("data-src");
+				img.style.opacity = 1;
+				img.style.transform = "scale(1)";
+				img.loaded = true;
+			}
+		},
+		// 计算图片大小
+		calSize(item, width, height, def) {
+			var tmp = def;
+			if (width && height) {
+				tmp = Math.round(this.imgWidth * height / width);
+			}
+			item._dim = tmp;
+			// ++this.loadedCount;
+			// // 当前图片都与处理完，则加载图片
+			// if (this.apiData.length === this.loadedCount) {
+			//     this.preloaded();
+			// }
 		}
 	},
 };

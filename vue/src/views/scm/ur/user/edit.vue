@@ -5,8 +5,8 @@
 				<div class="select-img">
 					<div class="bg-gray">
 						<div class="up-wall">
-							<sc-upload v-model="formData.avatar" :apiObj="uploadApi" :width="148" :height="148"
-								:onSuccess="upSuccess"></sc-upload>
+							<scUploadAvatar v-model="formData.avatar" :apiObj="uploadApi" :width="148" :height="148"
+								:onSuccess="upSuccess" />
 						</div>
 					</div>
 				</div>
@@ -121,7 +121,11 @@
 	</sc-dialog>
 </template>
 <script>
+import scUploadAvatar from "@/components/scUploadAvatar";
 export default {
+	components: {
+		scUploadAvatar: scUploadAvatar,
+	},
 	emits: ['complete'],
 	data() {
 		return {

@@ -40,8 +40,10 @@ export default {
 			isSaveing: false,
 			formData: {
 				id: '0',
-				option_id: 0,
-				text: ''
+				codec: '',
+				names: '',
+				phone: '',
+				remark: ''
 			},
 			rules: {
 				codec: [
