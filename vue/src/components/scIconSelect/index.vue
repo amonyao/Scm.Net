@@ -47,7 +47,7 @@
 										:title="icon.desc">
 										<div class="icon-item">
 											<div class="icon-info">
-												<span :class="getIcon(item, icon)">{{ getName(item, icon) }}</span>
+												<span :class="getIcon(item, icon)">{{ getText(item, icon) }}</span>
 											</div>
 											<div class="icon-desc">
 												{{ icon.desc }}
@@ -123,7 +123,7 @@ export default {
 			if (text) {
 				config.icons.forEach((t) => {
 					var icons = t.icons.filter((n) => n.desc.includes(text));
-					var cat = { name: t.name, icons: icons, size: icons.length };
+					var cat = { name: t.name, icons: icons, size: icons.length, set: t.set };
 					filterData.push(cat);
 				});
 			} else {
@@ -131,16 +131,16 @@ export default {
 			}
 			this.data = filterData;
 		},
-		getName(item, icon) {
+		getText(item, icon) {
 			if (item.set == 'ms') {
 				return icon.name;
 			}
 
 			return '';
 		},
-		getIcon(item, icon) {
+		getName(item, icon) {
 			if (item.set == 'ms') {
-				return 'material-symbols-' + (this.mode ? 'rounded' : 'outlined');
+				return icon.name;
 			}
 
 			var name = icon.name;
@@ -149,7 +149,15 @@ export default {
 			} else if (icon.type) {
 				name += '-' + icon.type;
 			}
-			return 'scfont sc-' + name;
+
+			return 'sc-' + name;
+		},
+		getIcon(item, icon) {
+			if (item.set == 'ms') {
+				return 'material-symbols-' + (this.mode ? 'rounded' : 'outlined');
+			}
+
+			return 'scfont ' + this.getName(item, icon);
 		}
 	},
 };
