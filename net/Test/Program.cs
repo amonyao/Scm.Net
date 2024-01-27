@@ -7,7 +7,7 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        new IconTool().Gen("D:\\js.js", "D:\\css.css");
+        new IconTool().MdGen("D:\\ms.json", "D:\\ms2.json");
         Console.WriteLine("升级完成！");
     }
 

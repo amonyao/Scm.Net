@@ -1,126 +1,215 @@
 <template>
-    <div class="doc-content-wrapper" style="background-color: white;">
-        <div class="doc-content-container">
-            <div class="doc-content">
-                <div>
-                    <h1>h1标题</h1>
-                    <p>内容</p>
-                    <h2>h2标题</h2>
-                    <div class="example">
-                        <div class="example-showcase">
-                        </div>
-                        <el-divider style="margin: 0px;" />
-                        <div class="op-btns">
-                            <i class="el-icon op-btn el-tooltip__trigger el-tooltip__trigger" aria-label="复制代码" tabindex="0"
-                                role="button" style="font-size: 16px;">
-                                <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-                                    <path fill="currentColor"
-                                        d="M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z">
-                                    </path>
-                                </svg>
-                            </i>
-                            <i class="el-icon op-btn el-tooltip__trigger el-tooltip__trigger" style="font-size: 16px;"
-                                @click="viewCode">
-                                <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-                                    <path fill="currentColor"
-                                        d="m23 12l-7.071 7.071l-1.414-1.414L20.172 12l-5.657-5.657l1.414-1.414L23 12zM3.828 12l5.657 5.657l-1.414 1.414L1 12l7.071-7.071l1.414 1.414L3.828 12z">
-                                    </path>
-                                </svg>
-                            </i>
-                        </div>
-                        <div class="example-source-wrapper" v-show="codeVisible">
-                            <div class="example-source language-vue">
-                                <highlightjs language="JavaScript" :autodetect="false" :code="code"></highlightjs>
-                            </div>
-                        </div>
-                        <div class="example-float-control" tabindex="0" role="button" v-show="codeVisible"
-                            @click="viewCode">
-                            <i class="el-icon" style="font-size: 16px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                    <path fill="currentColor" d="M512 320 192 704h639.936z"></path>
-                                </svg>
-                            </i><span>隐藏源代码</span>
-                        </div>
-                    </div>
-                </div>
+    <scWaterfall :data="list" @preload="preload" @showContent="showContent" :columnCount="3">
+        <template #item="{ item }">
+            <img :data-src="item.src" :alt="item.names" :style="{ height: item._dim + 'px' }" />
+            <div>
+                <label>这是说明文字</label>
             </div>
-        </div>
-    </div>
+        </template>
+    </scWaterfall>
 </template>
 <script>
-import '@/assets/code.scss';
-
-//import 'highlight.js/styles/atom-one-dark.css'
-import 'highlight.js/styles/stackoverflow-light.css';
-import 'highlight.js/lib/common';
-import hljsVuePlugin from '@highlightjs/vue-plugin';
-
 export default {
-    components: {
-        highlightjs: hljsVuePlugin.component
-    },
     data() {
         return {
-            code: `<template>
-  <el-row class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </el-row>
-
-  <el-row class="mb-4">
-    <el-button plain>Plain</el-button>
-    <el-button type="primary" plain>Primary</el-button>
-    <el-button type="success" plain>Success</el-button>
-    <el-button type="info" plain>Info</el-button>
-    <el-button type="warning" plain>Warning</el-button>
-    <el-button type="danger" plain>Danger</el-button>
-  </el-row>
-
-  <el-row class="mb-4">
-    <el-button round>Round</el-button>
-    <el-button type="primary" round>Primary</el-button>
-    <el-button type="success" round>Success</el-button>
-    <el-button type="info" round>Info</el-button>
-    <el-button type="warning" round>Warning</el-button>
-    <el-button type="danger" round>Danger</el-button>
-  </el-row>
-
-  <el-row>
-    <el-button :icon="Search" circle />
-    <el-button type="primary" :icon="Edit" circle />
-    <el-button type="success" :icon="Check" circle />
-    <el-button type="info" :icon="Message" circle />
-    <el-button type="warning" :icon="Star" circle />
-    <el-button type="danger" :icon="Delete" circle />
-  </el-row>
-</template>
-
-&lt;script setup>
-import {
-  Check,
-  Delete,
-  Edit,
-  Message,
-  Search,
-  Star,
-} from "@element-plus/icons-vue"
-< /script>`,
-            codeVisible: false,
-        }
+            apiObj: "",
+            showGrouploading: false,
+            groupFilterText: "",
+            group: [],
+            options: [
+                {
+                    value: "0",
+                    label: "所有文件",
+                },
+                {
+                    value: "file",
+                    label: "文件",
+                },
+                {
+                    value: "image",
+                    label: "图片",
+                },
+            ],
+            props: {
+                label: "path",
+            },
+            list: [],
+            imgWidth: 100,
+            param: {
+                types: '0',
+                row_status: 1,
+                create_time: '',
+                key: '',
+            },
+            selectFile: undefined,
+            copyUrl: undefined,
+        };
     },
     mounted() {
+        //this.$SCM.list_dic(this.types_list, 'article_type', true);
+        this.list = this.testData();
     },
     methods: {
-        viewCode() {
-            this.codeVisible = !this.codeVisible;
+        complete() {
+            this.$refs.table.refresh();
         },
-        copyCode() {
+        testData() {
+            var imgArr = [
+                {
+                    src: "https://vitejs.cn/vite3-cn/logo-with-shadow.png",
+                    width: 595,
+                    height: 808,
+                },
+                {
+                    src: "https://fscdn.zto.com/fs8/M02/94/F3/wKhBD19OTuuAedCpAAIKGsFFPqc560.png",
+                    width: 595,
+                    height: 808,
+                },
+                {
+                    src: "https://vitejs.cn/vite3-cn/logo-with-shadow.png",
+                    width: 188,
+                    height: 121,
+                },
+                {
+                    src: "https://vitejs.cn/vite3-cn/logo-with-shadow.png",
+                    width: 1317,
+                    height: 845,
+                },
+                {
+                    src: "https://fscdn.zto.com/fs8/M02/94/F3/wKhBD19OTuuAedCpAAIKGsFFPqc560.png",
+                    width: 1349,
+                    height: 799,
+                },
+            ];
 
-        }
+            var list = [];
+            for (let i = 0; i < 40; i++) {
+                var idx = Math.round(Math.random() * (imgArr.length - 1));
+                var img = imgArr[idx];
+                //var tmp = this.imgWidth * img.height / img.width;
+                img.height = Math.random() * img.height + 100;
+                list.push(img);
+            }
+
+            return list;
+        },
+        preload(item) {
+            // 指定大小
+            if (item.height && item.width) {
+                this.calSize(item, item.width, item.height, this.imgWidth);
+                return;
+            }
+
+            // 无图则把高度设置为0
+            var src = item.src;
+            if (!src) {
+                this.calSize(item, 0, 0, this.imgWidth);
+                return;
+            }
+
+            let img = new Image();
+            img.src = src;
+            img.onerror = () => {
+                item._error = true;
+            };
+            img.onload = () => {
+                this.calSize(item, img.width, img.height, this.imgWidth);
+            };
+        },
+        // 明细展示
+        showContent(item) {
+            let img = item.children[0];
+            if (img) {
+                if (img.loaded) {
+                    return;
+                }
+
+                img.src = img.getAttribute("data-src");
+                img.style.opacity = 1;
+                img.style.transform = "scale(1)";
+                img.loaded = true;
+            }
+        },
+        // 计算图片大小
+        calSize(item, width, height, def) {
+            var tmp = def;
+            if (width && height) {
+                tmp = Math.round((this.imgWidth * height) / width);
+            }
+            item._dim = tmp;
+        },
+        typeChange() {
+        },
+        groupClick() {
+
+        },
+        lookImg() {
+            this.showImageViewer = true;
+        },
+        file_del() {
+            this.$confirm(
+                `确定删除选中的 【${this.selectFile.name}】 吗？`,
+                "提示",
+                {
+                    type: "warning",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                }
+            )
+                .then(async () => {
+                    const loading = this.$loading();
+                    var res = await this.$API.sysfile.delFile.delete(
+                        this.selectFile.fileName
+                    );
+                    if (res.code == 200) {
+                        this.initFiles();
+                        loading.close();
+                        this.$message.success("删除成功");
+                    } else {
+                        this.$alert(res.message, "提示", { type: "error" });
+                    }
+                })
+                .catch(() => { });
+        },
+        file_down() {
+            const fileData = this.serverApi + this.selectFile.fileName;
+            const url = window.URL.createObjectURL(
+                new Blob([fileData], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8",
+                })
+            );
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", this.selectFile.name);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        },
+        open_dialog() {
+            // this.$refs.upload.open(this.param.path);
+        },
+        refresh() {
+            // this.value = [];
+            // this.initFiles();
+        },
     },
-}
+};
 </script>
+<style scoped>
+.page {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.sc-waterfall-item img {
+    width: 100%;
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.6s;
+    transition-delay: 0.1s;
+}
+</style>

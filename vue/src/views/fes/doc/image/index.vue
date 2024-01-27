@@ -90,7 +90,7 @@ export default {
 			selectedUrl: undefined,//文件绝对路径
 			showImageViewer: false,
 			showTextViewer: false,
-            imgWidth: 100,
+			imgWidth: 100,
 		};
 	},
 	mounted() {
@@ -280,6 +280,7 @@ export default {
 		},
 		// 计算图片大小
 		calSize(item, width, height, def) {
+			console.log('calSize:width-' + width + ',height-' + height + ',def-' + def)
 			var tmp = def;
 			if (width && height) {
 				tmp = Math.round(this.imgWidth * height / width);
@@ -295,220 +296,12 @@ export default {
 };
 </script>
 <style scoped>
-.sc-file-select {
-	display: flex;
-}
-
-.sc-file-select__files {
-	flex: 1;
-}
-
-.sc-file-select__item {
-	padding: 10px;
-}
-
-.sc-file-select__list {
-	height: 400px;
-}
-
-.sc-file-select__item {
-	display: inline-block;
-	float: left;
-	margin: 0 15px 25px 0;
-	width: 130px;
-	cursor: pointer;
-	background: #f9f9f9;
-}
-
-.sc-file-select__item__file {
-	width: 110px;
-	height: 110px;
-	position: relative;
-}
-
-.sc-file-select__item__file .el-image {
-	width: 110px;
-	height: 110px;
-}
-
-.sc-file-select__item__box {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	border: 2px solid var(--el-color-success);
-	z-index: 1;
-	display: none;
-}
-
-.sc-file-select__item__box::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: var(--el-color-success);
-	opacity: 0.2;
-	display: none;
-}
-
-.sc-file-select__item:hover .sc-file-select__item__box {
-	display: block;
-}
-
-.sc-file-select__item.active .sc-file-select__item__box {
-	display: block;
-}
-
-.sc-file-select__item.active .sc-file-select__item__box::before {
-	display: block;
-}
-
-.sc-file-select__item p {
-	margin-top: 10px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	-webkit-text-overflow: ellipsis;
-	text-align: center;
-}
-
-.sc-file-select__item__checkbox {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: 7px;
-	right: 7px;
-	z-index: 2;
-	background: rgba(0, 0, 0, 0.2);
-	border: 1px solid #fff;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.sc-file-select__item__checkbox i {
-	font-size: 14px;
-	color: #fff;
-	font-weight: bold;
-	display: none;
-}
-
-.sc-file-select__item__select {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: 0px;
-	right: 0px;
-	z-index: 2;
-	background: var(--el-color-success);
-	display: none;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.sc-file-select__item__select i {
-	font-size: 14px;
-	color: #fff;
-	font-weight: bold;
-}
-
-.sc-file-select__item.active .sc-file-select__item__checkbox {
-	background: var(--el-color-success);
-}
-
-.sc-file-select__item.active .sc-file-select__item__checkbox i {
-	display: block;
-}
-
-.sc-file-select__item.active .sc-file-select__item__select {
-	display: flex;
-}
-
-.sc-file-select__item__file .item-file {
-	width: 110px;
-	height: 110px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.sc-file-select__item__file .item-file i {
-	font-size: 40px;
-}
-
-.sc-file-select__item__file .item-file.item-file-doc {
-	color: #409eff;
-}
-
-.sc-file-select__item__upload {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 1;
-	background: rgba(255, 255, 255, 0.7);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.sc-file-select__side {
-	width: 200px;
-	margin-right: 15px;
-	border-right: 1px solid rgba(128, 128, 128, 0.2);
-	display: flex;
-	flex-flow: column;
-}
-
-.sc-file-select__side-menu {
-	flex: 1;
-}
-
-.sc-file-select__side-msg {
-	height: 32px;
-	line-height: 32px;
-}
-
-.sc-file-select__top {
-	margin-bottom: 15px;
-	display: flex;
-	justify-content: space-between;
-}
-
-.sc-file-select__upload {
-	display: inline-block;
-}
-
-.sc-file-select__top .tips {
-	font-size: 12px;
-	margin-left: 10px;
-	color: #999;
-}
-
-.sc-file-select__top .tips i {
-	font-size: 14px;
-	margin-right: 5px;
-	position: relative;
-	bottom: -0.125em;
-}
-
-.sc-file-select__pagination {
-	margin: 15px 0;
-}
-
-.sc-file-select__do {
-	text-align: right;
-}
-
-[data-theme="dark"] .sc-file-select__item {
-	background: #383838;
+.sc-waterfall-item img {
+	width: 100%;
+	border-radius: 10px;
+	opacity: 0;
+	transform: scale(0.5);
+	transition: all 0.6s;
+	transition-delay: 0.1s;
 }
 </style>
