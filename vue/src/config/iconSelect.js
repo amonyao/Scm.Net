@@ -75,6 +75,10 @@ export default {
 					desc: "1x_mobiledata",
 				},
 				{
+					name: "1x_mobiledata_badge",
+					desc: "1x_mobiledata_badge",
+				},
+				{
 					name: "20mp",
 					desc: "20mp",
 				},
@@ -93,6 +97,10 @@ export default {
 				{
 					name: "24mp",
 					desc: "24mp",
+				},
+				{
+					name: "2d",
+					desc: "2d",
 				},
 				{
 					name: "2k",
@@ -123,6 +131,10 @@ export default {
 					desc: "3g_mobiledata",
 				},
 				{
+					name: "3g_mobiledata_badge",
+					desc: "3g_mobiledata_badge",
+				},
+				{
 					name: "3k",
 					desc: "3k",
 				},
@@ -143,6 +155,10 @@ export default {
 					desc: "4g_mobiledata",
 				},
 				{
+					name: "4g_mobiledata_badge",
+					desc: "4g_mobiledata_badge",
+				},
+				{
 					name: "4g_plus_mobiledata",
 					desc: "4g_plus_mobiledata",
 				},
@@ -159,8 +175,16 @@ export default {
 					desc: "4mp",
 				},
 				{
+					name: "50mp",
+					desc: "50mp",
+				},
+				{
 					name: "5g",
 					desc: "5g",
+				},
+				{
+					name: "5g_mobiledata_badge",
+					desc: "5g_mobiledata_badge",
 				},
 				{
 					name: "5k",
@@ -235,100 +259,12 @@ export default {
 					desc: "9mp",
 				},
 				{
-					name: "arrow_back",
-					desc: "arrow_back",
-				},
-				{
-					name: "arrow_back_ios",
-					desc: "arrow_back_ios",
-				},
-				{
-					name: "arrow_back_ios_new",
-					desc: "arrow_back_ios_new",
-				},
-				{
-					name: "arrow_circle_down",
-					desc: "arrow_circle_down",
-				},
-				{
-					name: "arrow_circle_left",
-					desc: "arrow_circle_left",
-				},
-				{
-					name: "arrow_circle_right",
-					desc: "arrow_circle_right",
-				},
-				{
-					name: "arrow_circle_up",
-					desc: "arrow_circle_up",
-				},
-				{
-					name: "arrow_downward",
-					desc: "arrow_downward",
-				},
-				{
-					name: "arrow_drop_down",
-					desc: "arrow_drop_down",
-				},
-				{
-					name: "arrow_drop_down_circle",
-					desc: "arrow_drop_down_circle",
-				},
-				{
-					name: "arrow_drop_up",
-					desc: "arrow_drop_up",
-				},
-				{
-					name: "arrow_forward",
-					desc: "arrow_forward",
-				},
-				{
-					name: "arrow_forward_ios",
-					desc: "arrow_forward_ios",
-				},
-				{
-					name: "arrow_left",
-					desc: "arrow_left",
-				},
-				{
-					name: "arrow_outward",
-					desc: "arrow_outward",
-				},
-				{
-					name: "arrow_right",
-					desc: "arrow_right",
-				},
-				{
-					name: "arrow_right_alt",
-					desc: "arrow_right_alt",
-				},
-				{
-					name: "arrow_upward",
-					desc: "arrow_upward",
-				},
-				{
 					name: "abc",
 					desc: "abc",
 				},
 				{
 					name: "ac_unit",
 					desc: "ac_unit",
-				},
-				{
-					name: "access_alarm",
-					desc: "access_alarm",
-				},
-				{
-					name: "access_alarms",
-					desc: "access_alarms",
-				},
-				{
-					name: "access_time",
-					desc: "access_time",
-				},
-				{
-					name: "access_time_filled",
-					desc: "access_time_filled",
 				},
 				{
 					name: "accessibility",
@@ -359,12 +295,52 @@ export default {
 					desc: "account_box",
 				},
 				{
+					name: "account_child",
+					desc: "account_child",
+				},
+				{
+					name: "account_child_invert",
+					desc: "account_child_invert",
+				},
+				{
 					name: "account_circle",
 					desc: "account_circle",
 				},
 				{
+					name: "account_circle_off",
+					desc: "account_circle_off",
+				},
+				{
 					name: "account_tree",
 					desc: "account_tree",
+				},
+				{
+					name: "action_key",
+					desc: "action_key",
+				},
+				{
+					name: "activity_zone",
+					desc: "activity_zone",
+				},
+				{
+					name: "acute",
+					desc: "acute",
+				},
+				{
+					name: "ad",
+					desc: "ad",
+				},
+				{
+					name: "ad_group",
+					desc: "ad_group",
+				},
+				{
+					name: "ad_group_off",
+					desc: "ad_group_off",
+				},
+				{
+					name: "ad_off",
+					desc: "ad_off",
 				},
 				{
 					name: "ad_units",
@@ -383,8 +359,8 @@ export default {
 					desc: "add_a_photo",
 				},
 				{
-					name: "add_alarm",
-					desc: "add_alarm",
+					name: "add_ad",
+					desc: "add_ad",
 				},
 				{
 					name: "add_alert",
@@ -399,6 +375,10 @@ export default {
 					desc: "add_business",
 				},
 				{
+					name: "add_call",
+					desc: "add_call",
+				},
+				{
 					name: "add_card",
 					desc: "add_card",
 				},
@@ -411,10 +391,6 @@ export default {
 					desc: "add_circle",
 				},
 				{
-					name: "add_circle_outline",
-					desc: "add_circle_outline",
-				},
-				{
 					name: "add_comment",
 					desc: "add_comment",
 				},
@@ -425,10 +401,6 @@ export default {
 				{
 					name: "add_home_work",
 					desc: "add_home_work",
-				},
-				{
-					name: "add_ic_call",
-					desc: "add_ic_call",
 				},
 				{
 					name: "add_link",
@@ -445,6 +417,10 @@ export default {
 				{
 					name: "add_moderator",
 					desc: "add_moderator",
+				},
+				{
+					name: "add_notes",
+					desc: "add_notes",
 				},
 				{
 					name: "add_photo_alternate",
@@ -483,16 +459,16 @@ export default {
 					desc: "add_to_queue",
 				},
 				{
-					name: "addchart",
-					desc: "addchart",
-				},
-				{
 					name: "adf_scanner",
 					desc: "adf_scanner",
 				},
 				{
 					name: "adjust",
 					desc: "adjust",
+				},
+				{
+					name: "admin_meds",
+					desc: "admin_meds",
 				},
 				{
 					name: "admin_panel_settings",
@@ -503,12 +479,28 @@ export default {
 					desc: "ads_click",
 				},
 				{
+					name: "agender",
+					desc: "agender",
+				},
+				{
 					name: "agriculture",
 					desc: "agriculture",
 				},
 				{
 					name: "air",
 					desc: "air",
+				},
+				{
+					name: "air_freshener",
+					desc: "air_freshener",
+				},
+				{
+					name: "air_purifier",
+					desc: "air_purifier",
+				},
+				{
+					name: "air_purifier_gen",
+					desc: "air_purifier_gen",
 				},
 				{
 					name: "airline_seat_flat",
@@ -571,6 +563,14 @@ export default {
 					desc: "airport_shuttle",
 				},
 				{
+					name: "airware",
+					desc: "airware",
+				},
+				{
+					name: "airwave",
+					desc: "airwave",
+				},
+				{
 					name: "alarm",
 					desc: "alarm",
 				},
@@ -587,8 +587,32 @@ export default {
 					desc: "alarm_on",
 				},
 				{
+					name: "alarm_smart_wake",
+					desc: "alarm_smart_wake",
+				},
+				{
 					name: "album",
 					desc: "album",
+				},
+				{
+					name: "align_center",
+					desc: "align_center",
+				},
+				{
+					name: "align_end",
+					desc: "align_end",
+				},
+				{
+					name: "align_flex_center",
+					desc: "align_flex_center",
+				},
+				{
+					name: "align_flex_end",
+					desc: "align_flex_end",
+				},
+				{
+					name: "align_flex_start",
+					desc: "align_flex_start",
 				},
 				{
 					name: "align_horizontal_center",
@@ -601,6 +625,62 @@ export default {
 				{
 					name: "align_horizontal_right",
 					desc: "align_horizontal_right",
+				},
+				{
+					name: "align_items_stretch",
+					desc: "align_items_stretch",
+				},
+				{
+					name: "align_justify_center",
+					desc: "align_justify_center",
+				},
+				{
+					name: "align_justify_flex_end",
+					desc: "align_justify_flex_end",
+				},
+				{
+					name: "align_justify_flex_start",
+					desc: "align_justify_flex_start",
+				},
+				{
+					name: "align_justify_space_around",
+					desc: "align_justify_space_around",
+				},
+				{
+					name: "align_justify_space_between",
+					desc: "align_justify_space_between",
+				},
+				{
+					name: "align_justify_space_even",
+					desc: "align_justify_space_even",
+				},
+				{
+					name: "align_justify_stretch",
+					desc: "align_justify_stretch",
+				},
+				{
+					name: "align_self_stretch",
+					desc: "align_self_stretch",
+				},
+				{
+					name: "align_space_around",
+					desc: "align_space_around",
+				},
+				{
+					name: "align_space_between",
+					desc: "align_space_between",
+				},
+				{
+					name: "align_space_even",
+					desc: "align_space_even",
+				},
+				{
+					name: "align_start",
+					desc: "align_start",
+				},
+				{
+					name: "align_stretch",
+					desc: "align_stretch",
 				},
 				{
 					name: "align_vertical_bottom",
@@ -623,8 +703,20 @@ export default {
 					desc: "all_inclusive",
 				},
 				{
+					name: "all_match",
+					desc: "all_match",
+				},
+				{
 					name: "all_out",
 					desc: "all_out",
+				},
+				{
+					name: "allergies",
+					desc: "allergies",
+				},
+				{
+					name: "allergy",
+					desc: "allergy",
 				},
 				{
 					name: "alt_route",
@@ -633,6 +725,22 @@ export default {
 				{
 					name: "alternate_email",
 					desc: "alternate_email",
+				},
+				{
+					name: "altitude",
+					desc: "altitude",
+				},
+				{
+					name: "ambulance",
+					desc: "ambulance",
+				},
+				{
+					name: "amend",
+					desc: "amend",
+				},
+				{
+					name: "amp_stories",
+					desc: "amp_stories",
 				},
 				{
 					name: "analytics",
@@ -651,12 +759,16 @@ export default {
 					desc: "animation",
 				},
 				{
-					name: "announcement",
-					desc: "announcement",
-				},
-				{
 					name: "aod",
 					desc: "aod",
+				},
+				{
+					name: "aod_tablet",
+					desc: "aod_tablet",
+				},
+				{
+					name: "aod_watch",
+					desc: "aod_watch",
 				},
 				{
 					name: "apartment",
@@ -667,24 +779,44 @@ export default {
 					desc: "api",
 				},
 				{
+					name: "apk_document",
+					desc: "apk_document",
+				},
+				{
+					name: "apk_install",
+					desc: "apk_install",
+				},
+				{
+					name: "app_badging",
+					desc: "app_badging",
+				},
+				{
 					name: "app_blocking",
 					desc: "app_blocking",
+				},
+				{
+					name: "app_promo",
+					desc: "app_promo",
 				},
 				{
 					name: "app_registration",
 					desc: "app_registration",
 				},
 				{
-					name: "app_settings_alt",
-					desc: "app_settings_alt",
-				},
-				{
 					name: "app_shortcut",
 					desc: "app_shortcut",
 				},
 				{
+					name: "apparel",
+					desc: "apparel",
+				},
+				{
 					name: "approval",
 					desc: "approval",
+				},
+				{
+					name: "approval_delegation",
+					desc: "approval_delegation",
 				},
 				{
 					name: "apps",
@@ -693,6 +825,22 @@ export default {
 				{
 					name: "apps_outage",
 					desc: "apps_outage",
+				},
+				{
+					name: "aq",
+					desc: "aq",
+				},
+				{
+					name: "aq_indoor",
+					desc: "aq_indoor",
+				},
+				{
+					name: "ar_on_you",
+					desc: "ar_on_you",
+				},
+				{
+					name: "ar_stickers",
+					desc: "ar_stickers",
 				},
 				{
 					name: "architecture",
@@ -707,6 +855,138 @@ export default {
 					desc: "area_chart",
 				},
 				{
+					name: "arming_countdown",
+					desc: "arming_countdown",
+				},
+				{
+					name: "arrow_and_edge",
+					desc: "arrow_and_edge",
+				},
+				{
+					name: "arrow_back",
+					desc: "arrow_back",
+				},
+				{
+					name: "arrow_back_ios",
+					desc: "arrow_back_ios",
+				},
+				{
+					name: "arrow_back_ios_new",
+					desc: "arrow_back_ios_new",
+				},
+				{
+					name: "arrow_circle_down",
+					desc: "arrow_circle_down",
+				},
+				{
+					name: "arrow_circle_left",
+					desc: "arrow_circle_left",
+				},
+				{
+					name: "arrow_circle_right",
+					desc: "arrow_circle_right",
+				},
+				{
+					name: "arrow_circle_up",
+					desc: "arrow_circle_up",
+				},
+				{
+					name: "arrow_downward",
+					desc: "arrow_downward",
+				},
+				{
+					name: "arrow_downward_alt",
+					desc: "arrow_downward_alt",
+				},
+				{
+					name: "arrow_drop_down",
+					desc: "arrow_drop_down",
+				},
+				{
+					name: "arrow_drop_down_circle",
+					desc: "arrow_drop_down_circle",
+				},
+				{
+					name: "arrow_drop_up",
+					desc: "arrow_drop_up",
+				},
+				{
+					name: "arrow_forward",
+					desc: "arrow_forward",
+				},
+				{
+					name: "arrow_forward_ios",
+					desc: "arrow_forward_ios",
+				},
+				{
+					name: "arrow_insert",
+					desc: "arrow_insert",
+				},
+				{
+					name: "arrow_left",
+					desc: "arrow_left",
+				},
+				{
+					name: "arrow_left_alt",
+					desc: "arrow_left_alt",
+				},
+				{
+					name: "arrow_or_edge",
+					desc: "arrow_or_edge",
+				},
+				{
+					name: "arrow_outward",
+					desc: "arrow_outward",
+				},
+				{
+					name: "arrow_range",
+					desc: "arrow_range",
+				},
+				{
+					name: "arrow_right",
+					desc: "arrow_right",
+				},
+				{
+					name: "arrow_right_alt",
+					desc: "arrow_right_alt",
+				},
+				{
+					name: "arrow_selector_tool",
+					desc: "arrow_selector_tool",
+				},
+				{
+					name: "arrow_split",
+					desc: "arrow_split",
+				},
+				{
+					name: "arrow_top_left",
+					desc: "arrow_top_left",
+				},
+				{
+					name: "arrow_top_right",
+					desc: "arrow_top_right",
+				},
+				{
+					name: "arrow_upward",
+					desc: "arrow_upward",
+				},
+				{
+					name: "arrow_upward_alt",
+					desc: "arrow_upward_alt",
+				},
+				{
+					name: "arrows_more_down",
+					desc: "arrows_more_down",
+				},
+				{
+					name: "arrows_more_up",
+					desc: "arrows_more_up",
+				},
+				{
+					name: "arrows_outward",
+					desc: "arrows_outward",
+				},
+				{
 					name: "art_track",
 					desc: "art_track",
 				},
@@ -715,16 +995,24 @@ export default {
 					desc: "article",
 				},
 				{
+					name: "article_shortcut",
+					desc: "article_shortcut",
+				},
+				{
+					name: "artist",
+					desc: "artist",
+				},
+				{
 					name: "aspect_ratio",
 					desc: "aspect_ratio",
 				},
 				{
-					name: "assessment",
-					desc: "assessment",
-				},
-				{
 					name: "assignment",
 					desc: "assignment",
+				},
+				{
+					name: "assignment_add",
+					desc: "assignment_add",
 				},
 				{
 					name: "assignment_ind",
@@ -751,24 +1039,36 @@ export default {
 					desc: "assist_walker",
 				},
 				{
-					name: "assistant",
-					desc: "assistant",
+					name: "assistant_device",
+					desc: "assistant_device",
 				},
 				{
 					name: "assistant_direction",
 					desc: "assistant_direction",
 				},
 				{
-					name: "assistant_photo",
-					desc: "assistant_photo",
+					name: "assistant_navigation",
+					desc: "assistant_navigation",
+				},
+				{
+					name: "assistant_on_hub",
+					desc: "assistant_on_hub",
 				},
 				{
 					name: "assured_workload",
 					desc: "assured_workload",
 				},
 				{
+					name: "asterisk",
+					desc: "asterisk",
+				},
+				{
 					name: "atm",
 					desc: "atm",
+				},
+				{
+					name: "atr",
+					desc: "atr",
 				},
 				{
 					name: "attach_email",
@@ -777,6 +1077,10 @@ export default {
 				{
 					name: "attach_file",
 					desc: "attach_file",
+				},
+				{
+					name: "attach_file_add",
+					desc: "attach_file_add",
 				},
 				{
 					name: "attach_money",
@@ -795,16 +1099,16 @@ export default {
 					desc: "attribution",
 				},
 				{
+					name: "audio_description",
+					desc: "audio_description",
+				},
+				{
 					name: "audio_file",
 					desc: "audio_file",
 				},
 				{
-					name: "audiotrack",
-					desc: "audiotrack",
-				},
-				{
-					name: "auto_awesome",
-					desc: "auto_awesome",
+					name: "audio_video_receiver",
+					desc: "audio_video_receiver",
 				},
 				{
 					name: "auto_awesome_mosaic",
@@ -819,40 +1123,64 @@ export default {
 					desc: "auto_delete",
 				},
 				{
-					name: "auto_fix_high",
-					desc: "auto_fix_high",
+					name: "auto_read_pause",
+					desc: "auto_read_pause",
 				},
 				{
-					name: "auto_fix_normal",
-					desc: "auto_fix_normal",
-				},
-				{
-					name: "auto_fix_off",
-					desc: "auto_fix_off",
-				},
-				{
-					name: "auto_graph",
-					desc: "auto_graph",
-				},
-				{
-					name: "auto_mode",
-					desc: "auto_mode",
+					name: "auto_read_play",
+					desc: "auto_read_play",
 				},
 				{
 					name: "auto_stories",
 					desc: "auto_stories",
 				},
 				{
+					name: "auto_towing",
+					desc: "auto_towing",
+				},
+				{
+					name: "auto_transmission",
+					desc: "auto_transmission",
+				},
+				{
 					name: "autofps_select",
 					desc: "autofps_select",
+				},
+				{
+					name: "autopause",
+					desc: "autopause",
+				},
+				{
+					name: "autoplay",
+					desc: "autoplay",
 				},
 				{
 					name: "autorenew",
 					desc: "autorenew",
 				},
 				{
+					name: "autostop",
+					desc: "autostop",
+				},
+				{
 					name: "av_timer",
 					desc: "av_timer",
+				},
+				{
+					name: "avg_pace",
+					desc: "avg_pace",
+				},
+				{
+					name: "avg_time",
+					desc: "avg_time",
+				},
+				{
+					name: "award_star",
+					desc: "award_star",
+				},
+				{
+					name: "azm",
+					desc: "azm",
 				},
 				{
 					name: "baby_changing_station",
@@ -861,6 +1189,34 @@ export default {
 				{
 					name: "back_hand",
 					desc: "back_hand",
+				},
+				{
+					name: "back_to_tab",
+					desc: "back_to_tab",
+				},
+				{
+					name: "background_dot_large",
+					desc: "background_dot_large",
+				},
+				{
+					name: "background_dot_small",
+					desc: "background_dot_small",
+				},
+				{
+					name: "background_grid_small",
+					desc: "background_grid_small",
+				},
+				{
+					name: "background_replace",
+					desc: "background_replace",
+				},
+				{
+					name: "backlight_high",
+					desc: "backlight_high",
+				},
+				{
+					name: "backlight_low",
+					desc: "backlight_low",
 				},
 				{
 					name: "backpack",
@@ -883,6 +1239,10 @@ export default {
 					desc: "badge",
 				},
 				{
+					name: "badge_critical_battery",
+					desc: "badge_critical_battery",
+				},
+				{
 					name: "bakery_dining",
 					desc: "bakery_dining",
 				},
@@ -903,8 +1263,40 @@ export default {
 					desc: "bar_chart",
 				},
 				{
+					name: "bar_chart_4_bars",
+					desc: "bar_chart_4_bars",
+				},
+				{
+					name: "barcode",
+					desc: "barcode",
+				},
+				{
+					name: "barcode_reader",
+					desc: "barcode_reader",
+				},
+				{
+					name: "barcode_scanner",
+					desc: "barcode_scanner",
+				},
+				{
+					name: "barefoot",
+					desc: "barefoot",
+				},
+				{
 					name: "batch_prediction",
 					desc: "batch_prediction",
+				},
+				{
+					name: "bath_outdoor",
+					desc: "bath_outdoor",
+				},
+				{
+					name: "bath_private",
+					desc: "bath_private",
+				},
+				{
+					name: "bath_public_large",
+					desc: "bath_public_large",
 				},
 				{
 					name: "bathroom",
@@ -947,24 +1339,92 @@ export default {
 					desc: "battery_alert",
 				},
 				{
+					name: "battery_change",
+					desc: "battery_change",
+				},
+				{
+					name: "battery_charging_20",
+					desc: "battery_charging_20",
+				},
+				{
+					name: "battery_charging_30",
+					desc: "battery_charging_30",
+				},
+				{
+					name: "battery_charging_50",
+					desc: "battery_charging_50",
+				},
+				{
+					name: "battery_charging_60",
+					desc: "battery_charging_60",
+				},
+				{
+					name: "battery_charging_80",
+					desc: "battery_charging_80",
+				},
+				{
+					name: "battery_charging_90",
+					desc: "battery_charging_90",
+				},
+				{
 					name: "battery_charging_full",
 					desc: "battery_charging_full",
+				},
+				{
+					name: "battery_error",
+					desc: "battery_error",
 				},
 				{
 					name: "battery_full",
 					desc: "battery_full",
 				},
 				{
+					name: "battery_full_alt",
+					desc: "battery_full_alt",
+				},
+				{
+					name: "battery_horiz_000",
+					desc: "battery_horiz_000",
+				},
+				{
+					name: "battery_horiz_050",
+					desc: "battery_horiz_050",
+				},
+				{
+					name: "battery_horiz_075",
+					desc: "battery_horiz_075",
+				},
+				{
+					name: "battery_low",
+					desc: "battery_low",
+				},
+				{
+					name: "battery_plus",
+					desc: "battery_plus",
+				},
+				{
+					name: "battery_profile",
+					desc: "battery_profile",
+				},
+				{
 					name: "battery_saver",
 					desc: "battery_saver",
 				},
 				{
-					name: "battery_std",
-					desc: "battery_std",
+					name: "battery_share",
+					desc: "battery_share",
+				},
+				{
+					name: "battery_status_good",
+					desc: "battery_status_good",
 				},
 				{
 					name: "battery_unknown",
 					desc: "battery_unknown",
+				},
+				{
+					name: "battery_very_low",
+					desc: "battery_very_low",
 				},
 				{
 					name: "beach_access",
@@ -1003,12 +1463,32 @@ export default {
 					desc: "bento",
 				},
 				{
+					name: "bia",
+					desc: "bia",
+				},
+				{
+					name: "bid_landscape",
+					desc: "bid_landscape",
+				},
+				{
+					name: "bid_landscape_disabled",
+					desc: "bid_landscape_disabled",
+				},
+				{
+					name: "bigtop_updates",
+					desc: "bigtop_updates",
+				},
+				{
 					name: "bike_scooter",
 					desc: "bike_scooter",
 				},
 				{
 					name: "biotech",
 					desc: "biotech",
+				},
+				{
+					name: "blanket",
+					desc: "blanket",
 				},
 				{
 					name: "blender",
@@ -1031,16 +1511,16 @@ export default {
 					desc: "block",
 				},
 				{
+					name: "blood_pressure",
+					desc: "blood_pressure",
+				},
+				{
 					name: "bloodtype",
 					desc: "bloodtype",
 				},
 				{
 					name: "bluetooth",
 					desc: "bluetooth",
-				},
-				{
-					name: "bluetooth_audio",
-					desc: "bluetooth_audio",
 				},
 				{
 					name: "bluetooth_connected",
@@ -1067,6 +1547,10 @@ export default {
 					desc: "blur_linear",
 				},
 				{
+					name: "blur_medium",
+					desc: "blur_medium",
+				},
+				{
 					name: "blur_off",
 					desc: "blur_off",
 				},
@@ -1075,12 +1559,44 @@ export default {
 					desc: "blur_on",
 				},
 				{
+					name: "blur_short",
+					desc: "blur_short",
+				},
+				{
+					name: "body_fat",
+					desc: "body_fat",
+				},
+				{
+					name: "body_system",
+					desc: "body_system",
+				},
+				{
 					name: "bolt",
 					desc: "bolt",
 				},
 				{
+					name: "bomb",
+					desc: "bomb",
+				},
+				{
 					name: "book",
 					desc: "book",
+				},
+				{
+					name: "book_2",
+					desc: "book_2",
+				},
+				{
+					name: "book_3",
+					desc: "book_3",
+				},
+				{
+					name: "book_4",
+					desc: "book_4",
+				},
+				{
+					name: "book_5",
+					desc: "book_5",
 				},
 				{
 					name: "book_online",
@@ -1099,8 +1615,8 @@ export default {
 					desc: "bookmark_added",
 				},
 				{
-					name: "bookmark_border",
-					desc: "bookmark_border",
+					name: "bookmark_manager",
+					desc: "bookmark_manager",
 				},
 				{
 					name: "bookmark_remove",
@@ -1159,8 +1675,52 @@ export default {
 					desc: "border_vertical",
 				},
 				{
+					name: "bottom_app_bar",
+					desc: "bottom_app_bar",
+				},
+				{
+					name: "bottom_drawer",
+					desc: "bottom_drawer",
+				},
+				{
+					name: "bottom_navigation",
+					desc: "bottom_navigation",
+				},
+				{
+					name: "bottom_panel_close",
+					desc: "bottom_panel_close",
+				},
+				{
+					name: "bottom_panel_open",
+					desc: "bottom_panel_open",
+				},
+				{
+					name: "bottom_right_click",
+					desc: "bottom_right_click",
+				},
+				{
+					name: "bottom_sheets",
+					desc: "bottom_sheets",
+				},
+				{
+					name: "box",
+					desc: "box",
+				},
+				{
+					name: "box_add",
+					desc: "box_add",
+				},
+				{
+					name: "box_edit",
+					desc: "box_edit",
+				},
+				{
 					name: "boy",
 					desc: "boy",
+				},
+				{
+					name: "brand_awareness",
+					desc: "brand_awareness",
 				},
 				{
 					name: "branding_watermark",
@@ -1169,6 +1729,18 @@ export default {
 				{
 					name: "breakfast_dining",
 					desc: "breakfast_dining",
+				},
+				{
+					name: "breaking_news",
+					desc: "breaking_news",
+				},
+				{
+					name: "breaking_news_alt_1",
+					desc: "breaking_news_alt_1",
+				},
+				{
+					name: "breastfeeding",
+					desc: "breastfeeding",
 				},
 				{
 					name: "brightness_1",
@@ -1199,8 +1771,16 @@ export default {
 					desc: "brightness_7",
 				},
 				{
+					name: "brightness_alert",
+					desc: "brightness_alert",
+				},
+				{
 					name: "brightness_auto",
 					desc: "brightness_auto",
+				},
+				{
+					name: "brightness_empty",
+					desc: "brightness_empty",
 				},
 				{
 					name: "brightness_high",
@@ -1215,6 +1795,10 @@ export default {
 					desc: "brightness_medium",
 				},
 				{
+					name: "bring_your_own_ip",
+					desc: "bring_your_own_ip",
+				},
+				{
 					name: "broadcast_on_home",
 					desc: "broadcast_on_home",
 				},
@@ -1227,12 +1811,16 @@ export default {
 					desc: "broken_image",
 				},
 				{
-					name: "browse_gallery",
-					desc: "browse_gallery",
+					name: "browse",
+					desc: "browse",
 				},
 				{
-					name: "browser_not_supported",
-					desc: "browser_not_supported",
+					name: "browse_activity",
+					desc: "browse_activity",
+				},
+				{
+					name: "browse_gallery",
+					desc: "browse_gallery",
 				},
 				{
 					name: "browser_updated",
@@ -1247,8 +1835,16 @@ export default {
 					desc: "brush",
 				},
 				{
+					name: "bubble",
+					desc: "bubble",
+				},
+				{
 					name: "bubble_chart",
 					desc: "bubble_chart",
+				},
+				{
+					name: "bubbles",
+					desc: "bubbles",
 				},
 				{
 					name: "bug_report",
@@ -1275,12 +1871,20 @@ export default {
 					desc: "bus_alert",
 				},
 				{
-					name: "business",
-					desc: "business",
-				},
-				{
 					name: "business_center",
 					desc: "business_center",
+				},
+				{
+					name: "business_chip",
+					desc: "business_chip",
+				},
+				{
+					name: "business_messages",
+					desc: "business_messages",
+				},
+				{
+					name: "buttons_alt",
+					desc: "buttons_alt",
 				},
 				{
 					name: "cabin",
@@ -1299,8 +1903,24 @@ export default {
 					desc: "cake",
 				},
 				{
+					name: "cake_add",
+					desc: "cake_add",
+				},
+				{
 					name: "calculate",
 					desc: "calculate",
+				},
+				{
+					name: "calendar_add_on",
+					desc: "calendar_add_on",
+				},
+				{
+					name: "calendar_apps_script",
+					desc: "calendar_apps_script",
+				},
+				{
+					name: "calendar_clock",
+					desc: "calendar_clock",
 				},
 				{
 					name: "calendar_month",
@@ -1331,6 +1951,10 @@ export default {
 					desc: "call_end",
 				},
 				{
+					name: "call_log",
+					desc: "call_log",
+				},
+				{
 					name: "call_made",
 					desc: "call_made",
 				},
@@ -1347,6 +1971,10 @@ export default {
 					desc: "call_missed_outgoing",
 				},
 				{
+					name: "call_quality",
+					desc: "call_quality",
+				},
+				{
 					name: "call_received",
 					desc: "call_received",
 				},
@@ -1361,14 +1989,6 @@ export default {
 				{
 					name: "camera",
 					desc: "camera",
-				},
-				{
-					name: "camera_alt",
-					desc: "camera_alt",
-				},
-				{
-					name: "camera_enhance",
-					desc: "camera_enhance",
 				},
 				{
 					name: "camera_front",
@@ -1391,12 +2011,20 @@ export default {
 					desc: "camera_roll",
 				},
 				{
+					name: "camera_video",
+					desc: "camera_video",
+				},
+				{
 					name: "cameraswitch",
 					desc: "cameraswitch",
 				},
 				{
 					name: "campaign",
 					desc: "campaign",
+				},
+				{
+					name: "camping",
+					desc: "camping",
 				},
 				{
 					name: "cancel",
@@ -1411,8 +2039,20 @@ export default {
 					desc: "cancel_schedule_send",
 				},
 				{
+					name: "candle",
+					desc: "candle",
+				},
+				{
 					name: "candlestick_chart",
 					desc: "candlestick_chart",
+				},
+				{
+					name: "captive_portal",
+					desc: "captive_portal",
+				},
+				{
+					name: "capture",
+					desc: "capture",
 				},
 				{
 					name: "car_crash",
@@ -1427,10 +2067,6 @@ export default {
 					desc: "car_repair",
 				},
 				{
-					name: "card_giftcard",
-					desc: "card_giftcard",
-				},
-				{
 					name: "card_membership",
 					desc: "card_membership",
 				},
@@ -1439,8 +2075,32 @@ export default {
 					desc: "card_travel",
 				},
 				{
+					name: "cardiology",
+					desc: "cardiology",
+				},
+				{
+					name: "cards",
+					desc: "cards",
+				},
+				{
 					name: "carpenter",
 					desc: "carpenter",
+				},
+				{
+					name: "carry_on_bag",
+					desc: "carry_on_bag",
+				},
+				{
+					name: "carry_on_bag_checked",
+					desc: "carry_on_bag_checked",
+				},
+				{
+					name: "carry_on_bag_inactive",
+					desc: "carry_on_bag_inactive",
+				},
+				{
+					name: "carry_on_bag_question",
+					desc: "carry_on_bag_question",
 				},
 				{
 					name: "cases",
@@ -1463,12 +2123,16 @@ export default {
 					desc: "cast_for_education",
 				},
 				{
-					name: "castle",
-					desc: "castle",
+					name: "cast_pause",
+					desc: "cast_pause",
 				},
 				{
-					name: "catching_pokemon",
-					desc: "catching_pokemon",
+					name: "cast_warning",
+					desc: "cast_warning",
+				},
+				{
+					name: "castle",
+					desc: "castle",
 				},
 				{
 					name: "category",
@@ -1477,6 +2141,10 @@ export default {
 				{
 					name: "celebration",
 					desc: "celebration",
+				},
+				{
+					name: "cell_merge",
+					desc: "cell_merge",
 				},
 				{
 					name: "cell_tower",
@@ -1515,20 +2183,44 @@ export default {
 					desc: "change_history",
 				},
 				{
+					name: "charger",
+					desc: "charger",
+				},
+				{
 					name: "charging_station",
 					desc: "charging_station",
+				},
+				{
+					name: "chart_data",
+					desc: "chart_data",
 				},
 				{
 					name: "chat",
 					desc: "chat",
 				},
 				{
+					name: "chat_add_on",
+					desc: "chat_add_on",
+				},
+				{
+					name: "chat_apps_script",
+					desc: "chat_apps_script",
+				},
+				{
 					name: "chat_bubble",
 					desc: "chat_bubble",
 				},
 				{
-					name: "chat_bubble_outline",
-					desc: "chat_bubble_outline",
+					name: "chat_error",
+					desc: "chat_error",
+				},
+				{
+					name: "chat_info",
+					desc: "chat_info",
+				},
+				{
+					name: "chat_paste_go",
+					desc: "chat_paste_go",
 				},
 				{
 					name: "check",
@@ -1547,8 +2239,28 @@ export default {
 					desc: "check_circle",
 				},
 				{
-					name: "check_circle_outline",
-					desc: "check_circle_outline",
+					name: "check_in_out",
+					desc: "check_in_out",
+				},
+				{
+					name: "check_indeterminate_small",
+					desc: "check_indeterminate_small",
+				},
+				{
+					name: "check_small",
+					desc: "check_small",
+				},
+				{
+					name: "checkbook",
+					desc: "checkbook",
+				},
+				{
+					name: "checked_bag",
+					desc: "checked_bag",
+				},
+				{
+					name: "checked_bag_question",
+					desc: "checked_bag_question",
 				},
 				{
 					name: "checklist",
@@ -1561,6 +2273,14 @@ export default {
 				{
 					name: "checkroom",
 					desc: "checkroom",
+				},
+				{
+					name: "cheer",
+					desc: "cheer",
+				},
+				{
+					name: "chess",
+					desc: "chess",
 				},
 				{
 					name: "chevron_left",
@@ -1579,12 +2299,36 @@ export default {
 					desc: "child_friendly",
 				},
 				{
+					name: "chip_extraction",
+					desc: "chip_extraction",
+				},
+				{
+					name: "chips",
+					desc: "chips",
+				},
+				{
 					name: "chrome_reader_mode",
 					desc: "chrome_reader_mode",
 				},
 				{
+					name: "chromecast_2",
+					desc: "chromecast_2",
+				},
+				{
+					name: "chromecast_device",
+					desc: "chromecast_device",
+				},
+				{
+					name: "chronic",
+					desc: "chronic",
+				},
+				{
 					name: "church",
 					desc: "church",
+				},
+				{
+					name: "cinematic_blur",
+					desc: "cinematic_blur",
 				},
 				{
 					name: "circle",
@@ -1595,24 +2339,76 @@ export default {
 					desc: "circle_notifications",
 				},
 				{
-					name: "class",
-					desc: "class",
+					name: "circles",
+					desc: "circles",
+				},
+				{
+					name: "circles_ext",
+					desc: "circles_ext",
+				},
+				{
+					name: "clarify",
+					desc: "clarify",
 				},
 				{
 					name: "clean_hands",
 					desc: "clean_hands",
 				},
 				{
+					name: "cleaning",
+					desc: "cleaning",
+				},
+				{
+					name: "cleaning_bucket",
+					desc: "cleaning_bucket",
+				},
+				{
 					name: "cleaning_services",
 					desc: "cleaning_services",
 				},
 				{
-					name: "clear",
-					desc: "clear",
-				},
-				{
 					name: "clear_all",
 					desc: "clear_all",
+				},
+				{
+					name: "clear_day",
+					desc: "clear_day",
+				},
+				{
+					name: "clear_night",
+					desc: "clear_night",
+				},
+				{
+					name: "climate_mini_split",
+					desc: "climate_mini_split",
+				},
+				{
+					name: "clinical_notes",
+					desc: "clinical_notes",
+				},
+				{
+					name: "clock_loader_10",
+					desc: "clock_loader_10",
+				},
+				{
+					name: "clock_loader_20",
+					desc: "clock_loader_20",
+				},
+				{
+					name: "clock_loader_40",
+					desc: "clock_loader_40",
+				},
+				{
+					name: "clock_loader_60",
+					desc: "clock_loader_60",
+				},
+				{
+					name: "clock_loader_80",
+					desc: "clock_loader_80",
+				},
+				{
+					name: "clock_loader_90",
+					desc: "clock_loader_90",
 				},
 				{
 					name: "close",
@@ -1623,16 +2419,16 @@ export default {
 					desc: "close_fullscreen",
 				},
 				{
+					name: "close_small",
+					desc: "close_small",
+				},
+				{
 					name: "closed_caption",
 					desc: "closed_caption",
 				},
 				{
 					name: "closed_caption_disabled",
 					desc: "closed_caption_disabled",
-				},
-				{
-					name: "closed_caption_off",
-					desc: "closed_caption_off",
 				},
 				{
 					name: "cloud",
@@ -1655,16 +2451,16 @@ export default {
 					desc: "cloud_off",
 				},
 				{
-					name: "cloud_queue",
-					desc: "cloud_queue",
-				},
-				{
 					name: "cloud_sync",
 					desc: "cloud_sync",
 				},
 				{
 					name: "cloud_upload",
 					desc: "cloud_upload",
+				},
+				{
+					name: "cloudy_snowing",
+					desc: "cloudy_snowing",
 				},
 				{
 					name: "co2",
@@ -1679,6 +2475,10 @@ export default {
 					desc: "code",
 				},
 				{
+					name: "code_blocks",
+					desc: "code_blocks",
+				},
+				{
 					name: "code_off",
 					desc: "code_off",
 				},
@@ -1691,20 +2491,32 @@ export default {
 					desc: "coffee_maker",
 				},
 				{
-					name: "collections",
-					desc: "collections",
+					name: "cognition",
+					desc: "cognition",
+				},
+				{
+					name: "collapse_all",
+					desc: "collapse_all",
+				},
+				{
+					name: "collapse_content",
+					desc: "collapse_content",
 				},
 				{
 					name: "collections_bookmark",
 					desc: "collections_bookmark",
 				},
 				{
-					name: "color_lens",
-					desc: "color_lens",
-				},
-				{
 					name: "colorize",
 					desc: "colorize",
+				},
+				{
+					name: "colors",
+					desc: "colors",
+				},
+				{
+					name: "comic_bubble",
+					desc: "comic_bubble",
 				},
 				{
 					name: "comment",
@@ -1723,6 +2535,14 @@ export default {
 					desc: "commit",
 				},
 				{
+					name: "communication",
+					desc: "communication",
+				},
+				{
+					name: "communities",
+					desc: "communities",
+				},
+				{
 					name: "commute",
 					desc: "commute",
 				},
@@ -1739,6 +2559,10 @@ export default {
 					desc: "compass_calibration",
 				},
 				{
+					name: "component_exchange",
+					desc: "component_exchange",
+				},
+				{
 					name: "compost",
 					desc: "compost",
 				},
@@ -1751,8 +2575,20 @@ export default {
 					desc: "computer",
 				},
 				{
+					name: "concierge",
+					desc: "concierge",
+				},
+				{
+					name: "conditions",
+					desc: "conditions",
+				},
+				{
 					name: "confirmation_number",
 					desc: "confirmation_number",
+				},
+				{
+					name: "congenital",
+					desc: "congenital",
 				},
 				{
 					name: "connect_without_contact",
@@ -1795,8 +2631,16 @@ export default {
 					desc: "contactless",
 				},
 				{
+					name: "contactless_off",
+					desc: "contactless_off",
+				},
+				{
 					name: "contacts",
 					desc: "contacts",
+				},
+				{
+					name: "contacts_product",
+					desc: "contacts_product",
 				},
 				{
 					name: "content_copy",
@@ -1823,24 +2667,64 @@ export default {
 					desc: "content_paste_search",
 				},
 				{
+					name: "contract",
+					desc: "contract",
+				},
+				{
+					name: "contract_delete",
+					desc: "contract_delete",
+				},
+				{
+					name: "contract_edit",
+					desc: "contract_edit",
+				},
+				{
 					name: "contrast",
 					desc: "contrast",
+				},
+				{
+					name: "contrast_rtl_off",
+					desc: "contrast_rtl_off",
 				},
 				{
 					name: "control_camera",
 					desc: "control_camera",
 				},
 				{
-					name: "control_point",
-					desc: "control_point",
-				},
-				{
 					name: "control_point_duplicate",
 					desc: "control_point_duplicate",
 				},
 				{
+					name: "controller_gen",
+					desc: "controller_gen",
+				},
+				{
+					name: "conversion_path",
+					desc: "conversion_path",
+				},
+				{
+					name: "conversion_path_off",
+					desc: "conversion_path_off",
+				},
+				{
+					name: "conveyor_belt",
+					desc: "conveyor_belt",
+				},
+				{
 					name: "cookie",
 					desc: "cookie",
+				},
+				{
+					name: "cookie_off",
+					desc: "cookie_off",
+				},
+				{
+					name: "cooking",
+					desc: "cooking",
+				},
+				{
+					name: "cool_to_dry",
+					desc: "cool_to_dry",
 				},
 				{
 					name: "copy_all",
@@ -1863,12 +2747,48 @@ export default {
 					desc: "cottage",
 				},
 				{
-					name: "countertops",
-					desc: "countertops",
+					name: "counter_0",
+					desc: "counter_0",
 				},
 				{
-					name: "create",
-					desc: "create",
+					name: "counter_1",
+					desc: "counter_1",
+				},
+				{
+					name: "counter_2",
+					desc: "counter_2",
+				},
+				{
+					name: "counter_3",
+					desc: "counter_3",
+				},
+				{
+					name: "counter_4",
+					desc: "counter_4",
+				},
+				{
+					name: "counter_5",
+					desc: "counter_5",
+				},
+				{
+					name: "counter_6",
+					desc: "counter_6",
+				},
+				{
+					name: "counter_7",
+					desc: "counter_7",
+				},
+				{
+					name: "counter_8",
+					desc: "counter_8",
+				},
+				{
+					name: "counter_9",
+					desc: "counter_9",
+				},
+				{
+					name: "countertops",
+					desc: "countertops",
 				},
 				{
 					name: "create_new_folder",
@@ -1877,6 +2797,14 @@ export default {
 				{
 					name: "credit_card",
 					desc: "credit_card",
+				},
+				{
+					name: "credit_card_gear",
+					desc: "credit_card_gear",
+				},
+				{
+					name: "credit_card_heart",
+					desc: "credit_card_heart",
 				},
 				{
 					name: "credit_card_off",
@@ -1915,8 +2843,8 @@ export default {
 					desc: "crop_7_5",
 				},
 				{
-					name: "crop_din",
-					desc: "crop_din",
+					name: "crop_9_16",
+					desc: "crop_9_16",
 				},
 				{
 					name: "crop_free",
@@ -1925,10 +2853,6 @@ export default {
 				{
 					name: "crop_landscape",
 					desc: "crop_landscape",
-				},
-				{
-					name: "crop_original",
-					desc: "crop_original",
 				},
 				{
 					name: "crop_portrait",
@@ -1943,12 +2867,24 @@ export default {
 					desc: "crop_square",
 				},
 				{
+					name: "crossword",
+					desc: "crossword",
+				},
+				{
+					name: "crowdsource",
+					desc: "crowdsource",
+				},
+				{
 					name: "cruelty_free",
 					desc: "cruelty_free",
 				},
 				{
 					name: "css",
 					desc: "css",
+				},
+				{
+					name: "csv",
+					desc: "csv",
 				},
 				{
 					name: "currency_bitcoin",
@@ -1995,6 +2931,18 @@ export default {
 					desc: "curtains_closed",
 				},
 				{
+					name: "custom_typography",
+					desc: "custom_typography",
+				},
+				{
+					name: "cut",
+					desc: "cut",
+				},
+				{
+					name: "cycle",
+					desc: "cycle",
+				},
+				{
 					name: "cyclone",
 					desc: "cyclone",
 				},
@@ -2015,24 +2963,40 @@ export default {
 					desc: "dashboard_customize",
 				},
 				{
+					name: "data_alert",
+					desc: "data_alert",
+				},
+				{
 					name: "data_array",
 					desc: "data_array",
+				},
+				{
+					name: "data_check",
+					desc: "data_check",
 				},
 				{
 					name: "data_exploration",
 					desc: "data_exploration",
 				},
 				{
+					name: "data_info_alert",
+					desc: "data_info_alert",
+				},
+				{
+					name: "data_loss_prevention",
+					desc: "data_loss_prevention",
+				},
+				{
 					name: "data_object",
 					desc: "data_object",
 				},
 				{
-					name: "data_saver_off",
-					desc: "data_saver_off",
-				},
-				{
 					name: "data_saver_on",
 					desc: "data_saver_on",
+				},
+				{
+					name: "data_table",
+					desc: "data_table",
 				},
 				{
 					name: "data_thresholding",
@@ -2041,6 +3005,10 @@ export default {
 				{
 					name: "data_usage",
 					desc: "data_usage",
+				},
+				{
+					name: "database",
+					desc: "database",
 				},
 				{
 					name: "dataset",
@@ -2059,6 +3027,18 @@ export default {
 					desc: "deblur",
 				},
 				{
+					name: "deceased",
+					desc: "deceased",
+				},
+				{
+					name: "decimal_decrease",
+					desc: "decimal_decrease",
+				},
+				{
+					name: "decimal_increase",
+					desc: "decimal_increase",
+				},
+				{
 					name: "deck",
 					desc: "deck",
 				},
@@ -2075,16 +3055,16 @@ export default {
 					desc: "delete_forever",
 				},
 				{
-					name: "delete_outline",
-					desc: "delete_outline",
+					name: "delete_history",
+					desc: "delete_history",
 				},
 				{
 					name: "delete_sweep",
 					desc: "delete_sweep",
 				},
 				{
-					name: "delivery_dining",
-					desc: "delivery_dining",
+					name: "demography",
+					desc: "demography",
 				},
 				{
 					name: "density_large",
@@ -2099,8 +3079,36 @@ export default {
 					desc: "density_small",
 				},
 				{
+					name: "dentistry",
+					desc: "dentistry",
+				},
+				{
 					name: "departure_board",
 					desc: "departure_board",
+				},
+				{
+					name: "deployed_code",
+					desc: "deployed_code",
+				},
+				{
+					name: "deployed_code_account",
+					desc: "deployed_code_account",
+				},
+				{
+					name: "deployed_code_alert",
+					desc: "deployed_code_alert",
+				},
+				{
+					name: "deployed_code_history",
+					desc: "deployed_code_history",
+				},
+				{
+					name: "deployed_code_update",
+					desc: "deployed_code_update",
+				},
+				{
+					name: "dermatology",
+					desc: "dermatology",
 				},
 				{
 					name: "description",
@@ -2119,6 +3127,10 @@ export default {
 					desc: "desk",
 				},
 				{
+					name: "deskphone",
+					desc: "deskphone",
+				},
+				{
 					name: "desktop_access_disabled",
 					desc: "desktop_access_disabled",
 				},
@@ -2131,8 +3143,44 @@ export default {
 					desc: "desktop_windows",
 				},
 				{
+					name: "destruction",
+					desc: "destruction",
+				},
+				{
 					name: "details",
 					desc: "details",
+				},
+				{
+					name: "detection_and_zone",
+					desc: "detection_and_zone",
+				},
+				{
+					name: "detector",
+					desc: "detector",
+				},
+				{
+					name: "detector_alarm",
+					desc: "detector_alarm",
+				},
+				{
+					name: "detector_battery",
+					desc: "detector_battery",
+				},
+				{
+					name: "detector_co",
+					desc: "detector_co",
+				},
+				{
+					name: "detector_offline",
+					desc: "detector_offline",
+				},
+				{
+					name: "detector_smoke",
+					desc: "detector_smoke",
+				},
+				{
+					name: "detector_status",
+					desc: "detector_status",
 				},
 				{
 					name: "developer_board",
@@ -2143,12 +3191,24 @@ export default {
 					desc: "developer_board_off",
 				},
 				{
+					name: "developer_guide",
+					desc: "developer_guide",
+				},
+				{
 					name: "developer_mode",
 					desc: "developer_mode",
 				},
 				{
+					name: "developer_mode_tv",
+					desc: "developer_mode_tv",
+				},
+				{
 					name: "device_hub",
 					desc: "device_hub",
+				},
+				{
+					name: "device_reset",
+					desc: "device_reset",
 				},
 				{
 					name: "device_thermostat",
@@ -2167,12 +3227,32 @@ export default {
 					desc: "devices_fold",
 				},
 				{
+					name: "devices_off",
+					desc: "devices_off",
+				},
+				{
 					name: "devices_other",
 					desc: "devices_other",
 				},
 				{
+					name: "devices_wearables",
+					desc: "devices_wearables",
+				},
+				{
+					name: "dew_point",
+					desc: "dew_point",
+				},
+				{
+					name: "diagnosis",
+					desc: "diagnosis",
+				},
+				{
 					name: "dialer_sip",
 					desc: "dialer_sip",
+				},
+				{
+					name: "dialogs",
+					desc: "dialogs",
 				},
 				{
 					name: "dialpad",
@@ -2183,8 +3263,20 @@ export default {
 					desc: "diamond",
 				},
 				{
+					name: "dictionary",
+					desc: "dictionary",
+				},
+				{
 					name: "difference",
 					desc: "difference",
+				},
+				{
+					name: "digital_out_of_home",
+					desc: "digital_out_of_home",
+				},
+				{
+					name: "digital_wellbeing",
+					desc: "digital_wellbeing",
 				},
 				{
 					name: "dining",
@@ -2199,6 +3291,14 @@ export default {
 					desc: "directions",
 				},
 				{
+					name: "directions_alt",
+					desc: "directions_alt",
+				},
+				{
+					name: "directions_alt_off",
+					desc: "directions_alt_off",
+				},
+				{
 					name: "directions_bike",
 					desc: "directions_bike",
 				},
@@ -2207,24 +3307,12 @@ export default {
 					desc: "directions_boat",
 				},
 				{
-					name: "directions_boat_filled",
-					desc: "directions_boat_filled",
-				},
-				{
 					name: "directions_bus",
 					desc: "directions_bus",
 				},
 				{
-					name: "directions_bus_filled",
-					desc: "directions_bus_filled",
-				},
-				{
 					name: "directions_car",
 					desc: "directions_car",
-				},
-				{
-					name: "directions_car_filled",
-					desc: "directions_car_filled",
 				},
 				{
 					name: "directions_off",
@@ -2235,10 +3323,6 @@ export default {
 					desc: "directions_railway",
 				},
 				{
-					name: "directions_railway_filled",
-					desc: "directions_railway_filled",
-				},
-				{
 					name: "directions_run",
 					desc: "directions_run",
 				},
@@ -2247,20 +3331,12 @@ export default {
 					desc: "directions_subway",
 				},
 				{
-					name: "directions_subway_filled",
-					desc: "directions_subway_filled",
-				},
-				{
-					name: "directions_transit",
-					desc: "directions_transit",
-				},
-				{
-					name: "directions_transit_filled",
-					desc: "directions_transit_filled",
-				},
-				{
 					name: "directions_walk",
 					desc: "directions_walk",
+				},
+				{
+					name: "directory_sync",
+					desc: "directory_sync",
 				},
 				{
 					name: "dirty_lens",
@@ -2279,12 +3355,28 @@ export default {
 					desc: "disc_full",
 				},
 				{
-					name: "discount",
-					desc: "discount",
+					name: "discover_tune",
+					desc: "discover_tune",
+				},
+				{
+					name: "dishwasher",
+					desc: "dishwasher",
+				},
+				{
+					name: "dishwasher_gen",
+					desc: "dishwasher_gen",
+				},
+				{
+					name: "display_external_input",
+					desc: "display_external_input",
 				},
 				{
 					name: "display_settings",
 					desc: "display_settings",
+				},
+				{
+					name: "distance",
+					desc: "distance",
 				},
 				{
 					name: "diversity_1",
@@ -2299,32 +3391,12 @@ export default {
 					desc: "diversity_3",
 				},
 				{
+					name: "diversity_4",
+					desc: "diversity_4",
+				},
+				{
 					name: "dns",
 					desc: "dns",
-				},
-				{
-					name: "do_disturb",
-					desc: "do_disturb",
-				},
-				{
-					name: "do_disturb_alt",
-					desc: "do_disturb_alt",
-				},
-				{
-					name: "do_disturb_off",
-					desc: "do_disturb_off",
-				},
-				{
-					name: "do_disturb_on",
-					desc: "do_disturb_on",
-				},
-				{
-					name: "do_not_disturb",
-					desc: "do_not_disturb",
-				},
-				{
-					name: "do_not_disturb_alt",
-					desc: "do_not_disturb_alt",
 				},
 				{
 					name: "do_not_disturb_off",
@@ -2351,6 +3423,26 @@ export default {
 					desc: "dock",
 				},
 				{
+					name: "dock_to_bottom",
+					desc: "dock_to_bottom",
+				},
+				{
+					name: "dock_to_left",
+					desc: "dock_to_left",
+				},
+				{
+					name: "dock_to_right",
+					desc: "dock_to_right",
+				},
+				{
+					name: "docs_add_on",
+					desc: "docs_add_on",
+				},
+				{
+					name: "docs_apps_script",
+					desc: "docs_apps_script",
+				},
+				{
 					name: "document_scanner",
 					desc: "document_scanner",
 				},
@@ -2369,6 +3461,14 @@ export default {
 				{
 					name: "domain_verification",
 					desc: "domain_verification",
+				},
+				{
+					name: "domain_verification_off",
+					desc: "domain_verification_off",
+				},
+				{
+					name: "domino_mask",
+					desc: "domino_mask",
 				},
 				{
 					name: "done",
@@ -2399,12 +3499,28 @@ export default {
 					desc: "door_front",
 				},
 				{
+					name: "door_open",
+					desc: "door_open",
+				},
+				{
+					name: "door_sensor",
+					desc: "door_sensor",
+				},
+				{
 					name: "door_sliding",
 					desc: "door_sliding",
 				},
 				{
 					name: "doorbell",
 					desc: "doorbell",
+				},
+				{
+					name: "doorbell_3p",
+					desc: "doorbell_3p",
+				},
+				{
+					name: "doorbell_chime",
+					desc: "doorbell_chime",
 				},
 				{
 					name: "double_arrow",
@@ -2419,6 +3535,10 @@ export default {
 					desc: "download",
 				},
 				{
+					name: "download_2",
+					desc: "download_2",
+				},
+				{
 					name: "download_done",
 					desc: "download_done",
 				},
@@ -2431,8 +3551,20 @@ export default {
 					desc: "downloading",
 				},
 				{
+					name: "draft",
+					desc: "draft",
+				},
+				{
+					name: "draft_orders",
+					desc: "draft_orders",
+				},
+				{
 					name: "drafts",
 					desc: "drafts",
+				},
+				{
+					name: "drag_click",
+					desc: "drag_click",
 				},
 				{
 					name: "drag_handle",
@@ -2443,28 +3575,36 @@ export default {
 					desc: "drag_indicator",
 				},
 				{
+					name: "drag_pan",
+					desc: "drag_pan",
+				},
+				{
 					name: "draw",
 					desc: "draw",
 				},
 				{
-					name: "drive_eta",
-					desc: "drive_eta",
+					name: "draw_abstract",
+					desc: "draw_abstract",
+				},
+				{
+					name: "draw_collage",
+					desc: "draw_collage",
+				},
+				{
+					name: "dresser",
+					desc: "dresser",
 				},
 				{
 					name: "drive_file_move",
 					desc: "drive_file_move",
 				},
 				{
-					name: "drive_file_move_rtl",
-					desc: "drive_file_move_rtl",
-				},
-				{
-					name: "drive_file_rename_outline",
-					desc: "drive_file_rename_outline",
-				},
-				{
 					name: "drive_folder_upload",
 					desc: "drive_folder_upload",
+				},
+				{
+					name: "dropdown",
+					desc: "dropdown",
 				},
 				{
 					name: "dry",
@@ -2473,6 +3613,10 @@ export default {
 				{
 					name: "dry_cleaning",
 					desc: "dry_cleaning",
+				},
+				{
+					name: "dual_screen",
+					desc: "dual_screen",
 				},
 				{
 					name: "duo",
@@ -2491,8 +3635,20 @@ export default {
 					desc: "dynamic_form",
 				},
 				{
+					name: "e911_avatar",
+					desc: "e911_avatar",
+				},
+				{
+					name: "e911_emergency",
+					desc: "e911_emergency",
+				},
+				{
 					name: "e_mobiledata",
 					desc: "e_mobiledata",
+				},
+				{
+					name: "e_mobiledata_badge",
+					desc: "e_mobiledata_badge",
 				},
 				{
 					name: "earbuds",
@@ -2503,8 +3659,32 @@ export default {
 					desc: "earbuds_battery",
 				},
 				{
+					name: "early_on",
+					desc: "early_on",
+				},
+				{
+					name: "earthquake",
+					desc: "earthquake",
+				},
+				{
 					name: "east",
 					desc: "east",
+				},
+				{
+					name: "ecg",
+					desc: "ecg",
+				},
+				{
+					name: "ecg_heart",
+					desc: "ecg_heart",
+				},
+				{
+					name: "eco",
+					desc: "eco",
+				},
+				{
+					name: "eda",
+					desc: "eda",
 				},
 				{
 					name: "edgesensor_high",
@@ -2525,6 +3705,10 @@ export default {
 				{
 					name: "edit_calendar",
 					desc: "edit_calendar",
+				},
+				{
+					name: "edit_document",
+					desc: "edit_document",
 				},
 				{
 					name: "edit_location",
@@ -2549,6 +3733,14 @@ export default {
 				{
 					name: "edit_road",
 					desc: "edit_road",
+				},
+				{
+					name: "edit_square",
+					desc: "edit_square",
+				},
+				{
+					name: "editor_choice",
+					desc: "editor_choice",
 				},
 				{
 					name: "egg",
@@ -2603,16 +3795,24 @@ export default {
 					desc: "electrical_services",
 				},
 				{
+					name: "elevation",
+					desc: "elevation",
+				},
+				{
 					name: "elevator",
 					desc: "elevator",
 				},
 				{
-					name: "email",
-					desc: "email",
-				},
-				{
 					name: "emergency",
 					desc: "emergency",
+				},
+				{
+					name: "emergency_heat",
+					desc: "emergency_heat",
+				},
+				{
+					name: "emergency_home",
+					desc: "emergency_home",
 				},
 				{
 					name: "emergency_recording",
@@ -2623,12 +3823,16 @@ export default {
 					desc: "emergency_share",
 				},
 				{
-					name: "emoji_emotions",
-					desc: "emoji_emotions",
+					name: "emergency_share_off",
+					desc: "emergency_share_off",
 				},
 				{
 					name: "emoji_events",
 					desc: "emoji_events",
+				},
+				{
+					name: "emoji_flags",
+					desc: "emoji_flags",
 				},
 				{
 					name: "emoji_food_beverage",
@@ -2655,6 +3859,38 @@ export default {
 					desc: "emoji_transportation",
 				},
 				{
+					name: "emoticon",
+					desc: "emoticon",
+				},
+				{
+					name: "empty_dashboard",
+					desc: "empty_dashboard",
+				},
+				{
+					name: "enable",
+					desc: "enable",
+				},
+				{
+					name: "encrypted",
+					desc: "encrypted",
+				},
+				{
+					name: "endocrinology",
+					desc: "endocrinology",
+				},
+				{
+					name: "energy",
+					desc: "energy",
+				},
+				{
+					name: "energy_program_saving",
+					desc: "energy_program_saving",
+				},
+				{
+					name: "energy_program_time_used",
+					desc: "energy_program_time_used",
+				},
+				{
 					name: "energy_savings_leaf",
 					desc: "energy_savings_leaf",
 				},
@@ -2667,6 +3903,22 @@ export default {
 					desc: "enhanced_encryption",
 				},
 				{
+					name: "ent",
+					desc: "ent",
+				},
+				{
+					name: "enterprise",
+					desc: "enterprise",
+				},
+				{
+					name: "enterprise_off",
+					desc: "enterprise_off",
+				},
+				{
+					name: "equal",
+					desc: "equal",
+				},
+				{
 					name: "equalizer",
 					desc: "equalizer",
 				},
@@ -2675,8 +3927,8 @@ export default {
 					desc: "error",
 				},
 				{
-					name: "error_outline",
-					desc: "error_outline",
+					name: "error_med",
+					desc: "error_med",
 				},
 				{
 					name: "escalator",
@@ -2695,6 +3947,26 @@ export default {
 					desc: "euro_symbol",
 				},
 				{
+					name: "ev_charger",
+					desc: "ev_charger",
+				},
+				{
+					name: "ev_mobiledata_badge",
+					desc: "ev_mobiledata_badge",
+				},
+				{
+					name: "ev_shadow",
+					desc: "ev_shadow",
+				},
+				{
+					name: "ev_shadow_add",
+					desc: "ev_shadow_add",
+				},
+				{
+					name: "ev_shadow_minus",
+					desc: "ev_shadow_minus",
+				},
+				{
 					name: "ev_station",
 					desc: "ev_station",
 				},
@@ -2711,6 +3983,10 @@ export default {
 					desc: "event_busy",
 				},
 				{
+					name: "event_list",
+					desc: "event_list",
+				},
+				{
 					name: "event_note",
 					desc: "event_note",
 				},
@@ -2723,6 +3999,18 @@ export default {
 					desc: "event_seat",
 				},
 				{
+					name: "event_upcoming",
+					desc: "event_upcoming",
+				},
+				{
+					name: "exclamation",
+					desc: "exclamation",
+				},
+				{
+					name: "exercise",
+					desc: "exercise",
+				},
+				{
 					name: "exit_to_app",
 					desc: "exit_to_app",
 				},
@@ -2731,8 +4019,24 @@ export default {
 					desc: "expand",
 				},
 				{
+					name: "expand_all",
+					desc: "expand_all",
+				},
+				{
 					name: "expand_circle_down",
 					desc: "expand_circle_down",
+				},
+				{
+					name: "expand_circle_right",
+					desc: "expand_circle_right",
+				},
+				{
+					name: "expand_circle_up",
+					desc: "expand_circle_up",
+				},
+				{
+					name: "expand_content",
+					desc: "expand_content",
 				},
 				{
 					name: "expand_less",
@@ -2743,6 +4047,10 @@ export default {
 					desc: "expand_more",
 				},
 				{
+					name: "experiment",
+					desc: "experiment",
+				},
+				{
 					name: "explicit",
 					desc: "explicit",
 				},
@@ -2751,8 +4059,20 @@ export default {
 					desc: "explore",
 				},
 				{
+					name: "explore_nearby",
+					desc: "explore_nearby",
+				},
+				{
 					name: "explore_off",
 					desc: "explore_off",
+				},
+				{
+					name: "explosion",
+					desc: "explosion",
+				},
+				{
+					name: "export_notes",
+					desc: "export_notes",
 				},
 				{
 					name: "exposure",
@@ -2787,6 +4107,10 @@ export default {
 					desc: "extension_off",
 				},
 				{
+					name: "eyeglasses",
+					desc: "eyeglasses",
+				},
+				{
 					name: "face",
 					desc: "face",
 				},
@@ -2811,10 +4135,6 @@ export default {
 					desc: "face_6",
 				},
 				{
-					name: "face_retouching_natural",
-					desc: "face_retouching_natural",
-				},
-				{
 					name: "face_retouching_off",
 					desc: "face_retouching_off",
 				},
@@ -2827,8 +4147,36 @@ export default {
 					desc: "factory",
 				},
 				{
+					name: "falling",
+					desc: "falling",
+				},
+				{
+					name: "familiar_face_and_zone",
+					desc: "familiar_face_and_zone",
+				},
+				{
+					name: "family_history",
+					desc: "family_history",
+				},
+				{
+					name: "family_home",
+					desc: "family_home",
+				},
+				{
+					name: "family_link",
+					desc: "family_link",
+				},
+				{
 					name: "family_restroom",
 					desc: "family_restroom",
+				},
+				{
+					name: "family_star",
+					desc: "family_star",
+				},
+				{
+					name: "farsight_digital",
+					desc: "farsight_digital",
 				},
 				{
 					name: "fast_forward",
@@ -2843,20 +4191,28 @@ export default {
 					desc: "fastfood",
 				},
 				{
-					name: "favorite",
-					desc: "favorite",
+					name: "faucet",
+					desc: "faucet",
 				},
 				{
-					name: "favorite_border",
-					desc: "favorite_border",
+					name: "favorite",
+					desc: "favorite",
 				},
 				{
 					name: "fax",
 					desc: "fax",
 				},
 				{
+					name: "feature_search",
+					desc: "feature_search",
+				},
+				{
 					name: "featured_play_list",
 					desc: "featured_play_list",
+				},
+				{
+					name: "featured_seasonal_and_gifts",
+					desc: "featured_seasonal_and_gifts",
 				},
 				{
 					name: "featured_video",
@@ -2875,8 +4231,20 @@ export default {
 					desc: "female",
 				},
 				{
+					name: "femur",
+					desc: "femur",
+				},
+				{
+					name: "femur_alt",
+					desc: "femur_alt",
+				},
+				{
 					name: "fence",
 					desc: "fence",
+				},
+				{
+					name: "fertile",
+					desc: "fertile",
 				},
 				{
 					name: "festival",
@@ -2907,16 +4275,16 @@ export default {
 					desc: "file_copy",
 				},
 				{
-					name: "file_download",
-					desc: "file_download",
-				},
-				{
 					name: "file_download_done",
 					desc: "file_download_done",
 				},
 				{
 					name: "file_download_off",
 					desc: "file_download_off",
+				},
+				{
+					name: "file_map",
+					desc: "file_map",
 				},
 				{
 					name: "file_open",
@@ -2927,8 +4295,16 @@ export default {
 					desc: "file_present",
 				},
 				{
-					name: "file_upload",
-					desc: "file_upload",
+					name: "file_save",
+					desc: "file_save",
+				},
+				{
+					name: "file_save_off",
+					desc: "file_save_off",
+				},
+				{
+					name: "file_upload_off",
+					desc: "file_upload_off",
 				},
 				{
 					name: "filter",
@@ -3015,12 +4391,28 @@ export default {
 					desc: "filter_none",
 				},
 				{
+					name: "filter_retrolux",
+					desc: "filter_retrolux",
+				},
+				{
 					name: "filter_tilt_shift",
 					desc: "filter_tilt_shift",
 				},
 				{
 					name: "filter_vintage",
 					desc: "filter_vintage",
+				},
+				{
+					name: "finance",
+					desc: "finance",
+				},
+				{
+					name: "finance_chip",
+					desc: "finance_chip",
+				},
+				{
+					name: "finance_mode",
+					desc: "finance_mode",
 				},
 				{
 					name: "find_in_page",
@@ -3039,8 +4431,8 @@ export default {
 					desc: "fire_extinguisher",
 				},
 				{
-					name: "fire_hydrant_alt",
-					desc: "fire_hydrant_alt",
+					name: "fire_hydrant",
+					desc: "fire_hydrant",
 				},
 				{
 					name: "fire_truck",
@@ -3055,12 +4447,16 @@ export default {
 					desc: "first_page",
 				},
 				{
+					name: "fit_page",
+					desc: "fit_page",
+				},
+				{
 					name: "fit_screen",
 					desc: "fit_screen",
 				},
 				{
-					name: "fitbit",
-					desc: "fitbit",
+					name: "fit_width",
+					desc: "fit_width",
 				},
 				{
 					name: "fitness_center",
@@ -3107,6 +4503,18 @@ export default {
 					desc: "flatware",
 				},
 				{
+					name: "flex_direction",
+					desc: "flex_direction",
+				},
+				{
+					name: "flex_no_wrap",
+					desc: "flex_no_wrap",
+				},
+				{
+					name: "flex_wrap",
+					desc: "flex_wrap",
+				},
+				{
 					name: "flight",
 					desc: "flight",
 				},
@@ -3121,6 +4529,14 @@ export default {
 				{
 					name: "flight_takeoff",
 					desc: "flight_takeoff",
+				},
+				{
+					name: "flights_and_hotels",
+					desc: "flights_and_hotels",
+				},
+				{
+					name: "flightsmode",
+					desc: "flightsmode",
 				},
 				{
 					name: "flip",
@@ -3147,8 +4563,36 @@ export default {
 					desc: "flood",
 				},
 				{
+					name: "floor",
+					desc: "floor",
+				},
+				{
+					name: "floor_lamp",
+					desc: "floor_lamp",
+				},
+				{
+					name: "flowsheet",
+					desc: "flowsheet",
+				},
+				{
+					name: "fluid",
+					desc: "fluid",
+				},
+				{
+					name: "fluid_balance",
+					desc: "fluid_balance",
+				},
+				{
+					name: "fluid_med",
+					desc: "fluid_med",
+				},
+				{
 					name: "fluorescent",
 					desc: "fluorescent",
+				},
+				{
+					name: "flutter",
+					desc: "flutter",
 				},
 				{
 					name: "flutter_dash",
@@ -3159,8 +4603,12 @@ export default {
 					desc: "fmd_bad",
 				},
 				{
-					name: "fmd_good",
-					desc: "fmd_good",
+					name: "foggy",
+					desc: "foggy",
+				},
+				{
+					name: "folded_hands",
+					desc: "folded_hands",
 				},
 				{
 					name: "folder",
@@ -3171,8 +4619,16 @@ export default {
 					desc: "folder_copy",
 				},
 				{
+					name: "folder_data",
+					desc: "folder_data",
+				},
+				{
 					name: "folder_delete",
 					desc: "folder_delete",
+				},
+				{
+					name: "folder_managed",
+					desc: "folder_managed",
 				},
 				{
 					name: "folder_off",
@@ -3189,6 +4645,10 @@ export default {
 				{
 					name: "folder_special",
 					desc: "folder_special",
+				},
+				{
+					name: "folder_supervised",
+					desc: "folder_supervised",
 				},
 				{
 					name: "folder_zip",
@@ -3211,6 +4671,18 @@ export default {
 					desc: "food_bank",
 				},
 				{
+					name: "foot_bones",
+					desc: "foot_bones",
+				},
+				{
+					name: "footprint",
+					desc: "footprint",
+				},
+				{
+					name: "for_you",
+					desc: "for_you",
+				},
+				{
 					name: "forest",
 					desc: "forest",
 				},
@@ -3221,6 +4693,10 @@ export default {
 				{
 					name: "fork_right",
 					desc: "fork_right",
+				},
+				{
+					name: "forklift",
+					desc: "forklift",
 				},
 				{
 					name: "format_align_center",
@@ -3259,6 +4735,38 @@ export default {
 					desc: "format_color_text",
 				},
 				{
+					name: "format_h1",
+					desc: "format_h1",
+				},
+				{
+					name: "format_h2",
+					desc: "format_h2",
+				},
+				{
+					name: "format_h3",
+					desc: "format_h3",
+				},
+				{
+					name: "format_h4",
+					desc: "format_h4",
+				},
+				{
+					name: "format_h5",
+					desc: "format_h5",
+				},
+				{
+					name: "format_h6",
+					desc: "format_h6",
+				},
+				{
+					name: "format_image_left",
+					desc: "format_image_left",
+				},
+				{
+					name: "format_image_right",
+					desc: "format_image_right",
+				},
+				{
 					name: "format_indent_decrease",
 					desc: "format_indent_decrease",
 				},
@@ -3267,8 +4775,32 @@ export default {
 					desc: "format_indent_increase",
 				},
 				{
+					name: "format_ink_highlighter",
+					desc: "format_ink_highlighter",
+				},
+				{
 					name: "format_italic",
 					desc: "format_italic",
+				},
+				{
+					name: "format_letter_spacing",
+					desc: "format_letter_spacing",
+				},
+				{
+					name: "format_letter_spacing_2",
+					desc: "format_letter_spacing_2",
+				},
+				{
+					name: "format_letter_spacing_standard",
+					desc: "format_letter_spacing_standard",
+				},
+				{
+					name: "format_letter_spacing_wide",
+					desc: "format_letter_spacing_wide",
+				},
+				{
+					name: "format_letter_spacing_wider",
+					desc: "format_letter_spacing_wider",
 				},
 				{
 					name: "format_line_spacing",
@@ -3277,6 +4809,10 @@ export default {
 				{
 					name: "format_list_bulleted",
 					desc: "format_list_bulleted",
+				},
+				{
+					name: "format_list_bulleted_add",
+					desc: "format_list_bulleted_add",
 				},
 				{
 					name: "format_list_numbered",
@@ -3295,6 +4831,10 @@ export default {
 					desc: "format_paint",
 				},
 				{
+					name: "format_paragraph",
+					desc: "format_paragraph",
+				},
+				{
 					name: "format_quote",
 					desc: "format_quote",
 				},
@@ -3311,6 +4851,18 @@ export default {
 					desc: "format_strikethrough",
 				},
 				{
+					name: "format_text_clip",
+					desc: "format_text_clip",
+				},
+				{
+					name: "format_text_overflow",
+					desc: "format_text_overflow",
+				},
+				{
+					name: "format_text_wrap",
+					desc: "format_text_wrap",
+				},
+				{
 					name: "format_textdirection_l_to_r",
 					desc: "format_textdirection_l_to_r",
 				},
@@ -3321,6 +4873,18 @@ export default {
 				{
 					name: "format_underlined",
 					desc: "format_underlined",
+				},
+				{
+					name: "format_underlined_squiggle",
+					desc: "format_underlined_squiggle",
+				},
+				{
+					name: "forms_add_on",
+					desc: "forms_add_on",
+				},
+				{
+					name: "forms_apps_script",
+					desc: "forms_apps_script",
 				},
 				{
 					name: "fort",
@@ -3347,6 +4911,14 @@ export default {
 					desc: "forward_5",
 				},
 				{
+					name: "forward_circle",
+					desc: "forward_circle",
+				},
+				{
+					name: "forward_media",
+					desc: "forward_media",
+				},
+				{
 					name: "forward_to_inbox",
 					desc: "forward_to_inbox",
 				},
@@ -3355,8 +4927,24 @@ export default {
 					desc: "foundation",
 				},
 				{
-					name: "free_breakfast",
-					desc: "free_breakfast",
+					name: "frame_inspect",
+					desc: "frame_inspect",
+				},
+				{
+					name: "frame_person",
+					desc: "frame_person",
+				},
+				{
+					name: "frame_person_off",
+					desc: "frame_person_off",
+				},
+				{
+					name: "frame_reload",
+					desc: "frame_reload",
+				},
+				{
+					name: "frame_source",
+					desc: "frame_source",
 				},
 				{
 					name: "free_cancellation",
@@ -3367,12 +4955,32 @@ export default {
 					desc: "front_hand",
 				},
 				{
+					name: "front_loader",
+					desc: "front_loader",
+				},
+				{
+					name: "full_coverage",
+					desc: "full_coverage",
+				},
+				{
+					name: "full_hd",
+					desc: "full_hd",
+				},
+				{
+					name: "full_stacked_bar_chart",
+					desc: "full_stacked_bar_chart",
+				},
+				{
 					name: "fullscreen",
 					desc: "fullscreen",
 				},
 				{
 					name: "fullscreen_exit",
 					desc: "fullscreen_exit",
+				},
+				{
+					name: "function",
+					desc: "function",
 				},
 				{
 					name: "functions",
@@ -3383,40 +4991,72 @@ export default {
 					desc: "g_mobiledata",
 				},
 				{
+					name: "g_mobiledata_badge",
+					desc: "g_mobiledata_badge",
+				},
+				{
 					name: "g_translate",
 					desc: "g_translate",
+				},
+				{
+					name: "gallery_thumbnail",
+					desc: "gallery_thumbnail",
 				},
 				{
 					name: "gamepad",
 					desc: "gamepad",
 				},
 				{
-					name: "games",
-					desc: "games",
-				},
-				{
 					name: "garage",
 					desc: "garage",
+				},
+				{
+					name: "garage_door",
+					desc: "garage_door",
+				},
+				{
+					name: "garage_home",
+					desc: "garage_home",
+				},
+				{
+					name: "garden_cart",
+					desc: "garden_cart",
 				},
 				{
 					name: "gas_meter",
 					desc: "gas_meter",
 				},
 				{
+					name: "gastroenterology",
+					desc: "gastroenterology",
+				},
+				{
+					name: "gate",
+					desc: "gate",
+				},
+				{
 					name: "gavel",
 					desc: "gavel",
 				},
 				{
-					name: "generating_tokens",
-					desc: "generating_tokens",
+					name: "general_device",
+					desc: "general_device",
+				},
+				{
+					name: "genetics",
+					desc: "genetics",
+				},
+				{
+					name: "genres",
+					desc: "genres",
 				},
 				{
 					name: "gesture",
 					desc: "gesture",
 				},
 				{
-					name: "get_app",
-					desc: "get_app",
+					name: "gesture_select",
+					desc: "gesture_select",
 				},
 				{
 					name: "gif",
@@ -3435,32 +5075,56 @@ export default {
 					desc: "gite",
 				},
 				{
+					name: "glass_cup",
+					desc: "glass_cup",
+				},
+				{
+					name: "globe",
+					desc: "globe",
+				},
+				{
+					name: "globe_asia",
+					desc: "globe_asia",
+				},
+				{
+					name: "globe_uk",
+					desc: "globe_uk",
+				},
+				{
+					name: "glucose",
+					desc: "glucose",
+				},
+				{
+					name: "glyphs",
+					desc: "glyphs",
+				},
+				{
+					name: "go_to_line",
+					desc: "go_to_line",
+				},
+				{
 					name: "golf_course",
 					desc: "golf_course",
+				},
+				{
+					name: "google_home_devices",
+					desc: "google_home_devices",
+				},
+				{
+					name: "google_tv_remote",
+					desc: "google_tv_remote",
+				},
+				{
+					name: "google_wifi",
+					desc: "google_wifi",
 				},
 				{
 					name: "gpp_bad",
 					desc: "gpp_bad",
 				},
 				{
-					name: "gpp_good",
-					desc: "gpp_good",
-				},
-				{
 					name: "gpp_maybe",
 					desc: "gpp_maybe",
-				},
-				{
-					name: "gps_fixed",
-					desc: "gps_fixed",
-				},
-				{
-					name: "gps_not_fixed",
-					desc: "gps_not_fixed",
-				},
-				{
-					name: "gps_off",
-					desc: "gps_off",
 				},
 				{
 					name: "grade",
@@ -3491,12 +5155,20 @@ export default {
 					desc: "grid_3x3",
 				},
 				{
+					name: "grid_3x3_off",
+					desc: "grid_3x3_off",
+				},
+				{
 					name: "grid_4x4",
 					desc: "grid_4x4",
 				},
 				{
 					name: "grid_goldenratio",
 					desc: "grid_goldenratio",
+				},
+				{
+					name: "grid_guides",
+					desc: "grid_guides",
 				},
 				{
 					name: "grid_off",
@@ -3509,6 +5181,10 @@ export default {
 				{
 					name: "grid_view",
 					desc: "grid_view",
+				},
+				{
+					name: "grocery",
+					desc: "grocery",
 				},
 				{
 					name: "group",
@@ -3531,6 +5207,10 @@ export default {
 					desc: "group_work",
 				},
 				{
+					name: "grouped_bar_chart",
+					desc: "grouped_bar_chart",
+				},
+				{
 					name: "groups",
 					desc: "groups",
 				},
@@ -3543,16 +5223,40 @@ export default {
 					desc: "groups_3",
 				},
 				{
+					name: "gynecology",
+					desc: "gynecology",
+				},
+				{
 					name: "h_mobiledata",
 					desc: "h_mobiledata",
+				},
+				{
+					name: "h_mobiledata_badge",
+					desc: "h_mobiledata_badge",
 				},
 				{
 					name: "h_plus_mobiledata",
 					desc: "h_plus_mobiledata",
 				},
 				{
+					name: "h_plus_mobiledata_badge",
+					desc: "h_plus_mobiledata_badge",
+				},
+				{
 					name: "hail",
 					desc: "hail",
+				},
+				{
+					name: "hallway",
+					desc: "hallway",
+				},
+				{
+					name: "hand_bones",
+					desc: "hand_bones",
+				},
+				{
+					name: "hand_gesture",
+					desc: "hand_gesture",
 				},
 				{
 					name: "handshake",
@@ -3561,6 +5265,22 @@ export default {
 				{
 					name: "handyman",
 					desc: "handyman",
+				},
+				{
+					name: "hangout_video",
+					desc: "hangout_video",
+				},
+				{
+					name: "hangout_video_off",
+					desc: "hangout_video_off",
+				},
+				{
+					name: "hard_drive",
+					desc: "hard_drive",
+				},
+				{
+					name: "hard_drive_2",
+					desc: "hard_drive_2",
 				},
 				{
 					name: "hardware",
@@ -3603,6 +5323,10 @@ export default {
 					desc: "hdr_plus",
 				},
 				{
+					name: "hdr_plus_off",
+					desc: "hdr_plus_off",
+				},
+				{
 					name: "hdr_strong",
 					desc: "hdr_strong",
 				},
@@ -3619,10 +5343,6 @@ export default {
 					desc: "headphones_battery",
 				},
 				{
-					name: "headset",
-					desc: "headset",
-				},
-				{
 					name: "headset_mic",
 					desc: "headset_mic",
 				},
@@ -3635,8 +5355,28 @@ export default {
 					desc: "healing",
 				},
 				{
+					name: "health_and_beauty",
+					desc: "health_and_beauty",
+				},
+				{
 					name: "health_and_safety",
 					desc: "health_and_safety",
+				},
+				{
+					name: "health_metrics",
+					desc: "health_metrics",
+				},
+				{
+					name: "heap_snapshot_large",
+					desc: "heap_snapshot_large",
+				},
+				{
+					name: "heap_snapshot_multiple",
+					desc: "heap_snapshot_multiple",
+				},
+				{
+					name: "heap_snapshot_thumbnail",
+					desc: "heap_snapshot_thumbnail",
 				},
 				{
 					name: "hearing",
@@ -3651,12 +5391,36 @@ export default {
 					desc: "heart_broken",
 				},
 				{
+					name: "heart_check",
+					desc: "heart_check",
+				},
+				{
+					name: "heart_minus",
+					desc: "heart_minus",
+				},
+				{
+					name: "heart_plus",
+					desc: "heart_plus",
+				},
+				{
+					name: "heat",
+					desc: "heat",
+				},
+				{
 					name: "heat_pump",
 					desc: "heat_pump",
 				},
 				{
+					name: "heat_pump_balance",
+					desc: "heat_pump_balance",
+				},
+				{
 					name: "height",
 					desc: "height",
+				},
+				{
+					name: "helicopter",
+					desc: "helicopter",
 				},
 				{
 					name: "help",
@@ -3667,8 +5431,12 @@ export default {
 					desc: "help_center",
 				},
 				{
-					name: "help_outline",
-					desc: "help_outline",
+					name: "help_clinic",
+					desc: "help_clinic",
+				},
+				{
+					name: "hematology",
+					desc: "hematology",
 				},
 				{
 					name: "hevc",
@@ -3679,6 +5447,10 @@ export default {
 					desc: "hexagon",
 				},
 				{
+					name: "hide",
+					desc: "hide",
+				},
+				{
 					name: "hide_image",
 					desc: "hide_image",
 				},
@@ -3687,20 +5459,52 @@ export default {
 					desc: "hide_source",
 				},
 				{
+					name: "high_density",
+					desc: "high_density",
+				},
+				{
 					name: "high_quality",
 					desc: "high_quality",
+				},
+				{
+					name: "high_res",
+					desc: "high_res",
 				},
 				{
 					name: "highlight",
 					desc: "highlight",
 				},
 				{
-					name: "highlight_alt",
-					desc: "highlight_alt",
+					name: "highlight_keyboard_focus",
+					desc: "highlight_keyboard_focus",
 				},
 				{
-					name: "highlight_off",
-					desc: "highlight_off",
+					name: "highlight_mouse_cursor",
+					desc: "highlight_mouse_cursor",
+				},
+				{
+					name: "highlight_text_cursor",
+					desc: "highlight_text_cursor",
+				},
+				{
+					name: "highlighter_size_1",
+					desc: "highlighter_size_1",
+				},
+				{
+					name: "highlighter_size_2",
+					desc: "highlighter_size_2",
+				},
+				{
+					name: "highlighter_size_3",
+					desc: "highlighter_size_3",
+				},
+				{
+					name: "highlighter_size_4",
+					desc: "highlighter_size_4",
+				},
+				{
+					name: "highlighter_size_5",
+					desc: "highlighter_size_5",
 				},
 				{
 					name: "hiking",
@@ -3739,16 +5543,52 @@ export default {
 					desc: "home",
 				},
 				{
+					name: "home_and_garden",
+					desc: "home_and_garden",
+				},
+				{
+					name: "home_app_logo",
+					desc: "home_app_logo",
+				},
+				{
+					name: "home_health",
+					desc: "home_health",
+				},
+				{
+					name: "home_improvement_and_tools",
+					desc: "home_improvement_and_tools",
+				},
+				{
+					name: "home_iot_device",
+					desc: "home_iot_device",
+				},
+				{
 					name: "home_max",
 					desc: "home_max",
+				},
+				{
+					name: "home_max_dots",
+					desc: "home_max_dots",
 				},
 				{
 					name: "home_mini",
 					desc: "home_mini",
 				},
 				{
+					name: "home_pin",
+					desc: "home_pin",
+				},
+				{
 					name: "home_repair_service",
 					desc: "home_repair_service",
+				},
+				{
+					name: "home_speaker",
+					desc: "home_speaker",
+				},
+				{
+					name: "home_storage",
+					desc: "home_storage",
 				},
 				{
 					name: "home_work",
@@ -3779,6 +5619,10 @@ export default {
 					desc: "hotel_class",
 				},
 				{
+					name: "hourglass",
+					desc: "hourglass",
+				},
+				{
 					name: "hourglass_bottom",
 					desc: "hourglass_bottom",
 				},
@@ -3789,10 +5633,6 @@ export default {
 				{
 					name: "hourglass_empty",
 					desc: "hourglass_empty",
-				},
-				{
-					name: "hourglass_full",
-					desc: "hourglass_full",
 				},
 				{
 					name: "hourglass_top",
@@ -3807,8 +5647,16 @@ export default {
 					desc: "house_siding",
 				},
 				{
+					name: "house_with_shield",
+					desc: "house_with_shield",
+				},
+				{
 					name: "houseboat",
 					desc: "houseboat",
+				},
+				{
+					name: "household_supplies",
+					desc: "household_supplies",
 				},
 				{
 					name: "how_to_reg",
@@ -3819,6 +5667,10 @@ export default {
 					desc: "how_to_vote",
 				},
 				{
+					name: "hr_resting",
+					desc: "hr_resting",
+				},
+				{
 					name: "html",
 					desc: "html",
 				},
@@ -3827,12 +5679,36 @@ export default {
 					desc: "http",
 				},
 				{
-					name: "https",
-					desc: "https",
-				},
-				{
 					name: "hub",
 					desc: "hub",
+				},
+				{
+					name: "humerus",
+					desc: "humerus",
+				},
+				{
+					name: "humerus_alt",
+					desc: "humerus_alt",
+				},
+				{
+					name: "humidity_high",
+					desc: "humidity_high",
+				},
+				{
+					name: "humidity_indoor",
+					desc: "humidity_indoor",
+				},
+				{
+					name: "humidity_low",
+					desc: "humidity_low",
+				},
+				{
+					name: "humidity_mid",
+					desc: "humidity_mid",
+				},
+				{
+					name: "humidity_percentage",
+					desc: "humidity_percentage",
 				},
 				{
 					name: "hvac",
@@ -3847,16 +5723,24 @@ export default {
 					desc: "icecream",
 				},
 				{
+					name: "ifl",
+					desc: "ifl",
+				},
+				{
+					name: "iframe",
+					desc: "iframe",
+				},
+				{
+					name: "iframe_off",
+					desc: "iframe_off",
+				},
+				{
 					name: "image",
 					desc: "image",
 				},
 				{
 					name: "image_aspect_ratio",
 					desc: "image_aspect_ratio",
-				},
-				{
-					name: "image_not_supported",
-					desc: "image_not_supported",
 				},
 				{
 					name: "image_search",
@@ -3867,20 +5751,36 @@ export default {
 					desc: "imagesearch_roller",
 				},
 				{
-					name: "import_contacts",
-					desc: "import_contacts",
+					name: "imagesmode",
+					desc: "imagesmode",
 				},
 				{
-					name: "import_export",
-					desc: "import_export",
+					name: "immunology",
+					desc: "immunology",
+				},
+				{
+					name: "import_contacts",
+					desc: "import_contacts",
 				},
 				{
 					name: "important_devices",
 					desc: "important_devices",
 				},
 				{
+					name: "in_home_mode",
+					desc: "in_home_mode",
+				},
+				{
+					name: "inactive_order",
+					desc: "inactive_order",
+				},
+				{
 					name: "inbox",
 					desc: "inbox",
+				},
+				{
+					name: "inbox_customize",
+					desc: "inbox_customize",
 				},
 				{
 					name: "incomplete_circle",
@@ -3891,52 +5791,68 @@ export default {
 					desc: "indeterminate_check_box",
 				},
 				{
+					name: "indeterminate_question_box",
+					desc: "indeterminate_question_box",
+				},
+				{
 					name: "info",
 					desc: "info",
+				},
+				{
+					name: "info_i",
+					desc: "info_i",
+				},
+				{
+					name: "infrared",
+					desc: "infrared",
+				},
+				{
+					name: "ink_eraser",
+					desc: "ink_eraser",
+				},
+				{
+					name: "ink_eraser_off",
+					desc: "ink_eraser_off",
+				},
+				{
+					name: "ink_highlighter",
+					desc: "ink_highlighter",
+				},
+				{
+					name: "ink_highlighter_move",
+					desc: "ink_highlighter_move",
+				},
+				{
+					name: "ink_marker",
+					desc: "ink_marker",
+				},
+				{
+					name: "ink_pen",
+					desc: "ink_pen",
+				},
+				{
+					name: "inpatient",
+					desc: "inpatient",
 				},
 				{
 					name: "input",
 					desc: "input",
 				},
 				{
+					name: "input_circle",
+					desc: "input_circle",
+				},
+				{
 					name: "insert_chart",
 					desc: "insert_chart",
-				},
-				{
-					name: "insert_chart_outlined",
-					desc: "insert_chart_outlined",
-				},
-				{
-					name: "insert_comment",
-					desc: "insert_comment",
-				},
-				{
-					name: "insert_drive_file",
-					desc: "insert_drive_file",
-				},
-				{
-					name: "insert_emoticon",
-					desc: "insert_emoticon",
-				},
-				{
-					name: "insert_invitation",
-					desc: "insert_invitation",
-				},
-				{
-					name: "insert_link",
-					desc: "insert_link",
 				},
 				{
 					name: "insert_page_break",
 					desc: "insert_page_break",
 				},
 				{
-					name: "insert_photo",
-					desc: "insert_photo",
-				},
-				{
-					name: "insights",
-					desc: "insights",
+					name: "insert_text",
+					desc: "insert_text",
 				},
 				{
 					name: "install_desktop",
@@ -3947,8 +5863,16 @@ export default {
 					desc: "install_mobile",
 				},
 				{
+					name: "instant_mix",
+					desc: "instant_mix",
+				},
+				{
 					name: "integration_instructions",
 					desc: "integration_instructions",
+				},
+				{
+					name: "interactive_space",
+					desc: "interactive_space",
 				},
 				{
 					name: "interests",
@@ -3975,6 +5899,10 @@ export default {
 					desc: "invert_colors_off",
 				},
 				{
+					name: "ios",
+					desc: "ios",
+				},
+				{
 					name: "ios_share",
 					desc: "ios_share",
 				},
@@ -3983,16 +5911,16 @@ export default {
 					desc: "iron",
 				},
 				{
-					name: "iso",
-					desc: "iso",
+					name: "jamboard_kiosk",
+					desc: "jamboard_kiosk",
 				},
 				{
 					name: "javascript",
 					desc: "javascript",
 				},
 				{
-					name: "join_full",
-					desc: "join_full",
+					name: "join",
+					desc: "join",
 				},
 				{
 					name: "join_inner",
@@ -4007,6 +5935,14 @@ export default {
 					desc: "join_right",
 				},
 				{
+					name: "joystick",
+					desc: "joystick",
+				},
+				{
+					name: "jump_to_element",
+					desc: "jump_to_element",
+				},
+				{
 					name: "kayaking",
 					desc: "kayaking",
 				},
@@ -4015,12 +5951,24 @@ export default {
 					desc: "kebab_dining",
 				},
 				{
+					name: "kettle",
+					desc: "kettle",
+				},
+				{
 					name: "key",
 					desc: "key",
 				},
 				{
 					name: "key_off",
 					desc: "key_off",
+				},
+				{
+					name: "key_vertical",
+					desc: "key_vertical",
+				},
+				{
+					name: "key_visualizer",
+					desc: "key_visualizer",
 				},
 				{
 					name: "keyboard",
@@ -4055,6 +6003,10 @@ export default {
 					desc: "keyboard_capslock",
 				},
 				{
+					name: "keyboard_capslock_badge",
+					desc: "keyboard_capslock_badge",
+				},
+				{
 					name: "keyboard_command_key",
 					desc: "keyboard_command_key",
 				},
@@ -4079,12 +6031,36 @@ export default {
 					desc: "keyboard_double_arrow_up",
 				},
 				{
+					name: "keyboard_external_input",
+					desc: "keyboard_external_input",
+				},
+				{
+					name: "keyboard_full",
+					desc: "keyboard_full",
+				},
+				{
 					name: "keyboard_hide",
 					desc: "keyboard_hide",
 				},
 				{
+					name: "keyboard_keys",
+					desc: "keyboard_keys",
+				},
+				{
+					name: "keyboard_off",
+					desc: "keyboard_off",
+				},
+				{
+					name: "keyboard_onscreen",
+					desc: "keyboard_onscreen",
+				},
+				{
 					name: "keyboard_option_key",
 					desc: "keyboard_option_key",
+				},
+				{
+					name: "keyboard_previous_language",
+					desc: "keyboard_previous_language",
 				},
 				{
 					name: "keyboard_return",
@@ -4095,8 +6071,16 @@ export default {
 					desc: "keyboard_tab",
 				},
 				{
+					name: "keyboard_tab_rtl",
+					desc: "keyboard_tab_rtl",
+				},
+				{
 					name: "keyboard_voice",
 					desc: "keyboard_voice",
+				},
+				{
+					name: "kid_star",
+					desc: "kid_star",
 				},
 				{
 					name: "king_bed",
@@ -4111,6 +6095,18 @@ export default {
 					desc: "kitesurfing",
 				},
 				{
+					name: "lab_panel",
+					desc: "lab_panel",
+				},
+				{
+					name: "lab_profile",
+					desc: "lab_profile",
+				},
+				{
+					name: "lab_research",
+					desc: "lab_research",
+				},
+				{
 					name: "label",
 					desc: "label",
 				},
@@ -4121,6 +6117,10 @@ export default {
 				{
 					name: "label_off",
 					desc: "label_off",
+				},
+				{
+					name: "labs",
+					desc: "labs",
 				},
 				{
 					name: "lan",
@@ -4139,8 +6139,72 @@ export default {
 					desc: "language",
 				},
 				{
-					name: "laptop",
-					desc: "laptop",
+					name: "language_chinese_array",
+					desc: "language_chinese_array",
+				},
+				{
+					name: "language_chinese_cangjie",
+					desc: "language_chinese_cangjie",
+				},
+				{
+					name: "language_chinese_dayi",
+					desc: "language_chinese_dayi",
+				},
+				{
+					name: "language_chinese_pinyin",
+					desc: "language_chinese_pinyin",
+				},
+				{
+					name: "language_chinese_quick",
+					desc: "language_chinese_quick",
+				},
+				{
+					name: "language_chinese_wubi",
+					desc: "language_chinese_wubi",
+				},
+				{
+					name: "language_french",
+					desc: "language_french",
+				},
+				{
+					name: "language_gb_english",
+					desc: "language_gb_english",
+				},
+				{
+					name: "language_international",
+					desc: "language_international",
+				},
+				{
+					name: "language_japanese_kana",
+					desc: "language_japanese_kana",
+				},
+				{
+					name: "language_korean_latin",
+					desc: "language_korean_latin",
+				},
+				{
+					name: "language_pinyin",
+					desc: "language_pinyin",
+				},
+				{
+					name: "language_spanish",
+					desc: "language_spanish",
+				},
+				{
+					name: "language_us",
+					desc: "language_us",
+				},
+				{
+					name: "language_us_colemak",
+					desc: "language_us_colemak",
+				},
+				{
+					name: "language_us_dvorak",
+					desc: "language_us_dvorak",
+				},
+				{
+					name: "laps",
+					desc: "laps",
 				},
 				{
 					name: "laptop_chromebook",
@@ -4155,12 +6219,16 @@ export default {
 					desc: "laptop_windows",
 				},
 				{
+					name: "lasso_select",
+					desc: "lasso_select",
+				},
+				{
 					name: "last_page",
 					desc: "last_page",
 				},
 				{
-					name: "launch",
-					desc: "launch",
+					name: "laundry",
+					desc: "laundry",
 				},
 				{
 					name: "layers",
@@ -4169,6 +6237,10 @@ export default {
 				{
 					name: "layers_clear",
 					desc: "layers_clear",
+				},
+				{
+					name: "lda",
+					desc: "lda",
 				},
 				{
 					name: "leaderboard",
@@ -4183,6 +6255,18 @@ export default {
 					desc: "leak_remove",
 				},
 				{
+					name: "left_click",
+					desc: "left_click",
+				},
+				{
+					name: "left_panel_close",
+					desc: "left_panel_close",
+				},
+				{
+					name: "left_panel_open",
+					desc: "left_panel_open",
+				},
+				{
 					name: "legend_toggle",
 					desc: "legend_toggle",
 				},
@@ -4193,6 +6277,10 @@ export default {
 				{
 					name: "lens_blur",
 					desc: "lens_blur",
+				},
+				{
+					name: "letter_switch",
+					desc: "letter_switch",
 				},
 				{
 					name: "library_add",
@@ -4211,12 +6299,28 @@ export default {
 					desc: "library_music",
 				},
 				{
+					name: "license",
+					desc: "license",
+				},
+				{
+					name: "lift_to_talk",
+					desc: "lift_to_talk",
+				},
+				{
 					name: "light",
 					desc: "light",
 				},
 				{
+					name: "light_group",
+					desc: "light_group",
+				},
+				{
 					name: "light_mode",
 					desc: "light_mode",
+				},
+				{
+					name: "light_off",
+					desc: "light_off",
 				},
 				{
 					name: "lightbulb",
@@ -4227,8 +6331,64 @@ export default {
 					desc: "lightbulb_circle",
 				},
 				{
+					name: "lightning_stand",
+					desc: "lightning_stand",
+				},
+				{
 					name: "line_axis",
 					desc: "line_axis",
+				},
+				{
+					name: "line_curve",
+					desc: "line_curve",
+				},
+				{
+					name: "line_end",
+					desc: "line_end",
+				},
+				{
+					name: "line_end_arrow",
+					desc: "line_end_arrow",
+				},
+				{
+					name: "line_end_arrow_notch",
+					desc: "line_end_arrow_notch",
+				},
+				{
+					name: "line_end_circle",
+					desc: "line_end_circle",
+				},
+				{
+					name: "line_end_diamond",
+					desc: "line_end_diamond",
+				},
+				{
+					name: "line_end_square",
+					desc: "line_end_square",
+				},
+				{
+					name: "line_start",
+					desc: "line_start",
+				},
+				{
+					name: "line_start_arrow",
+					desc: "line_start_arrow",
+				},
+				{
+					name: "line_start_arrow_notch",
+					desc: "line_start_arrow_notch",
+				},
+				{
+					name: "line_start_circle",
+					desc: "line_start_circle",
+				},
+				{
+					name: "line_start_diamond",
+					desc: "line_start_diamond",
+				},
+				{
+					name: "line_start_square",
+					desc: "line_start_square",
 				},
 				{
 					name: "line_style",
@@ -4255,6 +6415,10 @@ export default {
 					desc: "linked_camera",
 				},
 				{
+					name: "linked_services",
+					desc: "linked_services",
+				},
+				{
 					name: "liquor",
 					desc: "liquor",
 				},
@@ -4265,6 +6429,14 @@ export default {
 				{
 					name: "list_alt",
 					desc: "list_alt",
+				},
+				{
+					name: "list_alt_add",
+					desc: "list_alt_add",
+				},
+				{
+					name: "lists",
+					desc: "lists",
 				},
 				{
 					name: "live_help",
@@ -4281,10 +6453,6 @@ export default {
 				{
 					name: "local_activity",
 					desc: "local_activity",
-				},
-				{
-					name: "local_airport",
-					desc: "local_airport",
 				},
 				{
 					name: "local_atm",
@@ -4327,16 +6495,8 @@ export default {
 					desc: "local_gas_station",
 				},
 				{
-					name: "local_grocery_store",
-					desc: "local_grocery_store",
-				},
-				{
 					name: "local_hospital",
 					desc: "local_hospital",
-				},
-				{
-					name: "local_hotel",
-					desc: "local_hotel",
 				},
 				{
 					name: "local_laundry_service",
@@ -4351,14 +6511,6 @@ export default {
 					desc: "local_mall",
 				},
 				{
-					name: "local_movies",
-					desc: "local_movies",
-				},
-				{
-					name: "local_offer",
-					desc: "local_offer",
-				},
-				{
 					name: "local_parking",
 					desc: "local_parking",
 				},
@@ -4367,16 +6519,8 @@ export default {
 					desc: "local_pharmacy",
 				},
 				{
-					name: "local_phone",
-					desc: "local_phone",
-				},
-				{
 					name: "local_pizza",
 					desc: "local_pizza",
-				},
-				{
-					name: "local_play",
-					desc: "local_play",
 				},
 				{
 					name: "local_police",
@@ -4385,10 +6529,6 @@ export default {
 				{
 					name: "local_post_office",
 					desc: "local_post_office",
-				},
-				{
-					name: "local_printshop",
-					desc: "local_printshop",
 				},
 				{
 					name: "local_see",
@@ -4403,12 +6543,24 @@ export default {
 					desc: "local_taxi",
 				},
 				{
+					name: "location_away",
+					desc: "location_away",
+				},
+				{
+					name: "location_chip",
+					desc: "location_chip",
+				},
+				{
 					name: "location_city",
 					desc: "location_city",
 				},
 				{
 					name: "location_disabled",
 					desc: "location_disabled",
+				},
+				{
+					name: "location_home",
+					desc: "location_home",
 				},
 				{
 					name: "location_off",
@@ -4433,6 +6585,10 @@ export default {
 				{
 					name: "lock_open",
 					desc: "lock_open",
+				},
+				{
+					name: "lock_open_right",
+					desc: "lock_open_right",
 				},
 				{
 					name: "lock_person",
@@ -4483,12 +6639,12 @@ export default {
 					desc: "looks_two",
 				},
 				{
-					name: "loop",
-					desc: "loop",
-				},
-				{
 					name: "loupe",
 					desc: "loupe",
+				},
+				{
+					name: "low_density",
+					desc: "low_density",
 				},
 				{
 					name: "low_priority",
@@ -4503,8 +6659,16 @@ export default {
 					desc: "lte_mobiledata",
 				},
 				{
+					name: "lte_mobiledata_badge",
+					desc: "lte_mobiledata_badge",
+				},
+				{
 					name: "lte_plus_mobiledata",
 					desc: "lte_plus_mobiledata",
+				},
+				{
+					name: "lte_plus_mobiledata_badge",
+					desc: "lte_plus_mobiledata_badge",
 				},
 				{
 					name: "luggage",
@@ -4519,8 +6683,28 @@ export default {
 					desc: "lyrics",
 				},
 				{
+					name: "macro_auto",
+					desc: "macro_auto",
+				},
+				{
 					name: "macro_off",
 					desc: "macro_off",
+				},
+				{
+					name: "magnification_large",
+					desc: "magnification_large",
+				},
+				{
+					name: "magnification_small",
+					desc: "magnification_small",
+				},
+				{
+					name: "magnify_docked",
+					desc: "magnify_docked",
+				},
+				{
+					name: "magnify_fullscreen",
+					desc: "magnify_fullscreen",
 				},
 				{
 					name: "mail",
@@ -4529,10 +6713,6 @@ export default {
 				{
 					name: "mail_lock",
 					desc: "mail_lock",
-				},
-				{
-					name: "mail_outline",
-					desc: "mail_outline",
 				},
 				{
 					name: "male",
@@ -4567,12 +6747,16 @@ export default {
 					desc: "manage_search",
 				},
 				{
-					name: "map",
-					desc: "map",
+					name: "manga",
+					desc: "manga",
 				},
 				{
-					name: "maps_home_work",
-					desc: "maps_home_work",
+					name: "manufacturing",
+					desc: "manufacturing",
+				},
+				{
+					name: "map",
+					desc: "map",
 				},
 				{
 					name: "maps_ugc",
@@ -4607,20 +6791,48 @@ export default {
 					desc: "mark_unread_chat_alt",
 				},
 				{
-					name: "markunread",
-					desc: "markunread",
+					name: "markdown",
+					desc: "markdown",
+				},
+				{
+					name: "markdown_copy",
+					desc: "markdown_copy",
+				},
+				{
+					name: "markdown_paste",
+					desc: "markdown_paste",
 				},
 				{
 					name: "markunread_mailbox",
 					desc: "markunread_mailbox",
 				},
 				{
+					name: "masked_transitions",
+					desc: "masked_transitions",
+				},
+				{
 					name: "masks",
 					desc: "masks",
 				},
 				{
+					name: "match_case",
+					desc: "match_case",
+				},
+				{
+					name: "match_word",
+					desc: "match_word",
+				},
+				{
+					name: "matter",
+					desc: "matter",
+				},
+				{
 					name: "maximize",
 					desc: "maximize",
+				},
+				{
+					name: "measuring_tape",
+					desc: "measuring_tape",
 				},
 				{
 					name: "media_bluetooth_off",
@@ -4631,12 +6843,20 @@ export default {
 					desc: "media_bluetooth_on",
 				},
 				{
+					name: "media_link",
+					desc: "media_link",
+				},
+				{
 					name: "mediation",
 					desc: "mediation",
 				},
 				{
 					name: "medical_information",
 					desc: "medical_information",
+				},
+				{
+					name: "medical_mask",
+					desc: "medical_mask",
 				},
 				{
 					name: "medical_services",
@@ -4659,6 +6879,14 @@ export default {
 					desc: "memory",
 				},
 				{
+					name: "memory_alt",
+					desc: "memory_alt",
+				},
+				{
+					name: "menstrual_health",
+					desc: "menstrual_health",
+				},
+				{
 					name: "menu",
 					desc: "menu",
 				},
@@ -4679,12 +6907,20 @@ export default {
 					desc: "merge_type",
 				},
 				{
-					name: "message",
-					desc: "message",
+					name: "metabolism",
+					desc: "metabolism",
+				},
+				{
+					name: "mfg_nest_yale_lock",
+					desc: "mfg_nest_yale_lock",
 				},
 				{
 					name: "mic",
 					desc: "mic",
+				},
+				{
+					name: "mic_double",
+					desc: "mic_double",
 				},
 				{
 					name: "mic_external_off",
@@ -4695,20 +6931,36 @@ export default {
 					desc: "mic_external_on",
 				},
 				{
-					name: "mic_none",
-					desc: "mic_none",
-				},
-				{
 					name: "mic_off",
 					desc: "mic_off",
+				},
+				{
+					name: "microbiology",
+					desc: "microbiology",
 				},
 				{
 					name: "microwave",
 					desc: "microwave",
 				},
 				{
+					name: "microwave_gen",
+					desc: "microwave_gen",
+				},
+				{
 					name: "military_tech",
 					desc: "military_tech",
+				},
+				{
+					name: "mimo",
+					desc: "mimo",
+				},
+				{
+					name: "mimo_disconnect",
+					desc: "mimo_disconnect",
+				},
+				{
+					name: "mindfulness",
+					desc: "mindfulness",
 				},
 				{
 					name: "minimize",
@@ -4719,12 +6971,28 @@ export default {
 					desc: "minor_crash",
 				},
 				{
-					name: "miscellaneous_services",
-					desc: "miscellaneous_services",
+					name: "mintmark",
+					desc: "mintmark",
 				},
 				{
 					name: "missed_video_call",
 					desc: "missed_video_call",
+				},
+				{
+					name: "missing_controller",
+					desc: "missing_controller",
+				},
+				{
+					name: "mist",
+					desc: "mist",
+				},
+				{
+					name: "mitre",
+					desc: "mitre",
+				},
+				{
+					name: "mixture_med",
+					desc: "mixture_med",
 				},
 				{
 					name: "mms",
@@ -4747,24 +7015,40 @@ export default {
 					desc: "mobiledata_off",
 				},
 				{
-					name: "mode",
-					desc: "mode",
-				},
-				{
 					name: "mode_comment",
 					desc: "mode_comment",
 				},
 				{
-					name: "mode_edit",
-					desc: "mode_edit",
+					name: "mode_cool",
+					desc: "mode_cool",
 				},
 				{
-					name: "mode_edit_outline",
-					desc: "mode_edit_outline",
+					name: "mode_cool_off",
+					desc: "mode_cool_off",
+				},
+				{
+					name: "mode_dual",
+					desc: "mode_dual",
+				},
+				{
+					name: "mode_fan",
+					desc: "mode_fan",
 				},
 				{
 					name: "mode_fan_off",
 					desc: "mode_fan_off",
+				},
+				{
+					name: "mode_heat",
+					desc: "mode_heat",
+				},
+				{
+					name: "mode_heat_cool",
+					desc: "mode_heat_cool",
+				},
+				{
+					name: "mode_heat_off",
+					desc: "mode_heat_off",
 				},
 				{
 					name: "mode_night",
@@ -4773,6 +7057,10 @@ export default {
 				{
 					name: "mode_of_travel",
 					desc: "mode_of_travel",
+				},
+				{
+					name: "mode_off_on",
+					desc: "mode_off_on",
 				},
 				{
 					name: "mode_standby",
@@ -4795,10 +7083,6 @@ export default {
 					desc: "money_off",
 				},
 				{
-					name: "money_off_csred",
-					desc: "money_off_csred",
-				},
-				{
 					name: "monitor",
 					desc: "monitor",
 				},
@@ -4809,6 +7093,18 @@ export default {
 				{
 					name: "monitor_weight",
 					desc: "monitor_weight",
+				},
+				{
+					name: "monitor_weight_gain",
+					desc: "monitor_weight_gain",
+				},
+				{
+					name: "monitor_weight_loss",
+					desc: "monitor_weight_loss",
+				},
+				{
+					name: "monitoring",
+					desc: "monitoring",
 				},
 				{
 					name: "monochrome_photos",
@@ -4823,12 +7119,16 @@ export default {
 					desc: "mood_bad",
 				},
 				{
-					name: "moped",
-					desc: "moped",
+					name: "mop",
+					desc: "mop",
 				},
 				{
 					name: "more",
 					desc: "more",
+				},
+				{
+					name: "more_down",
+					desc: "more_down",
 				},
 				{
 					name: "more_horiz",
@@ -4839,12 +7139,24 @@ export default {
 					desc: "more_time",
 				},
 				{
+					name: "more_up",
+					desc: "more_up",
+				},
+				{
 					name: "more_vert",
 					desc: "more_vert",
 				},
 				{
 					name: "mosque",
 					desc: "mosque",
+				},
+				{
+					name: "motion_blur",
+					desc: "motion_blur",
+				},
+				{
+					name: "motion_mode",
+					desc: "motion_mode",
 				},
 				{
 					name: "motion_photos_auto",
@@ -4859,20 +7171,72 @@ export default {
 					desc: "motion_photos_on",
 				},
 				{
-					name: "motion_photos_pause",
-					desc: "motion_photos_pause",
-				},
-				{
 					name: "motion_photos_paused",
 					desc: "motion_photos_paused",
+				},
+				{
+					name: "motion_sensor_active",
+					desc: "motion_sensor_active",
+				},
+				{
+					name: "motion_sensor_alert",
+					desc: "motion_sensor_alert",
+				},
+				{
+					name: "motion_sensor_idle",
+					desc: "motion_sensor_idle",
+				},
+				{
+					name: "motion_sensor_urgent",
+					desc: "motion_sensor_urgent",
+				},
+				{
+					name: "motorcycle",
+					desc: "motorcycle",
+				},
+				{
+					name: "mountain_flag",
+					desc: "mountain_flag",
 				},
 				{
 					name: "mouse",
 					desc: "mouse",
 				},
 				{
+					name: "move",
+					desc: "move",
+				},
+				{
 					name: "move_down",
 					desc: "move_down",
+				},
+				{
+					name: "move_group",
+					desc: "move_group",
+				},
+				{
+					name: "move_item",
+					desc: "move_item",
+				},
+				{
+					name: "move_location",
+					desc: "move_location",
+				},
+				{
+					name: "move_selection_down",
+					desc: "move_selection_down",
+				},
+				{
+					name: "move_selection_left",
+					desc: "move_selection_left",
+				},
+				{
+					name: "move_selection_right",
+					desc: "move_selection_right",
+				},
+				{
+					name: "move_selection_up",
+					desc: "move_selection_up",
 				},
 				{
 					name: "move_to_inbox",
@@ -4883,24 +7247,40 @@ export default {
 					desc: "move_up",
 				},
 				{
+					name: "moved_location",
+					desc: "moved_location",
+				},
+				{
 					name: "movie",
 					desc: "movie",
 				},
 				{
-					name: "movie_creation",
-					desc: "movie_creation",
+					name: "movie_edit",
+					desc: "movie_edit",
 				},
 				{
-					name: "movie_filter",
-					desc: "movie_filter",
+					name: "movie_info",
+					desc: "movie_info",
 				},
 				{
 					name: "moving",
 					desc: "moving",
 				},
 				{
+					name: "moving_beds",
+					desc: "moving_beds",
+				},
+				{
+					name: "moving_ministry",
+					desc: "moving_ministry",
+				},
+				{
 					name: "mp",
 					desc: "mp",
+				},
+				{
+					name: "multicooker",
+					desc: "multicooker",
 				},
 				{
 					name: "multiline_chart",
@@ -4913,6 +7293,10 @@ export default {
 				{
 					name: "museum",
 					desc: "museum",
+				},
+				{
+					name: "music_cast",
+					desc: "music_cast",
 				},
 				{
 					name: "music_note",
@@ -4929,6 +7313,10 @@ export default {
 				{
 					name: "my_location",
 					desc: "my_location",
+				},
+				{
+					name: "mystery",
+					desc: "mystery",
 				},
 				{
 					name: "nat",
@@ -4963,6 +7351,10 @@ export default {
 					desc: "near_me_disabled",
 				},
 				{
+					name: "nearby",
+					desc: "nearby",
+				},
+				{
 					name: "nearby_error",
 					desc: "nearby_error",
 				},
@@ -4971,8 +7363,188 @@ export default {
 					desc: "nearby_off",
 				},
 				{
+					name: "nephrology",
+					desc: "nephrology",
+				},
+				{
+					name: "nest_audio",
+					desc: "nest_audio",
+				},
+				{
+					name: "nest_cam_floodlight",
+					desc: "nest_cam_floodlight",
+				},
+				{
+					name: "nest_cam_indoor",
+					desc: "nest_cam_indoor",
+				},
+				{
+					name: "nest_cam_iq",
+					desc: "nest_cam_iq",
+				},
+				{
+					name: "nest_cam_iq_outdoor",
+					desc: "nest_cam_iq_outdoor",
+				},
+				{
+					name: "nest_cam_magnet_mount",
+					desc: "nest_cam_magnet_mount",
+				},
+				{
+					name: "nest_cam_outdoor",
+					desc: "nest_cam_outdoor",
+				},
+				{
+					name: "nest_cam_stand",
+					desc: "nest_cam_stand",
+				},
+				{
+					name: "nest_cam_wall_mount",
+					desc: "nest_cam_wall_mount",
+				},
+				{
 					name: "nest_cam_wired_stand",
 					desc: "nest_cam_wired_stand",
+				},
+				{
+					name: "nest_clock_farsight_analog",
+					desc: "nest_clock_farsight_analog",
+				},
+				{
+					name: "nest_clock_farsight_digital",
+					desc: "nest_clock_farsight_digital",
+				},
+				{
+					name: "nest_connect",
+					desc: "nest_connect",
+				},
+				{
+					name: "nest_detect",
+					desc: "nest_detect",
+				},
+				{
+					name: "nest_display",
+					desc: "nest_display",
+				},
+				{
+					name: "nest_display_max",
+					desc: "nest_display_max",
+				},
+				{
+					name: "nest_doorbell_visitor",
+					desc: "nest_doorbell_visitor",
+				},
+				{
+					name: "nest_eco_leaf",
+					desc: "nest_eco_leaf",
+				},
+				{
+					name: "nest_farsight_weather",
+					desc: "nest_farsight_weather",
+				},
+				{
+					name: "nest_found_savings",
+					desc: "nest_found_savings",
+				},
+				{
+					name: "nest_gale_wifi",
+					desc: "nest_gale_wifi",
+				},
+				{
+					name: "nest_heat_link_e",
+					desc: "nest_heat_link_e",
+				},
+				{
+					name: "nest_heat_link_gen_3",
+					desc: "nest_heat_link_gen_3",
+				},
+				{
+					name: "nest_hello_doorbell",
+					desc: "nest_hello_doorbell",
+				},
+				{
+					name: "nest_mini",
+					desc: "nest_mini",
+				},
+				{
+					name: "nest_multi_room",
+					desc: "nest_multi_room",
+				},
+				{
+					name: "nest_protect",
+					desc: "nest_protect",
+				},
+				{
+					name: "nest_remote",
+					desc: "nest_remote",
+				},
+				{
+					name: "nest_remote_comfort_sensor",
+					desc: "nest_remote_comfort_sensor",
+				},
+				{
+					name: "nest_secure_alarm",
+					desc: "nest_secure_alarm",
+				},
+				{
+					name: "nest_sunblock",
+					desc: "nest_sunblock",
+				},
+				{
+					name: "nest_tag",
+					desc: "nest_tag",
+				},
+				{
+					name: "nest_thermostat",
+					desc: "nest_thermostat",
+				},
+				{
+					name: "nest_thermostat_e_eu",
+					desc: "nest_thermostat_e_eu",
+				},
+				{
+					name: "nest_thermostat_gen_3",
+					desc: "nest_thermostat_gen_3",
+				},
+				{
+					name: "nest_thermostat_sensor",
+					desc: "nest_thermostat_sensor",
+				},
+				{
+					name: "nest_thermostat_sensor_eu",
+					desc: "nest_thermostat_sensor_eu",
+				},
+				{
+					name: "nest_thermostat_zirconium_eu",
+					desc: "nest_thermostat_zirconium_eu",
+				},
+				{
+					name: "nest_true_radiant",
+					desc: "nest_true_radiant",
+				},
+				{
+					name: "nest_wake_on_approach",
+					desc: "nest_wake_on_approach",
+				},
+				{
+					name: "nest_wake_on_press",
+					desc: "nest_wake_on_press",
+				},
+				{
+					name: "nest_wifi_point",
+					desc: "nest_wifi_point",
+				},
+				{
+					name: "nest_wifi_pro",
+					desc: "nest_wifi_pro",
+				},
+				{
+					name: "nest_wifi_pro_2",
+					desc: "nest_wifi_pro_2",
+				},
+				{
+					name: "nest_wifi_router",
+					desc: "nest_wifi_router",
 				},
 				{
 					name: "network_cell",
@@ -4983,8 +7555,24 @@ export default {
 					desc: "network_check",
 				},
 				{
+					name: "network_intelligence_history",
+					desc: "network_intelligence_history",
+				},
+				{
+					name: "network_intelligence_update",
+					desc: "network_intelligence_update",
+				},
+				{
 					name: "network_locked",
 					desc: "network_locked",
+				},
+				{
+					name: "network_manage",
+					desc: "network_manage",
+				},
+				{
+					name: "network_node",
+					desc: "network_node",
 				},
 				{
 					name: "network_ping",
@@ -4999,12 +7587,32 @@ export default {
 					desc: "network_wifi_1_bar",
 				},
 				{
+					name: "network_wifi_1_bar_locked",
+					desc: "network_wifi_1_bar_locked",
+				},
+				{
 					name: "network_wifi_2_bar",
 					desc: "network_wifi_2_bar",
 				},
 				{
+					name: "network_wifi_2_bar_locked",
+					desc: "network_wifi_2_bar_locked",
+				},
+				{
 					name: "network_wifi_3_bar",
 					desc: "network_wifi_3_bar",
+				},
+				{
+					name: "network_wifi_3_bar_locked",
+					desc: "network_wifi_3_bar_locked",
+				},
+				{
+					name: "network_wifi_locked",
+					desc: "network_wifi_locked",
+				},
+				{
+					name: "neurology",
+					desc: "neurology",
 				},
 				{
 					name: "new_label",
@@ -5015,8 +7623,24 @@ export default {
 					desc: "new_releases",
 				},
 				{
+					name: "new_window",
+					desc: "new_window",
+				},
+				{
+					name: "news",
+					desc: "news",
+				},
+				{
+					name: "newsmode",
+					desc: "newsmode",
+				},
+				{
 					name: "newspaper",
 					desc: "newspaper",
+				},
+				{
+					name: "newsstand",
+					desc: "newsstand",
 				},
 				{
 					name: "next_plan",
@@ -5035,16 +7659,24 @@ export default {
 					desc: "night_shelter",
 				},
 				{
+					name: "night_sight_auto",
+					desc: "night_sight_auto",
+				},
+				{
+					name: "night_sight_auto_off",
+					desc: "night_sight_auto_off",
+				},
+				{
+					name: "night_sight_max",
+					desc: "night_sight_max",
+				},
+				{
 					name: "nightlife",
 					desc: "nightlife",
 				},
 				{
 					name: "nightlight",
 					desc: "nightlight",
-				},
-				{
-					name: "nightlight_round",
-					desc: "nightlight_round",
 				},
 				{
 					name: "nights_stay",
@@ -5063,10 +7695,6 @@ export default {
 					desc: "no_backpack",
 				},
 				{
-					name: "no_cell",
-					desc: "no_cell",
-				},
-				{
 					name: "no_crash",
 					desc: "no_crash",
 				},
@@ -5077,10 +7705,6 @@ export default {
 				{
 					name: "no_encryption",
 					desc: "no_encryption",
-				},
-				{
-					name: "no_encryption_gmailerrorred",
-					desc: "no_encryption_gmailerrorred",
 				},
 				{
 					name: "no_flash",
@@ -5111,6 +7735,10 @@ export default {
 					desc: "no_sim",
 				},
 				{
+					name: "no_sound",
+					desc: "no_sound",
+				},
+				{
 					name: "no_stroller",
 					desc: "no_stroller",
 				},
@@ -5125,6 +7753,10 @@ export default {
 				{
 					name: "noise_control_off",
 					desc: "noise_control_off",
+				},
+				{
+					name: "noise_control_on",
+					desc: "noise_control_on",
 				},
 				{
 					name: "nordic_walking",
@@ -5147,8 +7779,8 @@ export default {
 					desc: "not_accessible",
 				},
 				{
-					name: "not_interested",
-					desc: "not_interested",
+					name: "not_accessible_forward",
+					desc: "not_accessible_forward",
 				},
 				{
 					name: "not_listed_location",
@@ -5171,6 +7803,14 @@ export default {
 					desc: "note_alt",
 				},
 				{
+					name: "note_stack",
+					desc: "note_stack",
+				},
+				{
+					name: "note_stack_add",
+					desc: "note_stack_add",
+				},
+				{
 					name: "notes",
 					desc: "notes",
 				},
@@ -5183,16 +7823,16 @@ export default {
 					desc: "notification_important",
 				},
 				{
+					name: "notification_multiple",
+					desc: "notification_multiple",
+				},
+				{
 					name: "notifications",
 					desc: "notifications",
 				},
 				{
 					name: "notifications_active",
 					desc: "notifications_active",
-				},
-				{
-					name: "notifications_none",
-					desc: "notifications_none",
 				},
 				{
 					name: "notifications_off",
@@ -5203,8 +7843,24 @@ export default {
 					desc: "notifications_paused",
 				},
 				{
+					name: "notifications_unread",
+					desc: "notifications_unread",
+				},
+				{
 					name: "numbers",
 					desc: "numbers",
+				},
+				{
+					name: "nutrition",
+					desc: "nutrition",
+				},
+				{
+					name: "ods",
+					desc: "ods",
+				},
+				{
+					name: "odt",
+					desc: "odt",
 				},
 				{
 					name: "offline_bolt",
@@ -5227,12 +7883,20 @@ export default {
 					desc: "on_device_training",
 				},
 				{
-					name: "ondemand_video",
-					desc: "ondemand_video",
+					name: "on_hub_device",
+					desc: "on_hub_device",
+				},
+				{
+					name: "oncology",
+					desc: "oncology",
 				},
 				{
 					name: "online_prediction",
 					desc: "online_prediction",
+				},
+				{
+					name: "onsen",
+					desc: "onsen",
 				},
 				{
 					name: "opacity",
@@ -5251,12 +7915,52 @@ export default {
 					desc: "open_in_new",
 				},
 				{
+					name: "open_in_new_down",
+					desc: "open_in_new_down",
+				},
+				{
 					name: "open_in_new_off",
 					desc: "open_in_new_off",
 				},
 				{
+					name: "open_in_phone",
+					desc: "open_in_phone",
+				},
+				{
+					name: "open_jam",
+					desc: "open_jam",
+				},
+				{
 					name: "open_with",
 					desc: "open_with",
+				},
+				{
+					name: "ophthalmology",
+					desc: "ophthalmology",
+				},
+				{
+					name: "oral_disease",
+					desc: "oral_disease",
+				},
+				{
+					name: "order_approve",
+					desc: "order_approve",
+				},
+				{
+					name: "order_play",
+					desc: "order_play",
+				},
+				{
+					name: "orders",
+					desc: "orders",
+				},
+				{
+					name: "orthopedics",
+					desc: "orthopedics",
+				},
+				{
+					name: "other_admission",
+					desc: "other_admission",
 				},
 				{
 					name: "other_houses",
@@ -5271,24 +7975,96 @@ export default {
 					desc: "outbox",
 				},
 				{
+					name: "outbox_alt",
+					desc: "outbox_alt",
+				},
+				{
+					name: "outdoor_garden",
+					desc: "outdoor_garden",
+				},
+				{
 					name: "outdoor_grill",
 					desc: "outdoor_grill",
+				},
+				{
+					name: "outgoing_mail",
+					desc: "outgoing_mail",
 				},
 				{
 					name: "outlet",
 					desc: "outlet",
 				},
 				{
-					name: "outlined_flag",
-					desc: "outlined_flag",
+					name: "outpatient",
+					desc: "outpatient",
+				},
+				{
+					name: "outpatient_med",
+					desc: "outpatient_med",
 				},
 				{
 					name: "output",
 					desc: "output",
 				},
 				{
+					name: "output_circle",
+					desc: "output_circle",
+				},
+				{
+					name: "oven",
+					desc: "oven",
+				},
+				{
+					name: "oven_gen",
+					desc: "oven_gen",
+				},
+				{
+					name: "overview",
+					desc: "overview",
+				},
+				{
+					name: "overview_key",
+					desc: "overview_key",
+				},
+				{
+					name: "oxygen_saturation",
+					desc: "oxygen_saturation",
+				},
+				{
+					name: "p2p",
+					desc: "p2p",
+				},
+				{
+					name: "pace",
+					desc: "pace",
+				},
+				{
+					name: "pacemaker",
+					desc: "pacemaker",
+				},
+				{
+					name: "package",
+					desc: "package",
+				},
+				{
+					name: "package_2",
+					desc: "package_2",
+				},
+				{
 					name: "padding",
 					desc: "padding",
+				},
+				{
+					name: "page_control",
+					desc: "page_control",
+				},
+				{
+					name: "page_info",
+					desc: "page_info",
+				},
+				{
+					name: "pageless",
+					desc: "pageless",
 				},
 				{
 					name: "pages",
@@ -5307,12 +8083,20 @@ export default {
 					desc: "palette",
 				},
 				{
+					name: "pallet",
+					desc: "pallet",
+				},
+				{
 					name: "pan_tool",
 					desc: "pan_tool",
 				},
 				{
 					name: "pan_tool_alt",
 					desc: "pan_tool_alt",
+				},
+				{
+					name: "pan_zoom",
+					desc: "pan_zoom",
 				},
 				{
 					name: "panorama",
@@ -5327,32 +8111,16 @@ export default {
 					desc: "panorama_horizontal",
 				},
 				{
-					name: "panorama_horizontal_select",
-					desc: "panorama_horizontal_select",
-				},
-				{
 					name: "panorama_photosphere",
 					desc: "panorama_photosphere",
-				},
-				{
-					name: "panorama_photosphere_select",
-					desc: "panorama_photosphere_select",
 				},
 				{
 					name: "panorama_vertical",
 					desc: "panorama_vertical",
 				},
 				{
-					name: "panorama_vertical_select",
-					desc: "panorama_vertical_select",
-				},
-				{
 					name: "panorama_wide_angle",
 					desc: "panorama_wide_angle",
-				},
-				{
-					name: "panorama_wide_angle_select",
-					desc: "panorama_wide_angle_select",
 				},
 				{
 					name: "paragliding",
@@ -5363,12 +8131,36 @@ export default {
 					desc: "park",
 				},
 				{
+					name: "partly_cloudy_day",
+					desc: "partly_cloudy_day",
+				},
+				{
+					name: "partly_cloudy_night",
+					desc: "partly_cloudy_night",
+				},
+				{
+					name: "partner_exchange",
+					desc: "partner_exchange",
+				},
+				{
+					name: "partner_reports",
+					desc: "partner_reports",
+				},
+				{
 					name: "party_mode",
 					desc: "party_mode",
 				},
 				{
+					name: "passkey",
+					desc: "passkey",
+				},
+				{
 					name: "password",
 					desc: "password",
+				},
+				{
+					name: "patient_list",
+					desc: "patient_list",
 				},
 				{
 					name: "pattern",
@@ -5383,20 +8175,8 @@ export default {
 					desc: "pause_circle",
 				},
 				{
-					name: "pause_circle_filled",
-					desc: "pause_circle_filled",
-				},
-				{
-					name: "pause_circle_outline",
-					desc: "pause_circle_outline",
-				},
-				{
 					name: "pause_presentation",
 					desc: "pause_presentation",
-				},
-				{
-					name: "payment",
-					desc: "payment",
 				},
 				{
 					name: "payments",
@@ -5405,6 +8185,30 @@ export default {
 				{
 					name: "pedal_bike",
 					desc: "pedal_bike",
+				},
+				{
+					name: "pediatrics",
+					desc: "pediatrics",
+				},
+				{
+					name: "pen_size_1",
+					desc: "pen_size_1",
+				},
+				{
+					name: "pen_size_2",
+					desc: "pen_size_2",
+				},
+				{
+					name: "pen_size_3",
+					desc: "pen_size_3",
+				},
+				{
+					name: "pen_size_4",
+					desc: "pen_size_4",
+				},
+				{
+					name: "pen_size_5",
+					desc: "pen_size_5",
 				},
 				{
 					name: "pending",
@@ -5419,20 +8223,12 @@ export default {
 					desc: "pentagon",
 				},
 				{
-					name: "people",
-					desc: "people",
-				},
-				{
-					name: "people_alt",
-					desc: "people_alt",
-				},
-				{
-					name: "people_outline",
-					desc: "people_outline",
-				},
-				{
 					name: "percent",
 					desc: "percent",
+				},
+				{
+					name: "pergola",
+					desc: "pergola",
 				},
 				{
 					name: "perm_camera_mic",
@@ -5449,10 +8245,6 @@ export default {
 				{
 					name: "perm_device_information",
 					desc: "perm_device_information",
-				},
-				{
-					name: "perm_identity",
-					desc: "perm_identity",
 				},
 				{
 					name: "perm_media",
@@ -5487,24 +8279,40 @@ export default {
 					desc: "person_add",
 				},
 				{
-					name: "person_add_alt",
-					desc: "person_add_alt",
-				},
-				{
-					name: "person_add_alt_1",
-					desc: "person_add_alt_1",
-				},
-				{
 					name: "person_add_disabled",
 					desc: "person_add_disabled",
 				},
 				{
-					name: "person_off",
-					desc: "person_off",
+					name: "person_alert",
+					desc: "person_alert",
 				},
 				{
-					name: "person_outline",
-					desc: "person_outline",
+					name: "person_apron",
+					desc: "person_apron",
+				},
+				{
+					name: "person_book",
+					desc: "person_book",
+				},
+				{
+					name: "person_cancel",
+					desc: "person_cancel",
+				},
+				{
+					name: "person_celebrate",
+					desc: "person_celebrate",
+				},
+				{
+					name: "person_check",
+					desc: "person_check",
+				},
+				{
+					name: "person_edit",
+					desc: "person_edit",
+				},
+				{
+					name: "person_off",
+					desc: "person_off",
 				},
 				{
 					name: "person_pin",
@@ -5515,24 +8323,40 @@ export default {
 					desc: "person_pin_circle",
 				},
 				{
-					name: "person_remove",
-					desc: "person_remove",
+					name: "person_play",
+					desc: "person_play",
 				},
 				{
-					name: "person_remove_alt_1",
-					desc: "person_remove_alt_1",
+					name: "person_raised_hand",
+					desc: "person_raised_hand",
+				},
+				{
+					name: "person_remove",
+					desc: "person_remove",
 				},
 				{
 					name: "person_search",
 					desc: "person_search",
 				},
 				{
+					name: "personal_bag",
+					desc: "personal_bag",
+				},
+				{
+					name: "personal_bag_off",
+					desc: "personal_bag_off",
+				},
+				{
+					name: "personal_bag_question",
+					desc: "personal_bag_question",
+				},
+				{
 					name: "personal_injury",
 					desc: "personal_injury",
 				},
 				{
-					name: "personal_video",
-					desc: "personal_video",
+					name: "personal_places",
+					desc: "personal_places",
 				},
 				{
 					name: "pest_control",
@@ -5543,16 +8367,16 @@ export default {
 					desc: "pest_control_rodent",
 				},
 				{
+					name: "pet_supplies",
+					desc: "pet_supplies",
+				},
+				{
 					name: "pets",
 					desc: "pets",
 				},
 				{
 					name: "phishing",
 					desc: "phishing",
-				},
-				{
-					name: "phone",
-					desc: "phone",
 				},
 				{
 					name: "phone_android",
@@ -5579,6 +8403,10 @@ export default {
 					desc: "phone_forwarded",
 				},
 				{
+					name: "phone_in_talk",
+					desc: "phone_in_talk",
+				},
+				{
 					name: "phone_iphone",
 					desc: "phone_iphone",
 				},
@@ -5593,10 +8421,6 @@ export default {
 				{
 					name: "phone_paused",
 					desc: "phone_paused",
-				},
-				{
-					name: "phonelink",
-					desc: "phonelink",
 				},
 				{
 					name: "phonelink_erase",
@@ -5615,6 +8439,10 @@ export default {
 					desc: "phonelink_ring",
 				},
 				{
+					name: "phonelink_ring_off",
+					desc: "phonelink_ring_off",
+				},
+				{
 					name: "phonelink_setup",
 					desc: "phonelink_setup",
 				},
@@ -5625,6 +8453,10 @@ export default {
 				{
 					name: "photo_album",
 					desc: "photo_album",
+				},
+				{
+					name: "photo_auto_merge",
+					desc: "photo_auto_merge",
 				},
 				{
 					name: "photo_camera",
@@ -5639,16 +8471,16 @@ export default {
 					desc: "photo_camera_front",
 				},
 				{
-					name: "photo_filter",
-					desc: "photo_filter",
+					name: "photo_frame",
+					desc: "photo_frame",
 				},
 				{
 					name: "photo_library",
 					desc: "photo_library",
 				},
 				{
-					name: "photo_size_select_actual",
-					desc: "photo_size_select_actual",
+					name: "photo_prints",
+					desc: "photo_prints",
 				},
 				{
 					name: "photo_size_select_large",
@@ -5661,6 +8493,10 @@ export default {
 				{
 					name: "php",
 					desc: "php",
+				},
+				{
+					name: "physical_therapy",
+					desc: "physical_therapy",
 				},
 				{
 					name: "piano",
@@ -5683,12 +8519,40 @@ export default {
 					desc: "picture_in_picture_alt",
 				},
 				{
+					name: "picture_in_picture_center",
+					desc: "picture_in_picture_center",
+				},
+				{
+					name: "picture_in_picture_large",
+					desc: "picture_in_picture_large",
+				},
+				{
+					name: "picture_in_picture_medium",
+					desc: "picture_in_picture_medium",
+				},
+				{
+					name: "picture_in_picture_mobile",
+					desc: "picture_in_picture_mobile",
+				},
+				{
+					name: "picture_in_picture_off",
+					desc: "picture_in_picture_off",
+				},
+				{
+					name: "picture_in_picture_small",
+					desc: "picture_in_picture_small",
+				},
+				{
 					name: "pie_chart",
 					desc: "pie_chart",
 				},
 				{
-					name: "pie_chart_outline",
-					desc: "pie_chart_outline",
+					name: "pill",
+					desc: "pill",
+				},
+				{
+					name: "pill_off",
+					desc: "pill_off",
 				},
 				{
 					name: "pin",
@@ -5711,20 +8575,40 @@ export default {
 					desc: "pinch",
 				},
 				{
+					name: "pinch_zoom_in",
+					desc: "pinch_zoom_in",
+				},
+				{
+					name: "pinch_zoom_out",
+					desc: "pinch_zoom_out",
+				},
+				{
+					name: "pip",
+					desc: "pip",
+				},
+				{
+					name: "pip_exit",
+					desc: "pip_exit",
+				},
+				{
 					name: "pivot_table_chart",
 					desc: "pivot_table_chart",
 				},
 				{
-					name: "pix",
-					desc: "pix",
-				},
-				{
-					name: "place",
-					desc: "place",
+					name: "place_item",
+					desc: "place_item",
 				},
 				{
 					name: "plagiarism",
 					desc: "plagiarism",
+				},
+				{
+					name: "planner_banner_ad_pt",
+					desc: "planner_banner_ad_pt",
+				},
+				{
+					name: "planner_review",
+					desc: "planner_review",
 				},
 				{
 					name: "play_arrow",
@@ -5733,14 +8617,6 @@ export default {
 				{
 					name: "play_circle",
 					desc: "play_circle",
-				},
-				{
-					name: "play_circle_filled",
-					desc: "play_circle_filled",
-				},
-				{
-					name: "play_circle_outline",
-					desc: "play_circle_outline",
 				},
 				{
 					name: "play_disabled",
@@ -5753,6 +8629,18 @@ export default {
 				{
 					name: "play_lesson",
 					desc: "play_lesson",
+				},
+				{
+					name: "play_pause",
+					desc: "play_pause",
+				},
+				{
+					name: "play_shapes",
+					desc: "play_shapes",
+				},
+				{
+					name: "playing_cards",
+					desc: "playing_cards",
 				},
 				{
 					name: "playlist_add",
@@ -5783,24 +8671,28 @@ export default {
 					desc: "plumbing",
 				},
 				{
-					name: "plus_one",
-					desc: "plus_one",
-				},
-				{
 					name: "podcasts",
 					desc: "podcasts",
+				},
+				{
+					name: "podiatry",
+					desc: "podiatry",
+				},
+				{
+					name: "podium",
+					desc: "podium",
 				},
 				{
 					name: "point_of_sale",
 					desc: "point_of_sale",
 				},
 				{
-					name: "policy",
-					desc: "policy",
+					name: "point_scan",
+					desc: "point_scan",
 				},
 				{
-					name: "poll",
-					desc: "poll",
+					name: "policy",
+					desc: "policy",
 				},
 				{
 					name: "polyline",
@@ -5819,12 +8711,28 @@ export default {
 					desc: "portable_wifi_off",
 				},
 				{
-					name: "portrait",
-					desc: "portrait",
+					name: "position_bottom_left",
+					desc: "position_bottom_left",
+				},
+				{
+					name: "position_bottom_right",
+					desc: "position_bottom_right",
+				},
+				{
+					name: "position_top_right",
+					desc: "position_top_right",
+				},
+				{
+					name: "post",
+					desc: "post",
 				},
 				{
 					name: "post_add",
 					desc: "post_add",
+				},
+				{
+					name: "potted_plant",
+					desc: "potted_plant",
 				},
 				{
 					name: "power",
@@ -5843,12 +8751,28 @@ export default {
 					desc: "power_settings_new",
 				},
 				{
+					name: "prayer_times",
+					desc: "prayer_times",
+				},
+				{
 					name: "precision_manufacturing",
 					desc: "precision_manufacturing",
 				},
 				{
+					name: "pregnancy",
+					desc: "pregnancy",
+				},
+				{
 					name: "pregnant_woman",
 					desc: "pregnant_woman",
+				},
+				{
+					name: "preliminary",
+					desc: "preliminary",
+				},
+				{
+					name: "prescriptions",
+					desc: "prescriptions",
 				},
 				{
 					name: "present_to_all",
@@ -5857,6 +8781,10 @@ export default {
 				{
 					name: "preview",
 					desc: "preview",
+				},
+				{
+					name: "preview_off",
+					desc: "preview_off",
 				},
 				{
 					name: "price_change",
@@ -5871,12 +8799,36 @@ export default {
 					desc: "print",
 				},
 				{
+					name: "print_add",
+					desc: "print_add",
+				},
+				{
+					name: "print_connect",
+					desc: "print_connect",
+				},
+				{
 					name: "print_disabled",
 					desc: "print_disabled",
 				},
 				{
+					name: "print_error",
+					desc: "print_error",
+				},
+				{
+					name: "print_lock",
+					desc: "print_lock",
+				},
+				{
+					name: "priority",
+					desc: "priority",
+				},
+				{
 					name: "priority_high",
 					desc: "priority_high",
+				},
+				{
+					name: "privacy",
+					desc: "privacy",
 				},
 				{
 					name: "privacy_tip",
@@ -5887,8 +8839,32 @@ export default {
 					desc: "private_connectivity",
 				},
 				{
+					name: "problem",
+					desc: "problem",
+				},
+				{
+					name: "procedure",
+					desc: "procedure",
+				},
+				{
+					name: "process_chart",
+					desc: "process_chart",
+				},
+				{
 					name: "production_quantity_limits",
 					desc: "production_quantity_limits",
+				},
+				{
+					name: "productivity",
+					desc: "productivity",
+				},
+				{
+					name: "progress_activity",
+					desc: "progress_activity",
+				},
+				{
+					name: "prompt_suggestion",
+					desc: "prompt_suggestion",
 				},
 				{
 					name: "propane",
@@ -5897,6 +8873,10 @@ export default {
 				{
 					name: "propane_tank",
 					desc: "propane_tank",
+				},
+				{
+					name: "psychiatry",
+					desc: "psychiatry",
 				},
 				{
 					name: "psychology",
@@ -5923,6 +8903,14 @@ export default {
 					desc: "published_with_changes",
 				},
 				{
+					name: "pulmonology",
+					desc: "pulmonology",
+				},
+				{
+					name: "pulse_alert",
+					desc: "pulse_alert",
+				},
+				{
 					name: "punch_clock",
 					desc: "punch_clock",
 				},
@@ -5939,28 +8927,24 @@ export default {
 					desc: "qr_code_2",
 				},
 				{
-					name: "qr_code_scanner",
-					desc: "qr_code_scanner",
+					name: "qr_code_2_add",
+					desc: "qr_code_2_add",
 				},
 				{
-					name: "query_builder",
-					desc: "query_builder",
+					name: "qr_code_scanner",
+					desc: "qr_code_scanner",
 				},
 				{
 					name: "query_stats",
 					desc: "query_stats",
 				},
 				{
-					name: "question_answer",
-					desc: "question_answer",
+					name: "question_exchange",
+					desc: "question_exchange",
 				},
 				{
 					name: "question_mark",
 					desc: "question_mark",
-				},
-				{
-					name: "queue",
-					desc: "queue",
 				},
 				{
 					name: "queue_music",
@@ -5971,8 +8955,32 @@ export default {
 					desc: "queue_play_next",
 				},
 				{
+					name: "quick_phrases",
+					desc: "quick_phrases",
+				},
+				{
+					name: "quick_reference",
+					desc: "quick_reference",
+				},
+				{
+					name: "quick_reference_all",
+					desc: "quick_reference_all",
+				},
+				{
+					name: "quick_reorder",
+					desc: "quick_reorder",
+				},
+				{
 					name: "quickreply",
 					desc: "quickreply",
+				},
+				{
+					name: "quiet_time",
+					desc: "quiet_time",
+				},
+				{
+					name: "quiet_time_active",
+					desc: "quiet_time_active",
 				},
 				{
 					name: "quiz",
@@ -5995,12 +9003,36 @@ export default {
 					desc: "radio_button_checked",
 				},
 				{
+					name: "radio_button_partial",
+					desc: "radio_button_partial",
+				},
+				{
 					name: "radio_button_unchecked",
 					desc: "radio_button_unchecked",
 				},
 				{
+					name: "radiology",
+					desc: "radiology",
+				},
+				{
 					name: "railway_alert",
 					desc: "railway_alert",
+				},
+				{
+					name: "rainy",
+					desc: "rainy",
+				},
+				{
+					name: "rainy_heavy",
+					desc: "rainy_heavy",
+				},
+				{
+					name: "rainy_light",
+					desc: "rainy_light",
+				},
+				{
+					name: "rainy_snow",
+					desc: "rainy_snow",
 				},
 				{
 					name: "ramen_dining",
@@ -6015,8 +9047,16 @@ export default {
 					desc: "ramp_right",
 				},
 				{
+					name: "range_hood",
+					desc: "range_hood",
+				},
+				{
 					name: "rate_review",
 					desc: "rate_review",
+				},
+				{
+					name: "raven",
+					desc: "raven",
 				},
 				{
 					name: "raw_off",
@@ -6031,8 +9071,24 @@ export default {
 					desc: "read_more",
 				},
 				{
+					name: "readiness_score",
+					desc: "readiness_score",
+				},
+				{
 					name: "real_estate_agent",
 					desc: "real_estate_agent",
+				},
+				{
+					name: "rear_camera",
+					desc: "rear_camera",
+				},
+				{
+					name: "rebase",
+					desc: "rebase",
+				},
+				{
+					name: "rebase_edit",
+					desc: "rebase_edit",
 				},
 				{
 					name: "receipt",
@@ -6045,6 +9101,10 @@ export default {
 				{
 					name: "recent_actors",
 					desc: "recent_actors",
+				},
+				{
+					name: "recent_patient",
+					desc: "recent_patient",
 				},
 				{
 					name: "recommend",
@@ -6079,20 +9139,32 @@ export default {
 					desc: "refresh",
 				},
 				{
+					name: "regular_expression",
+					desc: "regular_expression",
+				},
+				{
+					name: "relax",
+					desc: "relax",
+				},
+				{
+					name: "release_alert",
+					desc: "release_alert",
+				},
+				{
 					name: "remember_me",
 					desc: "remember_me",
 				},
 				{
+					name: "reminder",
+					desc: "reminder",
+				},
+				{
+					name: "remote_gen",
+					desc: "remote_gen",
+				},
+				{
 					name: "remove",
 					desc: "remove",
-				},
-				{
-					name: "remove_circle",
-					desc: "remove_circle",
-				},
-				{
-					name: "remove_circle_outline",
-					desc: "remove_circle_outline",
 				},
 				{
 					name: "remove_done",
@@ -6107,16 +9179,20 @@ export default {
 					desc: "remove_moderator",
 				},
 				{
-					name: "remove_red_eye",
-					desc: "remove_red_eye",
-				},
-				{
 					name: "remove_road",
 					desc: "remove_road",
 				},
 				{
+					name: "remove_selection",
+					desc: "remove_selection",
+				},
+				{
 					name: "remove_shopping_cart",
 					desc: "remove_shopping_cart",
+				},
+				{
+					name: "reopen_window",
+					desc: "reopen_window",
 				},
 				{
 					name: "reorder",
@@ -6159,10 +9235,6 @@ export default {
 					desc: "replay_5",
 				},
 				{
-					name: "replay_circle_filled",
-					desc: "replay_circle_filled",
-				},
-				{
 					name: "reply",
 					desc: "reply",
 				},
@@ -6175,16 +9247,8 @@ export default {
 					desc: "report",
 				},
 				{
-					name: "report_gmailerrorred",
-					desc: "report_gmailerrorred",
-				},
-				{
 					name: "report_off",
 					desc: "report_off",
-				},
-				{
-					name: "report_problem",
-					desc: "report_problem",
 				},
 				{
 					name: "request_page",
@@ -6195,8 +9259,28 @@ export default {
 					desc: "request_quote",
 				},
 				{
+					name: "reset_image",
+					desc: "reset_image",
+				},
+				{
 					name: "reset_tv",
 					desc: "reset_tv",
+				},
+				{
+					name: "reset_wrench",
+					desc: "reset_wrench",
+				},
+				{
+					name: "resize",
+					desc: "resize",
+				},
+				{
+					name: "respiratory_rate",
+					desc: "respiratory_rate",
+				},
+				{
+					name: "responsive_layout",
+					desc: "responsive_layout",
 				},
 				{
 					name: "restart_alt",
@@ -6211,10 +9295,6 @@ export default {
 					desc: "restaurant_menu",
 				},
 				{
-					name: "restore",
-					desc: "restore",
-				},
-				{
 					name: "restore_from_trash",
 					desc: "restore_from_trash",
 				},
@@ -6223,16 +9303,56 @@ export default {
 					desc: "restore_page",
 				},
 				{
+					name: "resume",
+					desc: "resume",
+				},
+				{
 					name: "reviews",
 					desc: "reviews",
+				},
+				{
+					name: "rewarded_ads",
+					desc: "rewarded_ads",
+				},
+				{
+					name: "rheumatology",
+					desc: "rheumatology",
+				},
+				{
+					name: "rib_cage",
+					desc: "rib_cage",
 				},
 				{
 					name: "rice_bowl",
 					desc: "rice_bowl",
 				},
 				{
+					name: "right_click",
+					desc: "right_click",
+				},
+				{
+					name: "right_panel_close",
+					desc: "right_panel_close",
+				},
+				{
+					name: "right_panel_open",
+					desc: "right_panel_open",
+				},
+				{
 					name: "ring_volume",
 					desc: "ring_volume",
+				},
+				{
+					name: "ripples",
+					desc: "ripples",
+				},
+				{
+					name: "robot",
+					desc: "robot",
+				},
+				{
+					name: "robot_2",
+					desc: "robot_2",
 				},
 				{
 					name: "rocket",
@@ -6257,10 +9377,6 @@ export default {
 				{
 					name: "roofing",
 					desc: "roofing",
-				},
-				{
-					name: "room",
-					desc: "room",
 				},
 				{
 					name: "room_preferences",
@@ -6307,6 +9423,10 @@ export default {
 					desc: "router",
 				},
 				{
+					name: "routine",
+					desc: "routine",
+				},
+				{
 					name: "rowing",
 					desc: "rowing",
 				},
@@ -6323,12 +9443,20 @@ export default {
 					desc: "rtt",
 				},
 				{
+					name: "rubric",
+					desc: "rubric",
+				},
+				{
 					name: "rule",
 					desc: "rule",
 				},
 				{
 					name: "rule_folder",
 					desc: "rule_folder",
+				},
+				{
+					name: "rule_settings",
+					desc: "rule_settings",
 				},
 				{
 					name: "run_circle",
@@ -6347,12 +9475,20 @@ export default {
 					desc: "safety_check",
 				},
 				{
+					name: "safety_check_off",
+					desc: "safety_check_off",
+				},
+				{
 					name: "safety_divider",
 					desc: "safety_divider",
 				},
 				{
 					name: "sailing",
 					desc: "sailing",
+				},
+				{
+					name: "salinity",
+					desc: "salinity",
 				},
 				{
 					name: "sanitizer",
@@ -6367,12 +9503,12 @@ export default {
 					desc: "satellite_alt",
 				},
 				{
-					name: "save",
-					desc: "save",
+					name: "sauna",
+					desc: "sauna",
 				},
 				{
-					name: "save_alt",
-					desc: "save_alt",
+					name: "save",
+					desc: "save",
 				},
 				{
 					name: "save_as",
@@ -6391,12 +9527,24 @@ export default {
 					desc: "scale",
 				},
 				{
+					name: "scan",
+					desc: "scan",
+				},
+				{
+					name: "scan_delete",
+					desc: "scan_delete",
+				},
+				{
 					name: "scanner",
 					desc: "scanner",
 				},
 				{
 					name: "scatter_plot",
 					desc: "scatter_plot",
+				},
+				{
+					name: "scene",
+					desc: "scene",
 				},
 				{
 					name: "schedule",
@@ -6419,6 +9567,10 @@ export default {
 					desc: "science",
 				},
 				{
+					name: "science_off",
+					desc: "science_off",
+				},
+				{
 					name: "score",
 					desc: "score",
 				},
@@ -6439,12 +9591,20 @@ export default {
 					desc: "screen_lock_rotation",
 				},
 				{
+					name: "screen_record",
+					desc: "screen_record",
+				},
+				{
 					name: "screen_rotation",
 					desc: "screen_rotation",
 				},
 				{
 					name: "screen_rotation_alt",
 					desc: "screen_rotation_alt",
+				},
+				{
+					name: "screen_rotation_up",
+					desc: "screen_rotation_up",
 				},
 				{
 					name: "screen_search_desktop",
@@ -6459,8 +9619,28 @@ export default {
 					desc: "screenshot",
 				},
 				{
+					name: "screenshot_frame",
+					desc: "screenshot_frame",
+				},
+				{
+					name: "screenshot_keyboard",
+					desc: "screenshot_keyboard",
+				},
+				{
 					name: "screenshot_monitor",
 					desc: "screenshot_monitor",
+				},
+				{
+					name: "screenshot_region",
+					desc: "screenshot_region",
+				},
+				{
+					name: "screenshot_tablet",
+					desc: "screenshot_tablet",
+				},
+				{
+					name: "scrollable_header",
+					desc: "scrollable_header",
 				},
 				{
 					name: "scuba_diving",
@@ -6479,12 +9659,20 @@ export default {
 					desc: "sd_card_alert",
 				},
 				{
-					name: "sd_storage",
-					desc: "sd_storage",
+					name: "sdk",
+					desc: "sdk",
 				},
 				{
 					name: "search",
 					desc: "search",
+				},
+				{
+					name: "search_check",
+					desc: "search_check",
+				},
+				{
+					name: "search_hands_free",
+					desc: "search_hands_free",
 				},
 				{
 					name: "search_off",
@@ -6495,8 +9683,8 @@ export default {
 					desc: "security",
 				},
 				{
-					name: "security_update",
-					desc: "security_update",
+					name: "security_key",
+					desc: "security_key",
 				},
 				{
 					name: "security_update_good",
@@ -6511,8 +9699,32 @@ export default {
 					desc: "segment",
 				},
 				{
+					name: "select",
+					desc: "select",
+				},
+				{
 					name: "select_all",
 					desc: "select_all",
+				},
+				{
+					name: "select_check_box",
+					desc: "select_check_box",
+				},
+				{
+					name: "select_to_speak",
+					desc: "select_to_speak",
+				},
+				{
+					name: "select_window",
+					desc: "select_window",
+				},
+				{
+					name: "select_window_off",
+					desc: "select_window_off",
+				},
+				{
+					name: "self_care",
+					desc: "self_care",
 				},
 				{
 					name: "self_improvement",
@@ -6529,6 +9741,10 @@ export default {
 				{
 					name: "send_and_archive",
 					desc: "send_and_archive",
+				},
+				{
+					name: "send_money",
+					desc: "send_money",
 				},
 				{
 					name: "send_time_extension",
@@ -6555,24 +9771,56 @@ export default {
 					desc: "sensors",
 				},
 				{
+					name: "sensors_krx",
+					desc: "sensors_krx",
+				},
+				{
+					name: "sensors_krx_off",
+					desc: "sensors_krx_off",
+				},
+				{
 					name: "sensors_off",
 					desc: "sensors_off",
+				},
+				{
+					name: "sentiment_calm",
+					desc: "sentiment_calm",
+				},
+				{
+					name: "sentiment_content",
+					desc: "sentiment_content",
 				},
 				{
 					name: "sentiment_dissatisfied",
 					desc: "sentiment_dissatisfied",
 				},
 				{
+					name: "sentiment_excited",
+					desc: "sentiment_excited",
+				},
+				{
+					name: "sentiment_extremely_dissatisfied",
+					desc: "sentiment_extremely_dissatisfied",
+				},
+				{
+					name: "sentiment_frustrated",
+					desc: "sentiment_frustrated",
+				},
+				{
 					name: "sentiment_neutral",
 					desc: "sentiment_neutral",
+				},
+				{
+					name: "sentiment_sad",
+					desc: "sentiment_sad",
 				},
 				{
 					name: "sentiment_satisfied",
 					desc: "sentiment_satisfied",
 				},
 				{
-					name: "sentiment_satisfied_alt",
-					desc: "sentiment_satisfied_alt",
+					name: "sentiment_stressed",
+					desc: "sentiment_stressed",
 				},
 				{
 					name: "sentiment_very_dissatisfied",
@@ -6581,6 +9829,14 @@ export default {
 				{
 					name: "sentiment_very_satisfied",
 					desc: "sentiment_very_satisfied",
+				},
+				{
+					name: "sentiment_worried",
+					desc: "sentiment_worried",
+				},
+				{
+					name: "service_toolbox",
+					desc: "service_toolbox",
 				},
 				{
 					name: "set_meal",
@@ -6595,8 +9851,20 @@ export default {
 					desc: "settings_accessibility",
 				},
 				{
+					name: "settings_account_box",
+					desc: "settings_account_box",
+				},
+				{
+					name: "settings_alert",
+					desc: "settings_alert",
+				},
+				{
 					name: "settings_applications",
 					desc: "settings_applications",
+				},
+				{
+					name: "settings_b_roll",
+					desc: "settings_b_roll",
 				},
 				{
 					name: "settings_backup_restore",
@@ -6615,8 +9883,16 @@ export default {
 					desc: "settings_cell",
 				},
 				{
+					name: "settings_cinematic_blur",
+					desc: "settings_cinematic_blur",
+				},
+				{
 					name: "settings_ethernet",
 					desc: "settings_ethernet",
+				},
+				{
+					name: "settings_heart",
+					desc: "settings_heart",
 				},
 				{
 					name: "settings_input_antenna",
@@ -6627,10 +9903,6 @@ export default {
 					desc: "settings_input_component",
 				},
 				{
-					name: "settings_input_composite",
-					desc: "settings_input_composite",
-				},
-				{
 					name: "settings_input_hdmi",
 					desc: "settings_input_hdmi",
 				},
@@ -6639,12 +9911,28 @@ export default {
 					desc: "settings_input_svideo",
 				},
 				{
+					name: "settings_motion_mode",
+					desc: "settings_motion_mode",
+				},
+				{
+					name: "settings_night_sight",
+					desc: "settings_night_sight",
+				},
+				{
 					name: "settings_overscan",
 					desc: "settings_overscan",
 				},
 				{
+					name: "settings_panorama",
+					desc: "settings_panorama",
+				},
+				{
 					name: "settings_phone",
 					desc: "settings_phone",
+				},
+				{
+					name: "settings_photo_camera",
+					desc: "settings_photo_camera",
 				},
 				{
 					name: "settings_power",
@@ -6655,24 +9943,52 @@ export default {
 					desc: "settings_remote",
 				},
 				{
-					name: "settings_suggest",
-					desc: "settings_suggest",
+					name: "settings_slow_motion",
+					desc: "settings_slow_motion",
 				},
 				{
 					name: "settings_system_daydream",
 					desc: "settings_system_daydream",
 				},
 				{
+					name: "settings_timelapse",
+					desc: "settings_timelapse",
+				},
+				{
+					name: "settings_video_camera",
+					desc: "settings_video_camera",
+				},
+				{
 					name: "settings_voice",
 					desc: "settings_voice",
+				},
+				{
+					name: "settop_component",
+					desc: "settop_component",
 				},
 				{
 					name: "severe_cold",
 					desc: "severe_cold",
 				},
 				{
+					name: "shadow",
+					desc: "shadow",
+				},
+				{
+					name: "shadow_add",
+					desc: "shadow_add",
+				},
+				{
+					name: "shadow_minus",
+					desc: "shadow_minus",
+				},
+				{
 					name: "shape_line",
 					desc: "shape_line",
+				},
+				{
+					name: "shapes",
+					desc: "shapes",
 				},
 				{
 					name: "share",
@@ -6683,20 +9999,76 @@ export default {
 					desc: "share_location",
 				},
 				{
+					name: "share_off",
+					desc: "share_off",
+				},
+				{
+					name: "share_reviews",
+					desc: "share_reviews",
+				},
+				{
+					name: "share_windows",
+					desc: "share_windows",
+				},
+				{
+					name: "sheets_rtl",
+					desc: "sheets_rtl",
+				},
+				{
+					name: "shelf_auto_hide",
+					desc: "shelf_auto_hide",
+				},
+				{
+					name: "shelf_position",
+					desc: "shelf_position",
+				},
+				{
+					name: "shelves",
+					desc: "shelves",
+				},
+				{
 					name: "shield",
 					desc: "shield",
+				},
+				{
+					name: "shield_lock",
+					desc: "shield_lock",
+				},
+				{
+					name: "shield_locked",
+					desc: "shield_locked",
 				},
 				{
 					name: "shield_moon",
 					desc: "shield_moon",
 				},
 				{
-					name: "shop",
-					desc: "shop",
+					name: "shield_person",
+					desc: "shield_person",
 				},
 				{
-					name: "shop_2",
-					desc: "shop_2",
+					name: "shield_question",
+					desc: "shield_question",
+				},
+				{
+					name: "shield_with_heart",
+					desc: "shield_with_heart",
+				},
+				{
+					name: "shield_with_house",
+					desc: "shield_with_house",
+				},
+				{
+					name: "shift",
+					desc: "shift",
+				},
+				{
+					name: "shift_lock",
+					desc: "shift_lock",
+				},
+				{
+					name: "shop",
+					desc: "shop",
 				},
 				{
 					name: "shop_two",
@@ -6719,12 +10091,20 @@ export default {
 					desc: "shopping_cart_checkout",
 				},
 				{
-					name: "short_text",
-					desc: "short_text",
+					name: "shopping_cart_off",
+					desc: "shopping_cart_off",
 				},
 				{
-					name: "shortcut",
-					desc: "shortcut",
+					name: "shoppingmode",
+					desc: "shoppingmode",
+				},
+				{
+					name: "short_stay",
+					desc: "short_stay",
+				},
+				{
+					name: "short_text",
+					desc: "short_text",
 				},
 				{
 					name: "show_chart",
@@ -6747,8 +10127,20 @@ export default {
 					desc: "shutter_speed",
 				},
 				{
+					name: "shutter_speed_add",
+					desc: "shutter_speed_add",
+				},
+				{
+					name: "shutter_speed_minus",
+					desc: "shutter_speed_minus",
+				},
+				{
 					name: "sick",
 					desc: "sick",
+				},
+				{
+					name: "side_navigation",
+					desc: "side_navigation",
 				},
 				{
 					name: "sign_language",
@@ -6759,8 +10151,24 @@ export default {
 					desc: "signal_cellular_0_bar",
 				},
 				{
+					name: "signal_cellular_1_bar",
+					desc: "signal_cellular_1_bar",
+				},
+				{
+					name: "signal_cellular_2_bar",
+					desc: "signal_cellular_2_bar",
+				},
+				{
+					name: "signal_cellular_3_bar",
+					desc: "signal_cellular_3_bar",
+				},
+				{
 					name: "signal_cellular_4_bar",
 					desc: "signal_cellular_4_bar",
+				},
+				{
+					name: "signal_cellular_add",
+					desc: "signal_cellular_add",
 				},
 				{
 					name: "signal_cellular_alt",
@@ -6783,10 +10191,6 @@ export default {
 					desc: "signal_cellular_connected_no_internet_4_bar",
 				},
 				{
-					name: "signal_cellular_no_sim",
-					desc: "signal_cellular_no_sim",
-				},
-				{
 					name: "signal_cellular_nodata",
 					desc: "signal_cellular_nodata",
 				},
@@ -6799,6 +10203,14 @@ export default {
 					desc: "signal_cellular_off",
 				},
 				{
+					name: "signal_cellular_pause",
+					desc: "signal_cellular_pause",
+				},
+				{
+					name: "signal_disconnected",
+					desc: "signal_disconnected",
+				},
+				{
 					name: "signal_wifi_0_bar",
 					desc: "signal_wifi_0_bar",
 				},
@@ -6807,32 +10219,24 @@ export default {
 					desc: "signal_wifi_4_bar",
 				},
 				{
-					name: "signal_wifi_4_bar_lock",
-					desc: "signal_wifi_4_bar_lock",
-				},
-				{
 					name: "signal_wifi_bad",
 					desc: "signal_wifi_bad",
-				},
-				{
-					name: "signal_wifi_connected_no_internet_4",
-					desc: "signal_wifi_connected_no_internet_4",
 				},
 				{
 					name: "signal_wifi_off",
 					desc: "signal_wifi_off",
 				},
 				{
-					name: "signal_wifi_statusbar_4_bar",
-					desc: "signal_wifi_statusbar_4_bar",
-				},
-				{
-					name: "signal_wifi_statusbar_connected_no_internet_4",
-					desc: "signal_wifi_statusbar_connected_no_internet_4",
+					name: "signal_wifi_statusbar_not_connected",
+					desc: "signal_wifi_statusbar_not_connected",
 				},
 				{
 					name: "signal_wifi_statusbar_null",
 					desc: "signal_wifi_statusbar_null",
+				},
+				{
+					name: "signature",
+					desc: "signature",
 				},
 				{
 					name: "signpost",
@@ -6841,10 +10245,6 @@ export default {
 				{
 					name: "sim_card",
 					desc: "sim_card",
-				},
-				{
-					name: "sim_card_alert",
-					desc: "sim_card_alert",
 				},
 				{
 					name: "sim_card_download",
@@ -6863,6 +10263,18 @@ export default {
 					desc: "skateboarding",
 				},
 				{
+					name: "skeleton",
+					desc: "skeleton",
+				},
+				{
+					name: "skillet",
+					desc: "skillet",
+				},
+				{
+					name: "skillet_cooktop",
+					desc: "skillet_cooktop",
+				},
+				{
 					name: "skip_next",
 					desc: "skip_next",
 				},
@@ -6871,8 +10283,24 @@ export default {
 					desc: "skip_previous",
 				},
 				{
+					name: "skull",
+					desc: "skull",
+				},
+				{
 					name: "sledding",
 					desc: "sledding",
+				},
+				{
+					name: "sleep_score",
+					desc: "sleep_score",
+				},
+				{
+					name: "slide_library",
+					desc: "slide_library",
+				},
+				{
+					name: "sliders",
+					desc: "sliders",
 				},
 				{
 					name: "slideshow",
@@ -6883,12 +10311,12 @@ export default {
 					desc: "slow_motion_video",
 				},
 				{
-					name: "smart_button",
-					desc: "smart_button",
-				},
-				{
 					name: "smart_display",
 					desc: "smart_display",
+				},
+				{
+					name: "smart_outlet",
+					desc: "smart_outlet",
 				},
 				{
 					name: "smart_screen",
@@ -6903,6 +10331,10 @@ export default {
 					desc: "smartphone",
 				},
 				{
+					name: "smb_share",
+					desc: "smb_share",
+				},
+				{
 					name: "smoke_free",
 					desc: "smoke_free",
 				},
@@ -6915,10 +10347,6 @@ export default {
 					desc: "sms",
 				},
 				{
-					name: "sms_failed",
-					desc: "sms_failed",
-				},
-				{
 					name: "snippet_folder",
 					desc: "snippet_folder",
 				},
@@ -6929,6 +10357,14 @@ export default {
 				{
 					name: "snowboarding",
 					desc: "snowboarding",
+				},
+				{
+					name: "snowing",
+					desc: "snowing",
+				},
+				{
+					name: "snowing_heavy",
+					desc: "snowing_heavy",
 				},
 				{
 					name: "snowmobile",
@@ -6947,6 +10383,10 @@ export default {
 					desc: "social_distance",
 				},
 				{
+					name: "social_leaderboard",
+					desc: "social_leaderboard",
+				},
+				{
 					name: "solar_power",
 					desc: "solar_power",
 				},
@@ -6963,12 +10403,32 @@ export default {
 					desc: "sos",
 				},
 				{
+					name: "sound_detection_dog_barking",
+					desc: "sound_detection_dog_barking",
+				},
+				{
+					name: "sound_detection_glass_break",
+					desc: "sound_detection_glass_break",
+				},
+				{
+					name: "sound_detection_loud_sound",
+					desc: "sound_detection_loud_sound",
+				},
+				{
+					name: "sound_sampler",
+					desc: "sound_sampler",
+				},
+				{
 					name: "soup_kitchen",
 					desc: "soup_kitchen",
 				},
 				{
-					name: "source",
-					desc: "source",
+					name: "source_environment",
+					desc: "source_environment",
+				},
+				{
+					name: "source_notes",
+					desc: "source_notes",
 				},
 				{
 					name: "south",
@@ -7031,6 +10491,18 @@ export default {
 					desc: "speaker_phone",
 				},
 				{
+					name: "special_character",
+					desc: "special_character",
+				},
+				{
+					name: "specific_gravity",
+					desc: "specific_gravity",
+				},
+				{
+					name: "speech_to_text",
+					desc: "speech_to_text",
+				},
+				{
 					name: "speed",
 					desc: "speed",
 				},
@@ -7043,12 +10515,44 @@ export default {
 					desc: "splitscreen",
 				},
 				{
+					name: "splitscreen_add",
+					desc: "splitscreen_add",
+				},
+				{
+					name: "splitscreen_bottom",
+					desc: "splitscreen_bottom",
+				},
+				{
+					name: "splitscreen_left",
+					desc: "splitscreen_left",
+				},
+				{
+					name: "splitscreen_right",
+					desc: "splitscreen_right",
+				},
+				{
+					name: "splitscreen_top",
+					desc: "splitscreen_top",
+				},
+				{
+					name: "splitscreen_vertical_add",
+					desc: "splitscreen_vertical_add",
+				},
+				{
+					name: "spo2",
+					desc: "spo2",
+				},
+				{
 					name: "spoke",
 					desc: "spoke",
 				},
 				{
 					name: "sports",
 					desc: "sports",
+				},
+				{
+					name: "sports_and_outdoors",
+					desc: "sports_and_outdoors",
 				},
 				{
 					name: "sports_bar",
@@ -7127,6 +10631,14 @@ export default {
 					desc: "sports_volleyball",
 				},
 				{
+					name: "sprinkler",
+					desc: "sprinkler",
+				},
+				{
+					name: "sprint",
+					desc: "sprint",
+				},
+				{
 					name: "square",
 					desc: "square",
 				},
@@ -7139,12 +10651,40 @@ export default {
 					desc: "ssid_chart",
 				},
 				{
+					name: "stack",
+					desc: "stack",
+				},
+				{
+					name: "stack_off",
+					desc: "stack_off",
+				},
+				{
+					name: "stack_star",
+					desc: "stack_star",
+				},
+				{
 					name: "stacked_bar_chart",
 					desc: "stacked_bar_chart",
 				},
 				{
+					name: "stacked_email",
+					desc: "stacked_email",
+				},
+				{
+					name: "stacked_inbox",
+					desc: "stacked_inbox",
+				},
+				{
 					name: "stacked_line_chart",
 					desc: "stacked_line_chart",
+				},
+				{
+					name: "stacks",
+					desc: "stacks",
+				},
+				{
+					name: "stadia_controller",
+					desc: "stadia_controller",
 				},
 				{
 					name: "stadium",
@@ -7159,28 +10699,16 @@ export default {
 					desc: "star",
 				},
 				{
-					name: "star_border",
-					desc: "star_border",
-				},
-				{
-					name: "star_border_purple500",
-					desc: "star_border_purple500",
-				},
-				{
 					name: "star_half",
 					desc: "star_half",
 				},
 				{
-					name: "star_outline",
-					desc: "star_outline",
-				},
-				{
-					name: "star_purple500",
-					desc: "star_purple500",
-				},
-				{
 					name: "star_rate",
 					desc: "star_rate",
+				},
+				{
+					name: "star_rate_half",
+					desc: "star_rate_half",
 				},
 				{
 					name: "stars",
@@ -7189,6 +10717,34 @@ export default {
 				{
 					name: "start",
 					desc: "start",
+				},
+				{
+					name: "stat_0",
+					desc: "stat_0",
+				},
+				{
+					name: "stat_1",
+					desc: "stat_1",
+				},
+				{
+					name: "stat_2",
+					desc: "stat_2",
+				},
+				{
+					name: "stat_3",
+					desc: "stat_3",
+				},
+				{
+					name: "stat_minus_1",
+					desc: "stat_minus_1",
+				},
+				{
+					name: "stat_minus_2",
+					desc: "stat_minus_2",
+				},
+				{
+					name: "stat_minus_3",
+					desc: "stat_minus_3",
 				},
 				{
 					name: "stay_current_landscape",
@@ -7207,8 +10763,56 @@ export default {
 					desc: "stay_primary_portrait",
 				},
 				{
+					name: "step",
+					desc: "step",
+				},
+				{
+					name: "step_into",
+					desc: "step_into",
+				},
+				{
+					name: "step_out",
+					desc: "step_out",
+				},
+				{
+					name: "step_over",
+					desc: "step_over",
+				},
+				{
+					name: "steppers",
+					desc: "steppers",
+				},
+				{
+					name: "steps",
+					desc: "steps",
+				},
+				{
+					name: "stethoscope",
+					desc: "stethoscope",
+				},
+				{
+					name: "stethoscope_arrow",
+					desc: "stethoscope_arrow",
+				},
+				{
+					name: "stethoscope_check",
+					desc: "stethoscope_check",
+				},
+				{
+					name: "sticky_note",
+					desc: "sticky_note",
+				},
+				{
 					name: "sticky_note_2",
 					desc: "sticky_note_2",
+				},
+				{
+					name: "stock_media",
+					desc: "stock_media",
+				},
+				{
+					name: "stockpot",
+					desc: "stockpot",
 				},
 				{
 					name: "stop",
@@ -7231,10 +10835,6 @@ export default {
 					desc: "store",
 				},
 				{
-					name: "store_mall_directory",
-					desc: "store_mall_directory",
-				},
-				{
 					name: "storefront",
 					desc: "storefront",
 				},
@@ -7251,16 +10851,36 @@ export default {
 					desc: "straighten",
 				},
 				{
+					name: "strategy",
+					desc: "strategy",
+				},
+				{
 					name: "stream",
 					desc: "stream",
+				},
+				{
+					name: "stream_apps",
+					desc: "stream_apps",
 				},
 				{
 					name: "streetview",
 					desc: "streetview",
 				},
 				{
+					name: "stress_management",
+					desc: "stress_management",
+				},
+				{
 					name: "strikethrough_s",
 					desc: "strikethrough_s",
+				},
+				{
+					name: "stroke_full",
+					desc: "stroke_full",
+				},
+				{
+					name: "stroke_partial",
+					desc: "stroke_partial",
 				},
 				{
 					name: "stroller",
@@ -7271,12 +10891,32 @@ export default {
 					desc: "style",
 				},
 				{
+					name: "styler",
+					desc: "styler",
+				},
+				{
+					name: "stylus",
+					desc: "stylus",
+				},
+				{
+					name: "stylus_laser_pointer",
+					desc: "stylus_laser_pointer",
+				},
+				{
+					name: "stylus_note",
+					desc: "stylus_note",
+				},
+				{
 					name: "subdirectory_arrow_left",
 					desc: "subdirectory_arrow_left",
 				},
 				{
 					name: "subdirectory_arrow_right",
 					desc: "subdirectory_arrow_right",
+				},
+				{
+					name: "subheader",
+					desc: "subheader",
 				},
 				{
 					name: "subject",
@@ -7307,12 +10947,24 @@ export default {
 					desc: "summarize",
 				},
 				{
+					name: "sunny",
+					desc: "sunny",
+				},
+				{
+					name: "sunny_snowing",
+					desc: "sunny_snowing",
+				},
+				{
 					name: "superscript",
 					desc: "superscript",
 				},
 				{
 					name: "supervised_user_circle",
 					desc: "supervised_user_circle",
+				},
+				{
+					name: "supervised_user_circle_off",
+					desc: "supervised_user_circle_off",
 				},
 				{
 					name: "supervisor_account",
@@ -7331,12 +10983,24 @@ export default {
 					desc: "surfing",
 				},
 				{
+					name: "surgical",
+					desc: "surgical",
+				},
+				{
 					name: "surround_sound",
 					desc: "surround_sound",
 				},
 				{
 					name: "swap_calls",
 					desc: "swap_calls",
+				},
+				{
+					name: "swap_driving_apps",
+					desc: "swap_driving_apps",
+				},
+				{
+					name: "swap_driving_apps_wheel",
+					desc: "swap_driving_apps_wheel",
 				},
 				{
 					name: "swap_horiz",
@@ -7353,6 +11017,10 @@ export default {
 				{
 					name: "swap_vertical_circle",
 					desc: "swap_vertical_circle",
+				},
+				{
+					name: "sweep",
+					desc: "sweep",
 				},
 				{
 					name: "swipe",
@@ -7395,6 +11063,18 @@ export default {
 					desc: "swipe_vertical",
 				},
 				{
+					name: "switch",
+					desc: "switch",
+				},
+				{
+					name: "switch_access",
+					desc: "switch_access",
+				},
+				{
+					name: "switch_access_2",
+					desc: "switch_access_2",
+				},
+				{
 					name: "switch_access_shortcut",
 					desc: "switch_access_shortcut",
 				},
@@ -7423,6 +11103,22 @@ export default {
 					desc: "switch_video",
 				},
 				{
+					name: "switches",
+					desc: "switches",
+				},
+				{
+					name: "sword_rose",
+					desc: "sword_rose",
+				},
+				{
+					name: "swords",
+					desc: "swords",
+				},
+				{
+					name: "symptoms",
+					desc: "symptoms",
+				},
+				{
 					name: "synagogue",
 					desc: "synagogue",
 				},
@@ -7447,16 +11143,12 @@ export default {
 					desc: "sync_problem",
 				},
 				{
-					name: "system_security_update",
-					desc: "system_security_update",
+					name: "sync_saved_locally",
+					desc: "sync_saved_locally",
 				},
 				{
-					name: "system_security_update_good",
-					desc: "system_security_update_good",
-				},
-				{
-					name: "system_security_update_warning",
-					desc: "system_security_update_warning",
+					name: "syringe",
+					desc: "syringe",
 				},
 				{
 					name: "system_update",
@@ -7471,8 +11163,40 @@ export default {
 					desc: "tab",
 				},
 				{
+					name: "tab_close",
+					desc: "tab_close",
+				},
+				{
+					name: "tab_close_right",
+					desc: "tab_close_right",
+				},
+				{
+					name: "tab_duplicate",
+					desc: "tab_duplicate",
+				},
+				{
+					name: "tab_group",
+					desc: "tab_group",
+				},
+				{
+					name: "tab_move",
+					desc: "tab_move",
+				},
+				{
+					name: "tab_new_right",
+					desc: "tab_new_right",
+				},
+				{
+					name: "tab_recent",
+					desc: "tab_recent",
+				},
+				{
 					name: "tab_unselected",
 					desc: "tab_unselected",
+				},
+				{
+					name: "table",
+					desc: "table",
 				},
 				{
 					name: "table_bar",
@@ -7483,12 +11207,24 @@ export default {
 					desc: "table_chart",
 				},
 				{
+					name: "table_chart_view",
+					desc: "table_chart_view",
+				},
+				{
+					name: "table_lamp",
+					desc: "table_lamp",
+				},
+				{
 					name: "table_restaurant",
 					desc: "table_restaurant",
 				},
 				{
 					name: "table_rows",
 					desc: "table_rows",
+				},
+				{
+					name: "table_rows_narrow",
+					desc: "table_rows_narrow",
 				},
 				{
 					name: "table_view",
@@ -7507,16 +11243,28 @@ export default {
 					desc: "tablet_mac",
 				},
 				{
+					name: "tabs",
+					desc: "tabs",
+				},
+				{
+					name: "tactic",
+					desc: "tactic",
+				},
+				{
 					name: "tag",
 					desc: "tag",
 				},
 				{
-					name: "tag_faces",
-					desc: "tag_faces",
-				},
-				{
 					name: "takeout_dining",
 					desc: "takeout_dining",
+				},
+				{
+					name: "tamper_detection_off",
+					desc: "tamper_detection_off",
+				},
+				{
+					name: "tamper_detection_on",
+					desc: "tamper_detection_on",
 				},
 				{
 					name: "tap_and_play",
@@ -7527,6 +11275,10 @@ export default {
 					desc: "tapas",
 				},
 				{
+					name: "target",
+					desc: "target",
+				},
+				{
 					name: "task",
 					desc: "task",
 				},
@@ -7535,8 +11287,20 @@ export default {
 					desc: "task_alt",
 				},
 				{
+					name: "taunt",
+					desc: "taunt",
+				},
+				{
 					name: "taxi_alert",
 					desc: "taxi_alert",
+				},
+				{
+					name: "team_dashboard",
+					desc: "team_dashboard",
+				},
+				{
+					name: "temp_preferences_eco",
+					desc: "temp_preferences_eco",
 				},
 				{
 					name: "temple_buddhist",
@@ -7547,12 +11311,16 @@ export default {
 					desc: "temple_hindu",
 				},
 				{
+					name: "tenancy",
+					desc: "tenancy",
+				},
+				{
 					name: "terminal",
 					desc: "terminal",
 				},
 				{
-					name: "terrain",
-					desc: "terrain",
+					name: "text_ad",
+					desc: "text_ad",
 				},
 				{
 					name: "text_decrease",
@@ -7561,6 +11329,10 @@ export default {
 				{
 					name: "text_fields",
 					desc: "text_fields",
+				},
+				{
+					name: "text_fields_alt",
+					desc: "text_fields_alt",
 				},
 				{
 					name: "text_format",
@@ -7595,16 +11367,64 @@ export default {
 					desc: "text_rotation_none",
 				},
 				{
+					name: "text_select_end",
+					desc: "text_select_end",
+				},
+				{
+					name: "text_select_jump_to_beginning",
+					desc: "text_select_jump_to_beginning",
+				},
+				{
+					name: "text_select_jump_to_end",
+					desc: "text_select_jump_to_end",
+				},
+				{
+					name: "text_select_move_back_character",
+					desc: "text_select_move_back_character",
+				},
+				{
+					name: "text_select_move_back_word",
+					desc: "text_select_move_back_word",
+				},
+				{
+					name: "text_select_move_down",
+					desc: "text_select_move_down",
+				},
+				{
+					name: "text_select_move_forward_character",
+					desc: "text_select_move_forward_character",
+				},
+				{
+					name: "text_select_move_forward_word",
+					desc: "text_select_move_forward_word",
+				},
+				{
+					name: "text_select_move_up",
+					desc: "text_select_move_up",
+				},
+				{
+					name: "text_select_start",
+					desc: "text_select_start",
+				},
+				{
 					name: "text_snippet",
 					desc: "text_snippet",
 				},
 				{
-					name: "textsms",
-					desc: "textsms",
+					name: "text_to_speech",
+					desc: "text_to_speech",
 				},
 				{
 					name: "texture",
 					desc: "texture",
+				},
+				{
+					name: "texture_add",
+					desc: "texture_add",
+				},
+				{
+					name: "texture_minus",
+					desc: "texture_minus",
 				},
 				{
 					name: "theater_comedy",
@@ -7615,6 +11435,26 @@ export default {
 					desc: "theaters",
 				},
 				{
+					name: "thermometer",
+					desc: "thermometer",
+				},
+				{
+					name: "thermometer_add",
+					desc: "thermometer_add",
+				},
+				{
+					name: "thermometer_gain",
+					desc: "thermometer_gain",
+				},
+				{
+					name: "thermometer_loss",
+					desc: "thermometer_loss",
+				},
+				{
+					name: "thermometer_minus",
+					desc: "thermometer_minus",
+				},
+				{
 					name: "thermostat",
 					desc: "thermostat",
 				},
@@ -7623,28 +11463,28 @@ export default {
 					desc: "thermostat_auto",
 				},
 				{
+					name: "thermostat_carbon",
+					desc: "thermostat_carbon",
+				},
+				{
+					name: "things_to_do",
+					desc: "things_to_do",
+				},
+				{
+					name: "thread_unread",
+					desc: "thread_unread",
+				},
+				{
 					name: "thumb_down",
 					desc: "thumb_down",
-				},
-				{
-					name: "thumb_down_alt",
-					desc: "thumb_down_alt",
-				},
-				{
-					name: "thumb_down_off_alt",
-					desc: "thumb_down_off_alt",
 				},
 				{
 					name: "thumb_up",
 					desc: "thumb_up",
 				},
 				{
-					name: "thumb_up_alt",
-					desc: "thumb_up_alt",
-				},
-				{
-					name: "thumb_up_off_alt",
-					desc: "thumb_up_off_alt",
+					name: "thumbnail_bar",
+					desc: "thumbnail_bar",
 				},
 				{
 					name: "thumbs_up_down",
@@ -7655,8 +11495,16 @@ export default {
 					desc: "thunderstorm",
 				},
 				{
-					name: "time_to_leave",
-					desc: "time_to_leave",
+					name: "tibia",
+					desc: "tibia",
+				},
+				{
+					name: "tibia_alt",
+					desc: "tibia_alt",
+				},
+				{
+					name: "time_auto",
+					desc: "time_auto",
 				},
 				{
 					name: "timelapse",
@@ -7675,12 +11523,20 @@ export default {
 					desc: "timer_10",
 				},
 				{
+					name: "timer_10_alt_1",
+					desc: "timer_10_alt_1",
+				},
+				{
 					name: "timer_10_select",
 					desc: "timer_10_select",
 				},
 				{
 					name: "timer_3",
 					desc: "timer_3",
+				},
+				{
+					name: "timer_3_alt_1",
+					desc: "timer_3_alt_1",
 				},
 				{
 					name: "timer_3_select",
@@ -7691,16 +11547,16 @@ export default {
 					desc: "timer_off",
 				},
 				{
-					name: "tips_and_updates",
-					desc: "tips_and_updates",
-				},
-				{
 					name: "tire_repair",
 					desc: "tire_repair",
 				},
 				{
 					name: "title",
 					desc: "title",
+				},
+				{
+					name: "toast",
+					desc: "toast",
 				},
 				{
 					name: "toc",
@@ -7731,6 +11587,50 @@ export default {
 					desc: "tonality",
 				},
 				{
+					name: "toolbar",
+					desc: "toolbar",
+				},
+				{
+					name: "tools_flat_head",
+					desc: "tools_flat_head",
+				},
+				{
+					name: "tools_installation_kit",
+					desc: "tools_installation_kit",
+				},
+				{
+					name: "tools_ladder",
+					desc: "tools_ladder",
+				},
+				{
+					name: "tools_level",
+					desc: "tools_level",
+				},
+				{
+					name: "tools_phillips",
+					desc: "tools_phillips",
+				},
+				{
+					name: "tools_pliers_wire_stripper",
+					desc: "tools_pliers_wire_stripper",
+				},
+				{
+					name: "tools_power_drill",
+					desc: "tools_power_drill",
+				},
+				{
+					name: "tooltip",
+					desc: "tooltip",
+				},
+				{
+					name: "top_panel_close",
+					desc: "top_panel_close",
+				},
+				{
+					name: "top_panel_open",
+					desc: "top_panel_open",
+				},
+				{
 					name: "topic",
 					desc: "topic",
 				},
@@ -7739,8 +11639,16 @@ export default {
 					desc: "tornado",
 				},
 				{
+					name: "total_dissolved_solids",
+					desc: "total_dissolved_solids",
+				},
+				{
 					name: "touch_app",
 					desc: "touch_app",
+				},
+				{
+					name: "touchpad_mouse",
+					desc: "touchpad_mouse",
 				},
 				{
 					name: "tour",
@@ -7751,12 +11659,32 @@ export default {
 					desc: "toys",
 				},
 				{
+					name: "toys_and_games",
+					desc: "toys_and_games",
+				},
+				{
+					name: "toys_fan",
+					desc: "toys_fan",
+				},
+				{
 					name: "track_changes",
 					desc: "track_changes",
 				},
 				{
 					name: "traffic",
 					desc: "traffic",
+				},
+				{
+					name: "trail_length",
+					desc: "trail_length",
+				},
+				{
+					name: "trail_length_medium",
+					desc: "trail_length_medium",
+				},
+				{
+					name: "trail_length_short",
+					desc: "trail_length_short",
 				},
 				{
 					name: "train",
@@ -7787,12 +11715,44 @@ export default {
 					desc: "transit_enterexit",
 				},
 				{
+					name: "transition_chop",
+					desc: "transition_chop",
+				},
+				{
+					name: "transition_dissolve",
+					desc: "transition_dissolve",
+				},
+				{
+					name: "transition_fade",
+					desc: "transition_fade",
+				},
+				{
+					name: "transition_push",
+					desc: "transition_push",
+				},
+				{
+					name: "transition_slide",
+					desc: "transition_slide",
+				},
+				{
 					name: "translate",
 					desc: "translate",
 				},
 				{
+					name: "transportation",
+					desc: "transportation",
+				},
+				{
+					name: "travel",
+					desc: "travel",
+				},
+				{
 					name: "travel_explore",
 					desc: "travel_explore",
+				},
+				{
+					name: "travel_luggage_and_bags",
+					desc: "travel_luggage_and_bags",
 				},
 				{
 					name: "trending_down",
@@ -7807,20 +11767,32 @@ export default {
 					desc: "trending_up",
 				},
 				{
+					name: "trip",
+					desc: "trip",
+				},
+				{
 					name: "trip_origin",
 					desc: "trip_origin",
+				},
+				{
+					name: "trolley",
+					desc: "trolley",
+				},
+				{
+					name: "trophy",
+					desc: "trophy",
 				},
 				{
 					name: "troubleshoot",
 					desc: "troubleshoot",
 				},
 				{
-					name: "try",
-					desc: "try",
-				},
-				{
 					name: "tsunami",
 					desc: "tsunami",
+				},
+				{
+					name: "tsv",
+					desc: "tsv",
 				},
 				{
 					name: "tty",
@@ -7829,10 +11801,6 @@ export default {
 				{
 					name: "tune",
 					desc: "tune",
-				},
-				{
-					name: "tungsten",
-					desc: "tungsten",
 				},
 				{
 					name: "turn_left",
@@ -7859,20 +11827,44 @@ export default {
 					desc: "turn_slight_right",
 				},
 				{
-					name: "turned_in",
-					desc: "turned_in",
-				},
-				{
-					name: "turned_in_not",
-					desc: "turned_in_not",
-				},
-				{
 					name: "tv",
 					desc: "tv",
 				},
 				{
+					name: "tv_gen",
+					desc: "tv_gen",
+				},
+				{
+					name: "tv_guide",
+					desc: "tv_guide",
+				},
+				{
 					name: "tv_off",
 					desc: "tv_off",
+				},
+				{
+					name: "tv_options_edit_channels",
+					desc: "tv_options_edit_channels",
+				},
+				{
+					name: "tv_options_input_settings",
+					desc: "tv_options_input_settings",
+				},
+				{
+					name: "tv_remote",
+					desc: "tv_remote",
+				},
+				{
+					name: "tv_signin",
+					desc: "tv_signin",
+				},
+				{
+					name: "tv_with_assistant",
+					desc: "tv_with_assistant",
+				},
+				{
+					name: "two_pager",
+					desc: "two_pager",
 				},
 				{
 					name: "two_wheeler",
@@ -7889,6 +11881,14 @@ export default {
 				{
 					name: "u_turn_right",
 					desc: "u_turn_right",
+				},
+				{
+					name: "ulna_radius",
+					desc: "ulna_radius",
+				},
+				{
+					name: "ulna_radius_alt",
+					desc: "ulna_radius_alt",
 				},
 				{
 					name: "umbrella",
@@ -7919,6 +11919,42 @@ export default {
 					desc: "unfold_more_double",
 				},
 				{
+					name: "ungroup",
+					desc: "ungroup",
+				},
+				{
+					name: "universal_currency",
+					desc: "universal_currency",
+				},
+				{
+					name: "universal_currency_alt",
+					desc: "universal_currency_alt",
+				},
+				{
+					name: "universal_local",
+					desc: "universal_local",
+				},
+				{
+					name: "unknown_2",
+					desc: "unknown_2",
+				},
+				{
+					name: "unknown_5",
+					desc: "unknown_5",
+				},
+				{
+					name: "unknown_document",
+					desc: "unknown_document",
+				},
+				{
+					name: "unknown_med",
+					desc: "unknown_med",
+				},
+				{
+					name: "unlicense",
+					desc: "unlicense",
+				},
+				{
 					name: "unpublished",
 					desc: "unpublished",
 				},
@@ -7947,8 +11983,16 @@ export default {
 					desc: "upload",
 				},
 				{
+					name: "upload_2",
+					desc: "upload_2",
+				},
+				{
 					name: "upload_file",
 					desc: "upload_file",
+				},
+				{
+					name: "urology",
+					desc: "urology",
 				},
 				{
 					name: "usb",
@@ -7959,8 +12003,20 @@ export default {
 					desc: "usb_off",
 				},
 				{
+					name: "user_attributes",
+					desc: "user_attributes",
+				},
+				{
 					name: "vaccines",
 					desc: "vaccines",
+				},
+				{
+					name: "vacuum",
+					desc: "vacuum",
+				},
+				{
+					name: "valve",
+					desc: "valve",
 				},
 				{
 					name: "vape_free",
@@ -7969,6 +12025,26 @@ export default {
 				{
 					name: "vaping_rooms",
 					desc: "vaping_rooms",
+				},
+				{
+					name: "variable_add",
+					desc: "variable_add",
+				},
+				{
+					name: "variable_insert",
+					desc: "variable_insert",
+				},
+				{
+					name: "variable_remove",
+					desc: "variable_remove",
+				},
+				{
+					name: "variables",
+					desc: "variables",
+				},
+				{
+					name: "ventilator",
+					desc: "ventilator",
 				},
 				{
 					name: "verified",
@@ -8023,6 +12099,10 @@ export default {
 					desc: "video_camera_front",
 				},
 				{
+					name: "video_camera_front_off",
+					desc: "video_camera_front_off",
+				},
+				{
 					name: "video_chat",
 					desc: "video_chat",
 				},
@@ -8037,6 +12117,10 @@ export default {
 				{
 					name: "video_library",
 					desc: "video_library",
+				},
+				{
+					name: "video_search",
+					desc: "video_search",
 				},
 				{
 					name: "video_settings",
@@ -8079,6 +12163,10 @@ export default {
 					desc: "view_column",
 				},
 				{
+					name: "view_column_2",
+					desc: "view_column_2",
+				},
+				{
 					name: "view_comfy",
 					desc: "view_comfy",
 				},
@@ -8109,6 +12197,10 @@ export default {
 				{
 					name: "view_in_ar",
 					desc: "view_in_ar",
+				},
+				{
+					name: "view_in_ar_off",
+					desc: "view_in_ar_off",
 				},
 				{
 					name: "view_kanban",
@@ -8155,8 +12247,16 @@ export default {
 					desc: "visibility",
 				},
 				{
+					name: "visibility_lock",
+					desc: "visibility_lock",
+				},
+				{
 					name: "visibility_off",
 					desc: "visibility_off",
+				},
+				{
+					name: "vital_signs",
+					desc: "vital_signs",
 				},
 				{
 					name: "voice_chat",
@@ -8165,6 +12265,10 @@ export default {
 				{
 					name: "voice_over_off",
 					desc: "voice_over_off",
+				},
+				{
+					name: "voice_selection",
+					desc: "voice_selection",
 				},
 				{
 					name: "voicemail",
@@ -8177,6 +12281,10 @@ export default {
 				{
 					name: "volume_down",
 					desc: "volume_down",
+				},
+				{
+					name: "volume_down_alt",
+					desc: "volume_down_alt",
 				},
 				{
 					name: "volume_mute",
@@ -8195,8 +12303,16 @@ export default {
 					desc: "volunteer_activism",
 				},
 				{
+					name: "voting_chip",
+					desc: "voting_chip",
+				},
+				{
 					name: "vpn_key",
 					desc: "vpn_key",
+				},
+				{
+					name: "vpn_key_alert",
+					desc: "vpn_key_alert",
 				},
 				{
 					name: "vpn_key_off",
@@ -8207,8 +12323,24 @@ export default {
 					desc: "vpn_lock",
 				},
 				{
+					name: "vr180_create2d",
+					desc: "vr180_create2d",
+				},
+				{
+					name: "vr180_create2d_off",
+					desc: "vr180_create2d_off",
+				},
+				{
 					name: "vrpano",
 					desc: "vrpano",
+				},
+				{
+					name: "wall_art",
+					desc: "wall_art",
+				},
+				{
+					name: "wall_lamp",
+					desc: "wall_lamp",
 				},
 				{
 					name: "wallet",
@@ -8219,6 +12351,14 @@ export default {
 					desc: "wallpaper",
 				},
 				{
+					name: "wallpaper_slideshow",
+					desc: "wallpaper_slideshow",
+				},
+				{
+					name: "ward",
+					desc: "ward",
+				},
+				{
 					name: "warehouse",
 					desc: "warehouse",
 				},
@@ -8227,8 +12367,8 @@ export default {
 					desc: "warning",
 				},
 				{
-					name: "warning_amber",
-					desc: "warning_amber",
+					name: "warning_off",
+					desc: "warning_off",
 				},
 				{
 					name: "wash",
@@ -8239,24 +12379,88 @@ export default {
 					desc: "watch",
 				},
 				{
-					name: "watch_later",
-					desc: "watch_later",
+					name: "watch_button_press",
+					desc: "watch_button_press",
 				},
 				{
 					name: "watch_off",
 					desc: "watch_off",
 				},
 				{
+					name: "watch_screentime",
+					desc: "watch_screentime",
+				},
+				{
+					name: "watch_wake",
+					desc: "watch_wake",
+				},
+				{
 					name: "water",
 					desc: "water",
+				},
+				{
+					name: "water_bottle",
+					desc: "water_bottle",
+				},
+				{
+					name: "water_bottle_large",
+					desc: "water_bottle_large",
 				},
 				{
 					name: "water_damage",
 					desc: "water_damage",
 				},
 				{
+					name: "water_do",
+					desc: "water_do",
+				},
+				{
 					name: "water_drop",
 					desc: "water_drop",
+				},
+				{
+					name: "water_ec",
+					desc: "water_ec",
+				},
+				{
+					name: "water_full",
+					desc: "water_full",
+				},
+				{
+					name: "water_heater",
+					desc: "water_heater",
+				},
+				{
+					name: "water_lock",
+					desc: "water_lock",
+				},
+				{
+					name: "water_loss",
+					desc: "water_loss",
+				},
+				{
+					name: "water_lux",
+					desc: "water_lux",
+				},
+				{
+					name: "water_medium",
+					desc: "water_medium",
+				},
+				{
+					name: "water_orp",
+					desc: "water_orp",
+				},
+				{
+					name: "water_ph",
+					desc: "water_ph",
+				},
+				{
+					name: "water_pump",
+					desc: "water_pump",
+				},
+				{
+					name: "water_voc",
+					desc: "water_voc",
 				},
 				{
 					name: "waterfall_chart",
@@ -8273,10 +12477,6 @@ export default {
 				{
 					name: "wb_auto",
 					desc: "wb_auto",
-				},
-				{
-					name: "wb_cloudy",
-					desc: "wb_cloudy",
 				},
 				{
 					name: "wb_incandescent",
@@ -8303,6 +12503,18 @@ export default {
 					desc: "wc",
 				},
 				{
+					name: "weather_hail",
+					desc: "weather_hail",
+				},
+				{
+					name: "weather_mix",
+					desc: "weather_mix",
+				},
+				{
+					name: "weather_snowy",
+					desc: "weather_snowy",
+				},
+				{
 					name: "web",
 					desc: "web",
 				},
@@ -8319,12 +12531,20 @@ export default {
 					desc: "web_stories",
 				},
 				{
+					name: "web_traffic",
+					desc: "web_traffic",
+				},
+				{
 					name: "webhook",
 					desc: "webhook",
 				},
 				{
 					name: "weekend",
 					desc: "weekend",
+				},
+				{
+					name: "weight",
+					desc: "weight",
 				},
 				{
 					name: "west",
@@ -8345,6 +12565,10 @@ export default {
 				{
 					name: "widgets",
 					desc: "widgets",
+				},
+				{
+					name: "width",
+					desc: "width",
 				},
 				{
 					name: "width_full",
@@ -8371,8 +12595,20 @@ export default {
 					desc: "wifi_2_bar",
 				},
 				{
+					name: "wifi_add",
+					desc: "wifi_add",
+				},
+				{
 					name: "wifi_calling",
 					desc: "wifi_calling",
+				},
+				{
+					name: "wifi_calling_1",
+					desc: "wifi_calling_1",
+				},
+				{
+					name: "wifi_calling_2",
+					desc: "wifi_calling_2",
 				},
 				{
 					name: "wifi_calling_3",
@@ -8387,8 +12623,16 @@ export default {
 					desc: "wifi_find",
 				},
 				{
+					name: "wifi_home",
+					desc: "wifi_home",
+				},
+				{
 					name: "wifi_lock",
 					desc: "wifi_lock",
+				},
+				{
+					name: "wifi_notification",
+					desc: "wifi_notification",
 				},
 				{
 					name: "wifi_off",
@@ -8401,6 +12645,10 @@ export default {
 				{
 					name: "wifi_protected_setup",
 					desc: "wifi_protected_setup",
+				},
+				{
+					name: "wifi_proxy",
+					desc: "wifi_proxy",
 				},
 				{
 					name: "wifi_tethering",
@@ -8423,6 +12671,18 @@ export default {
 					desc: "window",
 				},
 				{
+					name: "window_closed",
+					desc: "window_closed",
+				},
+				{
+					name: "window_open",
+					desc: "window_open",
+				},
+				{
+					name: "window_sensor",
+					desc: "window_sensor",
+				},
+				{
 					name: "wine_bar",
 					desc: "wine_bar",
 				},
@@ -8439,16 +12699,16 @@ export default {
 					desc: "work",
 				},
 				{
+					name: "work_alert",
+					desc: "work_alert",
+				},
+				{
 					name: "work_history",
 					desc: "work_history",
 				},
 				{
-					name: "work_off",
-					desc: "work_off",
-				},
-				{
-					name: "work_outline",
-					desc: "work_outline",
+					name: "work_update",
+					desc: "work_update",
 				},
 				{
 					name: "workspace_premium",
@@ -8459,8 +12719,16 @@ export default {
 					desc: "workspaces",
 				},
 				{
+					name: "wounds_injuries",
+					desc: "wounds_injuries",
+				},
+				{
 					name: "wrap_text",
 					desc: "wrap_text",
+				},
+				{
+					name: "wrist",
+					desc: "wrist",
 				},
 				{
 					name: "wrong_location",
@@ -8475,8 +12743,28 @@ export default {
 					desc: "yard",
 				},
 				{
+					name: "your_trips",
+					desc: "your_trips",
+				},
+				{
+					name: "youtube_activity",
+					desc: "youtube_activity",
+				},
+				{
 					name: "youtube_searched_for",
 					desc: "youtube_searched_for",
+				},
+				{
+					name: "zone_person_alert",
+					desc: "zone_person_alert",
+				},
+				{
+					name: "zone_person_idle",
+					desc: "zone_person_idle",
+				},
+				{
+					name: "zone_person_urgent",
+					desc: "zone_person_urgent",
 				},
 				{
 					name: "zoom_in",
@@ -8495,7 +12783,7 @@ export default {
 					desc: "zoom_out_map",
 				},
 			],
-			size: 2122,
+			size: 3194,
 		},
 		{
 			name: "箭头",
@@ -8678,6 +12966,7 @@ export default {
 		{
 			name: "建筑",
 			namee: "Buildings",
+			set: "sc",
 			icons: [
 				{
 					name: "home-heart",
@@ -8777,6 +13066,7 @@ export default {
 		{
 			name: "商务",
 			namee: "Business",
+			set: "sc",
 			icons: [
 				{
 					name: "attachment",
@@ -8883,7 +13173,7 @@ export default {
 					desc: "date,plan,schedule,agenda,check-in,punch,日历,日期,月份,计划,日程,时间表,签到,打卡",
 					type: "both",
 				},
-				{ name: "copyright", desc: "版权", type: "line" },
+				{ name: "copyright", desc: "版权", type: "both" },
 				{
 					name: "calendar-2",
 					desc: "date,plan,schedule,agenda,日历,日期,月份,计划,日程,时间表",
@@ -9176,6 +13466,7 @@ export default {
 		{
 			name: "社交",
 			namee: "Communication",
+			set: "sc",
 			icons: [
 				{
 					name: "chat-4",
@@ -9330,6 +13621,7 @@ export default {
 		{
 			name: "设计",
 			namee: "Design",
+			set: "sc",
 			icons: [
 				{ name: "edit", desc: "pencil,铅笔,编辑", type: "both" },
 				{ name: "artboard", desc: "grid,crop,画板,裁切", type: "both" },
@@ -9529,6 +13821,7 @@ export default {
 		{
 			name: "开发",
 			namee: "Development",
+			set: "sc",
 			icons: [
 				{ name: "bug-2", desc: "虫子", type: "both" },
 				{ name: "css3", desc: "css,web,styles", type: "both" },
@@ -9614,6 +13907,7 @@ export default {
 		{
 			name: "设备",
 			namee: "Device",
+			set: "sc",
 			icons: [
 				{ name: "keyboard", desc: "input,键盘,输入", type: "both" },
 				{ name: "u-disk", desc: "U盘,优盘", type: "both" },
@@ -9806,6 +14100,7 @@ export default {
 		{
 			name: "文档",
 			namee: "Document",
+			set: "sc",
 			icons: [
 				{
 					name: "folder-open",
@@ -10212,6 +14507,7 @@ export default {
 		{
 			name: "编辑",
 			namee: "Editor",
+			set: "sc",
 			icons: [
 				{
 					name: "indent-increase",
@@ -10470,6 +14766,7 @@ export default {
 		{
 			name: "金融",
 			namee: "Finance",
+			set: "sc",
 			icons: [
 				{ name: "gift", desc: "present,礼物", type: "both" },
 				{
@@ -10761,6 +15058,7 @@ export default {
 		{
 			name: "食物",
 			namee: "Food",
+			set: "sc",
 			icons: [
 				{ name: "cake", desc: "anniversary,蛋糕", type: "both" },
 				{
@@ -10793,6 +15091,7 @@ export default {
 		{
 			name: "医药",
 			namee: "Health & Medical",
+			set: "sc",
 			icons: [
 				{ name: "capsule", desc: "medicine, 胶囊,药", type: "both" },
 				{ name: "dossier", desc: "病例", type: "both" },
@@ -10886,6 +15185,7 @@ export default {
 		{
 			name: "商标",
 			namee: "Logos",
+			set: "sc",
 			icons: [
 				{ name: "windows", desc: "microsoft,窗户,微软", type: "line" },
 				{
@@ -11058,13 +15358,14 @@ export default {
 		{
 			name: "地图",
 			namee: "Map",
+			set: "sc",
 			icons: [
 				{
 					name: "suitcase-2",
 					desc: "travel,旅行,行李箱,拉杆箱",
 					type: "both",
 				},
-				{ name: "guide", desc: "path,指引,路线", type: "fill" },
+				{ name: "guide", desc: "path,指引,路线", type: "line" },
 				{ name: "bus-2", desc: "大巴,巴士", type: "both" },
 				{ name: "bike", desc: "自行车", type: "both" },
 				{ name: "charging-pile", desc: "充电桩", type: "both" },
@@ -11266,6 +15567,7 @@ export default {
 		{
 			name: "媒体",
 			namee: "Media",
+			set: "sc",
 			icons: [
 				{ name: "play-circle", desc: "start,播放,开始", type: "both" },
 				{ name: "pause-circle", desc: "暂停", type: "both" },
@@ -11282,6 +15584,7 @@ export default {
 		{
 			name: "系统",
 			namee: "System",
+			set: "sc",
 			icons: [
 				{ name: "zoom-out", desc: "缩小,放大镜", type: "both" },
 				{
@@ -11316,9 +15619,9 @@ export default {
 					desc: "edit,gear,preferences,偏好设置,编辑,齿轮",
 					type: "both",
 				},
-				{ name: "share", desc: "sharing,分享,转发", type: "fill" },
+				{ name: "share", desc: "sharing,分享,转发", type: "" },
 				{ name: "upload", desc: "send,上传,发送", type: "" },
-				{ name: "eye", desc: "watch,view,眼睛,查看", type: "fill" },
+				{ name: "eye", desc: "watch,view,眼睛,查看", type: "line" },
 				{ name: "zoom-in", desc: "放大,放大镜", type: "both" },
 			],
 			size: 13,
@@ -11326,23 +15629,19 @@ export default {
 		{
 			name: "表情",
 			namee: "User & Faces",
+			set: "sc",
 			icons: [
 				{ name: "user", desc: "用户,person,people", type: "both" },
 				{ name: "user-2", desc: "用户,person,people", type: "both" },
 				{
 					name: "team",
 					desc: "团队,小组,群主,person,people",
-					type: "fill",
+					type: "line",
 				},
 				{
 					name: "user-unfollow",
 					desc: "person,people,rejected,用户,取消关注,拒绝,错误",
 					type: "both",
-				},
-				{
-					name: "skull-2",
-					desc: "ghost,horror,thriller,骷髅,鬼怪,恐惧,恐怖",
-					type: "line",
 				},
 				{
 					name: "user-shared",
@@ -11357,28 +15656,23 @@ export default {
 				{
 					name: "user-heart",
 					desc: "用户,关注,person,people",
-					type: "line",
+					type: "fill",
 				},
-				{ name: "user-voice", desc: "用户,录音,演讲", type: "fill" },
-				{
-					name: "criminal",
-					desc: "horror,thriller,罪犯,犯罪,恐怖",
-					type: "line",
-				},
+				{ name: "user-voice", desc: "用户,录音,演讲", type: "line" },
 				{
 					name: "user-smile",
 					desc: "用户,微笑,person,people",
-					type: "line",
+					type: "fill",
 				},
 				{
 					name: "user-settings",
 					desc: "admin,用户,设置,管理员,person,people",
-					type: "fill",
+					type: "line",
 				},
 				{
 					name: "user-follow",
 					desc: "关注,person,people",
-					type: "line",
+					type: "fill",
 				},
 				{
 					name: "user-received",
@@ -11388,21 +15682,23 @@ export default {
 				{
 					name: "user-add",
 					desc: "用户,添加,新增,person,people",
-					type: "line",
+					type: "fill",
 				},
-				{ name: "travesti", desc: "女人,女性", type: "line" },
+				{ name: "travesti", desc: "女人,女性", type: "fill" },
 			],
 			size: 16,
 		},
 		{
 			name: "天气",
 			namee: "Weather",
+			set: "sc",
 			icons: [{ name: "fire", desc: "flame,hot,火,热门", type: "both" }],
 			size: 1,
 		},
 		{
 			name: "其它",
 			namee: "Others",
+			set: "sc",
 			icons: [
 				{ name: "bad", desc: "bad", type: "both" },
 				{ name: "good", desc: "good", type: "both" },
@@ -11414,11 +15710,10 @@ export default {
 				{ name: "windows_line", desc: "windows_line", type: "" },
 				{ name: "office", desc: "office", type: "both" },
 				{ name: "location", desc: "location", type: "both" },
-				{ name: "delete-2", desc: "delete-2", type: "both" },
 				{ name: "place", desc: "place", type: "" },
 				{ name: "pear", desc: "pear", type: "" },
 				{ name: "error", desc: "error", type: "" },
-				{ name: "info", desc: "info", type: "fill" },
+				{ name: "info", desc: "info", type: "line" },
 				{ name: "remove", desc: "remove", type: "" },
 				{ name: "success", desc: "success", type: "" },
 				{ name: "suitcase-1", desc: "suitcase-1", type: "" },
@@ -11502,11 +15797,11 @@ export default {
 					type: "both",
 				},
 				{ name: "wangwang", desc: "wangwang", type: "" },
-				{ name: "windows-2", desc: "windows-2", type: "line" },
+				{ name: "windows-2", desc: "windows-2", type: "fill" },
 				{ name: "wangxin", desc: "wangxin", type: "" },
-				{ name: "setings-2", desc: "setings-2", type: "fill" },
-				{ name: "goblet-3", desc: "goblet-3", type: "fill" },
-				{ name: "goblet-4", desc: "goblet-4", type: "fill" },
+				{ name: "setings-2", desc: "setings-2", type: "line" },
+				{ name: "goblet-3", desc: "goblet-3", type: "line" },
+				{ name: "goblet-4", desc: "goblet-4", type: "line" },
 				{ name: "grape", desc: "grape", type: "" },
 				{ name: "microphone", desc: "microphone", type: "" },
 				{ name: "position", desc: "position", type: "" },
@@ -11515,47 +15810,41 @@ export default {
 				{ name: "monitor", desc: "monitor", type: "" },
 				{ name: "goods", desc: "goods", type: "both" },
 				{ name: "baseball", desc: "baseball", type: "" },
-				{ name: "coffee", desc: "coffee", type: "fill" },
-				{ name: "coffee-cup", desc: "coffee-cup", type: "fill" },
+				{ name: "coffee", desc: "coffee", type: "line" },
+				{ name: "coffee-cup", desc: "coffee-cup", type: "line" },
 				{
 					name: "presentation-2",
 					desc: "presentation-2",
-					type: "fill",
+					type: "line",
 				},
 				{
 					name: "presentation-1",
 					desc: "presentation-1",
-					type: "fill",
+					type: "line",
 				},
-				{ name: "copy-document", desc: "copy-document", type: "" },
 				{
 					name: "presentation-3",
 					desc: "presentation-3",
-					type: "fill",
+					type: "line",
 				},
-				{ name: "goblet-2", desc: "goblet-2", type: "fill" },
-				{ name: "goblet-1", desc: "goblet-1", type: "fill" },
+				{ name: "goblet-2", desc: "goblet-2", type: "line" },
+				{ name: "goblet-1", desc: "goblet-1", type: "line" },
 				{
 					name: "football",
 					desc: "sports,运动,足球,体育",
-					type: "fill",
+					type: "line",
 				},
-				{ name: "food", desc: "food", type: "fill" },
+				{ name: "food", desc: "food", type: "line" },
 				{ name: "menu-hide", desc: "menu-hide", type: "" },
 				{ name: "menu-show", desc: "menu-show", type: "" },
-				{
-					name: "indent-decrease-2",
-					desc: "indent-decrease-2",
-					type: "",
-				},
-				{ name: "spread-down", desc: "spread-down", type: "fill" },
-				{ name: "spread-left", desc: "spread-left", type: "fill" },
-				{ name: "spread-right", desc: "spread-right", type: "fill" },
-				{ name: "spread-up", desc: "spread-up", type: "fill" },
-				{ name: "retract-left", desc: "retract-left", type: "fill" },
-				{ name: "retract-up", desc: "retract-up", type: "fill" },
-				{ name: "retract-down", desc: "retract-down", type: "fill" },
-				{ name: "retract-right", desc: "retract-right", type: "fill" },
+				{ name: "spread-down", desc: "spread-down", type: "line" },
+				{ name: "spread-left", desc: "spread-left", type: "line" },
+				{ name: "spread-right", desc: "spread-right", type: "line" },
+				{ name: "spread-up", desc: "spread-up", type: "line" },
+				{ name: "retract-left", desc: "retract-left", type: "line" },
+				{ name: "retract-up", desc: "retract-up", type: "line" },
+				{ name: "retract-down", desc: "retract-down", type: "line" },
+				{ name: "retract-right", desc: "retract-right", type: "line" },
 				{ name: "key", desc: "password,钥匙,密码", type: "both" },
 				{ name: "alarm-clock", desc: "alarm-clock", type: "both" },
 				{ name: "user-1", desc: "user-1", type: "both" },
@@ -11576,8 +15865,8 @@ export default {
 				},
 				{ name: "tenpay", desc: "tenpay", type: "both" },
 				{ name: "x", desc: "x", type: "both" },
-				{ name: "route-2", desc: "route-2", type: "line" },
-				{ name: "guide-2", desc: "guide-2", type: "fill" },
+				{ name: "route-2", desc: "route-2", type: "fill" },
+				{ name: "guide-2", desc: "guide-2", type: "line" },
 				{ name: "file-xls", desc: "file-xls", type: "both" },
 				{ name: "file-doc", desc: "file-doc", type: "both" },
 				{ name: "bar-chart-3", desc: "bar-chart-3", type: "both" },
@@ -11655,7 +15944,7 @@ export default {
 				{ name: "arrow-down-3", desc: "arrow-down-3", type: "both" },
 				{ name: "arrow-down-1", desc: "arrow-down-1", type: "both" },
 				{ name: "arrow-down-2", desc: "arrow-down-2", type: "both" },
-				{ name: "help", desc: "help", type: "fill" },
+				{ name: "help", desc: "help", type: "line" },
 				{ name: "remind", desc: "remind", type: "both" },
 				{ name: "remind-circle", desc: "remind-circle", type: "both" },
 				{
@@ -11684,7 +15973,7 @@ export default {
 				{
 					name: "customer-service-24hour",
 					desc: "customer-service-24hour",
-					type: "line",
+					type: "fill",
 				},
 				{ name: "customization", desc: "customization", type: "both" },
 				{
@@ -11695,33 +15984,33 @@ export default {
 				{ name: "discount", desc: "discount", type: "both" },
 				{ name: "email", desc: "email", type: "both" },
 				{ name: "fair", desc: "fair", type: "" },
-				{ name: "global-2", desc: "global-2", type: "fill" },
-				{ name: "honor", desc: "honor", type: "fill" },
+				{ name: "global-2", desc: "global-2", type: "line" },
+				{ name: "honor", desc: "honor", type: "line" },
 				{ name: "palette-1", desc: "palette-1", type: "both" },
 				{ name: "crown", desc: "crown", type: "both" },
 				{ name: "layers", desc: "layers", type: "both" },
 				{ name: "phone-2", desc: "phone-2", type: "both" },
 				{ name: "picture", desc: "picture", type: "both" },
 				{ name: "pin", desc: "pin", type: "both" },
-				{ name: "protection", desc: "protection", type: "line" },
+				{ name: "protection", desc: "protection", type: "fill" },
 				{ name: "response", desc: "response", type: "both" },
 				{ name: "shopping", desc: "shopping", type: "both" },
-				{ name: "security-1", desc: "security-1", type: "fill" },
-				{ name: "book-1", desc: "book-1", type: "fill" },
+				{ name: "security-1", desc: "security-1", type: "line" },
+				{ name: "book-1", desc: "book-1", type: "line" },
 				{
 					name: "presentation-4",
 					desc: "presentation-4",
-					type: "fill",
+					type: "line",
 				},
 				{ name: "top-raning", desc: "top-raning", type: "both" },
-				{ name: "arrow-up-4", desc: "arrow-up-4", type: "fill" },
-				{ name: "degree", desc: "degree", type: "fill" },
-				{ name: "picture-1", desc: "picture-1", type: "fill" },
-				{ name: "security", desc: "security", type: "fill" },
-				{ name: "database-3", desc: "database-3", type: "fill" },
-				{ name: "diamond-2", desc: "diamond-2", type: "fill" },
+				{ name: "arrow-up-4", desc: "arrow-up-4", type: "line" },
+				{ name: "degree", desc: "degree", type: "line" },
+				{ name: "picture-1", desc: "picture-1", type: "line" },
+				{ name: "security", desc: "security", type: "line" },
+				{ name: "database-3", desc: "database-3", type: "line" },
+				{ name: "diamond-2", desc: "diamond-2", type: "line" },
 				{ name: "services-icon", desc: "services-icon", type: "" },
-				{ name: "remind-2", desc: "remind-2", type: "fill" },
+				{ name: "remind-2", desc: "remind-2", type: "line" },
 			],
 			size: 182,
 		},

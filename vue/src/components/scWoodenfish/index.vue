@@ -1,14 +1,14 @@
 <template>
     <div class="sc-woodenfish">
         <div class="sc-woodenfish_container">
-            <img class="sc-woodenfish_img" :src="image" alt="木鱼" @click="click"
+            <img class="sc-woodenfish_img" :src="getUrl(image)" alt="木鱼" @click="click"
                 :class="animate ? 'sc-woodenfish_size' : ''" />
             <div class="sc-woodenfish_text">
                 <p v-for="text in textList" :key="text">{{ text }}</p>
             </div>
         </div>
         <audio ref="audio" class="audio">
-            <source :src="audio" />
+            <source :src="getUrl(audio)" />
         </audio>
     </div>
 </template>
@@ -16,8 +16,8 @@
 <script>
 export default {
     props: {
-        image: { type: String, default: '@/assets/woodenfish/wooden_fish.png' },
-        audio: { type: String, default: '@/assets/woodenfish/wooden_fish.wav' },
+        image: { type: String, default: '/data/woodenfish/wooden_fish.png' },
+        audio: { type: String, default: '/data/woodenfish/wooden_fish.wav' },
         bgAudio: { type: String, default: '' },
     },
     data() {
@@ -34,11 +34,20 @@ export default {
     methods: {
         init() {
         },
+        getUrl(url) {
+            if (url.startsWith('/')) {
+                return this.$CONFIG.SERVER_URL + url;
+            }
+            return url;
+        },
         changeSize() {
             this.animate = true;
             setTimeout(() => { this.animate = false; }, 300)
         },
         appendText() {
+            // if (this.textList.length > 10) {
+            //     this.textList.shift();
+            // }
             this.textList.push('功德 +1');
         },
         playAudio() {
