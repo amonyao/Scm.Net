@@ -6,6 +6,7 @@ const scm = {};
 
 scm.DEF_INT = 0;
 scm.SYS_ID = "1000000000000000001";
+scm.DEF_AVATAR = '/data/avatar/0.png';
 
 scm.REGEX_ID = /^[1-9]\d{15,18}$/;
 scm.REGEX_INT = /^[1-9]\d*$/;
@@ -19,6 +20,13 @@ scm.OPTION_ALL_INT = { label: "所有", id: "0", value: 0 };
 scm.OPTION_ONE_INT = { label: "请选择", id: "0", value: 0 };
 
 scm.catch = [];
+
+scm.get_avatar = function (user) {
+	if (!user || !user.avatar) {
+		return scm.DEF_AVATAR;
+	}
+	return user.avatar;
+};
 
 scm.is_valid_id = function (text) {
 	return scm.REGEX_ID.test(text);
@@ -101,7 +109,7 @@ scm.status_list = function (dom, http, list, status) {
 				dom.$alert(res.message, "提示", { type: "error" });
 			}
 		})
-		.catch(() => {});
+		.catch(() => { });
 };
 
 scm.delete_item = async function (dom, http, data) {
@@ -139,7 +147,7 @@ scm.delete_list = function (dom, http, list) {
 				dom.$alert(res.message, "提示", { type: "error" });
 			}
 		})
-		.catch(() => {});
+		.catch(() => { });
 };
 
 scm.getDate = function () {

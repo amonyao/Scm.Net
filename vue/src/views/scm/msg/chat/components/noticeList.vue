@@ -1,5 +1,5 @@
 <template>
-    <sc-list :data="userList">
+    <sc-list :data="noticeList">
     </sc-list>
 </template>
 <script>
@@ -7,11 +7,14 @@ export default {
     data() {
         return {
             apiObj: '',
-            userList: []
+            noticeList: []
         }
     },
-    methods: {
+    mounted() {
 
+    },
+    methods: {
+        
     }
 }
 </script>

@@ -18,7 +18,6 @@
                                         <div class="tree-table-name" @click="onFoldTable(index)">
                                             <span class="tree-fold-btn"
                                                 :class="['tree-fold-btn', foldIndex.includes(index) ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline']" />
-                                            <img src="@/assets/table.png" width="15px">
                                             {{ table.table }}
                                         </div>
                                         <template v-if="table.fields.length > 0 && foldIndex.includes(index)">

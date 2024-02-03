@@ -14,6 +14,6 @@ namespace Com.Scm.Fes.Doc
         /// 
         /// </summary>
         [Required]
-        public int handle { get; set; }
+        public Enums.ScmHandleEnum handle { get; set; }
     }
 }

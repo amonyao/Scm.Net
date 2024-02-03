@@ -1,5 +1,6 @@
 using Com.Scm;
 using Com.Scm.Cms;
+using Com.Scm.Cms.Doc;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -22,14 +23,17 @@ namespace FytSoa.Application.Fes.Doc
         private readonly SugarRepository<FileDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
         private readonly EnvConfig _envConfig;
+        private readonly ImageAnylise _anyliser;
 
         public FesDocFileService(SugarRepository<FileDao> thisRepository,
             SugarRepository<UserDao> userRepository,
-            EnvConfig envConfig)
+            EnvConfig envConfig,
+            ImageAnylise anyliser)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _envConfig = envConfig;
+            _anyliser = anyliser;
         }
 
         /// <summary>
@@ -198,7 +202,14 @@ namespace FytSoa.Application.Fes.Doc
             fileDao.file_create_time = TimeUtils.GetUnixTime();
             fileDao.file_modify_time = fileDao.file_create_time;
             await _thisRepository.InsertAsync(fileDao);
+
+            var handleDao = new FileHandleDao();
+            handleDao.id = fileDao.id;
+            handleDao.handle = Com.Scm.Enums.ScmHandleEnum.Todo;
+            await _thisRepository.Change<FileHandleDao>().InsertAsync(handleDao);
             #endregion
+
+            await Task.Run(_anyliser.Run);
 
             response.SetSuccess("文件上传成功！");
         }

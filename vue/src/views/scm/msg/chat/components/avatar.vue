@@ -2,16 +2,17 @@
     <div class="portrait-container">
         <el-popover placement="right" :width="200" trigger="click">
             <template #reference>
-                <el-avatar class="portrait" :size="50" :src="user.avatar" />
+                <el-avatar class="portrait" :size="50" :src="getAvatar()" />
             </template>
             <div class="info-popover">
-                <span class="edit iconfont icon-set" @click="editHandle" />
-                <el-avatar :size="70" :src="user.avatar" />
+                <sc-icon name="sc-menu-show" class="edit iconfont" @click="editHandle" />
+                <el-avatar :size="70" :src="getAvatar()" />
                 <div class="nickname-box ellipse-1">
                     <el-tooltip effect="dark" placement="top" :content="user.namec">
                         <span>{{ user.namec }}</span>
                     </el-tooltip>
                 </div>
+                <sc-icon name="sc-menu-show" @click="sendMsg"></sc-icon>
             </div>
         </el-popover>
     </div>
@@ -19,30 +20,26 @@
 </template>
 <script>
 export default {
+    emits: ['sendMe'],
+    props: {
+        user: { type: Object, default: null }
+    },
     data() {
         return {
-            user: {
-                id: '0',
-                account: "user@c-scm.net",
-                namec: "user",
-                avatar: "",
-                sex: "男",
-                summary: "",
-                role_list: [],
-                position_list: [],
-            },
         }
     },
     mounted() {
-        this.init();
     },
     methods: {
-        async init() {
-            const res = await this.$API.login.user.get();
-            this.user = res.data;
-        },
         editHandle() {
 
+        },
+        sendMsg() {
+            this.$emit('sendMe');
+        },
+        getAvatar() {
+            var image = this.$SCM.get_avatar(this.user);
+            return this.$CONFIG.SERVER_URL + image;
         }
     }
 }

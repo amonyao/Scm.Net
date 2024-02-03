@@ -7,7 +7,12 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        new IconTool().Gen("D:\\js.js", "D:\\css.css");
+        //new IconTool().Gen("D:\\js.js", "D:\\css.css");
+        //new IconFont().Save(@"D:\workspace");
+        //new IconFont().Compare(@"D:\workspace\icon.json", "D:\\workspace\\svg");
+        //new IconFont().Compare(@"D:\workspace\fill.json", "D:\\workspace\\svg\\fill");
+        //new IconFont().Compare(@"D:\workspace\line.json", "D:\\workspace\\svg\\line");
+        new IconFont().GetNextUnicode(@"D:\workspace\line.json");
         Console.WriteLine("升级完成！");
     }
 

@@ -40,18 +40,18 @@ export default {
     background-color: lightgray;
     border-radius: var(--el-border-radius-base);
     margin-right: 10px;
+    padding: 3px;
 }
 
 .sc-summary .title {
-    color: #aaa;
-    /* var(--el-text-color-primary); */
+    color: var(--el-text-color-primary);
     font-size: var(--el-font-size-base);
     line-height: 1.3;
 }
 
 .sc-summary .summary {
-    /* color: var(--el-text-color-regular); */
-    color: var(--el-text-color-primary);
+    color: var(--el-text-color-regular);
+    /* color: var(--el-text-color-primary); */
     font-size: var(--el-font-size-base);
     line-height: 1.3;
 }
