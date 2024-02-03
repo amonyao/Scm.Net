@@ -5,7 +5,6 @@ using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Com.Scm.Yms.Fac.Area.Dvo;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Yms.Fac

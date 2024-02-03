@@ -1,6 +1,6 @@
 <template>
 	<el-container class="is-vertical">
-		<sc-search @search="search" :syncSearch="true">
+		<sc-search @search="search" :syncSearch="true" :expandVisible="false">
 			<template #filter>
 				<label>图标格式：</label>
 				<el-switch v-model="mode" active-text="填充" inactive-text="线型" />
@@ -31,7 +31,7 @@
 									:key="index">
 									<div class="icon-item" :title="icon.desc" @click="copyCode(icon)">
 										<div class="icon-info" :style="{ 'fontSize': size + 'px', 'color': color }">
-											<span :class="getIcon(icon)"></span>
+											<span :class="getIcon(icon)">{{ getText(icon) }}</span>
 										</div>
 										<div class="icon-desc">
 											{{ icon.desc }}
@@ -45,13 +45,17 @@
 			</el-container>
 		</el-main>
 	</el-container>
+	<copy ref="copy" />
 </template>
 
 <script>
-const clipboardy = require('clipboardy');
 import config from "@/config/iconSelect";
+import { defineAsyncComponent } from "vue";
 
 export default {
+	components: {
+		copy: defineAsyncComponent(() => import("./copy")),
+	},
 	data() {
 		return {
 			param: {
@@ -102,7 +106,18 @@ export default {
 		hasIcons() {
 			return this.iconSet && this.iconSet.icons && this.iconSet.icons.length > 0;
 		},
+		getText(icon) {
+			if (this.iconSet.set == 'ms') {
+				return icon.name;
+			}
+
+			return '';
+		},
 		getName(icon) {
+			if (this.iconSet.set == 'ms') {
+				return icon.name;
+			}
+
 			var name = icon.name;
 			if (icon.type == 'both') {
 				name += (this.mode ? '-fill' : '-line');
@@ -112,20 +127,21 @@ export default {
 			return 'sc-' + name;
 		},
 		getIcon(icon) {
+			if (this.iconSet.set == 'ms') {
+				return 'material-symbols-' + (this.mode ? 'rounded' : 'outlined');
+			}
+
 			return 'scfont ' + this.getName(icon);
 		},
 		copyCode(icon) {
-			//var code = '<span class="' + this.getIcon(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
-			var code = '<sc-icon name="' + this.getName(icon) + '" style="color:' + this.color + ';font-size: ' + this.size + 'px;"/>';
-			clipboardy.writeSync(code);
-			this.$message.success('复制成功！');
+			this.$refs.copy.open(this.getName(icon), this.iconSet.set, this.color, this.size);
 		},
 		search(key) {
 			var filterData = [];
 			if (key) {
 				this.data.forEach((t) => {
 					var icons = t.icons.filter((n) => n.desc.includes(key));
-					var cat = { name: t.name, icons: icons, size: icons.length };
+					var cat = { name: t.name, icons: icons, size: icons.length, set: t.set };
 					filterData.push(cat);
 				});
 			} else {

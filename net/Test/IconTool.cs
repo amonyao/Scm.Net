@@ -5,6 +5,22 @@ namespace Test
 {
     public class IconTool
     {
+        public void MdGen(string src, string dst)
+        {
+            var text = File.ReadAllText(src);
+            var mdIcon = text.AsJsonObject<MdIcon>();
+
+            var list = new IconList();
+            var cat = new IconCat();
+            cat.name = "系统";
+            list.Add(cat);
+            foreach (var key in mdIcon.icons.Keys)
+            {
+                cat.Add(new Icon { name = key, desc = key });
+            }
+
+            File.WriteAllText(dst, list.ToJsonString());
+        }
         public void Gen(string src, string dst)
         {
             // 读取现有JS文件

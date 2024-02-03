@@ -43,10 +43,11 @@
 							<el-scrollbar>
 								<ul>
 									<el-empty v-if="item.icons.length == 0" :image-size="100" description="未查询到相关图标" />
-									<li v-for="icon in item.icons" :key="icon" @click="selectIcon(icon)" :title="icon.desc">
+									<li v-for="icon in item.icons" :key="icon" @click="selectIcon(item, icon)"
+										:title="icon.desc">
 										<div class="icon-item">
 											<div class="icon-info">
-												<span :class="getIcon(icon)"></span>
+												<span :class="getIcon(item, icon)">{{ getText(item, icon) }}</span>
 											</div>
 											<div class="icon-desc">
 												{{ icon.desc }}
@@ -106,11 +107,11 @@ export default {
 			}
 			this.dialogVisible = true;
 		},
-		selectIcon(icon) {
+		selectIcon(item, icon) {
 			if (!icon) {
 				return false;
 			}
-			this.value = this.getName(icon);
+			this.value = this.getName(item, icon);
 			this.dialogVisible = false;
 		},
 		clear() {
@@ -122,7 +123,7 @@ export default {
 			if (text) {
 				config.icons.forEach((t) => {
 					var icons = t.icons.filter((n) => n.desc.includes(text));
-					var cat = { name: t.name, icons: icons, size: icons.length };
+					var cat = { name: t.name, icons: icons, size: icons.length, set: t.set };
 					filterData.push(cat);
 				});
 			} else {
@@ -130,17 +131,33 @@ export default {
 			}
 			this.data = filterData;
 		},
-		getName(icon) {
+		getText(item, icon) {
+			if (item.set == 'ms') {
+				return icon.name;
+			}
+
+			return '';
+		},
+		getName(item, icon) {
+			if (item.set == 'ms') {
+				return icon.name;
+			}
+
 			var name = icon.name;
 			if (icon.type == 'both') {
 				name += (this.mode ? '-fill' : '-line');
 			} else if (icon.type) {
 				name += '-' + icon.type;
 			}
+
 			return 'sc-' + name;
 		},
-		getIcon(icon) {
-			return 'scfont ' + this.getName(icon);
+		getIcon(item, icon) {
+			if (item.set == 'ms') {
+				return 'material-symbols-' + (this.mode ? 'rounded' : 'outlined');
+			}
+
+			return 'scfont ' + this.getName(item, icon);
 		}
 	},
 };

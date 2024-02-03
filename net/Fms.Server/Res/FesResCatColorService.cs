@@ -6,7 +6,6 @@ using Com.Scm.Exceptions;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Fes.Doc
