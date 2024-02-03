@@ -1540,41 +1540,6 @@
             <param name="userId"></param>
             <param name="unitId"></param>
         </member>
-        <member name="T:Com.Scm.Dao.Ur.UnitAuthDao">
-            <summary>
-            机构授权
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.UnitAuthDao.lv">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.UnitAuthDao.gm">
-            <summary>
-            授权类型
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.UnitAuthDao.gt">
-            <summary>
-            授权日期
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.UnitAuthDao.qu">
-            <summary>
-            用户限制（数量）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.UnitAuthDao.qt">
-            <summary>
-            终端限制（数量）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Ur.UnitAuthDao.qd">
-            <summary>
-            数量限制（数量），各系统自定义
-            </summary>
-        </member>
         <member name="T:Com.Scm.Dao.Ur.UnitDao">
             <summary>
             机构表
