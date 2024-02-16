@@ -53,10 +53,6 @@ module.exports = defineConfig({
 						name: "elicons",
 						test: /[\\/]node_modules[\\/]@element-plus[\\/]icons-vue[\\/]/
 					},
-					tinymce: {
-						name: "tinymce",
-						test: /[\\/]node_modules[\\/]tinymce[\\/]/
-					},
 					echarts: {
 						name: "echarts",
 						test: /[\\/]node_modules[\\/]echarts[\\/]/

@@ -78,11 +78,11 @@ export default {
                 return;
             }
 
-            var ids = [];
-            var name = '';
+            var ids = [this.user.id];
+            var name = this.user.namec;
             users.forEach(element => {
                 ids.push(element.id);
-                name += element.namec + ',';
+                name += ',' + element.namec;
             });
             if (name.length > 64) {
                 name = name.substring(0, 64);
@@ -92,6 +92,8 @@ export default {
             if (!res || res.code != 200) {
                 return;
             }
+
+            this.chatList.unshift(res.data);
             //this.erceipt = res;
         },
         addHandle() {

@@ -36,7 +36,11 @@ export default {
             return item.user_id == this.user.id;
         },
         getNamec(item) {
-            return this.isMe(item) ? this.user.namec : 'this.friend.namec';
+            if (this.isMe(item)) {
+                return this.user.namec;
+            }
+            var user = item.user;
+            return user ? user.namec : 'unknown';
         },
         getAvatar(item) {
             var tmp = this.isMe(item) ? this.user : item.user;
