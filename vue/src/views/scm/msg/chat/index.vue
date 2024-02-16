@@ -1,9 +1,9 @@
 <template>
-    <el-container>
-        <el-aside>
-            <div class="sidebar">
-                <div class="bar-left">
-                    <avatar :user="user" @sendMe="sendMe" />
+    <div class="chat">
+        <el-container>
+            <el-aside width="80px">
+                <div class="sidebar">
+                    <avatar :user="user" @chatMe="chatMe" />
                     <el-scrollbar>
                         <ul>
                             <li class="active-line" :style="{ top: active * 70 + 'px' }" />
@@ -20,34 +20,16 @@
                         </ul>
                     </el-scrollbar>
                 </div>
-                <el-container>
-                    <el-header>
-                        <el-input class="search-input margin_r-10" prefix-icon="el-icon-search" placeholder="请输入名称或ID搜索"
-                            v-model="keywords" />
-                        <sc-icon name="sc-plus" @click="addHandle" />
-                        <sc-icon name="sc-minus" @click="refresh" />
-                    </el-header>
-                    <el-main class="nopadding">
-                        <transition name="el-fade-in-linear" mode="out-in">
-                            <keep-alive>
-                                <component :is="activeView" :key="active" :keywords="keywords" @chatMsg="chatMsg" />
-                            </keep-alive>
-                        </transition>
-                    </el-main>
-                    <!-- <dialog-add-friend ref="refAddFriend" v-if="friendVisible" /> -->
-                </el-container>
-            </div>
-        </el-aside>
-        <el-main class="nopadding">
-            <div class="content">
-                <transition name="el-fade-in-linear" mode="out-in">
-                    <chating ref="message" :user="user" :detailVisible="detailVisible" class="content-message"
-                        @on-detail="detailHandle" />
-                </transition>
-                <friend-info :user="user" class="content-details width-220" v-if="user.conversationId && detailVisible" />
-            </div>
-        </el-main>
-    </el-container>
+            </el-aside>
+            <el-main class="nopadding">
+                <!-- <transition name="el-fade-in-linear" mode="out-in">
+                                <keep-alive> -->
+                <component ref="myView" :is="activeView" :key="active" :user="user" @chatUser="chatUser" />
+                <!-- </keep-alive>
+                            </transition> -->
+            </el-main>
+        </el-container>
+    </div>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
@@ -56,8 +38,6 @@ export default {
         avatar: defineAsyncComponent(() => import("./components/avatar")),
         chatList: defineAsyncComponent(() => import("./components/chatList")),
         friendList: defineAsyncComponent(() => import("./components/friendList")),
-        friendInfo: defineAsyncComponent(() => import("./components/friendInfo")),
-        chating: defineAsyncComponent(() => import("./components/chating")),
     },
     data() {
         return {
@@ -71,8 +51,6 @@ export default {
                 role_list: [],
                 position_list: [],
             },
-            group: { conversationId: '11' },
-            detailVisible: false,
             icons: ['sc-wechat-line', 'sc-user-line', 'sc-bell-line'],
             active: 0,
             activePages: ['chatList', 'friendList', 'noticeList'],
@@ -95,11 +73,18 @@ export default {
             this.active = index;
             this.activeView = this.activePages[index];
         },
-        detailHandle() {
-            this.detailVisible = !this.detailVisible;
+        /**
+         * 头像使用，给自己发消息
+         */
+        async chatMe() {
+            this.chatUser(this.user);
         },
-        async sendMe() {
-            var res = await this.$API.scmmsgchatmessage.add.post({ types: 1, users: [this.user.id] });
+        /**
+         * 好友使用，给好友发消息
+         * @param {user} user 
+         */
+        async chatUser(user) {
+            var res = await this.$API.scmmsgchatmessage.add.post({ types: 1, users: [user.id], namec: user.namec });
             if (!res || res.code != 200) {
                 return;
             }
@@ -110,17 +95,14 @@ export default {
                 return;
             }
 
-            this.group = this.user;
-            this.$refs.message.setGroup(this.group);
-        },
-        async sendMsg() {
+            this.clickHandle(0);
+            this.$refs.myView.change(this.user);
         },
         async chatMsg(chat) {
-            this.group = chat;
-            this.$refs.message.setChat(this.group);
+            this.$refs.message.setChat(chat);
         },
         addHandle() {
-
+            this.$refs.myView.addHandle();
         },
         refresh() {
 
@@ -132,71 +114,63 @@ export default {
 @import '@/assets/sass/_variable.scss';
 $height: 70px;
 
-.sidebar {
-    background-color: #363e47;
-    display: flex;
-    width: 100%;
+.chat {
+    width: 80%;
     height: 100%;
-
-    .bar-left {
-        background-color: #303841;
-        width: 80px;
-
-        ul {
-            position: relative;
-
-            li {
-                position: relative;
-                z-index: 1;
-                height: $height;
-                line-height: $height;
-                width: 100%;
-                color: #a5b5c1;
-                cursor: pointer;
-                text-align: center;
-                font-size: 32px;
-
-                .unread {
-                    position: absolute;
-                    top: 10px;
-                    left: 10px;
-                    padding: 0px 6px;
-                    font-size: 12px;
-                    line-height: 18px;
-                    color: white;
-                    border-radius: 10px;
-                    background-color: red;
-                }
-
-                span {
-                    font-size: 30px;
-                }
-            }
-
-            .active-line {
-                position: absolute;
-                z-index: 0;
-                width: 100%;
-                border-left: 4px solid #5cadff;
-                transition: .3s;
-                background-color: #363e47;
-            }
-
-            .active {
-                color: #ffffff;
-            }
-        }
-    }
+    margin: 0 auto;
 }
 
-.content {
+.sidebar {
+    background-color: #303841;
     display: flex;
-    background-color: $lightColor-2;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 
-    &-message {
-        flex: 1
+    ul {
+        position: relative;
+
+        li {
+            position: relative;
+            z-index: 1;
+            height: $height;
+            line-height: $height;
+            width: 100%;
+            color: #a5b5c1;
+            cursor: pointer;
+            text-align: center;
+            font-size: 32px;
+
+            .unread {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                padding: 0px 6px;
+                font-size: 12px;
+                line-height: 18px;
+                color: white;
+                border-radius: 10px;
+                background-color: red;
+            }
+
+            span {
+                font-size: 30px;
+            }
+        }
+
+        .active-line {
+            position: absolute;
+            z-index: 0;
+            width: 100%;
+            border-left: 4px solid #5cadff;
+            transition: .3s;
+            background-color: #363e47;
+        }
+
+        .active {
+            color: #ffffff;
+        }
     }
 }
 </style>

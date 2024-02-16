@@ -1,18 +1,28 @@
 <template>
-    <scWaterfall :data="list" @preload="preload" @showContent="showContent" :columnCount="3">
+    <quill-editor v-model="content"></quill-editor>
+    <!-- <scWaterfall :data="list" @preload="preload" @showContent="showContent" :columnCount="3">
         <template #item="{ item }">
             <img :data-src="item.src" :alt="item.names" :style="{ height: item._dim + 'px' }" />
             <div>
                 <label>这是说明文字</label>
             </div>
         </template>
-    </scWaterfall>
+    </scWaterfall> -->
 </template>
 <script>
+import { quillEditor } from 'vue-quill-editor'
+import "quill/dist/quill.core.css"; // import styles
+import "quill/dist/quill.snow.css"; // for snow theme
+import "quill/dist/quill.bubble.css"; // for bubble theme
+
 export default {
+    components: {
+        quillEditor
+    },
     data() {
         return {
             apiObj: "",
+            content: '',
             showGrouploading: false,
             groupFilterText: "",
             group: [],

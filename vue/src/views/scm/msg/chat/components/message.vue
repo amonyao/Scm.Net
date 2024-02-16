@@ -25,13 +25,8 @@
 <script>
 export default {
     props: {
-        data: { type: Object, default: null },
-        user: { type: Object, default: null }
-    },
-    data() {
-        return {
-            friend: {},
-        }
+        data: { type: Object, default: () => { } },
+        user: { type: Object, default: () => { } }
     },
     methods: {
         isMe(item) {
@@ -41,10 +36,10 @@ export default {
             return item.user_id == this.user.id;
         },
         getNamec(item) {
-            return this.isMe(item) ? this.user.namec : this.friend.namec;
+            return this.isMe(item) ? this.user.namec : 'this.friend.namec';
         },
         getAvatar(item) {
-            var tmp = this.isMe(item) ? this.user : this.friend;
+            var tmp = this.isMe(item) ? this.user : item.user;
             var image = this.$SCM.get_avatar(tmp);
             return this.$CONFIG.SERVER_URL + image;
         }

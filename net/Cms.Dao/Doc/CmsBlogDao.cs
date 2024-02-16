@@ -1,9 +1,11 @@
 ﻿using Com.Scm.Cms.Enums;
 using Com.Scm.Dao.Unit;
+using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
 namespace Com.Scm.Cms.Doc
 {
+    [SugarTable("cms_doc_article")]
     public class CmsBlogDao : ScmUnitDataDao
     {
         /// <summary>
@@ -36,7 +38,7 @@ namespace Com.Scm.Cms.Doc
         public string title { get; set; }
 
         /// <summary>
-        /// 
+        /// 子标题
         /// </summary>
         [StringLength(512)]
         public string sub_title { get; set; }

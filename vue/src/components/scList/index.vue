@@ -46,7 +46,7 @@ export default {
         data: { type: Array, default: function () { return []; } },
         width: { type: String, default: "" },
         canSelected: { type: Boolean, default: true },
-        selectedIndex: { type: Number, default: 0 },
+        selectedIndex: { type: Number, default: -1 },
         showOpt: { type: Boolean, default: false },
         showEdit: { type: Boolean, default: false },
         showDrop: { type: Boolean, default: false },

@@ -1,19 +1,19 @@
 <template>
     <div class="blog">
         <div class="blog-guid">
-            <sc-list :data="group"></sc-list>
+            <sc-list :data="group" @change="changeCat"></sc-list>
         </div>
         <div class="blog-body">
             <div class="blog-head">
-                <el-tabs v-model="param.types" @tab-click="clickType">
+                <el-tabs v-model="param.types" @tab-change="changeTab">
                     <el-tab-pane label="推荐" :name="1" />
                     <el-tab-pane label="最新" :name="2" />
                     <el-tab-pane label="最热" :name="3" />
                 </el-tabs>
             </div>
             <div class="blog-list">
-                <div v-for="(item, index) in list" :key="index" class="blog-item" @click="clickItem(i)">
-                    <el-image class="icon" :src="item.image" fit="fill" />
+                <div v-for="(item, index) in list" :key="index" class="blog-item" @click="clickItem(item)">
+                    <el-image class="icon" :src="getImage(item)" fit="fill" />
                     <div class="blog-info">
                         <div class="blog-dd">
                             <div class="title">{{ item.title }}</div>
@@ -48,19 +48,44 @@ export default {
     },
     methods: {
         async loadCat() {
-            for (var i = 0; i < 10; i += 1) {
-                this.group.push({ id: i, label: '分类' + i, value: 'value' + i, time: 0, count: i + 3 });
+            var res = await this.$API.cmsrescat.list.get();
+            if (!res || res.code != 200) {
+                return;
             }
+
+            res.data.forEach(element => {
+                this.group.push({ id: element.id, label: element.namec, count: element.qty });
+            });
         },
         async loadList() {
-            for (var i = 0; i < 10; i += 1) {
-                this.list.push({ id: i, title: '标题' + i, summary: 'summary' + i, time: 1703145253000 });
+            var res = await this.$API.cmsblog.list.get(this.param);
+            if (!res || res.code != 200) {
+                return;
             }
+
+            this.list = res.data;
         },
-        clickType() {
+        changeCat(item) {
+            this.param.cat_id = item.id;
+            this.loadList();
+        },
+        changeTab(tabName) {
+            this.param.types = tabName;
+            this.loadList();
         },
         clickItem(item) {
-            alert(item);
+            if (!item) {
+                return;
+            }
+
+            this.$router.push({
+                path: '/cms/blog/view',
+                query: { 'id': item.id }
+            })
+        },
+        getImage(item) {
+            var image = this.$SCM.get_avatar(item.image);
+            return this.$CONFIG.SERVER_URL + image;
         }
     },
 };

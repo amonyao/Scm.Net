@@ -30,6 +30,7 @@ namespace Com.Scm.Cms.Doc.Notes
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _EnvConfig = config;
+            
         }
 
         /// <summary>
@@ -302,9 +303,9 @@ namespace Com.Scm.Cms.Doc.Notes
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost, AllowAnonymous, NoJsonResult]
-        public async Task<UploadResponse> UploadAsync([FromForm] UploadRequest request)
+        public async Task<NotesUploadResponse> UploadAsync([FromForm] UploadRequest request)
         {
-            var response = new UploadResponse();
+            var response = new NotesUploadResponse();
 
             //判断是否上传了文件内容
             if (request.file == null)
@@ -324,9 +325,8 @@ namespace Com.Scm.Cms.Doc.Notes
                 //将文件内容复制到流中
                 await request.file.CopyToAsync(stream);
             }
-            response.file = fileName;
-            response.location = _EnvConfig.ToUri(path);
-            response.SetSuccess("文件上传成功！");
+
+            response.SetSuccess(_EnvConfig.ToUri(path));
             #endregion
 
             return response;

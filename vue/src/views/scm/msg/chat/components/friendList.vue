@@ -1,16 +1,48 @@
 <template>
-    <sc-list :data="friendList">
-    </sc-list>
+    <el-container>
+        <el-aside>
+            <el-container>
+                <el-header>
+                    <el-input class="search-input margin_r-10" prefix-icon="el-icon-search" placeholder="请输入名称或ID搜索"
+                        v-model="key" />
+                    <el-button circle>
+                        <sc-icon name="sc-plus" :size="16" @click="addHandle" />
+                    </el-button>
+                </el-header>
+                <el-main class="nopadding">
+                    <sc-list :data="friendList" @change="change">
+                        <template #item="{ item }">
+                            <sc-summary :title="item.namec" :summary="item.update_time"
+                                :image="getAvatar(item)"></sc-summary>
+                        </template>
+                    </sc-list>
+                </el-main>
+            </el-container>
+        </el-aside>
+        <el-main class="nopadding content">
+            <transition name="el-fade-in-linear" mode="out-in">
+                <friend-info ref="friend" :user="user" class="content-details width-220" @chatUser="chatUser"
+                    v-if="user.id" />
+            </transition>
+        </el-main>
+    </el-container>
 </template>
 <script>
+import { defineAsyncComponent } from "vue";
 export default {
+    components: {
+        friendInfo: defineAsyncComponent(() => import("./friendPage")),
+    },
+    emits: ['chatUser'],
     data() {
         return {
             apiObj: '',
+            key: '',
             friendList: []
         }
     },
     props: {
+        user: { type: Object, default: null },
         keywords: { type: [Number, String, Boolean], required: false }
     },
     mounted() {
@@ -23,8 +55,36 @@ export default {
                 return;
             }
 
-            this.friendList = res.data;
+            var list = [{ id: '1', user_id: '1', namec: '我', type: 1 }, { id: '1000000000000001002', user_id: '1000000000000001002', namec: '小木同学', type: 1 }];
+            res.data.forEach(element => {
+                list.push(element);
+            });
+            this.friendList = list;
+        },
+        getAvatar(item) {
+            var image = this.$SCM.get_avatar(item);
+            return this.$CONFIG.SERVER_URL + image;
+        },
+        change(item) {
+            this.$refs.friend.setUser(item);
+        },
+        addHandle() {
+        },
+        refresh() {
+        },
+        chatUser(user) {
+            this.$emit('chatUser', user);
         }
     }
 }
 </script>
+<style lang="scss" scoped>
+@import '@/assets/sass/_variable.scss';
+
+.content {
+    display: flex;
+    background-color: $lightColor-2;
+    width: 100%;
+    height: 100%;
+}
+</style>

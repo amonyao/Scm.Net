@@ -20,7 +20,7 @@
 </template>
 <script>
 export default {
-    emits: ['sendMe'],
+    emits: ['chatMe'],
     props: {
         user: { type: Object, default: null }
     },
@@ -35,7 +35,7 @@ export default {
 
         },
         sendMsg() {
-            this.$emit('sendMe');
+            this.$emit('chatMe');
         },
         getAvatar() {
             var image = this.$SCM.get_avatar(this.user);

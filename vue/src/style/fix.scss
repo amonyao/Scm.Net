@@ -79,9 +79,3 @@
 .contextmenu li:hover {background-color: var(--el-color-primary-light-9)!important;color: var(--el-color-primary-light-2)!important;}
 .data-box .item-background {background-color: var(--el-color-primary)!important;}
 .layout-setting,.diy-grid-setting {background-color: var(--el-color-primary)!important;}
-
-/* 覆盖tinymce样式 */
-.sceditor .tox-tinymce {border: 1px solid #DCDFE6;}
-.sceditor .tox .tox-statusbar {border-top: 1px solid #DCDFE6;}
-.sceditor .tox .tox-toolbar__primary {background: #f6f8f9;border-bottom: 1px solid #DCDFE6;}
-body .tox-tinymce-aux {z-index: 5700;}

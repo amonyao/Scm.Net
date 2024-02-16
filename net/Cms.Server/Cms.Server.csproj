@@ -55,6 +55,9 @@
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Server.Ioc">
+      <HintPath>..\Libs\Scm.Server.Ioc.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server.Share">
       <HintPath>..\Libs\Scm.Server.Share.dll</HintPath>
     </Reference>

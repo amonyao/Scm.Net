@@ -6,7 +6,7 @@ const scm = {};
 
 scm.DEF_INT = 0;
 scm.SYS_ID = "1000000000000000001";
-scm.DEF_AVATAR = '/data/avatar/0.png';
+scm.DEF_AVATAR = "/data/avatar/0.png";
 
 scm.REGEX_ID = /^[1-9]\d{15,18}$/;
 scm.REGEX_INT = /^[1-9]\d*$/;
@@ -42,6 +42,20 @@ scm.is_valid_codec = function (text) {
 
 scm.is_valid_namec = function (text) {
 	return scm.REGEX_NAMEC.test(text);
+};
+
+scm.getUrl = function (url) {
+	if (!url) {
+		return "";
+	}
+	return config.SERVER_URL + url;
+};
+
+scm.getApiUrl = function (url) {
+	if (!url) {
+		return "";
+	}
+	return config.API_URL + url;
 };
 
 scm.encode_pass = function (pass) {
@@ -109,7 +123,7 @@ scm.status_list = function (dom, http, list, status) {
 				dom.$alert(res.message, "提示", { type: "error" });
 			}
 		})
-		.catch(() => { });
+		.catch(() => {});
 };
 
 scm.delete_item = async function (dom, http, data) {
@@ -147,7 +161,7 @@ scm.delete_list = function (dom, http, list) {
 				dom.$alert(res.message, "提示", { type: "error" });
 			}
 		})
-		.catch(() => { });
+		.catch(() => {});
 };
 
 scm.getDate = function () {

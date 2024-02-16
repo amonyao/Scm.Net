@@ -14,6 +14,23 @@ namespace Com.Scm.Cms.Doc.Blog.Dvo
         /// <summary>
         /// 
         /// </summary>
-        public int types { get; set; }
+        public SortTypeEnums types { get; set; }
+    }
+
+    public enum SortTypeEnums
+    {
+        None = 0,
+        /// <summary>
+        /// 推荐
+        /// </summary>
+        BySuggest = 1,
+        /// <summary>
+        /// 最新
+        /// </summary>
+        ByCreateTime = 2,
+        /// <summary>
+        /// 最热
+        /// </summary>
+        ByQty = 3,
     }
 }

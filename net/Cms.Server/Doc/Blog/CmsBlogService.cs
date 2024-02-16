@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Com.Scm.Cms.Doc.Blog
 {
     [ApiExplorerSettings(GroupName = "Cms")]
-    public class BlogService : ApiService
+    public class CmsBlogService : ApiService
     {
         private readonly SugarRepository<CmsBlogDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public BlogService(SugarRepository<CmsBlogDao> thisRepository,
+        public CmsBlogService(SugarRepository<CmsBlogDao> thisRepository,
             SugarRepository<UserDao> userRepository,
             EnvConfig config)
         {
@@ -52,15 +52,23 @@ namespace Com.Scm.Cms.Doc.Blog
         /// <returns></returns>
         public async Task<List<CmsDocNotesDvo>> GetListAsync(SearchRequest request)
         {
-            var result = await _thisRepository.AsQueryable()
+            var query = _thisRepository.AsQueryable()
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
-                .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
-                .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
-                .Select<CmsDocNotesDvo>()
-                .ToListAsync();
+                .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key));
 
-            //Prepare(result);
+            if (request.types == SortTypeEnums.ByCreateTime)
+            {
+                query = query.OrderBy(a => a.create_time, SqlSugar.OrderByType.Desc);
+            }
+            else if (request.types == SortTypeEnums.ByQty)
+            {
+                query = query.OrderBy(a => a.qty, SqlSugar.OrderByType.Desc);
+            }
+
+            var result = await query.Select<CmsDocNotesDvo>().ToListAsync();
+
+            Prepare(result);
             return result;
         }
 
@@ -71,6 +79,43 @@ namespace Com.Scm.Cms.Doc.Blog
                 item.create_names = GetUserNames(_userRepository, item.create_user);
                 item.update_names = GetUserNames(_userRepository, item.update_user);
             }
+        }
+
+        /// <summary>
+        /// 根据主键查询
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<CmsBlogDvo> GetAsync(long id)
+        {
+            var dvo = new CmsBlogDvo();
+
+            var dao = await _thisRepository
+                .AsQueryable()
+                .Where(a => a.id == id)
+                .FirstAsync();
+
+            if (dao != null)
+            {
+                dvo.id = dao.id;
+                dvo.title = dao.title;
+                dvo.content = dao.summary;
+
+                if (dao.files > 0)
+                {
+                    var file = GetFile(dao.id);
+                    if (File.Exists(file))
+                    {
+                        using (var reader = File.OpenText(file))
+                        {
+                            dvo.content = reader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+
+            return dvo;
         }
 
         /// <summary>
@@ -93,11 +138,11 @@ namespace Com.Scm.Cms.Doc.Blog
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<CmsBlogDto> GetViewAsync(long id)
+        public async Task<CmsBlogDvo> GetViewAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<CmsBlogDto>()
+                .Select<CmsBlogDvo>()
                 .FirstAsync(m => m.id == id);
         }
 

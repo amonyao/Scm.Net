@@ -60,7 +60,7 @@
 </template>
 <script>
 export default {
-	emits: ["onSelect"],
+	emits: ["onSelect", 'selectOpen', 'defaultValue'],
 	props: {
 		multiple: { type: Boolean, default: true },
 		multipleLimit: { type: Number, default: 0 },

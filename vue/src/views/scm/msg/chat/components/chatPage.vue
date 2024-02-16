@@ -10,15 +10,14 @@
         <el-main>
             <el-scrollbar class="message-group-box" ref="refScrollbar" @scroll="scrollHandle">
                 <div ref="refInner" class="list">
-                    <el-icon v-show="loading">
-                    </el-icon>
+                    <el-icon v-show="loading"></el-icon>
                     <span class="tips" v-show="!loading && list.length >= page.total">暂无更多</span>
                     <message v-show="!loading" :user="user" v-for="(item, index) in list" :key="index" :data="item"
                         class="margin-20-n" />
                 </div>
             </el-scrollbar>
         </el-main>
-        <el-footer style="height: auto;">
+        <el-footer style="height: auto;" v-show="chat.id">
             <div class="message-input-container" :class="{ 'highlight': focus }">
                 <div class="tool-box">
                     <el-popover placement="top" :width="400" trigger="click">
@@ -75,13 +74,14 @@ export default {
             content: '',
             focus: false,
             emojis: '😃 😄 😁 😆 😅 🤣 😂 🙂 🙃 😉 😊 😇 😍 🤩 😘 😗 ☺️ 😚 😙 😋 😛 😜 🤪 😝 😝 🤗 🤭 🤫 🤔 🤐 🤨 😐 😑 😶 😏 😒 🙄 😬 🤥 😌 😔 😪 🤤 😴 😷 🤒 🤕 🤢 🤮 🤧 😵 🤯 🤠 😎 🤓 🧐 😕 😟 🙁 ☹️ 😮 😯 😲 😳 😦 😧 😨 😰 😥 😢 😭 😱 😖 😣 😞 😓 😩 😫 😤 😡 😠 🤬 😈 👿 💀 ☠️ 🤡 👹 👺 👻 👽 🙈 🙉 🙊 💋 💌 💘 💝 💖 💗 💓 💞 💕 💔 ❤️ 🧡 💛 💚 💙 💜 🖤 💬 🤳 👃 👅 👄 👶 🧒 👋 🤚 🖐️ ✋ 🖖 👌 ✌️ 🤞 🤟 🤘 🤙 👈 👉 👆 🖕 👇 ☝️ 👍 ⬆️ ➡️ ⬇️ ⬅️ ↩️ ↪️ ⤴️ ⤵️ 🔃 🔄 🔙 🔚 🔛 🔜 🔝 🔀 🔁 🔂 ▶️ ⏩ ⏭️ ⏯️ ◀️ ⏪ ⏮️ 🔼 ⏫ 🔽 ⏬'.split(' '),
-            detailVisible: false,
             chat: {},
+            user_list: [],
         }
     },
     methods: {
         setChat(chat) {
             this.chat = chat;
+            this.listUsers();
             this.listChats();
         },
         detailHandle() {
@@ -98,6 +98,11 @@ export default {
             this.content += emoji;
         },
         async sendMsg() {
+            if (!this.chat.id) {
+                this.$message.warning('请选择一个会话！');
+                return;
+            }
+
             var res = await this.$API.scmmsgchatmessage.chat.post({ id: this.chat.id, types: 1, content: this.content });
             if (!res || res.code != 200) {
                 return;
@@ -124,6 +129,14 @@ export default {
         inputBlur() {
             this.focus = !this.focus;
         },
+        async listUsers() {
+            var res = await this.$API.scmmsgchatgroupuser.list.get(this.chat.group_id);
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.user_list = res.data;
+        },
         async listChats() {
             var res = await this.$API.scmmsgchatmessage.list_detail.get({ id: this.chat.id });
             if (!res || res.code != 200) {
@@ -143,6 +156,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/sass/_variable.scss';
 $height: 50px;
+
+.name {
+    margin-left: 10px;
+}
 
 .message-group-box {
     .list {

@@ -1,28 +1,52 @@
 <template>
-    <sc-list :data="chatList" @change="change">
-        <template #item="{ item }">
-            <sc-summary :title="item.namec" :summary="item.update_time" :image="getAvatar(item)"></sc-summary>
-        </template>
-    </sc-list>
+    <el-container>
+        <el-aside>
+            <el-container>
+                <el-header>
+                    <el-input class="search-input margin_r-10" prefix-icon="el-icon-search" placeholder="请输入名称或ID搜索"
+                        v-model="key" />
+                    <el-button circle>
+                        <sc-icon name="sc-plus" :size="16" @click="addHandle" />
+                    </el-button>
+                </el-header>
+                <el-main class="nopadding">
+                    <sc-list :data="chatList" @change="change" :showOpt="true" :showDrop="true" @dropItem="dropItem">
+                        <template #item="{ item }">
+                            <sc-summary :title="item.namec" :summary="$TOOL.dateTimeFormat(item.update_time)"
+                                :image="getAvatar(item)"></sc-summary>
+                        </template>
+                    </sc-list>
+                </el-main>
+            </el-container>
+        </el-aside>
+        <el-main class="nopadding content">
+            <transition name="el-fade-in-linear" mode="out-in">
+                <chatPage ref="chatPage" :user="user" class="content-message" @chatUser="chatUser" />
+            </transition>
+        </el-main>
+    </el-container>
     <select-user hide-input v-model:selectOpen="isOpenUser" @onSelect="selectUserRes"></select-user>
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
     components: {
-        selectUser: defineAsyncComponent(() => import("@/components/scSelectUser"))
+        selectUser: defineAsyncComponent(() => import("@/components/scSelectUser")),
+        chatPage: defineAsyncComponent(() => import("./chatPage")),
     },
     data() {
         return {
             apiObj: '',
+            key: '',
             chatList: [],
             isOpenUser: false
         }
     },
     props: {
+        user: { type: Object, default: () => { } },
         keywords: { type: [Number, String, Boolean], required: false }
     },
-    emits: ['chatMsg'],
+    emits: ['chatUser'],
     mounted() {
         this.listChats();
     },
@@ -36,22 +60,69 @@ export default {
             this.chatList = res.data;
         },
         change(group) {
-            this.$emit('chatMsg', group);
+            this.$refs.chatPage.setChat(group);
         },
         getAvatar(item) {
             var image = this.$SCM.get_avatar(item);
             return this.$CONFIG.SERVER_URL + image;
         },
-		openSelectUser() {
-			if (this.isOpenUser) {
-				this.isOpenUser = false;
-			}
-			this.isOpenUser = true;
-		},
-		selectUserRes(res) {
-			this.isOpenUser = false;
-			//this.erceipt = res;
-		},
+        openSelectUser() {
+            if (this.isOpenUser) {
+                this.isOpenUser = false;
+            }
+            this.isOpenUser = true;
+        },
+        selectUserRes(users) {
+            this.isOpenUser = false;
+            if (!users || users.length < 1) {
+                return;
+            }
+
+            var ids = [];
+            var name = '';
+            users.forEach(element => {
+                ids.push(element.id);
+                name += element.namec + ',';
+            });
+            if (name.length > 64) {
+                name = name.substring(0, 64);
+            }
+            console.log(name);
+            var res = this.$API.scmmsgchatmessage.create.post({ types: 2, users: ids, namec: name });
+            if (!res || res.code != 200) {
+                return;
+            }
+            //this.erceipt = res;
+        },
+        addHandle() {
+            if (this.isOpenUser) {
+                this.isOpenUser = false;
+            }
+            this.isOpenUser = true;
+        },
+        chatUser(user) {
+            this.$emit('chatUser', user);
+        },
+        refresh() {
+            this.listChats();
+        },
+        dropItem(item) {
+            alert(item.id);
+        }
     }
 }
 </script>
+<style lang="scss" scoped>
+@import '@/assets/sass/_variable.scss';
+
+.content {
+    display: flex;
+    background-color: $lightColor-2;
+    width: 100%;
+    height: 100%;
+
+    &-message {
+        flex: 1
+    }
+}
+</style>
