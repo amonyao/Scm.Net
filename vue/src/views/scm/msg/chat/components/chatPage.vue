@@ -11,8 +11,8 @@
             <el-scrollbar class="message-group-box" ref="refScrollbar" @scroll="scrollHandle">
                 <div ref="refInner" class="list">
                     <el-icon v-show="loading"></el-icon>
-                    <span class="tips" v-show="!loading && list.length >= page.total">暂无更多</span>
-                    <message v-show="!loading" :user="user" v-for="(item, index) in list" :key="index" :data="item"
+                    <span class="tips" v-show="!loading && chat_list.length >= page.total">暂无更多</span>
+                    <message v-show="!loading" :user="user" v-for="(item, index) in chat_list" :key="index" :data="item"
                         class="margin-20-n" />
                 </div>
             </el-scrollbar>
@@ -67,7 +67,7 @@ export default {
     data() {
         return {
             loading: false,
-            list: [],
+            chat_list: [],
             page: {
                 total: 100
             },
@@ -108,7 +108,7 @@ export default {
                 return;
             }
 
-            this.list.push(res.data);
+            this.chat_list.push(res.data);
             this.content = '';
         },
         uploadImage() {
@@ -130,7 +130,7 @@ export default {
             this.focus = !this.focus;
         },
         async listUsers() {
-            var res = await this.$API.scmmsgchatgroupuser.list.get(this.chat.group_id);
+            var res = await this.$API.scmmsgchatgroupuser.list.get({ id: this.chat.group_id });
             if (!res || res.code != 200) {
                 return;
             }
@@ -143,11 +143,27 @@ export default {
                 return;
             }
 
-            this.list = res.data;
+            this.chat_list = res.data;
+            this.chat_list.forEach(element => {
+                console.log(element.user_id);
+                element.user = this.getUser(element.user_id);
+                console.log(element.user);
+            });
         },
         getAvatar() {
             var image = this.$SCM.get_avatar(this.chat);
             return this.$CONFIG.SERVER_URL + image;
+        },
+        getUser(userId) {
+            if (this.user_list) {
+                for (var i = 0; i < this.user_list.length; i += 1) {
+                    var user = this.user_list[i];
+                    if (user.id == userId) {
+                        return user;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

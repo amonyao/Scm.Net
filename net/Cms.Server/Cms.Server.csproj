@@ -65,7 +65,7 @@
 
   <ItemGroup>
     <Folder Include="Doc\Litera\Dvo\" />
-    <Folder Include="Doc\Vlog\" />
+    <Folder Include="Doc\Vlog\Dvo\" />
   </ItemGroup>
 
 </Project>

@@ -30,7 +30,7 @@ namespace Com.Scm.Cms.Doc.Notes
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _EnvConfig = config;
-            
+
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Com.Scm.Cms.Doc.Notes
         public async Task<List<CmsDocNotesDvo>> GetListAsync(ListRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.types == Enums.ArticleTypesEnum.Notes && a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
