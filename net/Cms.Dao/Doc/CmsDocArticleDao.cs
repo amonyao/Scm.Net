@@ -27,7 +27,7 @@ namespace Com.Scm.Cms.Doc
         /// 类型
         /// </summary>
         [Required]
-        public ArticleTypesEnum types { get; set; } = 0;
+        public ArticleTypesEnum types { get; set; }
 
         /// <summary>
         /// 标题
@@ -45,25 +45,25 @@ namespace Com.Scm.Cms.Doc
         /// 数量
         /// </summary>
         [Required]
-        public int qty { get; set; } = 0;
+        public int qty { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public int qty0 { get; set; } = 0;
+        public int qty0 { get; set; }
 
         /// <summary>
         /// 收藏数量
         /// </summary>
         [Required]
-        public int fav_qty { get; set; } = 0;
+        public int fav_qty { get; set; }
 
         /// <summary>
         /// 留言数量
         /// </summary>
         [Required]
-        public int msg_qty { get; set; } = 0;
+        public int msg_qty { get; set; }
 
         /// <summary>
         /// 分类
@@ -111,7 +111,7 @@ namespace Com.Scm.Cms.Doc
         /// 文件
         /// </summary>
         [Required]
-        public int files { get; set; } = 0;
+        public int files { get; set; }
 
         /// <summary>
         /// 背景颜色
@@ -153,13 +153,13 @@ namespace Com.Scm.Cms.Doc
         /// 排列方式
         /// </summary>
         [Required]
-        public OriginEnum origin_types { get; set; } = 0;
+        public OriginEnum origin_types { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [Required]
-        public VisibleEnum visible { get; set; } = 0;
+        public VisibleEnum visible { get; set; }
 
         /// <summary>
         /// 

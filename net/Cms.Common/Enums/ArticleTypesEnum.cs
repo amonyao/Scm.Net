@@ -14,6 +14,8 @@ namespace Com.Scm.Cms.Enums
         [Description("字谜歇后")]
         Puzzle = 40,
         [Description("笔记")]
-        Notes = 50
+        Notes = 50,
+        [Description("博客")]
+        Blog = 60,
     }
 }

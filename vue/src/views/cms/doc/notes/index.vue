@@ -48,7 +48,7 @@
                             <label>文章分类</label>
                             <sc-select v-model="formData.cat_id" :data="cat_list"></sc-select>
                             <el-button type="primary" @click="newArticle">
-                                <sc-icon set="ms" name="new_window"></sc-icon>
+                                <sc-icon set="sc" name="sc-file-line"></sc-icon>
                                 新建
                             </el-button>
                             <el-button type="danger" @click="saveArticle">
@@ -128,8 +128,8 @@ export default {
     methods: {
         init() {
             this.types_list.push({ id: '0', value: 0, label: '请选择' });
-            this.types_list.push({ id: '1', value: 1, label: '笔记' });
-            this.types_list.push({ id: '2', value: 2, label: '博客' });
+            this.types_list.push({ id: '1', value: 50, label: '笔记' });
+            this.types_list.push({ id: '2', value: 60, label: '博客' });
 
             this.search();
             this.listCat();
@@ -276,6 +276,8 @@ export default {
     .editor-toolbar {
         background-color: #FCFCFC;
         margin: 0 auto;
+        height: 100%;
+        overflow: hidden;
     }
 
     .editor-content {

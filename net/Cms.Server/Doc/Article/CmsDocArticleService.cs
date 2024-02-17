@@ -388,21 +388,7 @@ namespace Com.Scm.Cms.Doc
             }
             else
             {
-                var pairDao = await _thisRepository.AsQueryable()
-                    .ClearFilter()
-                    .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
-                    .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
-                    .FirstAsync();
-                if (pairDao != null)
-                {
-                    articleId = new Random().NextInt64(pairDao.min_id, pairDao.max_id);
-                }
-
-                articleDao = await _thisRepository.AsQueryable()
-                    .ClearFilter()
-                    .Where(a => a.id >= articleId && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
-                    .FirstAsync();
-
+                articleDao = await Random2(userId);
                 if (articleDao == null)
                 {
                     articleDao = GetDefaultArticle();
@@ -422,6 +408,57 @@ namespace Com.Scm.Cms.Doc
             dailyDvo.article = await ReadArticle(articleDao);
 
             return dailyDvo;
+        }
+
+        /// <summary>
+        /// 最大和最小ID之间随机
+        /// 存在的问题：当ID空白区间过大时，总是推荐固定的某一条记录
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        private async Task<CmsDocArticleDao> Random1(long userId)
+        {
+            long articleId = 0;
+
+            var pairDao = await _thisRepository.AsQueryable()
+                .ClearFilter()
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                .Select(a => new DbIdPair { min_id = SqlFunc.AggregateMin(a.id), max_id = SqlFunc.AggregateMax(a.id) })
+                .FirstAsync();
+            if (pairDao != null)
+            {
+                articleId = new Random().NextInt64(pairDao.min_id, pairDao.max_id);
+            }
+
+            return await _thisRepository.AsQueryable()
+                .ClearFilter()
+                .Where(a => a.id >= articleId && a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
+                .FirstAsync();
+        }
+
+        /// <summary>
+        /// 最近1000条内随机
+        /// 存在的问题：只能推荐最后新增的记录
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        private async Task<CmsDocArticleDao> Random2(long userId)
+        {
+            var articleList = await _thisRepository.AsQueryable()
+                .ClearFilter()
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled
+                    && SqlFunc.Subqueryable<CmsLogUserDailyArticleDao>().Where(b => b.user_id == userId && b.article_id == a.id).NotAny())
+                .OrderBy(a => a.id, OrderByType.Desc)
+                .Take(1000)
+                .ToListAsync();
+
+            if (articleList.Count > 0)
+            {
+                var idx = new Random().Next(0, articleList.Count);
+                return articleList[idx];
+            }
+
+            return null;
         }
 
         /// <summary>
