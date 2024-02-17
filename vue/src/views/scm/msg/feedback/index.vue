@@ -47,7 +47,7 @@
 export default {
 	data() {
 		return {
-			tableName: 'msg_feedback',
+			tableName: 'scm_msg_feedback',
 			apiObj: this.$API.msgfeedback.page,
 			list: [],
 			param: {

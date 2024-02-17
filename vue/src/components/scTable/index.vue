@@ -54,7 +54,7 @@
 					trigger="click" :hide-after="0">
 					<template #reference>
 						<el-button circle title="导出Excel设置">
-							<sc-icon name="sc-file-excel-line" />
+							<sc-icon name="sc-file-xls-line" />
 						</el-button>
 					</template>
 					<columnExcel :column="column" :data="tableData" @excelCancel="excelCancel"></columnExcel>
@@ -120,7 +120,7 @@ export default {
 		scContextmenuItem,
 	},
 	props: {
-		tableName: { type: String, default: "" },
+		tableName: { type: String, default: "table" + new Date().getTime() },
 		apiObj: { type: Object, default: () => { } },
 		params: { type: Object, default: () => ({}) },
 		data: { type: Object, default: () => { } },

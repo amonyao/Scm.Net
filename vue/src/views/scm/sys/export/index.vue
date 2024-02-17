@@ -47,13 +47,13 @@
 				<div class="right-panel">
 					<div class="right-panel-search">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
-						<el-button type="primary" @click="search"><sc-icon name="sc-search"/></el-button>
+						<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
 					</div>
 				</div>
 			</el-header>
 			<el-main class="nopadding">
-				<scTable ref="table" :api-obj="apiObj" :column="column" :params="defaultParam" row-key="id"
-					@menu-handle="menuHandle" @selection-change="selectionChange">
+				<scTable :tableName="tableName" ref="table" :api-obj="apiObj" :column="column" :params="defaultParam"
+					row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
 					<!-- 固定列-选择列 -->
 					<el-table-column fixed type="selection" width="60" align="center" />
 					<el-table-column label="#" type="index" width="60"></el-table-column>
@@ -93,6 +93,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'scm_sys_export',
 			apiObj: this.$API.sysexportdetail.page,
 			list: [],
 			showGrouploading: false,

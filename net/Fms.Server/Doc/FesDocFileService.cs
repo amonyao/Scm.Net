@@ -1,17 +1,15 @@
-using Com.Scm;
 using Com.Scm.Cms;
-using Com.Scm.Cms.Doc;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
-using Com.Scm.Fes.Doc;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
-namespace FytSoa.Application.Fes.Doc
+namespace Com.Scm.Fes.Doc
 {
     /// <summary>
     /// 服务接口
@@ -22,17 +20,18 @@ namespace FytSoa.Application.Fes.Doc
         private readonly SugarRepository<FileDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
         private readonly EnvConfig _envConfig;
-        private readonly ImageAnylise _anyliser;
+        private readonly ISqlSugarClient _Client;
+        private ImageAnylise _anyliser;
 
         public FesDocFileService(SugarRepository<FileDao> thisRepository,
             SugarRepository<UserDao> userRepository,
             EnvConfig envConfig,
-            ImageAnylise anyliser)
+            ISqlSugarClient client)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _envConfig = envConfig;
-            _anyliser = anyliser;
+            _Client = client;
         }
 
         /// <summary>
@@ -208,6 +207,7 @@ namespace FytSoa.Application.Fes.Doc
             await _thisRepository.Change<FileHandleDao>().InsertAsync(handleDao);
             #endregion
 
+            _anyliser = new ImageAnylise(_Client);
             await Task.Run(_anyliser.Run);
 
             response.SetSuccess("文件上传成功！");

@@ -44,8 +44,8 @@
 				</div>
 			</el-header>
 			<el-main class="nopadding">
-				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" :menu-default="['add']"
-					@menu-handle="menuHandle" @selection-change="selectionChange">
+				<scTable :tableName="tableName" ref="table" :api-obj="apiObj" :column="column" row-key="id"
+					:menu-default="['add']" @menu-handle="menuHandle" @selection-change="selectionChange">
 					<el-table-column fixed type="selection" width="60" />
 					<el-table-column label="#" type="index" width="50"></el-table-column>
 					<template #title="{ data }">
@@ -84,6 +84,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'scm_msg_message',
 			apiObj: this.$API.sysmessage.page,
 			types_list: [],
 			list: [],
