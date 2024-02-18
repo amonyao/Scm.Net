@@ -1,6 +1,8 @@
 <template>
-    <div style="background-color: aliceblue;">
-        <div id="editor"></div>
+    <div class="richpad">
+        <el-card>
+            <div id="editor"></div>
+        </el-card>
     </div>
 </template>
 <script>
@@ -90,3 +92,14 @@ export default {
     },
 };
 </script>
+<style type="scss" scoped>
+.richpad {
+    width: 860px;
+    min-height: 800px;
+    margin: 0 auto;
+
+    .el-card {
+        min-height: 800px;
+    }
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
     <div class="textpad">
-        <el-card><template #header>
+        <el-card>
+            <template #header>
                 <div class="card-header">
                     <el-input v-model="formData.title"></el-input>
                 </div>
@@ -45,7 +46,6 @@ export default {
     width: 860px;
     margin: 0 auto;
 
-    .content {
-    }
+    .content {}
 }
 </style>
