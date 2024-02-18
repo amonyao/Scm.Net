@@ -38,7 +38,6 @@ export default {
             currItem: null,
         }
     },
-    //获取子组件传过来的激活tab
     props: {
         header: { type: String, default: '' },
         footer: { type: String, default: '' },
@@ -86,74 +85,73 @@ export default {
 }
 </script>
   
-<style scoped>
+<style type="scss" scoped>
 .sc-list {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--el-fill-color-blank);
     border: 1px solid var(--el-border-color-lighter);
     border-radius: var(--el-border-radius-base);
-}
 
-.sc-list .sc-list-item {
-    display: flex;
-    /* flex: 1; */
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    height: 100%;
-    padding: 10px;
-    background-color: var(--el-fill-color-blank);
-}
+    .active {
+        background-color: var(--el-color-primary-light-9);
+    }
 
-.sc-list .sc-list-item .sc-list-item_label {}
+    .sc-list_header {
+        border-bottom: 0;
+        font-size: 17px;
+        font-weight: bold;
+        padding: 15px 20px;
+    }
 
-.sc-list .sc-list-item .sc-list-item_value {
-    color: gray;
-}
+    .sc-list_body {
+        overflow-y: auto;
+        flex-basis: 100%;
+    }
 
-.sc-list .active {
-    background-color: var(--el-color-primary-light-9);
-}
+    .sc-list_footer {
+        color: var(--el-text-color-primary);
+        font-size: 16px;
+        font-weight: 700;
+    }
 
-.sc-panel {
-    margin: 15px;
-}
+    .sc-list-item {
+        display: flex;
+        /* flex: 1; */
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        padding: 10px;
+        background-color: var(--el-fill-color-blank);
 
-.sc-list_header {
-    border-bottom: 0;
-    font-size: 17px;
-    font-weight: bold;
-    padding: 15px 20px;
-}
+        .sc-list-item_label {}
 
-.sc-list_body {
-    overflow-y: auto;
-}
+        .sc-list-item_value {
+            color: gray;
+        }
 
-.sc-list_footer {
-    color: var(--el-text-color-primary);
-    font-size: 16px;
-    font-weight: 700;
-}
+        .opt {
+            display: none;
 
-.sc-list-item .opt {
-    display: none;
-}
+            i {
+                margin-left: 5px;
+                color: #999;
+            }
 
-.sc-list-item .opt i {
-    margin-left: 5px;
-    color: #999;
-}
+            i:hover {
+                color: #333;
+            }
+        }
+    }
 
-.sc-list-item .opt i:hover {
-    color: #333;
-}
+    .sc-list-item:hover {
+        background-color: var(--el-fill-color-light);
+    }
 
-.sc-list-item:hover {
-    background-color: var(--el-fill-color-light);
-}
-
-.sc-list-item:hover .opt {
-    display: inline-block;
+    .sc-list-item:hover .opt {
+        display: inline-block;
+    }
 }
 </style>

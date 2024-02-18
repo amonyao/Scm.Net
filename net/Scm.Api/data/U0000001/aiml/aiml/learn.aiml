@@ -1,0 +1,168 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<aiml version='2.0'>
+  <!-- 开始学习 -->
+  <category>
+    <pattern>#开始学习#</pattern>
+    <template>
+      好的，你说吧：
+      <think>
+        <set name="topic">学习</set>
+        <set name="learning">yes</set>
+      </think>
+    </template>
+  </category>
+
+  <!-- 快捷式学习 -->
+  <category>
+    <pattern>#以“_”回答“_”</pattern>
+    <template>
+      <think>
+        <learn>
+          <category>
+            <pattern>
+              <eval>
+                <star index="3"/>
+              </eval>
+            </pattern>
+            <template>
+              <eval>
+                <star index="2"/>
+              </eval>
+            </template>
+          </category>
+        </learn>
+      </think>
+      好的，我已经学会了。当你说“<star index="3"/>”时，我会回答“<star index="2"/>”。
+    </template>
+  </category>
+
+  <!-- 闲聊式学习 -->
+  <category>
+    <pattern>#这样回答_</pattern>
+    <template>
+      <learn>
+        <category>
+          <pattern>
+            <eval>
+              <request index="3"/>
+            </eval>
+          </pattern>
+          <template>
+            <eval>
+              <star index="2"/>
+            </eval>
+          </template>
+        </category>
+      </learn>
+      好的，我已经记下了！
+    </template>
+  </category>
+
+  <!-- 保存为指定话题 -->
+  <category>
+    <pattern>保存到话题#</pattern>
+    <template>
+      已保存到话题：<star/>
+    </template>
+  </category>
+
+  <!-- 保存到默认话题 -->
+  <category>
+    <pattern>保存#</pattern>
+    <template>
+      已保存：<star/>
+    </template>
+  </category>
+
+  <topic name="学习">
+    <!-- 暂停学习命令 -->
+    <category>
+      <pattern>#测试一下#</pattern>
+      <template>
+        已经暂停学习了，你提个问题吧：
+        <think>
+          <set name="topic">*</set>
+          <set name="learning">no</set>
+        </think>
+      </template>
+    </category>
+
+    <!-- 结束学习命令 -->
+    <category>
+      <pattern>#结束学习#</pattern>
+      <template>
+        <condition name="learning">
+          <li value="yes">
+            <think>
+              <set name="topic">*</set>
+              <set name="learning">no</set>
+            </think>
+            你有新的知识没有保存，需要保存吗？
+          </li>
+          <li>学习已经结束，您可以和我聊天了。</li>
+        </condition>
+      </template>
+    </category>
+
+    <!-- 模板式学习 -->
+    <category>
+      <pattern>
+        跟我学#<br/>
+        问题#<br/>
+        回答#<br/>
+      </pattern>
+      <template>
+        <learn>
+          <category>
+            <pattern>
+              <eval>
+                <star index="2"/>
+              </eval>
+            </pattern>
+            <template>
+              <eval>
+                <star index="3"/>
+              </eval>
+            </template>
+          </category>
+        </learn>
+        好的，我已经学会了。
+      </template>
+    </category>
+
+    <!-- 专注式学习 -->
+    <category>
+      <pattern>^</pattern>
+      <template>
+        <condition name="newAsk">
+          <li value="yes">
+            <think>
+              <learn>
+                <category>
+                  <pattern>
+                    <eval>
+                      <input index="2"/>
+                    </eval>
+                  </pattern>
+                  <template>
+                    <eval>
+                      <star/>
+                    </eval>
+                  </template>
+                </category>
+              </learn>
+              <set name="newAsk">0</set>
+            </think>
+            好的，我已经记下了！
+          </li>
+          <li>
+            <think>
+              <set name="newAsk">yes</set>
+            </think>
+            请说出你的答案：
+          </li>
+        </condition>
+      </template>
+    </category>
+  </topic>
+</aiml>

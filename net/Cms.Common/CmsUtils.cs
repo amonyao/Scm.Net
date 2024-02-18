@@ -6,6 +6,11 @@
 
         public static void SaveFile(string path, long id, string content)
         {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             var file = Path.Combine(path, id + ".txt");
             using (var writer = new StreamWriter(file))
             {

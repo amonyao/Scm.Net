@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<aiml version='2.0'>
+  <category>
+    <pattern>
+      <set>hello</set>^
+    </pattern>
+    <template>
+      <think>
+        <set name="topic">greetings</set>
+      </think>
+      <random>
+        <li>Hello!</li>
+        <li>Hi there!</li>
+        <li>Greetings!</li>
+        <li>你好！</li>
+        <li>
+          你好，<id/>
+        </li>
+        <li>你好呀！</li>
+        <li>
+          你好呀，<id/>
+        </li>
+        <li>您好！</li>
+        <li>
+          您好，<id/>
+        </li>
+        <li>您好呀！</li>
+        <li>
+          您好呀，<id/>
+        </li>
+        <li>嗯嗯，你也好呀！</li>
+        <li>你好，我是一个聊天机器人。有什么可以帮你的？</li>
+      </random>
+    </template>
+  </category>
+
+  <category>
+    <pattern>你叫什么名字^</pattern>
+    <template>
+      <think>
+        <set name="topic">greetings</set>
+      </think>
+      我叫<bot name="name"/>
+    </template>
+  </category>
+</aiml>

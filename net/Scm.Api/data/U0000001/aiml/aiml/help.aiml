@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<aiml version='2.0'>
+  <category>
+    <pattern>帮助</pattern>
+    <template>
+      <set name="topic">帮助</set>
+      请问我可以怎么帮助你？
+    </template>
+  </category>
+
+  <category>
+    <pattern>你有多少词汇</pattern>
+    <template>
+      我目前有<vocabulary/>个词汇。
+    </template>
+  </category>
+
+  <category>
+    <pattern>你有多少词条</pattern>
+    <template>
+      我目前有<size/>个词条。
+    </template>
+  </category>
+
+  <category>
+    <pattern>你有哪些技能^</pattern>
+    <template>
+      我有很多技术，比如：
+      <olist>
+        <li>聊天</li>
+        <li>询问时间</li>
+        <li>询问天气</li>
+        <li>教我学习</li>
+      </olist>
+    </template>
+  </category>
+  <category>
+    <pattern>我怎么教你学习#</pattern>
+    <template>
+      你可以通过以下几种方式教我：<br/>
+      1、快捷式学习，适用于较简短的对话，比如：<br/>
+      【用户】以“很高兴遇到你”回答“你好”
+      2、模板式学习，适用于较复杂的对话，比如：<br/>
+      【用户】
+      跟我学：<br/>
+      问题：你好！<br/>
+      回答：很高兴遇到你！<br/>
+      3、专注式学习，适用于大批量对话场景下的学习，比如：<br/>
+      【用户】开始学习
+      【机器人】……
+      【用户】你好！
+      【机器人】……
+      【用户】很高兴遇到你！
+      【机器人】……
+      【用户】你很漂亮！
+      【机器人】……
+      【用户】谢谢你的夸奖！
+      【机器人】……
+      【用户】结束学习
+      4、闲聊式学习，适用于非专注对话场景下的学习，比如：<br/>
+      【用户】你好！<br/>
+      【机器人】……
+      【用户】你可以这样回答：谢谢！<br/>
+      【机器人】……
+    </template>
+  </category>
+
+  <category>
+    <pattern>怎么询问时间^</pattern>
+    <template>
+      你可以通过以下的方式询问时间：<br/>
+      1、今天是几号？<br/>
+      2、昨天是几月几日？<br/>
+      3、明天是星期几？<br/>
+      4、现在是几点？<br/>
+    </template>
+  </category>
+
+  <topic name="帮助">
+  </topic>
+</aiml>
