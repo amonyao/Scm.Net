@@ -92,7 +92,7 @@ export default {
                     // 配置上传图片
                     uploadImage: {
                         // 请求路径
-                        server: this.$API.cmsdocnotes.upload.url,
+                        server: this.$API.cmsdocnote.upload.url,
                         // 后端接收的文件名称
                         fieldName: "file",
                         maxFileSize: 1 * 1024 * 1024, // 1M
@@ -147,7 +147,7 @@ export default {
             this.scEditor = editor;
         },
         async search() {
-            var res = await this.$API.cmsdocnotes.list.get(this.param);
+            var res = await this.$API.cmsdocnote.list.get(this.param);
             if (!res || res.code != 200) {
                 return;
             }
@@ -202,7 +202,7 @@ export default {
                 this.formData.title = '未命名：' + this.$TOOL.dateTimeFormat(new Date());
             }
 
-            var res = await this.$API.cmsdocnotes.save.post(this.formData);
+            var res = await this.$API.cmsdocnote.save.post(this.formData);
             if (!res || res.code != 200) {
                 this.$message.error(res.message);
                 return;
@@ -234,7 +234,7 @@ export default {
                 }
             ).then(async () => {
                 var loading = this.$loading();
-                var res = await this.$API.cmsdocnotes.status.post({ 'ids': [item.id], 'status': 2 });
+                var res = await this.$API.cmsdocnote.status.post({ 'ids': [item.id], 'status': 2 });
                 if (!res || res.code != 200) {
                     this.$alert(res.message, "提示", { type: "error" });
                     return;
@@ -250,7 +250,7 @@ export default {
             }
 
             this.loading = true;
-            var res = await this.$API.cmsdocnotes.model.get(id);
+            var res = await this.$API.cmsdocnote.model.get(id);
             if (!res || res.code != 200) {
                 this.loading = false;
                 return;
