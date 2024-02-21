@@ -1,7 +1,7 @@
 <template>
     <div class="blog">
         <div class="title" v-text="article.title"></div>
-        <div class="author">{{ this.$TOOL.dateTimeFormat(article.create_time) }} {{ article.create_name }}</div>
+        <div class="info">{{ article.create_name }} {{ this.$TOOL.dateTimeFormat(article.create_time) }}</div>
         <hr />
         <div class="content" v-html="article.content"></div>
     </div>
@@ -39,10 +39,13 @@ export default {
     box-shadow: 0 2px 10px rgb(0 0 0 / 12%);
 
     .title {
-        font-size: 20px;
+        margin: 0 0 1.3rem;
+        font-size: 2.667rem;
+        font-weight: 600;
+        line-height: 1.31;
     }
 
-    .author {
+    .info {
         font-size: 14px;
     }
 

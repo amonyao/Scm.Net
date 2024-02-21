@@ -1,41 +1,70 @@
 <template>
-    <div class="textpad">
-        <el-card>
-            <template #header>
-                <div class="card-header">
-                    <el-input v-model="formData.title"></el-input>
-                </div>
-            </template>
-            <el-input v-model="formData.content" type="textarea" rows="30" class="content"></el-input>
-        </el-card>
-    </div>
-    <el-button @click="save">保存</el-button>
+    <Note ref="scNote" @readNote="readNote" @newNote="newNote" @saveNote="saveNote">
+        <template #main>
+            <div class="textpad">
+                <el-card>
+                    <template #header>
+                        <div class="card-header">
+                            <el-input v-model="formData.title"></el-input>
+                        </div>
+                    </template>
+                    <el-input v-model="formData.content" type="textarea" rows="30" class="content"></el-input>
+                </el-card>
+            </div>
+        </template>
+    </Note>
 </template>
 <script>
+import { defineAsyncComponent } from "vue";
+
 export default {
+    components: {
+        Note: defineAsyncComponent(() => import("./components/note")),
+    },
     data() {
         return {
-            formData: {}
+            formData: this.def_data()
         }
     },
     mounted() {
-        this.init();
     },
     methods: {
         def_data() {
             return {
                 id: '0',
+                types: 1,
                 title: '',
                 content: ''
             }
         },
-        init() {
-            this.formData = this.def_data();
+        async readNote(item) {
+            if (!item || !item.id) {
+                return;
+            }
+
+            this.loading = true;
+            var res = await this.$API.cmsdocnote.model.get(item.id);
+            if (!res || res.code != 200) {
+                this.loading = false;
+                return;
+            }
+
+            this.formData = res.data;
         },
-        async save() {
+        newNote() {
+
+        },
+        async saveNote(catId) {
+            this.formData.cat_id = catId;
+
             var res = await this.$API.cmsdocnote.save.post(this.formData);
             if (!res || res.code != 200) {
                 return;
+            }
+
+            var note = this.$refs.scNote;
+            if (note) {
+                note.search();
             }
         }
     }
