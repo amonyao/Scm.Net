@@ -81,7 +81,7 @@ export default {
         def_data() {
             return {
                 id: '0',
-                types: 0,
+                types: 2,
                 cat_id: '0',
                 title: '',
                 content: '',

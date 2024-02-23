@@ -45,9 +45,13 @@
         </el-main>
     </el-container>
 </template>
+
 <script>
 export default {
     emits: ['readNote', 'saveNote', 'newNote'],
+    props: {
+        types: { type: Number, default: 0 }
+    },
     data() {
         return {
             param: {
@@ -66,6 +70,7 @@ export default {
     },
     methods: {
         async search() {
+            this.param.types = this.types;
             var res = await this.$API.cmsdocnote.list.get(this.param);
             if (!res || res.code != 200) {
                 return;

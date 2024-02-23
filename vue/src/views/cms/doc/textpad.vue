@@ -14,6 +14,7 @@
         </template>
     </Note>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 
@@ -33,8 +34,9 @@ export default {
             return {
                 id: '0',
                 types: 1,
+                cat_id: '0',
                 title: '',
-                content: ''
+                content: '',
             }
         },
         async readNote(item) {

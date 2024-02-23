@@ -23,9 +23,7 @@
             <el-container>
                 <el-main>
                     <div class="richpad">
-                        <el-card>
-                            <div id="editor"></div>
-                        </el-card>
+                        <v-md-editor v-model="formData.content" height="800px"></v-md-editor>
                     </div>
                 </el-main>
                 <el-footer>
@@ -47,15 +45,39 @@
     </el-container>
 </template>
 <script>
-import { defineAsyncComponent } from "vue";
 
-import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import List from '@editorjs/list';
+import VMdEditor from '@kangc/v-md-editor';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
+import '@kangc/v-md-editor/lib/theme/style/github.css';
+
+import hljs from 'highlight.js';
+
+// // codemirror 编辑器的相关资源
+// import Codemirror from 'codemirror';
+// // mode
+// import 'codemirror/mode/markdown/markdown';
+// import 'codemirror/mode/javascript/javascript';
+// import 'codemirror/mode/css/css';
+// import 'codemirror/mode/htmlmixed/htmlmixed';
+// import 'codemirror/mode/vue/vue';
+// // edit
+// import 'codemirror/addon/edit/closebrackets';
+// import 'codemirror/addon/edit/closetag';
+// import 'codemirror/addon/edit/matchbrackets';
+// // placeholder
+// import 'codemirror/addon/display/placeholder';
+// // active-line
+// import 'codemirror/addon/selection/active-line';
+// // scrollbar
+// import 'codemirror/addon/scroll/simplescrollbars';
+// import 'codemirror/addon/scroll/simplescrollbars.css';
+// // style
+// import 'codemirror/lib/codemirror.css';
 
 export default {
     components: {
-        Note: defineAsyncComponent(() => import("./components/note")),
+        VMdEditor
     },
     data() {
         return {
@@ -67,7 +89,6 @@ export default {
             cat_list: [],
             loading: false,
             article_list: [],
-            editor: null,
             formData: this.def_data()
         };
     },
@@ -87,90 +108,9 @@ export default {
             }
         },
         initEditor() {
-            this.editor = new EditorJS({
-                holder: 'editor',
-                autofocus: true,
-                placeholder: 'Press Tab',
-                tools: {
-                    header: Header,
-                    list: List
-                },
-                i18n: {
-                    messages: {
-                        ui: {
-                            "blockTunes": {
-                                "toggler": {
-                                    "Click to tune": "点击调整",
-                                    "or drag to move": "或拖拽移动"
-                                },
-                            },
-                            "inlineToolbar": {
-                                "converter": {
-                                    "Convert to": "转换为"
-                                }
-                            },
-                            "toolbar": {
-                                "toolbox": {
-                                    "Add": "点击添加"
-                                }
-                            },
-                            'popover': {
-                                'Filter': '过滤',
-                                'Nothing found': '未找到'
-                            }
-                        },
-                        toolNames: {
-                            "Text": "文本",
-                            "Heading": "标题",
-                            "List": "列表",
-                            "Warning": "Примечание",
-                            "Checklist": "Чеклист",
-                            "Quote": "Цитата",
-                            "Code": "Код",
-                            "Delimiter": "Разделитель",
-                            "Raw HTML": "HTML-фрагмент",
-                            "Table": "Таблица",
-                            "Link": "Ссылка",
-                            "Marker": "Маркер",
-                            "Bold": "加粗",
-                            "Italic": "斜体",
-                            "InlineCode": "Моноширинный"
-                        },
-                        tools: {
-                            "warning": { // <-- 'Warning' tool will accept this dictionary section
-                                "Title": "Название",
-                                "Message": "Сообщение",
-                            },
-
-                            /**
-                             * Link is the internal Inline Tool
-                             */
-                            "link": {
-                                "Add a link": "Вставьте ссылку"
-                            },
-                            /**
-                             * The "stub" is an internal block tool, used to fit blocks that does not have the corresponded plugin
-                             */
-                            "stub": {
-                                'The block can not be displayed correctly.': 'Блок не может быть отображен'
-                            },
-                            'paragraph': {
-                                'Press Tab': '输入内容'
-                            },
-                        },
-                        blockTunes: {
-                            'delete': {
-                                'Delete': '删除'
-                            },
-                            'moveUp': {
-                                'Move up': '上移'
-                            },
-                            'moveDown': {
-                                'Move down': '下移'
-                            },
-                        }
-                    }
-                }
+            //VMdEditor.Codemirror = Codemirror;
+            VMdEditor.use(githubTheme, {
+                Hljs: hljs,
             });
         },
         async search() {
@@ -237,16 +177,12 @@ export default {
             }
 
             this.formData = res.data;
-            var obj = JSON.parse(this.formData.content);
-            this.editor.render(obj);
         },
         newNote() {
         },
         async saveNote() {
-            var content = await this.editor.save();
             this.formData.cat_id = this.cat_id;
             this.formData.title = 'PAD' + (new Date().getTime());
-            this.formData.content = JSON.stringify(content);
 
             var res = await this.$API.cmsdocnote.save.post(this.formData);
             if (!res || res.code != 200) {
