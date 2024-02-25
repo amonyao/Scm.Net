@@ -11,9 +11,10 @@
             <el-scrollbar class="message-group-box" ref="refScrollbar" @scroll="scrollHandle">
                 <div ref="refInner" class="list">
                     <el-icon v-show="loading"></el-icon>
-                    <span class="tips" v-show="!loading && chat_list.length >= page.total">暂无更多</span>
-                    <message v-show="!loading" :user="user" v-for="(item, index) in chat_list" :key="index" :data="item"
+                    <span class="tips" v-show="!loading && msg_list.length >= page.total">暂无更多</span>
+                    <message v-show="!loading" :user="user" v-for="(item, index) in msg_list" :key="index" :data="item"
                         class="margin-20-n" />
+                    <div ref="refLine">&nbsp;</div>
                 </div>
             </el-scrollbar>
         </el-main>
@@ -67,7 +68,7 @@ export default {
     data() {
         return {
             loading: false,
-            chat_list: [],
+            msg_list: [],
             page: {
                 total: 100
             },
@@ -82,12 +83,11 @@ export default {
         setChat(chat) {
             this.chat = chat;
             this.listUsers();
-            this.listChats();
+            this.listMsgs();
         },
         detailHandle() {
 
         },
-
         scrollHandle() {
 
         },
@@ -97,9 +97,27 @@ export default {
         setEmoji(emoji) {
             this.content += emoji;
         },
+        addMsg(msg) {
+            if (!msg) {
+                return;
+            }
+
+            if (msg.chat_id != this.chat.id) {
+                return;
+            }
+
+            this.chat.last_time = msg.create_time;
+            msg.user = this.getUser(msg.user_id);
+            this.msg_list.push(msg);
+            this.scrollToBottom();
+        },
         async sendMsg() {
             if (!this.chat.id) {
                 this.$message.warning('请选择一个会话！');
+                return;
+            }
+            if (!this.content) {
+                this.$message.warning('请输入会话内容！');
                 return;
             }
 
@@ -108,7 +126,7 @@ export default {
                 return;
             }
 
-            this.chat_list.push(res.data);
+            //this.msg_list.push(res.data);
             this.content = '';
         },
         uploadImage() {
@@ -137,18 +155,30 @@ export default {
 
             this.user_list = res.data;
         },
-        async listChats() {
-            var res = await this.$API.scmmsgchatmessage.list_detail.get({ id: this.chat.id });
+        async listMsgs() {
+            var res = await this.$API.scmmsgchatmessage.list_detail.get({ id: this.chat.id, last_time: this.chat.last_time });
             if (!res || res.code != 200) {
                 return;
             }
 
-            this.chat_list = res.data;
-            this.chat_list.forEach(element => {
-                console.log(element.user_id);
+            this.msg_list = res.data;
+            this.msg_list.forEach(element => {
                 element.user = this.getUser(element.user_id);
-                console.log(element.user);
             });
+            this.scrollToBottom();
+        },
+        scrollToBottom() {
+            this.$nextTick(() => {
+                var div = this.$refs.refInner;
+                if (div) {
+                    div.scrollTop = div.scrollHeight;
+                }
+
+                div = this.$refs.refLine;
+                if (div) {
+                    div.scrollIntoView();
+                }
+            })
         },
         getAvatar() {
             var image = this.$SCM.get_avatar(this.chat);

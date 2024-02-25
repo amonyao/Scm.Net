@@ -33,6 +33,8 @@
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
+import socket from "@/utils/socket";
+
 export default {
     components: {
         avatar: defineAsyncComponent(() => import("./components/avatar")),
@@ -62,12 +64,26 @@ export default {
     },
     mounted() {
         this.init();
+        this.openWss();
     },
     methods: {
         async init() {
             const res = await this.$API.login.user.get();
             this.user = res.data;
-            this.user.conversationId = "111";
+        },
+        openWss() {
+            socket.open_wss("ChatMessage", this.addMsg);
+        },
+        addMsg(msg) {
+            console.log('ChatMessage:' + JSON.stringify(msg));
+            if (!msg || msg.code != 200) {
+                return;
+            }
+
+            var view = this.$refs.myView;
+            if (view && view.addMsg) {
+                view.addMsg(msg.data);
+            }
         },
         clickHandle(index) {
             this.active = index;

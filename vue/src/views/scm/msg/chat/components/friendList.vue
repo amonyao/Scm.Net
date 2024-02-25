@@ -61,6 +61,8 @@ export default {
             });
             this.friendList = list;
         },
+        addMsg() {
+        },
         getAvatar(item) {
             var image = this.$SCM.get_avatar(item);
             return this.$CONFIG.SERVER_URL + image;

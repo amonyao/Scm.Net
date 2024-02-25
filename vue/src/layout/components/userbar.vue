@@ -120,6 +120,7 @@ export default {
 	methods: {
 		async init() {
 			socket.open_wss("ReceiveMessage", (res) => {
+                console.log('ReceiveMessage:' + res);
 				if (!res || !res.success) {
 					return;
 				}

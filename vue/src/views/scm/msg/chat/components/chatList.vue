@@ -30,6 +30,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+    emits: ['chatUser'],
     components: {
         selectUser: defineAsyncComponent(() => import("@/components/scSelectUser")),
         chatPage: defineAsyncComponent(() => import("./chatPage")),
@@ -46,7 +47,6 @@ export default {
         user: { type: Object, default: () => { } },
         keywords: { type: [Number, String, Boolean], required: false }
     },
-    emits: ['chatUser'],
     mounted() {
         this.listChats();
     },
@@ -58,6 +58,16 @@ export default {
             }
 
             this.chatList = res.data;
+        },
+        addMsg(msg) {
+            for (var i = 0; i < this.chatList.length; i += 1) {
+                if (msg.chat_id == this.chatList[i].id) {
+                    this.chatList[i].qty += 1;
+                    break;
+                }
+            }
+
+            this.$refs.chatPage.addMsg(msg);
         },
         change(group) {
             this.$refs.chatPage.setChat(group);

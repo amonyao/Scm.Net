@@ -26,6 +26,8 @@ export default {
     methods: {
         addHandle() {
         },
+        addMsg() {
+        },
         refresh() {
         }
     }
