@@ -119,7 +119,7 @@ export default {
 .feed .item {
 	display: flex;
 	flex-direction: row;
-	justify-content: start;
+	justify-content: flex-start;
 	padding: 5px;
 }
 
