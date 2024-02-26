@@ -1,21 +1,19 @@
 <template>
-    <Note ref="scNote" @readNote="readNote" @newNote="newNote" @saveNote="saveNote">
+    <Note ref="scNote" :types="2" @readNote="readNote" @newNote="newNote" @saveNote="saveNote">
         <template #header>
             <div class="editor-toolbar">
                 <Toolbar :editor="scEditor" :defaultConfig="toolbarConfig" :mode="mode" />
             </div>
         </template>
-        <template #main>
-            <div class="editor-content">
-                <div class="editor-container">
-                    <div class="title-container">
-                        <input v-model="title" :placeholder="titleConfig.placeholder" />
-                    </div>
-                    <Editor style="height: 900px; overflow-y: hidden;" v-model="content" :defaultConfig="editorConfig"
-                        @onCreated="handleCreated" />
+        <div class="editor-content">
+            <div class="editor-container">
+                <div class="title-container">
+                    <input v-model="title" :placeholder="titleConfig.placeholder" />
                 </div>
+                <Editor style="height: 900px; overflow-y: hidden;" v-model="content" :defaultConfig="editorConfig"
+                    @onCreated="handleCreated" />
             </div>
-        </template>
+        </div>
     </Note>
 </template>
 <script>
@@ -45,7 +43,7 @@ export default {
                     // 配置上传图片
                     uploadImage: {
                         // 请求路径
-                        server: this.$API.cmsdocnotes.upload.url,
+                        server: this.$API.cmsdocnote.upload.url,
                         // 后端接收的文件名称
                         fieldName: "file",
                         maxFileSize: 1 * 1024 * 1024, // 1M
@@ -127,7 +125,7 @@ export default {
                 this.formData.title = '未命名：' + this.$TOOL.dateTimeFormat(new Date());
             }
 
-            var res = await this.$API.cmsdocnotes.save.post(this.formData);
+            var res = await this.$API.cmsdocnote.save.post(this.formData);
             if (!res || res.code != 200) {
                 this.$message.error(res.message);
                 return;
@@ -135,7 +133,10 @@ export default {
 
             this.formData.id = res.data.data;
             this.$message.success("数据已保存！");
-            this.search();
+            var note = this.$refs.scNote;
+            if (note) {
+                note.search();
+            }
         },
         async readNote(item) {
             if (!item || item.id === '0') {
@@ -143,7 +144,7 @@ export default {
             }
 
             this.loading = true;
-            var res = await this.$API.cmsdocnotes.model.get(item.id);
+            var res = await this.$API.cmsdocnote.model.get(item.id);
             if (!res || res.code != 200) {
                 this.loading = false;
                 return;

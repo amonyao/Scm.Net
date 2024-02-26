@@ -1,17 +1,16 @@
 <template>
-    <Note ref="scNote" @readNote="readNote" @newNote="newNote" @saveNote="saveNote">
-        <template #main>
-            <div class="textpad">
-                <el-card>
-                    <template #header>
-                        <div class="card-header">
-                            <el-input v-model="formData.title"></el-input>
-                        </div>
-                    </template>
-                    <el-input v-model="formData.content" type="textarea" rows="30" class="content"></el-input>
-                </el-card>
-            </div>
-        </template>
+    <Note ref="scNote" :types="1" @readNote="readNote" @newNote="newNote" @saveNote="saveNote">
+        <div class="textpad">
+            <el-card>
+                <div class="textpad-title">
+                    <input v-model="formData.title" :placeholder="titlePlaceholder" />
+                </div>
+                <div class="textpad-content">
+                    <el-input v-model="formData.content" type="textarea" rows="30" class="content"
+                        :placeholder="contentPlaceholder"></el-input>
+                </div>
+            </el-card>
+        </div>
     </Note>
 </template>
 
@@ -24,10 +23,13 @@ export default {
     },
     data() {
         return {
-            formData: this.def_data()
+            formData: this.def_data(),
+            titlePlaceholder: '请输入标题……',
+            contentPlaceholder: '请输入内容……',
         }
     },
     mounted() {
+        console.log('dddd')
     },
     methods: {
         def_data() {
@@ -76,6 +78,19 @@ export default {
 .textpad {
     width: 860px;
     margin: 0 auto;
+
+    .textpad-title {
+        padding: 10px 0 20px 0;
+        /* border-bottom: 1px solid #e8e8e8; */
+
+        input {
+            font-size: 30px;
+            border: 0;
+            outline: none;
+            width: 100%;
+            line-height: 1;
+        }
+    }
 
     .content {}
 }
