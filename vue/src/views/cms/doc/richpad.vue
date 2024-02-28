@@ -60,7 +60,7 @@ export default {
     data() {
         return {
             param: {
-                types: 3,
+                types: 4,
                 key: ''
             },
             cat_id: '0',
@@ -80,7 +80,7 @@ export default {
         def_data() {
             return {
                 id: '0',
-                types: 3,
+                types: 4,
                 cat_id: '0',
                 title: '',
                 content: '',
@@ -245,7 +245,7 @@ export default {
         async saveNote() {
             var content = await this.editor.save();
             this.formData.cat_id = this.cat_id;
-            this.formData.title = 'PAD' + (new Date().getTime());
+            this.formData.title = 'PAD_' + (new Date().getTime());
             this.formData.content = JSON.stringify(content);
 
             var res = await this.$API.cmsdocnote.save.post(this.formData);

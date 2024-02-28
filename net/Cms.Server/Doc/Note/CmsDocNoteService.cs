@@ -41,9 +41,9 @@ namespace Com.Scm.Cms.Doc.Notes
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
+                .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .WhereIF(request.types != Enums.NoteTypesEnum.None, a => a.types == request.types)
-                //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
-                //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
                 .Select<NoteBasicDvo>()
                 .ToPageAsync(request.page, request.limit);
@@ -63,6 +63,7 @@ namespace Com.Scm.Cms.Doc.Notes
                 .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
+                .WhereIF(request.types != Enums.NoteTypesEnum.None, a => a.types == request.types)
                 .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
                 .Select<NoteBasicDvo>()
                 .ToListAsync();
@@ -186,6 +187,7 @@ namespace Com.Scm.Cms.Doc.Notes
             {
                 dao = new CmsDocNoteDao();
                 dao.id = model.id;
+                dao.types = model.types;
                 dao.title = model.title;
                 dao.summary = model.ToDbSummary();
                 dao.content = model.ToDbContent();
