@@ -442,21 +442,6 @@
             操作状态
             </summary>
         </member>
-        <member name="T:Com.Scm.Dao.Msg.Chat.ChatMsgHeaderDao">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Chat.ChatMsgHeaderDao.group_id">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Chat.ChatMsgHeaderDao.namec">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Com.Scm.Dao.Msg.Message.MessageDao">
             <summary>
             留言消息表
@@ -525,46 +510,6 @@
         <member name="P:Com.Scm.Dao.Msg.Message.MessageTagDao.label">
             <summary>
             冗余
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Dao.Msg.Notice.NoticeReaderDao">
-            <summary>
-            收件人（是否已读）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.notice_id">
-            <summary>
-            通知编号
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.user_id">
-            <summary>
-            用户编号
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.is_arc">
-            <summary>
-            是否归档
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.is_del">
-            <summary>
-            是否删除
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.unread">
-            <summary>
-            未读标识
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.read_qty">
-            <summary>
-            读取次数(统计)
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Dao.Msg.Notice.NoticeReaderDao.reply_qty">
-            <summary>
-            回复次数
             </summary>
         </member>
         <member name="T:Com.Scm.Dao.Msg.Notice.NoticeSenderDao">
@@ -1921,106 +1866,6 @@
             执行次数
             </summary>
         </member>
-        <member name="T:Com.Scm.Msg.Chat.ChatFriendDao">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatFriendDao.user_id">
-            <summary>
-            好友ID
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatFriendDao.types">
-            <summary>
-            好友类型（人，群）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatFriendDao.namec">
-            <summary>
-            好友名称
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Msg.Chat.ChatGroupDao">
-            <summary>
-            群组
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupDao.types">
-            <summary>
-            群组类型（个人，群聊）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupDao.modes">
-            <summary>
-            群组模式（外部群、内部群）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupDao.namec">
-            <summary>
-            群组名称
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupDao.max">
-            <summary>
-            人员限制
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupDao.qty">
-            <summary>
-            人员数量
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupDao.hash">
-            <summary>
-            群组摘要
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Msg.Chat.ChatGroupUserDao">
-            <summary>
-            群组人员
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupUserDao.group_id">
-            <summary>
-            群组ID
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupUserDao.user_id">
-            <summary>
-            人员ID
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatGroupUserDao.last_time">
-            <summary>
-            上次读取时间
-            </summary>
-        </member>
-        <member name="T:Com.Scm.Msg.Chat.ChatMsgDetailDao">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatMsgDetailDao.header_id">
-            <summary>
-            接收人
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatMsgDetailDao.user_id">
-            <summary>
-            发送人
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatMsgDetailDao.types">
-            <summary>
-            消息类型（文本、图片、音频、文件）
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Msg.Chat.ChatMsgDetailDao.content">
-            <summary>
-            消息内容
-            </summary>
-        </member>
         <member name="T:Com.Scm.Msg.CommentDetailDao">
             <summary>
             
@@ -2495,36 +2340,6 @@
             具体流程Json
             </summary>
         </member>
-        <member name="T:Com.Scm.Domain.Sys.SysRoleConflict">
-            <summary>
-            角色互斥表
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Domain.Sys.SysRoleConflict.RoleA">
-            <summary>
-            角色A
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Domain.Sys.SysRoleConflict.RoleAObj">
-            <summary>
-            角色A信息
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Domain.Sys.SysRoleConflict.RoleB">
-            <summary>
-            角色B
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Domain.Sys.SysRoleConflict.RoleBObj">
-            <summary>
-            角色B信息
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Domain.Sys.SysRoleConflict.Summary">
-            <summary>
-            互斥说明
-            </summary>
-        </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeAttachmentDao">
             <summary>
             附件
@@ -2575,6 +2390,46 @@
             引用通知
             </summary>
         </member>
+        <member name="T:Scm.Dao.Msg.Notice.NoticeReaderDao">
+            <summary>
+            收件人（是否已读）
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.notice_id">
+            <summary>
+            通知编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.user_id">
+            <summary>
+            用户编号
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.is_arc">
+            <summary>
+            是否归档
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.is_del">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.unread">
+            <summary>
+            未读标识
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.read_qty">
+            <summary>
+            读取次数(统计)
+            </summary>
+        </member>
+        <member name="P:Scm.Dao.Msg.Notice.NoticeReaderDao.reply_qty">
+            <summary>
+            回复次数
+            </summary>
+        </member>
         <member name="T:Scm.Dao.Msg.Notice.NoticeRecipientDao">
             <summary>
             收件人
@@ -2623,6 +2478,36 @@
         <member name="P:Scm.Dao.Msg.Notice.NoticeSummaryDao.deleted">
             <summary>
             删除
+            </summary>
+        </member>
+        <member name="T:Scm.Domain.Sys.SysRoleConflict">
+            <summary>
+            角色互斥表
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleA">
+            <summary>
+            角色A
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleAObj">
+            <summary>
+            角色A信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleB">
+            <summary>
+            角色B
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.RoleBObj">
+            <summary>
+            角色B信息
+            </summary>
+        </member>
+        <member name="P:Scm.Domain.Sys.SysRoleConflict.Summary">
+            <summary>
+            互斥说明
             </summary>
         </member>
     </members>
