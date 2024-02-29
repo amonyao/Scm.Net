@@ -29,7 +29,6 @@ export default {
         }
     },
     mounted() {
-        console.log('dddd')
     },
     methods: {
         def_data() {

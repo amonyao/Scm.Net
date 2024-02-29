@@ -47,9 +47,7 @@
                     <el-input v-model="content" type="textarea" resize="none" rows="4" @focus="inputFocus" @blur="inputBlur"
                         @keydown="listener" />
                     <el-tooltip effect="dark" placement="top-end" content="按Enter发送消息，Shift+Enter换行">
-                        <el-button class="send">
-                            <sc-icon name="sc-send-plane-line" @click="sendMsg" />
-                        </el-button>
+                        <el-button size="small" class="send" @click="sendMsg">发送</el-button>
                     </el-tooltip>
                 </div>
             </div>
@@ -135,8 +133,10 @@ export default {
         uploadFile() {
 
         },
-        listener() {
-
+        listener(e) {
+            if (e.keyCode == 13) {
+                this.sendMsg();
+            }
         },
         uploadSuccessHandle() {
 
@@ -242,7 +242,6 @@ $height: 50px;
             position: absolute;
             right: 5px;
             bottom: 5px;
-            font-size: 24px;
             color: $activeColor;
             cursor: pointer;
         }
