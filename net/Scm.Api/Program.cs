@@ -1,3 +1,4 @@
+using Com.Scm.Aiml;
 using Com.Scm.Api.Filters;
 using Com.Scm.Api.Middleware;
 using Com.Scm.Config;
@@ -92,6 +93,11 @@ namespace Com.Scm.Api
             // EMail
             var emailConfig = AppUtils.GetConfig<EmailConfig>(EmailConfig.NAME) ?? new EmailConfig();
             builder.Services.AddSingleton(emailConfig);
+
+            // Aiml
+            var aimlConfig = AppUtils.GetConfig<AimlConfig>(AimlConfig.NAME) ?? new AimlConfig();
+            aimlConfig.Prepare(envConfig);
+            builder.Services.AddSingleton(aimlConfig);
 
             builder.Services.AddScoped<ILogService, ScmLogService>();
             builder.Services.AddScoped<IDicService, ScmDicService>();

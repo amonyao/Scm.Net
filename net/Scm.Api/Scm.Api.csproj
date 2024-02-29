@@ -130,6 +130,9 @@
     <Reference Include="Scm.Server">
       <HintPath>..\Libs\Scm.Server.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Server.Aiml">
+      <HintPath>..\Libs\Scm.Server.Aiml.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server.Api">
       <HintPath>..\Libs\Scm.Server.Api.dll</HintPath>
     </Reference>
