@@ -5,10 +5,14 @@
                 <el-avatar :size="160" :src="user.avatar" />
                 <p class="nickname">{{ user.namec }}</p>
                 <el-divider content-position="right" />
-                <p class="remove" @click="sendMsg">发送消息</p>
-                <p class="remove" @click="removeHandle">删除好友</p>
             </div>
         </el-main>
+        <el-footer>
+            <div class="friend-opt">
+                <el-button type="primary" @click="sendMsg">发送消息</el-button>
+                <el-button type="danger" @click="removeHandle">删除好友</el-button>
+            </div>
+        </el-footer>
     </el-container>
 </template>
 <script>
@@ -27,7 +31,7 @@ export default {
             this.$emit('chatUser', this.user);
         },
         removeHandle() {
-
+            this.$message.warning('暂不支持删除！');
         }
     }
 }
@@ -45,11 +49,11 @@ export default {
         color: $darkColor-8;
         font-weight: bold;
     }
+}
 
-    .remove {
-        font-size: 14px;
-        color: $warmColor;
-        cursor: pointer;
-    }
+.friend-opt {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 </style>

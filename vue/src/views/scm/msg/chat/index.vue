@@ -80,7 +80,6 @@ export default {
             socket.open_wss("ChatMessage", this.addMsg);
         },
         addMsg(msg) {
-            console.log('ChatMessage:' + JSON.stringify(msg));
             if (!msg || msg.code != 200) {
                 return;
             }
