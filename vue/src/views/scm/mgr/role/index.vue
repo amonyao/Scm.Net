@@ -24,6 +24,7 @@
 					</el-form-item>
 				</el-form>
 			</template>
+
 			<template #filter>
 				<el-button type="primary" @click="open_dialog">
 					<sc-icon name="sc-plus" />
@@ -54,6 +55,7 @@
 				<!-- 固定列-选择列 -->
 				<el-table-column fixed type="selection" width="60" />
 				<el-table-column align="center" fixed="right" label="操作" width="210">
+
 					<template #default="scope">
 						<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 							编辑
@@ -65,11 +67,13 @@
 						<el-divider direction="vertical" />
 						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row, scope.$index)">
 							<template #reference>
-								<el-button text :disabled="scope.row.isSystem" type="primary" size="small">删除</el-button>
+								<el-button text :disabled="scope.row.isSystem" type="primary"
+									size="small">删除</el-button>
 							</template>
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -77,11 +81,13 @@
 						</el-switch>
 					</el-tooltip>
 				</template>
+
 				<template #isSystem="{ data }">
 					<el-tag :type="data.isSystem ? 'success' : 'danger'">
 						{{ data.isSystem ? "是" : "否" }}
 					</el-tag>
 				</template>
+
 				<template #maxLength="{ data }">
 					<el-tag type="info">
 						{{ data.maxLength == 0 ? "不限制" : data.maxLength }}
@@ -93,9 +99,11 @@
 		<auth ref="auth" />
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_mgr_role',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		auth: defineAsyncComponent(() => import("./components/roleAuth")),

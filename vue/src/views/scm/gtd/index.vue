@@ -45,6 +45,7 @@
 				</div>
 				<div v-else-if="model == 2" class="grid_row">
 					<sc-list :data="list" :hide-do="true" class="gtd-list col3" :canSelected="true">
+
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
@@ -61,6 +62,7 @@
 				</div>
 				<div v-else-if="model == 3" class="grid_row">
 					<sc-list :data="handleList1" :hide-do="true" class="gtd-list col3" :canSelected="true" header="待办">
+
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
@@ -75,6 +77,7 @@
 						</template>
 					</sc-list>
 					<sc-list :data="handleList2" :hide-do="true" class="gtd-list col3" :canSelected="true" header="进行中">
+
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
@@ -89,6 +92,7 @@
 						</template>
 					</sc-list>
 					<sc-list :data="handleList3" :hide-do="true" class="gtd-list col3" :canSelected="true" header="已完成">
+
 						<template #item="{ item }">
 							<div class="gtd-item">
 								<div class="thumb" @click.stop="changeHandle(item)">
@@ -107,11 +111,13 @@
 					<div class="grid_col">
 						<sc-list ref="priority1" :data="priorityList1" :hide-do="true" class="gtd-list row2_top"
 							:canSelected="true" header="紧急且重要">
+
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
 										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-check-square-line" class="check-icon"
+											v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -122,11 +128,13 @@
 						</sc-list>
 						<sc-list ref="priority2" :data="priorityList2" :hide-do="true" class="gtd-list row2_bot"
 							:canSelected="true" header="紧急不重要">
+
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
 										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-check-square-line" class="check-icon"
+											v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -139,11 +147,13 @@
 					<div class="grid_col">
 						<sc-list ref="priority3" :data="priorityList3" :hide-do="true" class="gtd-list row2_top"
 							:canSelected="true" header="不紧急但重要">
+
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
 										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-check-square-line" class="check-icon"
+											v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -154,11 +164,13 @@
 						</sc-list>
 						<sc-list ref="priority4" :data="priorityList4" :hide-do="true" class="gtd-list row2_bot"
 							:canSelected="true" header="不紧急不重要">
+
 							<template #item="{ item }">
 								<div class="gtd-item">
 									<div class="thumb" @click.stop="changeHandle(item)">
 										<sc-icon name="sc-square-line" class="check-icon" v-if="item.handle == 1" />
-										<sc-icon name="sc-check-square-line" class="check-icon" v-if="item.handle == 3" />
+										<sc-icon name="sc-check-square-line" class="check-icon"
+											v-if="item.handle == 3" />
 									</div>
 									<div style="width: 100%;" @click="itemClick(item)">
 										<div class="title" :class="{ 'gtd-done': item.checked }">{{ item.title }}</div>
@@ -182,9 +194,11 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_gtd',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		// handle: defineAsyncComponent(() => import("./handle")),
@@ -376,6 +390,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .grid_row {
 	display: flex;

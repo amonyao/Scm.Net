@@ -42,6 +42,7 @@
 </template>
 <script>
 export default {
+	name: 'tools_barcode',
 	data() {
 		return {
 			baseUrl: this.$API.toolsbarcode.barcode.url,

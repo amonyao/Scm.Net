@@ -11,7 +11,7 @@
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-										start-placeholder="开始日期" end-placeholder="结束日期" />
+							start-placeholder="开始日期" end-placeholder="结束日期" />
 					</el-form-item>
 					<el-form-item label="搜索内容">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
@@ -23,16 +23,18 @@
 					</el-form-item>
 				</el-form>
 			</template>
+
 			<template #filter>
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
-					 @menu-handle="menuHandle" @selection-change="selectionChange">
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="70">
+
 					<template #default="scope">
 						<el-button text type="primary" size="small" @click="open_newtab(scope.row)">
 							详情
@@ -43,8 +45,10 @@
 		</el-main>
 	</el-container>
 </template>
+
 <script>
 export default {
+	name: 'scm_msg_feedback',
 	data() {
 		return {
 			tableName: 'scm_msg_feedback',

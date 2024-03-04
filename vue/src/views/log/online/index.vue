@@ -19,10 +19,12 @@
 		</el-main>
 	</el-container>
 </template>
+
 <script>
 import socket from "@/utils/socket"
 
 export default {
+	name: 'log_online',
 	data() {
 		return {
 			tableName: 'log_online',

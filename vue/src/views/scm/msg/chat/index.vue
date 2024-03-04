@@ -31,11 +31,13 @@
         </el-container>
     </div>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 import socket from "@/utils/socket";
 
 export default {
+    name: 'scm_msg_chat',
     components: {
         avatar: defineAsyncComponent(() => import("./components/avatar")),
         chatList: defineAsyncComponent(() => import("./components/chatList")),
@@ -46,7 +48,7 @@ export default {
             user: {
                 id: '0',
                 account: "user@c-scm.net",
-                namec: "user",
+                namec: "我",
                 avatar: "",
                 sex: "男",
                 summary: "",
@@ -69,6 +71,9 @@ export default {
     methods: {
         async init() {
             const res = await this.$API.login.user.get();
+            if (!res || res.code != 200) {
+                return;
+            }
             this.user = res.data;
         },
         openWss() {
@@ -126,6 +131,7 @@ export default {
     }
 }
 </script>
+
 <style lang="scss" scoped>
 @import '@/assets/sass/_variable.scss';
 $height: 70px;

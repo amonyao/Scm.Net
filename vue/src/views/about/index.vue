@@ -14,6 +14,7 @@
 
 <script>
 export default {
+    name: 'about',
     data() {
         return {
             img: this.$CONFIG.SERVER_URL + '/data/qq.jpg',
@@ -35,6 +36,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 .page {
     padding: 20px;

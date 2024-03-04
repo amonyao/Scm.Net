@@ -17,6 +17,7 @@
 
 <script>
 export default {
+    name: 'about_version',
     data() {
         return {
             ver_list: []

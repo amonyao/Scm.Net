@@ -27,6 +27,7 @@
 						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">查看表</el-button>
 					</template>
 				</el-table-column>
+
 				<template #status="{ data }">
 					<el-tag disable-transitions :type="data.status ? 'success' : 'danger'">
 						{{ data.status ? "正常" : "停用" }}
@@ -38,9 +39,11 @@
 	<column ref="column" />
 	<save ref="save" />
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'dev_gen',
 	components: {
 		column: defineAsyncComponent(() => import("./column")),
 		save: defineAsyncComponent(() => import("./save")),

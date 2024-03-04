@@ -72,6 +72,15 @@
 							一般配合功能列表中详细使用，以及不在资源中显示
 						</div>
 					</el-form-item>
+					<el-form-item label="是否缓存">
+						<el-radio-group v-model="form.keepAlive">
+							<el-radio :label="true">是</el-radio>
+							<el-radio :label="false">否</el-radio>
+						</el-radio-group>
+						<div class="el-form-item-msg">
+							启用缓存后，在进行页签切换时，页面不会刷新
+						</div>
+					</el-form-item>
 					<el-form-item>
 						<el-button type="primary" :loading="loading" @click="save">
 							保 存
@@ -83,11 +92,13 @@
 				<h2>接口权限</h2>
 				<sc-form-table v-model="form.api" :addTemplate="apiListAddTemplate" placeholder="暂无匹配接口权限">
 					<el-table-column prop="codec" label="标识" width="150">
+
 						<template #default="scope">
 							<el-input v-model="scope.row.codec" placeholder="请输入内容"></el-input>
 						</template>
 					</el-table-column>
 					<el-table-column prop="method" label="请求类型" width="130">
+
 						<template #default="scope">
 							<el-select v-model="scope.row.method">
 								<el-option v-for="item in methodType" :key="item" :label="item" :value="item" />
@@ -95,6 +106,7 @@
 						</template>
 					</el-table-column>
 					<el-table-column prop="url" label="Api url">
+
 						<template #default="scope">
 							<el-input v-model="scope.row.url" placeholder="请输入内容"></el-input>
 						</template>
@@ -117,24 +129,7 @@ export default {
 	},
 	data() {
 		return {
-			form: {
-				id: "0",
-				types: 1,
-				tenantId: 0,
-				parentId: "",
-				parentIdList: [],
-				namec: "",
-				codec: "",
-				url: "",
-				view: "",
-				redirect: "",
-				icon: "",
-				active: "",
-				color: "",
-				visible: true,
-				fullpage: false,
-				api: [],
-			},
+			form: this.def_data(),
 			menuOptions: [],
 			menuProps: {
 				multiple: false,
@@ -187,6 +182,27 @@ export default {
 	},
 	mounted() { },
 	methods: {
+		def_data() {
+			return {
+				id: "0",
+				types: 1,
+				tenantId: 0,
+				parentId: "",
+				parentIdList: [],
+				namec: "",
+				codec: "",
+				url: "",
+				view: "",
+				redirect: "",
+				icon: "",
+				active: "",
+				color: "",
+				visible: true,
+				fullpage: false,
+				keepAlive: true,
+				api: [],
+			}
+		},
 		//简单化菜单
 		treeToMap(tree) {
 			let _tree = [

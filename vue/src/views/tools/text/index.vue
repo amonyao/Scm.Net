@@ -20,9 +20,10 @@
         </template>
     </sc-panel>
 </template>
+
 <script>
 export default {
-    name: 'Home',
+    name: 'tools_text',
     data() {
         return {
             title: '字符统计',

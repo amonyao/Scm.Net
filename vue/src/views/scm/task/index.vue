@@ -91,6 +91,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_task',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		logs: defineAsyncComponent(() => import("./logs")),

@@ -77,6 +77,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_cfg_exportheader',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},

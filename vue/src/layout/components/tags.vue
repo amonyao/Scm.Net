@@ -6,14 +6,16 @@
 				@contextmenu.prevent="openContextMenu($event, tag)">
 				<router-link :to="tag">
 					<span>{{ tag.meta.title }}</span>
-					<el-icon v-if="!tag.meta.affix" @click.prevent.stop="closeSelectedTag(tag)"><el-icon-close /></el-icon>
+					<el-icon v-if="!tag.meta.affix"
+						@click.prevent.stop="closeSelectedTag(tag)"><el-icon-close /></el-icon>
 				</router-link>
 			</li>
 		</ul>
 	</div>
 
 	<transition name="el-zoom-in-top">
-		<ul v-if="contextMenuVisible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu" id="contextmenu">
+		<ul v-if="contextMenuVisible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu"
+			id="contextmenu">
 			<li @click="refreshTab()">
 				<el-icon><el-icon-refresh /></el-icon>刷新
 			</li>
@@ -128,7 +130,9 @@ export default {
 		},
 		//增加tag
 		addViewTags(route) {
-			if (route.name && !route.meta.fullpage) {
+			// TODO，是否需要缓存
+			// if (route.name && !route.meta.fullpage) {
+			if (route.name && route.meta.keepAlive && !route.meta.fullpage) {
 				this.$store.commit("pushViewTags", route);
 				this.$store.commit("pushKeepLive", route.name);
 			}

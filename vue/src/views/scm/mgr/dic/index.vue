@@ -28,6 +28,7 @@
 
 		<el-container class="is-vertical">
 			<sc-search @search="search">
+
 				<template #filter>
 					<el-button type="primary" :disabled="!selectColumn.id" @click="open_dialog">
 						<sc-icon name="sc-plus" />
@@ -59,6 +60,7 @@
 					<el-table-column fixed type="selection" width="60" align="center" />
 					<el-table-column label="#" type="index" width="60"></el-table-column>
 					<el-table-column align="center" fixed="right" label="操作" width="140">
+
 						<template #default="scope">
 							<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 								编辑
@@ -71,6 +73,7 @@
 							</el-popconfirm>
 						</template>
 					</el-table-column>
+
 					<template #row_status="scope">
 						<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 							<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -85,9 +88,11 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_mgr_dic',
 	components: {
 		dicDetail: defineAsyncComponent(() => import("./detail")),
 		dicHeader: defineAsyncComponent(() => import("./header")),
@@ -253,6 +258,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .add-column {
 	padding: 8px !important;

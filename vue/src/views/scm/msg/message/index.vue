@@ -48,9 +48,11 @@
 					:menu-default="['add']" @menu-handle="menuHandle" @selection-change="selectionChange">
 					<el-table-column fixed type="selection" width="60" />
 					<el-table-column label="#" type="index" width="50"></el-table-column>
+
 					<template #title="{ data }">
 						<el-link type="primary" @click="read(data)">{{ data.title }}</el-link>
 					</template>
+
 					<template #isread="{ data }">
 						<el-tag disable-transitions :type="data.isread ? 'success' : 'danger'">
 							{{ data.isread ? "是" : "否" }}
@@ -76,9 +78,11 @@
 		</el-container>
 	</el-drawer>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_msg_message',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},
@@ -322,6 +326,7 @@ export default {
 	},
 };
 </script>
+
 <style>
 .msg-tag .el-tag {
 	height: 18px;

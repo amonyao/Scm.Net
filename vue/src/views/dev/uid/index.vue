@@ -75,6 +75,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'dev_uid',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},

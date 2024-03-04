@@ -3,40 +3,19 @@
 		<el-aside width="260px" v-loading="showGrouploading">
 			<el-container>
 				<el-header>
-					<el-input
-						placeholder="输入关键字进行过滤"
-						v-model="groupFilterText"
-						clearable
-					></el-input>
-					<el-button
-						type="primary"
-						round
-						icon="el-icon-plus"
-						class="add-column"
-						@click="edit"
-					></el-button>
+					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
+					<el-button type="primary" round icon="el-icon-plus" class="add-column" @click="edit"></el-button>
 				</el-header>
 				<el-main class="nopadding">
-					<el-tree
-						ref="group"
-						class="menu"
-						node-key="id"
-						default-expand-all
-						:data="group"
-						:filter-node-method="groupFilterNode"
-						@node-click="groupClick"
-					>
+					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
+						:filter-node-method="groupFilterNode" @node-click="groupClick">
 						<template #default="{ node, data }">
 							<span class="scmui-item-node">
 								<span class="label">{{ node.label }}</span>
 								<span class="code">{{ data.code }}</span>
 								<span class="opt">
-									<el-icon @click.stop="edit(data)"
-										><el-icon-edit
-									/></el-icon>
-									<el-icon @click.stop="remove(node, data)"
-										><el-icon-delete
-									/></el-icon>
+									<el-icon @click.stop="edit(data)"><el-icon-edit /></el-icon>
+									<el-icon @click.stop="remove(node, data)"><el-icon-delete /></el-icon>
 								</span>
 							</span>
 						</template>
@@ -48,99 +27,47 @@
 		<el-container>
 			<el-header>
 				<div class="left-panel">
-					<el-button
-						icon="el-icon-plus"
-						type="primary"
-						:disabled="!selectColumn.id"
-						@click="open_dialog"
-					/>
-					<el-button
-						icon="el-icon-delete"
-						plain
-						type="danger"
-						:disabled="selection.length == 0"
-						@click="batch_del"
-					/>
+					<el-button icon="el-icon-plus" type="primary" :disabled="!selectColumn.id" @click="open_dialog" />
+					<el-button icon="el-icon-delete" plain type="danger" :disabled="selection.length == 0"
+						@click="batch_del" />
 				</div>
 				<div class="right-panel">
 					<div class="right-panel-search">
-						<el-input
-							v-model="param.key"
-							clearable
-							placeholder="关键字"
-						/>
-						<el-button
-							icon="el-icon-search"
-							type="primary"
-							@click="search"
-						/>
+						<el-input v-model="param.key" clearable placeholder="关键字" />
+						<el-button icon="el-icon-search" type="primary" @click="search" />
 					</div>
 				</div>
 			</el-header>
 			<el-main class="nopadding">
-				<scTable
-					ref="table"
-					:api-obj="apiObj"
-					:column="column"
-					row-key="id"
-					@menu-handle="menuHandle"
-					@selection-change="selectionChange"
-				>
+				<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+					@selection-change="selectionChange">
 					<!-- 固定列-选择列 -->
-					<el-table-column
-						fixed
-						type="selection"
-						width="60"
-						align="center"
-					/>
-					<el-table-column
-						label="#"
-						type="index"
-						width="60"
-					></el-table-column>
-					<el-table-column
-						align="center"
-						fixed="right"
-						label="操作"
-						width="140"
-					>
+					<el-table-column fixed type="selection" width="60" align="center" />
+					<el-table-column label="#" type="index" width="60"></el-table-column>
+					<el-table-column align="center" fixed="right" label="操作" width="140">
+
 						<template #default="scope">
-							<el-button
-								size="small"
-								text 
-								type="primary"
-								@click="open_dialog(scope.row)"
-							>
+							<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 								编辑
 							</el-button>
 							<el-divider direction="vertical" />
-							<el-popconfirm
-								title="确定删除吗？"
-								@confirm="table_del(scope.row, scope.$index)"
-							>
+							<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
 								<template #reference>
-									<el-button text type="primary" size="small"
-										>删除</el-button
-									>
+									<el-button text type="primary" size="small">删除</el-button>
 								</template>
 							</el-popconfirm>
 						</template>
 					</el-table-column>
+
 					<template #status="{ data }">
-						<el-tag
-							disable-transitions
-							:type="data.status ? 'success' : 'danger'"
-						>
+						<el-tag disable-transitions :type="data.status ? 'success' : 'danger'">
 							{{ data.status ? "正常" : "停用" }}
 						</el-tag>
 					</template>
+
 					<template #imgUrl="{ data }">
-						<el-image
-							v-if="data.imgUrl"
-							style="width: 180px; height: 80px"
-							:src="$CONFIG.SERVER_URL + data.imgUrl"
-							fit="contain"
-						/>
+						<el-image v-if="data.imgUrl" style="width: 180px; height: 80px"
+							:src="$CONFIG.SERVER_URL + data.imgUrl" fit="contain" />
 					</template>
 				</scTable>
 			</el-main>
@@ -149,9 +76,11 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_adv',
 	components: {
 		modify: defineAsyncComponent(() => import("./modify")),
 		column: defineAsyncComponent(() => import("./column")),
@@ -286,7 +215,7 @@ export default {
 						this.$alert(res.message, "提示", { type: "error" });
 					}
 				})
-				.catch(() => {});
+				.catch(() => { });
 		},
 		edit(row) {
 			if (row.id) {
@@ -314,7 +243,7 @@ export default {
 						this.$alert(res.message, "提示", { type: "error" });
 					}
 				})
-				.catch(() => {});
+				.catch(() => { });
 		},
 		open_dialog(row) {
 			if (row.id) {
@@ -330,20 +259,21 @@ export default {
 		selectionChange(selection) {
 			this.selection = selection;
 		},
-		menuHandle(obj){
-			if(obj.command=='add'){
+		menuHandle(obj) {
+			if (obj.command == 'add') {
 				this.open_dialog({})
 			}
-			if(obj.command=='edit'){
+			if (obj.command == 'edit') {
 				this.open_dialog(obj.row)
 			}
-			if(obj.command=='delete'){
+			if (obj.command == 'delete') {
 				this.table_del(obj.row)
 			}
 		},
 	},
 };
 </script>
+
 <style scoped>
 .add-column {
 	padding: 8px !important;

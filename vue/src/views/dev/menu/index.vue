@@ -11,8 +11,8 @@
 				<el-main class="nopadding">
 					<el-scrollbar>
 						<el-tree ref="menu" class="menu" node-key="id" :data="menuList" draggable highlight-current
-							:expand-on-click-node="false" check-strictly show-checkbox :filter-node-method="menuFilterNode"
-							@node-click="menuClick" @node-drop="nodeDrop">
+							:expand-on-click-node="false" check-strictly show-checkbox
+							:filter-node-method="menuFilterNode" @node-click="menuClick" @node-drop="nodeDrop">
 							<template #default="{ node, data }">
 								<span class="scmui-item-node el-tree-node__label">
 									<span class="label">{{ node.label }}</span>
@@ -39,7 +39,7 @@ let newMenuIndex = 1;
 import edit from "./edit";
 
 export default {
-	name: "settingMenu",
+	name: 'dev_menu',
 	components: {
 		edit,
 	},
@@ -169,6 +169,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .add-column {
 	padding: 8px !important;

@@ -6,9 +6,9 @@
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
 				</el-header>
 				<el-main class="nopadding">
-					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group" :current-node-key="''"
-						:highlight-current="true" :expand-on-click-node="false" :filter-node-method="groupFilterNode"
-						@node-click="groupClick"></el-tree>
+					<el-tree ref="group" class="menu" node-key="id" default-expand-all :data="group"
+						:current-node-key="''" :highlight-current="true" :expand-on-click-node="false"
+						:filter-node-method="groupFilterNode" @node-click="groupClick"></el-tree>
 				</el-main>
 			</el-container>
 		</el-aside>
@@ -47,6 +47,7 @@
 					<el-table-column fixed type="selection" width="60" />
 					<el-table-column label="#" type="index" width="50"></el-table-column>
 					<el-table-column align="center" fixed="right" label="操作" width="210">
+
 						<template #default="scope">
 							<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 								编辑
@@ -63,6 +64,7 @@
 							</el-popconfirm>
 						</template>
 					</el-table-column>
+
 					<template #row_status="scope">
 						<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 							<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -70,9 +72,11 @@
 							</el-switch>
 						</el-tooltip>
 					</template>
+
 					<template #avatar="{ data }">
 						<el-avatar :src="$CONFIG.SERVER_URL + data.avatar" size="small"></el-avatar>
 					</template>
+
 					<template #OrganizeObj="{ data }">
 						{{ data.organizeObj?.name }}
 					</template>
@@ -84,9 +88,11 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_ur_user',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		userRole: defineAsyncComponent(() => import("./components/userRole")),

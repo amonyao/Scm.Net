@@ -2,33 +2,33 @@ export default {
 	state: {
 		keepLiveRoute: [],
 		routeKey: null,
-		routeShow: true
+		routeShow: true,
 	},
 	mutations: {
-		pushKeepLive(state, component){
-			if(!state.keepLiveRoute.includes(component)){
-				state.keepLiveRoute.push(component)
+		pushKeepLive(state, component) {
+			if (!state.keepLiveRoute.includes(component)) {
+				state.keepLiveRoute.push(component);
 			}
 		},
-		removeKeepLive(state, component){
+		removeKeepLive(state, component) {
 			var index = state.keepLiveRoute.indexOf(component);
-			if(index !== -1){
+			if (index !== -1) {
 				state.keepLiveRoute.splice(index, 1);
 			}
 		},
-		clearKeepLive(state){
-			state.keepLiveRoute = []
+		clearKeepLive(state) {
+			state.keepLiveRoute = [];
 		},
-		setRouteKey(state, key){
-			state.routeKey = key
+		setRouteKey(state, key) {
+			state.routeKey = key;
 		},
-		setRouteShow(state, key){
-			state.routeShow = key
-		}
+		setRouteShow(state, key) {
+			state.routeShow = key;
+		},
 	},
 	actions: {
 		setRouteKey({ commit }, key) {
-			commit('setRouteKey', key);
-		}
-	}
-}
+			commit("setRouteKey", key);
+		},
+	},
+};

@@ -35,11 +35,13 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #status="{ data }">
 					<el-tag disable-transitions :type="data.status ? 'success' : 'danger'">
 						{{ data.status ? "正常" : "停用" }}
 					</el-tag>
 				</template>
+
 				<template #refused="{ data }">
 					{{ data.refused == 1 ? "返回审批流初始层级" : "返回到上一级" }}
 				</template>
@@ -47,8 +49,10 @@
 		</el-main>
 	</el-container>
 </template>
+
 <script>
 export default {
+	name: 'scm_sys_workflow',
 	components: {},
 	data() {
 		return {

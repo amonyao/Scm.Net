@@ -26,9 +26,11 @@
 			<el-header>
 				<div class="left-panel">
 					<el-input v-model="param.path" :style="{ width: '480px' }">
+
 						<template #prepend>
 							<el-icon><el-icon-folder-opened /></el-icon>
 						</template>
+
 						<template #append>
 							<el-button icon="el-icon-refresh" @click="refresh" />
 						</template>
@@ -39,7 +41,8 @@
 						v-copy="selectedUrl">复制地址</el-button>
 					<el-button icon="el-icon-view" plain type="success" :disabled="!selectedFile" @click="file_view" />
 					<el-button icon="el-icon-delete" plain type="danger" :disabled="!selectedFile" @click="file_del" />
-					<el-button icon="el-icon-download" plain type="primary" :disabled="!selectedFile" @click="file_down" />
+					<el-button icon="el-icon-download" plain type="primary" :disabled="!selectedFile"
+						@click="file_down" />
 					<el-button icon="el-icon-upload" plain type="primary" @click="open_dialog">本地上传</el-button>
 				</div>
 			</el-header>
@@ -72,9 +75,11 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_sys_file',
 	components: {
 		upload: defineAsyncComponent(() => import("./upload")),
 		scTextViewer: defineAsyncComponent(() => import("@/components/scTextViewer")),
@@ -244,5 +249,5 @@ export default {
 	},
 };
 </script>
-<style scoped>
-</style>
+
+<style scoped></style>

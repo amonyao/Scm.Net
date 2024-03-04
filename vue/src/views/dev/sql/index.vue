@@ -8,7 +8,7 @@
                 <el-main style="background-color: #FFFFFF;">
                     <div class="filter">
                         <el-input v-model="menuFilter" clearable placeholder="输入关键字进行过滤" />
-                        <el-button type="primary" @click="search"><sc-icon name="sc-search"/></el-button>
+                        <el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
                     </div>
                     <el-tabs>
                         <el-tab-pane label="表结构">
@@ -21,7 +21,8 @@
                                             {{ table.table }}
                                         </div>
                                         <template v-if="table.fields.length > 0 && foldIndex.includes(index)">
-                                            <div v-for="field in table.fields" :key="field.name" class="tree-table-field">
+                                            <div v-for="field in table.fields" :key="field.name"
+                                                class="tree-table-field">
                                                 {{ field.COLUMN_NAME }}
                                                 <!-- <span class="el-icon-document-copy"></span> -->
                                             </div>
@@ -34,6 +35,7 @@
                             <el-scrollbar>
                                 <sc-list :data="presql_list" @change="changeItem" @editItem="editItem"
                                     @dropItem="deleteItem">
+
                                     <template #item="{ item }">
                                         {{ item.namec }}
                                     </template>
@@ -75,6 +77,7 @@
                                     <ScIconErrorFill color="#F56C6C" v-if="runType === 3" />
                                 </el-icon>
                                 {{ runResult }}
+
                                 <template v-if="runType === 3">
                                     <div class="error-message"><b>脚本：</b>"{{ errMsg.sql }}"</div>
                                     <div class="error-message"><b>异常：</b>{{ errMsg.message }}</div>
@@ -97,7 +100,7 @@
     </el-container>
     <edit ref="edit" @complete="complete" />
 </template>
-  
+
 <script>
 import { defineAsyncComponent } from "vue";
 import { EditorView, basicSetup } from "codemirror";
@@ -107,7 +110,7 @@ import { sql } from "@codemirror/lang-sql";
 import { vkbeautify } from "vkbeautify";
 
 export default {
-    name: 'SQL',
+    name: 'dev_sql',
     components: {
         edit: defineAsyncComponent(() => import("./edit")),
     },
@@ -461,6 +464,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 .filter {
     display: flex;
@@ -473,6 +477,7 @@ export default {
     height: 360px;
 }
 </style>
+
 <style>
 .cm-editor {
     height: 100%;

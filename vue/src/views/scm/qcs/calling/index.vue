@@ -19,13 +19,14 @@
             <el-container>
                 <el-header>
                     <div class="left-panel">
-                        <el-button type="primary" plain :disabled="param.detail_id == '0'" @click="next()">下一位</el-button>
+                        <el-button type="primary" plain :disabled="param.detail_id == '0'"
+                            @click="next()">下一位</el-button>
                         <el-button type="danger" plain :disabled="param.detail_id == '0'" @click="skip()">跳过</el-button>
                     </div>
                     <div class="right-panel">
                         <div class="right-panel-search">
                             <el-input v-model="param.key" clearable placeholder="登录账号" />
-                            <el-button type="primary" @click="search"><sc-icon name="sc-search"/></el-button>
+                            <el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
                         </div>
                     </div>
                 </el-header>
@@ -36,12 +37,14 @@
                         <el-table-column fixed type="selection" width="60" />
                         <el-table-column label="#" type="index" width="50"></el-table-column>
                         <el-table-column align="center" fixed="right" label="操作" width="80">
+
                             <template #default="scope">
                                 <el-button size="small" text type="primary" @click="open_dialog(scope.row)">
                                     呼叫
                                 </el-button>
                             </template>
                         </el-table-column>
+
                         <template #row_status="scope">
                             <el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
                                 <el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -49,9 +52,11 @@
                                 </el-switch>
                             </el-tooltip>
                         </template>
+
                         <template #avatar="{ data }">
                             <el-avatar :src="$CONFIG.SERVER_URL + data.avatar" size="small"></el-avatar>
                         </template>
+
                         <template #OrganizeObj="{ data }">
                             {{ data.organizeObj?.name }}
                         </template>
@@ -61,9 +66,11 @@
         </el-main>
     </el-container>
 </template>
+
 <script>
 const signalR = require("@microsoft/signalr");
 export default {
+    name: 'scm_qcs_calling',
     data() {
         return {
             apiObj: this.$API.scmqcsqueue.calling_list,

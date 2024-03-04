@@ -69,8 +69,8 @@ export default {
 
             this.$refs.chatPage.addMsg(msg);
         },
-        change(group) {
-            this.$refs.chatPage.setChat(group);
+        change(chat) {
+            this.$refs.chatPage.setChat(chat);
         },
         getAvatar(item) {
             var image = this.$SCM.get_avatar(item);

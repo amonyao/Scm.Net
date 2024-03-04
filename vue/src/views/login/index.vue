@@ -11,8 +11,8 @@
 					<div class="common-header-title">{{ $t('login.signInTitle') }}</div>
 				</div>
 				<div class="common-header-right">
-					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info" @click="configDark"
-						:title="$t('login.themeTitle')">
+					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info"
+						@click="configDark" :title="$t('login.themeTitle')">
 					</el-button>
 					<el-dropdown trigger="click" placement="bottom-end" @command="configLang"
 						:title="$t('login.langTitle')">
@@ -61,6 +61,7 @@
 													<email-form></email-form>
 												</el-tab-pane>
 											</el-tabs>
+
 											<template v-if="$CONFIG.MY_SHOW_LOGIN_OAUTH">
 												<el-divider>{{ $t("login.signInOther") }}</el-divider>
 												<div class="login-oauth">
@@ -91,9 +92,7 @@
 		<div class="qrCodeLogin">
 			<sc-qr-code class="qrCode" :text="WechatLoginCode" :size="200"></sc-qr-code>
 			<p class="msg">
-				{{ $tc("login.wechatLoginMsg", 1) }}<br />{{
-					$tc("login.wechatLoginMsg", 2)
-				}}
+				{{ $tc("login.wechatLoginMsg", 1) }}<br />{{ $tc("login.wechatLoginMsg", 2) }}
 			</p>
 			<div class="qrCodeLogin-result" v-if="isWechatLoginResult">
 				<el-result icon="success" :title="$tc('login.wechatLoginResult', 1)"
@@ -110,6 +109,7 @@ import oauthForm from "./components/oauthForm";
 import emailForm from "./components/emailForm";
 
 export default {
+	name: 'login',
 	components: {
 		passwordForm,
 		phoneForm,

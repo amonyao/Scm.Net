@@ -30,6 +30,7 @@
 			<el-container>
 				<div class="list-body">
 					<sc-list :header="header" :data="list" :hide-do="true" class="qcs-list" :can-selected="false">
+
 						<template #item="{ item }">
 							<el-button type="primary" @click="queuing(item)" style="width: 100%; height: 50px;">
 								{{ item.namec }}
@@ -41,9 +42,11 @@
 		</el-main>
 	</el-container>
 </template>
+
 <script>
 const signalR = require("@microsoft/signalr");
 export default {
+	name: 'scm_qcs_queuing',
 	data() {
 		return {
 			showGrouploading: false,
@@ -173,6 +176,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .list-body {
 	width: 100%;

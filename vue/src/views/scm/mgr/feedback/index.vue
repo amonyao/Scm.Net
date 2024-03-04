@@ -26,6 +26,7 @@
 					</el-form-item>
 				</el-form>
 			</template>
+
 			<template #filter>
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
 			</template>
@@ -36,6 +37,7 @@
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="70">
+
 					<template #default="scope">
 						<el-button text type="primary" size="small" @click="open_newtab(scope.row)">
 							详情
@@ -46,8 +48,10 @@
 		</el-main>
 	</el-container>
 </template>
+
 <script>
 export default {
+	name: 'scm_mgr_feedback',
 	data() {
 		return {
 			tableName: 'mgr_feedback',

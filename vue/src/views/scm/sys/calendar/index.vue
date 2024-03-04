@@ -29,6 +29,7 @@
 				</div>
 			</el-header>
 			<el-calendar v-model="toDay" ref="calendar">
+
 				<template #header="{ date }">
 					<span>{{ date }}</span>
 					<el-button-group>
@@ -37,6 +38,7 @@
 						<el-button size="small" @click="selectDate('next-month')">下个月</el-button>
 					</el-button-group>
 				</template>
+
 				<template #date-cell="{ data }">
 					<div class="calendar-item">
 						<h2>{{ data.day.split("-")[2] }} 日</h2>
@@ -64,6 +66,7 @@
 				</el-header>
 				<el-main>
 					<div class="task-list">
+
 						<template v-if="dayItem">
 							<el-card shadow="hover" v-for="task in dayItem" :key="task.id" :class="stateMap[task.state]"
 								:style="{ 'border-color': task.level, }">
@@ -99,6 +102,7 @@
 								<div class="remind">
 									<el-popover placement="top-start" v-for="(row, uindex) in task.user" :key="uindex"
 										:title="row.fullName" trigger="hover">
+
 										<template #reference>
 											<el-avatar size="small" :src="$CONFIG.SERVER_URL + row.avatar" />
 										</template>
@@ -108,6 +112,7 @@
 								</div>
 							</el-card>
 						</template>
+
 						<template v-else>
 							<el-empty description="无工作任务" :image-size="100"></el-empty>
 						</template>
@@ -122,10 +127,10 @@
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_sys_calendar',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},
-	name: "calendar",
 	data() {
 		return {
 			apiObj: this.$API.uruser.simple,

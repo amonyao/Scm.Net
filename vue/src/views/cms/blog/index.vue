@@ -26,8 +26,10 @@
         </div>
     </div>
 </template>
+
 <script>
 export default {
+    name: 'cms_blog',
     components: {
     },
     data() {
@@ -90,6 +92,7 @@ export default {
     },
 };
 </script>
+
 <style>
 .blog {
     max-width: 960px;
@@ -160,6 +163,7 @@ export default {
     flex-basis: 100%;
 }
 </style>
+
 <style>
 .el-tabs__header {
     margin: 0px;

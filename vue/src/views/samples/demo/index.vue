@@ -10,12 +10,12 @@
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
-						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)"><sc-icon
-								name="sc-check-circle-line" /></el-button>
+						<el-button type="primary" plain :disabled="selection.length == 0"
+							@click="status_list(1)"><sc-icon name="sc-check-circle-line" /></el-button>
 					</el-tooltip>
 					<el-tooltip content="停用">
-						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)"><sc-icon
-								name="sc-pause-circle-line" /></el-button>
+						<el-button type="primary" plain :disabled="selection.length == 0"
+							@click="status_list(2)"><sc-icon name="sc-pause-circle-line" /></el-button>
 					</el-tooltip>
 					<el-tooltip content="删除">
 						<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list"><sc-icon
@@ -52,6 +52,7 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -65,11 +66,13 @@
 	<edit ref="edit" @complete="complete" />
 	<scUpload ref="upload" @complete="complete" :api-obj="this.$API.samplesdemo.upload" />
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 import config from "@/config";
 
 export default {
+	name: 'samples_demo',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		scUpload: defineAsyncComponent(() => import("@/components/scUpload")),

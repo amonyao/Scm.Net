@@ -10,7 +10,7 @@
 import vkbeautify from "vkbeautify";
 
 export default {
-    name: 'Home',
+	name: 'tools_code',
     data() {
         return {
             code: '',

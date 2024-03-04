@@ -26,6 +26,7 @@
                     </sc-code>
                     <sc-code :code="code2" title="显示尾信息" desc="用于显示一个列表数据，可以指定图标。">
                         <sc-list :data="data2" icon="sc-folder-open-line" header="颜色">
+
                             <template #footer>
                                 <div style="text-align: right;padding: 5px; color: #999;">共3种可用颜色</div>
                             </template>
@@ -50,11 +51,13 @@
         </div>
     </div>
 </template>
+
 <script>
 import "@/assets/code.scss";
 import scCode from "@/components/scCode";
 
 export default {
+    name: 'scui_sctable',
     components: {
         scCode: scCode
     },

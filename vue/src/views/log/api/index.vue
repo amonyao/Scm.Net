@@ -30,13 +30,15 @@
 							@row-click="rowClick">
 							<el-table-column fixed type="selection" width="60" />
 							<template #levelName="{ data }">
-								<el-icon v-if="data.level == '1'" style="color: #409eff"><el-icon-info-filled /></el-icon>
+								<el-icon v-if="data.level == '1'"
+									style="color: #409eff"><el-icon-info-filled /></el-icon>
 								<el-icon v-if="data.level == '2'" style="color: #e6a23c"><el-icon-bell /></el-icon>
 								<el-icon v-if="data.level == '3'"
 									style="color: #78e853"><el-icon-warning-filled /></el-icon>
 								<el-icon v-if="data.level == '4'"
 									style="color: #f56c6c"><el-icon-circle-close-filled /></el-icon>
-								<el-icon v-if="data.level == '5'" style="color: #9e87ff"><el-icon-info-filled /></el-icon>
+								<el-icon v-if="data.level == '5'"
+									style="color: #9e87ff"><el-icon-info-filled /></el-icon>
 							</template>
 						</scTable>
 					</el-main>
@@ -55,7 +57,7 @@ import info from "./info";
 import scEcharts from "@/components/scEcharts";
 
 export default {
-	name: "log",
+	name: 'log_api',
 	components: {
 		info,
 		scEcharts,

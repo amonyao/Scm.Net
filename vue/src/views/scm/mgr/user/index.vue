@@ -8,14 +8,14 @@
 					</el-form-item>
 					<el-form-item label="所属角色" prop="role_id">
 						<el-tree-select v-model="param.role_id" placeholder="请选择所属角色" :data="role_list" collapse-tags
-										check-strictly default-expand-all :style="{ width: '100%' }" />
+							check-strictly default-expand-all :style="{ width: '100%' }" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" clearable placeholder="请选择" :data="row_status_list" />
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-										start-placeholder="开始日期" end-placeholder="结束日期">
+							start-placeholder="开始日期" end-placeholder="结束日期">
 						</el-date-picker>
 					</el-form-item>
 					<el-form-item label="搜索内容">
@@ -28,6 +28,7 @@
 					</el-form-item>
 				</el-form>
 			</template>
+
 			<template #filter>
 				<el-button type="primary" @click="open_dialog">
 					<sc-icon name="sc-plus" />
@@ -61,6 +62,7 @@
 				<el-table-column fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column align="center" fixed="right" label="操作" width="210">
+
 					<template #default="scope">
 						<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 							编辑
@@ -77,6 +79,7 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -84,9 +87,11 @@
 						</el-switch>
 					</el-tooltip>
 				</template>
+
 				<template #avatar="{ data }">
 					<el-avatar :src="$CONFIG.SERVER_URL + data.avatar" size="small"></el-avatar>
 				</template>
+
 				<template #OrganizeObj="{ data }">
 					{{ data.organizeObj?.name }}
 				</template>
@@ -96,9 +101,11 @@
 	<edit ref="edit" @complete="complete" />
 	<role ref="role" />
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_mgr_user',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		role: defineAsyncComponent(() => import("./components/userRole")),

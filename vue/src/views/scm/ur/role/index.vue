@@ -68,6 +68,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_ur_role',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},

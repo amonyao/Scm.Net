@@ -18,6 +18,7 @@
         </template>
     </sc-panel>
 </template>
+
 <script>
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
@@ -29,7 +30,7 @@ import { sql } from "@codemirror/lang-sql";
 import { vkbeautify } from "vkbeautify";
 
 export default {
-    name: 'Home',
+    name: 'tools_beautify',
     data() {
         return {
             title: '代码美化',
@@ -298,6 +299,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 .editor {
     height: 100%;
@@ -314,6 +316,7 @@ export default {
     width: 120px;
 }
 </style>
+
 <style>
 .cm-editor {
     height: 100%;

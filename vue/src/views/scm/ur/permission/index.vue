@@ -30,6 +30,7 @@
 						</el-main>
 					</el-tab-pane>
 					<el-tab-pane label="" lazy>
+
 						<template #label>
 							<span class="custom-tabs-label">
 								<el-icon><el-icon-house /></el-icon>
@@ -43,8 +44,8 @@
 										<el-option v-for="item in form.list" :key="item.code" :label="item.name"
 											:value="item.code">
 											<span style="float: left">{{
-												item.name
-											}}</span>
+			item.name
+		}}</span>
 											<span style="float: right;color: #8492a6;font-size: 13px;">
 												{{ item.code }}
 											</span>
@@ -68,8 +69,10 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 export default {
+	name: 'scm_ur_permission',
 	components: {},
 	data() {
 		return {
@@ -153,9 +156,9 @@ export default {
 				classname = " clearFloat";
 			}
 			return (
-				<span class={classname}>
-					{node.label}
-				</span>
+				<span class= { classname } >
+				{ node.label }
+				< /span>
 			);
 		},
 		changeCss() {
@@ -277,6 +280,7 @@ export default {
 	},
 };
 </script>
+
 <style>
 .tabs-pages {
 	display: flex;

@@ -76,15 +76,16 @@
 								<el-dropdown-item command="0"><el-icon><el-icon-files /></el-icon>全部</el-dropdown-item>
 								<el-dropdown-item
 									command="2"><el-icon><el-icon-message-box /></el-icon>已读</el-dropdown-item>
-								<el-dropdown-item command="1"><el-icon><el-icon-message /></el-icon>未读</el-dropdown-item>
+								<el-dropdown-item
+									command="1"><el-icon><el-icon-message /></el-icon>未读</el-dropdown-item>
 								<el-dropdown-item command="3"><el-icon><el-icon-link /></el-icon>带文件</el-dropdown-item>
 							</el-dropdown-menu>
 						</template>
 					</el-dropdown>
 				</div>
 				<div class="notice-list-wall">
-					<div class="notice-item" v-for="(it, index) in list" :key="index" :class="it.checked ? 'active' : ''"
-						@click="goInfo(it)">
+					<div class="notice-item" v-for="(it, index) in list" :key="index"
+						:class="it.checked ? 'active' : ''" @click="goInfo(it)">
 						<div class="item-avatar">
 							<el-avatar :src="resHead(it.sender.avatar)" size="small"></el-avatar>
 							<el-checkbox size="large" v-model="it.checked" @change="itemChange(it)" />
@@ -94,7 +95,8 @@
 								<h3 class="uname">{{ it.sender.namec }}-({{ it.sender.names }})</h3>
 								<div class="item-tool">
 									<el-tooltip :content="it.unread ? '标记为已读' : '标记为未读'" placement="top">
-										<el-icon @click.stop="setSignRead(it)"><el-icon-message /></el-icon></el-tooltip>
+										<el-icon
+											@click.stop="setSignRead(it)"><el-icon-message /></el-icon></el-tooltip>
 									<el-tooltip :content="it.is_arc ? '标记为存档' : '取消存档'" placement="top">
 										<el-icon @click.stop="setArchive(it)"><el-icon-takeaway-box /></el-icon>
 									</el-tooltip>
@@ -111,6 +113,7 @@
 						</div>
 					</div>
 					<el-result icon="info" title="" v-if="list.length == 0">
+
 						<template #sub-title>
 							<p>空空如也~</p>
 						</template>
@@ -128,9 +131,11 @@
 		</el-container>
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_msg_notice',
 	components: {
 		info: defineAsyncComponent(() => import("./components/info")),
 		edit: defineAsyncComponent(() => import("./components/edit")),
@@ -395,6 +400,7 @@ export default {
 	},
 };
 </script>
+
 <style scoped>
 .notice-ft {
 	margin-right: 20px;

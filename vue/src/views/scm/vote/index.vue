@@ -35,14 +35,17 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #status="{ data }">
 					<el-tag disable-transitions :type="data.status ? 'success' : 'danger'">
 						{{ data.status ? "正常" : "停用" }}
 					</el-tag>
 				</template>
+
 				<template #type="{ data }">
 					{{ data.type ? "图文" : "视频" }}
 				</template>
+
 				<template #tickRule="{ data }">
 					{{ data.tickRule ? "单选" : "多选" }}
 				</template>
@@ -52,9 +55,11 @@
 		<detail ref="detail" />
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_vote',
 	components: {
 		modify: defineAsyncComponent(() => import("./modify")),
 		detail: defineAsyncComponent(() => import("./detail")),

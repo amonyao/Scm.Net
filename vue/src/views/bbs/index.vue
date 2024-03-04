@@ -155,11 +155,11 @@ const clickoutside = {
     },
 };
 export default {
+    name: 'bbs',
     components: {
         myComment: defineAsyncComponent(() => import("./components/comment")),
         ElementPlusIconsVue: ElementPlusIconsVue
     },
-    name: 'ArticleComment',
     data() {
         return {
             sort: '0',

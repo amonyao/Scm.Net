@@ -8,7 +8,7 @@
 					</el-form-item>
 					<el-form-item label="创建时间" prop="create_time">
 						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-										start-placeholder="开始日期" end-placeholder="结束日期" />
+							start-placeholder="开始日期" end-placeholder="结束日期" />
 					</el-form-item>
 					<el-form-item label="搜索内容">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
@@ -20,6 +20,7 @@
 					</el-form-item>
 				</el-form>
 			</template>
+
 			<template #filter>
 				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
@@ -44,10 +45,11 @@
 		</sc-search>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
-					 @menu-handle="menuHandle" @selection-change="selectionChange">
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
+
 					<template #default="scope">
 						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
 							编辑
@@ -60,10 +62,11 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
-								   @change="status_item($event, scope.row)">
+							@change="status_item($event, scope.row)">
 						</el-switch>
 					</el-tooltip>
 				</template>
@@ -72,9 +75,11 @@
 		<edit ref="edit" @complete="complete" />
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'dev_db',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},

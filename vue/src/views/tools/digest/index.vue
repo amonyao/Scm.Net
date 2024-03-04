@@ -33,10 +33,11 @@
         </template>
     </sc-panel>
 </template>
+
 <script>
 import CryptoJS from "crypto-js";
 export default {
-    name: 'Digest',
+    name: 'tools_digest',
     data() {
         return {
             title: '消息摘要',
@@ -145,6 +146,7 @@ export default {
     },
 }
 </script>
+
 <style>
 .el-radio-group {
     font-size: inherit;

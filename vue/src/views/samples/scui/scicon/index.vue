@@ -14,6 +14,7 @@
 			<el-container>
 				<el-aside style="width: 240px;">
 					<sc-list :data="filterData" @change="changeSet">
+
 						<template #item="{ item }">
 							{{ item.name }}
 							<el-tag size="small" type="info">
@@ -53,6 +54,7 @@ import config from "@/config/iconSelect";
 import { defineAsyncComponent } from "vue";
 
 export default {
+	name: 'scui_scicon',
 	components: {
 		copy: defineAsyncComponent(() => import("./copy")),
 	},

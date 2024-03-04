@@ -36,14 +36,17 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+
 				<template #status="{ data }">
 					<el-tag disable-transitions :type="data.status ? 'success' : 'danger'">
 						{{ data.status ? "正常" : "停用" }}
 					</el-tag>
 				</template>
+
 				<template #roleA="{ data }">
 					{{ data.roleAObj.name }}
 				</template>
+
 				<template #roleB="{ data }">
 					{{ data.roleBObj.name }}
 				</template>
@@ -52,9 +55,11 @@
 		<modify ref="modify" @complete="complete" />
 	</el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
+	name: 'scm_ur_roleconflict',
 	components: {
 		modify: defineAsyncComponent(() => import("./modify")),
 	},
