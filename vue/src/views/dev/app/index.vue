@@ -115,7 +115,6 @@ export default {
 		};
 	},
 	mounted() {
-		console.log('app mounted');
 		this.$SCM.list_dic(this.app_types_list, 'app_types', true);
 		this.$SCM.list_status(this.row_status_list);
 	},

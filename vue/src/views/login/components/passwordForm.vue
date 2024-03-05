@@ -99,7 +99,7 @@ export default {
 			this.$TOOL.data.set("USER_THEME", userRes.data.userTheme);
 
 			//获取菜单
-			var menuRes = await this.$API.sysmenu.authority.get();
+			var menuRes = await this.$API.login.authority.get();
 			if (menuRes.code != 200) {
 				this.$message.warning(menuRes.message);
 				return false;

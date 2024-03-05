@@ -129,10 +129,10 @@ async function recordPv(to) {
 
 	//var title = to.meta.title;
 	// 记录访问信息
-	var res = await http.post(`${config.API_URL}/syspv`, { url: url });
-	if (!res || res.code != 200) {
-		console.log("pv error");
-	}
+	await http.post(`${config.API_URL}/syspv`, { url: url });
+	// if (!res || res.code != 200) {
+	// 	return;
+	// }
 }
 
 //转换

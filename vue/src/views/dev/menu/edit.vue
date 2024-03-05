@@ -43,7 +43,7 @@
 							子节点或详情页需要高亮的上级菜单路由地址
 						</div>
 					</el-form-item>
-					<el-form-item label="视图" prop="view">
+					<el-form-item label="视图地址" prop="view">
 						<el-input v-model="form.view" clearable placeholder="">
 							<template #prepend>views/</template>
 						</el-input>
@@ -51,7 +51,7 @@
 							如父节点、链接或Iframe等没有视图的菜单不需要填写
 						</div>
 					</el-form-item>
-					<el-form-item label="颜色" prop="color">
+					<el-form-item label="字体颜色" prop="color">
 						<el-color-picker v-model="form.color" :predefine="predefineColors"></el-color-picker>
 					</el-form-item>
 					<el-form-item label="是否显示">

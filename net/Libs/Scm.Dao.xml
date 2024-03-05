@@ -197,6 +197,11 @@
             是否全屏
             </summary>
         </member>
+        <member name="P:Com.Scm.Dao.Dev.MenuDao.keepAlive">
+            <summary>
+            是否缓存
+            </summary>
+        </member>
         <member name="P:Com.Scm.Dao.Dev.MenuDao.types">
             <summary>
             菜单类型

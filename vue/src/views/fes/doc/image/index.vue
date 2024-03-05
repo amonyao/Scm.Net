@@ -280,7 +280,6 @@ export default {
 		},
 		// 计算图片大小
 		calSize(item, width, height, def) {
-			console.log('calSize:width-' + width + ',height-' + height + ',def-' + def)
 			var tmp = def;
 			if (width && height) {
 				tmp = Math.round(this.imgWidth * height / width);

@@ -130,7 +130,6 @@ export default {
 			this.$refs.table.refresh();
 		},
 		search() {
-			console.log('search:' + this.param.types)
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {

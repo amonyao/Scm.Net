@@ -43,7 +43,6 @@ export default {
 	methods: {
 		onMounted() {
 			this.pageLoading = false;
-			console.log('dashboard mounted');
 		}
 	}
 }

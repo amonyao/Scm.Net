@@ -140,7 +140,6 @@ export default {
 
             // 测试数据
             var testData = this.testData();
-            console.log('test:' + testData.length)
             this.apiData = this.apiData.concat(testData);
             this.hasMore = true;
 

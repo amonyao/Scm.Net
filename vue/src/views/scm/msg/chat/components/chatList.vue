@@ -97,7 +97,6 @@ export default {
             if (name.length > 64) {
                 name = name.substring(0, 64);
             }
-            console.log(name);
             var res = this.$API.scmmsgchatmessage.create.post({ types: 2, users: ids, namec: name });
             if (!res || res.code != 200) {
                 return;
