@@ -110,6 +110,7 @@ import draggable from "vuedraggable";
 import allComps from "./components";
 
 export default {
+	name: "home_widgets",
 	components: {
 		draggable,
 	},

@@ -76,6 +76,7 @@ import hljs from 'highlight.js';
 // import 'codemirror/lib/codemirror.css';
 
 export default {
+    name: 'cms_doc_markpad',
     components: {
         VMdEditor
     },

@@ -54,6 +54,7 @@ import Header from '@editorjs/header';
 import List from '@editorjs/list';
 
 export default {
+    name: 'cms_doc_richpad',
     components: {
         Note: defineAsyncComponent(() => import("./components/note")),
     },

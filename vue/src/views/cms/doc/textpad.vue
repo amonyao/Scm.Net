@@ -18,6 +18,7 @@
 import { defineAsyncComponent } from "vue";
 
 export default {
+    name: 'cms_doc_textpad',
     components: {
         Note: defineAsyncComponent(() => import("./components/note")),
     },

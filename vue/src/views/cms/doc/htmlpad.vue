@@ -23,6 +23,7 @@ import '@wangeditor/editor/dist/css/style.css'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 
 export default {
+    name: 'cms_doc_htmlpad',
     components: {
         Editor, Toolbar,
         Note: defineAsyncComponent(() => import("./components/note")),

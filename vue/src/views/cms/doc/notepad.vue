@@ -33,6 +33,7 @@
 </template>
 <script>
 export default {
+    name: 'cms_doc_notepad',
     data() {
         return {
             formData: this.def_data(),
