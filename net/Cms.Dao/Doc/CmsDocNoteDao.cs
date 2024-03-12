@@ -85,12 +85,25 @@ namespace Com.Scm.Cms.Doc
         [Required]
         public int files { get; set; }
 
+        /// <summary>
+        /// 版本
+        /// </summary>
+        public int ver { get; set; }
+
         public override void PrepareCreate(long userId, long unitId = 0)
         {
             base.PrepareCreate(userId, unitId);
 
             this.salt = new Random().Next(10000).ToString("d4");
             this.key = this.id + this.salt;
+            this.ver = 1;
+        }
+
+        public override void PrepareUpdate(long userId, long unitId = 0)
+        {
+            base.PrepareUpdate(userId, unitId);
+
+            this.ver += 1;
         }
     }
 }
