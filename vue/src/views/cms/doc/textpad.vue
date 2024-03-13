@@ -29,8 +29,8 @@
                                     @keydown.enter="handleEnter" />
                             </div>
                             <div class="notepad-content">
-                                <el-input ref="content" v-model="formData.content" type="textarea" rows="30"
-                                    class="content" :placeholder="contentPlaceholder"></el-input>
+                                <el-input ref="content" v-model="formData.content" type="textarea" rows="30" class="content"
+                                    :placeholder="contentPlaceholder"></el-input>
                             </div>
                         </el-card>
                     </div>
@@ -56,7 +56,7 @@
 
 <script>
 export default {
-	name: 'cms_doc_textpad',
+    name: 'cms_doc_textpad',
     data() {
         return {
             param: {
@@ -184,7 +184,7 @@ export default {
             var tmp = this.$SCM.read_json(this.formData.id);
             var changed = false;
             if (tmp) {
-                changed = this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
+                changed = tmp.id == '0' || this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
             }
 
             if (!changed) {
@@ -235,10 +235,7 @@ export default {
 
             this.saving = false;
 
-            var note = this.$refs.scNote;
-            if (note) {
-                note.search();
-            }
+            this.search();
         },
         loadCache(id) {
             this.formData = this.$SCM.read_json(id);
