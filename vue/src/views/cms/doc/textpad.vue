@@ -56,6 +56,9 @@
 
 <script>
 export default {
+    components: {
+        Note: defineAsyncComponent(() => import("./components/note")),
+    },
     data() {
         return {
             param: {
