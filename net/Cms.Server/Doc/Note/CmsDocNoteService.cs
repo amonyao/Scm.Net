@@ -171,10 +171,8 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<NoteSaveResponse> SaveAsync(CmsDocNotesDto model)
+        public async Task<CmsDocNotesDto> SaveAsync(CmsDocNotesDto model)
         {
-            var response = new NoteSaveResponse();
-
             CmsDocNoteDao dao = null;
             var tooLong = model.IsTooLong();
 
@@ -193,6 +191,8 @@ namespace Com.Scm.Cms.Doc.Notes
                 dao.content = model.ToDbContent();
                 dao.files = tooLong ? 1 : 0;
                 await _thisRepository.InsertAsync(dao);
+
+                model.id = dao.id;
             }
             else
             {
@@ -208,8 +208,8 @@ namespace Com.Scm.Cms.Doc.Notes
                 CmsUtils.SaveFile(_EnvConfig.GetDataPath(FOLDER_NAME), dao.id, model.content);
             }
 
-            response.data = dao.id;
-            return response;
+            model.ver = dao.ver;
+            return model;
         }
 
         /// <summary>

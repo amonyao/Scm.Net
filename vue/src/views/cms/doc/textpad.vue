@@ -39,7 +39,7 @@
                     <div class="doc-tool">
                         <el-space>
                             <label>文章分类</label>
-                            <sc-select v-model="cat_id" :data="cat_list"></sc-select>
+                            <sc-select v-model="formData.cat_id" :data="cat_list"></sc-select>
                             <el-button type="primary" @click="newNote">
                                 <sc-icon set="sc" name="sc-file-line"></sc-icon>新建
                             </el-button>
@@ -62,18 +62,20 @@ export default {
                 types: 1,
                 key: ''
             },//查询条件
-            cat_id: '0',
             cat_list: [],
             note_list: [],//笔记列表
             formData: this.def_data(),
+            titlePlaceholder: '请输入标题……',
+            contentPlaceholder: '请输入内容……',
             timer: null,// 定时器
             loading: false,//加载标识
             saving: false,// 保存标识
-            titlePlaceholder: '请输入标题……',
-            contentPlaceholder: '请输入内容……',
         }
     },
     mounted() {
+        this.listCat();
+        this.search();
+
         this.timer = setInterval(() => {
             this.saveCache();
         }, 1000);
@@ -97,7 +99,6 @@ export default {
             }
         },
         async search() {
-            this.param.types = this.types;
             var res = await this.$API.cmsdocnote.list.get(this.param);
             if (!res || res.code != 200) {
                 return;
@@ -185,23 +186,23 @@ export default {
                 changed = this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
             }
 
-            if (changed) {
-                this.$confirm(`您有数据未保存，确认要新建文档吗？`, "提示", {
-                    type: "warning",
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                })
-                    .then(() => {
-                        this.loadCache('0');
-                        this.showArticle();
-                    })
-                    .catch(() => { });
+            if (!changed) {
+                this.formData = this.def_data();
                 return;
             }
 
-            this.loadCache('0');
+            this.$confirm(`您有数据未保存，确认要新建文档吗？`, "提示", {
+                type: "warning",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+            })
+                .then(() => {
+                    this.formData = this.def_data();
+                    this.showArticle();
+                })
+                .catch(() => { });
         },
-        async saveNote(catId) {
+        async saveNote() {
             if (!this.formData.types) {
                 this.$message.warning('请选择文章类型！');
                 return;
@@ -215,8 +216,6 @@ export default {
             if (!this.formData.title) {
                 this.formData.title = '未命名：' + this.$TOOL.dateTimeFormat(new Date());
             }
-
-            this.formData.cat_id = catId;
 
             this.saving = true;
             var res = await this.$API.cmsdocnote.save.post(this.formData);
@@ -247,7 +246,6 @@ export default {
             }
         },
         saveCache() {
-            console.log('save Notepad')
             if (this.saving) {
                 return;
             }

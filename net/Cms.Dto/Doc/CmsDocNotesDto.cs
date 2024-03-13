@@ -32,6 +32,11 @@ namespace Com.Scm.Cms.Doc
         [Required]
         public string content { get; set; }
 
+        /// <summary>
+        /// 版本信息
+        /// </summary>
+        public int ver { get; set; }
+
         public bool IsTooLong()
         {
             var tmp = this.content ?? "";
