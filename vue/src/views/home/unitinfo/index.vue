@@ -45,7 +45,7 @@
 import { defineAsyncComponent } from "vue";
 
 export default {
-	name: "userCenter",
+	name: "home_unit",
 	components: {
 		account: defineAsyncComponent(() => import("./components/account")),
 		seting: defineAsyncComponent(() => import("./components/seting")),

@@ -54,6 +54,7 @@ import myTask from './components/myTask';
 import scEcharts from "@/components/scEcharts";
 
 export default {
+    name: "home_data",
     components: {
         myCard,
         myTask,

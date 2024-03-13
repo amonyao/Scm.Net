@@ -85,6 +85,9 @@ namespace Com.Scm.Cms.Doc
         [Required]
         public int files { get; set; }
 
+        /// <summary>
+        /// 版本
+        /// </summary>
         public int ver { get; set; }
 
         public override void PrepareCreate(long userId, long unitId = 0)

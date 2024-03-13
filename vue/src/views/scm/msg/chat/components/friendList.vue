@@ -55,7 +55,9 @@ export default {
                 return;
             }
 
-            var list = [{ id: '1', user_id: '1', namec: '我', type: 1 }, { id: '1000000000000001002', user_id: '1000000000000001002', namec: '小木同学', type: 1 }];
+            var userId = this.user ? this.user.id : '1';
+            var list = [{ id: userId, user_id: userId, namec: '我', type: 1 },
+            { id: '1000000000000001002', user_id: '1000000000000001002', namec: '小木同学', type: 1 }];
             res.data.forEach(element => {
                 list.push(element);
             });

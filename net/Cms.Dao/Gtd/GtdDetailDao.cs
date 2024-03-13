@@ -14,12 +14,12 @@ namespace Com.Scm.Cms.Gtd
         /// <summary>
         /// 
         /// </summary>
-        public long user_id { get; set; }
+        public long header_id { get; set; }
 
         /// <summary>
-        /// 
+        /// 用户
         /// </summary>
-        public long header_id { get; set; }
+        public long user_id { get; set; }
 
         /// <summary>
         /// 
