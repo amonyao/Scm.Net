@@ -101,6 +101,7 @@ namespace Com.Scm.Cms.Doc.Notes
                 dvo.id = dao.id;
                 dvo.title = dao.title;
                 dvo.content = dao.summary;
+                dvo.ver = dao.ver;
 
                 if (dao.files > 0)
                 {
@@ -144,7 +145,7 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(CmsDocNotesDto model)
+        public async Task<bool> AddAsync(CmsDocNoteDto model)
         {
             var dao = model.Adapt<CmsDocNoteDao>();
             if (IsValidId(dao.cat_id))
@@ -171,7 +172,7 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<CmsDocNotesDto> SaveAsync(CmsDocNotesDto model)
+        public async Task<CmsDocNoteDto> SaveAsync(CmsDocNoteDto model)
         {
             CmsDocNoteDao dao = null;
             var tooLong = model.IsTooLong();
@@ -217,7 +218,7 @@ namespace Com.Scm.Cms.Doc.Notes
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(CmsDocNotesDto model)
+        public async Task UpdateAsync(CmsDocNoteDto model)
         {
             var dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)

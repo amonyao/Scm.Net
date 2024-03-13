@@ -228,7 +228,7 @@ namespace Com.Scm.Cms.Doc
             return 0;
         }
 
-        public async Task SaveNotesAsync(CmsDocNotesDto model)
+        public async Task SaveNotesAsync(CmsDocNoteDto model)
         {
             var content = model.content ?? "";
 
