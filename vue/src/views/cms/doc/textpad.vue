@@ -56,9 +56,7 @@
 
 <script>
 export default {
-    components: {
-        Note: defineAsyncComponent(() => import("./components/note")),
-    },
+	name: 'cms_doc_textpad',
     data() {
         return {
             param: {
