@@ -241,6 +241,7 @@ export default {
             this.editor.render(obj);
         },
         newNote() {
+            this.formData = this.def_data();
         },
         async saveNote() {
             var content = await this.editor.save();

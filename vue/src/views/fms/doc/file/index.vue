@@ -1,148 +1,157 @@
 <template>
-    <div class="page">
-        <scWaterfall :data="list" @preload="preload" @showContent="showContent">
-            <template #item="{ item }">
-                <img :data-src="item.src" :alt="item.names" :style="{ 'height': item._dim + 'px', }">
-                <div>
-                    <label>这是说明文字</label>
-                </div>
-            </template>
-        </scWaterfall>
-    </div>
+	<el-container class="is-vertical">
+		<sc-search @search="search">
+			<template>
+				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
+					<el-form-item label="查询选项" prop="option_id">
+						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
+					</el-form-item>
+					<el-form-item label="数据状态" prop="row_status">
+						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+					</el-form-item>
+					<el-form-item label="创建时间" prop="create_time">
+						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+							start-placeholder="开始日期" end-placeholder="结束日期" />
+					</el-form-item>
+				</el-form>
+			</template>
+
+			<template #filter>
+				<el-button type="primary" @click="open_dialog">
+					<sc-icon name="sc-plus" />
+				</el-button>
+				<el-divider direction="vertical"></el-divider>
+				<el-button-group>
+					<el-tooltip content="启用">
+						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)">
+							<sc-icon name="sc-check-circle-line" />
+						</el-button>
+					</el-tooltip>
+					<el-tooltip content="停用">
+						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)">
+							<sc-icon name="sc-pause-circle-line" />
+						</el-button>
+					</el-tooltip>
+					<el-tooltip content="删除">
+						<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list">
+							<sc-icon name="sc-close-circle-line" />
+						</el-button>
+					</el-tooltip>
+				</el-button-group>
+			</template>
+		</sc-search>
+		<el-main class="nopadding">
+			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+				@selection-change="selectionChange">
+				<el-table-column align="center" fixed type="selection" width="60" />
+				<el-table-column label="#" type="index" width="50"></el-table-column>
+				<el-table-column label="操作" align="center" fixed="right" width="140">
+
+					<template #default="scope">
+						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
+							编辑
+						</el-button>
+						<el-divider direction="vertical" />
+						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
+							<template #reference>
+								<el-button text type="primary" size="small">删除</el-button>
+							</template>
+						</el-popconfirm>
+					</template>
+				</el-table-column>
+
+				<template #row_status="scope">
+					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
+						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
+							@change="status_item($event, scope.row)">
+						</el-switch>
+					</el-tooltip>
+				</template>
+			</scTable>
+		</el-main>
+		<edit ref="edit" @complete="complete" />
+	</el-container>
 </template>
+
 <script>
+import { defineAsyncComponent } from "vue";
 export default {
-    data() {
-        return {
-            apiObj: this.$API.cmsdocarticle.page,
-            list: [],
-            imgWidth: 100,
-            param: {
-                types_id: '0',
-                row_status: 1,
-                create_time: '',
-                key: ''
-            },
-            selection: [],
-            column: [
-                { label: "id", prop: "id", hide: true },
-                { prop: 'types', label: '类型', width: 100, formatter: this.getTypesNames },
-                { prop: 'title', label: '主标题', width: 100 },
-                { prop: 'qty', label: '点赞数量', width: 100 },
-                { prop: 'fav_qty', label: '收藏数量', width: 100 },
-                { prop: 'msg_qty', label: '留言数量', width: 100 },
-                { prop: 'cat_id', label: '分类', width: 100 },
-                { prop: 'author_names', label: '作者', width: 100 },
-                { prop: 'row_status', label: '数据状态', width: 80 },
-                { prop: 'update_names', label: '更新人员', width: 100 },
-                { prop: 'update_time', label: '更新时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
-                { prop: 'create_names', label: '创建人员', width: 100 },
-                { prop: 'create_time', label: '创建时间', width: 160, sortable: true, formatter: this.$TOOL.dateTimeFormat },
-            ],
-            row_status_list: [this.$SCM.OPTION_ALL],
-            types_list: [this.$SCM.OPTION_ALL],
-        };
-    },
-    mounted() {
-        //this.$SCM.list_dic(this.types_list, 'article_type', true);
-        this.list = this.testData();
-    },
-    methods: {
-        complete() {
-            this.$refs.table.refresh();
-        },
-        testData() {
-            var imgArr = [{ 'src': 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', 'width': 595, 'height': 808 },
-            { 'src': 'https://fscdn.zto.com/fs8/M02/94/F3/wKhBD19OTuuAedCpAAIKGsFFPqc560.png', 'width': 595, 'height': 808 },
-            { 'src': 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', 'width': 188, 'height': 121 },
-            { 'src': 'https://vitejs.cn/vite3-cn/logo-with-shadow.png', 'width': 1317, 'height': 845 },
-            { 'src': 'https://fscdn.zto.com/fs8/M02/94/F3/wKhBD19OTuuAedCpAAIKGsFFPqc560.png', 'width': 1349, 'height': 799 }];
-
-            var list = [];
-            for (let i = 0; i < 40; i++) {
-                var idx = Math.round(Math.random() * (imgArr.length - 1));
-                var img = imgArr[idx];
-                //var tmp = this.imgWidth * img.height / img.width;
-                img.height = (Math.random() * img.height) + 100;
-                list.push(img);
-            }
-
-            return list;
-        },
-        preload(item) {
-            // 指定大小
-            if (item.height && item.width) {
-                this.calSize(item, item.width, item.height, this.imgWidth);
-                return;
-            }
-
-            // 无图则把高度设置为0
-            var src = item.src;
-            if (!src) {
-                this.calSize(item, 0, 0, this.imgWidth);
-                return;
-            }
-
-            let img = new Image();
-            img.src = src;
-            img.onload = img.onerror = (e) => {
-                var width = 0;
-                var height = 0;
-                if (e.type === "error") {
-                    item._error = true;
-                }
-                else if (e.type === 'load') {
-                    width = img.width;
-                    height = img.height;
-                }
-
-                this.calSize(item, width, height, this.imgWidth);
-            }
-        },
-        // 明细展示
-        showContent(item) {
-            let img = item.children[0];
-            if (img) {
-                if (img.loaded) {
-                    return;
-                }
-
-                img.src = img.getAttribute("data-src");
-                img.style.opacity = 1;
-                img.style.transform = "scale(1)";
-                img.loaded = true;
-            }
-        },
-        // 计算图片大小
-        calSize(item, width, height, def) {
-            var tmp = def;
-            if (width && height) {
-                tmp = Math.round(this.imgWidth * height / width);
-            }
-            item._dim = tmp;
-            // ++this.loadedCount;
-            // // 当前图片都与处理完，则加载图片
-            // if (this.apiData.length === this.loadedCount) {
-            //     this.preloaded();
-            // }
-        }
-    }
-}
+	components: {
+		edit: defineAsyncComponent(() => import("./edit")),
+	},
+	data() {
+		return {
+			apiObj: this.$API.fesdocfile.page,
+			list: [],
+			param: {
+				option_id: 0,
+				row_status: 1,
+				create_time: '',
+				key: ''
+			},
+			selection: [],
+			column: [
+				{ prop: "id", label: "id", hide: true },
+				{ prop: 'types', label: '类别', width: 100 },
+				{ prop: 'names', label: '系统名称', width: 100 },
+				{ prop: 'namec', label: '展示名称', width: 100 },
+				{ prop: 'path', label: '文件路径', width: 100 },
+				{ prop: 'size', label: '文件大小', width: 100 },
+				{ prop: 'remark', label: '备注', minWidth: 200 },
+				{ prop: 'file_create_time', label: '文件创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'file_modify_time', label: '文件修改时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '修改时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
+			],
+			row_status_list: [],
+			option_list: [],
+		};
+	},
+	mounted() {
+		this.$SCM.list_status(this.row_status_list);
+	},
+	methods: {
+		complete() {
+			this.$refs.table.refresh();
+		},
+		search() {
+			this.$refs.table.upData(this.param);
+		},
+		async status_item(e, row) {
+			this.$SCM.status_item(this, this.$API.fesdocfile.status, row, row.row_status);
+		},
+		status_list(status) {
+			this.$SCM.status_list(this, this.$API.fesdocfile.status, this.selection, status);
+		},
+		async delete_item(row) {
+			this.$SCM.delete_item(this, this.$API.fesdocfile.delete, row);
+		},
+		delete_list() {
+			this.$SCM.delete_list(this, this.$API.fesdocfile.delete, this.selection);
+		},
+		open_dialog(row) {
+			this.$refs.edit.open(row);
+		},
+		selectionChange(selection) {
+			this.selection = selection;
+		},
+		menuHandle(obj) {
+			if (obj.command == "add") {
+				this.open_dialog();
+				return;
+			}
+			if (obj.command == "edit") {
+				this.open_dialog(obj.row);
+				return;
+			}
+			if (obj.command == "delete") {
+				this.delete_item(obj.row);
+				return;
+			}
+		},
+	},
+};
 </script>
-<style scoped>
-.page {
-    width: 800px;
-    height: 100%;
-    margin: 0 auto;
-    background-color: white;
-}
-
-.waterfall-item img {
-    width: 100%;
-    border-radius: 10px;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.6s;
-    transition-delay: 0.1s;
-}
-</style>

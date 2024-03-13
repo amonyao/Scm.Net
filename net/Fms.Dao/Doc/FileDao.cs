@@ -114,8 +114,11 @@ namespace Com.Scm.Fes.Doc
         /// </summary>
         public long file_modify_time { get; set; }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="unitId"></param>
         public override void PrepareCreate(long userId, long unitId = 0)
         {
             base.PrepareCreate(userId, unitId);

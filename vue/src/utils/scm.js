@@ -19,7 +19,7 @@ scm.OPTION_ONE = { label: "请选择", id: "0", value: "0" };
 scm.OPTION_ALL_INT = { label: "所有", id: "0", value: 0 };
 scm.OPTION_ONE_INT = { label: "请选择", id: "0", value: 0 };
 
-scm.catch = [];
+scm.cache = [];
 
 scm.get_avatar = function (user) {
 	if (!user || !user.avatar) {
@@ -269,7 +269,7 @@ scm.list_dic = async function (list, key, all, useCatch) {
 		list.push(scm.OPTION_ONE_INT);
 	}
 
-	var data = useCatch ? scm.catch[key] : null;
+	var data = useCatch ? scm.cache[key] : null;
 	if (data == null) {
 		var res = await http.get(`${config.API_URL}/scmdic/option/` + key);
 		if (!res || res.code != 200) {
@@ -278,7 +278,7 @@ scm.list_dic = async function (list, key, all, useCatch) {
 
 		data = res.data;
 		if (useCatch) {
-			scm.catch[key] = data;
+			scm.cache[key] = data;
 		}
 	}
 
@@ -444,6 +444,77 @@ scm.save_table = async function (key, cfg) {
 		return false;
 	}
 	return true;
+};
+
+/**
+ * 本地临时存储数据
+ * @param {*} key
+ * @param {*} val
+ * @returns
+ */
+scm.save_cache = function (key, val) {
+	var type = typeof val || "string";
+
+	var tmp = val;
+	if (type != "number" && type != "string" && type != "boolean") {
+		tmp = JSON.stringify(val);
+	}
+
+	if (localStorage) {
+		localStorage.setItem(key, tmp);
+	}
+
+	scm.cache[key] = tmp;
+};
+
+/**
+ * 读取本地临时数据
+ * @param {*} key
+ * @param {*} val
+ * @returns
+ */
+scm.read_cache = function (key, val) {
+	var tmp = null;
+	if (localStorage) {
+		tmp = localStorage.getItem(key);
+	} else {
+		tmp = scm.cache[key];
+	}
+
+	return tmp || val;
+};
+
+/**
+ * 移除指定键值
+ * @param {*} key
+ * @returns
+ */
+scm.drop_cache = function (key) {
+	if (localStorage) {
+		localStorage.removeItem(key);
+		return;
+	}
+
+	scm.cache = scm.cache.filter((tmp) => {
+		return tmp != key;
+	});
+};
+
+/**
+ *
+ * @param {*} key
+ * @param {*} val
+ * @returns
+ */
+scm.read_json = function (key, val) {
+	var tmp = null;
+	if (localStorage) {
+		tmp = localStorage.getItem(key);
+	} else {
+		tmp = scm.cache[key];
+	}
+
+	return tmp ? JSON.parse(tmp) : val;
 };
 
 export default scm;

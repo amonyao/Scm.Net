@@ -1,6 +1,7 @@
 <template>
-    <i :class="scIcon" :style="{ 'fontSize': scSize, 'color': color }">{{ scName() }}</i>
+    <i class="scicon" :class="scIcon" :style="{ 'fontSize': scSize, 'color': color }">{{ scName() }}</i>
 </template>
+
 <script>
 export default {
     props: {

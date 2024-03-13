@@ -207,7 +207,7 @@ namespace Com.Scm.Fes.Doc
             await _thisRepository.Change<FileHandleDao>().InsertAsync(handleDao);
             #endregion
 
-            _anyliser = new ImageAnylise(_Client);
+            _anyliser = new ImageAnylise(_Client, _envConfig);
             await Task.Run(_anyliser.Run);
 
             response.SetSuccess("文件上传成功！");

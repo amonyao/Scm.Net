@@ -25,6 +25,7 @@
         </template>
     </sc-dialog>
 </template>
+
 <script>
 export default {
     props: {
@@ -94,8 +95,8 @@ export default {
                 param.onError(err);
             })
         },
-        uploadSuccess() {
-            this.$emit("complete");
+        uploadSuccess(res) {
+            this.$emit("complete", res);
             this.visible = false;
         },
         uploadError() {

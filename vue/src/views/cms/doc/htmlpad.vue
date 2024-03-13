@@ -29,10 +29,10 @@ export default {
     },
     data() {
         return {
-            title: '',
-            content: '',
             formData: this.def_data(),
-            article_list: [],
+            timer: null,// 定时器
+            loading: false,//加载标识
+            saving: false,// 保存标识
             scEditor: null,
             mode: 'simple', // 'default' 或 'simple'
             toolbarConfig: {},
@@ -74,22 +74,37 @@ export default {
         }
     },
     mounted() {
+        this.timer = setInterval(() => {
+            this.saveCache();
+        }, 1000);
+
+        this.loadCache('0');
+    },
+    unmounted() {
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
     },
     methods: {
         def_data() {
             return {
                 id: '0',
                 types: 2,
-                cat_id: '0',
                 title: '',
                 content: '',
+                cat_id: '0',
             };
         },
         handleCreated(editor) {
             this.scEditor = editor;
         },
         newNote() {
-            var changed = this.formData.title != this.title || this.formData.content != this.content;
+            var tmp = this.$SCM.read_json(this.formData.id);
+            var changed = false;
+            if (tmp) {
+                changed = this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
+            }
+
             if (changed) {
                 this.$confirm(`您有数据未保存，确认要新建文档吗？`, "提示", {
                     type: "warning",
@@ -97,42 +112,44 @@ export default {
                     cancelButtonText: "取消",
                 })
                     .then(() => {
-                        this.formData = this.def_data();
+                        this.loadCache('0');
                         this.showArticle();
                     })
                     .catch(() => { });
                 return;
             }
 
-            this.formData = this.def_data();
+            this.loadCache('0');
             this.showArticle();
         },
         async saveNote() {
-            if (!this.content || this.content == '<p><br></p>') {
-                this.$message.warning('请输入文章内容！');
-                return;
-            }
-
             if (!this.formData.types) {
                 this.$message.warning('请选择文章类型！');
                 return;
             }
 
-            this.formData.title = this.title;
-            this.formData.content = this.content;
+            if (!this.formData.content || this.formData.content == '<p><br></p>') {
+                this.$message.warning('请输入文章内容！');
+                return;
+            }
 
             if (!this.formData.title) {
                 this.formData.title = '未命名：' + this.$TOOL.dateTimeFormat(new Date());
             }
 
+            this.saving = true;
             var res = await this.$API.cmsdocnote.save.post(this.formData);
             if (!res || res.code != 200) {
                 this.$message.error(res.message);
+                this.saving = false;
                 return;
             }
 
             this.formData.id = res.data.data;
             this.$message.success("数据已保存！");
+
+            this.saving = false;
+
             var note = this.$refs.scNote;
             if (note) {
                 note.search();
@@ -144,6 +161,15 @@ export default {
             }
 
             this.loading = true;
+
+            // 优先读取本地缓存
+            this.formData = this.$SCM.read_json(item.id);
+            if (this.formData) {
+                this.loading = false;
+                return;
+            }
+
+            // 读取服务器信息
             var res = await this.$API.cmsdocnote.model.get(item.id);
             if (!res || res.code != 200) {
                 this.loading = false;
@@ -151,12 +177,27 @@ export default {
             }
 
             this.formData = res.data;
+            this.loading = false;
+
             this.showArticle();
         },
         showArticle() {
             this.title = this.formData.title;
             this.content = this.formData.content;
-        }
+        },
+        loadCache(id) {
+            this.formData = this.$SCM.read_json(id);
+            if (!this.formData) {
+                this.formData = this.def_data();
+            }
+        },
+        saveCache() {
+            if (this.saving) {
+                return;
+            }
+
+            this.$SCM.save_cache(this.formData.id, this.formData);
+        },
     }
 }
 </script>

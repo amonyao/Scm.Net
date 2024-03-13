@@ -1,4 +1,4 @@
-using Com.Scm.Dao;
+using Com.Scm.Dao.Unit;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +8,7 @@ namespace Com.Scm.Fes.Doc
     /// 
     /// </summary>
     [SugarTable("fes_doc_file_handle")]
-    public class FileHandleDao : ScmDataDao
+    public class FileHandleDao : ScmUnitDataDao
     {
         /// <summary>
         /// 

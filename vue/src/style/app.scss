@@ -70,8 +70,8 @@ a,button,input,textarea{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing: bo
 .el-menu .menu-tag {position: absolute;height: 18px;line-height: 18px;background: var(--el-color-danger);font-size: 12px;color: #fff;right: 20px;border-radius:18px;padding:0 6px;}
 .el-menu .el-sub-menu__title .menu-tag {right: 40px;}
 .el-menu--horizontal > li .menu-tag {display: none;}
-.el-sub-menu .scfont {margin-right: 5px;width: var(--el-menu-icon-width);text-align: center;font-size: 18px;vertical-align: middle}
-.el-menu-item .scfont {margin-right: 5px;width: var(--el-menu-icon-width);text-align: center;font-size: 18px;vertical-align: middle}
+.el-sub-menu .scicon {margin-right: 5px;width: var(--el-menu-icon-width);text-align: center;font-size: 18px;vertical-align: middle}
+.el-menu-item .scicon {margin-right: 5px;width: var(--el-menu-icon-width);text-align: center;font-size: 18px;vertical-align: middle}
 
 /* 右侧内容 */
 .scmui-body {flex: 1;display: flex;flex-flow: column;}

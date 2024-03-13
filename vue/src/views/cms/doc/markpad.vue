@@ -179,6 +179,7 @@ export default {
             this.formData = res.data;
         },
         newNote() {
+            this.formData = this.def_data();
         },
         async saveNote() {
             this.formData.cat_id = this.cat_id;

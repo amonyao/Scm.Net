@@ -1,4 +1,5 @@
-﻿using Com.Scm.Enums;
+﻿using Com.Scm.Config;
+using Com.Scm.Enums;
 using Com.Scm.Image.SkiaSharp;
 using SqlSugar;
 
@@ -7,10 +8,12 @@ namespace Com.Scm.Fes.Doc
     public class ImageAnylise
     {
         public ISqlSugarClient _Client;
+        private EnvConfig _EnvConfig;
 
-        public ImageAnylise(ISqlSugarClient client)
+        public ImageAnylise(ISqlSugarClient client, EnvConfig envConfig)
         {
             _Client = client;
+            _EnvConfig = envConfig;
         }
 
         public void Run()
@@ -42,7 +45,12 @@ namespace Com.Scm.Fes.Doc
             }
 
             var engine = new ImageEngine();
-            var image = engine.Load(fileDao.path);
+            var path = _EnvConfig.GetUploadPath(fileDao.path);
+            if (!File.Exists(path))
+            {
+                return;
+            }
+            var image = engine.Load(path);
             if (image == null)
             {
                 ChangeHandle(handleDao, ScmHandleEnum.Doing, ScmHandleEnum.Failure);

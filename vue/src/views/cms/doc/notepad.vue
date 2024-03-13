@@ -68,6 +68,7 @@ export default {
             });
         },
         newNote() {
+            this.formData = this.def_data();
         },
         async save() {
             var res = await this.$API.cmsdocnote.save.post(this.formData);
