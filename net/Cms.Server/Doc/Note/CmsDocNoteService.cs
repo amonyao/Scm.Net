@@ -99,6 +99,7 @@ namespace Com.Scm.Cms.Doc.Notes
             if (dao != null)
             {
                 dvo.id = dao.id;
+                dvo.types = dao.types;
                 dvo.title = dao.title;
                 dvo.content = dao.summary;
                 dvo.ver = dao.ver;

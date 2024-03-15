@@ -22,14 +22,14 @@
         <el-main style="padding: 0px;">
             <el-container>
                 <el-header>
-                    <div class="editor-toolbar">
+                    <div class="notepad-toolbar">
                         <Toolbar :editor="scEditor" :defaultConfig="toolbarConfig" :mode="mode" />
                     </div>
                 </el-header>
                 <el-main>
-                    <div class="editor-content">
-                        <div class="editor-container">
-                            <div class="title-container">
+                    <div class="notepad-content">
+                        <div class="notepad-container">
+                            <div class="notepad-title">
                                 <input v-model="title" :placeholder="titleConfig.placeholder" />
                             </div>
                             <Editor style="height: 900px; overflow-y: hidden;" v-model="content"
@@ -316,13 +316,28 @@ export default {
         margin-top: -4px;
     }
 
-    .notepad {
-        width: 860px;
+    .notepad-toolbar {
         margin: 0 auto;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .notepad-content {
+        overflow-y: auto;
+        position: relative;
+
+        .notepad-container {
+            width: 860px;
+            margin: 0 auto;
+            background-color: var(--el-bg-color);
+            padding: 20px 50px 50px 50px;
+            border: 1px solid var(--el-border-color-light);
+            box-shadow: var(--el-box-shadow-light);
+        }
 
         .notepad-title {
-            padding: 10px 0 20px 0;
-            /* border-bottom: 1px solid #e8e8e8; */
+            padding: 20px 0;
+            border-bottom: 1px solid var(--el-border-color-light);
 
             input {
                 font-size: 30px;
@@ -332,8 +347,6 @@ export default {
                 line-height: 1;
             }
         }
-
-        .notepad-content {}
     }
 }
 </style>
