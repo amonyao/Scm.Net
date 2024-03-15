@@ -53,5 +53,10 @@ namespace Com.Scm.Cms.Doc.Note.Dvo
         /// 
         /// </summary>
         public string content { get; set; }
+
+        /// <summary>
+        /// 版本
+        /// </summary>
+        public int ver { get; set; }
     }
 }

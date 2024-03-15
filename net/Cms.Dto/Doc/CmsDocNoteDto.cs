@@ -25,6 +25,7 @@ namespace Com.Scm.Cms.Doc
         /// <summary>
         /// 标题
         /// </summary>
+        [Required]
         [StringLength(256)]
         public string title { get; set; }
 
@@ -37,37 +38,31 @@ namespace Com.Scm.Cms.Doc
         /// <summary>
         /// 数量
         /// </summary>
-        [Required]
         public int qty { get; set; }
 
         /// <summary>
         /// 收藏数量
         /// </summary>
-        [Required]
         public int fav_qty { get; set; }
 
         /// <summary>
         /// 留言数量
         /// </summary>
-        [Required]
         public int msg_qty { get; set; }
 
         /// <summary>
         /// 分类
         /// </summary>
-        [Required]
         public long cat_id { get; set; }
 
         /// <summary>
         /// 文件
         /// </summary>
-        [Required]
         public int files { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [Required]
         [StringLength(1024)]
         public string summary { get; set; }
 
@@ -77,5 +72,36 @@ namespace Com.Scm.Cms.Doc
         [Required]
         [StringLength(1024)]
         public string content { get; set; }
+
+        /// <summary>
+        /// 版本信息
+        /// </summary>
+        public int ver { get; set; }
+
+        public bool IsTooLong()
+        {
+            var tmp = this.content ?? "";
+            return tmp.Length > CmsDocNoteDto.CONTENT_SIZE;
+        }
+
+        public string ToDbSummary()
+        {
+            var tmp = this.content ?? "";
+            if (tmp.Length > CmsDocNoteDto.SUMMARY_SIZE)
+            {
+                tmp = tmp.Substring(0, CmsDocNoteDto.SUMMARY_SIZE);
+            }
+            return tmp;
+        }
+
+        public string ToDbContent()
+        {
+            var tmp = this.content ?? "";
+            if (tmp.Length > CmsDocNoteDto.CONTENT_SIZE)
+            {
+                tmp = tmp.Substring(0, CmsDocNoteDto.CONTENT_SIZE);
+            }
+            return tmp;
+        }
     }
 }
