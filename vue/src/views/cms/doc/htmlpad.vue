@@ -1,21 +1,61 @@
 <template>
-    <Note ref="scNote" :types="2" @readNote="readNote" @newNote="newNote" @saveNote="saveNote">
-        <template #header>
-            <div class="editor-toolbar">
-                <Toolbar :editor="scEditor" :defaultConfig="toolbarConfig" :mode="mode" />
-            </div>
-        </template>
-        <div class="editor-content">
-            <div class="editor-container">
-                <div class="title-container">
-                    <input v-model="title" :placeholder="titleConfig.placeholder" />
-                </div>
-                <Editor style="height: 900px; overflow-y: hidden;" v-model="content" :defaultConfig="editorConfig"
-                    @onCreated="handleCreated" />
-            </div>
-        </div>
-    </Note>
+    <el-container class="doc">
+        <el-aside style="width: 320px;">
+            <el-container>
+                <el-header>
+                    <el-input placeholder="输入关键字进行过滤" v-model="param.key" clearable>
+                        <template #append>
+                            <el-button icon="el-icon-search" @click="search()" />
+                        </template>
+                    </el-input>
+                </el-header>
+                <el-main class="doc-guid">
+                    <sc-list :data="note_list" style="height: 100%;" @dropItem="itemDelete" :canSelected="true">
+                        <template #item="{ item }">
+                            <sc-summary :title="item.title" :summary="this.$TOOL.dateTimeFormat(item.create_time)"
+                                @click="itemClick(item)"></sc-summary>
+                        </template>
+                    </sc-list>
+                </el-main>
+            </el-container>
+        </el-aside>
+        <el-main style="padding: 0px;">
+            <el-container>
+                <el-header>
+                    <div class="editor-toolbar">
+                        <Toolbar :editor="scEditor" :defaultConfig="toolbarConfig" :mode="mode" />
+                    </div>
+                </el-header>
+                <el-main>
+                    <div class="editor-content">
+                        <div class="editor-container">
+                            <div class="title-container">
+                                <input v-model="title" :placeholder="titleConfig.placeholder" />
+                            </div>
+                            <Editor style="height: 900px; overflow-y: hidden;" v-model="content"
+                                :defaultConfig="editorConfig" @onCreated="handleCreated" />
+                        </div>
+                    </div>
+                </el-main>
+                <el-footer>
+                    <div class="doc-tool">
+                        <el-space>
+                            <label>文章分类</label>
+                            <sc-select v-model="formData.cat_id" :data="cat_list"></sc-select>
+                            <el-button type="primary" @click="newNote">
+                                <sc-icon set="sc" name="sc-file-line"></sc-icon>新建
+                            </el-button>
+                            <el-button type="danger" @click="saveNote">
+                                <sc-icon set="ms" name="save"></sc-icon>保存
+                            </el-button>
+                        </el-space>
+                    </div>
+                </el-footer>
+            </el-container>
+        </el-main>
+    </el-container>
 </template>
+
 <script>
 import { defineAsyncComponent } from "vue";
 
@@ -30,6 +70,12 @@ export default {
     },
     data() {
         return {
+            param: {
+                types: 2,
+                key: ''
+            },//查询条件
+            cat_list: [],
+            note_list: [],//笔记列表
             formData: this.def_data(),
             timer: null,// 定时器
             loading: false,//加载标识
@@ -75,6 +121,9 @@ export default {
         }
     },
     mounted() {
+        this.listCat();
+        this.search();
+
         this.timer = setInterval(() => {
             this.saveCache();
         }, 1000);
@@ -94,34 +143,115 @@ export default {
                 title: '',
                 content: '',
                 cat_id: '0',
-            };
+                ver: 1,
+            }
         },
         handleCreated(editor) {
             this.scEditor = editor;
+        },
+        async search() {
+            var res = await this.$API.cmsdocnote.list.get(this.param);
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.note_list = res.data;
+        },
+        async listCat() {
+            var res = await this.$API.cmsrescat.list.get();
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.cat_list.push({ id: '0', value: '0', label: '默认' });
+            res.data.forEach(element => {
+                this.cat_list.push({ id: element.id, value: element.id, label: element.namec });
+            });
+        },
+        itemClick(item) {
+            if (!item) {
+                return;
+            }
+
+            this.readNote(item);
+        },
+        itemDelete(item) {
+            if (!item || !item.id) {
+                return;
+            }
+
+            this.$confirm(
+                `确定要删除文章 ${item.title} 吗？`,
+                "提示",
+                {
+                    type: "warning",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                }
+            ).then(async () => {
+                var loading = this.$loading();
+                var res = await this.$API.cmsdocnotes.status.post({ 'ids': [item.id], 'status': 2 });
+                if (!res || res.code != 200) {
+                    this.$alert(res.message, "提示", { type: "error" });
+                    return;
+                }
+
+                loading.close();
+                this.search();
+            }).catch(() => { });
+        },
+        handleEnter() {
+            this.$refs.content.focus();
+        },
+        async readNote(item) {
+            if (!item || !item.id) {
+                return;
+            }
+
+            this.loading = true;
+
+            // 读取远程数据
+            var res = await this.$API.cmsdocnote.model.get(item.id);
+            if (!res || res.code != 200) {
+                this.loading = false;
+                return;
+            }
+
+            // 读取本地缓存
+            var cahced = this.$SCM.read_json(item.id, {});
+
+            var nativeVer = cahced.ver || 1;
+            var remoteVer = res.data.ver || 1;
+            if (nativeVer >= remoteVer) {
+                this.formData = cahced;
+            } else {
+                this.formData = res.data;
+            }
+
+            this.loading = false;
         },
         newNote() {
             var tmp = this.$SCM.read_json(this.formData.id);
             var changed = false;
             if (tmp) {
-                changed = this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
+                changed = tmp.id == '0' || this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
             }
 
-            if (changed) {
-                this.$confirm(`您有数据未保存，确认要新建文档吗？`, "提示", {
-                    type: "warning",
-                    confirmButtonText: "确定",
-                    cancelButtonText: "取消",
-                })
-                    .then(() => {
-                        this.loadCache('0');
-                        this.showArticle();
-                    })
-                    .catch(() => { });
+            if (!changed) {
+                this.formData = this.def_data();
                 return;
             }
 
-            this.loadCache('0');
-            this.showArticle();
+            this.$confirm(`您有数据未保存，确认要新建文档吗？`, "提示", {
+                type: "warning",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+            })
+                .then(() => {
+                    this.formData = this.def_data();
+                    this.showArticle();
+                })
+                .catch(() => { });
         },
         async saveNote() {
             if (!this.formData.types) {
@@ -146,45 +276,16 @@ export default {
                 return;
             }
 
-            this.formData.id = res.data.data;
+            this.formData.id = res.data.id;
+            this.formData.ver = res.data.ver;
             this.$message.success("数据已保存！");
+
+            // 暂不删除本地
+            // this.$SCM.drop_cache(this.formData.id);
 
             this.saving = false;
 
-            var note = this.$refs.scNote;
-            if (note) {
-                note.search();
-            }
-        },
-        async readNote(item) {
-            if (!item || item.id === '0') {
-                return;
-            }
-
-            this.loading = true;
-
-            // 优先读取本地缓存
-            this.formData = this.$SCM.read_json(item.id);
-            if (this.formData) {
-                this.loading = false;
-                return;
-            }
-
-            // 读取服务器信息
-            var res = await this.$API.cmsdocnote.model.get(item.id);
-            if (!res || res.code != 200) {
-                this.loading = false;
-                return;
-            }
-
-            this.formData = res.data;
-            this.loading = false;
-
-            this.showArticle();
-        },
-        showArticle() {
-            this.title = this.formData.title;
-            this.content = this.formData.content;
+            this.search();
         },
         loadCache(id) {
             this.formData = this.$SCM.read_json(id);
@@ -203,37 +304,36 @@ export default {
 }
 </script>
 <style type="scss" scoped>
-.editor-toolbar {
-    background-color: #FCFCFC;
-    margin: 0 auto;
-    height: 100%;
-    overflow: hidden;
-}
-
-.editor-content {
-    overflow-y: auto;
-    position: relative;
-
-    .editor-container {
-        width: 850px;
-        margin: 10px auto;
-        background-color: #fff;
-        padding: 20px 50px 50px 50px;
-        border: 1px solid #e8e8e8;
-        box-shadow: 0 2px 10px rgb(0 0 0 / 12%);
+.doc {
+    .doc-guid {
+        background-color: var(--el-bg-color);
+        padding: 0px;
     }
 
-    .title-container {
-        padding: 20px 0;
-        border-bottom: 1px solid #e8e8e8;
+    .doc-tool {
+        text-align: center;
+        align-items: center;
+        margin-top: -4px;
+    }
 
-        input {
-            font-size: 30px;
-            border: 0;
-            outline: none;
-            width: 100%;
-            line-height: 1;
+    .notepad {
+        width: 860px;
+        margin: 0 auto;
+
+        .notepad-title {
+            padding: 10px 0 20px 0;
+            /* border-bottom: 1px solid #e8e8e8; */
+
+            input {
+                font-size: 30px;
+                border: 0;
+                outline: none;
+                width: 100%;
+                line-height: 1;
+            }
         }
+
+        .notepad-content {}
     }
 }
 </style>
