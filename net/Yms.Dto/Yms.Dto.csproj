@@ -15,6 +15,9 @@
     <Reference Include="Scm.Common.Dto">
       <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Common.Text">
+      <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
