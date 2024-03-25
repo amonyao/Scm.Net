@@ -3,8 +3,8 @@
 		<sc-search @search="search">
 			<template #search>
 				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="应用" prop="app">
-						<sc-select v-model="param.app" placeholder="请选择" :data="app_list"></sc-select>
+					<el-form-item label="查询选项" prop="option_id">
+						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
 					</el-form-item>
 					<el-form-item label="数据状态" prop="row_status">
 						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
@@ -44,11 +44,11 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" hide-pagination is-tree
-				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
+			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+				@selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
+				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
-
 					<template #default="scope">
 						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
 							编辑
@@ -61,7 +61,6 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
-
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -74,33 +73,32 @@
 		<edit ref="edit" @complete="complete" />
 	</el-container>
 </template>
-
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
-	name: 'scm_res_cat',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},
 	data() {
 		return {
-			tableName: '',
-			apiObj: this.$API.scmrescat.list,
+			apiObj: this.$API.scmressms.page,
+			list: [],
 			param: {
-				app: '0',
+				option_id: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
 			},
-			list: [],
 			selection: [],
 			column: [
-				{ label: "id", prop: "id", hide: true },
-				{ prop: 'image', label: '图标', width: 100 },
-				{ prop: 'namec', label: '名称', minWidth: 200, align: 'left' },
-				{ prop: 'lv', label: '层级', width: 100 },
-				{ prop: 'od', label: '显示排序', width: 100 },
-				{ prop: 'qty', label: '引用数量', width: 100 },
+				{ prop: "id", label: "id", hide: true },
+				{ prop: 'types', label: '模板类型', width: 100 },
+				{ prop: 'codec', label: '模板代码', width: 100 },
+				{ prop: 'namec', label: '模板名称', width: 100 },
+				{ prop: 'head', label: '标题模板', width: 100, align: 'left' },
+				{ prop: 'body', label: '内容模板', minWidth: 200, align: 'left' },
+				{ prop: 'foot', label: '声明模板', width: 100, align: 'left' },
+				{ prop: 'file', label: '文件模板', width: 100 },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
@@ -108,11 +106,10 @@ export default {
 				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
 			row_status_list: [],
-			app_list: [],
+			option_list: [],
 		};
 	},
 	mounted() {
-		this.$SCM.list_app(this.app_list, 0, true);
 		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
@@ -123,16 +120,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.scmrescat.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmressms.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.scmrescat.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmressms.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.scmrescat.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmressms.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.scmrescat.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmressms.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -153,7 +150,7 @@ export default {
 				this.delete_item(obj.row);
 				return;
 			}
-		}
+		},
 	},
 };
 </script>

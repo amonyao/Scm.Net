@@ -13,6 +13,12 @@
 			<el-form-item label="性别">
 				<sc-select v-model="form.sex" placeholder="请选择" :data="sex_list"></sc-select>
 			</el-form-item>
+			<el-form-item label="手机号码">
+				<el-input v-model="form.phone"></el-input>
+			</el-form-item>
+			<el-form-item label="电子邮件">
+				<el-input v-model="form.email"></el-input>
+			</el-form-item>
 			<el-form-item label="个性签名">
 				<el-input v-model="form.remark" type="textarea"></el-input>
 			</el-form-item>
@@ -32,9 +38,11 @@ export default {
 				id: '0',
 				names: "admin@user",
 				namec: "系统管理员",
-				avatar: "",
+				phone: '',
+				email: '',
+				avatar: '',
 				sex: 1,
-				remark: "",
+				remark: '',
 				role: [],
 				post: [],
 			},

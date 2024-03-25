@@ -1,5 +1,5 @@
-import config from "@/config"
-import http from "@/utils/request"
+import config from "@/config";
+import http from "@/utils/request";
 
 export default {
 	token: {
@@ -7,70 +7,84 @@ export default {
 		name: "登录获取TOKEN",
 		post: async function (data = {}) {
 			return await http.post(this.url, data);
-		}
+		},
+	},
+	sendSms: {
+		url: `${config.API_URL}/operator/sendSms`,
+		name: "发送验证码",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		},
+	},
+	oauth: {
+		url: `${config.API_URL}/operator/sendSms`,
+		name: "发送验证码",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		},
 	},
 	user: {
 		url: `${config.API_URL}/operator/userword`,
 		name: "查询登录人信息",
 		get: async function (data = {}) {
 			return await http.get(this.url, data);
-		}
+		},
 	},
 	signIn: {
 		url: `${config.API_URL}/operator/signin`,
 		name: "登录",
 		post: async function (data = {}) {
 			return await http.post(this.url, data);
-		}
+		},
 	},
 	signon: {
 		url: `${config.API_URL}/operator/signon`,
 		name: "注册",
 		post: async function (data) {
 			return await http.post(this.url, data);
-		}
+		},
 	},
 	dateTheme: {
 		url: `${config.API_URL}/operator/datetheme`,
 		name: "获取登录风格",
 		get: async function (data) {
 			return await http.get(this.url, data);
-		}
+		},
 	},
 	userTheme: {
 		url: `${config.API_URL}/operator/usertheme`,
 		name: "获取登录风格",
 		get: async function (data) {
 			return await http.get(this.url, data);
-		}
+		},
 	},
 	userBasic: {
 		url: `${config.API_URL}/operator/userbasic`,
 		name: "修改登录人基本信息",
 		put: async function (data = {}) {
 			return await http.put(this.url, data);
-		}
+		},
 	},
 	userPass: {
 		url: `${config.API_URL}/operator/userpass`,
 		name: "修改密码",
 		put: async function (data) {
 			return await http.put(this.url, data);
-		}
+		},
 	},
 	unitWord: {
 		url: `${config.API_URL}/operator/unitword`,
 		name: "查询机构信息",
 		get: async function (data = {}) {
 			return await http.get(this.url, data);
-		}
+		},
 	},
 	unitBasic: {
 		url: `${config.API_URL}/operator/unitbasic`,
 		name: "修改登录机构基本信息",
 		put: async function (data = {}) {
 			return await http.put(this.url, data);
-		}
+		},
 	},
 	authority: {
 		url: `${config.API_URL}/operator/authoritymenu`,
@@ -79,4 +93,4 @@ export default {
 			return await http.get(this.url);
 		},
 	},
-}
+};

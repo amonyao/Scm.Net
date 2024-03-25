@@ -46,9 +46,10 @@ export default {
 	name: "home_user",
 	components: {
 		account: defineAsyncComponent(() => import("./components/account")),
-		seting: defineAsyncComponent(() => import("./components/seting")),
+		userSettings: defineAsyncComponent(() => import("./components/userSettings")),
 		pushSettings: defineAsyncComponent(() => import("./components/pushSettings")),
 		password: defineAsyncComponent(() => import("./components/password")),
+		oauth: defineAsyncComponent(() => import("./components/oauth")),
 		space: defineAsyncComponent(() => import("./components/space")),
 		logs: defineAsyncComponent(() => import("./components/logs")),
 	},
@@ -66,12 +67,17 @@ export default {
 						{
 							icon: "sc-settings-3-line",
 							title: "个人设置",
-							component: "seting",
+							component: "userSettings",
 						},
 						{
 							icon: "sc-pass-pending-line",
 							title: "修改密码",
 							component: "password",
+						},
+						{
+							icon: "sc-pass-pending-line",
+							title: "联合登录",
+							component: "oauth",
 						},
 						{
 							icon: "sc-bell-line",

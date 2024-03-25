@@ -121,13 +121,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.sysdicheader.add.post(
-							this.formData
-						);
+						res = await this.$API.sysdicheader.add.post(this.formData);
 					} else {
-						res = await this.$API.sysdicheader.update.put(
-							this.formData
-						);
+						res = await this.$API.sysdicheader.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

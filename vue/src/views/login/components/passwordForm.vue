@@ -1,7 +1,8 @@
 <template>
 	<el-form ref="loginForm" :model="form" :rules="rules" label-width="0" size="large">
 		<el-form-item prop="user">
-			<el-input v-model="form.user" prefix-icon="el-icon-user" clearable :placeholder="$t('login.userPlaceholder')">
+			<el-input v-model="form.user" prefix-icon="el-icon-user" clearable
+				:placeholder="$t('login.userPlaceholder')">
 			</el-input>
 		</el-form-item>
 		<el-form-item prop="pass">
@@ -9,7 +10,8 @@
 				:placeholder="$t('login.PWPlaceholder')"></el-input>
 		</el-form-item>
 		<el-form-item prop="code">
-			<el-input v-model.trim="form.code" :placeholder="$t('login.userCode')" clearable prefix-icon="el-icon-set-up">
+			<el-input v-model.trim="form.code" :placeholder="$t('login.userCode')" clearable
+				prefix-icon="el-icon-set-up">
 			</el-input>
 			<el-image class="login-code" :src="codeUrl" @click="changeCode" />
 		</el-form-item>
@@ -39,6 +41,7 @@ export default {
 		return {
 			codeUrl: "img/loading.gif",
 			form: {
+				mode: 1,
 				user: this.$CONFIG.DEF_USER,
 				pass: this.$CONFIG.DEF_PASS,
 				code: undefined,
@@ -61,13 +64,11 @@ export default {
 	},
 	mounted() {
 		this.form.codeKey = this.$TOOL.uuid();
-		this.codeUrl = this.$CONFIG.API_URL + "/captcha/" + this.form.codeKey;
+		this.codeUrl = this.$CONFIG.API_URL + "/captcha/cha/" + this.form.codeKey;
 	},
 	methods: {
 		async login() {
-			var validate = await this.$refs.loginForm
-				.validate()
-				.catch(() => { });
+			var validate = await this.$refs.loginForm.validate().catch(() => { });
 			if (!validate) {
 				return false;
 			}
@@ -83,6 +84,7 @@ export default {
 			//pass = this.$SCM.encode_pass(pass);
 
 			const data = {
+				mode: this.form.mode,
 				user: this.form.user,
 				pass: pass,
 				time: time,
@@ -122,7 +124,7 @@ export default {
 			this.$message.success("Login Success 登录成功");
 		},
 		changeCode() {
-			this.codeUrl = this.$CONFIG.API_URL + "/captcha/" + this.form.codeKey + `?timestamp=${new Date().getTime()}`;
+			this.codeUrl = this.$CONFIG.API_URL + "/captcha/cha/" + this.form.codeKey + `?timestamp=${new Date().getTime()}`;
 		},
 		async loadCfg() {
 			var cfgRes = await this.$API.syscfgconfig.list.get({ 'types': 10 });
