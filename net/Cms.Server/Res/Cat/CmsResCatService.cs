@@ -1,10 +1,8 @@
-using Com.Scm.Cms.Res;
 using Com.Scm.Cms.Res.Cat.Dvo;
-using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
-using Mapster;
+using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Cms.Res.Cat
@@ -30,8 +28,9 @@ namespace Com.Scm.Cms.Res.Cat
         {
             var query = await _thisRepository.AsQueryable()
                 .OrderByDescending(m => m.id)
+                .Select<CmsResCatDto>()
                 .ToPageAsync(request.page, request.limit);
-            return query.Adapt<PageResult<CmsResCatDto>>();
+            return query;
         }
 
         /// <summary>
@@ -43,8 +42,8 @@ namespace Com.Scm.Cms.Res.Cat
             var list = await _thisRepository
                 .AsQueryable()
                 .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
-                .Select<CmsResCatDto>()
                 .OrderByDescending(m => m.id)
+                .Select<CmsResCatDto>()
                 .ToListAsync();
             return list;
         }
@@ -54,8 +53,8 @@ namespace Com.Scm.Cms.Res.Cat
             var list = await _thisRepository
                 .AsQueryable()
                 .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled && a.id != request.id)
-                .Select(a => new ResOptionDvo { id = a.id, label = a.namec, value = a.id, parentId = a.pid })
                 .OrderByDescending(m => m.id)
+                .Select(a => new ResOptionDvo { id = a.id, label = a.namec, value = a.id, parentId = a.pid })
                 .ToListAsync();
             return list;
         }

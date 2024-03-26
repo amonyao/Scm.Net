@@ -1,10 +1,10 @@
 ﻿using Com.Scm.Cms.Doc.Daily.Dvo;
-using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Jwt;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Share.Dvo;
 using Com.Scm.Ur;
+using Com.Scm.Utils;
 
 namespace Com.Scm.Cms.Doc.Share
 {

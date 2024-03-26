@@ -1,5 +1,5 @@
 using Com.Scm.Dao.Unit;
-using Com.Scm.Uid;
+using Com.Scm.Utils;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -45,7 +45,7 @@ namespace Com.Scm.Yms.So
         {
             base.PrepareCreate(userId, unitId);
 
-            codes = UidHelper.NextCodes("oms_so_header");
+            codes = UidUtils.NextCodes("oms_so_header");
         }
     }
 }

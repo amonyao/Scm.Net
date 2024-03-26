@@ -1,8 +1,7 @@
-using Com.Scm.Aiml;
 using Com.Scm.Api.Configure.Filters;
 using Com.Scm.Api.Configure.Middleware;
 using Com.Scm.Config;
-using Com.Scm.Dsa.Dba.Sugar;
+using Com.Scm.Dsa.Dba.Sugar.UnitOfWork.Filters;
 using Com.Scm.Email.Config;
 using Com.Scm.Generator;
 using Com.Scm.Generator.Config;
@@ -16,7 +15,6 @@ using Com.Scm.Quartz.Extensions;
 using Com.Scm.Service;
 using Com.Scm.Share;
 using Com.Scm.Swagger;
-using Com.Scm.Uid;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
 using Microsoft.Extensions.FileProviders;
@@ -73,7 +71,7 @@ namespace Com.Scm.Api
 
             // UID≈‰÷√
             var uidConfig = AppUtils.GetConfig<UidConfig>(UidConfig.NAME);
-            UidHelper.InitConfig(uidConfig);
+            UidUtils.InitConfig(uidConfig);
 
             // Ω”ø⁄≈‰÷√
             var apiConfig = AppUtils.GetConfig<ApiConfig>(ApiConfig.NAME);

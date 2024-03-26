@@ -1,5 +1,5 @@
 using Com.Scm.Dao.Unit;
-using Com.Scm.Uid;
+using Com.Scm.Utils;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -123,7 +123,7 @@ namespace Com.Scm.Fms.Doc
         {
             base.PrepareCreate(userId, unitId);
 
-            codes = UidHelper.NextCodes("fes_doc_file");
+            codes = UidUtils.NextCodes("fes_doc_file");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Com.Scm.Dao;
 using Com.Scm.Enums;
-using Com.Scm.Uid;
+using Com.Scm.Utils;
 using System.ComponentModel.DataAnnotations;
 
 namespace Com.Scm.Samples.Demo.Dao
@@ -62,7 +62,7 @@ namespace Com.Scm.Samples.Demo.Dao
             base.PrepareCreate(userId, unitId);
 
             // 新增时，自动生成系统编码
-            codes = UidHelper.NextCodes("samples_demo");
+            codes = UidUtils.NextCodes("samples_demo");
             // 新增时，自动生成系统名称
             if (string.IsNullOrWhiteSpace(names))
             {
