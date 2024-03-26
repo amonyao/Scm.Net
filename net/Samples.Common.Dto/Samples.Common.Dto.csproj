@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Scm.Common.Dto">
       <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
     </Reference>
