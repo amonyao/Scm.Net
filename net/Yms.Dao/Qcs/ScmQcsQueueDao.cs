@@ -1,9 +1,8 @@
 using Com.Scm.Dao.Unit;
-using Com.Scm.Yms;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Qcs
+namespace Com.Scm.Yms.Qcs
 {
     /// <summary>
     /// 号码

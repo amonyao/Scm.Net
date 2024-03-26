@@ -6,9 +6,10 @@ using Com.Scm.Exceptions;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
+using Com.Scm.Yms.So.Dvo;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.So
+namespace Com.Scm.Yms.So
 {
     /// <summary>
     /// 订单主档服务接口

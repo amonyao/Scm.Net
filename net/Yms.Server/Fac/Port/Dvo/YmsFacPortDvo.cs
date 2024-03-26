@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Yms.Fac
+namespace Com.Scm.Yms.Fac.Port.Dvo
 {
     /// <summary>
     /// 大门管理

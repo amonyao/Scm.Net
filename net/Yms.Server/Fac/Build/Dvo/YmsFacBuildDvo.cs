@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Yms.Fac
+namespace Com.Scm.Yms.Fac.Build.Dvo
 {
     /// <summary>
     /// 楼宇

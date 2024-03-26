@@ -4,9 +4,10 @@ using Com.Scm.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
+using Com.Scm.Yms.Fac.Floor.Dvo;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Yms.Fac
+namespace Com.Scm.Yms.Fac.Floor
 {
     /// <summary>
     /// 楼层服务接口
@@ -57,7 +58,7 @@ namespace Com.Scm.Yms.Fac
         public async Task<List<YmsFacFloorDvo>> GetListAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
                 .Select<YmsFacFloorDvo>()
@@ -86,7 +87,7 @@ namespace Com.Scm.Yms.Fac
         public async Task<List<ResOptionDvo>> GetOptionAsync(ScmOptionRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.build_id == request.pid)
+                .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled && a.build_id == request.pid)
                 .OrderBy(a => a.id)
                 .Select(a => new ResOptionDvo { id = a.id, label = a.names, value = a.id })
                 .ToListAsync();

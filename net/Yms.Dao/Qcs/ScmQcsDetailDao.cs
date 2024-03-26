@@ -1,9 +1,8 @@
 using Com.Scm.Dao.Unit;
-using Com.Scm.Yms;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Qcs
+namespace Com.Scm.Yms.Qcs
 {
     /// <summary>
     /// 队列
@@ -75,7 +74,7 @@ namespace Com.Scm.Qcs
         /// <param name="step"></param>
         public void Add(int step)
         {
-            this.qty += step;
+            qty += step;
         }
 
         /// <summary>
@@ -83,7 +82,7 @@ namespace Com.Scm.Qcs
         /// </summary>
         public void Next()
         {
-            this.idx += 1;
+            idx += 1;
         }
 
         /// <summary>

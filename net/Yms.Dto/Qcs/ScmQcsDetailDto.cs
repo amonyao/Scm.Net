@@ -1,7 +1,7 @@
 using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Qcs
+namespace Com.Scm.Yms.Qcs
 {
     /// <summary>
     /// 队列

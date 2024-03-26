@@ -3,7 +3,7 @@ using Com.Scm.Uid;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.So
+namespace Com.Scm.Yms.So
 {
     /// <summary>
     /// 订单主档

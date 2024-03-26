@@ -1,8 +1,7 @@
 using Com.Scm.Dto;
-using Com.Scm.Yms;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Qcs
+namespace Com.Scm.Yms.Qcs
 {
     /// <summary>
     /// 号码

@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.So
+namespace Com.Scm.Yms.So.Dvo
 {
     /// <summary>
     /// 订单主档
