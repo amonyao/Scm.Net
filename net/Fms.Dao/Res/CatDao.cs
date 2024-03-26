@@ -3,7 +3,7 @@ using Com.Scm.Uid;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Cms.Res
+namespace Com.Scm.Fms.Res
 {
     /// <summary>
     /// 

@@ -2,7 +2,7 @@ using Com.Scm.Dao;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Fms.Doc
 {
     /// <summary>
     /// 图片颜色

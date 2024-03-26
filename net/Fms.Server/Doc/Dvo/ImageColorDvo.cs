@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Doc.Dvo
+namespace Com.Scm.Fms.Doc.Dvo
 {
     /// <summary>
     /// 图片颜色

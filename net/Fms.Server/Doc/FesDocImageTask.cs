@@ -1,4 +1,4 @@
-﻿namespace Com.Scm.Cms.Doc
+﻿namespace Com.Scm.Fms.Doc
 {
     public class FesDocImageTask
     {

@@ -1,15 +1,15 @@
-using Com.Scm.Cms.Res.Dvo;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
+using Com.Scm.Fms.Res.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Res
+namespace Com.Scm.Fms.Res
 {
     /// <summary>
     /// 服务接口
@@ -36,14 +36,14 @@ namespace Com.Scm.Cms.Res
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<TagDvo>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<FmsResTagDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(a => a.id)
-                .Select<TagDvo>()
+                .Select<FmsResTagDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -55,13 +55,13 @@ namespace Com.Scm.Cms.Res
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<TagDvo>> GetListAsync(ScmSearchRequest request)
+        public async Task<List<FmsResTagDvo>> GetListAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .Where(a => a.row_status == ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(a => a.id)
-                .Select<TagDvo>()
+                .Select<FmsResTagDvo>()
                 .ToListAsync();
 
             Prepare(result);
@@ -72,7 +72,7 @@ namespace Com.Scm.Cms.Res
         /// 
         /// </summary>
         /// <param name="list"></param>
-        private void Prepare(List<TagDvo> list)
+        private void Prepare(List<FmsResTagDvo> list)
         {
             foreach (var item in list)
             {
@@ -116,11 +116,11 @@ namespace Com.Scm.Cms.Res
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<TagDvo> GetViewAsync(long id)
+        public async Task<FmsResTagDvo> GetViewAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<TagDvo>()
+                .Select<FmsResTagDvo>()
                 .FirstAsync(m => m.id == id);
         }
 

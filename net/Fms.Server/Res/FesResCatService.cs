@@ -5,7 +5,7 @@ using Com.Scm.Service;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Res
+namespace Com.Scm.Fms.Res
 {
     /// <summary>
     /// 服务接口

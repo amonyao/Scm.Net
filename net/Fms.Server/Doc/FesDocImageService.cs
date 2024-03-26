@@ -1,4 +1,3 @@
-using Com.Scm.Cms.Doc.Dvo;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -6,13 +5,14 @@ using Com.Scm.Dvo;
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
 using Com.Scm.Filter;
+using Com.Scm.Fms.Doc.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Fms.Doc
 {
     /// <summary>
     /// 图片数据服务接口

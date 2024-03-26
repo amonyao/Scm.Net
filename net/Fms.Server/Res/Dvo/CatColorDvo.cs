@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Res.Dvo
+namespace Com.Scm.Fms.Res.Dvo
 {
     /// <summary>
     /// 

@@ -1,11 +1,11 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Res.Dvo
+namespace Com.Scm.Fms.Res.Dvo
 {
     /// <summary>
     /// 
     /// </summary>
-    public class TagDvo : ScmDataDvo
+    public class FmsResTagDvo : ScmDataDvo
     {
         /// <summary>
         /// 

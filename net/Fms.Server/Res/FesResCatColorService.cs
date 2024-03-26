@@ -1,15 +1,15 @@
-using Com.Scm.Cms.Res.Dvo;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
+using Com.Scm.Fms.Res.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Res
+namespace Com.Scm.Fms.Res
 {
     /// <summary>
     /// 服务接口

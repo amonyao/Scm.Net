@@ -1,16 +1,16 @@
-using Com.Scm.Cms;
-using Com.Scm.Cms.Doc.Dvo;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
+using Com.Scm.Fms;
+using Com.Scm.Fms.Doc.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Fms.Doc
 {
     /// <summary>
     /// 服务接口
@@ -204,7 +204,7 @@ namespace Com.Scm.Cms.Doc
 
             var handleDao = new FileHandleDao();
             handleDao.id = fileDao.id;
-            handleDao.handle = Scm.Enums.ScmHandleEnum.Todo;
+            handleDao.handle = Enums.ScmHandleEnum.Todo;
             await _thisRepository.Change<FileHandleDao>().InsertAsync(handleDao);
             #endregion
 

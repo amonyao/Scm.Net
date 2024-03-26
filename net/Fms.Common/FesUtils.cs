@@ -1,4 +1,4 @@
-﻿namespace Com.Scm.Cms
+﻿namespace Com.Scm.Fms
 {
     public class FesUtils
     {
