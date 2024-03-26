@@ -2,7 +2,7 @@ using Com.Scm.Result;
 using System.Net;
 using System.Text.Json;
 
-namespace Com.Scm.Api.Middleware;
+namespace Com.Scm.Api.Configure.Middleware;
 
 public class ExceptionMiddleware
 {

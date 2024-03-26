@@ -1,4 +1,4 @@
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Doc.Dvo
 {
     /// <summary>
     /// 图片数据

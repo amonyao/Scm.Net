@@ -2,7 +2,7 @@ using Com.Scm.Cms.Enums;
 using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Fav
+namespace Com.Scm.Cms.Fav
 {
     /// <summary>
     /// 

@@ -7,7 +7,7 @@ using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Res
+namespace Com.Scm.Cms.Res.Author
 {
     /// <summary>
     /// 作者服务接口
@@ -52,7 +52,7 @@ namespace Com.Scm.Cms.Res
         public async Task<List<CmsResAuthorDto>> GetListAsync(SearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.dynasty_id), a => a.dynasty_id == request.dynasty_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.names.Contains(request.key))
                 .OrderBy(m => m.id)
@@ -71,7 +71,7 @@ namespace Com.Scm.Cms.Res
         public async Task<List<ResOptionDvo>> GetOptionAsync(OptionRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.dynasty_id == request.dynasty_id)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled && a.dynasty_id == request.dynasty_id)
                 .OrderBy(a => a.id)
                 .Select(a => new ResOptionDvo { id = a.id, label = a.names, value = a.id })
                 .ToListAsync();

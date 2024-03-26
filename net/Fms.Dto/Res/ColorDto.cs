@@ -1,7 +1,7 @@
 using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Res
 {
     /// <summary>
     /// 

@@ -2,7 +2,7 @@ using Com.Scm.Dao;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Cms
+namespace Com.Scm.Cms.Cfg
 {
     /// <summary>
     /// 

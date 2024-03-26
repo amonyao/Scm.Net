@@ -1,8 +1,10 @@
-﻿using Com.Scm.Config;
+﻿using Com.Scm;
+using Com.Scm.Config;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
 using Com.Scm.Enums;
 using Com.Scm.Result;
+using Com.Scm.Samples;
 using Com.Scm.Samples.Demo.Dao;
 using Com.Scm.Samples.Demo.Dto;
 using Com.Scm.Samples.Demo.Dvo;

@@ -1,3 +1,4 @@
+using Com.Scm.Cms.Res.Dvo;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
@@ -8,7 +9,7 @@ using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Res
 {
     /// <summary>
     /// 服务接口

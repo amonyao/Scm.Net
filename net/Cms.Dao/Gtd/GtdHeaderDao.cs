@@ -3,7 +3,7 @@ using Com.Scm.Dao.Unit;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Gtd
+namespace Com.Scm.Cms.Gtd
 {
     /// <summary>
     /// 待办（头档）

@@ -3,7 +3,7 @@ using Com.Scm.Uid;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Doc
 {
     /// <summary>
     /// 图片数据

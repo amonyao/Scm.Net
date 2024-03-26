@@ -3,7 +3,7 @@ using Com.Scm.Dao.Unit;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Fav
+namespace Com.Scm.Cms.Fav
 {
     /// <summary>
     /// 

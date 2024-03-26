@@ -1,4 +1,5 @@
 ﻿using Com.Scm.Cms.Doc.Note.Dvo;
+using Com.Scm.Cms.Res;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -10,7 +11,7 @@ using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Doc.Notes
+namespace Com.Scm.Cms.Doc.Note
 {
     /// <summary>
     /// 记事
@@ -60,7 +61,7 @@ namespace Com.Scm.Cms.Doc.Notes
         public async Task<List<NoteBasicDvo>> GetListAsync(NoteSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
                 .WhereIF(request.types != Enums.NoteTypesEnum.None, a => a.types == request.types)
@@ -286,7 +287,7 @@ namespace Com.Scm.Cms.Doc.Notes
             #region 保存文件
             var fileName = request.file.FileName;
             var ext = Path.GetExtension(fileName);
-            fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
+            fileName = DateTime.UtcNow.Ticks.ToString() + ext;
 
             var path = _EnvConfig.GetUploadPath(fileName);
             using (var stream = File.OpenWrite(path))

@@ -1,12 +1,11 @@
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
-using Com.Scm.Fes.Doc;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FytSoa.Application.Fes.Doc
+namespace Com.Scm.Cms.Res
 {
     /// <summary>
     /// 服务接口
@@ -25,12 +24,12 @@ namespace FytSoa.Application.Fes.Doc
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<PageResult<Com.Scm.Fes.Doc.CatDvo>> GetPagesAsync(ScmSearchPageRequest param)
+        public async Task<PageResult<Dvo.CatDvo>> GetPagesAsync(ScmSearchPageRequest param)
         {
             var query = await _thisRepository.AsQueryable()
                 //.WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 .OrderBy(m => m.id)
-                .Select<Com.Scm.Fes.Doc.CatDvo>()
+                .Select<Dvo.CatDvo>()
                 .ToPageAsync(param.page, param.limit);
             return query;
         }
@@ -39,11 +38,11 @@ namespace FytSoa.Application.Fes.Doc
         /// 查询所有
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Com.Scm.Fes.Doc.CatDvo>> GetListAsync(ScmSearchRequest param)
+        public async Task<List<Dvo.CatDvo>> GetListAsync(ScmSearchRequest param)
         {
             var list = await _thisRepository.AsQueryable()
                         .OrderBy(m => m.id)
-                        .Select<Com.Scm.Fes.Doc.CatDvo>()
+                        .Select<Dvo.CatDvo>()
                         .ToListAsync();
             return list;
         }
@@ -80,11 +79,11 @@ namespace FytSoa.Application.Fes.Doc
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<Com.Scm.Fes.Doc.CatDvo> GetViewAsync(long id)
+        public async Task<Dvo.CatDvo> GetViewAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<Com.Scm.Fes.Doc.CatDvo>()
+                .Select<Dvo.CatDvo>()
                 .FirstAsync(m => m.id == id);
         }
 

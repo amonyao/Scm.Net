@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 using System.Text.RegularExpressions;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Cms.Doc.Article
 {
     /// <summary>
     /// 文章服务接口
@@ -50,7 +50,7 @@ namespace Com.Scm.Cms.Doc
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.key == request.key)
-                .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
+                .OrderBy(m => m.id, OrderByType.Desc)
                 .Select<CmsDocArticleDto>()
                 .ToPageAsync(request.page, request.limit);
 
@@ -66,10 +66,10 @@ namespace Com.Scm.Cms.Doc
         public async Task<List<CmsDocArticleDto>> GetListAsync(ListRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key))
-                .OrderBy(m => m.id, SqlSugar.OrderByType.Desc)
+                .OrderBy(m => m.id, OrderByType.Desc)
                 .Select(a => new CmsDocArticleDto { id = a.id, key = a.key, title = a.title, create_time = a.create_time, update_time = a.update_time })
                 .ToListAsync();
 
@@ -329,7 +329,7 @@ namespace Com.Scm.Cms.Doc
             #region 保存文件
             var fileName = request.file.FileName;
             var ext = Path.GetExtension(fileName);
-            fileName = System.DateTime.UtcNow.Ticks.ToString() + ext;
+            fileName = DateTime.UtcNow.Ticks.ToString() + ext;
 
             var path = _EnvConfig.GetUploadPath(fileName);
             using (var stream = File.OpenWrite(path))

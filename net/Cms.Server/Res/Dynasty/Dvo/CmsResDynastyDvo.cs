@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Cms.Res.Dynasty.Dvo
 {
     /// <summary>
     /// 

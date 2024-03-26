@@ -1,4 +1,4 @@
-using Com.Scm.Cms.Doc;
+using Com.Scm.Cms.Res;
 using Com.Scm.Cms.Res.Cat.Dvo;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
@@ -7,7 +7,7 @@ using Com.Scm.Service;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FytSoa.Application.Cms.Doc
+namespace Com.Scm.Cms.Res.Cat
 {
     /// <summary>
     /// 服务接口
@@ -42,7 +42,7 @@ namespace FytSoa.Application.Cms.Doc
         {
             var list = await _thisRepository
                 .AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 .Select<CmsResCatDto>()
                 .OrderByDescending(m => m.id)
                 .ToListAsync();
@@ -53,7 +53,7 @@ namespace FytSoa.Application.Cms.Doc
         {
             var list = await _thisRepository
                 .AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled && a.id != request.id)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled && a.id != request.id)
                 .Select(a => new ResOptionDvo { id = a.id, label = a.namec, value = a.id, parentId = a.pid })
                 .OrderByDescending(m => m.id)
                 .ToListAsync();

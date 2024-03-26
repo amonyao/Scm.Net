@@ -1,4 +1,4 @@
-using Com.Scm.Cms.Fav.Uri;
+using Com.Scm.Cms.Fav;
 using Com.Scm.Cms.Fav.Uri.Dvo;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
@@ -10,7 +10,7 @@ using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Fav.Uri
+namespace Com.Scm.Cms.Fav.Uri
 {
     /// <summary>
     /// 服务接口

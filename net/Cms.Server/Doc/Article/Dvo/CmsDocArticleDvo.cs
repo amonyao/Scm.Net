@@ -1,7 +1,7 @@
 using Com.Scm.Cms.Enums;
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Cms.Doc.Article.Dvo
 {
     /// <summary>
     /// 文章

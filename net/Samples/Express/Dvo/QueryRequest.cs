@@ -1,4 +1,4 @@
-﻿namespace Samples.Express.Dvo
+﻿namespace Com.Scm.Samples.Express.Dvo
 {
     public class QueryRequest
     {

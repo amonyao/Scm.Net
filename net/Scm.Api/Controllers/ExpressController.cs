@@ -1,5 +1,4 @@
-﻿using Com.Scm.Api.Controllers;
-using Com.Scm.Config;
+﻿using Com.Scm.Config;
 using Com.Scm.Dvo;
 using Com.Scm.Express.Dto;
 using Com.Scm.Express.My;
@@ -11,7 +10,7 @@ using Com.Scm.Express.OrderUpdate;
 using Com.Scm.Express.RouteSearch;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Scm.Api.Controllers
+namespace Com.Scm.Api.Controllers
 {
     [Route("express")]
     public class ExpressController : ApiController

@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Doc.Dvo
 {
     /// <summary>
     /// 

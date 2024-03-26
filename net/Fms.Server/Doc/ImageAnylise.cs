@@ -1,9 +1,10 @@
-﻿using Com.Scm.Config;
+﻿using Com.Scm.Cms.Res;
+using Com.Scm.Config;
 using Com.Scm.Enums;
 using Com.Scm.Image.SkiaSharp;
 using SqlSugar;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Doc
 {
     public class ImageAnylise
     {

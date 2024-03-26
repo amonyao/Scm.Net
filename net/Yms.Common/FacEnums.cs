@@ -1,4 +1,4 @@
-﻿namespace Com.Scm.Yms.Fac
+﻿namespace Com.Scm.Yms
 {
     public enum FacPortTypesEnums
     {

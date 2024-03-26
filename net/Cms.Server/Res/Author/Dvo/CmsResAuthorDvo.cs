@@ -1,6 +1,6 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Cms.Res
+namespace Com.Scm.Cms.Res.Author.Dvo
 {
     /// <summary>
     /// 作者

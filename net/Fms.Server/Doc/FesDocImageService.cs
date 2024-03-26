@@ -1,3 +1,4 @@
+using Com.Scm.Cms.Doc.Dvo;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -11,7 +12,7 @@ using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Doc
 {
     /// <summary>
     /// 图片数据服务接口

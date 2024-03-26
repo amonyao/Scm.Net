@@ -1,6 +1,6 @@
 using Com.Scm.Aiml;
-using Com.Scm.Api.Filters;
-using Com.Scm.Api.Middleware;
+using Com.Scm.Api.Configure.Filters;
+using Com.Scm.Api.Configure.Middleware;
 using Com.Scm.Config;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Email.Config;

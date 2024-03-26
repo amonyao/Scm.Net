@@ -6,7 +6,7 @@ using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Cms.Doc.ArticleTag
 {
     /// <summary>
     /// 服务接口
@@ -51,7 +51,7 @@ namespace Com.Scm.Cms.Doc
         public async Task<List<CmsDocArticleTagDto>> GetListAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
                 .Select<CmsDocArticleTagDto>()

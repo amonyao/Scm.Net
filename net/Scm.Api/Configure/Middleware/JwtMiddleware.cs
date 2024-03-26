@@ -2,7 +2,7 @@ using Com.Scm.Api.Service;
 using Com.Scm.Jwt;
 using Com.Scm.Utils;
 
-namespace Com.Scm.Api.Middleware;
+namespace Com.Scm.Api.Configure.Middleware;
 
 public class JwtMiddleware
 {

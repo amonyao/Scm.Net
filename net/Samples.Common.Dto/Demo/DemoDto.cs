@@ -1,7 +1,7 @@
 ﻿using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Samples.Demo.Dto
+namespace Com.Scm.Samples.Demo
 {
     /// <summary>
     /// 演示对象DTO

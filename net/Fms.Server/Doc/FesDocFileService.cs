@@ -1,4 +1,5 @@
 using Com.Scm.Cms;
+using Com.Scm.Cms.Doc.Dvo;
 using Com.Scm.Config;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
@@ -9,7 +10,7 @@ using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
-namespace Com.Scm.Fes.Doc
+namespace Com.Scm.Cms.Doc
 {
     /// <summary>
     /// 服务接口
@@ -203,7 +204,7 @@ namespace Com.Scm.Fes.Doc
 
             var handleDao = new FileHandleDao();
             handleDao.id = fileDao.id;
-            handleDao.handle = Com.Scm.Enums.ScmHandleEnum.Todo;
+            handleDao.handle = Scm.Enums.ScmHandleEnum.Todo;
             await _thisRepository.Change<FileHandleDao>().InsertAsync(handleDao);
             #endregion
 

@@ -1,7 +1,7 @@
 using Com.Scm.Quartz.Extensions;
 using Com.Scm.Utils;
 
-namespace Com.Scm.Api.Middleware;
+namespace Com.Scm.Api.Configure.Middleware;
 
 public static class UseMiddleware
 {

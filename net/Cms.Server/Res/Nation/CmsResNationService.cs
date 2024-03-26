@@ -1,3 +1,4 @@
+using Com.Scm.Cms.Res;
 using Com.Scm.Dao.Ur;
 using Com.Scm.Dsa.Dba.Sugar;
 using Com.Scm.Dvo;
@@ -6,7 +7,7 @@ using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Cms.Doc
+namespace Com.Scm.Cms.Res.Nation
 {
     /// <summary>
     /// 国别服务接口
@@ -51,7 +52,7 @@ namespace Com.Scm.Cms.Doc
         public async Task<List<CmsResNationDto>> GetListAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
                 .Select<CmsResNationDto>()
@@ -69,7 +70,7 @@ namespace Com.Scm.Cms.Doc
         public async Task<List<ResOptionDvo>> GetOptionAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 .OrderBy(a => a.id)
                 .Select(a => new ResOptionDvo { id = a.id, label = a.names, value = a.id })
                 .ToListAsync();
