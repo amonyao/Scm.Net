@@ -29,8 +29,8 @@
                                     @keydown.enter="handleEnter" />
                             </div>
                             <div class="notepad-content">
-                                <el-input ref="content" v-model="formData.content" type="textarea" rows="30" class="content"
-                                    :placeholder="contentPlaceholder"></el-input>
+                                <el-input ref="content" v-model="formData.content" type="textarea" rows="30"
+                                    class="content" :placeholder="contentPlaceholder"></el-input>
                             </div>
                         </el-card>
                     </div>
@@ -238,7 +238,7 @@ export default {
             this.search();
         },
         loadCache(id) {
-            this.formData = this.$SCM.read_json(id);
+            this.formData = this.$SCM.read_json('textpad_' + id);
             if (!this.formData) {
                 this.formData = this.def_data();
             }
@@ -248,7 +248,7 @@ export default {
                 return;
             }
 
-            this.$SCM.save_cache(this.formData.id, this.formData);
+            this.$SCM.save_cache('textpad_' + this.formData.id, this.formData);
         },
     }
 }

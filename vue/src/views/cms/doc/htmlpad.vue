@@ -30,9 +30,9 @@
                     <div class="notepad-content">
                         <div class="notepad-container">
                             <div class="notepad-title">
-                                <input v-model="title" :placeholder="titleConfig.placeholder" />
+                                <input v-model="formData.title" :placeholder="titleConfig.placeholder" />
                             </div>
-                            <Editor style="height: 900px; overflow-y: hidden;" v-model="content"
+                            <Editor style="height: 900px; overflow-y: hidden;" v-model="formData.content"
                                 :defaultConfig="editorConfig" @onCreated="handleCreated" />
                         </div>
                     </div>
@@ -288,7 +288,7 @@ export default {
             this.search();
         },
         loadCache(id) {
-            this.formData = this.$SCM.read_json(id);
+            this.formData = this.$SCM.read_json('htmlpad_' + id);
             if (!this.formData) {
                 this.formData = this.def_data();
             }
@@ -298,7 +298,7 @@ export default {
                 return;
             }
 
-            this.$SCM.save_cache(this.formData.id, this.formData);
+			this.$SCM.save_cache('htmlpad_' + this.formData.id, this.formData);
         },
     }
 }
