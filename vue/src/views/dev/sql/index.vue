@@ -104,6 +104,8 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import { EditorView, basicSetup } from "codemirror";
+import { syntaxHighlighting, defaultHighlightStyle } from "@codemirror/language"
+import { autocompletion } from "@codemirror/autocomplete"
 import { EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
 import { sql } from "@codemirror/lang-sql";
@@ -132,14 +134,15 @@ export default {
             param: {
                 db_id: '0'
             },
-            options: {
-                theme: '',
-                // lineNumbers: true,
-                styleActiveLine: true,
-                lineWrapping: true,
-            },
             code: '', // 实时输入的代码
             runLoading: false, // 运行加载状态
+            talbeOptions: [
+                { label: "select", type: "keyword" },
+                { label: "update", type: "keyword" },
+                { label: "delete", type: "keyword" },
+                { label: "from", type: "keyword" },
+                { label: "where", type: "keyword" },
+            ],
             errMsg: {
                 sql: '',
                 message: '',
@@ -156,13 +159,34 @@ export default {
     methods: {
         init() {
             let startState = EditorState.create({
-                extensions: [basicSetup, javascript(), sql()]
+                extensions: [
+                    basicSetup,
+                    javascript(),
+                    sql(),
+                    autocompletion({ override: [this.myCompletions] }),
+                    syntaxHighlighting(defaultHighlightStyle)]
             })
 
             this.sqlEditor = new EditorView({
                 state: startState,
-                parent: this.$refs.sqlEditor
+                parent: this.$refs.sqlEditor,
+                options: {
+                    mode: 'sql',
+                    theme: '',
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    lineWrapping: true,
+                },
             })
+        },
+        myCompletions(context) {
+            let word = context.matchBefore(/\w*/)
+            if (word.from == word.to && !context.explicit)
+                return null
+            return {
+                from: word.from,
+                options: this.talbeOptions
+            }
         },
         getValue() {
             return this.sqlEditor.state.doc.toString();
@@ -301,9 +325,9 @@ export default {
                 this.$message.warning('已取消提交')
             })
         },
-        // setHintOptions(tables) {
-        // this.sqlEditor.options.hintOptions.tables = tables
-        // },
+        setHintOptions(tables) {
+            this.sqlEditor.options.hintOptions.tables = tables
+        },
         editorEvents() {
             // 设置代码提示
             // this.sqlEditor.on('keyup', (cm, event) => {
@@ -414,6 +438,7 @@ export default {
                         //     });
                         // }
 
+                        this.talbeOptions.push({ label: table.name, type: "variable" });
                         this.treeData.push(treeObj)
                     }
                 })
