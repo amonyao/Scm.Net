@@ -155,11 +155,7 @@ export default {
 			} else if (node.childNodes.length > 0) {
 				classname = " clearFloat";
 			}
-			return (
-				<span class= { classname } >
-				{ node.label }
-				< /span>
-			);
+			return '<span class="' + classname + '">' + node.label + '</span>';
 		},
 		changeCss() {
 			this.$nextTick(() => {

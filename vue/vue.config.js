@@ -2,7 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 
 module.exports = defineConfig({
 	//设置为空打包后不分更目录还是多级目录
-	publicPath:'',
+	publicPath: '',
 	//build编译后存放静态文件的目录
 	//assetsDir: "static",
 
@@ -29,6 +29,14 @@ module.exports = defineConfig({
 		config.plugins.delete('preload');
 		config.plugins.delete('prefetch');
 		config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js');
+		config.plugin('define').tap((definitions) => {
+			Object.assign(definitions[0], {
+				__VUE_OPTIONS_API__: 'true',
+				__VUE_PROD_DEVTOOLS__: 'false',
+				__VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
+			})
+			return definitions
+		});
 	},
 
 	configureWebpack: {
