@@ -56,6 +56,7 @@
     </el-container>
 </template>
 
+<link href="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/css/style.min.css" rel="stylesheet" />
 <script>
 import '@wangeditor/editor/dist/css/style.css'
 import { createEditor, createToolbar } from 'wang-editor';
@@ -370,4 +371,3 @@ export default {
     }
 }
 </style>
-<link rel="stylesheet" href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css">
