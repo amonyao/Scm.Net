@@ -234,6 +234,7 @@ export default {
             // this.$SCM.drop_cache(this.formData.id);
 
             this.saving = false;
+            this.saveCache();
 
             this.search();
         },
