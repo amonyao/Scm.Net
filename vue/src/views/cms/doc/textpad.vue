@@ -66,22 +66,23 @@ export default {
             cat_list: [],
             note_list: [],//笔记列表
             formData: this.def_data(),
-            titlePlaceholder: '请输入标题……',
-            contentPlaceholder: '请输入内容……',
             timer: null,// 定时器
             loading: false,//加载标识
             saving: false,// 保存标识
+            titlePlaceholder: '请输入标题……',
+            contentPlaceholder: '请输入内容……',
         }
     },
     mounted() {
         this.listCat();
         this.search();
 
+        this.formData = this.loadCache('0');
+        this.showNote();
+
         this.timer = setInterval(() => {
             this.saveCache();
         }, 1000);
-
-        this.loadCache('0');
     },
     unmounted() {
         if (this.timer) {
@@ -92,11 +93,11 @@ export default {
         def_data() {
             return {
                 id: '0',
+                ver: 1,
                 types: 1,
                 title: '',
                 content: '',
                 cat_id: '0',
-                ver: 1,
             }
         },
         async search() {
@@ -153,6 +154,9 @@ export default {
         handleEnter() {
             this.$refs.content.focus();
         },
+        showNote() {
+
+        },
         async readNote(item) {
             if (!item || !item.id) {
                 return;
@@ -168,7 +172,7 @@ export default {
             }
 
             // 读取本地缓存
-            var cahced = this.$SCM.read_json(item.id, {});
+            var cahced = this.loadCache(item.id, {});
 
             var nativeVer = cahced.ver || 1;
             var remoteVer = res.data.ver || 1;
@@ -177,11 +181,12 @@ export default {
             } else {
                 this.formData = res.data;
             }
+            this.showNote();
 
             this.loading = false;
         },
         newNote() {
-            var tmp = this.$SCM.read_json(this.formData.id);
+            var tmp = this.loadCache(this.formData.id);
             var changed = false;
             if (tmp) {
                 changed = tmp.id == '0' || this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
@@ -189,6 +194,7 @@ export default {
 
             if (!changed) {
                 this.formData = this.def_data();
+                this.showNote();
                 return;
             }
 
@@ -199,7 +205,7 @@ export default {
             })
                 .then(() => {
                     this.formData = this.def_data();
-                    this.showArticle();
+                    this.showNote();
                 })
                 .catch(() => { });
         },
@@ -239,10 +245,11 @@ export default {
             this.search();
         },
         loadCache(id) {
-            this.formData = this.$SCM.read_json('textpad_' + id);
-            if (!this.formData) {
-                this.formData = this.def_data();
+            var cached = this.$SCM.read_json('textpad_' + id);
+            if (!cached) {
+                cached = this.def_data();
             }
+            return cached;
         },
         saveCache() {
             if (this.saving) {

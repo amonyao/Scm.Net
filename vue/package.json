@@ -23,7 +23,6 @@
     "@kangc/v-md-editor": "^2.3.18",
     "@microsoft/signalr": "^8.0.0",
     "@wangeditor/editor": "^5.1.23",
-    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.6.8",
     "codemirror": "^6.0.1",
     "cropperjs": "^1.6.1",
@@ -47,7 +46,8 @@
     "vuex": "4.1.0",
     "xgplayer": "3.0.14",
     "xgplayer-hls": "3.0.14",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "5.0.8",

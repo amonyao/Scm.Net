@@ -1,55 +1,83 @@
 <template>
 	<div style="border: 1px solid #ccc">
-		<Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig"
-			:mode="mode" />
-		<Editor style="height: 500px; overflow-y: hidden;" v-model="valueHtml" :defaultConfig="editorConfig"
-			@onCreated="handleCreated" />
+		<div id="toolbar-container"></div>
+		<div id="editor-container"></div>
 	</div>
 </template>
 <script>
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 
-import { onBeforeUnmount, ref, shallowRef, onMounted } from 'vue'
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import { createEditor, createToolbar } from 'wang-editor'
 
 export default {
-	components: { Editor, Toolbar },
-	setup() {
-		// 编辑器实例，必须用 shallowRef
-		const editorRef = shallowRef()
-
-		// 内容 HTML
-		const valueHtml = ref('<p>hello</p>')
-
-		// 模拟 ajax 异步获取内容
-		onMounted(() => {
-			setTimeout(() => {
-				valueHtml.value = '<p>模拟 Ajax 异步设置内容</p>'
-			}, 1500)
-		})
-
-		const toolbarConfig = {}
-		const editorConfig = { placeholder: '请输入内容...' }
-
-		// 组件销毁时，也及时销毁编辑器
-		onBeforeUnmount(() => {
-			const editor = editorRef.value
-			if (editor == null) return
-			editor.destroy()
-		})
-
-		const handleCreated = (editor) => {
-			editorRef.value = editor // 记录 editor 实例，重要！
-		}
-
+	name: 'scEditor',
+	emits: ['onchange'],
+	props: {
+		content: { type: String, default: '' }
+	},
+	data() {
 		return {
-			editorRef,
-			valueHtml,
-			mode: 'default', // 或 'simple'
-			toolbarConfig,
-			editorConfig,
-			handleCreated
+			html: '',
+		}
+	},
+	watch: {
+		content(val) {
+			this.scEditor.setHtml(!val ? "<p><br></p>" : val);
+		}
+	},
+	mounted() {
+		this.html = this.content;
+
+		var editorConfig = {
+			placeholder: '请输入内容...',
+			onChange: function () {
+				this.html = this.scEditor.getHtml();
+				this.emits('onchange', this.html);
+			},
+			MENU_CONF: {
+				// 配置上传图片
+				uploadImage: {
+					// 请求路径
+					server: this.$API.cmsdocnote.upload.url,
+					// 后端接收的文件名称
+					fieldName: "file",
+					maxFileSize: 1 * 1024 * 1024, // 1M
+					// 上传的图片类型
+					allowedFileTypes: ["image/*"],
+					// 小于该值就插入 base64 格式（而不上传），默认为 0
+					base64LimitSize: 1024, // 10MB
+					customInsert: this.insertSuccess,
+					// 携带的数据
+					header: {
+						token: ''
+					},
+					// 单个文件上传成功之后
+					onSuccess: this.uploadSuccess,
+					// 单个文件上传失败
+					onFailed(file, res) {
+						console.log(res)
+						this.$message.error(`${file.name} 上传失败`)
+					},
+					// 上传错误，或者触发 timeout 超时
+					onError(file, err, res) {
+						console.log(err, res)
+						this.$message.error(`${file.name} 上传出错`)
+					},
+				}
+			}
 		};
-	}
+		this.scEditor = createEditor({
+			selector: '#editor-container',
+			config: editorConfig,
+			mode: 'simple' // 或 default'simple' 
+		})
+		var toolbarConfig = {};
+		createToolbar({
+			editor: this.scEditor,
+			selector: '#toolbar-container',
+			config: toolbarConfig,
+			mode: 'simple' // 或 'simple'
+		});
+	},
 }
 </script>

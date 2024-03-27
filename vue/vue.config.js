@@ -75,6 +75,17 @@ module.exports = defineConfig({
 					}
 				}
 			}
+		},
+		externals: {
+			'vue': 'Vue',
+			'vue-router': 'VueRouter',
+			'vuex': 'Vuex',
+			'axios': 'axios',
+			'element-plus': 'ElementPlus',
+			'element-icons': 'ElementPlusIconsVue',
+			'echarts': 'echarts',
+			'highlight.js': 'highlight.js',
+			'wang-editor': 'wangEditor'
 		}
 	}
 })

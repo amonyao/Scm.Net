@@ -23,17 +23,17 @@
             <el-container>
                 <el-header>
                     <div class="notepad-toolbar">
-                        <Toolbar :editor="scEditor" :defaultConfig="toolbarConfig" :mode="mode" />
+                        <div id="toolbar-container"></div>
                     </div>
                 </el-header>
                 <el-main>
                     <div class="notepad-content">
                         <div class="notepad-container">
                             <div class="notepad-title">
-                                <input v-model="formData.title" :placeholder="titleConfig.placeholder" />
+                                <input v-model="formData.title" :placeholder="titlePlaceholder"
+                                    @keydown.enter="handleEnter" />
                             </div>
-                            <Editor style="height: 900px; overflow-y: hidden;" v-model="formData.content"
-                                :defaultConfig="editorConfig" @onCreated="handleCreated" />
+                            <div id="editor-container" style="height: 900px; overflow-y: hidden;"></div>
                         </div>
                     </div>
                 </el-main>
@@ -41,7 +41,7 @@
                     <div class="doc-tool">
                         <el-space>
                             <label>文章分类</label>
-                            <sc-select v-model="formData.cat_id" :data="cat_list"></sc-select>
+                            <sc-select v-model="formData.cat_id" :data="cat_list" style="width: 120px;"></sc-select>
                             <el-button type="primary" @click="newNote">
                                 <sc-icon set="sc" name="sc-file-line"></sc-icon>新建
                             </el-button>
@@ -57,17 +57,11 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
-
 import '@wangeditor/editor/dist/css/style.css'
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import { createEditor, createToolbar } from 'wang-editor';
 
 export default {
     name: 'cms_doc_htmlpad',
-    components: {
-        Editor, Toolbar,
-        Note: defineAsyncComponent(() => import("./components/note")),
-    },
     data() {
         return {
             param: {
@@ -80,12 +74,44 @@ export default {
             timer: null,// 定时器
             loading: false,//加载标识
             saving: false,// 保存标识
+            titlePlaceholder: '请输入标题...',
+            contentPlaceholder: '请输入内容...',
             scEditor: null,
-            mode: 'simple', // 'default' 或 'simple'
-            toolbarConfig: {},
-            titleConfig: { placeholder: '请输入标题...' },
-            editorConfig: {
-                placeholder: '请输入内容...',
+        }
+    },
+    mounted() {
+        this.listCat();
+        this.search();
+
+        this.init();
+
+        this.formData = this.loadCache('0');
+        this.showNote();
+
+        this.timer = setInterval(() => {
+            this.saveCache();
+        }, 1000);
+    },
+    unmounted() {
+        if (this.timer) {
+            clearInterval(this.timer);
+        }
+    },
+    methods: {
+        def_data() {
+            return {
+                id: '0',
+                ver: 1,
+                types: 2,
+                title: '',
+                content: '',
+                cat_id: '0',
+            }
+        },
+        init() {
+            var editorConfig = {
+                placeholder: this.contentPlaceholder,
+                onChange: this.contentChange,
                 MENU_CONF: {
                     // 配置上传图片
                     uploadImage: {
@@ -117,37 +143,30 @@ export default {
                         },
                     }
                 }
-            },
-        }
-    },
-    mounted() {
-        this.listCat();
-        this.search();
-
-        this.timer = setInterval(() => {
-            this.saveCache();
-        }, 1000);
-
-        this.loadCache('0');
-    },
-    unmounted() {
-        if (this.timer) {
-            clearInterval(this.timer);
-        }
-    },
-    methods: {
-        def_data() {
-            return {
-                id: '0',
-                types: 2,
-                title: '',
-                content: '',
-                cat_id: '0',
-                ver: 1,
-            }
+            };
+            this.scEditor = createEditor({
+                selector: '#editor-container',
+                config: editorConfig,
+                mode: 'simple' // 或 'default' 
+            })
+            var toolbarConfig = {};
+            createToolbar({
+                editor: this.scEditor,
+                selector: '#toolbar-container',
+                config: toolbarConfig,
+                mode: 'simple' // 或 'default'
+            });
         },
-        handleCreated(editor) {
-            this.scEditor = editor;
+        handleEnter() {
+            this.scEditor.focus();
+        },
+        contentChange() {
+            this.formData.content = this.scEditor.getHtml();
+        },
+        showNote() {
+            if (this.scEditor) {
+                this.scEditor.setHtml(this.formData.content);
+            }
         },
         async search() {
             var res = await this.$API.cmsdocnote.list.get(this.param);
@@ -200,9 +219,6 @@ export default {
                 this.search();
             }).catch(() => { });
         },
-        handleEnter() {
-            this.$refs.content.focus();
-        },
         async readNote(item) {
             if (!item || !item.id) {
                 return;
@@ -218,20 +234,21 @@ export default {
             }
 
             // 读取本地缓存
-            var cahced = this.$SCM.read_json(item.id, {});
+            var cached = this.loadCache(item.id);
 
-            var nativeVer = cahced.ver || 1;
+            var nativeVer = cached.ver || 1;
             var remoteVer = res.data.ver || 1;
             if (nativeVer >= remoteVer) {
-                this.formData = cahced;
+                this.formData = cached;
             } else {
                 this.formData = res.data;
             }
+            this.showNote();
 
             this.loading = false;
         },
         newNote() {
-            var tmp = this.$SCM.read_json(this.formData.id);
+            var tmp = this.loadCache(this.formData.id);
             var changed = false;
             if (tmp) {
                 changed = tmp.id == '0' || this.formData.title != tmp.title || this.formData.content != tmp.content || this.formData.cat_id != tmp.cat_id;
@@ -239,6 +256,7 @@ export default {
 
             if (!changed) {
                 this.formData = this.def_data();
+                this.showNote();
                 return;
             }
 
@@ -249,7 +267,7 @@ export default {
             })
                 .then(() => {
                     this.formData = this.def_data();
-                    this.showArticle();
+                    this.showNote();
                 })
                 .catch(() => { });
         },
@@ -284,21 +302,23 @@ export default {
             // this.$SCM.drop_cache(this.formData.id);
 
             this.saving = false;
+            this.saveCache();
 
             this.search();
         },
         loadCache(id) {
-            this.formData = this.$SCM.read_json('htmlpad_' + id);
-            if (!this.formData) {
-                this.formData = this.def_data();
+            var cached = this.$SCM.read_json('htmlpad_' + id);
+            if (!cached) {
+                cached = this.def_data();
             }
+            return cached;
         },
         saveCache() {
             if (this.saving) {
                 return;
             }
 
-			this.$SCM.save_cache('htmlpad_' + this.formData.id, this.formData);
+            this.$SCM.save_cache('htmlpad_' + this.formData.id, this.formData);
         },
     }
 }
@@ -350,3 +370,4 @@ export default {
     }
 }
 </style>
+<link rel="stylesheet" href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css">
