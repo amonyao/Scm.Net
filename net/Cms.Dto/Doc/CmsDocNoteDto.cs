@@ -70,7 +70,6 @@ namespace Com.Scm.Cms.Doc
         /// 
         /// </summary>
         [Required]
-        [StringLength(1024)]
         public string content { get; set; }
 
         /// <summary>

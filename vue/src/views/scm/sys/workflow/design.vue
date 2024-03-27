@@ -36,8 +36,8 @@
 							</el-col>
 							<el-col :span="12">
 								<el-form-item label="状态" prop="status" required>
-									<el-switch v-model="formData.status" inline-prompt active-text="启用" inactive-text="禁用"
-										width="100"></el-switch>
+									<el-switch v-model="formData.status" inline-prompt active-text="启用"
+										inactive-text="禁用" width="100"></el-switch>
 								</el-form-item>
 							</el-col>
 							<el-col :span="24">
@@ -279,7 +279,7 @@ export default {
 	margin-bottom: 15px;
 }
 
->>>.basic-main .el-switch__core {
+:deep(.basic-main) .el-switch__core {
 	width: 60px;
 }
 </style>
