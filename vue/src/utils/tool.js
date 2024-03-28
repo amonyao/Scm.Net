@@ -76,7 +76,7 @@ tool.cookie = {
 		var cookieStr = `${key}=${escape(value)}`;
 		if (cfg.expires) {
 			var exp = new Date();
-			exp.setTime(exp.getTime() + parseInt(cfg.expires) * 1000);
+			exp.setTime(exp.getTime() + parseInt(cfg.expires || 1) * 1000);
 			cookieStr += `;expires=${exp.toGMTString()}`;
 		}
 		if (cfg.path) {

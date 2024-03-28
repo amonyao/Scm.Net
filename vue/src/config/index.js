@@ -32,14 +32,14 @@ const DEFAULT_CONFIG = {
 	//SignalR地址
 	SignalR_URL: process.env.VUE_APP_API_BASEURL + "/scmhub",
 
-	// 默认用户
-	DEF_USER: process.env.DEF_USER,
-
 	// 默认机构
-	DEF_UNIT: process.env.DEF_UNIT,
+	DEF_UNIT: process.env.VUE_APP_DEF_UNIT,
+
+	// 默认用户
+	DEF_USER: process.env.VUE_APP_DEF_USER,
 
 	// 默认口令
-	DEF_PASS: process.env.DEF_PASS,
+	DEF_PASS: process.env.VUE_APP_DEF_PASS,
 
 	//请求超时
 	TIMEOUT: 10000,
