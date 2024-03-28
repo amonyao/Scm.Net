@@ -1,13 +1,16 @@
 <template>
-    <el-container>
-        <el-button @click="myShow">测试</el-button>
-    </el-container>
+    <sc-list :data="list">
+    </sc-list>
 </template>
 <script>
 export default {
     data() {
         return {
-        };
+            list: [{ id: 1, label: '红色', value: '1' },
+            { id: 2, label: '黄色', value: '2' },
+            { id: 3, label: '蓝色', value: '3' }
+            ]
+        }
     },
     mounted() { },
     methods: {

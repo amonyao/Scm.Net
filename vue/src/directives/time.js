@@ -2,12 +2,12 @@ import tool from '@/utils/tool'
 
 var Time = {
 	//获取当前时间戳
-	getUnix: function() {
+	getUnix: function () {
 		var date = new Date();
 		return date.getTime();
 	},
 	//获取今天0点0分0秒的时间戳
-	getTodayUnix: function() {
+	getTodayUnix: function () {
 		var date = new Date();
 		date.setHours(0);
 		date.setMinutes(0);
@@ -16,7 +16,7 @@ var Time = {
 		return date.getTime();
 	},
 	//获取今年1月1日0点0秒的时间戳
-	getYearUnix: function() {
+	getYearUnix: function () {
 		var date = new Date();
 		date.setMonth(0);
 		date.setDate(1);
@@ -27,14 +27,14 @@ var Time = {
 		return date.getTime();
 	},
 	//获取标准年月日
-	getLastDate: function(time) {
+	getLastDate: function (time) {
 		var date = new Date(time);
 		var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
 		var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
 		return date.getFullYear() + '-' + month + '-' + day;
 	},
 	//转换时间
-	getFormateTime: function(timestamp) {
+	getFormateTime: function (timestamp) {
 		timestamp = new Date(timestamp)
 		var now = this.getUnix();
 		var today = this.getTodayUnix();
@@ -61,8 +61,8 @@ var Time = {
 
 export default {
 	mounted(el, binding) {
-		let { value, modifiers} = binding
-		if(value.toString().length == 10){
+		let { value, modifiers } = binding
+		if (value.toString().length == 10) {
 			value = value * 1000
 		}
 		if (modifiers.tip) {

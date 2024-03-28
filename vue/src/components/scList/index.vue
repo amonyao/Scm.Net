@@ -6,7 +6,7 @@
         <el-empty :description="emptyText" :image-size="100" v-if="isEmpty()"></el-empty>
         <div class="sc-list_body" :style="{ padding: this.padding + 'px' }" v-else>
             <div v-for="(item, index) in data" :key="index" @click="itemClick(item, index)" class="sc-list-item"
-                :class="{ active: canSelected && currIndex == index }" :style="{ width: 100 / columns + '%' }">
+                :class="{ actived: canSelected && currIndex == index }" :style="{ width: 100 / columns + '%' }">
                 <slot name="item" :item="item" :index="index">
                     <div class="sc-list-item_label">
                         <sc-icon :name="icon"></sc-icon>
@@ -84,7 +84,7 @@ export default {
     }
 }
 </script>
-  
+
 <style type="scss" scoped>
 .sc-list {
     width: 100%;
@@ -94,10 +94,6 @@ export default {
     background-color: var(--el-fill-color-blank);
     border: 1px solid var(--el-border-color-lighter);
     border-radius: var(--el-border-radius-base);
-
-    .active {
-        background-color: var(--el-color-primary-light-9);
-    }
 
     .sc-list_header {
         border-bottom: 0;
@@ -109,6 +105,10 @@ export default {
     .sc-list_body {
         overflow-y: auto;
         flex-basis: 100%;
+
+        .actived {
+            background-color: var(--el-color-primary-light-9);
+        }
     }
 
     .sc-list_footer {

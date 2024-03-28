@@ -20,10 +20,10 @@ export default {
 		}
 		el.addEventListener('click', el.handler)
 	},
-	updated(el, binding){
+	updated(el, binding) {
 		el.$value = binding.value
 	},
-	unmounted(el){
+	unmounted(el) {
 		el.removeEventListener('click', el.handler)
 	}
 }
