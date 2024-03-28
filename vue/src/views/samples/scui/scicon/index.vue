@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import config from "@/config/iconSelect";
 import { defineAsyncComponent } from "vue";
+import scIcons from "@/config/scIcons";
 
 export default {
 	name: 'scui_scicon',
@@ -96,7 +96,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.data.push(...config.icons);
+		this.data.push(...scIcons.icons);
 		this.filterData = this.data;
 		this.iconSet = this.filterData[this.index];
 	},

@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import config from "@/config/iconSelect";
+import scIcons from "@/config/scIcons";
 
 export default {
 	props: {
@@ -98,7 +98,7 @@ export default {
 	},
 	mounted() {
 		this.value = this.modelValue;
-		this.data.push(...config.icons);
+		this.data.push(...scIcons.icons);
 	},
 	methods: {
 		open() {
