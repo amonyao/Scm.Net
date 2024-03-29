@@ -16,11 +16,11 @@ export default {
 			return await http.post(this.url, data);
 		},
 	},
-	oauth: {
-		url: `${config.API_URL}/operator/sendSms`,
-		name: "发送验证码",
-		post: async function (data) {
-			return await http.post(this.url, data);
+	getAuth: {
+		url: `${config.API_URL}/operator/getAuth/`,
+		name: "获取授权信息",
+		get: async function (data) {
+			return await http.get(this.url + data);
 		},
 	},
 	user: {

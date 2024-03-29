@@ -86,7 +86,7 @@ module.exports = defineConfig({
 			'echarts': 'echarts',
 			'highlight.js': 'highlight.js',
 			'wang-editor': 'wangEditor',
-			'xlsx': 'Xlsx',
+			// 'xlsx': 'Xlsx',
 			'editorjs': 'editorjs'
 		}
 	}

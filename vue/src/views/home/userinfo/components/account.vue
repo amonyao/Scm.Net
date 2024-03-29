@@ -14,7 +14,7 @@
 				<sc-select v-model="form.sex" placeholder="请选择" :data="sex_list"></sc-select>
 			</el-form-item>
 			<el-form-item label="手机号码">
-				<el-input v-model="form.phone"></el-input>
+				<el-input v-model="form.cellphone"></el-input>
 			</el-form-item>
 			<el-form-item label="电子邮件">
 				<el-input v-model="form.email"></el-input>
@@ -38,7 +38,7 @@ export default {
 				id: '0',
 				names: "admin@user",
 				namec: "系统管理员",
-				phone: '',
+				cellphone: '',
 				email: '',
 				avatar: '',
 				sex: 1,

@@ -27,7 +27,8 @@
 				<div class="el-form-item-msg">请输入包含英文、数字的8位以上密码</div>
 			</el-form-item>
 			<el-form-item label="确认密码" prop="password2">
-				<el-input v-model="formData.password2" type="password" show-password placeholder="请再一次输入登录密码"></el-input>
+				<el-input v-model="formData.password2" type="password" show-password
+					placeholder="请再一次输入登录密码"></el-input>
 			</el-form-item>
 			<el-form-item label="" prop="agree">
 				<el-checkbox v-model="formData.agree" label="">已阅读并同意</el-checkbox><span class="link"
@@ -40,6 +41,9 @@
 			</el-form-item>
 			<el-form-item label="真实姓名" prop="user_name">
 				<el-input v-model="formData.user_name" placeholder="请输入真实姓名"></el-input>
+			</el-form-item>
+			<el-form-item label="手机号码" prop="phone">
+				<el-input v-model="formData.phone" placeholder="请输入手机号码"></el-input>
 			</el-form-item>
 			<el-form-item label="电子邮件" prop="email">
 				<el-input v-model="formData.email" placeholder="请输入电子邮件"></el-input>
@@ -79,6 +83,7 @@ import scPasswordStrength from '@/components/scPasswordStrength';
 import commonPage from './components/commonPage'
 
 export default {
+	name: 'user_register',
 	components: {
 		commonPage,
 		scPasswordStrength

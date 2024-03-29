@@ -18,7 +18,7 @@ const routes_404 = {
 	hidden: true,
 	component: () => import(/* webpackChunkName: "404" */ "@/layout/other/404"),
 };
-let routes_404_r = () => {};
+let routes_404_r = () => { };
 
 const router = createRouter({
 	history: createWebHashHistory(),
@@ -73,8 +73,8 @@ router.beforeEach(async (to, from, next) => {
 		let userMenu = treeFilter(userRoutes, (node) => {
 			return node.meta.role
 				? node.meta.role.filter(
-						(item) => userInfo.role.indexOf(item) > -1
-				  ).length > 0
+					(item) => userInfo.role.indexOf(item) > -1
+				).length > 0
 				: true;
 		});
 		let menu = [...userMenu, ...apiMenu];
@@ -114,7 +114,7 @@ router.sc_getMenu = () => {
 	let userMenu = treeFilter(userRoutes, (node) => {
 		return node.meta.role
 			? node.meta.role.filter((item) => userInfo.role.indexOf(item) > -1)
-					.length > 0
+				.length > 0
 			: true;
 	});
 	var menu = [...userMenu, ...apiMenu];
@@ -122,8 +122,8 @@ router.sc_getMenu = () => {
 };
 
 async function recordPv(to) {
-	var url = to.fullPath;
-	if (url == "/login") {
+	var url = to.path;
+	if (url == '/login' || url == '/user_register' || url == '/user_options' || url == '/reset_password') {
 		return;
 	}
 
