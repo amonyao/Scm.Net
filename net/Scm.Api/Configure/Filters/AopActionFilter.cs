@@ -4,7 +4,6 @@ using Com.Scm.Filters;
 using Com.Scm.Jwt;
 using Com.Scm.Log;
 using Com.Scm.Log.Api;
-using Com.Scm.Operator;
 using Com.Scm.Result;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
@@ -31,14 +30,17 @@ public class AopActionFilter : IAsyncActionFilter
 
     private readonly SecurityConfig _Config;
     private readonly LogApiService _logService;
-    private readonly OperatorService _operatorService;
+    //private readonly OperatorService _operatorService;
     private readonly JwtContextHolder _jwtContextHolder;
 
-    public AopActionFilter(SecurityConfig config, LogApiService logService, OperatorService operatorService, JwtContextHolder jwtContextHolder)
+    public AopActionFilter(SecurityConfig config,
+        LogApiService logService,
+        //OperatorService operatorService, 
+        JwtContextHolder jwtContextHolder)
     {
         _Config = config;
         _logService = logService;
-        _operatorService = operatorService;
+        //_operatorService = operatorService;
         _jwtContextHolder = jwtContextHolder;
     }
 

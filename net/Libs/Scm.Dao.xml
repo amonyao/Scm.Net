@@ -2740,6 +2740,11 @@
             错误描述
             </summary>
         </member>
+        <member name="P:Com.Scm.Ur.UserOauthDao.qty">
+            <summary>
+            登录次数
+            </summary>
+        </member>
         <member name="T:Com.Scm.Ur.UserOrganizeDao">
             <summary>
             用户机构关系表

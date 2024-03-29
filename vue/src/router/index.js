@@ -123,7 +123,7 @@ router.sc_getMenu = () => {
 
 async function recordPv(to) {
 	var url = to.path;
-	if (url == '/login' || url == '/user_register' || url == '/user_options' || url == '/reset_password') {
+	if (url == '/login' || url == '/oauth' || url == '/user_register' || url == '/reset_password') {
 		return;
 	}
 

@@ -35,9 +35,9 @@ const routes = [
 		meta: { title: "用户注册" },
 	},
 	{
-		path: "/user_options",
-		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/login/userOptions"),
-		meta: { title: "登录选项" },
+		path: "/oauth",
+		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/login/oauth"),
+		meta: { title: "联合登录" },
 	},
 	{
 		path: "/reset_password",
