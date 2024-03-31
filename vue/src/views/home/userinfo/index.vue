@@ -49,7 +49,6 @@ export default {
 		userSettings: defineAsyncComponent(() => import("./components/userSettings")),
 		pushSettings: defineAsyncComponent(() => import("./components/pushSettings")),
 		password: defineAsyncComponent(() => import("./components/password")),
-		oauth: defineAsyncComponent(() => import("./components/oauth")),
 		space: defineAsyncComponent(() => import("./components/space")),
 		logs: defineAsyncComponent(() => import("./components/logs")),
 	},
@@ -73,11 +72,6 @@ export default {
 							icon: "sc-pass-pending-line",
 							title: "修改密码",
 							component: "password",
-						},
-						{
-							icon: "sc-pass-pending-line",
-							title: "联合登录",
-							component: "oauth",
 						},
 						{
 							icon: "sc-bell-line",

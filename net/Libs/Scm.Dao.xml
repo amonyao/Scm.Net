@@ -547,6 +547,76 @@
             操作状态
             </summary>
         </member>
+        <member name="T:Com.Scm.Log.LogOAuthDao">
+            <summary>
+            三方登录
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.key">
+            <summary>
+            登录标识
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.web">
+            <summary>
+            登录网站
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.oauth_id">
+            <summary>
+            UnionID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.user">
+            <summary>
+            用户
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.name">
+            <summary>
+            昵称
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.access_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.refresh_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.expires_in">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.err_code">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.err_msg">
+            <summary>
+            错误描述
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.qty">
+            <summary>
+            登录次数
+            </summary>
+        </member>
         <member name="T:Com.Scm.Log.LogSmsDao">
             <summary>
             
@@ -2670,77 +2740,47 @@
             
             </summary>
         </member>
-        <member name="T:Com.Scm.Ur.UserOauthDao">
+        <member name="T:Com.Scm.Ur.UserOAuthDao">
             <summary>
             三方登录
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.key">
-            <summary>
-            登录标识
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.user_id">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.user_id">
             <summary>
             用户
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.src">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.od">
             <summary>
-            登录网站
+            显示排序
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.union_id">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.web">
             <summary>
-            UnionID
+            外部应用
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.user">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.oauth_id">
             <summary>
-            用户
+            授权ID
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.name">
-            <summary>
-            昵称
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.sex">
-            <summary>
-            性别
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.avatar">
-            <summary>
-            头像
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.access_token">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.user">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.refresh_token">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.name">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.expires_in">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.avatar">
             <summary>
-            过期时间
+            
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.err_code">
-            <summary>
-            错误代码
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.err_msg">
-            <summary>
-            错误描述
-            </summary>
-        </member>
-        <member name="P:Com.Scm.Ur.UserOauthDao.qty">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.qty">
             <summary>
             登录次数
             </summary>

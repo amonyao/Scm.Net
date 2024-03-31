@@ -26,7 +26,15 @@
             </div>
         </el-form>
         <div v-else class="loading">
-            系统加载中……
+            <div v-if="error_code == 0">
+                系统加载中……
+            </div>
+            <div v-else>
+                {{ error_msg }}
+                <div>
+                    <a href="/login">返回登录</a>
+                </div>
+            </div>
         </div>
     </common-page>
 </template>
@@ -44,6 +52,8 @@ export default {
             loading: false,
             needOptions: false,
             formData: this.def_data(),
+            error_code: 0,
+            error_msg: '',
             rules: {
                 type: [{ required: true, message: '请选择登录选项' }],
                 user: [{ required: true, message: '请输入登录用户' }],
@@ -83,15 +93,23 @@ export default {
             this.checkAuth(key);
         },
         async checkAuth(key) {
-            var data = { mode: 4, key: key,code:'1234' };
-            var userRes = await this.$API.login.token.post(data);
-            if (userRes.code != 200) {
-                this.$message.warning(userRes.message);
+            var data = { mode: 4, key: key, code: '1234' };
+            var res = await this.$API.login.token.post(data);
+            if (res.code != 200) {
+                this.$message.warning(res.message);
                 return false;
             }
-            this.$TOOL.data.set("TOKEN", userRes.data.accessToken);
-            this.$TOOL.data.set("USER_INFO", userRes.data.userInfo);
-            this.$TOOL.data.set("USER_THEME", userRes.data.userTheme);
+            var userData = res.data;
+            if (userData.code != 0) {
+                this.error_code = userData.code;
+                this.error_msg = userData.message;
+                console.log('error_code:' + this.error_code)
+                return false;
+            }
+
+            this.$TOOL.data.set("TOKEN", userData.accessToken);
+            this.$TOOL.data.set("USER_INFO", userData.userInfo);
+            this.$TOOL.data.set("USER_THEME", userData.userTheme);
 
             //获取菜单
             var menuRes = await this.$API.login.authority.get();
@@ -112,7 +130,7 @@ export default {
 
             this.loadCfg();
 
-            let path = userRes.data.userInfo.unitId == 0 ? "/" : "/";//TODO:区分管理员与用户
+            let path = userData.userInfo.unitId == 0 ? "/" : "/";//TODO:区分管理员与用户
             this.$router.replace({ path: path });
             this.$message.success("Login Success 登录成功");
         },

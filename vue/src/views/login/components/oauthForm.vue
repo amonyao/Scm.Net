@@ -1,30 +1,50 @@
 <template>
     <div class="login-oauth">
-        <el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin" title="微信登录"></el-button>
-        <el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin" title="QQ登录"></el-button>
-        <el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin" title="支付宝登录"></el-button>
-        <el-button type="success" icon="sc-icon-wechat" circle @click="wechatLogin" title="其它登录"></el-button>
-    </div>
-    <el-dialog v-model="showWechatLogin" :title="$t('login.wechatLoginTitle')" :width="400" destroy-on-close>
-        <div class="qrCodeLogin">
-            <sc-qr-code class="qrCode" :text="WechatLoginCode" :size="200"></sc-qr-code>
-            <p class="msg">
-                {{ $tc("login.wechatLoginMsg", 1) }}<br />{{ $tc("login.wechatLoginMsg", 2) }}
-            </p>
-            <div class="qrCodeLogin-result" v-if="isWechatLoginResult">
-                <el-result icon="success" :title="$tc('login.wechatLoginResult', 1)"
-                    :sub-title="$tc('login.wechatLoginResult', 2)"></el-result>
+        <div class="row">
+            <div class="card" title="使用 华为 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('huawei')"></el-button>
+                <div class="foot">华为</div>
+            </div>
+            <div class="card" title="使用 小米 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('mi')"></el-button>
+                <div class="foot">小米</div>
+            </div>
+            <div class="card" title="使用 阿里云 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('aliyun')"></el-button>
+                <div class="foot">阿里云</div>
+            </div>
+            <div class="card" title="使用 QQ 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('qq')"></el-button>
+                <div class="foot">QQ</div>
             </div>
         </div>
-    </el-dialog>
+        <div class="row">
+            <div class="card" title="使用 Gitee 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('gitee')"></el-button>
+                <div class="foot">Gitee</div>
+            </div>
+            <div class="card" title="使用 Github 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('github')"></el-button>
+                <div class="foot">Github</div>
+            </div>
+            <div class="card" title="使用 Gitlab 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('gitlab')"></el-button>
+                <div class="foot">Gitlab</div>
+            </div>
+            <div class="card" title="使用 OSChina 登录">
+                <el-button type="success" icon="el-icon-link" circle @click="oauthLogin('oschina')"></el-button>
+                <div class="foot">OSChina</div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 export default {
     data() {
         return {
-			WechatLoginCode: "",
-			showWechatLogin: false,
-			isWechatLoginResult: false,
+            WechatLoginCode: "",
+            showWechatLogin: false,
+            isWechatLoginResult: false,
             form: {
                 email: "",
                 yzm: "",
@@ -62,47 +82,43 @@ export default {
                 }
             }, 1000)
         },
-        wechatLogin() {
-            this.showWechatLogin = true;
-            this.WechatLoginCode = "Scm-823677237287236-" + new Date().getTime();
-            this.isWechatLoginResult = false;
-            setTimeout(() => {
-                this.isWechatLoginResult = true;
-            }, 3000);
+        oauthLogin(type) {
+            window.location.href = 'https://sso.c-scm.net/oauth/login/' + type;
         },
     }
 }
 </script>
 
-<style>
+<style type="scss" scoped>
 .login-oauth {
     display: flex;
-    justify-content: space-around;
-}
+    flex-direction: column;
 
-.qrCodeLogin {
-    text-align: center;
-    position: relative;
-    padding: 20px 0;
-}
+    .row {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+    }
 
-.qrCodeLogin img.qrCode {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-}
+    .card {
+        width: 100px;
+        height: 86px;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid #fff;
 
-.qrCodeLogin p.msg {
-    margin-top: 15px;
-}
+        .foot {
+            margin-top: 10px;
+            border: 1px solid #f8f8f8;
+            line-height: 20px;
+            border-radius: 3px;
+            background-color: #fafafa;
+        }
+    }
 
-.qrCodeLogin .qrCodeLogin-result {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    background: var(--el-mask-color);
+    .card:hover {
+        border: 1px solid #ccc;
+    }
 }
 </style>

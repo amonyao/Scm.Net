@@ -57,7 +57,9 @@ namespace Com.Scm.Api
             builder.Services.SwaggerSetup(swaggerConfig);
 
             // Sqlsugar≈‰÷√
-            builder.Services.SqlSugarSetup();
+            var sqlConfig = AppUtils.GetConfig<SqlConfig>(SqlConfig.NAME);
+            sqlConfig.Prepare(envConfig);
+            builder.Services.SqlSugarSetup(sqlConfig);
 
             // ª∫¥Ê≈‰÷√
             builder.Services.DsaCacheSetup();
