@@ -85,16 +85,14 @@ export default {
         },
         async load() {
             var res = await this.$API.uruseroauth.list.get();
-            console.log(res);
             if (!res || res.code != 200) {
                 return;
             }
 
             this.oauth_list = res.data;
-            console.log('oauth:' + this.oauth_list.length);
         },
         add() {
-            window.location.href = 'http://sso.c-scm.net/oauth';
+            window.location.href = 'http://sso.c-scm.net/oauth?mode=bind';
         },
         del(id) {
             this.$confirm(

@@ -83,7 +83,7 @@ export default {
             }, 1000)
         },
         oauthLogin(type) {
-            window.location.href = 'https://sso.c-scm.net/oauth/login/' + type;
+            window.location.href = 'https://sso.c-scm.net/oauth/login/' + type + '?mode=login';
         },
     }
 }
