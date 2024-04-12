@@ -31,18 +31,14 @@ export default {
 	data() {
 		return {
 			form: {
-				mode: 2,
+				type: 20,
 				phone: '',
 				code: '',
 				key: '',
 			},
 			rules: {
-				phone: [
-					{ required: true, message: this.$t('login.phoneError') }
-				],
-				code: [
-					{ required: true, message: this.$t('login.smsError') }
-				]
+				phone: [{ required: true, message: this.$t('login.phoneError') }],
+				code: [{ required: true, message: this.$t('login.smsError') }]
 			},
 			disabled: false,
 			time: 0,

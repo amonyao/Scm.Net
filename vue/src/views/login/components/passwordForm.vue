@@ -41,7 +41,7 @@ export default {
 		return {
 			codeUrl: "img/loading.gif",
 			form: {
-				mode: 1,
+				type: 10,
 				user: this.$CONFIG.DEF_USER,
 				pass: this.$CONFIG.DEF_PASS,
 				code: undefined,
@@ -49,15 +49,9 @@ export default {
 				autologin: false,
 			},
 			rules: {
-				user: [
-					{ required: true, trigger: "blur", message: this.$t("login.userError") }
-				],
-				pass: [
-					{ required: true, trigger: "blur", message: this.$t("login.PWError") }
-				],
-				code: [
-					{ required: true, trigger: "blur", message: "验证码不能空" }
-				],
+				user: [{ required: true, trigger: "blur", message: this.$t("login.userError") }],
+				pass: [{ required: true, trigger: "blur", message: this.$t("login.PWError") }],
+				code: [{ required: true, trigger: "blur", message: "验证码不能空" }],
 			},
 			islogin: false,
 		};
@@ -79,12 +73,12 @@ export default {
 		},
 		async checkAuth() {
 			var pass = this.$TOOL.crypto.SHA(this.form.pass);
-			var time = '' + new Date().getTime();
+			var time = new Date().getTime();
 			pass = this.$TOOL.crypto.SHA(pass + '@' + time);
 			//pass = this.$SCM.encode_pass(pass);
 
 			const data = {
-				mode: this.form.mode,
+				type: this.form.type,
 				user: this.form.user,
 				pass: pass,
 				time: time,
@@ -96,9 +90,14 @@ export default {
 				this.$message.warning(userRes.message);
 				return false;
 			}
-			this.$TOOL.data.set("TOKEN", userRes.data.accessToken);
-			this.$TOOL.data.set("USER_INFO", userRes.data.userInfo);
-			this.$TOOL.data.set("USER_THEME", userRes.data.userTheme);
+			var userData = userRes.data;
+			if (userData.code != 0) {
+				this.$message.warning(userData.message);
+				return false;
+			}
+			this.$TOOL.data.set("TOKEN", userData.accessToken);
+			this.$TOOL.data.set("USER_INFO", userData.userInfo);
+			this.$TOOL.data.set("USER_THEME", userData.userTheme);
 
 			//获取菜单
 			var menuRes = await this.$API.login.authority.get();

@@ -30,18 +30,14 @@ export default {
 	data() {
 		return {
 			form: {
-				mode: 3,
+				type: 30,
 				email: '',
 				code: '',
 				key: '',
 			},
 			rules: {
-				email: [
-					{ required: true, message: this.$t('login.emailError') }
-				],
-				code: [
-					{ required: true, message: this.$t('login.msgError') }
-				]
+				email: [{ required: true, message: this.$t('login.emailError') }],
+				code: [{ required: true, message: this.$t('login.msgError') }]
 			},
 			disabled: false,
 			time: 0,
@@ -76,7 +72,7 @@ export default {
 			}, 1000);
 
 			var data = {
-				mode: this.form.mode,
+				type: this.form.type,
 				code: this.form.email,
 				key: this.form.key,
 			};

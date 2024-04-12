@@ -94,18 +94,10 @@ export default {
 			showAgree: false,
 			formData: this.def_data(),
 			rules: {
-				type: [
-					{ required: true, message: '请选择账户类型' }
-				],
-				unit: [
-					{ required: true, message: '请输入公司简称' }
-				],
-				user: [
-					{ required: true, message: '请输入登录用户' }
-				],
-				password1: [
-					{ required: true, message: '请输入登录密码' }
-				],
+				type: [{ required: true, message: '请选择账户类型' }],
+				unit: [{ required: true, message: '请输入公司简称' }],
+				user: [{ required: true, message: '请输入登录用户' }],
+				password1: [{ required: true, message: '请输入登录密码' }],
 				password2: [
 					{ required: true, message: '请输入确认密码' },
 					{
@@ -129,15 +121,9 @@ export default {
 						}
 					}
 				],
-				unit_name: [
-					{ required: true, message: '请输入公司全称' }
-				],
-				user_name: [
-					{ required: true, message: '请输入真实姓名' }
-				],
-				email: [
-					{ required: true, message: '请输入电子邮件' }
-				],
+				unit_name: [{ required: true, message: '请输入公司全称' }],
+				user_name: [{ required: true, message: '请输入真实姓名' }],
+				email: [{ required: true, message: '请输入电子邮件' }],
 				open: [
 					{ required: true, message: '请选择开通类别' }
 				]
@@ -151,7 +137,7 @@ export default {
 	methods: {
 		def_data() {
 			return {
-				type: '1',
+				type: 10,
 				unit: '',
 				user: '',
 				pass: '',
@@ -161,6 +147,7 @@ export default {
 				unit_name: '',
 				user_name: '',
 				email: '',
+				phone: '',
 				open: []
 			}
 		},
@@ -190,10 +177,11 @@ export default {
 				type: this.formData.type,
 				unit: this.formData.unit,
 				user: this.formData.user,
-				pass: this.$TOOL.crypto.MD5(this.formData.password1),
+				pass: this.$TOOL.crypto.SHA(this.formData.password1),
 				unit_name: this.formData.unit_name,
 				user_name: this.formData.user_name,
 				email: this.formData.email,
+				phone: this.formData.phone,
 				open: []
 			};
 			var res = await this.$API.login.signon.post(data);

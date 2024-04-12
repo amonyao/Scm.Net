@@ -13,6 +13,7 @@
                                 <div class="value">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
                             </div>
                             <div class="opt">
+                                <label>{{ this.getProvider(item.src) }}</label>
                                 <el-button type="danger" @click="del(item.id)">解绑</el-button>
                             </div>
                         </div>
@@ -31,7 +32,8 @@ import { useRoute } from "vue-router"
 export default {
     data() {
         return {
-            oauth_list: []
+            oauth_list: [],
+            vender_list: []
         }
     },
     mounted() {
@@ -39,6 +41,8 @@ export default {
     },
     methods: {
         async init() {
+            this.$SCM.list_dic(this.handle_list, 'iam_vernder');
+
             var route = useRoute();
             var key = route.query.key;
             var reg = /^[0-9a-zA-Z]{32}$/
@@ -108,6 +112,9 @@ export default {
                     this.unBind(id);
                 })
                 .catch(() => { });
+        },
+        getProvider(src) {
+            this.$SCM.get_dic_names(this.vender_list, src, '-');
         }
     }
 }
@@ -144,6 +151,9 @@ export default {
 
     }
 
-    .opt {}
+    .opt {
+        display: flex;
+        align-items: center;
+    }
 }
 </style>

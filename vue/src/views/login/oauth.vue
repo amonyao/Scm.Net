@@ -1,36 +1,40 @@
 <template>
     <common-page title="联合登录">
         <el-form ref="userForm" :model="formData" :rules="rules" :label-width="120" v-if="needOptions">
-            <el-form-item label="联合登录" prop="type">
-                <el-radio-group v-model="formData.type">
+            <el-form-item label="登录选项" prop="opt">
+                <el-radio-group v-model="formData.opt">
                     <el-radio-button label="1">注册新用户</el-radio-button>
                     <el-radio-button label="2">关联已有用户</el-radio-button>
-                    <el-radio-button label="3">选择登录用户</el-radio-button>
+                    <el-radio-button label="3" v-if="error_code == 46">选择登录用户</el-radio-button>
                 </el-radio-group>
                 <div class="el-form-item-msg">请选择登录选项</div>
             </el-form-item>
-            <el-form-item label="登录账户" prop="user" v-if="formData.type == 2">
-                <el-input v-model="formData.user1" placeholder="请输入登录账户"></el-input>
+            <el-form-item label="登录账户" prop="user" v-if="formData.opt == 2">
+                <el-input v-model="formData.user" placeholder="请输入登录账户"></el-input>
                 <div class="el-form-item-msg">请输入需要进行关联的登录账户，格式为：username@unitname</div>
             </el-form-item>
-            <el-form-item label="登录账户" prop="user_id" v-if="formData.type == 3">
+            <el-form-item label="登录账户" prop="user_id" v-if="formData.opt == 3">
                 <sc-select v-model="formData.user_id" placeholder="请选择登录账户"></sc-select>
                 <div class="el-form-item-msg">系统检测到多个关联账户，请选择要登录的账户</div>
             </el-form-item>
-            <el-form-item label="登录密码" prop="pass" v-if="formData.type == 2 || formData.type == 3">
+            <el-form-item label="登录密码" prop="pass" v-if="formData.opt == 2 || formData.opt == 3">
                 <el-input v-model="formData.pass" type="password" show-password placeholder="请输入登录密码"></el-input>
                 <div class="el-form-item-msg">请输账户对应的登录密码</div>
             </el-form-item>
             <div style="text-align: center;">
-                <el-button type="primary" @click="save()">提交</el-button>
+                <el-button type="primary" @click="signon()">提交</el-button>
             </div>
         </el-form>
-        <div v-else class="loading">
+        <div class="loading" v-else>
             <div v-if="error_code == 0">
-                系统加载中……
+                <div class="notice">
+                    系统加载中……
+                </div>
             </div>
             <div v-else>
-                {{ error_msg }}
+                <div class="notice warning">
+                    {{ error_msg }}
+                </div>
                 <div>
                     <a href="/login">返回登录</a>
                 </div>
@@ -60,6 +64,7 @@ export default {
                 user_id: [{ required: true, message: '请输入登录用户' }],
                 pass: [{ required: true, message: '请输入登录密码' }]
             },
+            key: '',
         }
     },
     mounted() {
@@ -68,7 +73,8 @@ export default {
     methods: {
         def_data() {
             return {
-                type: '1',
+                type: 40,
+                opt: 1,
                 user: '',
                 user_id: '0',
                 pass: '',
@@ -83,7 +89,7 @@ export default {
         },
         async init() {
             var route = useRoute();
-            var key = route.query.key;
+            var key = route.query.code;
             var reg = /^[0-9a-zA-Z]{32}$/
             if (!reg.test(key)) {
                 this.$router.replace({ path: '/login' });
@@ -93,20 +99,25 @@ export default {
             this.checkAuth(key);
         },
         async checkAuth(key) {
-            var data = { mode: 4, key: key, code: '1234' };
+            this.key = key;
+            var data = { type: 40, key: key, code: '1234' };
             var res = await this.$API.login.token.post(data);
             if (res.code != 200) {
                 this.$message.warning(res.message);
                 return false;
             }
+
             var userData = res.data;
             if (userData.code != 0) {
                 this.error_code = userData.code;
                 this.error_msg = userData.message;
-                console.log('error_code:' + this.error_code)
+                this.needOptions = userData.code > 44;
                 return false;
             }
 
+            this.loadAuth(userData);
+        },
+        async loadAuth(userData) {
             this.$TOOL.data.set("TOKEN", userData.accessToken);
             this.$TOOL.data.set("USER_INFO", userData.userInfo);
             this.$TOOL.data.set("USER_THEME", userData.userTheme);
@@ -155,31 +166,48 @@ export default {
             });
         },
         async signon() {
+            console.log(this.formData.pass);
+
             var data = {
                 type: this.formData.type,
-                unit: this.formData.unit,
                 user: this.formData.user,
-                pass: this.$TOOL.crypto.MD5(this.formData.password1),
-                unit_name: this.formData.unit_name,
-                user_name: this.formData.user_name,
-                email: this.formData.email,
-                open: []
+                pass: this.$TOOL.crypto.SHA(this.formData.pass),
+                opt: this.formData.opt,
+                key: this.key
             };
             var res = await this.$API.login.signon.post(data);
             if (res.code != 200) {
                 this.$message.warning(res.message);
                 return false;
             }
+
+            var userData = res.data;
+            if (userData.code != 0) {
+                this.$message.warning(userData.message);
+                return false;
+            }
+
+            this.loadAuth(userData);
         },
     }
 }
 </script>
-<style>
+<style type="scss" scoped>
 .loading {
     min-height: 400px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    text-align: center;
+
+    .notice {
+        font-size: 26px;
+        margin: 20px;
+    }
+}
+
+.warning {
+    color: red;
 }
 </style>

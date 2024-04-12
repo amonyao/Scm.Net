@@ -562,6 +562,11 @@
             登录网站
             </summary>
         </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.src">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Com.Scm.Log.LogOAuthDao.oauth_id">
             <summary>
             UnionID
@@ -615,6 +620,16 @@
         <member name="P:Com.Scm.Log.LogOAuthDao.qty">
             <summary>
             登录次数
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.phone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Log.LogOAuthDao.email">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Com.Scm.Log.LogSmsDao">
@@ -2583,22 +2598,22 @@
         </member>
         <member name="P:Com.Scm.Ur.UserDao.codes">
             <summary>
-            
+            系统代码
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UserDao.codec">
             <summary>
-            
+            用户编码
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UserDao.names">
             <summary>
-            登录用户
+            系统姓名，如真实姓名
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UserDao.namec">
             <summary>
-            展示姓名
+            展示姓名，如用户昵称
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UserDao.user">
