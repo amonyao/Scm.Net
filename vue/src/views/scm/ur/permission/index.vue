@@ -44,8 +44,8 @@
 										<el-option v-for="item in form.list" :key="item.code" :label="item.name"
 											:value="item.code">
 											<span style="float: left">{{
-			item.name
-		}}</span>
+												item.name
+											}}</span>
 											<span style="float: right;color: #8492a6;font-size: 13px;">
 												{{ item.code }}
 											</span>
@@ -155,7 +155,9 @@ export default {
 			} else if (node.childNodes.length > 0) {
 				classname = " clearFloat";
 			}
-			return '<span class="' + classname + '">' + node.label + '</span>';
+			
+			//return '<span class="' + classname + '">' + node.label + '</span>';
+			return h('span', { class: classname }, node.label);
 		},
 		changeCss() {
 			this.$nextTick(() => {

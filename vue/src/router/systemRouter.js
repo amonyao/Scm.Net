@@ -36,7 +36,7 @@ const routes = [
 	},
 	{
 		path: "/oauth",
-		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/login/oauth"),
+		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/oauth"),
 		meta: { title: "联合登录" },
 	},
 	{

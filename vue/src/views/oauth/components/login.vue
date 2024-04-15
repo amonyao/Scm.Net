@@ -1,55 +1,49 @@
 <template>
-    <common-page title="联合登录">
-        <el-form ref="userForm" :model="formData" :rules="rules" :label-width="120" v-if="needOptions">
-            <el-form-item label="登录选项" prop="opt">
-                <el-radio-group v-model="formData.opt">
-                    <el-radio-button label="1">注册新用户</el-radio-button>
-                    <el-radio-button label="2">关联已有用户</el-radio-button>
-                    <el-radio-button label="3" v-if="error_code == 46">选择登录用户</el-radio-button>
-                </el-radio-group>
-                <div class="el-form-item-msg">请选择登录选项</div>
-            </el-form-item>
-            <el-form-item label="登录账户" prop="user" v-if="formData.opt == 2">
-                <el-input v-model="formData.user" placeholder="请输入登录账户"></el-input>
-                <div class="el-form-item-msg">请输入需要进行关联的登录账户，格式为：username@unitname</div>
-            </el-form-item>
-            <el-form-item label="登录账户" prop="user_id" v-if="formData.opt == 3">
-                <sc-select v-model="formData.user_id" placeholder="请选择登录账户"></sc-select>
-                <div class="el-form-item-msg">系统检测到多个关联账户，请选择要登录的账户</div>
-            </el-form-item>
-            <el-form-item label="登录密码" prop="pass" v-if="formData.opt == 2 || formData.opt == 3">
-                <el-input v-model="formData.pass" type="password" show-password placeholder="请输入登录密码"></el-input>
-                <div class="el-form-item-msg">请输账户对应的登录密码</div>
-            </el-form-item>
-            <div style="text-align: center;">
-                <el-button type="primary" @click="signon()">提交</el-button>
-            </div>
-        </el-form>
-        <div class="loading" v-else>
-            <div v-if="error_code == 0">
-                <div class="notice">
-                    系统加载中……
-                </div>
-            </div>
-            <div v-else>
-                <div class="notice warning">
-                    {{ error_msg }}
-                </div>
-                <div>
-                    <a href="/login">返回登录</a>
-                </div>
+    <el-form ref="userForm" :model="formData" :rules="rules" :label-width="120" v-if="needOptions">
+        <el-form-item label="登录选项" prop="opt">
+            <el-radio-group v-model="formData.opt">
+                <el-radio-button label="1">注册新用户</el-radio-button>
+                <el-radio-button label="2">关联已有用户</el-radio-button>
+                <el-radio-button label="3" v-if="error_code == 46">选择登录用户</el-radio-button>
+            </el-radio-group>
+            <div class="el-form-item-msg">请选择登录选项</div>
+        </el-form-item>
+        <el-form-item label="登录账户" prop="user" v-if="formData.opt == 2">
+            <el-input v-model="formData.user" placeholder="请输入登录账户"></el-input>
+            <div class="el-form-item-msg">请输入需要进行关联的登录账户，格式为：username@unitname</div>
+        </el-form-item>
+        <el-form-item label="登录账户" prop="user_id" v-if="formData.opt == 3">
+            <sc-select v-model="formData.user_id" placeholder="请选择登录账户"></sc-select>
+            <div class="el-form-item-msg">系统检测到多个关联账户，请选择要登录的账户</div>
+        </el-form-item>
+        <el-form-item label="登录密码" prop="pass" v-if="formData.opt == 2 || formData.opt == 3">
+            <el-input v-model="formData.pass" type="password" show-password placeholder="请输入登录密码"></el-input>
+            <div class="el-form-item-msg">请输账户对应的登录密码</div>
+        </el-form-item>
+        <div style="text-align: center;">
+            <el-button type="primary" @click="signon()">提交</el-button>
+        </div>
+    </el-form>
+    <div class="loading" v-else>
+        <div v-if="error_code == 0">
+            <div class="notice">
+                系统加载中……
             </div>
         </div>
-    </common-page>
+        <div v-else>
+            <div class="notice warning">
+                {{ error_msg }}
+            </div>
+            <div>
+                <a href="/login">返回登录</a>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
-import { useRoute } from "vue-router"
-import commonPage from './components/commonPage'
-
 export default {
-    name: 'user_options',
-    components: {
-        commonPage
+    props: {
+        code: { type: String, default: '' }
     },
     data() {
         return {
@@ -68,7 +62,7 @@ export default {
         }
     },
     mounted() {
-        this.init();
+        this.init(this.code);
     },
     methods: {
         def_data() {
@@ -87,16 +81,14 @@ export default {
                 }
             });
         },
-        async init() {
-            var route = useRoute();
-            var key = route.query.code;
+        async init(code) {
             var reg = /^[0-9a-zA-Z]{32}$/
-            if (!reg.test(key)) {
+            if (!reg.test(code)) {
                 this.$router.replace({ path: '/login' });
                 return;
             }
 
-            this.checkAuth(key);
+            this.checkAuth(code);
         },
         async checkAuth(key) {
             this.key = key;

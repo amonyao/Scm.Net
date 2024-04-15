@@ -6,14 +6,14 @@
                     <template #item="{ item }">
                         <div class="oauth-item">
                             <div class="thumb">
-                                <el-avatar :size="50" />
+                                <el-avatar :size="50" :src="getAvatar(item)" />
                             </div>
                             <div class="info">
                                 <div class="label">{{ item.name }}</div>
                                 <div class="value">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
                             </div>
                             <div class="opt">
-                                <label>{{ this.getProvider(item.src) }}</label>
+                                <label class="provider">{{ this.getProvider(item.provider) }}</label>
                                 <el-button type="danger" @click="del(item.id)">解绑</el-button>
                             </div>
                         </div>
@@ -27,8 +27,6 @@
     </el-container>
 </template>
 <script>
-import { useRoute } from "vue-router"
-
 export default {
     data() {
         return {
@@ -42,31 +40,6 @@ export default {
     methods: {
         async init() {
             this.$SCM.list_dic(this.handle_list, 'iam_vernder');
-
-            var route = useRoute();
-            var key = route.query.key;
-            var reg = /^[0-9a-zA-Z]{32}$/
-            if (!reg.test(key)) {
-                this.load();
-                return;
-            }
-
-            this.doBind(key);
-        },
-        async doBind(key) {
-            var res = await this.$API.uruseroauth.dobind.post({ 'key': key });
-            if (res.code != 200) {
-                this.$message.warning(res.message);
-                return false;
-            }
-
-            var data = res.data;
-            if (data.code != 0) {
-                this.$message.warning(data.message);
-            }
-            else {
-                this.$message.success('联合登录绑定成功！');
-            }
 
             this.load();
         },
@@ -113,8 +86,13 @@ export default {
                 })
                 .catch(() => { });
         },
-        getProvider(src) {
-            this.$SCM.get_dic_names(this.vender_list, src, '-');
+        getProvider(provider) {
+            //this.$SCM.get_dic_names(this.vender_list, provider, '-');
+            return provider;
+        },
+        getAvatar(item) {
+            var image = this.$SCM.get_avatar(item);
+            return this.$CONFIG.SERVER_URL + image;
         }
     }
 }
@@ -154,6 +132,11 @@ export default {
     .opt {
         display: flex;
         align-items: center;
+
+        .provider {
+            color: #999;
+            margin-right: 20px;
+        }
     }
 }
 </style>

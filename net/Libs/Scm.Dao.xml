@@ -2541,37 +2541,37 @@
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.codes">
             <summary>
-            
+            系统代码
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.codec">
             <summary>
-            
+            机构编码
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.names">
             <summary>
-            默认账号
+            机构简称
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.namec">
             <summary>
-            租户名称
+            机构全称
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.contact">
             <summary>
-            负责人
+            联系人
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.cellphone">
             <summary>
-            手机号码
+            手机
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.telephone">
             <summary>
-            
+            固话
             </summary>
         </member>
         <member name="P:Com.Scm.Ur.UnitDao.row_delete">
@@ -2770,7 +2770,7 @@
             显示排序
             </summary>
         </member>
-        <member name="P:Com.Scm.Ur.UserOAuthDao.web">
+        <member name="P:Com.Scm.Ur.UserOAuthDao.provider">
             <summary>
             外部应用
             </summary>
