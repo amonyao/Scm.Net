@@ -72,6 +72,12 @@
     <Reference Include="Scm.App">
       <HintPath>..\Libs\Scm.App.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Cache">
+      <HintPath>..\..\..\..\scm\libs\Scm.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Cache.Dictionary">
+      <HintPath>..\..\..\..\scm\libs\Scm.Cache.Dictionary.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Common">
       <HintPath>..\Libs\Scm.Common.dll</HintPath>
     </Reference>
@@ -95,9 +101,6 @@
     </Reference>
     <Reference Include="Scm.Dao">
       <HintPath>..\Libs\Scm.Dao.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Dsa.Cache">
-      <HintPath>..\Libs\Scm.Dsa.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
@@ -131,6 +134,9 @@
     </Reference>
     <Reference Include="Scm.Server.Bearer">
       <HintPath>..\Libs\Scm.Server.Bearer.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Cache">
+      <HintPath>..\..\..\..\scm\libs\Scm.Server.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>

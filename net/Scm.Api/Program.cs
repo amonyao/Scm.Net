@@ -10,6 +10,7 @@ using Com.Scm.Mapper;
 using Com.Scm.Newton;
 using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
+using Com.Scm.Server;
 using Com.Scm.Service;
 using Com.Scm.Share;
 using Com.Scm.Swagger;
@@ -25,7 +26,7 @@ namespace Com.Scm.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            AppUtils.Configuration = builder.Configuration;
+            AppUtils.Init(builder.Configuration);
 
             // SignalR
             builder.Services.AddSignalR();
@@ -62,7 +63,7 @@ namespace Com.Scm.Api
             builder.Services.SqlSugarSetup(sqlConfig);
 
             // ª∫¥Ê≈‰÷√
-            builder.Services.DsaCacheSetup();
+            builder.Services.CacheSetup(envConfig);
 
             // ∞≤»´≈‰÷√
             var secConfig = AppUtils.GetConfig<SecurityConfig>(SecurityConfig.NAME);
