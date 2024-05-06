@@ -1,7 +1,7 @@
 const DEFAULT_CONFIG = {
 	//标题
 	APP_NAME: process.env.VUE_APP_TITLE,
-	
+
 	//简介（支持HTML）
 	APP_DESC: process.env.VUE_APP_DESC,
 
@@ -76,6 +76,13 @@ const DEFAULT_CONFIG = {
 		//小组件分布，com取值:views/home/components 文件名
 		copmsList: [["welcome", "ver"], ["time", "progress"], ["about"]],
 	},
+	OIDC_OSP: process.env.VUE_APP_OIDC_OSP,
+	OIDC_KEY: process.env.VUE_APP_OIDC_KEY,
+	OIDC_LOGO: process.env.VUE_APP_OIDC_LOGO,
+	OIDC_AUTH: process.env.VUE_APP_OIDC_AUTH,
+	OIDC_BIND: process.env.VUE_APP_OIDC_BIND,
+	BEIAN_MIIT: 'MIIT Beian',
+	BEIAN_MPS: ''
 };
 
 //合并业务配置

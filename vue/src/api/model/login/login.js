@@ -93,4 +93,9 @@ export default {
 			return await http.get(this.url);
 		},
 	},
+	listOsp: {
+		get: async function (url) {
+			return await http.get(url);
+		},
+	},
 };
