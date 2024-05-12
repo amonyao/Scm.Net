@@ -26,6 +26,9 @@
     <Reference Include="Scm.Common.Uid">
       <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Dao">
+      <HintPath>..\Libs\Scm.Dao.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
     </Reference>
@@ -41,8 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Res\" />
-    <Folder Include="So\" />
+    <Folder Include="Service\Res\Dvo\" />
+    <Folder Include="Service\Se\Dvo\" />
+    <Folder Include="Service\So\Dvo\" />
   </ItemGroup>
 
 </Project>

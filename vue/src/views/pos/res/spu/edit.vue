@@ -1,22 +1,26 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen destroy-on-close :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="应用类型" prop="types">
-				<sc-select v-model="formData.types" :data="app_types_list"></sc-select>
+			<el-form-item label="品类ID" prop="cat_id">
+				<sc-select v-model="formData.cat_id" placeholder="请输入品类ID" :maxlength="20" show-word-limit
+					clearable></sc-select>
 			</el-form-item>
-			<el-form-item label="应用代码" prop="code">
-				<el-input v-model="formData.code" placeholder="请输入应用代码" :maxlength="16" show-word-limit
+			<el-form-item label="商品编码" prop="codec">
+				<el-input v-model="formData.codec" placeholder="请输入商品编码" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="应用名称" prop="title">
-				<el-input v-model="formData.title" placeholder="请输入应用标题" :maxlength="32" show-word-limit
+			<el-form-item label="商品全称" prop="namec">
+				<el-input v-model="formData.namec" placeholder="请输入商品全称" :maxlength="128" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="应用简介" prop="content">
-				<el-input v-model="formData.content" placeholder="请输入应用说明" :maxlength="1024" show-word-limit clearable
-					type="textarea" rows="6"></el-input>
+			<el-form-item label="商品简称" prop="names">
+				<el-input v-model="formData.names" placeholder="请输入商品简称" :maxlength="64" show-word-limit
+					clearable></el-input>
 			</el-form-item>
-
+			<el-form-item label="备注" prop="remark">
+				<el-input v-model="formData.remark" placeholder="请输入备注" :maxlength="256" show-word-limit
+					clearable></el-input>
+			</el-form-item>
 		</el-form>
 
 		<template #footer>
@@ -37,33 +41,27 @@ export default {
 			isSaveing: false,
 			formData: this.def_data(),
 			rules: {
-				types: [
-					{ required: true, trigger: "change", message: "请选择应用类型", },
+				codec: [
+					{ required: true, pattern: this.$SCM.REGEX_CODEC, message: "请输入商品编码", },
 				],
-				code: [
-					{ required: true, trigger: "blur", message: "请输入应用代码", },
-				],
-				title: [
-					{ required: true, trigger: "blur", message: "请输入应用名称", },
-				],
-				content: [
-					{ required: true, trigger: "blur", message: "请输入应用简介", },
+				namec: [
+					{ required: true, message: "请输入商品全称", },
 				],
 			},
-			app_types_list: [],
+			cat_list: []
 		};
 	},
 	mounted() {
-		this.$SCM.list_dic(this.app_types_list, 'app_types', false);
 	},
 	methods: {
 		def_data() {
 			return {
 				id: '0',
-				types: 0,
-				code: '',
-				title: '',
-				content: '',
+				cat_id: '0',
+				codec: '',
+				namec: '',
+				names: '',
+				remark: '',
 			}
 		},
 		async open(row) {
@@ -71,7 +69,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.devapp.edit.get(row.id);
+				var res = await this.$API.posresspu.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -82,9 +80,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.devapp.add.post(this.formData);
+						res = await this.$API.posresspu.add.post(this.formData);
 					} else {
-						res = await this.$API.devapp.update.put(this.formData);
+						res = await this.$API.posresspu.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

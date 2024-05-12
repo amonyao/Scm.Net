@@ -1,7 +1,9 @@
 ﻿using Com.Scm.Cms.Doc.Note.Dvo;
 using Com.Scm.Config;
+using Com.Scm.Enums;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Sys.Notes;
 using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +13,10 @@ namespace Com.Scm.Cms.Doc.Note
     [ApiExplorerSettings(GroupName = "Cms")]
     public class CmsBlogService : ApiService
     {
-        private readonly SugarRepository<CmsDocNoteDao> _thisRepository;
+        private readonly SugarRepository<NoteDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public CmsBlogService(SugarRepository<CmsDocNoteDao> thisRepository,
+        public CmsBlogService(SugarRepository<NoteDao> thisRepository,
             SugarRepository<UserDao> userRepository,
             EnvConfig config)
         {
@@ -28,15 +30,15 @@ namespace Com.Scm.Cms.Doc.Note
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<NoteBasicDvo>> GetPagesAsync(BlogSearchRequest request)
+        public async Task<PageResult<BlogDvo>> GetPagesAsync(BlogSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.types == Enums.NoteTypesEnum.HtmlPad)
+                .Where(a => a.types == NoteTypesEnum.HtmlPad)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<NoteBasicDvo>()
+                .Select<BlogDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -48,10 +50,10 @@ namespace Com.Scm.Cms.Doc.Note
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<NoteBasicDvo>> GetListAsync(BlogSearchRequest request)
+        public async Task<List<BlogDvo>> GetListAsync(BlogSearchRequest request)
         {
             var query = _thisRepository.AsQueryable()
-                .Where(a => a.types == Enums.NoteTypesEnum.HtmlPad)
+                .Where(a => a.types == NoteTypesEnum.HtmlPad)
                 .Where(a => a.row_status == Scm.Enums.ScmStatusEnum.Enabled)
                 .WhereIF(IsValidId(request.cat_id), a => a.cat_id == request.cat_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.title.Contains(request.key));
@@ -65,13 +67,13 @@ namespace Com.Scm.Cms.Doc.Note
                 query = query.OrderBy(a => a.qty, SqlSugar.OrderByType.Desc);
             }
 
-            var result = await query.Select<NoteBasicDvo>().ToListAsync();
+            var result = await query.Select<BlogDvo>().ToListAsync();
 
             Prepare(result);
             return result;
         }
 
-        private void Prepare(List<NoteBasicDvo> list)
+        private void Prepare(List<BlogDvo> list)
         {
             foreach (var item in list)
             {

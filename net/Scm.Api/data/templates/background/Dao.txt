@@ -22,7 +22,7 @@ namespace Com.Scm.{NameSpace}
             {
                 names = namef;
             }
-            codes = UidHelper.NextCodes("{DataTable}");
+            codes = UidUtils.NextCodes("{DataTable}");
         }
 	}
 }

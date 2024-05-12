@@ -6,6 +6,7 @@ using Com.Scm.Filters;
 using Com.Scm.Jwt;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Sys.Notes;
 using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
@@ -225,7 +226,7 @@ namespace Com.Scm.Cms.Doc.Article
             return 0;
         }
 
-        public async Task SaveNotesAsync(CmsDocNoteDto model)
+        public async Task SaveNotesAsync(NoteDto model)
         {
             var content = model.content ?? "";
 
