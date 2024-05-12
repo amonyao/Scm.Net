@@ -157,7 +157,7 @@
             
             </summary>
         </member>
-        <member name="P:Com.Scm.Dev.AppDao.name">
+        <member name="P:Com.Scm.Dev.AppDao.code">
             <summary>
             应用代码
             </summary>
@@ -402,7 +402,7 @@
             应用
             </summary>
         </member>
-        <member name="P:Com.Scm.Dev.VerHeaderDao.sys">
+        <member name="P:Com.Scm.Dev.VerHeaderDao.app_id">
             <summary>
             系统
             </summary>
@@ -1801,6 +1801,76 @@
             </summary>
             <param name="tag"></param>
             <returns></returns>
+        </member>
+        <member name="T:Com.Scm.Sys.Notes.NoteDao">
+            <summary>
+            记事功能
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.key">
+            <summary>
+            键
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.salt">
+            <summary>
+            盐
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.types">
+            <summary>
+            文章类型
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.cat_id">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.sub_title">
+            <summary>
+            子标题
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.qty">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.fav_qty">
+            <summary>
+            收藏数量
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.msg_qty">
+            <summary>
+            留言数量
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.summary">
+            <summary>
+            摘要
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.files">
+            <summary>
+            文件
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.ver">
+            <summary>
+            版本
+            </summary>
         </member>
         <member name="T:Com.Scm.Sys.PvDetailDao">
             <summary>

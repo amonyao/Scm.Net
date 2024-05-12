@@ -155,7 +155,7 @@ export default {
 	},
 	methods: {
 		async loadInfo() {
-			var res = await this.$API.devapp.model.get({ name: 'scm.web' });
+			var res = await this.$API.devapp.model.get({ 'code': 'scm.web' });
 			if (res == null || res.code != 200) {
 				return;
 			}

@@ -7,7 +7,6 @@ using Com.Scm.Generator;
 using Com.Scm.Generator.Config;
 using Com.Scm.Hubs;
 using Com.Scm.Mapper;
-using Com.Scm.Newton;
 using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
 using Com.Scm.Server;
