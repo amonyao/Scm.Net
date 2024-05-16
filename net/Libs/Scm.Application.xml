@@ -9641,6 +9641,14 @@
             记事
             </summary>
         </member>
+        <member name="M:Com.Scm.Sys.Notes.SysNoteService.#ctor(Com.Scm.SugarRepository{Com.Scm.Sys.Notes.NoteDao},Com.Scm.SugarRepository{Com.Scm.Ur.UserDao},Com.Scm.Config.EnvConfig)">
+            <summary>
+            
+            </summary>
+            <param name="thisRepository"></param>
+            <param name="userRepository"></param>
+            <param name="config"></param>
+        </member>
         <member name="M:Com.Scm.Sys.Notes.SysNoteService.GetPagesAsync(Com.Scm.Sys.Notes.Dvo.NoteSearchRequest)">
             <summary>
             查询分页

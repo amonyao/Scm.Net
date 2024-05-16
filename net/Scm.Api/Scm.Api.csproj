@@ -73,6 +73,9 @@
     <Reference Include="Scm.App">
       <HintPath>..\Libs\Scm.App.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Cache">
+      <HintPath>..\Libs\Scm.Cache.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Common">
       <HintPath>..\Libs\Scm.Common.dll</HintPath>
     </Reference>
@@ -129,6 +132,9 @@
     </Reference>
     <Reference Include="Scm.Server.Bearer">
       <HintPath>..\Libs\Scm.Server.Bearer.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Cache">
+      <HintPath>..\Libs\Scm.Server.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
