@@ -45,14 +45,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FytApi.MUI" Version="1.1.1" />
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="MetadataExtractor" Version="2.8.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
     <PackageReference Include="Quartz" Version="3.8.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.148" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -71,6 +71,9 @@
   <ItemGroup>
     <Reference Include="Scm.App">
       <HintPath>..\Libs\Scm.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Cache">
+      <HintPath>..\Libs\Scm.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Common">
       <HintPath>..\Libs\Scm.Common.dll</HintPath>
@@ -95,9 +98,6 @@
     </Reference>
     <Reference Include="Scm.Dao">
       <HintPath>..\Libs\Scm.Dao.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Dsa.Cache">
-      <HintPath>..\Libs\Scm.Dsa.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
@@ -132,14 +132,11 @@
     <Reference Include="Scm.Server.Bearer">
       <HintPath>..\Libs\Scm.Server.Bearer.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Server.Cache">
+      <HintPath>..\Libs\Scm.Server.Cache.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Ioc">
-      <HintPath>..\Libs\Scm.Server.Ioc.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Newton">
-      <HintPath>..\Libs\Scm.Server.Newton.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Quartz">
       <HintPath>..\Libs\Scm.Server.Quartz.dll</HintPath>
@@ -149,6 +146,9 @@
     </Reference>
     <Reference Include="Scm.Server.SignalR">
       <HintPath>..\Libs\Scm.Server.SignalR.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.SqlSugar">
+      <HintPath>..\Libs\Scm.Server.SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Swagger">
       <HintPath>..\Libs\Scm.Server.Swagger.dll</HintPath>
