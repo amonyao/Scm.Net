@@ -4,8 +4,8 @@
 			<el-form-item label="应用类型" prop="types">
 				<sc-select v-model="formData.types" :data="app_types_list"></sc-select>
 			</el-form-item>
-			<el-form-item label="应用代码" prop="name">
-				<el-input v-model="formData.name" placeholder="请输入应用代码" :maxlength="16" show-word-limit
+			<el-form-item label="应用代码" prop="code">
+				<el-input v-model="formData.code" placeholder="请输入应用代码" :maxlength="16" show-word-limit
 					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="应用名称" prop="title">
@@ -40,7 +40,7 @@ export default {
 				types: [
 					{ required: true, trigger: "change", message: "请选择应用类型", },
 				],
-				name: [
+				code: [
 					{ required: true, trigger: "blur", message: "请输入应用代码", },
 				],
 				title: [
@@ -61,7 +61,7 @@ export default {
 			return {
 				id: '0',
 				types: 0,
-				name: '',
+				code: '',
 				title: '',
 				content: '',
 			}

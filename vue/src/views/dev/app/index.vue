@@ -101,7 +101,7 @@ export default {
 			column: [
 				{ label: "id", prop: "id", hide: true },
 				{ prop: 'types', label: '应用类型', width: 80 },
-				{ prop: 'name', label: '应用代码', width: 100, align: 'left' },
+				{ prop: 'code', label: '应用代码', width: 100, align: 'left' },
 				{ prop: 'title', label: '应用名称', width: 140, align: 'left' },
 				{ prop: 'content', label: '应用简介', minWidth: 100, align: 'left', showOverflowTooltip: true },
 				{ prop: 'row_status', label: '数据状态', width: 80 },

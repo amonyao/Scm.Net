@@ -38,7 +38,7 @@ export default {
 				// 配置上传图片
 				uploadImage: {
 					// 请求路径
-					server: this.$API.cmsdocnote.upload.url,
+					server: this.$API.sysnote.upload.url,
 					// 后端接收的文件名称
 					fieldName: "file",
 					maxFileSize: 1 * 1024 * 1024, // 1M

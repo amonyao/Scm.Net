@@ -1,12 +1,9 @@
-using Com.Scm.Dao.Ur;
-using Com.Scm.Dsa.Dba.Sugar;
-using Com.Scm.Dvo;
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
 using Com.Scm.Result;
 using Com.Scm.Service;
+using Com.Scm.Ur;
 using Com.Scm.Utils;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.{NameSpace}
@@ -36,7 +33,7 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<PageResult<{TableName}Dvo>> GetPagesAsync(BaseSearchPageRequest request)
+    public async Task<PageResult<{TableName}Dvo>> GetPagesAsync(ScmSearchPageRequest request)
     {
         var result = await _thisRepository.AsQueryable()
             .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
@@ -55,7 +52,7 @@ public class {TableName}Service : ApiService
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    public async Task<List<{TableName}Dvo>> GetListAsync(BaseSearchRequest request)
+    public async Task<List<{TableName}Dvo>> GetListAsync(ScmSearchRequest request)
     {
         var result = await _thisRepository.AsQueryable()
             .Where(a => a.row_status == ScmStatusEnum.Enabled)

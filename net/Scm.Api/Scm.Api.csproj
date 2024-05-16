@@ -64,6 +64,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cms.Server\Cms.Server.csproj" />
     <ProjectReference Include="..\Fms.Server\Fms.Server.csproj" />
+    <ProjectReference Include="..\Pos\Pos.csproj" />
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
     <ProjectReference Include="..\Yms.Server\Yms.Server.csproj" />
   </ItemGroup>
@@ -71,9 +72,6 @@
   <ItemGroup>
     <Reference Include="Scm.App">
       <HintPath>..\Libs\Scm.App.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Cache">
-      <HintPath>..\Libs\Scm.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Common">
       <HintPath>..\Libs\Scm.Common.dll</HintPath>
@@ -131,9 +129,6 @@
     </Reference>
     <Reference Include="Scm.Server.Bearer">
       <HintPath>..\Libs\Scm.Server.Bearer.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Cache">
-      <HintPath>..\Libs\Scm.Server.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>

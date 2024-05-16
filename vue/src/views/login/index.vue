@@ -11,8 +11,8 @@
 					<div class="common-header-title">{{ $t('login.signInTitle') }}</div>
 				</div>
 				<div class="common-header-right">
-					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info"
-						@click="configDark" :title="$t('login.themeTitle')">
+					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info" @click="configDark"
+						:title="$t('login.themeTitle')">
 					</el-button>
 					<el-dropdown trigger="click" placement="bottom-end" @command="configLang"
 						:title="$t('login.langTitle')">
@@ -76,6 +76,12 @@
 	</div>
 	<div class="login_foot">
 		© {{ $CONFIG.APP_NAME }} {{ $CONFIG.APP_VER }} BUILD {{ $CONFIG.APP_BUILD }}
+		<a href="https://beian.miit.gov.cn/" target="_blank" title="备案信息查询" v-if="$CONFIG.BEIAN_MIIT">
+			{{ $CONFIG.BEIAN_MIIT }}
+		</a>
+		<a href="https://beian.mps.gov.cn/" target="_blank" title="备案信息查询" v-if="$CONFIG.BEIAN_MPS">
+			{{ $CONFIG.BEIAN_MPS }}
+		</a>
 	</div>
 </template>
 
@@ -149,7 +155,7 @@ export default {
 	},
 	methods: {
 		async loadInfo() {
-			var res = await this.$API.devapp.model.get({ name: 'scm.web' });
+			var res = await this.$API.devapp.model.get({ 'code': 'scm.web' });
 			if (res == null || res.code != 200) {
 				return;
 			}
@@ -300,6 +306,10 @@ export default {
 	text-align: center;
 	color: #fff;
 	z-index: 3;
+}
+
+.login_foot a {
+	color: #fff;
 }
 
 .login_user {}

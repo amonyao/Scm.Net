@@ -31,13 +31,13 @@
       <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dao">
-      <HintPath>..\Libs\Scm.Dao.dll</HintPath>
+      <HintPath>..\..\..\..\scm\libs\Scm.Dao.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dto">
-      <HintPath>..\Libs\Scm.Dto.dll</HintPath>
+      <HintPath>..\..\..\..\scm\libs\Scm.Dto.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Plugin">
       <HintPath>..\Libs\Scm.Plugin.dll</HintPath>

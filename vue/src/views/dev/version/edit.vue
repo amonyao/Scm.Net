@@ -4,13 +4,12 @@
             <el-row>
                 <el-col :span="12">
                     <el-form-item label="终端类型" prop="types">
-                        <sc-select v-model="formData.types" style="width: 100%;" :data="typeList"></sc-select>
+                        <sc-select v-model="formData.types" :data="typeList"></sc-select>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="系统代码" prop="sys">
-                        <el-input v-model="formData.sys" placeholder="请输入系统代码" :maxlength="16" show-word-limit
-                            clearable></el-input>
+                    <el-form-item label="系统代码" prop="app_id">
+                        <sc-select v-model="formData.app_id" :data="app_list"></sc-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -113,6 +112,7 @@ export default {
                     { required: true, trigger: "blur", message: "请输入版本信息", },
                 ],
             },
+            app_list: []
         };
     },
     mounted() {
@@ -122,9 +122,8 @@ export default {
             return {
                 id: '0',
                 types: 0,
-                sys: '',
+                app_id: '0',
                 date: '',
-                time: new Date(),
                 build: '',
                 ver: '',
                 ver_min: '',
@@ -136,6 +135,7 @@ export default {
             };
         },
         async open(row) {
+            await this.$SCM.list_option(this.app_list, this.$API.devapp.option, 0, false);
             await this.$SCM.list_dic(this.typeList, 'client_type', false);
             if (!row || !row.id) {
                 this.mode = "add";

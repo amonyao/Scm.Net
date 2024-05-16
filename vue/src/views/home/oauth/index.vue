@@ -27,6 +27,8 @@
     </el-container>
 </template>
 <script>
+import config from "@/config";
+
 export default {
     data() {
         return {
@@ -69,7 +71,9 @@ export default {
             this.oauth_list = res.data;
         },
         add() {
-            window.location.href = 'http://sso.c-scm.net/oauth?mode=bind';
+            var url = config.OIDC_BIND || '';
+            url = url.replace('{key}', config.OIDC_KEY).replace('{state}', 'bind');
+            window.location.href = url;
         },
         del(id) {
             this.$confirm(
