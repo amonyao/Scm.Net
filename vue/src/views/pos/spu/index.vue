@@ -20,12 +20,12 @@
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
-						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)"><sc-icon
-								name="sc-check-circle-line" /></el-button>
+						<el-button type="primary" plain :disabled="selection.length == 0"
+							@click="status_list(1)"><sc-icon name="sc-check-circle-line" /></el-button>
 					</el-tooltip>
 					<el-tooltip content="停用">
-						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)"><sc-icon
-								name="sc-pause-circle-line" /></el-button>
+						<el-button type="primary" plain :disabled="selection.length == 0"
+							@click="status_list(2)"><sc-icon name="sc-pause-circle-line" /></el-button>
 					</el-tooltip>
 					<el-tooltip content="删除">
 						<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list"><sc-icon
@@ -72,10 +72,10 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.posresspu.page,
+			apiObj: this.$API.posspu.page,
 			list: [],
 			param: {
-				option_id: '',
+				option_id: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
@@ -83,12 +83,22 @@ export default {
 			selection: [],
 			column: [
 				{ prop: "id", label: "id", hide: true },
-				{ prop: 'cat_id', label: '品类ID', width: 100 },
+				{ prop: 'cat_id', label: '分类', width: 100 },
+				{ prop: 'od', label: '显示排序', width: 80 },
+				{ prop: 'types', label: '商品类型', width: 100 },
 				{ prop: 'codes', label: '系统代码', width: 100 },
 				{ prop: 'codec', label: '商品编码', width: 100 },
+				{ prop: 'barcode', label: '条码', width: 100 },
 				{ prop: 'names', label: '商品简称', width: 100 },
-				{ prop: 'namec', label: '商品全称', minWidth: 160 },
+				{ prop: 'namec', label: '商品名称', width: 100 },
 				{ prop: 'image', label: '图片', width: 100 },
+				{ prop: 'show_status', label: '展示状态', width: 100 },
+				{ prop: 'sale_status', label: '销售状态', width: 100 },
+				{ prop: 'ass', label: '售后状态', width: 100 },
+				{ prop: 'hot', label: '热销商品', width: 100 },
+				{ prop: 'vip', label: '会员商品', width: 100 },
+				{ prop: 'sss', label: '推荐商品', width: 100 },
+				{ prop: 'qty', label: '已售数量', width: 100 },
 				{ prop: 'remark', label: '备注', width: 100 },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
@@ -111,16 +121,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.posresspu.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.posspu.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.posresspu.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.posspu.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.posresspu.delete, row);
+			this.$SCM.delete_item(this, this.$API.posspu.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.posresspu.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.posspu.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

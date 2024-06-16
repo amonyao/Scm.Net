@@ -93,7 +93,7 @@ export default {
         def_data() {
             return {
                 id: '0',
-                ver: 1,
+                ver: 0,
                 types: 1,
                 title: '',
                 content: '',
@@ -172,9 +172,9 @@ export default {
             }
 
             // 读取本地缓存
-            var cahced = this.loadCache(item.id, {});
+            var cahced = this.loadCache(item.id);
 
-            var nativeVer = cahced.ver || 1;
+            var nativeVer = cahced.ver || 0;
             var remoteVer = res.data.ver || 1;
             if (nativeVer >= remoteVer) {
                 this.formData = cahced;

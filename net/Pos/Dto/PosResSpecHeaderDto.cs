@@ -1,17 +1,17 @@
 using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Pos
+namespace Com.Scm.Pos.Res
 {
     /// <summary>
-    /// 扩展信息
+    /// 规格主档
     /// </summary>
-    public class PosResSpuExtsDto : ScmDataDto
+    public class PosResSpecHeaderDto : ScmDataDto
     {
         /// <summary>
-        /// 商品ID
+        /// 分类
         /// </summary>
-        public long spu_id { get; set; }
+        public long cat_id { get; set; }
 
         /// <summary>
         /// 显示排序
@@ -19,21 +19,20 @@ namespace Com.Scm.Pos
         public int od { get; set; }
 
         /// <summary>
-        /// 属性名称
+        /// 规格编码
+        /// </summary>
+        [StringLength(32)]
+        public string codec { get; set; }
+
+        /// <summary>
+        /// 规格名称
         /// </summary>
         [StringLength(32)]
         public string namec { get; set; }
 
         /// <summary>
-        /// 属性内容
+        /// 是否支持图片
         /// </summary>
-        [StringLength(512)]
-        public string json { get; set; }
-
-        /// <summary>
-        /// 单价
-        /// </summary>
-        [Required]
-        public int price { get; set; }
+        public int image { get; set; }
     }
 }

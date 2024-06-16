@@ -1,5 +1,6 @@
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
+using Com.Scm.Pos.Res;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
@@ -12,9 +13,9 @@ namespace Com.Scm.Pos
     /// 规格信息服务接口
     /// </summary>
     [ApiExplorerSettings(GroupName = "Pos")]
-    public class PosResSpuSpecService : ApiService
+    public class PosSkuService : ApiService
     {
-        private readonly SugarRepository<PosResSpuSpecDao> _thisRepository;
+        private readonly SugarRepository<PosSkuDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
         /// <summary>
@@ -22,7 +23,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public PosResSpuSpecService(SugarRepository<PosResSpuSpecDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public PosSkuService(SugarRepository<PosSkuDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
@@ -87,10 +88,10 @@ namespace Com.Scm.Pos
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<PosResSpuSpecDto> GetAsync(long id)
+        public async Task<PosSkuDto> GetAsync(long id)
         {
             var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<PosResSpuSpecDto>();
+            return model.Adapt<PosSkuDto>();
         }
 
         /// <summary>
@@ -99,11 +100,11 @@ namespace Com.Scm.Pos
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<PosResSpuSpecDto> GetEditAsync(long id)
+        public async Task<PosSkuDto> GetEditAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<PosResSpuSpecDto>()
+                .Select<PosSkuDto>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -126,7 +127,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(PosResSpuSpecDto model)
+        public async Task<bool> AddAsync(PosSkuDto model)
         {
             var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec);
             if (dao != null)
@@ -144,7 +145,7 @@ namespace Com.Scm.Pos
                 throw new BusinessException($"已存在简称为{model.names}的规格信息！");
             }
 
-            return await _thisRepository.InsertAsync(model.Adapt<PosResSpuSpecDao>());
+            return await _thisRepository.InsertAsync(model.Adapt<PosSkuDao>());
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(PosResSpuSpecDto model)
+        public async Task UpdateAsync(PosSkuDto model)
         {
             var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec && a.id != model.id);
             if (dao != null)

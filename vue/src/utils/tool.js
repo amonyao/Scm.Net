@@ -5,8 +5,6 @@
  * @LastEditTime: 2021年7月20日10:58:41
  */
 
-import CryptoJS from "crypto-js";
-
 const tool = {};
 
 tool.trim = function (x) {
@@ -16,18 +14,53 @@ tool.trim = function (x) {
 	return x.toString().replace(/^\s+|\s+$/gm, "");
 };
 
+tool._cache = [];
+
+/** 临时缓存 */
+tool.catch = {
+	set(key, obj) {
+		var _set = JSON.stringify(obj);
+		tool._cache[key] = _set;
+	},
+	get(key, def) {
+		var data = tool._cache[key];
+		if (!data) {
+			return def;
+		}
+
+		try {
+			data = JSON.parse(data);
+		} catch (err) {
+			return def;
+		}
+		return data;
+	},
+	remove(key) {
+		tool._cache = tool._cache.filter((tmp) => {
+			return tmp != key;
+		});
+	},
+	clear() {
+		tool._cache = [];
+	},
+};
+
 /* localStorage */
-tool.data = {
+tool.local = {
 	set(key, obj) {
 		var _set = JSON.stringify(obj);
 		return localStorage.setItem(key, _set);
 	},
-	get(key) {
+	get(key, def) {
 		var data = localStorage.getItem(key);
+		if (!data) {
+			return def;
+		}
+
 		try {
 			data = JSON.parse(data);
 		} catch (err) {
-			return null;
+			return def;
 		}
 		return data;
 	},
@@ -45,12 +78,16 @@ tool.session = {
 		var _set = JSON.stringify(obj);
 		return sessionStorage.setItem(key, _set);
 	},
-	get(key) {
+	get(key, def) {
 		var data = sessionStorage.getItem(key);
+		if (!data) {
+			return def;
+		}
+
 		try {
 			data = JSON.parse(data);
 		} catch (err) {
-			return null;
+			return def;
 		}
 		return data;
 	},
@@ -88,14 +125,14 @@ tool.cookie = {
 		cookieStr += ";samesite=Lax";
 		document.cookie = cookieStr;
 	},
-	get(key) {
+	get(key, def) {
 		var arr = document.cookie.match(
 			new RegExp("(^| )" + key + "=([^;]*)(;|$)")
 		);
 		if (arr != null) {
 			return unescape(arr[2]);
 		} else {
-			return null;
+			return def;
 		}
 	},
 	remove(key) {
@@ -183,6 +220,45 @@ tool.objCopy = function (obj) {
 	return JSON.parse(JSON.stringify(obj));
 };
 
+tool.getDate = function () {
+	var date = new Date();
+	var y = date.getFullYear();
+	var m = date.getMonth() + 1;
+	var d = date.getDate();
+	return y + "-" + tool.lpad(m, 2, "0") + "-" + tool.lpad(d, 2, "0");
+};
+
+tool.getTime = function () {
+	var date = new Date();
+	var h = date.getHours();
+	var m = date.getMinutes();
+	var s = date.getSeconds();
+	return (
+		tool.lpad(h, 2, "0") +
+		":" +
+		tool.lpad(m, 2, "0") +
+		":" +
+		tool.lpad(s, 2, "0")
+	);
+};
+
+tool.format = function (str, len, pad) {
+	pad = pad || "*";
+	if (!str) {
+		return pad.repeat(len);
+	}
+
+	const t = str.length;
+	if (t > len) {
+		return str.substring(0, len);
+	}
+	if (t < len) {
+		return str.padEnd(len, pad);
+	}
+
+	return str;
+};
+
 tool.dateTimeFormat = function (time) {
 	if (!time) {
 		return "";
@@ -206,6 +282,10 @@ tool.dateTimeFormat = function (time) {
 
 tool.lpad = function (val, total = 2, str = "0") {
 	return val.toString().padStart(total, str);
+};
+
+tool.rpad = function (val, total = 2, str = "0") {
+	return val.toString().padEnd(total, str);
 };
 
 /* 日期格式化
@@ -389,54 +469,6 @@ tool.fileSize = function (limit) {
 		return sizeStr.substring(0, index) + sizeStr.substr(index + 3, 2);
 	}
 	return size;
-};
-
-/* 常用加解密 */
-tool.crypto = {
-	//MD5加密
-	MD5(data) {
-		return CryptoJS.MD5(data).toString();
-	},
-	SHA(data) {
-		return CryptoJS.SHA256(data).toString();
-	},
-	//BASE64加解密
-	BASE64: {
-		encrypt(data) {
-			return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(data));
-		},
-		decrypt(cipher) {
-			return CryptoJS.enc.Base64.parse(cipher).toString(
-				CryptoJS.enc.Utf8
-			);
-		},
-	},
-	AES_SECRETKEY: "dd0308a654ea42eab695bf060241b5aa",
-	//AES加解密
-	AES: {
-		encrypt(data, secretKey) {
-			const result = CryptoJS.AES.encrypt(
-				data,
-				CryptoJS.enc.Utf8.parse(secretKey),
-				{
-					mode: CryptoJS.mode.ECB,
-					padding: CryptoJS.pad.Pkcs7,
-				}
-			);
-			return result.toString();
-		},
-		decrypt(cipher, secretKey) {
-			const result = CryptoJS.AES.decrypt(
-				cipher,
-				CryptoJS.enc.Utf8.parse(secretKey),
-				{
-					mode: CryptoJS.mode.ECB,
-					padding: CryptoJS.pad.Pkcs7,
-				}
-			);
-			return CryptoJS.enc.Utf8.stringify(result);
-		},
-	},
 };
 
 tool.randomString = function (length, upper) {

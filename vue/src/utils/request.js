@@ -2,6 +2,7 @@ import axios from "axios";
 import { ElNotification, ElMessageBox } from "element-plus";
 import sysConfig from "@/config";
 import tool from "@/utils/tool";
+import crypto from "@/utils/crypto";
 import router from "@/router";
 
 axios.defaults.baseURL = "";
@@ -40,7 +41,7 @@ axios.interceptors.request.use(
 				timestamp +
 				JSON.stringify(config.data);
 		}
-		config.headers["signature"] = tool.crypto.MD5(signStr);
+		config.headers["signature"] = crypto.MD5(signStr);
 		Object.assign(config.headers, sysConfig.HEADERS);
 		return config;
 	},

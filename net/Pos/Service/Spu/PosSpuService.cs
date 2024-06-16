@@ -1,20 +1,22 @@
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
+using Com.Scm.Pos.Res;
+using Com.Scm.Res.Cat;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Pos
+namespace Com.Scm.Pos.Service.Spu
 {
     /// <summary>
     /// 商品服务接口
     /// </summary>
     [ApiExplorerSettings(GroupName = "Pos")]
-    public class PosResSpuService : ApiService
+    public class PosSpuService : ApiService
     {
-        private readonly SugarRepository<PosResSpuDao> _thisRepository;
+        private readonly SugarRepository<PosSpuDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
         /// <summary>
@@ -22,7 +24,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public PosResSpuService(SugarRepository<PosResSpuDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public PosSpuService(SugarRepository<PosSpuDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
@@ -87,10 +89,10 @@ namespace Com.Scm.Pos
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<PosResSpuDto> GetAsync(long id)
+        public async Task<PosSpuDto> GetAsync(long id)
         {
             var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<PosResSpuDto>();
+            return model.Adapt<PosSpuDto>();
         }
 
         /// <summary>
@@ -99,11 +101,11 @@ namespace Com.Scm.Pos
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<PosResSpuDto> GetEditAsync(long id)
+        public async Task<PosSpuDto> GetEditAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<PosResSpuDto>()
+                .Select<PosSpuDto>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -126,7 +128,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(PosResSpuDto model)
+        public async Task<bool> AddAsync(PosSpuDto model)
         {
             var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec);
             if (dao != null)
@@ -144,7 +146,51 @@ namespace Com.Scm.Pos
                 throw new BusinessException($"已存在简称为{model.names}的商品！");
             }
 
-            return await _thisRepository.InsertAsync(model.Adapt<PosResSpuDao>());
+            return await _thisRepository.InsertAsync(model.Adapt<PosSpuDao>());
+        }
+
+        /// <summary>
+        /// 获取商品规格列表
+        /// </summary>
+        /// <param name="spuId"></param>
+        /// <returns></returns>
+        public async Task<bool> GetSpecAsync(long spuId)
+        {
+            var spuDao = await _thisRepository.GetByIdAsync(spuId);
+            if (spuDao == null)
+            {
+                return false;
+            }
+
+            var specId = spuDao.spec_id;
+            PosResSpecHeaderDao specHeaderDao = null;
+            var specHeaderClient = _thisRepository.Change<PosResSpecHeaderDao>();
+            var specDetailClient = _thisRepository.Change<PosResSpecDetailDao>();
+            if (ScmUtils.IsValidId(specId))
+            {
+                specHeaderDao = await specHeaderClient.AsQueryable()
+                    .Where(a => a.id == specId && a.row_status == ScmStatusEnum.Enabled)
+                    .FirstAsync();
+                if (specHeaderDao != null)
+                {
+                    var t = await specDetailClient.AsQueryable()
+                        .Where(a => a.header_id == specId && a.row_status == ScmStatusEnum.Enabled)
+                        .OrderBy(a => a.od, SqlSugar.OrderByType.Asc)
+                        .ToListAsync();
+                }
+            }
+
+            var catId = spuDao.cat_id;
+            if (ScmUtils.IsValidId(catId))
+            {
+                var catDao = await _thisRepository.Change<CatDao>().GetByIdAsync(spuDao.cat_id);
+                if (catDao != null)
+                {
+                    specId = catDao.ref_id;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -152,7 +198,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(PosResSpuDto model)
+        public async Task UpdateAsync(PosSpuDto model)
         {
             var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec && a.id != model.id);
             if (dao != null)

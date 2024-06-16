@@ -7616,16 +7616,16 @@
             操作人服务
             </summary>
         </member>
-        <member name="M:Com.Scm.Operator.OperatorService.#ctor(Com.Scm.Cache.ICacheService,Com.Scm.Jwt.JwtContextHolder,Com.Scm.ILogService,SqlSugar.ISqlSugarClient,Com.Scm.Email.Config.EmailConfig,Com.Scm.Config.EnvConfig)">
+        <member name="M:Com.Scm.Operator.OperatorService.#ctor(SqlSugar.ISqlSugarClient,Com.Scm.Config.EnvConfig,Com.Scm.Cache.ICacheService,Com.Scm.Jwt.JwtContextHolder,Com.Scm.ILogService,Com.Scm.ISmsService)">
             <summary>
             
             </summary>
+            <param name="sqlClient"></param>
+            <param name="envConfig"></param>
             <param name="cacheService"></param>
             <param name="jwtContextHolder"></param>
             <param name="logService"></param>
-            <param name="sqlClient"></param>
-            <param name="emailConfig"></param>
-            <param name="envConfig"></param>
+            <param name="smsService"></param>
         </member>
         <member name="M:Com.Scm.Operator.OperatorService.GetTokenUser">
             <summary>
@@ -7838,18 +7838,6 @@
             
             </summary>
             <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Operator.OperatorService.SendSmsByPhone(Com.Scm.Operator.Dvo.SendSmsRequest,System.String,System.String,System.String,System.String)">
-            <summary>
-            发送手机验证码
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Com.Scm.Operator.OperatorService.SendSmsByEmail(Com.Scm.Operator.Dvo.SendSmsRequest,System.String,System.String,System.String,System.String)">
-            <summary>
-            发送邮件验证码
-            </summary>
             <returns></returns>
         </member>
         <member name="M:Com.Scm.Operator.OperatorService.GetAuthorityMenuAsync">

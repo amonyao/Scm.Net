@@ -1252,6 +1252,11 @@
             引用数量
             </summary>
         </member>
+        <member name="P:Com.Scm.Res.Cat.CatDao.ref_id">
+            <summary>
+            引用ID
+            </summary>
+        </member>
         <member name="T:Com.Scm.Res.Sms.SmsDao">
             <summary>
             消息模板

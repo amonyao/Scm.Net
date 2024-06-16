@@ -1,5 +1,6 @@
 using Com.Scm.Enums;
 using Com.Scm.Exceptions;
+using Com.Scm.Pos.Res;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
@@ -12,9 +13,9 @@ namespace Com.Scm.Pos
     /// 扩展信息服务接口
     /// </summary>
     [ApiExplorerSettings(GroupName = "Pos")]
-    public class PosResSpuExtsService : ApiService
+    public class PosSpuExtsService : ApiService
     {
-        private readonly SugarRepository<PosResSpuExtsDao> _thisRepository;
+        private readonly SugarRepository<PosSpuExtsDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
         /// <summary>
@@ -22,7 +23,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public PosResSpuExtsService(SugarRepository<PosResSpuExtsDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public PosSpuExtsService(SugarRepository<PosSpuExtsDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
@@ -87,10 +88,10 @@ namespace Com.Scm.Pos
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<PosResSpuExtsDto> GetAsync(long id)
+        public async Task<PosSpuExtsDto> GetAsync(long id)
         {
             var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<PosResSpuExtsDto>();
+            return model.Adapt<PosSpuExtsDto>();
         }
 
         /// <summary>
@@ -99,11 +100,11 @@ namespace Com.Scm.Pos
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<PosResSpuExtsDto> GetEditAsync(long id)
+        public async Task<PosSpuExtsDto> GetEditAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<PosResSpuExtsDto>()
+                .Select<PosSpuExtsDto>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -126,7 +127,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(PosResSpuExtsDto model)
+        public async Task<bool> AddAsync(PosSpuExtsDto model)
         {
             //var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec);
             //if (dao != null)
@@ -144,7 +145,7 @@ namespace Com.Scm.Pos
             //    throw new BusinessException($"已存在简称为{model.names}的扩展信息！");
             //}
 
-            return await _thisRepository.InsertAsync(model.Adapt<PosResSpuExtsDao>());
+            return await _thisRepository.InsertAsync(model.Adapt<PosSpuExtsDao>());
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace Com.Scm.Pos
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(PosResSpuExtsDto model)
+        public async Task UpdateAsync(PosSpuExtsDto model)
         {
             //var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec && a.id != model.id);
             //if (dao != null)

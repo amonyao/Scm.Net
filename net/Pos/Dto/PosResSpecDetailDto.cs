@@ -1,24 +1,22 @@
 using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Pos
+namespace Com.Scm.Pos.Res
 {
     /// <summary>
-    /// 规格信息
+    /// 规格明细
     /// </summary>
-    public class PosResSpuSpecDto : ScmDataDto
+    public class PosResSpecDetailDto : ScmDataDto
     {
         /// <summary>
-        /// 商品ID
+        /// 
         /// </summary>
-        [Required]
-        public long spu_id { get; set; }
+        public long header_id { get; set; }
 
         /// <summary>
-        /// 系统代码
+        /// 显示排序
         /// </summary>
-        [StringLength(16)]
-        public string codes { get; set; }
+        public int od { get; set; } 
 
         /// <summary>
         /// 规格编码
@@ -27,27 +25,15 @@ namespace Com.Scm.Pos
         public string codec { get; set; }
 
         /// <summary>
-        /// 系统名称
-        /// </summary>
-        [StringLength(64)]
-        public string names { get; set; }
-
-        /// <summary>
         /// 规格名称
         /// </summary>
-        [StringLength(128)]
+        [StringLength(32)]
         public string namec { get; set; }
 
         /// <summary>
-        /// 图片
+        /// 图片名称
         /// </summary>
         [StringLength(32)]
         public string image { get; set; }
-
-        /// <summary>
-        /// 单价
-        /// </summary>
-        [Required]
-        public int price { get; set; }
     }
 }
