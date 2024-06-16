@@ -17,7 +17,7 @@ tool.trim = function (x) {
 tool._cache = [];
 
 /** 临时缓存 */
-tool.catch = {
+tool.data = {
 	set(key, obj) {
 		var _set = JSON.stringify(obj);
 		tool._cache[key] = _set;

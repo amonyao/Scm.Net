@@ -12,7 +12,6 @@ using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
 using Com.Scm.Server;
 using Com.Scm.Service;
-using Com.Scm.Swagger;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
 using Microsoft.Extensions.FileProviders;
@@ -91,6 +90,7 @@ namespace Com.Scm.Api
             services.AddScoped<ISecService, ScmSecService>();
             services.AddScoped<ICatService, ScmCatService>();
             services.AddScoped<ITagService, ScmTagService>();
+            services.AddScoped<ISmsService, ScmSmsService>();
 
             // È«¾Ö¹ýÂË
             services.AddControllers(options =>

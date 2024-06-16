@@ -692,6 +692,11 @@
             发送状态
             </summary>
         </member>
+        <member name="P:Com.Scm.Log.LogSmsDao.verify">
+            <summary>
+            核验次数
+            </summary>
+        </member>
         <member name="T:Com.Scm.Msg.Chat.ChatFriendDao">
             <summary>
             
@@ -1255,6 +1260,11 @@
         <member name="P:Com.Scm.Res.Cat.CatDao.ref_id">
             <summary>
             引用ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Res.Cat.CatDao.uri">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Com.Scm.Res.Sms.SmsDao">
