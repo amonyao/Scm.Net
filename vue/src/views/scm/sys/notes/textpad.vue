@@ -29,8 +29,8 @@
                                     @keydown.enter="handleEnter" />
                             </div>
                             <div class="notepad-content">
-                                <el-input ref="content" v-model="formData.content" type="textarea" rows="30" class="content"
-                                    :placeholder="contentPlaceholder"></el-input>
+                                <el-input ref="content" v-model="formData.content" type="textarea" rows="30"
+                                    class="content" :placeholder="contentPlaceholder"></el-input>
                             </div>
                         </el-card>
                     </div>
@@ -45,6 +45,9 @@
                             </el-button>
                             <el-button type="danger" @click="saveNote">
                                 <sc-icon set="ms" name="save"></sc-icon>保存
+                            </el-button>
+                            <el-button type="danger" @click="loadRemote">
+                                使用服务端
                             </el-button>
                         </el-space>
                     </div>
@@ -124,8 +127,15 @@ export default {
                 return;
             }
 
-            this.readNote(item);
+            this.readNote(item.id, false);
         },
+        loadRemote(){
+            if(!this.formData){
+                return;
+            }
+            
+            this.readNote(this.formData.id, true);
+        }, 
         itemDelete(item) {
             if (!item || !item.id) {
                 return;
@@ -157,29 +167,34 @@ export default {
         showNote() {
 
         },
-        async readNote(item) {
-            if (!item || !item.id) {
+        async readNote(itemId, force) {
+            if (!itemId) {
                 return;
             }
 
             this.loading = true;
 
             // 读取远程数据
-            var res = await this.$API.sysnote.model.get(item.id);
+            var res = await this.$API.sysnote.model.get(itemId);
             if (!res || res.code != 200) {
                 this.loading = false;
                 return;
             }
 
             // 读取本地缓存
-            var cahced = this.loadCache(item.id);
-
-            var nativeVer = cahced.ver || 0;
-            var remoteVer = res.data.ver || 1;
-            if (nativeVer >= remoteVer) {
-                this.formData = cahced;
-            } else {
+            if (force) {
                 this.formData = res.data;
+            }
+            else {
+                var cahced = this.loadCache(itemId);
+
+                var nativeVer = cahced.ver || 0;
+                var remoteVer = res.data.ver || 1;
+                if (nativeVer >= remoteVer) {
+                    this.formData = cahced;
+                } else {
+                    this.formData = res.data;
+                }
             }
             this.showNote();
 

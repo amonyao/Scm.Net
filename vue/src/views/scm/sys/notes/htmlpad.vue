@@ -48,6 +48,9 @@
                             <el-button type="danger" @click="saveNote">
                                 <sc-icon set="ms" name="save"></sc-icon>保存
                             </el-button>
+                            <el-button type="danger" @click="loadRemote">
+                                使用服务端
+                            </el-button>
                         </el-space>
                     </div>
                 </el-footer>
@@ -56,9 +59,8 @@
     </el-container>
 </template>
 
-<link href="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/css/style.min.css" rel="stylesheet" />
 <script>
-import '@wangeditor/editor/dist/css/style.css'
+import '@wangeditor/editor/dist/css/style.css';
 import { createEditor, createToolbar } from 'wang-editor';
 
 export default {
@@ -148,14 +150,14 @@ export default {
             this.scEditor = createEditor({
                 selector: '#editor-container',
                 config: editorConfig,
-                mode: 'simple' // 或 'default' 
+                mode: 'default' // 或 'default' 
             })
             var toolbarConfig = {};
             createToolbar({
                 editor: this.scEditor,
                 selector: '#toolbar-container',
                 config: toolbarConfig,
-                mode: 'simple' // 或 'default'
+                mode: 'default' // 或 'default'
             });
         },
         handleEnter() {
@@ -193,7 +195,7 @@ export default {
                 return;
             }
 
-            this.readNote(item);
+            this.readNote(item, false);
         },
         itemDelete(item) {
             if (!item || !item.id) {
@@ -220,29 +222,40 @@ export default {
                 this.search();
             }).catch(() => { });
         },
-        async readNote(item) {
-            if (!item || !item.id) {
+        loadRemote() {
+            if (!this.formData) {
+                return;
+            }
+
+            this.readNote(this.formData.id, true);
+        },
+        async readNote(itemId, force) {
+            if (!itemId) {
                 return;
             }
 
             this.loading = true;
 
             // 读取远程数据
-            var res = await this.$API.sysnote.model.get(item.id);
+            var res = await this.$API.sysnote.model.get(itemId);
             if (!res || res.code != 200) {
                 this.loading = false;
                 return;
             }
 
-            // 读取本地缓存
-            var cached = this.loadCache(item.id);
-
-            var nativeVer = cached.ver || 0;
-            var remoteVer = res.data.ver || 1;
-            if (nativeVer >= remoteVer) {
-                this.formData = cached;
-            } else {
+            if (force) {
                 this.formData = res.data;
+            } else {
+                // 读取本地缓存
+                var cached = this.loadCache(itemId);
+
+                var nativeVer = cached.ver || 0;
+                var remoteVer = res.data.ver || 1;
+                if (nativeVer >= remoteVer) {
+                    this.formData = cached;
+                } else {
+                    this.formData = res.data;
+                }
             }
             this.showNote();
 
