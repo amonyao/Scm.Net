@@ -99,7 +99,7 @@ namespace Com.Scm.Api
                 options.Filters.Add<GlobalExceptionFilter>();
                 options.Filters.Add<UnitOfWorkFilter>();
                 options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            }).JsonSetup();
+            }).NewtonJsonSetup();
 
             // Ω”ø⁄≈‰÷√
             var apiConfig = AppUtils.GetConfig<DllConfig>(DllConfig.NAME);

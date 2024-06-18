@@ -1,9 +1,9 @@
 using Com.Scm.Controllers;
 using Com.Scm.Filters;
 using Com.Scm.Generator;
+using Com.Scm.Generator.Config;
 using Com.Scm.Generator.Dvo;
 using Com.Scm.Result;
-using Com.Scm.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
@@ -12,14 +12,16 @@ namespace Com.Scm.Api.Controllers
     /// <summary>
     /// 代码生成
     /// </summary>
-    [ApiExplorerSettings(GroupName = ApiVersionInfo.V1)]
+    [ApiExplorerSettings(GroupName = "Scm")]
     public class GeneratorController : ApiController
     {
         private readonly IGeneratorService _generatorService;
+        private GeneratorConfig _Config;
 
-        public GeneratorController(IGeneratorService generatorService)
+        public GeneratorController(IGeneratorService generatorService, GeneratorConfig config)
         {
             _generatorService = generatorService;
+            _Config = config;
         }
 
         [HttpGet("option")]
@@ -49,8 +51,12 @@ namespace Com.Scm.Api.Controllers
         {
             if (_generatorService.CreateCode(param))
             {
-                var path = "/" + _generatorService.FileName.Replace(@"\", "/");
-                return File(path, "application/zip", "code.zip");
+                if (_Config.Download)
+                {
+                    return File(_generatorService.Helper.Bytes, "application/zip", "code_" + DateTime.Now.Ticks + ".zip");
+                }
+
+                return Ok("下载完成！");
             }
             return BadRequest(_generatorService.Message);
         }

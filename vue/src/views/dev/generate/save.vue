@@ -122,11 +122,7 @@ export default {
 						this.formData
 					);
 
-					var blob = new Blob([res], { type: 'application/octet-stream' });
-					var link = document.createElement('a');
-					link.href = window.URL.createObjectURL(blob);
-					link.download = 'file.zip';
-					link.click();
+					this.download(res, 'application/octet-stream', 'code.zip');
 
 					//this.isSaveing = false;
 					// if (res.code == 200) {
@@ -139,6 +135,17 @@ export default {
 				}
 			});
 
+		},
+		download(res, fileType, fileName) {
+			var blob = new Blob([res], { 'type': fileType });
+			var element = document.createElement('a');
+			var href = window.URL.createObjectURL(blob);
+			element.href = href;
+			element.download = fileName;
+			// document.body.appendChild(element);
+			element.click();
+			// document.body.removeChild(element);
+			window.URL.revokeObjectURL(href);
 		},
 		async init() {
 			var res = await this.$API.devgen.option.get();
