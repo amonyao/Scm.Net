@@ -7,41 +7,15 @@
     <RootNamespace>Com.Scm.Api</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>bin\Debug\Scm.Api.xml</DocumentationFile>
-    <NoWarn>1701;1702;CS1591;CS8601;CS8618</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>bin\Release\Scm.Api.xml</DocumentationFile>
-    <NoWarn>1701;1702;CS1591;CS8601;CS8618</NoWarn>
-  </PropertyGroup>
-
   <ItemGroup>
-    <Compile Remove="data\generator\**" />
-    <Compile Remove="dev\generator\**" />
-    <Compile Remove="images\**" />
-    <Compile Remove="logs\**" />
+    <Compile Remove="dev\**" />
     <Compile Remove="Quartz.Settings\**" />
-    <Compile Remove="upload\Generator\**" />
-    <Content Remove="data\generator\**" />
-    <Content Remove="dev\generator\**" />
-    <Content Remove="images\**" />
-    <Content Remove="logs\**" />
+    <Content Remove="dev\**" />
     <Content Remove="Quartz.Settings\**" />
-    <Content Remove="upload\Generator\**" />
-    <EmbeddedResource Remove="data\generator\**" />
-    <EmbeddedResource Remove="dev\generator\**" />
-    <EmbeddedResource Remove="images\**" />
-    <EmbeddedResource Remove="logs\**" />
+    <EmbeddedResource Remove="dev\**" />
     <EmbeddedResource Remove="Quartz.Settings\**" />
-    <EmbeddedResource Remove="upload\Generator\**" />
-    <None Remove="data\generator\**" />
-    <None Remove="dev\generator\**" />
-    <None Remove="images\**" />
-    <None Remove="logs\**" />
+    <None Remove="dev\**" />
     <None Remove="Quartz.Settings\**" />
-    <None Remove="upload\Generator\**" />
   </ItemGroup>
 
   <ItemGroup>
