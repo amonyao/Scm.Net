@@ -1,5 +1,6 @@
 using Com.Scm.Dto;
 using Com.Scm.Enums;
+using Com.Scm.OAuth.Web.Dto;
 using System.ComponentModel.DataAnnotations;
 
 namespace Com.Scm.Iam.Res
@@ -25,7 +26,7 @@ namespace Com.Scm.Iam.Res
         /// 
         /// </summary>
         [Required]
-        public int ver { get; set; }
+        public OspVerEnum ver { get; set; }
 
         /// <summary>
         /// 

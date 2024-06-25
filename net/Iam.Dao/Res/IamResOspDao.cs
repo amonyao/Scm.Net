@@ -1,5 +1,6 @@
 using Com.Scm.Dao;
 using Com.Scm.Enums;
+using Com.Scm.OAuth.Web.Dto;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -27,7 +28,7 @@ namespace Com.Scm.Iam.Res
         /// 
         /// </summary>
         [Required]
-        public int ver { get; set; }
+        public OspVerEnum ver { get; set; }
 
         /// <summary>
         /// 
