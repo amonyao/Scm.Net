@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <RootNamespace>Com.Scm.Samples</RootNamespace>
+    <RootNamespace>Com.Scm.Iam</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,9 @@
     <Reference Include="Scm.Common.Uid">
       <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
     </Reference>
+    <Reference Include="Scm.Dao">
+      <HintPath>..\Libs\Scm.Dao.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
       <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
     </Reference>
@@ -38,6 +41,12 @@
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Iam.Common\Iam.Common.csproj" />
+    <ProjectReference Include="..\Iam.Dao\Iam.Dao.csproj" />
+    <ProjectReference Include="..\Iam.Dto\Iam.Dto.csproj" />
   </ItemGroup>
 
 </Project>

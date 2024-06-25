@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
-    <RootNamespace>Com.Scm.Yms</RootNamespace>
+    <RootNamespace>Com.Scm.Iam</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,12 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Yms.Common\Yms.Common.csproj" />
+    <ProjectReference Include="..\Iam.Common\Iam.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Scm.Common.Uid">
-      <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
+    <Reference Include="Scm.Common">
+      <HintPath>..\Libs\Scm.Common.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
