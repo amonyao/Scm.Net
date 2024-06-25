@@ -38,7 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cms.Server\Cms.Server.csproj" />
     <ProjectReference Include="..\Fms.Server\Fms.Server.csproj" />
-    <ProjectReference Include="..\Pos\Pos.csproj" />
+    <ProjectReference Include="..\Iam.Server\Iam.Server.csproj" />
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
     <ProjectReference Include="..\Yms.Server\Yms.Server.csproj" />
   </ItemGroup>

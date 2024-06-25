@@ -11,7 +11,7 @@ namespace Com.Scm.Iam
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "iam")]
+    [ApiExplorerSettings(GroupName = "Iam")]
     public class IamOidcService : ApiService
     {
         private readonly SugarRepository<IamOidcDao> _thisRepository;

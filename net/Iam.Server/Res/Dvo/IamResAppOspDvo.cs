@@ -5,32 +5,37 @@ namespace Com.Scm.Iam.Res.Dvo
     /// <summary>
     /// 
     /// </summary>
-    public class IamResOspDvo : ScmDataDvo
+    public class IamResAppOspDvo : ScmDataDvo
     {
         /// <summary>
         /// 
         /// </summary>
-        public string code { get; set; }
+        public long user_id { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string name { get; set; }
+        public long app_id { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public int ver { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string icon { get; set; }
+        public long osp_id { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public int od { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string key { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string url { get; set; }
 
         /// <summary>
         /// 

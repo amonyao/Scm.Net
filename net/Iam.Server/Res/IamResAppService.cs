@@ -1,3 +1,4 @@
+using Com.Scm.Iam.Cfg;
 using Com.Scm.Iam.Res.Dvo;
 using Com.Scm.Result;
 using Com.Scm.Service;
@@ -10,16 +11,18 @@ namespace Com.Scm.Iam.Res
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "iam")]
+    [ApiExplorerSettings(GroupName = "Iam")]
     public class IamResAppService : ApiService
     {
         private readonly SugarRepository<IamResAppDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
+        private readonly SugarRepository<IamCfgAppOspDao> _appOspRepository;
 
-        public IamResAppService(SugarRepository<IamResAppDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public IamResAppService(SugarRepository<IamResAppDao> thisRepository, SugarRepository<UserDao> userRepository, SugarRepository<IamCfgAppOspDao> appOspRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
+            _appOspRepository = appOspRepository;
         }
 
         /// <summary>
@@ -153,5 +156,54 @@ namespace Com.Scm.Iam.Res
         {
             return await DeleteRecord(_thisRepository, ids.ToListLong());
         }
+
+        #region Osp服务
+        /// <summary>
+        /// 查询所有
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<List<IamCfgAppOspDto>> GetListOspAsync(ScmSearchRequest request)
+        {
+            var result = await _appOspRepository.AsQueryable()
+                .Where(a => a.app_id == request.id && a.row_status == Enums.ScmStatusEnum.Enabled)
+                .OrderBy(a => a.od)
+                .Select<IamCfgAppOspDto>()
+                .ToListAsync();
+
+            return result;
+        }
+
+        /// <summary>
+        /// 添加Osp
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<bool> AddOspAsync(IamCfgAppOspDto model)
+        {
+            var list = await _appOspRepository.AsQueryable()
+                .Where(a => a.app_id == model.app_id && a.row_status == Enums.ScmStatusEnum.Enabled)
+                .OrderBy(a => a.od)
+                .ToListAsync();
+            var od = 1;
+            foreach (var item in list)
+            {
+                item.od = od++;
+            }
+            await _appOspRepository.UpdateRangeAsync(list);
+
+            return await _thisRepository.InsertAsync(model.Adapt<IamResAppDao>());
+        }
+
+        /// <summary>
+        /// 删除Osp
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<bool> DeleteOspAsync(long id)
+        {
+            return await _appOspRepository.DeleteByIdAsync(id);
+        }
+        #endregion
     }
 }

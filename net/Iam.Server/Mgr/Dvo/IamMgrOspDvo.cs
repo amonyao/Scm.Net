@@ -1,41 +1,36 @@
 using Com.Scm.Dvo;
 
-namespace Com.Scm.Iam.Cfg.Dvo
+namespace Com.Scm.Iam.Mgr.Dvo
 {
     /// <summary>
     /// 
     /// </summary>
-    public class IamCfgAppOspDvo : ScmDataDvo
+    public class IamMgrOspDvo : ScmDataDvo
     {
         /// <summary>
         /// 
         /// </summary>
-        public long user_id { get; set; }
+        public string code { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public long app_id { get; set; }
+        public string name { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public long osp_id { get; set; }
+        public int ver { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string icon { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public int od { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string key { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string url { get; set; }
 
         /// <summary>
         /// 

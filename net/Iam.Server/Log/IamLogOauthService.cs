@@ -10,7 +10,7 @@ namespace Com.Scm.Iam.Log
     /// <summary>
     /// 三方登录服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "iam")]
+    [ApiExplorerSettings(GroupName = "Iam")]
     public class IamLogOauthService : ApiService
     {
         private readonly SugarRepository<IamLogOauthDao> _thisRepository;

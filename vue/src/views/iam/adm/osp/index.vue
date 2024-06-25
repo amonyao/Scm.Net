@@ -24,24 +24,23 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" hide-pagination is-tree
-				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
-				<el-table-column fixed type="selection" width="60" />
-				<el-table-column align="center" fixed="right" label="操作" width="140">
-
+			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
+				@selection-change="selectionChange">
+				<el-table-column align="center" fixed type="selection" width="60" />
+				<el-table-column label="#" type="index" width="50"></el-table-column>
+				<el-table-column label="操作" align="center" fixed="right" width="140">
 					<template #default="scope">
-						<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
+						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
 							编辑
 						</el-button>
 						<el-divider direction="vertical" />
-						<el-popconfirm title="确定删除吗？" @confirm="delete_item(scope.row, scope.$index)">
+						<el-popconfirm title="确定删除吗？" @confirm="table_del(scope.row, scope.$index)">
 							<template #reference>
 								<el-button text type="primary" size="small">删除</el-button>
 							</template>
 						</el-popconfirm>
 					</template>
 				</el-table-column>
-
 				<template #row_status="scope">
 					<el-tooltip :content="scope.row.row_status ? '正常' : '停用'" placement="right">
 						<el-switch v-model="scope.row.row_status" :active-value="1" :inactive-value="2"
@@ -49,44 +48,43 @@
 						</el-switch>
 					</el-tooltip>
 				</template>
-
-				<template #isSystem="{ data }">
-					<el-tag :type="data.isSystem ? 'success' : 'danger'">
-						{{ data.isSystem ? "是" : "否" }}
-					</el-tag>
-				</template>
 			</scTable>
 		</el-main>
 		<edit ref="edit" @complete="complete" />
 	</el-container>
 </template>
-
 <script>
 import { defineAsyncComponent } from "vue";
 export default {
-	name: 'scm_ur_group',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 	},
 	data() {
 		return {
-			apiObj: this.$API.urgroup.list,
-			tableName: 'scm_ur_group',
+			apiObj: this.$API.iammgrosp.page,
 			list: [],
 			param: {
-				key: '',
+				option_id: '0',
+				row_status: '1',
+				create_time: '',
+				key: ''
 			},
 			selection: [],
 			column: [
-				{ label: "id", prop: "id", hide: true, },
-				{ prop: "namec", label: "群组名称", width: 200, align: "left", },
-				{ prop: "remark", label: "备注", minWidth: 200, align: "left", },
+				{ label: "id", prop: "id", hide: true },
+				{ prop: 'code', label: '服务代码', width: 100, align: 'left' },
+				{ prop: 'name', label: '服务名称', minWidth: 100, align: 'left' },
+				{ prop: 'ver', label: '协议版本', width: 100 },
+				{ prop: 'od', label: '显示排序', width: 80 },
+				{ prop: 'qty', label: '调用次数', width: 80 },
 				{ prop: "row_status", label: "数据状态", width: "80", },
 				{ prop: "update_names", label: "更新人员", width: "100", },
 				{ prop: "update_time", label: "更新时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
 				{ prop: "create_names", label: "创建人员", width: "100", },
 				{ prop: "create_time", label: "创建时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
 			],
+			row_status_list: [this.$SCM.OPTION_ALL],
+			option_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
@@ -99,16 +97,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.urgroup.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.iammgrosp.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.urgroup.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.iammgrosp.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.urgroup.delete, row);
+			this.$SCM.delete_item(this, this.$API.iammgrosp.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.urgroup.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.iammgrosp.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -118,13 +116,16 @@ export default {
 		},
 		menuHandle(obj) {
 			if (obj.command == "add") {
-				this.open_dialog({});
+				this.open_dialog();
+				return;
 			}
 			if (obj.command == "edit") {
 				this.open_dialog(obj.row);
+				return;
 			}
 			if (obj.command == "delete") {
 				this.delete_item(obj.row);
+				return;
 			}
 		},
 	},

@@ -10,7 +10,7 @@ namespace Com.Scm.Iam.Log
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "iam")]
+    [ApiExplorerSettings(GroupName = "Iam")]
     public class IamLogTicketService : ApiService
     {
         private readonly SugarRepository<IamLogTicketDao> _thisRepository;

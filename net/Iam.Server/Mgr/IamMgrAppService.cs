@@ -1,22 +1,23 @@
-using Com.Scm.Iam.Res.Dvo;
+using Com.Scm.Iam.Mgr.Dvo;
+using Com.Scm.Iam.Res;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Iam.Res
+namespace Com.Scm.Iam.Mgr
 {
     /// <summary>
     /// 服务接口
     /// </summary>
-    [ApiExplorerSettings(GroupName = "iam")]
-    public class IamResOspService : ApiService
+    [ApiExplorerSettings(GroupName = "Iam")]
+    public class IamMgrAppService : ApiService
     {
-        private readonly SugarRepository<IamResOspDao> _thisRepository;
+        private readonly SugarRepository<IamResAppDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public IamResOspService(SugarRepository<IamResOspDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public IamMgrAppService(SugarRepository<IamResAppDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
@@ -27,14 +28,14 @@ namespace Com.Scm.Iam.Res
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<IamResOspDvo>> GetPagesAsync(ScmSearchPageRequest request)
+        public async Task<PageResult<IamMgrAppDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
             var result = await _thisRepository.AsQueryable()
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<IamResOspDvo>()
+                .Select<IamMgrAppDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -46,20 +47,20 @@ namespace Com.Scm.Iam.Res
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<IamResOspDvo>> GetListAsync(ScmSearchRequest request)
+        public async Task<List<IamMgrAppDvo>> GetListAsync(ScmSearchRequest request)
         {
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+                .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
-                .Select<IamResOspDvo>()
+                .Select<IamMgrAppDvo>()
                 .ToListAsync();
 
             Prepare(result);
             return result;
         }
 
-        private void Prepare(List<IamResOspDvo> list)
+        private void Prepare(List<IamMgrAppDvo> list)
         {
             foreach (var item in list)
             {
@@ -74,10 +75,10 @@ namespace Com.Scm.Iam.Res
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IamResOspDvo> GetAsync(long id)
+        public async Task<IamMgrAppDvo> GetAsync(long id)
         {
             var model = await _thisRepository.GetByIdAsync(id);
-            return model.Adapt<IamResOspDvo>();
+            return model.Adapt<IamMgrAppDvo>();
         }
 
         /// <summary>
@@ -86,11 +87,11 @@ namespace Com.Scm.Iam.Res
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IamResOspDvo> GetEditAsync(long id)
+        public async Task<IamMgrAppDvo> GetEditAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<IamResOspDvo>()
+                .Select<IamMgrAppDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -100,11 +101,11 @@ namespace Com.Scm.Iam.Res
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IamResOspDvo> GetViewAsync(long id)
+        public async Task<IamMgrAppDvo> GetViewAsync(long id)
         {
             return await _thisRepository
                 .AsQueryable()
-                .Select<IamResOspDvo>()
+                .Select<IamMgrAppDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -113,15 +114,15 @@ namespace Com.Scm.Iam.Res
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(IamResOspDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<IamResOspDao>());
+        public async Task<bool> AddAsync(IamResAppDto model) =>
+            await _thisRepository.InsertAsync(model.Adapt<IamResAppDao>());
 
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(IamResOspDto model)
+        public async Task UpdateAsync(IamResAppDto model)
         {
             var dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)
