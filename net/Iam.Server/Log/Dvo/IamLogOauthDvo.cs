@@ -17,16 +17,21 @@ namespace Com.Scm.Iam.Log.Dvo
         /// 
         /// </summary>
         public long oidc_id { get; set; }
+        public string oidc_code { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public long app_id { get; set; }
+        public string app_code { get; set; }
+        public string app_name { get; set; }
 
         /// <summary>
         /// 登录网站
         /// </summary>
         public long osp_id { get; set; }
+        public string osp_code { get; set; }
+        public string osp_name { get; set; }
 
         /// <summary>
         /// UnionID

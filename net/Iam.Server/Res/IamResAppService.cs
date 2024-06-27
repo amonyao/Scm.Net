@@ -1,5 +1,7 @@
+using Com.Scm.Exceptions;
 using Com.Scm.Iam.Cfg;
 using Com.Scm.Iam.Res.Dvo;
+using Com.Scm.Jwt;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
@@ -14,12 +16,14 @@ namespace Com.Scm.Iam.Res
     [ApiExplorerSettings(GroupName = "Iam")]
     public class IamResAppService : ApiService
     {
+        private readonly JwtContextHolder _ContextHolder;
         private readonly SugarRepository<IamResAppDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
         private readonly SugarRepository<IamCfgAppOspDao> _appOspRepository;
 
-        public IamResAppService(SugarRepository<IamResAppDao> thisRepository, SugarRepository<UserDao> userRepository, SugarRepository<IamCfgAppOspDao> appOspRepository)
+        public IamResAppService(JwtContextHolder contextHolder, SugarRepository<IamResAppDao> thisRepository, SugarRepository<UserDao> userRepository, SugarRepository<IamCfgAppOspDao> appOspRepository)
         {
+            _ContextHolder = contextHolder;
             _thisRepository = thisRepository;
             _userRepository = userRepository;
             _appOspRepository = appOspRepository;
@@ -32,7 +36,10 @@ namespace Com.Scm.Iam.Res
         /// <returns></returns>
         public async Task<PageResult<IamResAppDvo>> GetPagesAsync(ScmSearchPageRequest request)
         {
+            var token = _ContextHolder.GetToken();
+
             var result = await _thisRepository.AsQueryable()
+                .Where(a => a.user_id == token.user_id)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
                 //.WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
@@ -51,7 +58,10 @@ namespace Com.Scm.Iam.Res
         /// <returns></returns>
         public async Task<List<IamResAppDvo>> GetListAsync(ScmSearchRequest request)
         {
+            var token = _ContextHolder.GetToken();
+
             var result = await _thisRepository.AsQueryable()
+                .Where(a => a.user_id == token.user_id)
                 .Where(a => a.row_status == Enums.ScmStatusEnum.Enabled)
                 //.WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
                 .OrderBy(m => m.id)
@@ -116,8 +126,22 @@ namespace Com.Scm.Iam.Res
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(IamResAppDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<IamResAppDao>());
+        public async Task<bool> AddAsync(IamResAppDto model)
+        {
+            var code = model.app_code;
+            var dao = await _thisRepository.AsQueryable()
+                .Where(a => a.app_code == model.app_code)
+                .FirstAsync();
+            if (dao != null)
+            {
+                throw new BusinessException("");
+            }
+
+            dao = model.Adapt<IamResAppDao>();
+            dao.app_key = OidcUtils.GenAppKey();
+            dao.app_secret = OidcUtils.GenAppSecret();
+            return await _thisRepository.InsertAsync(dao);
+        }
 
         /// <summary>
         /// 更新

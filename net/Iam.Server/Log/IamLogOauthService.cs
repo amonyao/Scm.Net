@@ -1,9 +1,12 @@
+using Com.Scm.Iam.Cfg;
 using Com.Scm.Iam.Log.Dvo;
+using Com.Scm.Iam.Res;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
 namespace Com.Scm.Iam.Log
 {
@@ -16,8 +19,9 @@ namespace Com.Scm.Iam.Log
         private readonly SugarRepository<IamLogOauthDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public IamLogOauthService(SugarRepository<IamLogOauthDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public IamLogOauthService(ISqlSugarClient client, SugarRepository<IamLogOauthDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
+            _SqlClient = client;
             _thisRepository = thisRepository;
             _userRepository = userRepository;
         }
@@ -61,8 +65,59 @@ namespace Com.Scm.Iam.Log
 
         private void Prepare(List<IamLogOauthDvo> list)
         {
+            var oidcDict = new Dictionary<long, IamOidcDao>();
+            var appDict = new Dictionary<long, IamResAppDao>();
+            var ospDict = new Dictionary<long, IamResOspDao>();
+
             foreach (var item in list)
             {
+                IamOidcDao oidcDao = null;
+                if (!oidcDict.ContainsKey(item.oidc_id))
+                {
+                    oidcDao = _SqlClient.Queryable<IamOidcDao>().First(a => a.id == item.oidc_id);
+                    if (oidcDao != null)
+                    {
+                        oidcDict[item.oidc_id] = oidcDao;
+                    }
+                }
+                else
+                {
+                    oidcDao = oidcDict[item.oidc_id];
+                }
+                item.oidc_code = oidcDao?.code;
+
+                IamResAppDao appDao = null;
+                if (!appDict.ContainsKey(item.app_id))
+                {
+                    appDao = _SqlClient.Queryable<IamResAppDao>().First(a => a.id == item.app_id);
+                    if (appDao != null)
+                    {
+                        appDict[item.app_id] = appDao;
+                    }
+                }
+                else
+                {
+                    appDao = appDict[item.app_id];
+                }
+                item.app_code = appDao?.app_code;
+                item.app_name = appDao?.app_name;
+
+                IamResOspDao ospDao;
+                if (!ospDict.ContainsKey(item.osp_id))
+                {
+                    ospDao = _SqlClient.Queryable<IamResOspDao>().First(a => a.id == item.osp_id);
+                    if (ospDao != null)
+                    {
+                        ospDict[item.osp_id] = ospDao;
+                    }
+                }
+                else
+                {
+                    ospDao = ospDict[item.osp_id];
+                }
+                item.osp_code = ospDao?.code;
+                item.osp_name = ospDao?.name;
+
                 item.update_names = GetUserNames(_userRepository, item.update_user);
                 item.update_names = GetUserNames(_userRepository, item.update_user);
             }
@@ -113,8 +168,10 @@ namespace Com.Scm.Iam.Log
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(IamLogOauthDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<IamLogOauthDao>());
+        public async Task<bool> AddAsync(IamLogOauthDto model)
+        {
+            return await _thisRepository.InsertAsync(model.Adapt<IamLogOauthDao>());
+        }
 
         /// <summary>
         /// 更新

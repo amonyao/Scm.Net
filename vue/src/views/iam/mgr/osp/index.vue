@@ -24,8 +24,8 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -61,7 +61,8 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.iammgrapp.page,
+			tableName: 'iam_mgr_osp',
+			apiObj: this.$API.iammgrosp.page,
 			list: [],
 			param: {
 				option_id: '0',
@@ -72,11 +73,10 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'user_name', label: '所属用户', width: 100 },
-				{ prop: 'app_code', label: '应用代码', width: 100, align: 'left' },
-				{ prop: 'app_name', label: '应用名称', width: 100, align: 'left' },
-				{ prop: 'app_desc', label: '应用说明', minWidth: 100, align: 'left' },
-				{ prop: 'app_key', label: 'APP KEY', width: 100 },
+				{ prop: 'code', label: '服务代码', width: 100, align: 'left' },
+				{ prop: 'name', label: '服务名称', minWidth: 100, align: 'left' },
+				{ prop: 'ver', label: '协议版本', width: 100 },
+				{ prop: 'od', label: '显示排序', width: 80 },
 				{ prop: 'qty', label: '调用次数', width: 80 },
 				{ prop: "row_status", label: "数据状态", width: "80", },
 				{ prop: "update_names", label: "更新人员", width: "100", },
@@ -98,16 +98,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.iammgrapp.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.iammgrosp.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.iammgrapp.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.iammgrosp.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.iammgrapp.delete, row);
+			this.$SCM.delete_item(this, this.$API.iammgrosp.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.iammgrapp.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.iammgrosp.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

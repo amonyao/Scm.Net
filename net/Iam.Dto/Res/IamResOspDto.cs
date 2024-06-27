@@ -10,6 +10,11 @@ namespace Com.Scm.Iam.Res
     /// </summary>
     public class IamResOspDto : ScmDataDto
     {
+        public const long PHONE_ID = 1000000000000001010;
+        public const string PHONE_CODE = "Phone";
+        public const long EMAIL_ID = 1000000000000001020;
+        public const string EMAIL_CODE = "Email";
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,14 +30,20 @@ namespace Com.Scm.Iam.Res
         /// <summary>
         /// 
         /// </summary>
-        [Required]
-        public OspVerEnum ver { get; set; }
+        [StringLength(32)]
+        public string icon { get; set; }
+
+        /// <summary>
+        /// ·þÎñµØÖ·
+        /// </summary>
+        [StringLength(128)]
+        public string url { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [StringLength(32)]
-        public string icon { get; set; }
+        [Required]
+        public OspVerEnum ver { get; set; }
 
         /// <summary>
         /// 

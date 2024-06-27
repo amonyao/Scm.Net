@@ -1,10 +1,12 @@
 using Com.Scm.Iam.Cfg;
 using Com.Scm.Iam.Dvo;
+using Com.Scm.Iam.Res;
 using Com.Scm.Result;
 using Com.Scm.Service;
 using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
 namespace Com.Scm.Iam
 {
@@ -17,8 +19,9 @@ namespace Com.Scm.Iam
         private readonly SugarRepository<IamOidcDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public IamOidcService(SugarRepository<IamOidcDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public IamOidcService(ISqlSugarClient client, SugarRepository<IamOidcDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
+            _SqlClient = client;
             _thisRepository = thisRepository;
             _userRepository = userRepository;
         }
@@ -62,8 +65,26 @@ namespace Com.Scm.Iam
 
         private void Prepare(List<IamOidcDvo> list)
         {
+            var ospDict = new Dictionary<long, IamResOspDao>();
+
             foreach (var item in list)
             {
+                IamResOspDao ospDao;
+                if (!ospDict.ContainsKey(item.osp_id))
+                {
+                    ospDao = _SqlClient.Queryable<IamResOspDao>().First(a => a.id == item.osp_id);
+                    if (ospDao != null)
+                    {
+                        ospDict[item.osp_id] = ospDao;
+                    }
+                }
+                else
+                {
+                    ospDao = ospDict[item.osp_id];
+                }
+                item.osp_code = ospDao?.code;
+                item.osp_name = ospDao?.name;
+
                 item.update_names = GetUserNames(_userRepository, item.update_user);
                 item.update_names = GetUserNames(_userRepository, item.update_user);
             }

@@ -24,8 +24,8 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -61,6 +61,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'iam_res_app',
 			apiObj: this.$API.iamresapp.page,
 			list: [],
 			param: {
@@ -75,7 +76,6 @@ export default {
 				{ prop: 'app_code', label: '应用代码', width: 100, align: 'left' },
 				{ prop: 'app_name', label: '应用名称', width: 100, align: 'left' },
 				{ prop: 'app_desc', label: '应用简介', minWidth: 100, align: 'left' },
-				{ prop: 'app_key', label: 'APP KEY', width: 100 },
 				{ prop: 'qty', label: '调用次数', width: 80 },
 				{ prop: "row_status", label: "数据状态", width: 80, },
 				{ prop: "update_names", label: "更新人员", width: 100, },

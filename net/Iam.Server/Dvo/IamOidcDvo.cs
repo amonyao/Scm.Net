@@ -16,6 +16,8 @@ namespace Com.Scm.Iam.Dvo
         /// 
         /// </summary>
         public long osp_id { get; set; }
+        public string osp_code { get; set; }
+        public string osp_name { get; set; }
 
         /// <summary>
         /// 

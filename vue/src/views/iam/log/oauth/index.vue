@@ -24,8 +24,8 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="80">
@@ -48,6 +48,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: "iam_log_oauth",
 			apiObj: this.$API.iamlogoauth.page,
 			list: [],
 			param: {
@@ -59,16 +60,14 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'oidc_id', label: '联合代码', width: 100 },
-				{ prop: 'app_id', label: '应用名称', width: 100 },
-				{ prop: 'osp_id', label: '登录网站', width: 100 },
-				{ prop: 'oauth_id', label: 'UnionID', width: 100 },
+				{ prop: 'oidc_code', label: '联合代码', width: 100 },
+				{ prop: 'app_name', label: '应用名称', width: 100 },
+				{ prop: 'osp_name', label: '登录网站', width: 100 },
+				{ prop: 'oauth_id', label: 'OauthID', width: 100 },
 				{ prop: 'user', label: '用户', width: 100 },
 				{ prop: 'name', label: '昵称', width: 100 },
-				{ prop: 'sex', label: '性别', width: 100 },
-				{ prop: 'avatar', label: '头像', width: 100 },
-				{ prop: 'err_code', label: '错误代码', width: 100 },
-				{ prop: 'err_msg', label: '错误描述', width: 100 },
+				{ prop: 'err_code', label: '错误代码', width: 100, align: 'left' },
+				{ prop: 'err_msg', label: '错误描述', minWidth: 100, align: 'left' },
 				{ prop: 'qty', label: '登录次数', width: 100 },
 				{ prop: "update_names", label: "更新人员", width: "100", },
 				{ prop: "update_time", label: "更新时间", width: "160", formatter: this.$TOOL.dateTimeFormat },

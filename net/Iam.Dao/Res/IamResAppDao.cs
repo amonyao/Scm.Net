@@ -91,5 +91,12 @@ namespace Com.Scm.Iam.Res
         /// </summary>
         [Required]
         public OspShowMoreEnum show_more { get; set; }
+
+        public override void PrepareCreate(long userId, long unitId = 0)
+        {
+            base.PrepareCreate(userId, unitId);
+
+            this.user_id = userId;
+        }
     }
 }

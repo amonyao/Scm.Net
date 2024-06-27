@@ -24,8 +24,8 @@
 			</template>
 		</sc-search>
 		<el-main class="nopadding">
-			<scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
-				@selection-change="selectionChange">
+			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" row-key="id"
+				@menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -61,6 +61,7 @@ export default {
 	},
 	data() {
 		return {
+			tableName: 'iam_oidc',
 			apiObj: this.$API.iamoidc.page,
 			list: [],
 			param: {
@@ -72,14 +73,11 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'code', label: 'UnionID', width: 100 },
-				{ prop: 'osp_id', label: '服务名称', width: 100 },
+				{ prop: 'code', label: 'OidcID', width: 100 },
+				{ prop: 'osp_name', label: '服务名称', width: 100 },
 				{ prop: 'oauth_id', label: 'OAuthID', width: 100 },
 				{ prop: 'user', label: '登录用户', width: 100 },
 				{ prop: 'name', label: '显示名称', width: 100 },
-				{ prop: 'avatar', label: '用户头像', width: 100 },
-				{ prop: 'phone', label: '电话', width: 100 },
-				{ prop: 'email', label: '邮件', width: 100 },
 				{ prop: 'qty', label: '登录频次', width: 100 },
 				{ prop: "row_status", label: "数据状态", width: "80", },
 				{ prop: "update_names", label: "更新人员", width: "100", },
