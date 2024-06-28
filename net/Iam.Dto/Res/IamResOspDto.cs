@@ -10,9 +10,11 @@ namespace Com.Scm.Iam.Res
     /// </summary>
     public class IamResOspDto : ScmDataDto
     {
-        public const long PHONE_ID = 1000000000000001010;
+        public const long MORE_ID = 1000000000000001010;
+        public const string MORE_CODE = "More";
+        public const long PHONE_ID = 1000000000000001020;
         public const string PHONE_CODE = "Phone";
-        public const long EMAIL_ID = 1000000000000001020;
+        public const long EMAIL_ID = 1000000000000001030;
         public const string EMAIL_CODE = "Email";
 
         /// <summary>

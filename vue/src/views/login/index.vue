@@ -54,12 +54,6 @@
 												<el-tab-pane :label="$t('login.accountLogin')" lazy>
 													<password-form></password-form>
 												</el-tab-pane>
-												<el-tab-pane :label="$t('login.phoneLogin')" lazy>
-													<phone-form></phone-form>
-												</el-tab-pane>
-												<el-tab-pane :label="$t('login.emailLogin')" lazy>
-													<email-form></email-form>
-												</el-tab-pane>
 												<el-tab-pane :label="$t('login.oauthLogin')" lazy>
 													<oauth-form></oauth-form>
 												</el-tab-pane>
@@ -87,17 +81,13 @@
 
 <script>
 import passwordForm from "./components/passwordForm";
-import phoneForm from "./components/phoneForm";
 import oauthForm from "./components/oauthForm";
-import emailForm from "./components/emailForm";
 
 export default {
 	name: 'login',
 	components: {
 		passwordForm,
-		phoneForm,
 		oauthForm,
-		emailForm,
 	},
 	data() {
 		return {
