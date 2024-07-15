@@ -7,54 +7,28 @@
     <RootNamespace>Com.Scm.Api</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DocumentationFile>bin\Debug\Scm.Api.xml</DocumentationFile>
-    <NoWarn>1701;1702;CS1591;CS8601;CS8618</NoWarn>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DocumentationFile>bin\Release\Scm.Api.xml</DocumentationFile>
-    <NoWarn>1701;1702;CS1591;CS8601;CS8618</NoWarn>
-  </PropertyGroup>
-
   <ItemGroup>
-    <Compile Remove="data\generator\**" />
-    <Compile Remove="dev\generator\**" />
-    <Compile Remove="images\**" />
-    <Compile Remove="logs\**" />
+    <Compile Remove="dev\**" />
     <Compile Remove="Quartz.Settings\**" />
-    <Compile Remove="upload\Generator\**" />
-    <Content Remove="data\generator\**" />
-    <Content Remove="dev\generator\**" />
-    <Content Remove="images\**" />
-    <Content Remove="logs\**" />
+    <Content Remove="dev\**" />
     <Content Remove="Quartz.Settings\**" />
-    <Content Remove="upload\Generator\**" />
-    <EmbeddedResource Remove="data\generator\**" />
-    <EmbeddedResource Remove="dev\generator\**" />
-    <EmbeddedResource Remove="images\**" />
-    <EmbeddedResource Remove="logs\**" />
+    <EmbeddedResource Remove="dev\**" />
     <EmbeddedResource Remove="Quartz.Settings\**" />
-    <EmbeddedResource Remove="upload\Generator\**" />
-    <None Remove="data\generator\**" />
-    <None Remove="dev\generator\**" />
-    <None Remove="images\**" />
-    <None Remove="logs\**" />
+    <None Remove="dev\**" />
     <None Remove="Quartz.Settings\**" />
-    <None Remove="upload\Generator\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FytApi.MUI" Version="1.1.1" />
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="MetadataExtractor" Version="2.8.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.3" />
     <PackageReference Include="Quartz" Version="3.8.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.148" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.159" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.1" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.10" />
@@ -64,7 +38,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Cms.Server\Cms.Server.csproj" />
     <ProjectReference Include="..\Fms.Server\Fms.Server.csproj" />
-    <ProjectReference Include="..\Pos\Pos.csproj" />
+    <ProjectReference Include="..\Iam.Server\Iam.Server.csproj" />
     <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
     <ProjectReference Include="..\Yms.Server\Yms.Server.csproj" />
   </ItemGroup>
@@ -74,10 +48,7 @@
       <HintPath>..\Libs\Scm.App.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Cache">
-      <HintPath>..\..\..\..\scm\libs\Scm.Cache.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Cache.Dictionary">
-      <HintPath>..\..\..\..\scm\libs\Scm.Cache.Dictionary.dll</HintPath>
+      <HintPath>..\Libs\Scm.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Common">
       <HintPath>..\Libs\Scm.Common.dll</HintPath>
@@ -137,25 +108,25 @@
       <HintPath>..\Libs\Scm.Server.Bearer.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Cache">
-      <HintPath>..\..\..\..\scm\libs\Scm.Server.Cache.dll</HintPath>
+      <HintPath>..\Libs\Scm.Server.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
       <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
     </Reference>
-    <Reference Include="Scm.Server.Ioc">
-      <HintPath>..\Libs\Scm.Server.Ioc.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Newton">
-      <HintPath>..\Libs\Scm.Server.Newton.dll</HintPath>
-    </Reference>
     <Reference Include="Scm.Server.Quartz">
       <HintPath>..\Libs\Scm.Server.Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Service">
+      <HintPath>..\Libs\Scm.Server.Service.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Share">
       <HintPath>..\Libs\Scm.Server.Share.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.SignalR">
       <HintPath>..\Libs\Scm.Server.SignalR.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.SqlSugar">
+      <HintPath>..\Libs\Scm.Server.SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Swagger">
       <HintPath>..\Libs\Scm.Server.Swagger.dll</HintPath>

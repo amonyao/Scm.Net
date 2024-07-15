@@ -21,21 +21,8 @@
         </el-aside>
         <el-main style="padding: 0px;">
             <el-container>
-                <el-header>
-                    <div class="notepad-toolbar">
-                        <div id="toolbar-container"></div>
-                    </div>
-                </el-header>
-                <el-main>
-                    <div class="notepad-content">
-                        <div class="notepad-container">
-                            <div class="notepad-title">
-                                <input v-model="formData.title" :placeholder="titlePlaceholder"
-                                    @keydown.enter="handleEnter" />
-                            </div>
-                            <div id="editor-container" style="height: 900px; overflow-y: hidden;"></div>
-                        </div>
-                    </div>
+                <el-main class="nopadding">
+                    <sc-editor ref="editor" :content="content"></sc-editor>
                 </el-main>
                 <el-footer>
                     <div class="doc-tool">
@@ -48,6 +35,9 @@
                             <el-button type="danger" @click="saveNote">
                                 <sc-icon set="ms" name="save"></sc-icon>保存
                             </el-button>
+                            <el-button type="danger" @click="loadRemote">
+                                使用服务端
+                            </el-button>
                         </el-space>
                     </div>
                 </el-footer>
@@ -56,13 +46,14 @@
     </el-container>
 </template>
 
-<link href="https://cdn.bootcdn.net/ajax/libs/wangeditor5/5.1.23/css/style.min.css" rel="stylesheet" />
 <script>
-import '@wangeditor/editor/dist/css/style.css'
-import { createEditor, createToolbar } from 'wang-editor';
+import { defineAsyncComponent } from "vue";
 
 export default {
     name: 'cms_doc_htmlpad',
+    components: {
+        scEditor: defineAsyncComponent(() => import("@/components/scEditor")),
+    },
     data() {
         return {
             param: {
@@ -75,9 +66,6 @@ export default {
             timer: null,// 定时器
             loading: false,//加载标识
             saving: false,// 保存标识
-            titlePlaceholder: '请输入标题...',
-            contentPlaceholder: '请输入内容...',
-            scEditor: null,
         }
     },
     mounted() {
@@ -87,7 +75,9 @@ export default {
         this.init();
 
         this.formData = this.loadCache('0');
-        this.showNote();
+        this.$nextTick(() => {
+            this.showNote();
+        })
 
         this.timer = setInterval(() => {
             this.saveCache();
@@ -102,7 +92,7 @@ export default {
         def_data() {
             return {
                 id: '0',
-                ver: 1,
+                ver: 0,
                 types: 2,
                 title: '',
                 content: '',
@@ -110,64 +100,10 @@ export default {
             }
         },
         init() {
-            var editorConfig = {
-                placeholder: this.contentPlaceholder,
-                onChange: this.contentChange,
-                MENU_CONF: {
-                    // 配置上传图片
-                    uploadImage: {
-                        // 请求路径
-                        server: this.$API.sysnote.upload.url,
-                        // 后端接收的文件名称
-                        fieldName: "file",
-                        maxFileSize: 1 * 1024 * 1024, // 1M
-                        // 上传的图片类型
-                        allowedFileTypes: ["image/*"],
-                        // 小于该值就插入 base64 格式（而不上传），默认为 0
-                        base64LimitSize: 1024, // 10MB
-                        customInsert: this.insertSuccess,
-                        // 携带的数据
-                        header: {
-                            token: ''
-                        },
-                        // 单个文件上传成功之后
-                        onSuccess: this.uploadSuccess,
-                        // 单个文件上传失败
-                        onFailed(file, res) {
-                            console.log(res)
-                            this.$message.error(`${file.name} 上传失败`)
-                        },
-                        // 上传错误，或者触发 timeout 超时
-                        onError(file, err, res) {
-                            console.log(err, res)
-                            this.$message.error(`${file.name} 上传出错`)
-                        },
-                    }
-                }
-            };
-            this.scEditor = createEditor({
-                selector: '#editor-container',
-                config: editorConfig,
-                mode: 'simple' // 或 'default' 
-            })
-            var toolbarConfig = {};
-            createToolbar({
-                editor: this.scEditor,
-                selector: '#toolbar-container',
-                config: toolbarConfig,
-                mode: 'simple' // 或 'default'
-            });
-        },
-        handleEnter() {
-            this.scEditor.focus();
-        },
-        contentChange() {
-            this.formData.content = this.scEditor.getHtml();
         },
         showNote() {
-            if (this.scEditor) {
-                this.scEditor.setHtml(this.formData.content);
-            }
+            this.$refs.editor.setTitle(this.formData.title);
+            this.$refs.editor.setContent(this.formData.content);
         },
         async search() {
             var res = await this.$API.sysnote.list.get(this.param);
@@ -193,7 +129,7 @@ export default {
                 return;
             }
 
-            this.readNote(item);
+            this.readNote(item.id, false);
         },
         itemDelete(item) {
             if (!item || !item.id) {
@@ -220,29 +156,41 @@ export default {
                 this.search();
             }).catch(() => { });
         },
-        async readNote(item) {
-            if (!item || !item.id) {
+        loadRemote() {
+            if (!this.formData) {
+                return;
+            }
+
+            this.readNote(this.formData.id, true);
+        },
+        async readNote(itemId, force) {
+            if (!itemId) {
                 return;
             }
 
             this.loading = true;
 
             // 读取远程数据
-            var res = await this.$API.sysnote.model.get(item.id);
+            var res = await this.$API.sysnote.model.get(itemId);
             if (!res || res.code != 200) {
                 this.loading = false;
                 return;
             }
 
-            // 读取本地缓存
-            var cached = this.loadCache(item.id);
-
-            var nativeVer = cached.ver || 1;
-            var remoteVer = res.data.ver || 1;
-            if (nativeVer >= remoteVer) {
-                this.formData = cached;
-            } else {
+            if (force) {
                 this.formData = res.data;
+            } else {
+                // 读取本地缓存
+                var cached = this.loadCache(itemId);
+                console.log('cached:'+cached.ver)
+
+                var nativeVer = cached.ver || 0;
+                var remoteVer = res.data.ver || 1;
+                if (nativeVer >= remoteVer) {
+                    this.formData = cached;
+                } else {
+                    this.formData = res.data;
+                }
             }
             this.showNote();
 
@@ -278,11 +226,14 @@ export default {
                 return;
             }
 
-            if (!this.formData.content || this.formData.content == '<p><br></p>') {
+            var content = this.$refs.editor.getContent();
+            if (!content || content == '<p><br></p>') {
                 this.$message.warning('请输入文章内容！');
                 return;
             }
+            this.formData.content = content;
 
+            this.formData.title = this.$refs.editor.getTitle();
             if (!this.formData.title) {
                 this.formData.title = '未命名：' + this.$TOOL.dateTimeFormat(new Date());
             }
@@ -318,7 +269,14 @@ export default {
             if (this.saving) {
                 return;
             }
+            var title = this.$refs.editor.getTitle();
+            var content = this.$refs.editor.getContent();
+            if (this.formData.title == title && this.formData.content == content) {
+                return;
+            }
 
+            this.formData.title = title;
+            this.formData.content = content;
             this.$SCM.save_cache('htmlpad_' + this.formData.id, this.formData);
         },
     }
@@ -335,39 +293,6 @@ export default {
         text-align: center;
         align-items: center;
         margin-top: -4px;
-    }
-
-    .notepad-toolbar {
-        margin: 0 auto;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    .notepad-content {
-        overflow-y: auto;
-        position: relative;
-
-        .notepad-container {
-            width: 860px;
-            margin: 0 auto;
-            background-color: var(--el-bg-color);
-            padding: 20px 50px 50px 50px;
-            border: 1px solid var(--el-border-color-light);
-            box-shadow: var(--el-box-shadow-light);
-        }
-
-        .notepad-title {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--el-border-color-light);
-
-            input {
-                font-size: 30px;
-                border: 0;
-                outline: none;
-                width: 100%;
-                line-height: 1;
-            }
-        }
     }
 }
 </style>

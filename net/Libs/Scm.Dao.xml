@@ -692,6 +692,11 @@
             发送状态
             </summary>
         </member>
+        <member name="P:Com.Scm.Log.LogSmsDao.verify">
+            <summary>
+            核验次数
+            </summary>
+        </member>
         <member name="T:Com.Scm.Msg.Chat.ChatFriendDao">
             <summary>
             
@@ -1252,6 +1257,16 @@
             引用数量
             </summary>
         </member>
+        <member name="P:Com.Scm.Res.Cat.CatDao.ref_id">
+            <summary>
+            引用ID
+            </summary>
+        </member>
+        <member name="P:Com.Scm.Res.Cat.CatDao.uri">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Com.Scm.Res.Sms.SmsDao">
             <summary>
             消息模板
@@ -1807,6 +1822,11 @@
             记事功能
             </summary>
         </member>
+        <member name="P:Com.Scm.Sys.Notes.NoteDao.od">
+            <summary>
+            显示排序
+            </summary>
+        </member>
         <member name="P:Com.Scm.Sys.Notes.NoteDao.key">
             <summary>
             键
@@ -1871,6 +1891,27 @@
             <summary>
             版本
             </summary>
+        </member>
+        <member name="M:Com.Scm.Sys.Notes.NoteDao.PrepareCreate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="M:Com.Scm.Sys.Notes.NoteDao.PrepareUpdate(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userId"></param>
+            <param name="unitId"></param>
+        </member>
+        <member name="M:Com.Scm.Sys.Notes.NoteDao.GetFileName">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:Com.Scm.Sys.PvDetailDao">
             <summary>

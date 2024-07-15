@@ -163,7 +163,7 @@ export default {
             var data = {
                 type: this.formData.type,
                 user: this.formData.user,
-                pass: this.$TOOL.crypto.SHA(this.formData.pass),
+                pass: this.$CRYPTO.SHA(this.formData.pass),
                 opt: this.formData.opt,
                 key: this.key
             };

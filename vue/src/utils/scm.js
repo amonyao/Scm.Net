@@ -164,41 +164,6 @@ scm.delete_list = function (dom, http, list) {
 		.catch(() => {});
 };
 
-scm.getDate = function () {
-	var date = new Date();
-	var y = date.getFullYear();
-	var m = date.getMonth() + 1;
-	var d = date.getDate();
-	return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d);
-};
-
-scm.getTime = function () {
-	var date = new Date();
-	var y = date.getFullYear();
-	var m = date.getMonth() + 1;
-	m = m < 10 ? "0" + m : m;
-	var d = date.getDate();
-	d = d < 10 ? "0" + d : d;
-	alert(y + m + d);
-};
-
-scm.format = function (str, len, pad) {
-	pad = pad || "*";
-	if (!str) {
-		return pad.repeat(len);
-	}
-
-	const t = str.length;
-	if (t > len) {
-		return str.substring(0, len);
-	}
-	if (t < len) {
-		return str.padEnd(len, pad);
-	}
-
-	return str;
-};
-
 /**
  * 追加【所有】选项
  * @param {Array} arr

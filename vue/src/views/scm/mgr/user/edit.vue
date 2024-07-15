@@ -234,7 +234,7 @@ export default {
 						);
 					}
 
-					this.formData.pass = this.$TOOL.crypto.MD5(
+					this.formData.pass = this.$CRYPTO.MD5(
 						this.formData.pass
 					);
 					this.isSaveing = true;

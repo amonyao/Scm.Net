@@ -1,5 +1,6 @@
 import config from "./config";
 import api from "./api";
+import crypto from "./utils/crypto";
 import tool from "./utils/tool";
 import http from "./utils/request";
 import scm from "./utils/scm";
@@ -45,6 +46,7 @@ export default {
 	install(app) {
 		//挂载全局对象
 		app.config.globalProperties.$CONFIG = config;
+		app.config.globalProperties.$CRYPTO = crypto;
 		app.config.globalProperties.$TOOL = tool;
 		app.config.globalProperties.$HTTP = http;
 		app.config.globalProperties.$API = api;

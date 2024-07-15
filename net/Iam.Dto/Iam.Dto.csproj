@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm.Iam</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Iam.Common\Iam.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.Common">
+      <HintPath>..\Libs\Scm.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Dto">
+      <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

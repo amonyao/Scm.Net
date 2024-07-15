@@ -65,7 +65,7 @@ public class JwtMiddleware
                     time = DateTime.Now,
                     data = jwtToken.data,
                 });
-                context.Response.Headers.Add("X-Refresh-Token", newToken);
+                context.Response.Headers.Append("X-Refresh-Token", newToken);
             }
             return _next(context);
         }

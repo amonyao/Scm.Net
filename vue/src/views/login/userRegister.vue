@@ -177,7 +177,7 @@ export default {
 				type: this.formData.type,
 				unit: this.formData.unit,
 				user: this.formData.user,
-				pass: this.$TOOL.crypto.SHA(this.formData.password1),
+				pass: this.$CRYPTO.SHA(this.formData.password1),
 				unit_name: this.formData.unit_name,
 				user_name: this.formData.user_name,
 				email: this.formData.email,
