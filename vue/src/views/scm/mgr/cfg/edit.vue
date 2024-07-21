@@ -5,19 +5,19 @@
 				<sc-select v-model="formData.types" :data="types_list" />
 			</el-form-item>
 			<el-form-item label="键" prop="key">
-				<el-input v-model="formData.key" placeholder="请输入键" :maxlength="30" show-word-limit clearable
-					:style="{ width: '100%' }"></el-input>
+				<el-input v-model="formData.key" placeholder="请输入键" :maxlength="32" show-word-limit
+					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="值" prop="value">
-				<el-input v-model="formData.value" placeholder="请输入值" :maxlength="30" show-word-limit clearable
-					:style="{ width: '100%' }"></el-input>
+				<el-input v-model="formData.value" placeholder="请输入值" :maxlength="256" show-word-limit
+					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="数据类型" prop="data">
 				<sc-select v-model="formData.data" :data="data_list" />
 			</el-form-item>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" type="textarea" placeholder="请输入备注" :maxlength="100" show-word-limit
-					:autosize="{ minRows: 2, maxRows: 4 }" :style="{ width: '100%' }"></el-input>
+					:autosize="{ minRows: 2, maxRows: 4 }"></el-input>
 			</el-form-item>
 		</el-form>
 
