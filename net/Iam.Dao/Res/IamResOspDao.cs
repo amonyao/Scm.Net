@@ -13,6 +13,11 @@ namespace Com.Scm.Iam.Res
     public class IamResOspDao : ScmDataDao
     {
         /// <summary>
+        /// 服务类型
+        /// </summary>
+        public OspTypeEnum type { get; set; }
+
+        /// <summary>
         /// 服务代码
         /// </summary>
         [StringLength(32)]

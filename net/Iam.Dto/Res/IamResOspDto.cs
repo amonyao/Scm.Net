@@ -20,6 +20,11 @@ namespace Com.Scm.Iam.Res
         /// <summary>
         /// 
         /// </summary>
+        public OspTypeEnum type { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [StringLength(32)]
         public string code { get; set; }
 
@@ -64,5 +69,25 @@ namespace Com.Scm.Iam.Res
         /// </summary>
         [Required]
         public ScmSystemEnum row_system { get; set; }
+
+        public bool IsEmail()
+        {
+            return type == OspTypeEnum.Email;
+        }
+
+        public bool IsPhone()
+        {
+            return type == OspTypeEnum.Phone;
+        }
+
+        public bool IsOAuth()
+        {
+            return type == OspTypeEnum.OAuth;
+        }
+
+        public bool IsMore()
+        {
+            return type == OspTypeEnum.More;
+        }
     }
 }
