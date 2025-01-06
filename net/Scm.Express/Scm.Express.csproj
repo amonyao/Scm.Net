@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Scm.Common">
+      <HintPath>..\Libs\Scm.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Scm.Common.Dto">
       <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Common.Http">
-      <HintPath>..\..\..\..\Scm\libs\Scm.Common.Http.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Common.Text">
       <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>

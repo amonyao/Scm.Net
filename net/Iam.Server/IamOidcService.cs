@@ -16,10 +16,10 @@ namespace Com.Scm.Iam
     [ApiExplorerSettings(GroupName = "Iam")]
     public class IamOidcService : ApiService
     {
-        private readonly SugarRepository<IamOidcDao> _thisRepository;
+        private readonly SugarRepository<IamOidcDetailDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
 
-        public IamOidcService(ISqlSugarClient client, SugarRepository<IamOidcDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public IamOidcService(ISqlSugarClient client, SugarRepository<IamOidcDetailDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _SqlClient = client;
             _thisRepository = thisRepository;
@@ -135,15 +135,15 @@ namespace Com.Scm.Iam
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(IamOidcDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<IamOidcDao>());
+        public async Task<bool> AddAsync(IamOidcDetailDto model) =>
+            await _thisRepository.InsertAsync(model.Adapt<IamOidcDetailDao>());
 
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(IamOidcDto model)
+        public async Task UpdateAsync(IamOidcDetailDto model)
         {
             var dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)

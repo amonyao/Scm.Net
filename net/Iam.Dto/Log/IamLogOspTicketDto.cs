@@ -6,7 +6,7 @@ namespace Com.Scm.Iam.Log
     /// <summary>
     /// 
     /// </summary>
-    public class IamLogTicketDto : ScmDataDto
+    public class IamLogOspTicketDto : ScmDataDto
     {
         /// <summary>
         /// 

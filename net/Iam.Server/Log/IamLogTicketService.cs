@@ -13,9 +13,9 @@ namespace Com.Scm.Iam.Log
     [ApiExplorerSettings(GroupName = "Iam")]
     public class IamLogTicketService : ApiService
     {
-        private readonly SugarRepository<IamLogTicketDao> _thisRepository;
+        private readonly SugarRepository<IamLogOspTicketDao> _thisRepository;
         private readonly SugarRepository<UserDao> _userRepository;
-        public IamLogTicketService(SugarRepository<IamLogTicketDao> thisRepository, SugarRepository<UserDao> userRepository)
+        public IamLogTicketService(SugarRepository<IamLogOspTicketDao> thisRepository, SugarRepository<UserDao> userRepository)
         {
             _thisRepository = thisRepository;
             _userRepository = userRepository;
@@ -112,15 +112,15 @@ namespace Com.Scm.Iam.Log
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> AddAsync(IamLogTicketDto model) =>
-            await _thisRepository.InsertAsync(model.Adapt<IamLogTicketDao>());
+        public async Task<bool> AddAsync(IamLogOspTicketDto model) =>
+            await _thisRepository.InsertAsync(model.Adapt<IamLogOspTicketDao>());
 
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(IamLogTicketDto model)
+        public async Task UpdateAsync(IamLogOspTicketDto model)
         {
             var dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)

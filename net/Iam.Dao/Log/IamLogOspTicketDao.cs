@@ -7,8 +7,8 @@ namespace Com.Scm.Iam.Log
     /// <summary>
     /// 
     /// </summary>
-    [SugarTable("iam_log_ticket")]
-    public class IamLogTicketDao : ScmDataDao
+    [SugarTable("iam_log_osp_ticket")]
+    public class IamLogOspTicketDao : ScmDataDao
     {
         /// <summary>
         /// 

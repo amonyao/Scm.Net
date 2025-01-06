@@ -65,16 +65,16 @@ namespace Com.Scm.Iam.Log
 
         private void Prepare(List<IamLogOauthDvo> list)
         {
-            var oidcDict = new Dictionary<long, IamOidcDao>();
+            var oidcDict = new Dictionary<long, IamOidcDetailDao>();
             var appDict = new Dictionary<long, IamResAppDao>();
             var ospDict = new Dictionary<long, IamResOspDao>();
 
             foreach (var item in list)
             {
-                IamOidcDao oidcDao = null;
+                IamOidcDetailDao oidcDao = null;
                 if (!oidcDict.ContainsKey(item.oidc_id))
                 {
-                    oidcDao = _SqlClient.Queryable<IamOidcDao>().First(a => a.id == item.oidc_id);
+                    oidcDao = _SqlClient.Queryable<IamOidcDetailDao>().First(a => a.id == item.oidc_id);
                     if (oidcDao != null)
                     {
                         oidcDict[item.oidc_id] = oidcDao;

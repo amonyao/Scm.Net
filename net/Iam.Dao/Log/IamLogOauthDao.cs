@@ -1,5 +1,6 @@
 using Com.Scm.Dao;
 using Com.Scm.Enums;
+using Com.Scm.Utils;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations;
 
@@ -19,12 +20,17 @@ namespace Com.Scm.Iam.Log
         public string key { get; set; }
 
         /// <summary>
-        /// 
+        /// 授权ID（应用）
         /// </summary>
-        public long oidc_id { get; set; }
+        public long oidc_header_id { get; set; }
 
         /// <summary>
-        /// 
+        /// 授权ID（服务商）
+        /// </summary>
+        public long oidc_detail_id { get; set; }
+
+        /// <summary>
+        /// 应用ID
         /// </summary>
         public long app_id { get; set; }
 
@@ -37,8 +43,8 @@ namespace Com.Scm.Iam.Log
         /// <summary>
         /// UnionID
         /// </summary>
-        [StringLength(64)]
-        public string oauth_id { get; set; }
+        [StringLength(128)]
+        public string oauth_code { get; set; }
 
         /// <summary>
         /// 用户
@@ -111,5 +117,10 @@ namespace Com.Scm.Iam.Log
         /// </summary>
         [StringLength(256)]
         public string email { get; set; }
+
+        public bool IsExpired(DateTime time)
+        {
+            return TimeUtils.GetUnixTime(time) > expires_in;
+        }
     }
 }
