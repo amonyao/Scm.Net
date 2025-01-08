@@ -17,7 +17,13 @@ namespace Com.Scm.Iam.Log
         /// </summary>
         [Required]
         [StringLength(64)]
-        public string key { get; set; }
+        public string ticket { get; set; }
+
+        /// <summary>
+        /// 请求ID
+        /// </summary>
+        [StringLength(32)]
+        public string request_id { get; set; }
 
         /// <summary>
         /// 授权ID（应用）
@@ -28,6 +34,30 @@ namespace Com.Scm.Iam.Log
         /// 授权ID（服务商）
         /// </summary>
         public long oidc_detail_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [StringLength(16)]
+        public string response_type { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [StringLength(128)]
+        public string redirect_uri { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [StringLength(128)]
+        public string state { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [StringLength(128)]
+        public string scope { get; set; }
 
         /// <summary>
         /// 应用ID
@@ -117,6 +147,10 @@ namespace Com.Scm.Iam.Log
         /// </summary>
         [StringLength(256)]
         public string email { get; set; }
+
+        public OAuthHandleEnum handle { get; set; }
+
+        public OAuthResultEnum result { get; set; }
 
         public bool IsExpired(DateTime time)
         {

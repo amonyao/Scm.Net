@@ -17,10 +17,13 @@
 
   <ItemGroup>
     <Reference Include="Scm.Common">
-      <HintPath>..\Libs\Scm.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Scm\libs\netstandard2.0\Scm.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Common.Time">
+      <HintPath>..\..\..\..\Scm\libs\netstandard2.0\Scm.Common.Time.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
-      <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
+      <HintPath>..\..\..\..\Scm\libs\net8.0\Scm.Server.Dao.dll</HintPath>
     </Reference>
   </ItemGroup>
 

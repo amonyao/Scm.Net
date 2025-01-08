@@ -1,6 +1,6 @@
 ﻿namespace Com.Scm.Iam
 {
-    public enum AppTicketHandleEnum : byte
+    public enum OAuthHandleEnum : byte
     {
         None,
         Todo,
@@ -8,7 +8,7 @@
         Done
     }
 
-    public enum AppTicketResultEnum : byte
+    public enum OAuthResultEnum : byte
     {
         None,
         Failure,

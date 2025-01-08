@@ -75,7 +75,13 @@ namespace Com.Scm.Iam.Res
         public long refresh_expires { get; set; }
 
         /// <summary>
-        /// 
+        /// 最大显示数量
+        /// </summary>
+        [Required]
+        public int max { get; set; }
+
+        /// <summary>
+        /// 调用次数
         /// </summary>
         [Required]
         public int qty { get; set; }

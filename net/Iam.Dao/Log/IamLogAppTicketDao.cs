@@ -16,7 +16,7 @@ namespace Com.Scm.Iam.Log
         /// <summary>
         /// 请求标识
         /// </summary>
-        public string seq { get; set; }
+        public string request_id { get; set; }
 
         /// <summary>
         /// 握手票据
@@ -27,11 +27,11 @@ namespace Com.Scm.Iam.Log
         /// <summary>
         /// 处理状态
         /// </summary>
-        public AppTicketHandleEnum handle { get; set; }
+        public OAuthHandleEnum handle { get; set; }
 
         /// <summary>
         /// 处理结果
         /// </summary>
-        public AppTicketResultEnum result { get; set; }
+        public OAuthResultEnum result { get; set; }
     }
 }

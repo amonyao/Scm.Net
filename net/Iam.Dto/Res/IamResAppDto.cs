@@ -76,6 +76,12 @@ namespace Com.Scm.Iam.Res
         /// 
         /// </summary>
         [Required]
+        public int max { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
         public int qty { get; set; }
 
         /// <summary>
