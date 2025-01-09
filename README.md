@@ -8,7 +8,7 @@
 
 ## 软件架构
 1. 采用前后端分离模式；  
-2. 后端基于.Net6开发，可直接升级到.Net7；  
+2. 后端基于.Net8开发，可直接编译输出.Net6/7/8的运行时；  
 3. 后端仅依赖几个常用的三方类库：**[SqlSugarCore](https://www.donet5.com/Home/Doc)**(ORM工具）、**[Newtonsoft.Json](https://www.newtonsoft.com/json)**（JSON工具）、**[ImageSharp](https://github.com/SixLabors/ImageSharp)**（跨平台图像工具）；  
 4. 前端基于 **[Vue 3](https://vuejs.org)** 及 **[Element Plus](https://element-plus.gitee.io)** 开发；  
 5. 前端仅依赖几个常用的三方组件：**[Axios](https://axios-http.com/)**（HTTP工具），良好支持i18n（多语言）；  
