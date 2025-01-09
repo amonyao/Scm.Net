@@ -383,16 +383,16 @@ namespace Com.Scm.Express.My.Shipper.JT
             var timestamp = Timestamp(now);
             var json = req.ToJsonString();
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddParameter("bizContent", json);
 
-            var client = new RestClient(req.GetPath());
-            client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-            client.AddDefaultHeader("apiAccount", GetApiAccount());
-            client.AddDefaultHeader("digest", Digest(json));
-            client.AddDefaultHeader("timestamp", timestamp.ToString());
+            var client = new ScmHttpClient(req.GetPath());
+            client.AddHeadParam("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+            client.AddHeadParam("apiAccount", GetApiAccount());
+            client.AddHeadParam("digest", Digest(json));
+            client.AddHeadParam("timestamp", timestamp.ToString());
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

@@ -305,7 +305,7 @@ namespace Com.Scm.Express.My.Shipper.STO
         {
             var json = req.ToJsonString();
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddParameter("api_name", req.GetApiName());
             request.AddParameter("from_appkey", GetAppKey());
             request.AddParameter("from_code", GetAppCode());
@@ -314,10 +314,10 @@ namespace Com.Scm.Express.My.Shipper.STO
             request.AddParameter("content", json);
             request.AddParameter("data_digest", Digest(json));
 
-            var client = new RestClient(req.GetServicePath());
-            client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded");
+            var client = new ScmHttpClient(req.GetServicePath());
+            client.AddHeadParam("Content-type", "application/x-www-form-urlencoded");
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

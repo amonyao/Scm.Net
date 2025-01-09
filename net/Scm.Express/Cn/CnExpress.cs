@@ -53,7 +53,7 @@ namespace Com.Scm.Express.CnExpress
             var v = "2.0";
             var algorithm = "md5-salt";
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddQueryParameter("LOP-DN", req.GetDomain());
             request.AddQueryParameter("app_key", GetAppKey());
             request.AddQueryParameter("access_token", _JdClient.GetAccessToken());
@@ -63,10 +63,10 @@ namespace Com.Scm.Express.CnExpress
             request.AddQueryParameter("sign", Digest(req.GetServicePath(), json, timestamp, v));
             request.AddBody(json);
 
-            var client = new RestClient(BASE_URI + req.GetServicePath());
-            client.AddDefaultHeader("Content-type", "application/json;charset=utf-8");
+            var client = new ScmHttpClient(BASE_URI + req.GetServicePath());
+            client.AddHeadParam("Content-type", "application/json;charset=utf-8");
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

@@ -288,16 +288,16 @@ namespace Com.Scm.Express.My.Shipper.YUNDA
         {
             var json = req.ToJsonString();
 
-            var client = new RestClient(req.GetServicePath());
-            client.AddDefaultHeader("Content-type", "application/json");
-            client.AddDefaultHeader("app-key", GetAppKey());
-            client.AddDefaultHeader("sign", Digest(json));
-            client.AddDefaultHeader("req-time", Digest(json));
+            var client = new ScmHttpClient(req.GetServicePath());
+            client.AddHeadParam("Content-type", "application/json");
+            client.AddHeadParam("app-key", GetAppKey());
+            client.AddHeadParam("sign", Digest(json));
+            client.AddHeadParam("req-time", Digest(json));
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddBody(json);
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

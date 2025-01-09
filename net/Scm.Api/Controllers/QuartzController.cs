@@ -26,7 +26,7 @@ public class QuartzController : ApiController
     [HttpGet("job"), AllowAnonymous]
     public IActionResult TestJob()
     {
-        Logger.Info("执行任务：" + DateTime.Now);
+        LogUtils.Info("执行任务：" + DateTime.Now);
         return Ok("Success");
     }
 

@@ -1,3 +1,0 @@
-<template>
-    VLog TODO
-</template>

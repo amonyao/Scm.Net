@@ -36,7 +36,7 @@ namespace Com.Scm.Express.My.Shipper.SF
                 url = "https://sfapi-sbox.sf-express.com/oauth2/accessToken";
             }
 
-            var req = new HttpRequest();
+            var req = new ScmHttpRequest();
             req.AddQueryParameter("partnerID", CUSTOMER_CODE);
             req.AddQueryParameter("secret", CUSTOMER_PASS);
             req.AddQueryParameter("grantType", "password");
@@ -50,11 +50,11 @@ namespace Com.Scm.Express.My.Shipper.SF
             return true;
         }
 
-        protected static T Post<T>(string url, HttpRequest request) where T : class, new()
+        protected static T Post<T>(string url, ScmHttpRequest request) where T : class, new()
         {
-            var client = new RestClient(url);
-            client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
-            var text = client.Post(request);
+            var client = new ScmHttpClient(url);
+            client.AddHeadParam("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

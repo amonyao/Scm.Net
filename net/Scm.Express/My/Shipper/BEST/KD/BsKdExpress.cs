@@ -143,16 +143,16 @@ namespace Com.Scm.Express.My.Shipper.BEST.KD
         {
             var json = req.ToJsonString();
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddParameter("partnerID", GetPartnerId());
             request.AddParameter("serviceType", req.GetServiceType());
             request.AddParameter("bizData", json);
             request.AddParameter("sign", Digest(json));
 
-            var client = new RestClient(GetServicePath());
-            client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+            var client = new ScmHttpClient(GetServicePath());
+            client.AddHeadParam("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
     }

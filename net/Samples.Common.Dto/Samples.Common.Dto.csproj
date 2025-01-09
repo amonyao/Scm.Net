@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <Reference Include="Scm.Common.Dto">
-      <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
+      <HintPath>..\Libs\netstandard2.0\Scm.Common.Dto.dll</HintPath>
     </Reference>
   </ItemGroup>
 

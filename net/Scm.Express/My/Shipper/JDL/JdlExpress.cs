@@ -51,7 +51,7 @@ namespace Com.Scm.Express.My.Shipper.JDL
             var v = "2.0";
             var algorithm = "md5-salt";
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             var domain = req.GetDomain();
             if (!string.IsNullOrWhiteSpace(domain))
             {
@@ -65,10 +65,10 @@ namespace Com.Scm.Express.My.Shipper.JDL
             request.AddQueryParameter("sign", Digest(req.GetPath(), json, timestamp, v));
             request.AddBody(json);
 
-            var client = new RestClient(GetServiceUrl() + req.GetPath());
-            client.AddDefaultHeader("Content-type", "application/json;charset=utf-8");
+            var client = new ScmHttpClient(GetServiceUrl() + req.GetPath());
+            client.AddHeadParam("Content-type", "application/json;charset=utf-8");
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

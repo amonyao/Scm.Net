@@ -103,7 +103,7 @@ public class AopActionFilter : IAsyncActionFilter
 
                 if (string.IsNullOrEmpty(appkey) || string.IsNullOrEmpty(timestamp) || string.IsNullOrEmpty(signature))
                 {
-                    Logger.Info("ApiSecurity——请求不合法");
+                    LogUtils.Info("ApiSecurity——请求不合法");
                     context.Result = new JsonResult(JResult<int>.Error("请求不合法"));
                     return;
                 }
@@ -116,7 +116,7 @@ public class AopActionFilter : IAsyncActionFilter
 
                 if (appkey != _Config.AppKey)
                 {
-                    Logger.Info("ApiSecurity——请求不合法-k");
+                    LogUtils.Info("ApiSecurity——请求不合法-k");
                     context.Result = new JsonResult(JResult<int>.Error("请求不合法-k"));
                     return;
                 }
@@ -127,7 +127,7 @@ public class AopActionFilter : IAsyncActionFilter
                 bool falg = ts2 - ts1 > 1200 * 1000; //1分钟有效
                 if (falg)
                 {
-                    Logger.Info("ApiSecurity——请求不合法-t");
+                    LogUtils.Info("ApiSecurity——请求不合法-t");
                     context.Result = new JsonResult(JResult<int>.Error("请求不合法-t"));
                     return;
                 }
@@ -193,7 +193,7 @@ public class AopActionFilter : IAsyncActionFilter
 
                 if (!ApiSecurityValidate(timestamp, appkey, data, signature))
                 {
-                    Logger.Info("ApiSecurity——参数不合法-Sign");
+                    LogUtils.Info("ApiSecurity——参数不合法-Sign");
                     context.Result = new JsonResult(JResult<int>.Error("参数不合法"));
                     return;
                 }

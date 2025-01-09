@@ -1,3 +1,0 @@
-<template>
-    Daily TODO
-</template>

@@ -4,10 +4,10 @@ using Com.Scm.Config;
 using Com.Scm.Dsa.Dba.Sugar.UnitOfWork.Filters;
 using Com.Scm.Email.Config;
 using Com.Scm.Extensions;
-using Com.Scm.Generator;
 using Com.Scm.Generator.Config;
 using Com.Scm.Hubs;
 using Com.Scm.Mapper;
+using Com.Scm.Phone.Config;
 using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
 using Com.Scm.Server;
@@ -30,7 +30,7 @@ namespace Com.Scm.Api
             //Serilog.Log.Logger = new LoggerConfiguration()
             //    .ReadFrom.Configuration(builder.Configuration)
             //    .CreateLogger();
-            Logger.Setup();
+            LogUtils.Setup();
 
             var services = builder.Services;
 
@@ -77,7 +77,13 @@ namespace Com.Scm.Api
 
             // EMail
             var emailConfig = AppUtils.GetConfig<EmailConfig>(EmailConfig.NAME) ?? new EmailConfig();
+            emailConfig.Prepare(envConfig);
             services.AddSingleton(emailConfig);
+
+            // Phone
+            var phoneConfig = AppUtils.GetConfig<PhoneConfig>(PhoneConfig.NAME) ?? new PhoneConfig();
+            phoneConfig.Prepare(envConfig);
+            services.AddSingleton(phoneConfig);
 
             // Aiml
             var aimlConfig = AppUtils.GetConfig<AimlConfig>(AimlConfig.NAME) ?? new AimlConfig();

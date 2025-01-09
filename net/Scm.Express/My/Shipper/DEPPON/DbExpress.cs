@@ -221,16 +221,16 @@ namespace Com.Scm.Express.My.Shipper.DEPPON
 
             var json = req.ToJsonString();
 
-            var client = new RestClient(req.GetServicePath());
-            client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+            var client = new ScmHttpClient(req.GetServicePath());
+            client.AddHeadParam("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddParameter("params", json);
             request.AddParameter("digest", Digest(json, time));
             request.AddParameter("timestamp", time);
             request.AddParameter("companyCode", GetCompanyCode());
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

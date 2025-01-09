@@ -232,15 +232,15 @@ namespace Com.Scm.Express.My.Shipper.ZTO
         {
             var json = req.ToJsonString();
 
-            var client = new RestClient(req.GetServiceUrl());
-            client.AddDefaultHeader("Content-type", "application/json");
-            client.AddDefaultHeader("x-appKey", GetAppKey());
-            client.AddDefaultHeader("x-datadigest", Digest(json));
+            var client = new ScmHttpClient(req.GetServiceUrl());
+            client.AddHeadParam("Content-type", "application/json");
+            client.AddHeadParam("x-appKey", GetAppKey());
+            client.AddHeadParam("x-datadigest", Digest(json));
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddBody(json);
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 

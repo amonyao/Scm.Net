@@ -285,7 +285,7 @@ namespace Com.Scm.Express.My.Shipper.SF.Scs
             var now = DateTime.Now;
             var timestamp = Timestamp(now);
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddParameter("partnerID", CUSTOMER_CODE);
             request.AddParameter("requestID", now.Ticks);
             request.AddParameter("serviceCode", req.GetServiceCode());

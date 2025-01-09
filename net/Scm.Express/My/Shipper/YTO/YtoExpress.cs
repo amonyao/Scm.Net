@@ -261,12 +261,12 @@ namespace Com.Scm.Express.My.Shipper.YTO
             req2.sign = Digest(json, req);
             json = req2.ToJsonString();
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddBody(json);
 
-            var client = new RestClient(req.GetServicePath());
+            var client = new ScmHttpClient(req.GetServicePath());
 
-            return client.Post(request);
+            return client.PostText(request);
         }
 
         private static HashAlgorithm _Md5;

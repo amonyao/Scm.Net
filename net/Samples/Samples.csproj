@@ -15,28 +15,28 @@
 
   <ItemGroup>
     <Reference Include="Scm.Common">
-      <HintPath>..\Libs\Scm.Common.dll</HintPath>
+      <HintPath>..\Libs\netstandard2.0\Scm.Common.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Common.Dto">
-      <HintPath>..\Libs\Scm.Common.Dto.dll</HintPath>
+      <HintPath>..\Libs\netstandard2.0\Scm.Common.Dto.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Common.Text">
-      <HintPath>..\Libs\Scm.Common.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Common.Uid">
-      <HintPath>..\Libs\Scm.Common.Uid.dll</HintPath>
+      <HintPath>..\Libs\netstandard2.0\Scm.Common.Text.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
-      <HintPath>..\Libs\Scm.Dsa.Dba.Sugar.dll</HintPath>
+      <HintPath>..\Libs\net8.0\Scm.Dsa.Dba.Sugar.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server">
-      <HintPath>..\Libs\Scm.Server.dll</HintPath>
+      <HintPath>..\Libs\net8.0\Scm.Server.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Api">
-      <HintPath>..\Libs\Scm.Server.Api.dll</HintPath>
+      <HintPath>..\Libs\net8.0\Scm.Server.Api.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
-      <HintPath>..\Libs\Scm.Server.Dao.dll</HintPath>
+      <HintPath>..\Libs\net8.0\Scm.Server.Dao.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Uid">
+      <HintPath>..\Libs\net8.0\Scm.Uid.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -1,3 +1,0 @@
-<template>
-    Whiteboard TODO
-</template>

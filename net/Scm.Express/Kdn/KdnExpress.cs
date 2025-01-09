@@ -45,7 +45,7 @@ namespace Com.Scm.Express.Kdn
         {
             var json = req.ToJsonString();
 
-            var request = new HttpRequest();
+            var request = new ScmHttpRequest();
             request.AddQueryParameter("RequestData", json);
             request.AddQueryParameter("EBusinessID", USER_ID);
             request.AddQueryParameter("RequestType", req.GetRequestType());
@@ -53,10 +53,10 @@ namespace Com.Scm.Express.Kdn
             request.AddQueryParameter("DataSign", Digest(json));
             request.AddBody(json);
 
-            var client = new RestClient(req.GetServicePath());
-            client.AddDefaultHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+            var client = new ScmHttpClient(req.GetServicePath());
+            client.AddHeadParam("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
-            var text = client.Post(request);
+            var text = client.PostText(request);
             return text.AsJsonObject<T>();
         }
 
