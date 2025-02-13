@@ -81,9 +81,6 @@
     <Reference Include="Scm.Email">
       <HintPath>..\Libs\net8.0\Scm.Email.dll</HintPath>
     </Reference>
-    <Reference Include="Scm.Express">
-      <HintPath>..\Libs\net8.0\Scm.Express.dll</HintPath>
-    </Reference>
     <Reference Include="Scm.Generator">
       <HintPath>..\Libs\net8.0\Scm.Generator.dll</HintPath>
     </Reference>
