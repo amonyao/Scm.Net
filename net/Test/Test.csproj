@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Garnet" Version="1.0.54" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.175" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.180" />
   </ItemGroup>
 
   <ItemGroup>

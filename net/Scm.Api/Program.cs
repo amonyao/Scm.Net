@@ -15,6 +15,7 @@ using Com.Scm.Service;
 using Com.Scm.Uid.Config;
 using Com.Scm.Utils;
 using Microsoft.Extensions.FileProviders;
+using Serilog;
 
 namespace Com.Scm.Api
 {
@@ -27,10 +28,10 @@ namespace Com.Scm.Api
             AppUtils.Init(builder.Configuration);
 
             // LOG≈‰÷√
-            //Serilog.Log.Logger = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(builder.Configuration)
-            //    .CreateLogger();
-            LogUtils.Setup();
+            Serilog.Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Configuration)
+                .CreateLogger();
+            //LogUtils.Setup();
 
             var services = builder.Services;
 
