@@ -84,9 +84,9 @@ module.exports = defineConfig({
 			'element-plus': 'ElementPlus',
 			'element-icons': 'ElementPlusIconsVue',
 			'echarts': 'echarts',
+			// 'xlsx': 'Xlsx',
 			'highlight.js': 'highlight.js',
 			'wang-editor': 'wangEditor',
-			// 'xlsx': 'Xlsx',
 			'editorjs': 'editorjs'
 		}
 	}
