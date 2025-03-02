@@ -7,12 +7,11 @@
 			<el-col :lg="12">
 				<h2>{{ form.namec || "新增菜单" }}</h2>
 				<el-form ref="dialogForm" :model="form" :rules="rules" label-width="80px" label-position="left">
+					<el-form-item label="显示语言" prop="lang">
+						<sc-select v-model="form.lang" placeholder="请选择显示语言" :data="lang_list" />
+					</el-form-item>
 					<el-form-item label="显示名称" prop="namec">
 						<el-input v-model="form.namec" clearable placeholder="菜单显示名字"></el-input>
-					</el-form-item>
-					<el-form-item label="上级菜单" prop="parentIdList">
-						<el-cascader v-model="form.parentIdList" :options="menuOptions" :props="menuProps"
-							:show-all-levels="false" placeholder="顶级菜单" clearable disabled></el-cascader>
 					</el-form-item>
 					<el-form-item label="类型" prop="types">
 						<el-radio-group v-model="form.types">
@@ -130,15 +129,10 @@ export default {
 	data() {
 		return {
 			form: this.def_data(),
-			menuOptions: [],
-			menuProps: {
-				multiple: false,
-				checkStrictly: true,
-				expandTrigger: "hover",
-			},
+			lang_list: [this.$SCM.OPTION_ONE],
 			rules: {
-				parentIdList: [
-					{ required: true, trigger: "change", message: "请选择上级菜单", type: "array" },
+				lang: [
+					{ required: true, trigger: "change", message: "请选择显示语言" },
 				],
 				types: [
 					{ required: true, trigger: "change", type: 'number', min: 1, message: "菜单类型不能为空" },
@@ -172,23 +166,15 @@ export default {
 			loading: false,
 		};
 	},
-	watch: {
-		menu: {
-			handler() {
-				this.menuOptions = this.treeToMap(this.menu);
-			},
-			deep: true,
-		},
+	mounted() {
+		this.listLang();
 	},
-	mounted() { },
 	methods: {
 		def_data() {
 			return {
 				id: "0",
+				lang: "",
 				types: 1,
-				tenantId: 0,
-				parentId: "",
-				parentIdList: [],
 				namec: "",
 				codec: "",
 				url: "",
@@ -203,20 +189,12 @@ export default {
 				api: [],
 			}
 		},
-		//简单化菜单
-		treeToMap(tree) {
-			let _tree = [
-				{ id: "1", value: "0", label: "（默认）", parentId: "0" },
-			];
-			tree.some((m) => {
-				_tree.push({
-					id: m.id,
-					value: m.id,
-					label: m.namec,
-					parentId: m.parentId,
-				});
-			});
-			return tool.changeTree(_tree);
+		async listLang() {
+			var res = await this.$API.syslang.option.get();
+			if (res.code == 200) {
+				this.lang_list = res.data;
+			}
+			this.lang_list = this.$SCM.option_one(this.lang_list);
 		},
 		//保存
 		async save() {
