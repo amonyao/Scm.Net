@@ -3,13 +3,13 @@
         <el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
             <el-row>
                 <el-col :span="12">
-                    <el-form-item label="终端类型" prop="types">
-                        <sc-select v-model="formData.types" :data="typeList"></sc-select>
+                    <el-form-item label="所属应用" prop="app_id">
+                        <sc-select v-model="formData.app_id" :data="app_list"></sc-select>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="系统代码" prop="app_id">
-                        <sc-select v-model="formData.app_id" :data="app_list"></sc-select>
+                    <el-form-item label="终端类型" prop="types">
+                        <sc-select v-model="formData.types" :data="typeList"></sc-select>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -93,6 +93,9 @@ export default {
             typeList: [],
             formData: this.def_data(),
             rules: {
+                app_id: [
+                    { required: true, trigger: "blur", message: "请选择所属应用", },
+                ],
                 types: [
                     { required: true, trigger: "blur", message: "请选择终端类型", },
                 ],

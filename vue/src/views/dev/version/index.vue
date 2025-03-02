@@ -106,8 +106,8 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
+				{ prop: 'app_name', label: '所属应用', minWidth: 100 },
 				{ prop: 'types', label: '终端类型', width: 100, formatter: this.getTypesNames },
-				{ prop: 'sys', label: '系统代码', minWidth: 100 },
 				{ prop: 'current', label: '当前版本', width: 100 },
 				{ prop: 'ver', label: '版本', width: 100 },
 				{ prop: 'ver_min', label: '最小版本', width: 100 },

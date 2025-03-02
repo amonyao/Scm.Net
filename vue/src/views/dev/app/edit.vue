@@ -8,8 +8,8 @@
 				<el-input v-model="formData.code" placeholder="请输入应用代码" :maxlength="16" show-word-limit
 					clearable></el-input>
 			</el-form-item>
-			<el-form-item label="应用名称" prop="title">
-				<el-input v-model="formData.title" placeholder="请输入应用标题" :maxlength="32" show-word-limit
+			<el-form-item label="应用名称" prop="name">
+				<el-input v-model="formData.name" placeholder="请输入应用标题" :maxlength="32" show-word-limit
 					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="应用简介" prop="content">
@@ -43,7 +43,7 @@ export default {
 				code: [
 					{ required: true, trigger: "blur", message: "请输入应用代码", },
 				],
-				title: [
+				name: [
 					{ required: true, trigger: "blur", message: "请输入应用名称", },
 				],
 				content: [
@@ -62,7 +62,7 @@ export default {
 				id: '0',
 				types: 0,
 				code: '',
-				title: '',
+				name: '',
 				content: '',
 			}
 		},
