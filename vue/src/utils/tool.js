@@ -16,6 +16,34 @@ tool.trim = function (x) {
 
 tool._cache = [];
 
+tool.setCache = function (key, obj) {
+	tool.data.set(key, obj);
+	tool.cookie.set(key, obj);
+	tool.session.set(key, obj);
+	tool.local.set(key, obj);
+};
+
+tool.getCache = function (key, obj) {
+	var tmp = tool.data.get(key);
+	if (tmp) {
+		return tmp;
+	}
+	tmp = tool.cookie.get(key);
+	if (tmp) {
+		return tmp;
+	}
+	tmp = tool.session.get(key);
+	if (tmp) {
+		return tmp;
+	}
+	tmp = tool.local.get(key);
+	if (tmp) {
+		return tmp;
+	}
+
+	return obj;
+};
+
 /** 临时缓存 */
 tool.data = {
 	set(key, obj) {

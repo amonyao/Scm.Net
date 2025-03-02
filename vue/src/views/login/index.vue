@@ -11,8 +11,8 @@
 					<div class="common-header-title">{{ $t('login.signInTitle') }}</div>
 				</div>
 				<div class="common-header-right">
-					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info" @click="configDark"
-						:title="$t('login.themeTitle')">
+					<el-button :icon="config.dark ? 'el-icon-sunny' : 'el-icon-moon'" circle type="info"
+						@click="configDark" :title="$t('login.themeTitle')">
 					</el-button>
 					<el-dropdown trigger="click" placement="bottom-end" @command="configLang"
 						:title="$t('login.langTitle')">
@@ -90,10 +90,13 @@ export default {
 		oauthForm,
 	},
 	data() {
+		var lang = this.$TOOL.getCache("APP_LANG") || this.$CONFIG.LANG;
+		this.$i18n.locale = lang;
+
 		return {
 			config: {
-				lang: this.$TOOL.data.get("APP_LANG") || this.$CONFIG.LANG,
-				dark: this.$TOOL.data.get("APP_DARK") || false,
+				lang: lang,
+				dark: this.$TOOL.getCache("APP_DARK") || false,
 			},
 			lang: [
 				{ name: "简体中文", value: "zh-cn", },
@@ -117,15 +120,15 @@ export default {
 		"config.dark"(val) {
 			if (val) {
 				document.documentElement.classList.add("dark");
-				this.$TOOL.data.set("APP_DARK", val);
+				this.$TOOL.setCache("APP_DARK", val);
 			} else {
 				document.documentElement.classList.remove("dark");
-				this.$TOOL.data.remove("APP_DARK");
+				this.$TOOL.removeCache("APP_DARK");
 			}
 		},
 		"config.lang"(val) {
 			this.$i18n.locale = val;
-			this.$TOOL.data.set("APP_LANG", val);
+			this.$TOOL.setCache("APP_LANG", val);
 		},
 	},
 	created: function () {

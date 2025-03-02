@@ -48,7 +48,7 @@ export default {
 				role.push(item.id);
 			});
 			this.isSaveing = true;
-			let res = await this.$API.syspermission.plusAdmin.post({
+			let res = await this.$API.urroleauth.plusAdmin.post({
 				roleArr: role,
 				adminArr: this.adminIdArr,
 			});

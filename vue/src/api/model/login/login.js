@@ -1,5 +1,6 @@
 import config from "@/config";
 import http from "@/utils/request";
+import tool from "@/utils/tool";
 
 export default {
 	token: {
@@ -89,8 +90,11 @@ export default {
 	authority: {
 		url: `${config.API_URL}/operator/authoritymenu`,
 		name: "获得权限",
-		get: async function () {
-			return await http.get(this.url);
+		get: async function (lang) {
+			if (!lang) {
+				lang = tool.getCache("APP_LANG") || config.LANG;
+			}
+			return await http.get(this.url, { 'lang': lang });
 		},
 	},
 	listOsp: {

@@ -186,7 +186,7 @@ export default {
 			// if (!data.children) {
 			this.selectRole = data;
 			this.btnDisable = false;
-			const res = await this.$API.syspermission.role.get(data.id);
+			const res = await this.$API.urroleauth.role.get(data.id);
 			const that = this;
 			if (res.code == 200) {
 				res.data.forEach((item) => {
@@ -263,7 +263,7 @@ export default {
 			});
 			var data = { roleId: this.selectRole.id, menus: _menus };
 			this.loading = true;
-			const res = await this.$API.syspermission.plusRole.post(data);
+			const res = await this.$API.urroleauth.plusRole.post(data);
 			this.loading = false;
 			if (res.code == 200) {
 				this.$message.success("授权成功");
