@@ -11,17 +11,17 @@ const routes = [
 	},
 	{
 		path: "/about",
-		component: () => import(/* webpackChunkName: "login" */ "@/views/about"),
+		component: () => import(/* webpackChunkName: "about" */ "@/views/about"),
 		meta: { title: "关于" },
 	},
 	{
-		path: "/about_site",
-		component: () => import(/* webpackChunkName: "login" */ "@/views/about/site"),
+		path: "/about/site",
+		component: () => import(/* webpackChunkName: "aboutSite" */ "@/views/about/site"),
 		meta: { title: "关于网站" },
 	},
 	{
-		path: "/about_author",
-		component: () => import(/* webpackChunkName: "login" */ "@/views/about/author"),
+		path: "/about/author",
+		component: () => import(/* webpackChunkName: "aboutAuthor" */ "@/views/about/author"),
 		meta: { title: "关于作者" },
 	},
 	{
@@ -35,14 +35,14 @@ const routes = [
 		meta: { title: "用户注册" },
 	},
 	{
-		path: "/oauth",
-		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/oauth"),
-		meta: { title: "联合登录" },
-	},
-	{
 		path: "/reset_password",
 		component: () => import(/* webpackChunkName: "resetPassword" */ "@/views/login/resetPassword"),
 		meta: { title: "重置密码" },
+	},
+	{
+		path: "/oauth",
+		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/oauth"),
+		meta: { title: "联合登录" },
 	},
 ];
 

@@ -38,8 +38,6 @@ router.beforeEach(async (to, from, next) => {
 		? `${to.meta.title} - ${config.APP_NAME}`
 		: `${config.APP_NAME}`;
 
-	let token = tool.data.get("TOKEN");
-
 	if (to.path === "/login") {
 		//删除路由(替换当前layout路由)
 		router.addRoute(routes[0]);
@@ -55,6 +53,7 @@ router.beforeEach(async (to, from, next) => {
 		return false;
 	}
 
+	let token = tool.data.get("TOKEN");
 	if (!token) {
 		next({
 			path: "/login",
