@@ -92,7 +92,7 @@ export default {
         },
         async checkAuth(key) {
             this.key = key;
-            var data = { type: 40, key: key, code: '1234' };
+            var data = { 'type': 40, 'key': 'oidc', 'code': key };
             var res = await this.$API.login.token.post(data);
             if (res.code != 200) {
                 this.$message.warning(res.message);
@@ -165,7 +165,7 @@ export default {
                 user: this.formData.user,
                 pass: this.$CRYPTO.SHA(this.formData.pass),
                 opt: this.formData.opt,
-                key: this.key
+                code: this.key
             };
             var res = await this.$API.login.signon.post(data);
             if (res.code != 200) {

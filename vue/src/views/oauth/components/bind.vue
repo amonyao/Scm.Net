@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         async init(code) {
-            var res = await this.$API.uruseroauth.dobind.post({ 'key': code });
+            var res = await this.$API.uruseroauth.dobind.post({ 'code': code });
             if (res.code != 200) {
                 this.$message.warning(res.message);
                 return false;
