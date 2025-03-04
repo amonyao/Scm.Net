@@ -14,6 +14,7 @@
 <script>
 import Player from "xgplayer";
 import HlsPlayer from "xgplayer-hls";
+import 'xgplayer/dist/index.min.css';
 
 export default {
 	props: {
@@ -36,10 +37,7 @@ export default {
 		//画中画
 		pip: { type: Boolean, default: false },
 		//倍速播放
-		playbackRate: {
-			type: [Array, String],
-			default: () => [0.5, 0.75, 1, 1.5, 2],
-		},
+		playbackRate: { type: [Array, String], default: () => [0.5, 0.75, 1, 1.5, 2] },
 		//记忆播放
 		lastPlayTime: { type: Number, default: 0 },
 		//弹幕
@@ -68,7 +66,8 @@ export default {
 			this.player = new Player({
 				el: this.$refs.scVideo,
 				url: this.src,
-				fluid: true,
+				height: '100%',
+				width: '100%',
 				poster: this.poster,
 				lang: "zh-cn",
 				volume: this.volume,
@@ -121,28 +120,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-.sc-video:deep(.danmu) > * {
-	color: #fff;
-	font-size: 20px;
-	font-weight: bold;
-	text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, -1px 1px 0 #000,
-		1px -1px 0 #000;
-}
-.sc-video:deep(.xgplayer-controls) {
-	background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
-}
-.sc-video:deep(.xgplayer-progress-tip) {
-	border: 0;
-	color: #fff;
-	background: rgba(0, 0, 0, 0.5);
-	line-height: 25px;
-	padding: 0 10px;
-	border-radius: 25px;
-}
-.sc-video:deep(.xgplayer-enter-spinner) {
-	width: 50px;
-	height: 50px;
-}
-</style>

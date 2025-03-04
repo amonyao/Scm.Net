@@ -91,6 +91,11 @@ namespace Com.Scm.Api
             aimlConfig.Prepare(envConfig);
             services.AddSingleton(aimlConfig);
 
+            // Oidc
+            var oidcConfig = AppUtils.GetConfig<OidcConfig>(OidcConfig.NAME) ?? new OidcConfig();
+            oidcConfig.Prepare(envConfig);
+            services.AddSingleton(oidcConfig);
+
             services.AddScoped<ILogService, ScmLogService>();
             services.AddScoped<IDicService, ScmDicService>();
             services.AddScoped<ICfgService, ScmCfgService>();
