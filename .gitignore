@@ -1,13 +1,13 @@
 ﻿################################################################################
-# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+# 此文件由项目作者创建，您可以根据需要进行增删调整。
 ################################################################################
 
-# Vue项目文件
+# Vue 项目文件
 dist/
 node_modules/
 webpack/
 
-# Visual Studio项目文件
+# Visual Studio 项目文件
 .vs/
 [Bb]in/
 [Oo]bj/
@@ -25,4 +25,4 @@ PublishProfiles/
 /net/Scm.Api/logs/
 /net/Scm.Api/dev/
 /net/Scm.Api/quartz/settings/logs/
-/net/Scm.Api/Properties/PublishProfiles/FolderProfile.pubxml.user
+/net/Scm.Api/Properties/PublishProfiles/
