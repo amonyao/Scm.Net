@@ -110,7 +110,7 @@
 更多截图请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis) 查看项目截图小节  
 
 ## 特别鸣谢
-1. 前端代码借鉴自 **[SCUI](https://gitee.com/feiyit/scui)**；  
+1. 数据引擎 **[SqlSugar](https://gitee.com/dotnetchina/SqlSugar)**；  
 2. 动态API代码借鉴自 **[Panda.DynamicWebApi](https://gitee.com/mirrors/Panda.DynamicWebApi)**；  
 
 ## QQ交流群
