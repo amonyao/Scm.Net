@@ -1,0 +1,73 @@
+@keyframes hideScmLoader {
+	0% {
+		width: 100%;
+		height: 100%;
+	}
+
+	100% {
+		width: 0;
+		height: 0;
+	}
+}
+
+@keyframes scmLoading {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+body > div.scm-loader {
+	position: fixed;
+	background: white;
+	width: 100%;
+	height: 100%;
+	z-index: 1071;
+	opacity: 0;
+	transition: opacity .5s ease;
+	overflow: hidden;
+	pointer-events: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+	body > div.scm-loader .scm-loading {
+		display: inline-block;
+		width: 2rem;
+		height: 2rem;
+		vertical-align: -.125em;
+		border: .25em solid currentColor;
+		border-right-color: transparent;
+		border-radius: 50%;
+		-webkit-animation: .75s linear infinite scmLoading;
+		animation: .75s linear infinite scmLoading;
+	}
+
+	body > div.scm-loader .scm-only {
+		position: absolute;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		white-space: nowrap;
+		border: 0;
+	}
+
+	body > div.scm-loader .scm-message {
+		margin-top: 1rem;
+	}
+
+body:not(.loaded) > div.scm-loader {
+	opacity: 1;
+}
+
+body:not(.loaded) {
+	overflow: hidden;
+}
+
+body.loaded > div.scm-loader {
+	animation: hideScmLoader .5s linear .5s forwards;
+}

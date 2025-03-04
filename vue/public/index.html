@@ -9,6 +9,8 @@
 	<title>
 		<%= htmlWebpackPlugin.options.title %>
 	</title>
+	<link rel="stylesheet" href="scmloader.css" asp-append-version="true" />
+	<script type="text/javascript" src="scmloader.js"></script>
 	<link href="https://cdn.staticfile.net/element-plus/2.3.12/index.min.css" rel="stylesheet" />
 	<link rel="stylesheet" href="http://oidc.org.cn/app/oidc.css" />
 	<link rel="stylesheet" href="index.css" />
@@ -33,6 +35,14 @@
 			抱歉，<%= htmlWebpackPlugin.options.title %>无法在未启用JavaScript的情况下良好工作，请尝试开户JavaScript功能后重新尝试！
 		</strong>
 	</noscript>
+	<div class="scm-loader">
+		<div class="scm-loading" role="status">
+			<span class="scm-only">&nbsp;</span>
+		</div>
+		<div class="scm-message">
+			Loading
+		</div>
+	</div>
 	<script src="https://cdn.staticfile.net/vue/3.3.4/vue.global.min.js"></script>
 	<script src="https://cdn.staticfile.net/vue-router/4.2.4/vue-router.global.min.js"></script>
 	<script src="https://cdn.staticfile.net/vuex/4.1.0/vuex.global.min.js"></script>
