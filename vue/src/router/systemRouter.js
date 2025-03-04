@@ -15,12 +15,12 @@ const routes = [
 		meta: { title: "关于" },
 	},
 	{
-		path: "/about/site",
+		path: "/about_site",
 		component: () => import(/* webpackChunkName: "aboutSite" */ "@/views/about/site"),
 		meta: { title: "关于网站" },
 	},
 	{
-		path: "/about/author",
+		path: "/about_author",
 		component: () => import(/* webpackChunkName: "aboutAuthor" */ "@/views/about/author"),
 		meta: { title: "关于作者" },
 	},
