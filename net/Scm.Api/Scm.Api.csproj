@@ -9,13 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="dev\**" />
-    <Compile Remove="Quartz.Settings\**" />
+    <Compile Remove="Logs\**" />
     <Content Remove="dev\**" />
-    <Content Remove="Quartz.Settings\**" />
+    <Content Remove="Logs\**" />
     <EmbeddedResource Remove="dev\**" />
-    <EmbeddedResource Remove="Quartz.Settings\**" />
+    <EmbeddedResource Remove="Logs\**" />
     <None Remove="dev\**" />
-    <None Remove="Quartz.Settings\**" />
+    <None Remove="Logs\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,10 +39,6 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0.1" />
     <PackageReference Include="ZXing.Net.Bindings.SkiaSharp" Version="0.16.21" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Samples.Server\Samples.Server.csproj" />
   </ItemGroup>
 
   <ItemGroup>
