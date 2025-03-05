@@ -83,7 +83,7 @@ export default {
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.parentIdOptions = this.$TOOL.changeTree(_tree);

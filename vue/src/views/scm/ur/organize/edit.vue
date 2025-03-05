@@ -19,8 +19,8 @@
 			</el-row>
 			<el-row>
 				<el-col>
-					<el-form-item label="组织编号">
-						<el-input v-model="formData.codec" placeholder="请输入组织编号" clearable></el-input>
+					<el-form-item label="组织编码">
+						<el-input v-model="formData.codec" placeholder="请输入组织编码" clearable></el-input>
 					</el-form-item>
 				</el-col>
 			</el-row>

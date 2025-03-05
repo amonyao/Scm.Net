@@ -19,7 +19,7 @@
 						<template #label>
 							<span class="custom-tabs-label">
 								<el-icon><el-icon-document-copy /></el-icon>
-								<span>菜单权限【复查元】</span>
+								<span>菜单权限</span>
 							</span>
 						</template>
 						<el-main style="height: calc(100vh - 195px)">

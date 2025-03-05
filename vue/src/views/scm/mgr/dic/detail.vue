@@ -1,12 +1,12 @@
 <template>
 	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="750px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
+			<el-form-item label="值" prop="value">
+				<el-input-number v-model="formData.value" placeholder="请输入值" :maxlength="30" show-word-limit
+					clearable></el-input-number>
+			</el-form-item>
 			<el-form-item label="键" prop="codec">
 				<el-input v-model="formData.codec" placeholder="请输入键" :maxlength="30" show-word-limit clearable
-					:style="{ width: '100%' }"></el-input>
-			</el-form-item>
-			<el-form-item label="值" prop="value">
-				<el-input v-model="formData.value" placeholder="请输入值" :maxlength="30" show-word-limit clearable
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="名称" prop="namec">

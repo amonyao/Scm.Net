@@ -85,8 +85,11 @@ export default {
 				{ label: "电话", prop: "leaderMobile", width: "200" },
 				{ label: "数据状态", prop: "row_status", width: "80" },
 				{ label: "排序", prop: "od", width: "80" },
-				{ label: "更新时间", prop: "update_time", width: "160", formatter: this.$TOOL.dateTimeFormat },
-				{ label: "创建时间", prop: "create_time", width: "160", formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "row_status", label: "数据状态", width: "80", },
+				{ prop: "update_names", label: "更新人员", width: "100", },
+				{ prop: "update_time", label: "更新时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "create_names", label: "创建人员", width: "100", },
+				{ prop: "create_time", label: "创建时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},

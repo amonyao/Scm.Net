@@ -122,7 +122,11 @@ export default {
 				{ label: "手机号码", prop: "cellphone", width: "120" },
 				{ label: "固话", prop: "telephone", width: "120" },
 				{ label: "数据状态", prop: "row_status", width: "80" },
-				{ label: "创建时间", prop: "create_time", width: "160", sortable: true, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "row_status", label: "数据状态", width: "80", },
+				{ prop: "update_names", label: "更新人员", width: "100", },
+				{ prop: "update_time", label: "更新时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "create_names", label: "创建人员", width: "100", },
+				{ prop: "create_time", label: "创建时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
 			],
 			sex_list: [],
 		};

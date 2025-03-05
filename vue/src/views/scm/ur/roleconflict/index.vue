@@ -61,33 +61,26 @@ import { defineAsyncComponent } from "vue";
 export default {
 	name: 'scm_ur_roleconflict',
 	components: {
-		modify: defineAsyncComponent(() => import("./modify")),
+		modify: defineAsyncComponent(() => import("./edit")),
 	},
 	data() {
 		return {
-			apiObj: this.$API.sysroleconflict.page,
+			apiObj: this.$API.urroleconflict.page,
 			list: [],
 			param: {
 				key: "",
 			},
 			selection: [],
 			column: [
-				{
-					label: "id",
-					prop: "id",
-					width: "200",
-					sortable: true,
-					hide: true,
-				},
-				{ prop: "roleA", label: "角色A", width: 100, align: "left" },
-				{ prop: "roleB", label: "角色B", width: 100, align: "left" },
-				{
-					prop: "summary",
-					label: "互斥说明",
-					width: 200,
-					align: "left",
-				},
-				{ prop: "createTime", label: "创建时间", width: 180 },
+				{ prop: "id", label: "id", hide: true },
+				{ prop: "rolea_names", label: "角色A", width: 100, align: "left" },
+				{ prop: "roleb_names", label: "角色B", width: 100, align: "left" },
+				{ prop: "remark", label: "互斥说明", minWidth: 200, align: "left" },
+				{ prop: "row_status", label: "数据状态", width: "80", },
+				{ prop: "update_names", label: "更新人员", width: "100", },
+				{ prop: "update_time", label: "更新时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "create_names", label: "创建人员", width: "100", },
+				{ prop: "create_time", label: "创建时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
 			],
 		};
 	},
@@ -101,7 +94,7 @@ export default {
 		},
 		//删除
 		async table_del(row) {
-			var res = await this.$API.sysroleconflict.delete.delete([row.id]);
+			var res = await this.$API.urroleconflict.delete.delete([row.id]);
 			if (res.code == 200) {
 				this.$refs.table.refresh();
 				this.$message.success("删除成功");
@@ -126,7 +119,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.sysroleconflict.delete.delete(
+					var res = await this.$API.urroleconflict.delete.delete(
 						ids
 					);
 					if (res.code == 200) {

@@ -48,7 +48,6 @@
 				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="操作" align="center" fixed="right" width="140">
-
 					<template #default="scope">
 						<el-button text type="primary" size="small" @click="open_dialog(scope.row)">
 							编辑
