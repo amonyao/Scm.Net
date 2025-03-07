@@ -1,6 +1,9 @@
 const DEFAULT_CONFIG = {
-	//标题
-	APP_NAME: process.env.VUE_APP_TITLE,
+	// 应用代码
+	APP_CODE: process.env.VUE_APP_CODE,
+	
+	// 应用名称
+	APP_NAME: process.env.VUE_APP_NAME,
 
 	//简介（支持HTML）
 	APP_DESC: process.env.VUE_APP_DESC,

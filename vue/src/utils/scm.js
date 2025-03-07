@@ -123,7 +123,7 @@ scm.status_list = function (dom, http, list, status) {
 				dom.$alert(res.message, "提示", { type: "error" });
 			}
 		})
-		.catch(() => {});
+		.catch(() => { });
 };
 
 scm.delete_item = async function (dom, http, data) {
@@ -161,7 +161,7 @@ scm.delete_list = function (dom, http, list) {
 				dom.$alert(res.message, "提示", { type: "error" });
 			}
 		})
-		.catch(() => {});
+		.catch(() => { });
 };
 
 /**
@@ -481,5 +481,12 @@ scm.read_json = function (key, val) {
 
 	return tmp ? JSON.parse(tmp) : val;
 };
+
+scm.get_avatar = function (avatar) {
+	if (!avatar) {
+		avatar = '0.png';
+	}
+	return config.SERVER_URL + '/data/avatar/' + avatar;
+}
 
 export default scm;

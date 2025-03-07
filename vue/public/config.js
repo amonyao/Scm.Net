@@ -1,5 +1,7 @@
 const APP_CONFIG = {
-	/** 产品名称 */
+	/** 应用代码 */
+	APP_CODE: "Scm.Net",
+	/** 应用名称 */
 	APP_NAME: "产品名称",
 	/** 产品描述 */
 	APP_DESC: '这是基于Js的产品介绍',

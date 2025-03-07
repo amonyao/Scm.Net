@@ -112,7 +112,7 @@ export default {
 		this.userName = userInfo.userName;
 		this.userNameF = this.userName.substring(0, 1);
 		this.unitName = userInfo.unitName;
-		this.avatar = config.SERVER_URL + userInfo.avatar;
+		this.avatar = this.$SCM.get_avatar(userInfo.avatar);
 		this.show_avatar = this.avatar != null && this.avatar != '';
 		this.init();
 		this.listMsg();

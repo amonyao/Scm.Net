@@ -8,14 +8,18 @@
 		<el-form v-if="stepActive == 0" ref="stepForm_0" :model="formData" :rules="rules" :label-width="120">
 			<el-form-item label="账号类型" prop="type">
 				<el-radio-group v-model="formData.type" disabled>
-					<el-radio-button label="1">企业用户</el-radio-button>
-					<el-radio-button label="2">个人用户</el-radio-button>
+					<el-radio-button label="10">企业用户</el-radio-button>
+					<el-radio-button label="20">个人用户</el-radio-button>
 				</el-radio-group>
-				<div class="el-form-item-msg">系统目前仅支持公司账户申请</div>
+				<div class="el-form-item-msg">系统目前仅支持企业账户申请</div>
 			</el-form-item>
-			<el-form-item label="公司简称" prop="unit" v-if="formData.type == 1">
-				<el-input v-model="formData.unit" placeholder="请输入公司简称"></el-input>
-				<div class="el-form-item-msg">公司简称将用于区分不同的账套主体</div>
+			<el-form-item label="企业简称" prop="unit" v-if="formData.type == 10">
+				<el-input v-model="formData.unit" placeholder="请输入企业简称"></el-input>
+				<div class="el-form-item-msg">企业简称将用于区分不同的账套主体</div>
+			</el-form-item>
+			<el-form-item label="企业全称" prop="unit_name" v-if="formData.type == 10">
+				<el-input v-model="formData.unit_name" placeholder="请输入企业全称"></el-input>
+				<div class="el-form-item-msg">请输入完整的公司名称信息</div>
 			</el-form-item>
 			<el-form-item label="登录账号" prop="user">
 				<el-input v-model="formData.user" placeholder="请输入登录账号"></el-input>
@@ -36,9 +40,6 @@
 			</el-form-item>
 		</el-form>
 		<el-form v-if="stepActive == 1" ref="stepForm_1" :model="formData" :rules="rules" :label-width="120">
-			<el-form-item label="公司全称" prop="unit_name">
-				<el-input v-model="formData.unit_name" placeholder="请输入公司全称"></el-input>
-			</el-form-item>
 			<el-form-item label="真实姓名" prop="user_name">
 				<el-input v-model="formData.user_name" placeholder="请输入真实姓名"></el-input>
 			</el-form-item>
@@ -57,8 +58,11 @@
 			</el-form-item>
 		</el-form>
 		<div v-if="stepActive == 2">
-			<el-result icon="success" title="注册成功" :sub-title="signInName">
+			<el-result icon="success" title="注册成功">
 				<template #extra>
+					<div style="margin-bottom: var(--el-result-extra-margin-top);">
+						您可以使用 <el-text type="success">{{ signInName }}</el-text> 登录系统！
+					</div>
 					<el-button type="primary" @click="goLogin">前去登录</el-button>
 				</template>
 			</el-result>
@@ -95,7 +99,7 @@ export default {
 			formData: this.def_data(),
 			rules: {
 				type: [{ required: true, message: '请选择账户类型' }],
-				unit: [{ required: true, message: '请输入公司简称' }],
+				unit: [{ required: true, message: '请输入企业简称' }],
 				user: [{ required: true, message: '请输入登录用户' }],
 				password1: [{ required: true, message: '请输入登录密码' }],
 				password2: [
@@ -121,7 +125,7 @@ export default {
 						}
 					}
 				],
-				unit_name: [{ required: true, message: '请输入公司全称' }],
+				unit_name: [{ required: true, message: '请输入企业全称' }],
 				user_name: [{ required: true, message: '请输入真实姓名' }],
 				email: [{ required: true, message: '请输入电子邮件' }],
 				open: [
@@ -173,7 +177,7 @@ export default {
 			});
 		},
 		async signon() {
-			var data = {
+			var form = {
 				type: this.formData.type,
 				unit: this.formData.unit,
 				user: this.formData.user,
@@ -184,14 +188,19 @@ export default {
 				phone: this.formData.phone,
 				open: []
 			};
-			var res = await this.$API.login.signon.post(data);
+			var res = await this.$API.login.signon.post(form);
 			if (res.code != 200) {
 				this.$message.warning(res.message);
 				return false;
 			}
+			var data = res.data;
+			if (!data.success) {
+				this.$message.warning(data.message);
+				return false;
+			}
 
 			this.stepActive += 1;
-			this.signInName = '可以使用 ' + this.formData.user + '@' + this.formData.unit + ' 登录系统';
+			this.signInName = this.formData.user + '@' + this.formData.unit;
 		},
 		goLogin() {
 			this.$router.push({
@@ -201,5 +210,3 @@ export default {
 	}
 }
 </script>
-
-<style scoped></style>

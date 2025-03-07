@@ -4,7 +4,7 @@
 			<el-container>
 				<el-header style="height: auto; display: block">
 					<div class="user-info-top">
-						<el-avatar :size="70" :src="$CONFIG.SERVER_URL + user.avatar"></el-avatar>
+						<el-avatar :size="70" :src="$SCM.get_avatar(user.avatar)"></el-avatar>
 						<h2>{{ user.namec }}</h2>
 						<p>
 							<el-tag v-for="(it, index) in user.role_list" :key="index">{{ it }}</el-tag>
