@@ -148,7 +148,6 @@ export default {
 	},
 	methods: {
 		async loadInfo() {
-			alert(this.$CONFIG.APP_CODE)
 			var res = await this.$API.devapp.model.get({ 'code': this.$CONFIG.APP_CODE });
 			if (res == null || res.code != 200) {
 				return;
