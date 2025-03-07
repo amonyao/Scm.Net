@@ -7,20 +7,22 @@
 			<el-form-item label="值" prop="v">
 				<el-input v-model="formData.v" placeholder="请输入值" :maxlength="20" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="缓存大小" prop="c">
-				<el-input-number v-model="formData.c" placeholder="请输入缓存大小" />
+			<el-form-item label="预取数量" prop="c">
+				<el-input-number v-model="formData.c" :min="1" :max="1024" placeholder="请输入预取数量" />
 			</el-form-item>
 			<el-form-item label="缓冲大小" prop="b">
-				<el-input-number v-model="formData.b" placeholder="请输入缓冲大小" />
+				<el-input-number v-model="formData.b" :min="0" :max="1024" placeholder="请输入缓冲大小" />
 			</el-form-item>
-			<el-form-item label="数值长度" prop="l">
-				<el-input-number v-model="formData.l" placeholder="请输入数值长度" />
+			<el-form-item label="数字位数" prop="l">
+				<el-input-number v-model="formData.l" :min="0" :max="32" placeholder="请输入数字位数" />
 			</el-form-item>
 			<el-form-item label="前置掩码" prop="m">
-				<el-input v-model="formData.m" placeholder="请输入前置掩码" :maxlength="8" show-word-limit clearable></el-input>
+				<el-input v-model="formData.m" placeholder="请输入前置掩码" :maxlength="8" show-word-limit
+					clearable></el-input>
 			</el-form-item>
 			<el-form-item label="后置掩码" prop="p">
-				<el-input v-model="formData.p" placeholder="请输入后置掩码" :maxlength="8" show-word-limit clearable></el-input>
+				<el-input v-model="formData.p" placeholder="请输入后置掩码" :maxlength="8" show-word-limit
+					clearable></el-input>
 			</el-form-item>
 		</el-form>
 
