@@ -99,13 +99,17 @@
 [![Gitee license](https://img.shields.io/github/license/argozhang/bootstrapadmin.svg?logo=git&logoColor=red)](https://gitee.com/openscm/scm.net/blob/master/LICENSE)
 
 ## 项目截图
-后台首页
+电脑端页面   
+![后台首页](https://gitee.com/openscm/scm.net/raw/master/pc-home.png)  
+![接口日志](https://gitee.com/openscm/scm.net/raw/master/pc-logapi.png)  
+![在线SQL](https://gitee.com/openscm/scm.net/raw/master/pc-sql.png)  
+![任务调度](https://gitee.com/openscm/scm.net/raw/master/pc-task.png)  
+![系统监控](https://gitee.com/openscm/scm.net/raw/master/pc-monitor.png)  
 
-![后台首页](https://gitee.com/openscm/scm.net/raw/master/screenshot1.png)
-![超管模块](https://gitee.com/openscm/scm.net/raw/master/screenshot2.png)
-![在线SQL](https://gitee.com/openscm/scm.net/raw/master/screenshot3.png)
-![任务调度](https://gitee.com/openscm/scm.net/raw/master/screenshot5.png)
-![系统监控](https://gitee.com/openscm/scm.net/raw/master/screenshot7.png)
+手机端页面   
+![用户登录](https://gitee.com/openscm/scm.net/raw/master/mp-login.jpg)  
+![用户首页](https://gitee.com/openscm/scm.net/raw/master/mp-home.jpg)  
+![系统菜单](https://gitee.com/openscm/scm.net/raw/master/mp-menu.jpg)  
 
 更多截图请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis) 查看项目截图小节  
 
