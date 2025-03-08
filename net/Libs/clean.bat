@@ -2,7 +2,13 @@ cd net8.0
 
 del *.pdb
 
+del *.json
+
 del iam*
+
+del scm.aiml.dll
+
+del scm.express.dll
 
 cd ..
 
