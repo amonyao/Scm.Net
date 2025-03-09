@@ -152,8 +152,9 @@ export default {
 				if (!item) {
 					return;
 				}
-				
+
 				res.push({
+					id: item.id,
 					name: item.name,
 					type: item.meta.type,
 					path: item.meta.type == "link" ? item.path.slice(1) : item.path,

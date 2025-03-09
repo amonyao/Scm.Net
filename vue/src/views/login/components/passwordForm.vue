@@ -127,7 +127,15 @@ export default {
 		},
 		async loadCfg() {
 			var cfgRes = await this.$API.syscfgconfig.list.get({ 'types': 10 });
-			cfgRes.data.forEach((item) => {
+			if (!cfgRes || cfgRes.code != 200) {
+				return;
+			}
+			var data = cfgRes.data;
+			if (!data) {
+				return;
+			}
+
+			data.forEach((item) => {
 				if ("app_theme" == item.key) {
 					if (item.value == "true") {
 						document.documentElement.classList.add("dark")

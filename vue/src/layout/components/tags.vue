@@ -24,7 +24,11 @@
 				<el-icon><el-icon-close /></el-icon>关闭当前标签
 			</li>
 			<li @click="closeOtherTabs()">
-				<el-icon><el-icon-close /></el-icon>关闭其他标签
+				<el-icon><el-icon-close-bold /></el-icon>关闭其他标签
+			</li>
+			<hr />
+			<li @click="addFav()">
+				<el-icon><el-icon-star /></el-icon>收藏
 			</li>
 			<hr />
 			<li @click="maximize()">
@@ -137,6 +141,30 @@ export default {
 				this.$store.commit("pushKeepLive", route.name);
 			}
 		},
+		async addFav() {
+			this.contextMenuVisible = false;
+
+			var nowTag = this.contextMenuItem;
+
+			// TODO: 此处还没有想好如何获取当前route的id，只能再全量查找一次，有待后续解决。
+			var menuList = this.$router.sc_getMenu();
+			var menu = this.treeFind(
+				menuList,
+				(node) => node.path == nowTag.path
+			);
+			console.log('menu.id=' + menu.id)
+
+			var res = await this.$API.cfgmenu.save.post({ 'id': menu.id });
+			if (!res) {
+				return;
+			}
+			if (res.code != 200) {
+				this.$message.error(res.message);
+				return;
+			}
+
+			this.$message.success("已成功添加到收藏！");
+		},
 		//高亮tag
 		isActive(route) {
 			return route.fullPath === this.$route.fullPath;
@@ -221,10 +249,7 @@ export default {
 			}
 			var tags = [...this.tagList];
 			tags.forEach((tag) => {
-				if (
-					(tag.meta && tag.meta.affix) ||
-					nowTag.fullPath == tag.fullPath
-				) {
+				if ((tag.meta && tag.meta.affix) || nowTag.fullPath == tag.fullPath) {
 					return true;
 				} else {
 					this.closeSelectedTag(tag, false);

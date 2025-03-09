@@ -11,9 +11,6 @@
 			<el-form-item label="用户" prop="user">
 				<el-input v-model="formData.user" placeholder="请输入用户" :maxlength="32" show-word-limit clearable></el-input>
 			</el-form-item>
-			<el-form-item label="密码" prop="pass">
-				<el-input v-model="formData.pass" placeholder="请输入密码" :maxlength="256" show-word-limit clearable></el-input>
-			</el-form-item>
 			<el-form-item label="端口" prop="port">
 				<el-input-number v-model="formData.port" placeholder="请输入端口" :maxlength="11" :max="65535"
 					clearable></el-input-number>
@@ -62,9 +59,6 @@ export default {
 				user: [
 					{ required: true, trigger: "blur", message: "用户不能为空" },
 				],
-				pass: [
-					{ required: true, trigger: "blur", message: "密码不能为空" },
-				],
 			},
 		};
 	},
@@ -78,7 +72,6 @@ export default {
 				host: '',
 				port: 3306,
 				user: '',
-				pass: '',
 				schame: '',
 				charset: 'utf8mb4',
 				od: 0,
@@ -124,7 +117,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-select {
 	width: 100%;
 }

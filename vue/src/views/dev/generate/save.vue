@@ -4,13 +4,13 @@
 			<el-row>
 				<el-col :span="8">
 					<el-form-item label="命名空间" prop="namespace">
-						<el-input v-model="formData.namespace" placeholder="例如：Sys" :maxlength="30" show-word-limit
+						<el-input v-model="formData.namespace" placeholder="例如：Sys" :maxlength="32" show-word-limit
 							clearable prefix-icon="el-icon-collection-tag" :style="{ width: '100%' }"></el-input>
 					</el-form-item>
 				</el-col>
 				<el-col :span="8">
-					<el-form-item label="API版本" prop="apiVersion">
-						<el-input v-model="formData.apiVersion" placeholder="例如：v1" :maxlength="20" show-word-limit
+					<el-form-item label="API分组" prop="group">
+						<el-input v-model="formData.group" placeholder="例如：Sys" :maxlength="32" show-word-limit
 							clearable prefix-icon="el-icon-discount" :style="{ width: '100%' }"></el-input>
 					</el-form-item>
 				</el-col>
@@ -80,7 +80,7 @@ export default {
 				namespace: '',
 				types: 2,
 				isGrid: false,
-				apiVersion: '',
+				group: '',
 				tableColumnInfo: []
 			},
 			rules: {
@@ -90,8 +90,8 @@ export default {
 				isGrid: [
 					{ required: true, trigger: "change", message: "单选框组不能为空", },
 				],
-				apiVersion: [
-					{ required: true, trigger: "blur", message: "例如：v1", },
+				group: [
+					{ required: true, trigger: "blur", message: "例如：Sys", },
 				],
 			},
 			typesOptions: [

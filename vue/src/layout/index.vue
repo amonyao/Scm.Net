@@ -107,8 +107,8 @@
 			</div>
 			<div class="scmui-header-right">
 				<div v-if="!ismobile" class="scmui-header-menu">
-					<el-menu mode="horizontal" :default-active="active" router background-color="#222b45" text-color="#fff"
-						active-text-color="var(--el-color-primary)">
+					<el-menu mode="horizontal" :default-active="active" router background-color="#222b45"
+						text-color="#fff" active-text-color="var(--el-color-primary)">
 						<NavMenu :navMenus="menu"></NavMenu>
 					</el-menu>
 				</div>

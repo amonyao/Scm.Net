@@ -96,6 +96,7 @@ namespace Com.Scm.Api
             oidcConfig.Prepare(envConfig);
             services.AddSingleton(oidcConfig);
 
+            services.AddScoped<IUserService, ScmUserService>();
             services.AddScoped<ILogService, ScmLogService>();
             services.AddScoped<IDicService, ScmDicService>();
             services.AddScoped<ICfgService, ScmCfgService>();

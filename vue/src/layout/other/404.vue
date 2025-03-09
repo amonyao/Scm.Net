@@ -1,7 +1,6 @@
 <template>
 	<div style="text-align: center;width: 100%;">
 		<el-empty description=" ">
-
 			<h2 data-text="404">404</h2>
 			<h4>啊呀~页面不存在!</h4>
 			<p>您可以先检查网址，然后重新输入或给我们反馈问题。</p>

@@ -22,7 +22,6 @@
 								name="sc-close-circle-line" /></el-button>
 					</el-tooltip>
 				</el-button-group>
-				<sc-icon name="face" :size="16"></sc-icon>
 			</div>
 			<div class="right-panel">
 				<div class="right-panel-search">

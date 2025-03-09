@@ -28,22 +28,22 @@
 				<el-button-group>
 					<el-tooltip content="启用">
 						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(1)">
-							<sc-icon icon="sc-check-circle-line" />
+							<sc-icon name="sc-check-circle-line" />
 						</el-button>
 					</el-tooltip>
 					<el-tooltip content="停用">
 						<el-button type="primary" plain :disabled="selection.length == 0" @click="status_list(2)">
-							<sc-icon icon="sc-pause-circle-line" />
+							<sc-icon name="sc-pause-circle-line" />
 						</el-button>
 					</el-tooltip>
 					<el-tooltip content="删除">
 						<el-button type="danger" plain :disabled="selection.length == 0" @click="delete_list">
-							<sc-icon icon="sc-close-circle-line" />
+							<sc-icon name="sc-close-circle-line" />
 						</el-button>
 					</el-tooltip>
 				</el-button-group>
 				<el-divider direction="vertical"></el-divider>
-				<el-button type="primary" @click="resetData()">
+				<el-button type="primary" :disabled="selection.length == 0" @click="resetData()">
 					<sc-icon name="sc-plus" />
 				</el-button>
 			</template>
@@ -159,15 +159,27 @@ export default {
 			}
 		},
 		resetData() {
-			if (!this.selection) {
+			if (!this.selection || this.selection.length != 1) {
 				return;
 			}
 
-			var row = this.selection[0];
-			var res = this.$API.mgrunit.resetData.get(row.id);
-			if (res == null) {
-				return;
-			}
+			this.$confirm(`确定重置选中项的数据吗？`, "提示", {
+				type: "warning",
+				confirmButtonText: "确定",
+				cancelButtonText: "取消",
+			})
+				.then(async () => {
+					var row = this.selection[0];
+					var res = await this.$API.mgrunit.resetData.get(row.id);
+					if (res == null) {
+						this.$message.warning("数据重置失败！");
+						return;
+					}
+					if (res.code == 200) {
+						this.$message.success("数据重置成功！");
+					}
+				})
+				.catch(() => { });
 		},
 		clearData() {
 

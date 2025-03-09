@@ -14,6 +14,7 @@ const routes = systemRouter;
 
 //系统特殊路由
 const routes_404 = {
+	id: '404',
 	path: "/:pathMatch(.*)*",
 	hidden: true,
 	component: () => import(/* webpackChunkName: "404" */ "@/layout/other/404"),
@@ -146,6 +147,7 @@ function filterAsyncRouter(routerMap) {
 		}
 		//MAP转路由对象
 		var route = {
+			id: item.id,
 			path: item.path,
 			name: item.name,
 			meta: item.meta,

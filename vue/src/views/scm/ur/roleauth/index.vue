@@ -6,7 +6,7 @@
 					<el-input placeholder="输入关键字进行过滤" v-model="groupFilterText" clearable></el-input>
 				</el-header>
 				<el-main class="nopadding">
-					<el-tree ref="group" class="menu" node-key="id" default-expand-all check-strictly :data="group"
+					<el-tree ref="group" class="menu" node-key="id" default-expand-all check-strictly :data="roleTree"
 						:current-node-key="''" :highlight-current="true" :expand-on-click-node="false"
 						:filter-node-method="groupFilterNode" @node-click="groupClick"></el-tree>
 				</el-main>
@@ -24,7 +24,7 @@
 						</template>
 						<el-main style="height: calc(100vh - 195px)">
 							<el-scrollbar>
-								<el-tree ref="tree" class="menu" :data="menuTree" show-checkbox node-key="number"
+								<el-tree ref="tree" class="menu" :data="menuTree" show-checkbox node-key="id"
 									default-expand-all :render-content="renderContent"></el-tree>
 							</el-scrollbar>
 						</el-main>
@@ -78,10 +78,11 @@ export default {
 		return {
 			showGrouploading: false,
 			groupFilterText: "",
-			group: [],
 			tabIndex: 0,
+			roleList: [],
+			roleTree: [],
 			menuTree: [],
-			numberMenu: [],
+			menuList: [],
 			selectRole: { id: "" },
 			menuloading: false,
 			loading: false,
@@ -116,10 +117,10 @@ export default {
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
-			this.group = this.$TOOL.changeTree(_tree);
+			this.roleTree = this.$TOOL.changeTree(_tree);
 
 			this.menuloading = true;
 			var resMenu = await this.$API.devmenu.list.get();
@@ -128,10 +129,9 @@ export default {
 			resMenu.data.some((m) => {
 				menutree.push({
 					id: m.id,
-					number: this.$TOOL.uuid(),
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 				// m.api.some((r) => {
 				// 	menutree.push({
@@ -144,7 +144,7 @@ export default {
 				// 	});
 				// });
 			});
-			this.numberMenu = menutree;
+			this.menuList = menutree;
 			this.menuTree = this.$TOOL.changeTree(menutree);
 			this.changeCss();
 		},
@@ -155,7 +155,7 @@ export default {
 			} else if (node.childNodes.length > 0) {
 				classname = " clearFloat";
 			}
-			
+
 			//return '<span class="' + classname + '">' + node.label + '</span>';
 			return h('span', { class: classname }, node.label);
 		},
@@ -190,13 +190,13 @@ export default {
 			const that = this;
 			if (res.code == 200) {
 				res.data.forEach((item) => {
-					that.numberMenu
+					that.menuList
 						.filter((m) => m.id == item.auth_id && m.id != 0)
 						.forEach((st) => {
-							that.$refs.tree.setChecked(st.number, true, false);
+							that.$refs.tree.setChecked(st.id, true, false);
 						});
 					// if (item.api.length > 0) {
-					// 	let apiArr = that.numberMenu.filter(
+					// 	let apiArr = that.menuList.filter(
 					// 		(m) => m.parentId == item.auth_id && m.id == 0
 					// 	);
 					// 	item.api.forEach((row) => {
