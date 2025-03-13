@@ -178,9 +178,9 @@ export default {
 				return false;
 			}
 			//获取菜单
-			var menu = await this.$API.login.authority.get();
-			if (menu.code == 200) {
-				if (menu.data.length == 0) {
+			var menuRes = await this.$API.login.authority.get();
+			if (menuRes.code == 200) {
+				if (menuRes.data.length == 0) {
 					this.islogin = false;
 					this.$alert(
 						"当前用户无任何菜单权限，请联系系统管理员",
@@ -192,11 +192,12 @@ export default {
 					);
 					return false;
 				}
-				this.$TOOL.data.set("MENU", menu.data);
+				var menuList = this.$SCM.recursive_menu(menuRes.data, '0');
+				this.$TOOL.data.set("MENU", menuList);
 				this.$TOOL.data.set("PERMISSIONS", []);
 			} else {
 				this.islogin = false;
-				this.$message.warning(menu.message);
+				this.$message.warning(menuRes.message);
 				return false;
 			}
 

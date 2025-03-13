@@ -106,7 +106,8 @@ export default {
 				);
 				return false;
 			}
-			this.$TOOL.data.set("MENU", menuRes.data);
+			var menuList = this.$SCM.recursive_menu(menuRes.data, '0');
+			this.$TOOL.data.set("MENU", menuList);
 			this.$TOOL.data.set("PERMISSIONS", []);
 
 			this.loadCfg();

@@ -487,6 +487,80 @@ scm.get_avatar = function (avatar) {
 		avatar = '0.png';
 	}
 	return config.SERVER_URL + '/data/avatar/' + avatar;
+};
+
+scm.recursive_menu = function (menuList, pid) {
+	if (!pid) {
+		pid = '0';
+	}
+
+	return scm.recursive_menu2(menuList, pid);
+};
+
+scm.get_sub_menu = function (menuList, pid) {
+	var list = [];
+
+	for (var i = 0; i < menuList.length; i += 1) {
+		var menu = menuList[i];
+		if (menu.pid != pid) {
+			continue;
+		}
+
+		var idx = -1;
+		for (var j = 0; j < list.length; j += 1) {
+			if (list[j].od > menu.od) {
+				idx = j;
+				break;
+			}
+		}
+		if (idx > -1) {
+			list.splice(idx, 0, menu);
+		}
+		else {
+			list.push(menu);
+		}
+	}
+	return list;
+}
+
+scm.recursive_menu2 = function (menuList, pid) {
+	if (!pid) {
+		return null;
+	}
+
+	var subList = scm.get_sub_menu(menuList, pid);
+	if (subList.length < 1) {
+		return null;
+	}
+
+	var list = [];
+	var types = ['', 'menu', 'iframe', 'link', 'button', 'input'];
+	for (var i = 0; i < subList.length; i += 1) {
+		var menu = subList[i];
+
+		var children = scm.recursive_menu2(menuList, menu.id);
+
+		var item = {
+			'id': menu.id,
+			'path': menu.uri,
+			'name': menu.codec,
+			'component': menu.view,
+			'meta': {
+				'id': menu.id,
+				'title': menu.namec,
+				'icon': menu.icon,
+				'type': types[menu.types],
+				'hidden': !menu.visible,
+				'fullpage': !!menu.fullpage,
+				'keepAlive': menu.keepAlive,
+				'affix': menu.codec == 'dashboard'
+			},
+			'children': children
+		};
+		list.push(item);
+	}
+
+	return list;
 }
 
 export default scm;

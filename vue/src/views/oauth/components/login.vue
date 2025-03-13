@@ -92,7 +92,7 @@ export default {
         },
         async checkAuth(key) {
             this.key = key;
-            var data = { 'type': 40, 'key': 'oidc', 'code': key };
+            var data = { type: 40, key: key, code: '1234' };
             var res = await this.$API.login.token.post(data);
             if (res.code != 200) {
                 this.$message.warning(res.message);
@@ -128,7 +128,8 @@ export default {
                 );
                 return false;
             }
-            this.$TOOL.data.set("MENU", menuRes.data);
+            var menuList = this.$SCM.recursive_menu(menuRes.data, '0');
+            this.$TOOL.data.set("MENU", menuList);
             this.$TOOL.data.set("PERMISSIONS", []);
 
             this.loadCfg();
@@ -165,7 +166,7 @@ export default {
                 user: this.formData.user,
                 pass: this.$CRYPTO.SHA(this.formData.pass),
                 opt: this.formData.opt,
-                code: this.key
+                key: this.key
             };
             var res = await this.$API.login.signon.post(data);
             if (res.code != 200) {
