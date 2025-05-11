@@ -1,8 +1,5 @@
 ﻿using Com.Scm.Config;
-using Com.Scm.Dsa.Dba.Sugar;
-using Com.Scm.Dvo;
 using Com.Scm.Enums;
-using Com.Scm.Result;
 using Com.Scm.Samples.Demo.Dvo;
 using Com.Scm.Service;
 using Com.Scm.Utils;
@@ -37,7 +34,7 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<DemoDvo>> GetPageAsync(SearchRequest request)
+        public async Task<ScmSearchPageResponse<DemoDvo>> GetPageAsync(SearchRequest request)
         {
             var isEmpty = string.IsNullOrWhiteSpace(request.key);
             var isCodes = !isEmpty && SamplesUtils.IsDemoCodes(request.key);

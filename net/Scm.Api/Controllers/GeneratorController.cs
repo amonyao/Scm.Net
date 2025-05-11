@@ -3,7 +3,6 @@ using Com.Scm.Filters;
 using Com.Scm.Generator;
 using Com.Scm.Generator.Config;
 using Com.Scm.Generator.Dvo;
-using Com.Scm.Result;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 
@@ -38,9 +37,9 @@ namespace Com.Scm.Api.Controllers
 
 
         [HttpGet("column")]
-        public PageResult<DbColumnInfo> ColumnAsync(string table)
+        public ScmSearchPageResponse<DbColumnInfo> ColumnAsync(string table)
         {
-            return new PageResult<DbColumnInfo>()
+            return new ScmSearchPageResponse<DbColumnInfo>()
             {
                 Items = _generatorService.GetColumn(table)
             };

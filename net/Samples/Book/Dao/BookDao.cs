@@ -1,15 +1,16 @@
 ﻿using Com.Scm.Dao;
+using Com.Scm.Dao.Unit;
 using Com.Scm.Enums;
 using Com.Scm.Utils;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Samples.Demo.Dao
+namespace Com.Scm.Samples.Book.Dao
 {
     /// <summary>
     /// 演示对象DAO
     /// </summary>
-    [SqlSugar.SugarTable("samples_demo")]
-    public class DemoDao : ScmDataDao, ISystemDao, IDeleteDao
+    [SqlSugar.SugarTable("samples_book")]
+    public class BookDao : ScmUnitDataDao, ISystemDao, IDeleteDao, IApprovalDao
     {
         /// <summary>
         /// 选项
@@ -22,7 +23,7 @@ namespace Com.Scm.Samples.Demo.Dao
         [StringLength(16)]
         public string codes { get; set; }
         /// <summary>
-        /// 客户编码（客户自定义编码，具有业务含义）
+        /// 书籍编码（书籍自定义编码，具有业务含义）
         /// </summary>
         [StringLength(32)]
         public string codec { get; set; }
@@ -32,15 +33,15 @@ namespace Com.Scm.Samples.Demo.Dao
         [StringLength(32)]
         public string names { get; set; }
         /// <summary>
-        /// 客户名称（全称）
+        /// 书籍名称（全称）
         /// </summary>
         [StringLength(128)]
         public string namec { get; set; }
         /// <summary>
-        /// 电话
+        /// 条码
         /// </summary>
         [StringLength(32)]
-        public string phone { get; set; }
+        public string barcode { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
@@ -57,12 +58,17 @@ namespace Com.Scm.Samples.Demo.Dao
         /// </summary>
         public ScmDeleteEnum row_delete { get; set; }
 
+        /// <summary>
+        /// 审批状态（不是必需）
+        /// </summary>
+        public ScmApprovalEnum wfa_status { get; set; }
+
         public override void PrepareCreate(long userId, long unitId = 0)
         {
             base.PrepareCreate(userId, unitId);
 
             // 新增时，自动生成系统编码
-            codes = UidUtils.NextCodes("samples_demo");
+            codes = UidUtils.NextCodes("samples_book");
             // 新增时，自动生成系统名称
             if (string.IsNullOrWhiteSpace(names))
             {

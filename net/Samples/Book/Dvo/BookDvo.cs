@@ -1,15 +1,15 @@
 ﻿using Com.Scm.Dvo;
 
-namespace Com.Scm.Samples.Demo.Dvo
+namespace Com.Scm.Samples.Book.Dvo
 {
-    public class DemoDvo : ScmDataDvo
+    public class BookDvo : ScmDataDvo
     {
         /// <summary>
         /// 系统编码
         /// </summary>
         public string codes { get; set; }
         /// <summary>
-        /// 客户编码
+        /// 书籍编码
         /// </summary>
         public string codec { get; set; }
         /// <summary>
@@ -17,13 +17,13 @@ namespace Com.Scm.Samples.Demo.Dvo
         /// </summary>
         public string names { get; set; }
         /// <summary>
-        /// 客户名称
+        /// 书籍名称
         /// </summary>
         public string namec { get; set; }
         /// <summary>
-        /// 电话
+        /// 条码
         /// </summary>
-        public string phone { get; set; }
+        public string barcode { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

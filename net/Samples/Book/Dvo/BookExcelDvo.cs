@@ -1,24 +1,24 @@
 ﻿using MiniExcelLibs.Attributes;
 
-namespace Com.Scm.Samples.Demo.Dvo
+namespace Com.Scm.Samples.Book.Dvo
 {
-    public class DemoExcelDvo
+    public class BookExcelDvo
     {
         /// <summary>
-        /// 客户编码
+        /// 书籍编码
         /// </summary>
-        [ExcelColumnName("客户编码")]
+        [ExcelColumnName("书籍编码")]
         public string codec { get; set; }
         /// <summary>
-        /// 客户名称
+        /// 书籍名称
         /// </summary>
-        [ExcelColumnName("客户名称")]
+        [ExcelColumnName("书籍名称")]
         public string namec { get; set; }
         /// <summary>
-        /// 电话
+        /// 条码
         /// </summary>
-        [ExcelColumnName("电话")]
-        public string phone { get; set; }
+        [ExcelColumnName("条码")]
+        public string barcode { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

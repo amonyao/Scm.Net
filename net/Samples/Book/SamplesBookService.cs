@@ -1,34 +1,40 @@
 ﻿using Com.Scm.Config;
 using Com.Scm.Enums;
-using Com.Scm.Result;
-using Com.Scm.Samples.Demo.Dao;
-using Com.Scm.Samples.Demo.Dto;
-using Com.Scm.Samples.Demo.Dvo;
+using Com.Scm.Samples.Book.Dao;
+using Com.Scm.Samples.Book.Dto;
+using Com.Scm.Samples.Book.Dvo;
+using Com.Scm.Samples.Book.Rnr;
 using Com.Scm.Service;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 using MiniExcelLibs;
 
-namespace Com.Scm.Samples.Demo
+namespace Com.Scm.Samples.Book
 {
     /// <summary>
     /// 示例代码服务接口
     /// </summary>
     [ApiExplorerSettings(GroupName = "Samples")]
-    public class SamplesDemoService : ApiService
+    public class SamplesBookService : ApiService
     {
-        private readonly SugarRepository<DemoDao> _thisRepository;
+        protected const string FLOW_ORDER = "samples_book";
+
+        private readonly SugarRepository<BookDao> _thisRepository;
         private readonly EnvConfig _Config;
-        private readonly IUserService _userService;
+        private readonly IFlowService _FlowService;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="thisRepository"></param>
-        public SamplesDemoService(SugarRepository<DemoDao> thisRepository, IUserService userService, EnvConfig config)
+        public SamplesBookService(SugarRepository<BookDao> thisRepository,
+            IUserService userService,
+            IFlowService flowService,
+            EnvConfig config)
         {
             _thisRepository = thisRepository;
-            _userService = userService;
+            _UserService = userService;
+            _FlowService = flowService;
             _Config = config;
         }
 
@@ -37,7 +43,7 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<PageResult<DemoDvo>> GetPagesAsync(SearchRequest request)
+        public async Task<ScmSearchPageResponse<BookDvo>> GetPageAsync(SearchRequest request)
         {
             var isEmpty = string.IsNullOrWhiteSpace(request.key);
             var isCodes = !isEmpty && SamplesUtils.IsDemoCodes(request.key);
@@ -48,8 +54,8 @@ namespace Com.Scm.Samples.Demo
                 .WhereIF(IsNormalId(request.option_id), a => a.option_id == request.option_id)
                 .WhereIF(isCodes, a => a.codes == request.key)
                 .WhereIF(!isEmpty && !isCodes, a => a.codec.Contains(request.key) || a.names.Contains(request.key))
-            .OrderByDescending(a => a.id)
-                .Select<DemoDvo>()
+                .OrderByDescending(a => a.id)
+                .Select<BookDvo>()
                 .ToPageAsync(request.page, request.limit);
 
             Prepare(result.Items);
@@ -61,7 +67,7 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<DemoDvo>> GetListAsync(SearchRequest request)
+        public async Task<List<BookDvo>> GetListAsync(SearchRequest request)
         {
             var items = await _thisRepository.AsQueryable()
                 .Where(a => a.row_delete != ScmDeleteEnum.Yes)
@@ -69,19 +75,18 @@ namespace Com.Scm.Samples.Demo
                 .WhereIF(IsNormalId(request.option_id), a => a.option_id == request.option_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.codec.Contains(request.key) || a.names.Contains(request.key))
                 .OrderByDescending(a => a.id)
-                .Select<DemoDvo>()
+                .Select<BookDvo>()
                 .ToListAsync();
 
             Prepare(items);
             return items;
         }
 
-        private void Prepare(List<DemoDvo> list)
+        private void Prepare(List<BookDvo> list)
         {
             foreach (var item in list)
             {
-                item.update_names = _userService.GetUserNames(item.update_user);
-                item.create_names = _userService.GetUserNames(item.create_user);
+                Prepare(item);
 
                 // Others TODO
             }
@@ -93,11 +98,11 @@ namespace Com.Scm.Samples.Demo
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<DemoDvo> GetEditAsync(long id)
+        public async Task<BookDvo> GetEditAsync(long id)
         {
             return await _thisRepository
-            .AsQueryable()
-                .Select<DemoDvo>()
+                .AsQueryable()
+                .Select<BookDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -107,11 +112,11 @@ namespace Com.Scm.Samples.Demo
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<DemoDvo> GetViewAsync(long id)
+        public async Task<BookDvo> GetViewAsync(long id)
         {
             return await _thisRepository
-            .AsQueryable()
-                .Select<DemoDvo>()
+                .AsQueryable()
+                .Select<BookDvo>()
                 .FirstAsync(m => m.id == id);
         }
 
@@ -120,9 +125,22 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task AddAsync(DemoDto model)
+        public async Task AddAsync(BookDto model)
         {
-            await _thisRepository.InsertAsync(model.Clone<DemoDao>());
+            var dao = model.Clone<BookDao>();
+            await _thisRepository.InsertAsync(dao);
+
+            // 查询流程
+            var flowOrderDao = await _FlowService.GetFlowOrderAsync(dao.unit_id, FLOW_ORDER);
+            if (flowOrderDao == null)
+            {
+                return;
+            }
+
+            // 启动流程
+            var orderId = dao.id;
+            var orderCode = dao.codes;
+            await _FlowService.StartFlow(flowOrderDao.flow_id, orderId, orderCode, "演示审批流程", 0, dao.create_user);
         }
 
         /// <summary>
@@ -130,9 +148,9 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(DemoDto model)
+        public async Task UpdateAsync(BookDto model)
         {
-            await _thisRepository.UpdateAsync(model.Clone<DemoDao>());
+            await _thisRepository.UpdateAsync(model.Clone<BookDao>());
         }
 
         /// <summary>
@@ -162,15 +180,15 @@ namespace Com.Scm.Samples.Demo
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<UploadResponse> UploadAsync([FromForm] UploadRequest request)
+        public async Task<UploadResult> UploadAsync([FromForm] UploadRequest request)
         {
-            var response = new UploadResponse();
+            var result = new UploadResult();
 
             //判断是否上传了文件内容
             if (request.file == null)
             {
-                response.SetFailure("上传内容为空！");
-                return response;
+                result.SetFailure("上传内容为空！");
+                return result;
             }
 
             #region 保存文件
@@ -191,17 +209,17 @@ namespace Com.Scm.Samples.Demo
             #region 数据导入
             using (var stream = request.file.OpenReadStream())
             {
-                var list = stream.Query<DemoExcelDvo>();
+                var list = stream.Query<BookExcelDvo>();
                 foreach (var item in list)
                 {
-                    var dao = item.Clone<DemoDao>();
+                    var dao = item.Clone<BookDao>();
                     await _thisRepository.InsertAsync(dao);
                 }
             }
             #endregion
 
-            response.SetSuccess("文件导入成功！");
-            return response;
+            result.SetSuccess("文件导入成功！");
+            return result;
         }
 
         /// <summary>

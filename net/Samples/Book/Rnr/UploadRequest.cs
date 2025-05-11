@@ -1,7 +1,6 @@
-﻿using Com.Scm.Dvo;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
-namespace Com.Scm.Samples.Demo.Dvo
+namespace Com.Scm.Samples.Book.Rnr
 {
     /// <summary>
     /// 

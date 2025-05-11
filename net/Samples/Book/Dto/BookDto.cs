@@ -1,12 +1,12 @@
 ﻿using Com.Scm.Dto;
 using System.ComponentModel.DataAnnotations;
 
-namespace Com.Scm.Samples.Demo.Dto
+namespace Com.Scm.Samples.Book.Dto
 {
     /// <summary>
     /// 演示对象DTO
     /// </summary>
-    public class DemoDto : ScmDataDto
+    public class BookDto : ScmDataDto
     {
         /// <summary>
         /// 系统编码
@@ -14,7 +14,7 @@ namespace Com.Scm.Samples.Demo.Dto
         [StringLength(16)]
         public string codes { get; set; }
         /// <summary>
-        /// 客户编码
+        /// 书籍编码
         /// </summary>
         [StringLength(32)]
         public string codec { get; set; }
@@ -24,15 +24,15 @@ namespace Com.Scm.Samples.Demo.Dto
         [StringLength(32)]
         public string names { get; set; }
         /// <summary>
-        /// 客户名称
+        /// 书籍名称
         /// </summary>
         [StringLength(128)]
         public string namec { get; set; }
         /// <summary>
-        /// 电话
+        /// 条码
         /// </summary>
         [StringLength(32)]
-        public string phone { get; set; }
+        public string barcode { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

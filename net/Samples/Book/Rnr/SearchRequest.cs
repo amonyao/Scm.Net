@@ -1,6 +1,4 @@
-﻿using Com.Scm.Dvo;
-
-namespace Com.Scm.Samples.Demo.Dvo
+﻿namespace Com.Scm.Samples.Book.Rnr
 {
     /// <summary>
     /// 
