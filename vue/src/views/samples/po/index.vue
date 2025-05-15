@@ -62,6 +62,9 @@
 						</el-popconfirm>
 					</template>
 				</el-table-column>
+				<template #codes="scope">
+					<el-button type="primary" link @click="open_newtab(scope.row)">{{ scope.row.codes }}</el-button>
+				</template>
 				<template #item_qty="scope">
 					{{ scope.row.item_need_qty }} / {{ scope.row.item_real_qty }}
 				</template>
@@ -85,13 +88,12 @@ import { defineAsyncComponent } from "vue";
 export default {
 	name: 'samples_po_header',
 	components: {
-		editHeader: defineAsyncComponent(() => import("./header")),
+		editHeader: defineAsyncComponent(() => import("./editheader")),
 	},
 	data() {
 		return {
 			tableName: 'samples_po_header',
 			apiObj: this.$API.samplespoheader.page,
-			list: [],
 			param: {
 				option_id: '0',
 				row_status: 1,
@@ -162,6 +164,12 @@ export default {
 				return;
 			}
 		},
+		open_newtab(row) {
+			if (!row.id) {
+				return;
+			}
+			this.$router.push({ path: '/samples/po/edit', query: { 'id': row.id } });
+		}
 	},
 };
 </script>

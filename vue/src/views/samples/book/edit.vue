@@ -29,6 +29,7 @@
 </template>
 <script>
 export default {
+	emits: ['complete'],
 	data() {
 		return {
 			mode: "add",

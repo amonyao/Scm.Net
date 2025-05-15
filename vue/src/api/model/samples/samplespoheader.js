@@ -71,4 +71,11 @@ export default {
 			return await http.get(this.url,data);
 		}
 	},
+	submit: {
+		url: `${config.API_URL}/samplespoheader/submit/`,
+		name: "提交审批",
+		post: async function (data) {
+			return await http.post(this.url + data);
+		}
+	},
 }

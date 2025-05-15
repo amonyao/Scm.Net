@@ -95,12 +95,6 @@ export default {
 			this.$refs.formRef.resetFields();
 			this.visible = false;
 		},
-		open_newtab(row) {
-			if (!row.id) {
-				return;
-			}
-			this.$router.push({ path: '/samples/po/detail', query: { 'id': row.id } });
-		}
 	},
 };
 </script>

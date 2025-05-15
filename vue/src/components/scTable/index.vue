@@ -41,8 +41,8 @@
 			</div>
 			<div class="scTable-do" v-if="!hideDo">
 				<el-button v-if="!hideRefresh" @click="refresh" icon="el-icon-refresh" circle title="刷新"></el-button>
-				<el-popover v-if="!hidePrint" placement="top" ref="printPover" title="打印列设置" :width="400" trigger="click"
-					:hide-after="0">
+				<el-popover v-if="!hidePrint" placement="top" ref="printPover" title="打印列设置" :width="400"
+					trigger="click" :hide-after="0">
 					<template #reference>
 						<el-button circle title="打印列设置">
 							<sc-icon name="sc-printer-line" />
@@ -67,7 +67,8 @@
 					<columnSetting v-if="customColumnShow" ref="columnSetting" @userChange="columnSettingChange"
 						@save="columnSettingSave" @back="columnSettingBack" :column="userColumn"></columnSetting>
 				</el-popover>
-				<el-popover v-if="!hideSetting" placement="top" title="表格设置" :width="400" trigger="click" :hide-after="0">
+				<el-popover v-if="!hideSetting" placement="top" title="表格设置" :width="400" trigger="click"
+					:hide-after="0">
 					<template #reference>
 						<el-button icon="el-icon-setting" circle title="表格设置"></el-button>
 					</template>
@@ -207,7 +208,7 @@ export default {
 
 		//判断是否静态数据
 		if (this.apiObj) {
-			this.getData();
+			this.loadData();
 		} else if (this.data) {
 			this.tableData = this.data;
 			this.total = this.tableData.length;
@@ -230,8 +231,8 @@ export default {
 			);
 			this.userColumn = userColumn;
 		},
-		//获取数据
-		async getData() {
+		//加载数据
+		async loadData() {
 			this.loading = true;
 			var reqData = {
 				[config.request.page]: this.currentPage,
@@ -263,15 +264,18 @@ export default {
 			this.$refs.scTable.setScrollTop(0);
 			this.$emit("dataChange", res, this.tableData);
 		},
+		getData() {
+			return this.tableData;
+		},
 		//分页点击
 		paginationChange(number) {
 			this.currentPage = number;
-			this.getData();
+			this.loadData();
 		},
 		paginationSizeChange(number) {
 			this.pageSize = number;
 			this.currentPage = 1;
-			this.getData();
+			this.loadData();
 		},
 		getTotal() {
 			return this.total;
@@ -279,14 +283,14 @@ export default {
 		//刷新数据
 		refresh() {
 			this.$refs.scTable.clearSelection();
-			this.getData();
+			this.loadData();
 		},
 		//更新数据 合并上一次params
 		upData(params, page = 1) {
 			this.currentPage = page;
 			this.$refs.scTable.clearSelection();
 			Object.assign(this.tableParams, params || {});
-			this.getData();
+			this.loadData();
 		},
 		//重载数据 替换params
 		reload(params, page = 1) {
@@ -295,7 +299,7 @@ export default {
 			this.$refs.scTable.clearSelection();
 			this.$refs.scTable.clearSort();
 			this.$refs.scTable.clearFilter();
-			this.getData();
+			this.loadData();
 		},
 		//自定义变化事件
 		columnSettingChange(userColumn) {
@@ -344,7 +348,7 @@ export default {
 				this.prop = null;
 				this.order = null;
 			}
-			this.getData();
+			this.loadData();
 		},
 		//本地过滤
 		filterHandler(value, row, column) {
