@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import config from "@/config"
 import socket from "@/utils/socket"
 import search from "./search.vue";
 import tasks from "./tasks.vue";

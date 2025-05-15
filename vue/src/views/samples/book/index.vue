@@ -63,7 +63,7 @@
 		</el-main>
 	</el-container>
 	<edit ref="edit" @complete="complete" />
-	<scUpload ref="upload" @complete="complete" :api-obj="this.$API.samplesdemo.upload" />
+	<scUpload ref="upload" @complete="complete" :api-obj="this.$API.samplesbook.upload" />
 </template>
 
 <script>
@@ -71,17 +71,17 @@ import { defineAsyncComponent } from "vue";
 import config from "@/config";
 
 export default {
-	name: 'samples_demo',
+	name: 'samples_book',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
 		scUpload: defineAsyncComponent(() => import("@/components/scUpload")),
 	},
 	data() {
 		return {
-			tableName: 'samples-demo',
-			apiObj: this.$API.samplesdemo.page,
-			uploadApi: this.$API.samplesdemo.upload,
-			importApi: this.$API.samplesdemo.import,
+			tableName: 'samples_book',
+			apiObj: this.$API.samplesbook.page,
+			uploadApi: this.$API.samplesbook.upload,
+			importApi: this.$API.samplesbook.import,
 			templateUrl: `${config.SERVER_URL}/upload/templates/示例模板.xlsx`,
 			param: {
 				option_id: '0',
@@ -89,24 +89,25 @@ export default {
 				create_time: '',
 				key: ''
 			},
-			option_list: [this.$SCM.OPTION_ALL],
-			statusList: [this.$SCM.OPTION_ALL],
+			formData: {},
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
 				{ prop: 'codes', label: '系统代码', width: 140 },
-				{ prop: 'codec', label: '客户编码', width: 100 },
+				{ prop: 'codec', label: '书籍编码', width: 100 },
 				{ prop: 'names', label: '系统简称', width: 160 },
-				{ prop: 'namec', label: '客户全称', minWidth: 200, align: 'left' },
-				{ prop: 'phone', label: '电话', width: 100 },
+				{ prop: 'namec', label: '书籍全称', minWidth: 200, align: 'left' },
+				{ prop: 'barcode', label: '条码', width: 100 },
 				{ prop: 'remark', label: '备注', width: 200 },
+				{ prop: 'wfa_status', label: '审批状态', width: 80 },
 				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
-			formData: {}
+			option_list: [this.$SCM.OPTION_ALL],
+			statusList: [this.$SCM.OPTION_ALL]
 		};
 	},
 	mounted() {
@@ -119,16 +120,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.samplesdemo.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.samplesbook.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.samplesdemo.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.samplesbook.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.samplesdemo.delete, row);
+			this.$SCM.delete_item(this, this.$API.samplesbook.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.samplesdemo.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.samplesbook.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -151,7 +152,6 @@ export default {
 			}
 		},
 		success(res) {
-			//dlg();
 			if (res == null) {
 				return;
 			}

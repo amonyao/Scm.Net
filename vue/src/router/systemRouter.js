@@ -43,7 +43,7 @@ const routes = [
 	{
 		id: '1006',
 		path: "/scm/sys/workflow/design",
-		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/scm/sys/workflow/design"),
+		component: () => import(/* webpackChunkName: "userRegister" */ "@/views/scm/sys/flowinfo/design"),
 		meta: { title: "流程设计" },
 	},
 ];

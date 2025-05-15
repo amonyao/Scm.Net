@@ -5,13 +5,15 @@ import tool from "@/utils/tool";
 const scm = {};
 
 scm.DEF_INT = 0;
+scm.DEF_ID = "0";
 scm.SYS_ID = "1000000000000000001";
 scm.DEF_AVATAR = "/data/avatar/0.png";
 
 scm.REGEX_ID = /^[1-9]\d{15,18}$/;
 scm.REGEX_INT = /^[1-9]\d*$/;
-scm.REGEX_CODEC = /^[-_0-9a-zA-Z]{1,32}$/;
-scm.REGEX_NAMEC = /^$\w{1,64}/;
+scm.REGEX_CODEC = /^[-_0-9a-zA-Z]{4,32}$/;
+scm.REGEX_NAMEC = /^\S{4,64}$/;
+scm.REGEX_NAMEF = /^\S{4,128}$/;
 scm.REGEX_NUMBER = /^\d+$/;
 
 scm.OPTION_ALL = { label: "所有", id: "0", value: "0" };
@@ -131,6 +133,7 @@ scm.delete_item = async function (dom, http, data) {
 		return;
 	}
 
+	// var res = await http.delete({ 'ids': data.id });
 	var res = await http.delete(data.id);
 	if (res.code == 200) {
 		dom.$refs.table.refresh();

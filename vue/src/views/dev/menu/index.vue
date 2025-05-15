@@ -71,7 +71,7 @@ export default {
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.sourceLst = res.data;
@@ -109,10 +109,9 @@ export default {
 		async add(node, data) {
 			var newMenuName = "未命名" + newMenuIndex++;
 			var newMenuData = {
-				parentId: data ? data.id : "0",
+				pid: data ? data.id : "0",
 				name: newMenuName,
-				label: newMenuName,
-				tenantId: 0,
+				label: newMenuName
 			};
 			this.menuloading = true;
 			var res = await this.$API.devmenu.temp.post(newMenuData);
