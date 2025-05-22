@@ -26,10 +26,9 @@
 			</el-container>
 		</el-aside>
 
-		<el-container class="is-vertical">
-			<sc-search @search="search">
-
-				<template #filter>
+		<el-container>
+			<el-header>
+				<div class="left-panel">
 					<el-button type="primary" :disabled="!selectColumn.id" @click="open_dialog">
 						<sc-icon name="sc-plus" />
 					</el-button>
@@ -51,8 +50,8 @@
 							</el-button>
 						</el-tooltip>
 					</el-button-group>
-				</template>
-			</sc-search>
+				</div>
+			</el-header>
 			<el-main class="nopadding">
 				<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" :params="defaultParam"
 					row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">

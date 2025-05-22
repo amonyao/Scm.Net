@@ -1,24 +1,30 @@
 <template>
-	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="750px" @close="close">
-		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-form-item label="值" prop="value">
-				<el-input-number v-model="formData.value" placeholder="请输入值" :maxlength="30" show-word-limit
-					clearable></el-input-number>
+	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="600px" @close="close">
+		<el-form ref="formRef" label-width="60px" :model="formData" :rules="rules">
+			<el-form-item label="名称" prop="namec">
+				<el-input v-model="formData.namec" placeholder="请输入名称" :maxlength="30" show-word-limit clearable
+					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="键" prop="codec">
 				<el-input v-model="formData.codec" placeholder="请输入键" :maxlength="30" show-word-limit clearable
 					:style="{ width: '100%' }"></el-input>
 			</el-form-item>
-			<el-form-item label="名称" prop="namec">
-				<el-input v-model="formData.namec" placeholder="请输入名称" :maxlength="30" show-word-limit clearable
-					:style="{ width: '100%' }"></el-input>
-			</el-form-item>
-			<el-form-item label="排序" prop="od">
-				<el-input-number v-model="formData.od"></el-input-number>
-			</el-form-item>
+			<el-row>
+				<el-col :span="12">
+					<el-form-item label="值" prop="value">
+						<el-input-number v-model="formData.value" placeholder="请输入值" :maxlength="30" show-word-limit
+							clearable></el-input-number>
+					</el-form-item>
+				</el-col>
+				<el-col :span="12">
+					<el-form-item label="排序" prop="od">
+						<el-input-number v-model="formData.od"></el-input-number>
+					</el-form-item>
+				</el-col>
+			</el-row>
 			<el-form-item label="备注" prop="remark">
 				<el-input v-model="formData.remark" type="textarea" placeholder="请输入备注" :maxlength="100" show-word-limit
-					:autosize="{ minRows: 2, maxRows: 4 }" :style="{ width: '100%' }"></el-input>
+					:autosize="{ minRows: 3, maxRows: 6 }" :style="{ width: '100%' }"></el-input>
 			</el-form-item>
 		</el-form>
 
@@ -65,12 +71,13 @@ export default {
 		def_data() {
 			return {
 				id: '0',
-				tag: 1,
-				dic_header_id: 0,
-				namec: undefined,
-				value: undefined,
-				od: 1,
+				od: 0,
+				namec: '',
+				codec: '',
+				value: 0,
 				remark: undefined,
+				dic_header_id: '0',
+				tag: 1,
 			}
 		},
 		async open(row, type = "edit") {
