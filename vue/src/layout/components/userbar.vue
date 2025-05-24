@@ -55,8 +55,7 @@
 		<el-divider direction="vertical"></el-divider>
 		<el-dropdown class="user panel-item" trigger="click" @command="handleUser">
 			<div class="user-avatar">
-				<el-image style="width: 32px; height: 32px; border-radius: 50%;" :src="avatar" :fit="fit"
-					v-if="show_avatar"></el-image>
+				<el-avatar :size="30" :src="avatar" :fit="fit" v-if="show_avatar"></el-avatar>
 				<el-avatar :size="30" v-else>{{ userNameF }}</el-avatar>
 				<label>{{ userName }}</label>
 				<el-icon class="el-icon--right"><el-icon-arrow-down /></el-icon>

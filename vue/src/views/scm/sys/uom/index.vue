@@ -2,8 +2,14 @@
 	<sc-search ref="search" @search="search">
 		<template #search>
 			<el-form ref="formRef" label-width="80px" :model="param">
-				<el-form-item label="查询选项" prop="option_id">
-					<sc-select v-model="param.option_id" placeholder="请选择" :data="types_list" />
+				<el-form-item label="单位类型" prop="types">
+					<sc-select v-model="param.types" placeholder="请选择" :data="types_list" />
+				</el-form-item>
+				<el-form-item label="单位模式" prop="modes">
+					<sc-select v-model="param.modes" placeholder="请选择" :data="modes_list" />
+				</el-form-item>
+				<el-form-item label="单位制式" prop="kinds">
+					<sc-select v-model="param.kinds" placeholder="请选择" :data="kinds_list" />
 				</el-form-item>
 				<el-form-item label="数据状态" prop="row_status">
 					<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
@@ -34,6 +40,9 @@
 							@click="delete_list"></el-button>
 					</el-tooltip>
 				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length != 1"
+					@click="show_refer"></el-button>
 			</div>
 			<div class="right-panel">
 				<el-input v-model="param.key" clearable placeholder="关键字">
@@ -71,8 +80,9 @@
 				</template>
 			</scTable>
 		</el-main>
-		<edit ref="edit" @complete="complete" />
 	</el-container>
+	<edit ref="edit" @complete="complete" />
+	<editRefer ref="editRefer" @complete="complete" />
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
@@ -80,6 +90,7 @@ export default {
 	name: 'scm_sys_uom',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
+		editRefer: defineAsyncComponent(() => import("./editRefer")),
 	},
 	data() {
 		return {
@@ -87,7 +98,9 @@ export default {
 			apiObj: this.$API.scmsysuom.page,
 			list: [],
 			param: {
-				option_id: '0',
+				types: 0,
+				modes: 0,
+				kinds: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
@@ -95,16 +108,16 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: 'types', label: '单位类型', width: 100 },
-				{ prop: 'modes', label: '单位模式', width: 100 },
-				{ prop: 'kinds', label: '单位制式', width: 100 },
-				{ prop: 'od', label: '显示排序', width: 100 },
-				{ prop: 'codec', label: '单位编码', width: 100 },
-				{ prop: 'lang', label: '显示语言', width: 100 },
-				{ prop: 'namec', label: '单位名称', width: 100 },
+				{ prop: 'od', label: '显示排序', width: 80 },
+				{ prop: 'lang', label: '显示语言', width: 100, formatter: this.getLangNames },
+				{ prop: 'codec', label: '单位编码', width: 100, align: 'left' },
+				{ prop: 'namec', label: '单位名称', minWidth: 140, align: 'left' },
 				{ prop: 'symbol', label: '单位符号', width: 100 },
-				{ prop: 'base_id', label: '基准单位', width: 100 },
-				{ prop: 'base_qty', label: '基准数量', width: 100 },
+				{ prop: 'types', label: '单位类型', width: 80, formatter: this.getTypesNames },
+				{ prop: 'modes', label: '单位模式', width: 80, formatter: this.getModesNames },
+				{ prop: 'kinds', label: '单位制式', width: 80, formatter: this.getKindsNames },
+				{ prop: 'refer_names', label: '参照单位', width: 140, align: 'left' },
+				{ prop: 'refer_qty', label: '参照数量', width: 100, align: 'right' },
 				{ prop: "row_status", label: "数据状态", width: 80, },
 				{ prop: "update_names", label: "更新人员", width: 100, },
 				{ prop: "update_time", label: "更新时间", width: 160, formatter: this.$TOOL.dateTimeFormat },
@@ -115,6 +128,7 @@ export default {
 			types_list: [this.$SCM.OPTION_ALL],
 			modes_list: [this.$SCM.OPTION_ALL],
 			kinds_list: [this.$SCM.OPTION_ALL],
+			lang_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
@@ -122,6 +136,7 @@ export default {
 		this.$SCM.list_dic(this.types_list, 'uom_types', true);
 		this.$SCM.list_dic(this.modes_list, 'uom_modes', true);
 		this.$SCM.list_dic(this.kinds_list, 'uom_kinds', true);
+		this.$SCM.list_dic(this.lang_list, 'lang', true);
 	},
 	methods: {
 		complete() {
@@ -165,6 +180,25 @@ export default {
 				return;
 			}
 		},
+		getTypesNames(types) {
+			return this.$SCM.get_dic_names(this.types_list, types, '');
+		},
+		getModesNames(modes) {
+			return this.$SCM.get_dic_names(this.modes_list, modes, '');
+		},
+		getKindsNames(kinds) {
+			return this.$SCM.get_dic_names(this.kinds_list, kinds, '');
+		},
+		getLangNames(lang) {
+			return this.$SCM.get_dic_names(this.lang_list, lang, '');
+		},
+		show_refer() {
+			if (this.selection.length != 1) {
+				return;
+			}
+
+			this.$refs.editRefer.open(this.selection[0]);
+		}
 	},
 };
 </script>

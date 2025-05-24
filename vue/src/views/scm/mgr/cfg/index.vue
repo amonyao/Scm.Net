@@ -26,10 +26,9 @@
 			</el-container>
 		</el-aside>
 
-		<el-container class="is-vertical">
-			<sc-search @search="search">
-
-				<template #filter>
+		<el-container>
+			<el-header>
+				<div class="left-panel">
 					<el-button type="primary" :disabled="!selectColumn.id" @click="open_dialog">
 						<sc-icon name="sc-plus" />
 					</el-button>
@@ -51,8 +50,8 @@
 							</el-button>
 						</el-tooltip>
 					</el-button-group>
-				</template>
-			</sc-search>
+				</div>
+			</el-header>
 			<el-main class="nopadding">
 				<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" :params="defaultParam"
 					row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
@@ -60,7 +59,6 @@
 					<el-table-column fixed type="selection" width="60" align="center" />
 					<el-table-column label="#" type="index" width="60"></el-table-column>
 					<el-table-column align="center" fixed="right" label="操作" width="140">
-
 						<template #default="scope">
 							<el-button size="small" text type="primary" @click="open_dialog(scope.row)">
 								编辑

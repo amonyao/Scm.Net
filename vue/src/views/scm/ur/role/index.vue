@@ -1,10 +1,8 @@
 <template>
-	<el-container class="is-vertical">
-		<sc-search @search="search">
-			<template #filter>
-				<el-button type="primary" @click="open_dialog">
-					<sc-icon name="sc-plus" />
-				</el-button>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
+				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
 					<el-tooltip content="启用">
@@ -23,8 +21,15 @@
 						</el-button>
 					</el-tooltip>
 				</el-button-group>
-			</template>
-		</sc-search>
+			</div>
+			<div class="right-panel">
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
+			</div>
+		</el-header>
 		<el-main class="nopadding">
 			<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" hide-pagination is-tree
 				row-key="id" @menu-handle="menuHandle" @selection-change="selectionChange">
@@ -76,7 +81,6 @@ export default {
 		return {
 			apiObj: this.$API.urrole.list,
 			tableName: 'scm_ur_role',
-			list: [],
 			param: {
 				key: "",
 			},

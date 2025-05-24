@@ -71,4 +71,18 @@ export default {
 			return await http.get(this.url, data);
 		}
 	},
+	changeRefer: {
+		url: `${config.API_URL}/scmsysuom/changeRefer`,
+		name: "更新参照单位",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		}
+	},
+	changeBasic: {
+		url: `${config.API_URL}/scmsysuom/changeBasic`,
+		name: "更新参照单位",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		}
+	},
 }

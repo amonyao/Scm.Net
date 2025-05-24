@@ -10,12 +10,11 @@
 				</el-button>
 			</div>
 			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button type="primary" @click="search">
-						<sc-icon name="sc-search" />
-					</el-button>
-				</div>
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
 			</div>
 		</el-header>
 		<el-main class="nopadding">

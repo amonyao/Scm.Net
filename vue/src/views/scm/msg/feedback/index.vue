@@ -1,8 +1,7 @@
 <template>
-	<el-container class="is-vertical">
-		<sc-search @search="search">
+	<sc-search ref="search" @search="search">
 			<template #search>
-				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
+				<el-form ref="formRef" label-width="80px" :model="param">
 					<el-form-item label="查询选项" prop="types">
 						<sc-select v-model="param.types" placeholder="请选择" :data="types_list" />
 					</el-form-item>
@@ -16,18 +15,15 @@
 					<el-form-item label="搜索内容">
 						<el-input v-model="param.key" clearable placeholder="关键字" />
 					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click="search">
-							<sc-icon name="sc-search" />查询
-						</el-button>
-					</el-form-item>
 				</el-form>
 			</template>
-
-			<template #filter>
+	</sc-search>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
-			</template>
-		</sc-search>
+			</div>
+		</el-header>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
 				@menu-handle="menuHandle" @selection-change="selectionChange">
@@ -114,6 +110,9 @@ export default {
 		},
 		getTypesNames(types) {
 			return this.$SCM.get_dic_names(this.types_list, types, '');
+		},
+		show_search() {
+			this.$refs.search.open(this.param.key);
 		}
 	},
 };

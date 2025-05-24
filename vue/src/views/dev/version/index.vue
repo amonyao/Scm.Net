@@ -1,30 +1,27 @@
 <template>
-	<el-container class="is-vertical">
-		<sc-search @search="search">
-			<template #search>
-				<el-form :model="param" :inline="true">
-					<el-form-item label="终端类型" prop="types">
-						<sc-select v-model="param.types" :data="types_list" placeholder="请选择终端类型" />
-					</el-form-item>
-					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" :data="row_status_list" placeholder="请选择数据状态" />
-					</el-form-item>
-					<el-form-item label="创建时间" prop="create_time">
-						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-							start-placeholder="开始日期" end-placeholder="结束日期">
-						</el-date-picker>
-					</el-form-item>
-					<el-form-item label="搜索内容">
-						<el-input v-model="param.key" clearable placeholder="关键字" />
-					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click="search">
-							<sc-icon name="sc-search" />查询
-						</el-button>
-					</el-form-item>
-				</el-form>
-			</template>
-			<template #filter>
+	<sc-search ref="search" @search="search">
+		<template #search>
+			<el-form ref="formRef" label-width="80px" :model="param">
+				<el-form-item label="终端类型" prop="client">
+					<sc-select v-model="param.client" :data="client_list" placeholder="请选择终端类型" />
+				</el-form-item>
+				<el-form-item label="数据状态" prop="row_status">
+					<sc-select v-model="param.row_status" :data="row_status_list" placeholder="请选择数据状态" />
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_time">
+					<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+						start-placeholder="开始日期" end-placeholder="结束日期">
+					</el-date-picker>
+				</el-form-item>
+				<el-form-item label="搜索内容">
+					<el-input v-model="param.key" clearable placeholder="关键字" />
+				</el-form-item>
+			</el-form>
+		</template>
+	</sc-search>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
 				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
@@ -46,8 +43,16 @@
 				</el-button-group>
 				<el-divider direction="vertical"></el-divider>
 				<el-button type="primary" @click="set_current()">设为当前版本</el-button>
-			</template>
-		</sc-search>
+			</div>
+			<div class="right-panel">
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
+				<el-button @click="show_search">高级</el-button>
+			</div>
+		</el-header>
 		<el-main class="nopadding">
 			<scTable ref="table" :tableName="tableName" :api-obj="apiObj" :column="column" row-key="id"
 				@menu-handle="menuHandle" @selection-change="selectionChange">
@@ -96,24 +101,24 @@ export default {
 			apiObj: this.$API.devversion.page,
 			list: [],
 			param: {
-				types: 0,
+				client: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
 			},
-			types_list: [],
+			client_list: [],
 			row_status_list: [],
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
 				{ prop: 'app_name', label: '所属应用', minWidth: 100 },
-				{ prop: 'types', label: '终端类型', width: 100, formatter: this.getTypesNames },
-				{ prop: 'current', label: '当前版本', width: 100 },
-				{ prop: 'ver', label: '版本', width: 100 },
-				{ prop: 'ver_min', label: '最小版本', width: 100 },
-				{ prop: 'alpha', label: '是否内测', width: 100 },
-				{ prop: 'beta', label: '是否公测', width: 100 },
-				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'client', label: '终端类型', width: 140, formatter: this.getClientNames },
+				{ prop: 'current', label: '当前版本', width: 80 },
+				{ prop: 'ver', label: '版本', width: 100, align: 'right' },
+				{ prop: 'ver_min', label: '最小版本', width: 100, align: 'right' },
+				{ prop: 'alpha', label: '是否内测', width: 80 },
+				{ prop: 'beta', label: '是否公测', width: 80 },
+				{ prop: 'row_status', label: '数据状态', width: 80 },
 				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'update_names', label: '更新人员', width: 100 },
 				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
@@ -122,7 +127,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.$SCM.list_dic(this.types_list, 'client_type', true);
+		this.$SCM.list_dic(this.client_list, 'client_type', true);
 		this.$SCM.list_status(this.row_status_list);
 	},
 	methods: {
@@ -143,6 +148,9 @@ export default {
 		},
 		delete_list() {
 			this.$SCM.delete_list(this, this.$API.devversion.delete, this.selection);
+		},
+		show_search() {
+			this.$refs.search.open(this.param.key);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -178,8 +186,8 @@ export default {
 				this.$alert(res.message, "提示", { type: "error" });
 			}
 		},
-		getTypesNames(types) {
-			return this.$SCM.get_dic_names(this.types_list, types, '');
+		getClientNames(client) {
+			return this.$SCM.get_dic_names(this.client_list, client, '');
 		}
 	},
 };
