@@ -1,4 +1,5 @@
 ﻿using Com.Scm.Dto;
+using Com.Scm.Samples.Book.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Com.Scm.Samples.Book.Dto
@@ -8,6 +9,10 @@ namespace Com.Scm.Samples.Book.Dto
     /// </summary>
     public class BookDto : ScmDataDto
     {
+        /// <summary>
+        /// 书籍类型
+        /// </summary>
+        public BookTypesEnum types { get; set; }
         /// <summary>
         /// 系统编码
         /// </summary>
@@ -33,6 +38,10 @@ namespace Com.Scm.Samples.Book.Dto
         /// </summary>
         [StringLength(32)]
         public string barcode { get; set; }
+        /// <summary>
+        /// 图片
+        /// </summary>
+        public string image { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

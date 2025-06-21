@@ -1,5 +1,6 @@
 ﻿using Com.Scm.Config;
-using Com.Scm.Enums;
+using Com.Scm.Dvo;
+using Com.Scm.Exceptions;
 using Com.Scm.Samples.Book.Dao;
 using Com.Scm.Samples.Book.Dto;
 using Com.Scm.Samples.Book.Dvo;
@@ -15,13 +16,11 @@ namespace Com.Scm.Samples.Book
     /// 示例代码服务接口
     /// </summary>
     [ApiExplorerSettings(GroupName = "Samples")]
-    public class SamplesBookService : ApiService
+    public class SamplesBookService : ApiService, IBookService
     {
-        protected const string FLOW_ORDER = "samples_book";
-
         private readonly SugarRepository<BookDao> _thisRepository;
         private readonly EnvConfig _Config;
-        private readonly IFlowService _FlowService;
+        private static readonly Dictionary<long, BookDao> _Dict = new Dictionary<long, BookDao>();
 
         /// <summary>
         /// 构造函数
@@ -29,12 +28,10 @@ namespace Com.Scm.Samples.Book
         /// <param name="thisRepository"></param>
         public SamplesBookService(SugarRepository<BookDao> thisRepository,
             IUserService userService,
-            IFlowService flowService,
             EnvConfig config)
         {
             _thisRepository = thisRepository;
             _UserService = userService;
-            _FlowService = flowService;
             _Config = config;
         }
 
@@ -49,9 +46,9 @@ namespace Com.Scm.Samples.Book
             var isCodes = !isEmpty && SamplesUtils.IsDemoCodes(request.key);
 
             var result = await _thisRepository.AsQueryable()
-                .Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                //.Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                .WhereIF(request.types != Enums.BookTypesEnum.None, a => a.types == request.types)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
-                .WhereIF(IsNormalId(request.option_id), a => a.option_id == request.option_id)
                 .WhereIF(isCodes, a => a.codes == request.key)
                 .WhereIF(!isEmpty && !isCodes, a => a.codec.Contains(request.key) || a.names.Contains(request.key))
                 .OrderByDescending(a => a.id)
@@ -70,9 +67,9 @@ namespace Com.Scm.Samples.Book
         public async Task<List<BookDvo>> GetListAsync(SearchRequest request)
         {
             var items = await _thisRepository.AsQueryable()
-                .Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                //.Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                .WhereIF(request.types != Enums.BookTypesEnum.None, a => a.types == request.types)
                 .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
-                .WhereIF(IsNormalId(request.option_id), a => a.option_id == request.option_id)
                 .WhereIF(!string.IsNullOrEmpty(request.key), a => a.codec.Contains(request.key) || a.names.Contains(request.key))
                 .OrderByDescending(a => a.id)
                 .Select<BookDvo>()
@@ -90,6 +87,24 @@ namespace Com.Scm.Samples.Book
 
                 // Others TODO
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<List<ResOptionDvo>> GetOptionAsync(SearchRequest request)
+        {
+            var items = await _thisRepository.AsQueryable()
+                //.Where(a => a.row_delete != ScmDeleteEnum.Yes)
+                .WhereIF(request.types != Enums.BookTypesEnum.None, a => a.types == request.types)
+                .WhereIF(!request.IsAllStatus(), a => a.row_status == request.row_status)
+                .OrderByDescending(a => a.id)
+                .Select(a => new ResOptionDvo { id = a.id, label = a.namec, value = a.id })
+                .ToListAsync();
+
+            return items;
         }
 
         /// <summary>
@@ -129,18 +144,6 @@ namespace Com.Scm.Samples.Book
         {
             var dao = model.Clone<BookDao>();
             await _thisRepository.InsertAsync(dao);
-
-            // 查询流程
-            var flowOrderDao = await _FlowService.GetFlowOrderAsync(dao.unit_id, FLOW_ORDER);
-            if (flowOrderDao == null)
-            {
-                return;
-            }
-
-            // 启动流程
-            var orderId = dao.id;
-            var orderCode = dao.codes;
-            await _FlowService.StartFlow(flowOrderDao.flow_id, orderId, orderCode, "演示审批流程", 0, dao.create_user);
         }
 
         /// <summary>
@@ -148,9 +151,22 @@ namespace Com.Scm.Samples.Book
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateAsync(BookDto model)
+        public async Task<bool> UpdateAsync(BookDto model)
         {
-            await _thisRepository.UpdateAsync(model.Clone<BookDao>());
+            var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec && a.id != model.id);
+            if (dao != null)
+            {
+                throw new BusinessException("已存在相同编码的书籍！");
+            }
+            dao = await _thisRepository.GetByIdAsync(model.id);
+            if (dao == null)
+            {
+                throw new BusinessException("无效的书籍！");
+            }
+
+            dao = model.Adapt(dao);
+            RemoveCacheById(dao.id);
+            return await _thisRepository.UpdateAsync(dao);
         }
 
         /// <summary>
@@ -235,6 +251,29 @@ namespace Com.Scm.Samples.Book
                 var bytes = new byte[stream.Length];
                 await stream.ReadAsync(bytes, 0, bytes.Length);
                 return new FileContentResult(bytes, "image/png");
+            }
+        }
+
+        public BookDao GetDaoById(long id, bool useCache = true)
+        {
+            if (_Dict.ContainsKey(id))
+            {
+                return _Dict[id];
+            }
+
+            var dao = _thisRepository.GetById(id);
+            if (dao != null)
+            {
+                _Dict[id] = dao;
+            }
+            return dao;
+        }
+
+        public void RemoveCacheById(long id)
+        {
+            if (_Dict.ContainsKey(id))
+            {
+                _Dict.Remove(id);
             }
         }
     }

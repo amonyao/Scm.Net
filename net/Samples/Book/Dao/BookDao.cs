@@ -1,6 +1,7 @@
 ﻿using Com.Scm.Dao;
 using Com.Scm.Dao.Unit;
 using Com.Scm.Enums;
+using Com.Scm.Samples.Book.Enums;
 using Com.Scm.Utils;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,9 +14,9 @@ namespace Com.Scm.Samples.Book.Dao
     public class BookDao : ScmUnitDataDao, ISystemDao, IDeleteDao, IApprovalDao
     {
         /// <summary>
-        /// 选项
+        /// 书籍类型
         /// </summary>
-        public long option_id { get; set; }
+        public BookTypesEnum types { get; set; }
         /// <summary>
         /// 系统编码（全局编码，用于系统时API交换）
         /// 格式：DEMO00000001
@@ -43,6 +44,11 @@ namespace Com.Scm.Samples.Book.Dao
         [StringLength(32)]
         public string barcode { get; set; }
         /// <summary>
+        /// 图片
+        /// </summary>
+        [StringLength(32)]
+        public string image { get; set; }
+        /// <summary>
         /// 备注
         /// </summary>
         [StringLength(256)]
@@ -61,7 +67,7 @@ namespace Com.Scm.Samples.Book.Dao
         /// <summary>
         /// 审批状态（不是必需）
         /// </summary>
-        public ScmApprovalEnum wfa_status { get; set; }
+        public ScmWfaStatusEnum wfa_status { get; set; }
 
         public override void PrepareCreate(long userId, long unitId = 0)
         {
