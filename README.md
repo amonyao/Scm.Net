@@ -1,130 +1,101 @@
-﻿# Scm.Net
+
+
+# Scm.Net
 
 ## 项目介绍
-一款基于.Net8及Vue3适用于中后台管理系统的快速开发框架。  
-笔者从事供应链系统产研多年，经常面对异构应用场景需求，在梳理之前多种项目经验的过程中，特开发此项目以期帮助各位同仁位快速搭建一个完整的开发框架，并满足多场景下的异构应用场景需求。  
-以下是笔者以及其它伙伴基于此项目开发的产品：OMS（订单管理系统）、WMS（仓储管理系统）、TMS（运输管理系统）、DMS（配送管理系统）、BMS（计费管理系统）、YMS（园区管理系统）、IOT（物联网管理系统）等。  
-当然，此项目还在不断完善的过程中，还存在不少待完善的事项，也欢迎有兴趣的同仁一起交流沟通。  
+
+Scm.Net 是一个基于 .NET 平台的软件项目，结合 Vue.js 前端框架，提供了一套完整的前后端架构解决方案。该项目主要用于构建企业级应用程序，涵盖了从数据访问层到用户界面层的完整结构，支持多种功能模块，包括数据管理、文件上传、缓存服务、定时任务等。
 
 ## 软件架构
-1. 采用前后端分离模式；  
-2. 后端基于.Net8开发，可直接编译输出.Net6/7/8的运行时；  
-3. 后端仅依赖几个常用的三方类库：**[SqlSugarCore](https://www.donet5.com/Home/Doc)**(ORM工具）、**[Newtonsoft.Json](https://www.newtonsoft.com/json)**（JSON工具）、**[ImageSharp](https://github.com/SixLabors/ImageSharp)**（跨平台图像工具）；  
-4. 前端基于 **[Vue 3](https://vuejs.org)** 及 **[Element Plus](https://element-plus.gitee.io)** 开发；  
-5. 前端仅依赖几个常用的三方组件：**[Axios](https://axios-http.com/)**（HTTP工具），良好支持i18n（多语言）；  
-6. 系统无平台依赖，可直接在多平台（**Windows**、**MacOS**、**Linux**等）开发与运行；  
-7. 响应式布局，支持多种设备终端（**电脑**、**平板**、**手机**）等。  
+
+该项目后端使用 .NET 8.0 构建，包含多个模块化的类库，采用分层架构设计，包括：
+
+- **DAO (Data Access Object)**: 负责与数据库交互，如 `Samples.Server.Dao` 模块。
+- **DTO (Data Transfer Object)**: 数据传输对象，用于封装和传递数据。
+- **DVO (Domain View Object)**: 用于前端展示的数据对象。
+- **Service**: 提供业务逻辑处理，例如 `SamplesDemoService` 和 `SamplesBookService`。
+- **Controllers**: 提供 RESTful API 接口，支持前端交互。
+
+前端使用 Vue.js 框架，结合 Material Symbols 和其他公共资源，构建现代用户界面。
 
 ## 设计原则
-1. 数据库仅用于**存储数据**，除CRUD以外不使用任何依赖特定数据库的特性，项目可平滑迁移到任何支持标准SQL的数据引擎；  
-2. 数据库原则上仅允许**单表操作**，最多不能同时操作两张表，可以一定程度上进行数据冗余设计，以提升数据引擎效率；  
-3. 基于**Json格式**的多端数据交互，在保证数据低噪音的前提下提升数据可扩展性；  
-4. 适配多场景异构应用需求，DTO（数据传输层）统一使用**蛇形命名法**；  
 
-## 主要功能  
-1. 首页自定义风格；  
-2. 支持多种登录方式（账户、手机、邮件、三方等）；  
-3. 支持代码自动生成，支持自定义代码模板；  
-4. 集成ID生成器，支持雪花ID、序列ID、格式ID等多种生成方式；  
-5. 支持多级权限管理：公司管理、部门管理、岗位管理、分组管理、用户管理、角色管理等。  
-6. 支持全局数据字典；  
-7. 支持全局配置参数；  
-8. 支持多种数据引擎（**MySQL**、**SQL Server**、**Oracle**、**SQLite**、**MariaDB**、**Postgresql**、**Firebird**、**MongoDB**等）；  
-9. 支持多种缓存机制（**MemoryCache**、**Map**、**Redis**等）；  
-10. 支持**登录日志**与**操作日志**，并记录用户跟进信息（**登录主机**、**操作系统**、**浏览器**等）；  
-11. 支持用户留言与实时反馈；  
-
-## 更新日志：
-[更新日志](https://gitee.com/openscm/scm.net/wikis/更新日志)  
+- **模块化**: 各个功能模块独立，便于维护和扩展。
+- **分层架构**: 清晰的分层结构，分离数据访问、业务逻辑和用户界面。
+- **可扩展性**: 支持通过插件和模块扩展功能。
+- **前后端分离**: � - **缓存**：使用 `Scm.Cache` 系列 DLL 提供缓存支持。
+- **定时任务**：通过 `Scm.Server.Quartz` 支持定时任务管理。
+- **文件处理**：支持文件上传、下载、Excel 导入导出等功能。
+- **Redis 缓存**：提供 Redis 缓存集成支持。
+- **代码生成**：`Scm.Generator` 支持代码模板生成。
 
 ## 项目特色
-1. 系统提供完善的示例与操作说明；  
-2. 系统将不同的功能进行模块化拆分，可以根据需要引入使用；  
-3. 前台与后台系统分离，分别为不同的系统（域名可独立）；  
-4. 后台系统无需任何二次开发，直接发布即可使用；  
-5. 可扩展为多租户、多组织架构应用；  
 
-[查看文档](https://gitee.com/openscm/scm.net/wikis/%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D)
-
-## 浏览器支持
-
-![chrome](https://img.shields.io/badge/chrome->%3D4.5-success.svg?logo=google%20chrome&logoColor=red)
-![firefox](https://img.shields.io/badge/firefox->38-success.svg?logo=mozilla%20firefox&logoColor=red)
-![edge](https://img.shields.io/badge/edge->%3D12-success.svg?logo=microsoft%20edge&logoColor=blue)
-![ie](https://img.shields.io/badge/ie->%3D11-success.svg?logo=internet%20explorer&logoColor=blue)
-![Safari](https://img.shields.io/badge/safari->%3D9-success.svg?logo=safari&logoColor=blue)
-![Andriod](https://img.shields.io/badge/andriod->%3D4.4-success.svg?logo=android)
-![oper](https://img.shields.io/badge/opera->%3D3.0-success.svg?logo=opera&logoColor=red)  
-
-移动端：
-![ios](https://img.shields.io/badge/ios-supported-success.svg?logo=apple&logoColor=white)
-![Andriod](https://img.shields.io/badge/andriod-suported-success.svg?logo=android)
-
-|                        |  **Chrome**  |  **Firefox**  |  **Safari**  |  **Android Browser & WebView**  |  **Microsoft Edge**  |
-| -------                | ---------    | ---------     | ------       | -------------------------       | --------------       |
-|  **iOS**               | 支持         | 支持           | 支持         | N/A                             | 支持                 |
-|  **Android**           | 支持         | 支持           | N/A          | Android v5.0+ 支持              | 支持                 |
-
-桌面端：
-![windows](https://img.shields.io/badge/windows-suported-success.svg?logo=windows)
-![macOS](https://img.shields.io/badge/macOS-supported-success.svg?logo=apple&logoColor=white)
-![linux](https://img.shields.io/badge/linux-suported-success.svg?logo=linux&logoColor=white)
-
-|             | **Chrome**    | **Firefox**   | **Internet Explorer** | **Microsoft Edge** | **Opera**     | **Safari**    |
-| -------     | ---------     | ---------     | -----------------     | --------------     | ---------     | ------------- |
-| **Windows** | 支持          | 支持          | 支持（IE10+）          | 支持                | 支持           | 支持          |
-| **MacOS**   | 支持          | 支持          | N/A                   | N/A                | 支持           | 支持          |
-| **Linux**   | 支持          | 支持          | N/A                   | N/A                | N/A            | N/A           |
+- **多数据库支持**：通过 `SqlSugar` 支持多种数据库操作。
+- **文件操作模块**：支持多种文件格式和文件存储管理。
+- **缓存机制**：支持内存缓存和 Redis 缓存。
+- **前后端分离架构**：后端提供 API，前端使用 Vue.js 独立开发。
+- **模块化设计**：易于扩展和维护。
+- **企业级功能**：包括定时任务、审批流程、日志记录等。
 
 ## 开发环境搭建
-1. 安装 .Net SDK（.Net6或以上）[官方网址](https://dotnet.microsoft.com)
-2. 安装 Visual Studio（2022或以上）[官方网址](https://visualstudio.microsoft.com)
-3. 安装 MariaDB（10.3或上）[官方网址](https://mariadb.org)
-4. 获取项目代码：[Scm.NET](https://gitee.com/openscm/scm.net)
-5. 环境搭建教程：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B)
-6. 数据库配置：[详细说明](https://gitee.com/openscm/scm.net/wikis/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
 
-## 演示地址  
-【登录地址】[点击登录](http://www.c-scm.net)  
-【管理账号】
-用户：Admin@demo
-密码：123456  
-【普通账号】
-用户：User@demo
-密码：123456  
+1. **后端开发环境**:
+   - 安装 .NET 8.0 SDK
+   - 安装 Visual Studio 或 Rider
+   - 恢复项目依赖项
+
+2. **前端开发环境**:
+   - 安装 Node.js 和 npm
+   - 使用 `package.json` 安装前端依赖
+   - 使用 Vue CLI 构建和运行项目
+
+3. **数据库配置**:
+   - 使用 `SqlSugar` 配置数据库连接
+   - 初始化数据库结构
 
 ## 常见问题
-请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) 查看常见问题小节  
+
+### 如何运行后端服务？
+
+使用 Visual Studio 或 Rider 打开 `.sln` 文件，运行 `Scm.Api` 项目。
+
+### 如何运行前端？
+
+进入 `vue` 目录，执行：
+
+```bash
+npm install
+npm run serve
+```
+
+### 如何上传文件？
+
+使用 `UploadRequest` 和 `UploadAsync` 方法进行文件上传，支持多模块文件处理。
+
+### 如何实现 Excel 导入？
+
+通过 `ImportRequest` 和 `ImportAsync` 方法实现 Excel 数据导入功能。
 
 ## 开源协议
-[![Gitee license](https://img.shields.io/github/license/argozhang/bootstrapadmin.svg?logo=git&logoColor=red)](https://gitee.com/openscm/scm.net/blob/master/LICENSE)
+
+该项目采用开源协议（请查看 LICENSE 文件）进行分发。
 
 ## 项目截图
-电脑端页面   
-![后台首页](https://gitee.com/openscm/scm.net/raw/master/pc-home.png)  
-![接口日志](https://gitee.com/openscm/scm.net/raw/master/pc-logapi.png)  
-![在线SQL](https://gitee.com/openscm/scm.net/raw/master/pc-sql.png)  
-![任务调度](https://gitee.com/openscm/scm.net/raw/master/pc-task.png)  
-![系统监控](https://gitee.com/openscm/scm.net/raw/master/pc-monitor.png)  
 
-手机端页面   
-![用户登录](https://gitee.com/openscm/scm.net/raw/master/mp-login.jpg)  
-![用户首页](https://gitee.com/openscm/scm.net/raw/master/mp-home.jpg)  
-![系统菜单](https://gitee.com/openscm/scm.net/raw/master/mp-menu.jpg)  
-
-更多截图请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis) 查看项目截图小节  
+- `pc-login.png`: 登录界面截图
+- `pc-home.png`: 主界面截图
+- `pc-task.png`: 任务模块界面
+- `pc-sql.png`: 数据库操作界面
 
 ## 特别鸣谢
-1. 数据引擎 **[SqlSugar](https://gitee.com/dotnetchina/SqlSugar)**；  
-2. 动态API代码借鉴自 **[Panda.DynamicWebApi](https://gitee.com/mirrors/Panda.DynamicWebApi)**；  
 
-## QQ交流群
-
-![QQ](https://img.shields.io/badge/QQ-415872667-green.svg?logo=tencent%20qq&logoColor=red)  
-<img src="https://gitee.com/openscm/scm.net/raw/master/qq.jpg" width="30%"/>
+感谢 .NET 社区、Vue.js 开发团队以及所有为该项目提供支持的开源项目。
 
 ## 支持作者
 
-如果这个项目对您有所帮助，并希望能够给更多的提供方便，请给予笔者支持，深表感谢。
+如需支持项目开发，欢迎加入我们的 QQ 交流群（群号请查看 `README.md` 文件）。
 
-<img src="https://gitee.com/openscm/scm.net/raw/master/wepay.jpg" width="30%"/>
+## 联系方式
+
+如需进一步帮助，请联系作者或提交 issue 到本项目的 Gitee 页面。
