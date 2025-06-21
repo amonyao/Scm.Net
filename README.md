@@ -88,10 +88,10 @@
 【登录地址】[点击登录](http://www.c-scm.net)  
 【管理账号】
 用户：Admin@demo
-密码：123654  
+密码：123456  
 【普通账号】
 用户：User@demo
-密码：123654  
+密码：123456  
 
 ## 常见问题
 请点击 [查看文档](https://gitee.com/openscm/scm.net/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98) 查看常见问题小节  

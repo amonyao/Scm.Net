@@ -43,4 +43,11 @@ export default {
 			return await http.delete(this.url, data);
 		},
 	},
+	changeOwner: {
+		url: `${config.API_URL}/urorganize/changeOwner`,
+		name: "更新主管",
+		post: async function (data) {
+			return await http.post(this.url, data);
+		},
+	},
 };

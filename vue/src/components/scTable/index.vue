@@ -33,7 +33,7 @@
 				</template>
 			</el-table>
 		</div>
-		<div class="scTable-page">
+		<div class="scTable-page" v-if="!hidePagination && !hideDo">
 			<div class="scTable-pagination">
 				<el-pagination v-if="!hidePagination" :currentPage="currentPage" :page-size="pageSize"
 					:page-sizes="scPageSize" :layout="paginationLayout" :total="total" background :small="true"

@@ -1,56 +1,20 @@
 <template>
-	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" :destroy-on-close="true" width="800px"
+	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" :destroy-on-close="true" width="450px"
 		@close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
-			<el-row>
-				<el-col>
-					<el-form-item label="所属组织" prop="pid">
-						<el-tree-select v-model="formData.pid" :data="parentIdOptions" :default-expand-all="true"
-							:check-strictly="true" :style="{ width: '100%' }" />
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col>
-					<el-form-item label="组织名称" prop="namec">
-						<el-input v-model="formData.namec" placeholder="请输入组织名称" clearable></el-input>
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col>
-					<el-form-item label="组织编码">
-						<el-input v-model="formData.codec" placeholder="请输入组织编码" clearable></el-input>
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col>
-					<el-form-item label="组织负责人" prop="leaderUser">
-						<el-input v-model="formData.leaderUser" placeholder="请输入组织负责人" clearable></el-input></el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col>
-					<el-form-item label="联系电话" prop="leaderMobile">
-						<el-input v-model="formData.leaderMobile" placeholder="请输入联系电话" clearable></el-input>
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col>
-					<el-form-item label="联系邮箱" prop="leaderEmail">
-						<el-input v-model="formData.leaderEmail" placeholder="请输入联系邮箱" clearable></el-input>
-					</el-form-item>
-				</el-col>
-			</el-row>
-			<el-row>
-				<el-col>
-					<el-form-item label="排序" prop="od" required>
-						<el-input-number v-model="formData.od" :min="0" />
-					</el-form-item>
-				</el-col>
-			</el-row>
+			<el-form-item label="所属组织" prop="pid">
+				<el-tree-select v-model="formData.pid" :data="parentIdOptions" :default-expand-all="true"
+					:check-strictly="true" :style="{ width: '100%' }" />
+			</el-form-item>
+			<el-form-item label="组织名称" prop="namec">
+				<el-input v-model="formData.namec" placeholder="请输入组织名称" clearable></el-input>
+			</el-form-item>
+			<el-form-item label="组织编码" prop="codec">
+				<el-input v-model="formData.codec" placeholder="请输入组织编码" clearable></el-input>
+			</el-form-item>
+			<el-form-item label="排序" prop="od" required>
+				<el-input-number v-model="formData.od" :min="0" />
+			</el-form-item>
 		</el-form>
 
 		<template #footer>
@@ -75,16 +39,12 @@ export default {
 				// pid: [
 				// 	{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属组织", },
 				// ],
+				codec: [
+					{ required: true, trigger: "blur", message: "请输入组织编码", },
+				],
 				namec: [
 					{ required: true, trigger: "blur", message: "请输入组织名称", },
 				],
-				leaderUser: [
-					{ required: true, trigger: "blur", message: "请输入组织负责人", },
-				],
-				leaderMobile: [
-					{ required: true, trigger: "blur", message: "请输入联系电话", },
-				],
-				leaderEmail: [],
 			},
 			parentIdOptions: [],
 			parentIdProps: {
@@ -100,9 +60,6 @@ export default {
 				id: '0',
 				pid: undefined,
 				namec: "",
-				leaderUser: "",
-				leaderMobile: "",
-				leaderEmail: "",
 				od: 1,
 			}
 		},

@@ -79,9 +79,11 @@ export default {
         },
         async save() {
             if (!this.api) {
+                this.$message.success("调用API为空！");
                 return;
             }
             if (!this.selection || this.selection.length < 1) {
+                this.$message.success("请选择要添加的书籍！");
                 return;
             }
 

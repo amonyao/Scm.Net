@@ -72,21 +72,21 @@ export default {
 		}
 	},
 	submit: {
-		url: `${config.API_URL}/samplespoheader/submit/`,
+		url: `${config.API_URL}/samplespoflow/submit/`,
 		name: "提交审批",
 		post: async function (data) {
 			return await http.post(this.url + data);
 		}
 	},
 	accept: {
-		url: `${config.API_URL}/samplespoheader/accept`,
+		url: `${config.API_URL}/samplespoflow/accept`,
 		name: "审批通过",
 		post: async function (data) {
 			return await http.post(this.url, data);
 		}
 	},
 	reject: {
-		url: `${config.API_URL}/samplespoheader/reject`,
+		url: `${config.API_URL}/samplespoflow/reject`,
 		name: "审批拒绝",
 		post: async function (data) {
 			return await http.post(this.url, data);

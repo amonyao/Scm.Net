@@ -52,7 +52,7 @@
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<template #order_codes="scope">
-					<el-button type="primary" plain @click="open_tab(scope.row)">{{ scope.row.order_codes }}</el-button>
+					<el-button type="primary" link @click="open_tab(scope.row)">{{ scope.row.order_codes }}</el-button>
 				</template>
 			</scTable>
 		</el-main>
@@ -132,7 +132,6 @@ export default {
 			}
 		},
 		open_tab(row) {
-			console.log(row.url)
 			if (!row.id || !row.url) {
 				return;
 			}

@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-main>
-            <el-container>
+            <el-container style="background-color: #fff;">
                 <el-header>
                     <el-row>
                         <el-col :span="8">
@@ -13,7 +13,8 @@
                     </el-row>
                 </el-header>
                 <el-main class="nopadding">
-                    <scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" row-key="id">
+                    <scTable ref="table" :table-name="tableName" :data="detail_list" :column="column" row-key="id"
+                        :hidePagination="true" :hideDo="true">
                         <el-table-column label="#" type="index" width="50"></el-table-column>
                     </scTable>
                 </el-main>
@@ -26,8 +27,8 @@
                         <el-timeline-item placement="top" v-for="item in result_list" :key="item.id"
                             :timestamp="item.date">
                             <el-card shadow="never">
-                                <h4>版本：{{ item.ver }}（BUILD:{{ item.build }}）</h4>
-                                <p v-html="toHtml(item.remark)"></p>
+                                <h4>{{ this.$TOOL.dateTimeFormat(item.create_time) }}</h4>
+                                <p v-html="item.comment"></p>
                             </el-card>
                         </el-timeline-item>
                     </el-timeline>
@@ -68,7 +69,9 @@ export default {
                 { prop: "create_names", label: "创建人员", width: 100, },
                 { prop: "create_time", label: "创建时间", width: 160, formatter: this.$TOOL.dateTimeFormat },
             ],
+            id: '0',
             header: {},
+            detail_list: [],
             flow_data: {},
             result_list: []
         };
@@ -86,7 +89,7 @@ export default {
                 return;
             }
 
-            this.param.id = id;
+            this.id = id;
 
             var res = await this.$API.sysflowdata.view.get(id);
             if (!res || res.code != 200) {
@@ -100,19 +103,47 @@ export default {
             }
 
             this.header = res.data;
-            this.search();
+            this.param.id = this.header.id;
+            this.listDetail();
+            this.listResult();
+        },
+        async listDetail() {
+            var res = await this.$API.samplespodetail.list.get(this.param);
+            if (!res || res.code != 200) {
+                return;
+            }
+            this.detail_list = res.data;
+        },
+        async listResult() {
+            var res = await this.$API.sysflowdata.result.get(this.id);
+            if (!res || res.code != 200) {
+                return;
+            }
+            this.result_list = res.data;
         },
         complete() {
-            this.$refs.table.refresh();
+            this.listDetail();
         },
         search() {
-            this.$refs.table.upData(this.param);
+            this.listDetail();
         },
-        accept() {
-            alert('accept');
+        async accept() {
+            var data = { 'id': this.id, 'comment': '' };
+            var res = await this.$API.samplespoheader.accept.post(data);
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.$message.success("审批通过");
         },
-        reject() {
-            alert('reject');
+        async reject() {
+            var data = { 'id': this.id, 'comment': '' };
+            var res = await this.$API.samplespoheader.reject.post(data);
+            if (!res || res.code != 200) {
+                return;
+            }
+
+            this.$message.success("审批拒绝");
         }
     },
 };

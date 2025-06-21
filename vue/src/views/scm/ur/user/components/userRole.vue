@@ -32,7 +32,7 @@ export default {
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.parentId,
+					parentId: m.pid,
 				});
 			});
 			this.data = this.$TOOL.changeTree(roleArr);

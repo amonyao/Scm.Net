@@ -1,4 +1,20 @@
 <template>
+	<sc-search ref="search" @search="search">
+		<template #search>
+			<el-form ref="formRef" label-width="80px" :model="param">
+				<el-form-item label="书籍类型" prop="types">
+					<sc-select v-model="param.types" placeholder="请选择" :data="types_list" />
+				</el-form-item>
+				<el-form-item label="数据状态" prop="row_status">
+					<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_time">
+					<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+						start-placeholder="开始日期" end-placeholder="结束日期" />
+				</el-form-item>
+			</el-form>
+		</template>
+	</sc-search>
 	<el-container>
 		<el-header>
 			<div class="left-panel">
@@ -24,12 +40,12 @@
 				</el-button-group>
 			</div>
 			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" v-on:input="usernameInput()"
-						v-on:keydown="userNameKeydown($event)" v-on:keyup="userNameKeyup($event)"
-						v-on:paste="usernamePaste()" @blur="blurUsername()" />
-					<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
-				</div>
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
+				<el-button @click="show_search">高级</el-button>
 			</div>
 		</el-header>
 		<el-main class="nopadding">
@@ -84,7 +100,7 @@ export default {
 			importApi: this.$API.samplesbook.import,
 			templateUrl: `${config.SERVER_URL}/upload/templates/示例模板.xlsx`,
 			param: {
-				option_id: '0',
+				types: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
@@ -93,6 +109,7 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
+				{ prop: 'types', label: '书籍类型', width: 100, formatter: this.getTypesNames },
 				{ prop: 'codes', label: '系统代码', width: 140 },
 				{ prop: 'codec', label: '书籍编码', width: 100 },
 				{ prop: 'names', label: '系统简称', width: 160 },
@@ -106,11 +123,13 @@ export default {
 				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
 				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
-			option_list: [this.$SCM.OPTION_ALL],
-			statusList: [this.$SCM.OPTION_ALL]
+			types_list: [this.$SCM.OPTION_ALL],
+			row_status_list: [this.$SCM.OPTION_ALL]
 		};
 	},
 	mounted() {
+		this.$SCM.list_status(this.row_status_list);
+		this.$SCM.list_dic(this.types_list, 'samples_demo_book_types', true);
 	},
 	methods: {
 		complete() {
@@ -130,6 +149,9 @@ export default {
 		},
 		delete_list() {
 			this.$SCM.delete_list(this, this.$API.samplesbook.delete, this.selection);
+		},
+		show_search() {
+			this.$refs.search.open(this.param.key);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -159,6 +181,9 @@ export default {
 		},
 		do_upload() {
 			this.$refs.upload.open();
+		},
+		getTypesNames(types) {
+			return this.$SCM.get_dic_names(this.types_list, types, '');
 		}
 	},
 };

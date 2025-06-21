@@ -21,6 +21,8 @@
 						</el-button>
 					</el-tooltip>
 				</el-button-group>
+				<el-divider direction="vertical"></el-divider>
+				<el-button type="primary" @click="open_owner()" :disabled="selection.length != 1">修改负责人</el-button>
 			</div>
 			<div class="right-panel">
 				<el-input v-model="param.key" clearable placeholder="关键字">
@@ -64,8 +66,9 @@
 				</template>
 			</scTable>
 		</el-main>
-		<edit ref="edit" @complete="complete" />
 	</el-container>
+	<edit ref="edit" @complete="complete" />
+	<editOwner ref="editOwner" @complete="complete" />
 </template>
 
 <script>
@@ -74,6 +77,7 @@ export default {
 	name: 'scm_ur_organize',
 	components: {
 		edit: defineAsyncComponent(() => import("./edit")),
+		editOwner: defineAsyncComponent(() => import("./editOwner")),
 	},
 	data() {
 		return {
@@ -86,12 +90,10 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ label: "组织名称", prop: "namec", align: "left", minWidth: 200 },
-				{ label: "组织编码", prop: "codec", width: "100" },
-				{ label: "负责人", prop: "leaderUser", width: "100" },
-				{ label: "电话", prop: "leaderMobile", width: "200" },
-				{ label: "数据状态", prop: "row_status", width: "80" },
-				{ label: "排序", prop: "od", width: "80" },
+				{ prop: "namec", label: "组织名称", minWidth: "200", align: "left" },
+				{ prop: "codec", label: "组织编码", width: "100" },
+				{ prop: "owner_names", label: "负责人", width: "100", align: "left" },
+				{ prop: "od", label: "排序", width: "80" },
 				{ prop: "row_status", label: "数据状态", width: "80", },
 				{ prop: "update_names", label: "更新人员", width: "100", },
 				{ prop: "update_time", label: "更新时间", width: "160", formatter: this.$TOOL.dateTimeFormat },
@@ -136,6 +138,13 @@ export default {
 			if (obj.command == "delete") {
 				this.table_del(obj.row);
 			}
+		},
+		open_owner() {
+			if (this.selection.length != 1) {
+				return;
+			}
+
+			this.$refs.editOwner.open(this.selection[0]);
 		},
 	},
 };

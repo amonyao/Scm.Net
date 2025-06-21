@@ -12,7 +12,7 @@ export default {
 		url: `${config.API_URL}/samplespodetail/list`,
 		name: "列表",
 		get: async function (params) {
-			return await http.get(this.url + params);
+			return await http.get(this.url, params);
 		}
 	},
 	view: {
