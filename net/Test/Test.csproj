@@ -8,26 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Garnet" Version="1.0.54" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.180" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Scm.Common">
-      <HintPath>..\Libs\netstandard2.0\Scm.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Common.Dto">
-      <HintPath>..\Libs\netstandard2.0\Scm.Common.Dto.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Common.Text">
-      <HintPath>..\Libs\netstandard2.0\Scm.Common.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Dao">
-      <HintPath>..\Libs\net8.0\Scm.Dao.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Dao">
-      <HintPath>..\Libs\net8.0\Scm.Server.Dao.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
