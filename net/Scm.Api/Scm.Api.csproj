@@ -42,6 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Samples\Samples.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Scm.App">
       <HintPath>..\Libs\net8.0\Scm.App.dll</HintPath>
     </Reference>
