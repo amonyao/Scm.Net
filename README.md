@@ -1,4 +1,6 @@
-﻿# Scm.Net
+﻿
+
+# Scm.Net
 
 ## 项目介绍
 一款基于.Net8及Vue3适用于中后台管理系统的快速开发框架。  
@@ -8,31 +10,33 @@
 
 ## 软件架构
 1. 采用前后端分离模式；  
-2. 后端基于.Net8开发，可直接编译输出.Net6/7/8的运行时；  
-3. 后端仅依赖几个常用的三方类库：**[SqlSugarCore](https://www.donet5.com/Home/Doc)**(ORM工具）、**[Newtonsoft.Json](https://www.newtonsoft.com/json)**（JSON工具）、**[ImageSharp](https://github.com/SixLabors/ImageSharp)**（跨平台图像工具）；  
+2. 后端基于 **.Net8** 开发，可直接编译输出 .Net6/7/8 的运行时；  
+3. 后端仅依赖几个常用的三方类库： **[SqlSugarCore](https://www.donet5.com/Home/Doc)** (ORM工具）、 **[Newtonsoft.Json](https://www.newtonsoft.com/json)** （JSON工具）、 **[ImageSharp](https://github.com/SixLabors/ImageSharp)** （跨平台图像工具）；  
 4. 前端基于 **[Vue 3](https://vuejs.org)** 及 **[Element Plus](https://element-plus.gitee.io)** 开发；  
-5. 前端仅依赖几个常用的三方组件：**[Axios](https://axios-http.com/)**（HTTP工具），良好支持i18n（多语言）；  
-6. 系统无平台依赖，可直接在多平台（**Windows**、**MacOS**、**Linux**等）开发与运行；  
-7. 响应式布局，支持多种设备终端（**电脑**、**平板**、**手机**）等。  
+5. 前端仅依赖几个常用的三方组件： **[Axios](https://axios-http.com/)** （HTTP工具），良好支持i18n（多语言）；  
+6. 系统无平台依赖，可直接在多平台（ **Windows** 、 **MacOS** 、 **Linux** 、 **HarmonyOS** 等）开发与运行；  
+7. 响应式布局，支持多种设备终端（ **电脑** 、 **平板** 、 **手机** ）等。  
 
 ## 设计原则
-1. 数据库仅用于**存储数据**，除CRUD以外不使用任何依赖特定数据库的特性，项目可平滑迁移到任何支持标准SQL的数据引擎；  
-2. 数据库原则上仅允许**单表操作**，最多不能同时操作两张表，可以一定程度上进行数据冗余设计，以提升数据引擎效率；  
-3. 基于**Json格式**的多端数据交互，在保证数据低噪音的前提下提升数据可扩展性；  
-4. 适配多场景异构应用需求，DTO（数据传输层）统一使用**蛇形命名法**；  
+1. 数据库仅用于 **存储数据** ，除CRUD以外不使用任何依赖特定数据库的特性，项目可平滑迁移到任何支持标准SQL的数据引擎；  
+2. 数据库原则上仅允许 **单表操作** ，最多不能同时操作两张表，可以一定程度上进行数据冗余设计，以提升数据引擎效率；  
+3. 基于 **Json格式** 的多端数据交互，在保证数据低噪音的前提下提升数据可扩展性；  
+4. 适配多场景异构应用需求，DTO（数据传输层）统一使用 **蛇形命名法** ；  
 
 ## 主要功能  
 1. 首页自定义风格；  
-2. 支持多种登录方式（账户、手机、邮件、三方等）；  
-3. 支持代码自动生成，支持自定义代码模板；  
-4. 集成ID生成器，支持雪花ID、序列ID、格式ID等多种生成方式；  
-5. 支持多级权限管理：公司管理、部门管理、岗位管理、分组管理、用户管理、角色管理等。  
-6. 支持全局数据字典；  
-7. 支持全局配置参数；  
-8. 支持多种数据引擎（**MySQL**、**SQL Server**、**Oracle**、**SQLite**、**MariaDB**、**Postgresql**、**Firebird**、**MongoDB**等）；  
-9. 支持多种缓存机制（**MemoryCache**、**Map**、**Redis**等）；  
-10. 支持**登录日志**与**操作日志**，并记录用户跟进信息（**登录主机**、**操作系统**、**浏览器**等）；  
-11. 支持用户留言与实时反馈；  
+2. 支持多种登录方式（ **账户** 、 **手机** 、 **邮件** 、 **三方** 等）；  
+3. 支持多种数据引擎（ **MySQL** 、 **SQL Server** 、 **Oracle** 、 **SQLite** 、 **MariaDB** 、 **Postgresql** 、 **Firebird** 、 **MongoDB** 等）；  
+4. 支持多种缓存机制（ **MemoryCache** 、 **Map** 、 **Redis** 等）；  
+5. 支持 **登录日志** 与 **操作日志** ，并记录用户跟进信息（ **登录主机** 、 **操作系统** 、 **浏览器** 等）；  
+6. 支持集成多种大模型（ **[DeepSeek](https://www.deepseek.com/)** 、、 **[华为盘古](https://pangu.huaweicloud.com/)** 、 **[阿里通义千问](https://www.tongyi.com/)** 、 **[腾讯元宝](https://yuanbao.tencent.com/)** 、 **[百度文心一言](https://yiyan.baidu.com/)** 、 **[豆包](https://www.doubao.com/)** 、 **[ChatGPT](https://chatgpt.com/)** ）；  
+7. 支持代码自动生成，支持自定义代码模板；  
+8. 集成ID生成器，支持雪花ID、序列ID、格式ID等多种生成方式；  
+9. 支持多级权限管理：公司管理、部门管理、岗位管理、分组管理、用户管理、角色管理等。  
+10. 支持全局数据字典；  
+11. 支持全局配置参数；  
+12. 支持用户留言与实时反馈；  
+13. 支持自定义审批流程；  
 
 ## 更新日志：
 [更新日志](https://gitee.com/openscm/scm.net/wikis/更新日志)  
@@ -86,11 +90,11 @@
 
 ## 演示地址  
 【登录地址】[点击登录](http://www.c-scm.net)  
-【管理账号】
-用户：Admin@demo
+【管理账号】  
+用户：admin@demo  
 密码：123456  
-【普通账号】
-用户：User@demo
+【普通账号】  
+用户：user@demo  
 密码：123456  
 
 ## 常见问题
