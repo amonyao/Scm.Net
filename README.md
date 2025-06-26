@@ -3,9 +3,12 @@
 # Scm.Net
 
 ## 项目介绍
-一款基于 **.Net8** 及 **Vue3** 构架、适用于企业中后台管理系统的快速开发框架。  
+一款基于 **.Net8** 及 **Vue3** 构架、适用于企业中后台管理系统的快速开发框架。   
+
 笔者多年从事供应链系统及企业信息化系统的产品与研发，经常面对异构应用场景需求，在梳理之前多种项目经验的过程中，特开发此项目以期帮助各位同仁位快速搭建一个完整的开发框架，并满足多场景下的异构应用场景需求。  
-以下是笔者以及其它伙伴基于此项目开发的产品： **OMS** （订单管理系统）、 **WMS** （仓储管理系统）、 **TMS** （运输管理系统）、 **DMS** （配送管理系统）、 **BMS** （计费管理系统）、 **YMS** （园区管理系统）、 **EAM** （资产管理系统）、 **IOT** （物联网管理系统）等。  
+
+以下是笔者以及其它伙伴基于此项目开发的产品：**OMS**（订单管理系统）、**WMS**（仓储管理系统）、**TMS**（运输管理系统）、**DMS**（配送管理系统）、**BMS**（计费管理系统）、**YMS**（园区管理系统）、**EAM**（资产管理系统）、**IOT**（物联网管理系统）等。  
+
 当然，此项目还在不断完善的过程中，还存在不少待完善的事项，也欢迎有兴趣的同仁一起交流沟通。  
 
 ## 软件架构
@@ -13,9 +16,9 @@
 2. 后端基于 **.Net8** 开发，可直接编译输出 .Net6/7/8 的运行时；  
 3. 后端仅依赖几个常用的三方类库： **[SqlSugarCore](https://www.donet5.com/Home/Doc)** (ORM工具）、 **[Newtonsoft.Json](https://www.newtonsoft.com/json)** （JSON工具）、 **[ImageSharp](https://github.com/SixLabors/ImageSharp)** （跨平台图像工具）；  
 4. 前端基于 **[Vue 3](https://vuejs.org)** 及 **[Element Plus](https://element-plus.gitee.io)** 开发；  
-5. 前端仅依赖几个常用的三方组件： **[Axios](https://axios-http.com/)** （HTTP工具），良好支持i18n（多语言）；  
-6. 系统无平台依赖，可直接在多平台（ **Windows** 、 **MacOS** 、 **Linux** 、 **HarmonyOS** 等）开发与运行；  
-7. 响应式布局，支持多种设备终端（ **电脑** 、 **平板** 、 **手机** ）等。  
+5. 前端仅依赖几个常用的三方组件：**[Axios](https://axios-http.com/)**（HTTP工具），良好支持i18n（多语言）；  
+6. 系统无平台依赖，可直接在多平台（**Windows**、**MacOS**、**Linux**、**HarmonyOS**等）开发与运行；  
+7. 响应式布局，支持多种设备终端（**电脑**、**平板**、**手机**）等。  
 
 ## 设计原则
 1. 数据库仅用于 **存储数据** ，除CRUD以外不使用任何依赖特定数据库的特性，项目可平滑迁移到任何支持标准SQL的数据引擎；  
@@ -25,11 +28,11 @@
 
 ## 主要功能  
 1. 首页自定义风格；  
-2. 支持多种登录方式（ **账户** 、 **手机** 、 **邮件** 、 **三方** 等）；  
-3. 支持多种数据引擎（ **MySQL** 、 **SQL Server** 、 **Oracle** 、 **SQLite** 、 **MariaDB** 、 **Postgresql** 、 **Firebird** 、 **MongoDB** 等）；  
-4. 支持多种缓存机制（ **MemoryCache** 、 **Map** 、 **Redis** 等）；  
-5. 支持 **登录日志** 与 **操作日志** ，并记录用户跟进信息（ **登录主机** 、 **操作系统** 、 **浏览器** 等）；  
-6. 支持集成多种大模型（ **[DeepSeek](https://www.deepseek.com/)** 、、 **[华为盘古](https://pangu.huaweicloud.com/)** 、 **[阿里通义千问](https://www.tongyi.com/)** 、 **[腾讯元宝](https://yuanbao.tencent.com/)** 、 **[百度文心一言](https://yiyan.baidu.com/)** 、 **[豆包](https://www.doubao.com/)** 、 **[ChatGPT](https://chatgpt.com/)** ）；  
+2. 支持多种登录方式（**账户**、**手机**、**邮件**、**三方**等）；  
+3. 支持多种数据引擎（**MySQL**、**SQL Server**、**Oracle**、**SQLite**、**MariaDB**、**PostgreSQL**、**Firebird**、**MongoDB**等）；  
+4. 支持多种缓存机制（**MemoryCache**、**Map**、**Redis**等）；  
+5. 支持 **登录日志** 与 **操作日志** ，并记录用户跟进信息（**登录主机**、**操作系统**、**浏览器**、**终端代码**等）；  
+6. 支持集成多种大模型（**[DeepSeek](https://www.deepseek.com/)**、**[华为盘古](https://pangu.huaweicloud.com/)**、**[阿里通义千问](https://www.tongyi.com/)**、**[腾讯元宝](https://yuanbao.tencent.com/)**、**[百度文心一言](https://yiyan.baidu.com/)**、**[豆包](https://www.doubao.com/)**、**[ChatGPT](https://chatgpt.com/)**）；  
 7. 支持代码自动生成，支持自定义代码模板；  
 8. 集成ID生成器，支持雪花ID、序列ID、格式ID等多种生成方式；  
 9. 支持多级权限管理：公司管理、部门管理、岗位管理、分组管理、用户管理、角色管理等。  
