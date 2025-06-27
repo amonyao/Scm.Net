@@ -26,3 +26,8 @@ PublishProfiles/
 /net/Scm.Api/dev/
 /net/Scm.Api/quartz/settings/logs/
 /net/Scm.Api/Properties/PublishProfiles/
+
+/net/Scm.Api/data/scm.db
+/net/Scm.Api/data/scm.uid
+/net/Scm.Api/data/scm.db
+/net/Scm.Api/data/scm.uid
