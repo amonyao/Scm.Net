@@ -70,6 +70,8 @@ export default {
 				that.$refs.table.refresh();
 			}, 1000);
 		},
+		selectionChange() {
+		}
 	},
 };
 </script>
