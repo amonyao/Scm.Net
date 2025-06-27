@@ -104,6 +104,7 @@ namespace Com.Scm.Api
             services.AddScoped<ICatService, ScmCatService>();
             services.AddScoped<ITagService, ScmTagService>();
             services.AddScoped<ISmsService, ScmSmsService>();
+            services.AddScoped<IFlowService, ScmFlowService>();
 
             // È«¾Ö¹ýÂË
             services.AddControllers(options =>
