@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <RootNamespace>Com.Scm.Samples</RootNamespace>
@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
-    <PackageReference Include="MiniExcel" Version="1.37.0" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.180" />
+    <PackageReference Include="MiniExcel" Version="1.41.3" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.197" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,22 +24,22 @@
       <HintPath>..\Libs\netstandard2.0\Scm.Common.Text.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dao">
-      <HintPath>..\Libs\net8.0\Scm.Dao.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Dao.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Dsa.Dba.Sugar">
-      <HintPath>..\Libs\net8.0\Scm.Dsa.Dba.Sugar.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Dsa.Dba.Sugar.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server">
-      <HintPath>..\Libs\net8.0\Scm.Server.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Server.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Api">
-      <HintPath>..\Libs\net8.0\Scm.Server.Api.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Server.Api.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
-      <HintPath>..\Libs\net8.0\Scm.Server.Dao.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Server.Dao.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Uid">
-      <HintPath>..\Libs\net8.0\Scm.Uid.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Uid.dll</HintPath>
     </Reference>
   </ItemGroup>
 

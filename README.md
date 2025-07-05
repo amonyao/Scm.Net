@@ -3,7 +3,7 @@
 # Scm.Net
 
 ## 项目介绍
-一款基于 **.Net8** 及 **Vue3** 构架、适用于企业中后台管理系统的快速开发框架。   
+一款基于 **.Net 9** 及 **Vue 3** 构架、适用于企业中后台管理系统的快速开发框架。   
 
 笔者多年从事供应链系统及企业信息化系统的产品与研发，经常面对异构应用场景需求，在梳理之前多种项目经验的过程中，特开发此项目以期帮助各位同仁位快速搭建一个完整的开发框架，并满足多场景下的异构应用场景需求。  
 
@@ -13,7 +13,7 @@
 
 ## 软件架构
 1. 采用前后端分离模式；  
-2. 后端基于 **.Net8** 开发，可直接编译输出 .Net6/7/8 的运行时；  
+2. 后端基于 **.Net 9** 开发，可直接编译输出 .Net6/7/8/9 的运行时；  
 3. 后端仅依赖几个常用的三方类库：**[SqlSugarCore](https://www.donet5.com/Home/Doc)**(ORM工具）、**[Newtonsoft.Json](https://www.newtonsoft.com/json)**（JSON工具）、**[ImageSharp](https://github.com/SixLabors/ImageSharp)**（跨平台图像工具）；  
 4. 前端基于 **[Vue 3](https://vuejs.org)** 及 **[Element Plus](https://element-plus.gitee.io)** 开发；  
 5. 前端仅依赖几个常用的三方组件：**[Axios](https://axios-http.com/)**（HTTP工具），良好支持i18n（多语言）；  

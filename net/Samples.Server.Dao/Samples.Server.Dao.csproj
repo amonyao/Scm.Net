@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <RootNamespace>Com.Scm.Samples</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.180" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.197" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,10 +16,10 @@
       <HintPath>..\Libs\netstandard2.0\Scm.Common.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Server.Dao">
-      <HintPath>..\Libs\net8.0\Scm.Server.Dao.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Server.Dao.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Uid">
-      <HintPath>..\Libs\net8.0\Scm.Uid.dll</HintPath>
+      <HintPath>..\Libs\net9.0\Scm.Uid.dll</HintPath>
     </Reference>
   </ItemGroup>
 
