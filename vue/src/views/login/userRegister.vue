@@ -193,11 +193,11 @@ export default {
 				this.$message.warning(res.message);
 				return false;
 			}
-			var data = res.data;
-			if (!data.success) {
-				this.$message.warning(data.message);
-				return false;
-			}
+			// var data = res.data;
+			// if (!data.success) {
+			// 	this.$message.warning(data.message);
+			// 	return false;
+			// }
 
 			this.stepActive += 1;
 			this.signInName = this.formData.user + '@' + this.formData.unit;
