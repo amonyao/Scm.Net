@@ -24,8 +24,8 @@ export default {
 			return await http.get(this.url + data);
 		},
 	},
-	user: {
-		url: `${config.API_URL}/operator/userword`,
+	userwork: {
+		url: `${config.API_URL}/operator/userwork`,
 		name: "查询登录人信息",
 		get: async function (data = {}) {
 			return await http.get(this.url, data);
@@ -73,8 +73,8 @@ export default {
 			return await http.put(this.url, data);
 		},
 	},
-	unitWord: {
-		url: `${config.API_URL}/operator/unitword`,
+	unitWork: {
+		url: `${config.API_URL}/operator/unitwork`,
 		name: "查询机构信息",
 		get: async function (data = {}) {
 			return await http.get(this.url, data);
@@ -90,11 +90,17 @@ export default {
 	authority: {
 		url: `${config.API_URL}/operator/authoritymenu`,
 		name: "获得权限",
-		get: async function (lang) {
-			if (!lang) {
-				lang = tool.getCache("APP_LANG") || config.LANG;
+		get: async function (data) {
+			if (!data) {
+				data = {};
 			}
-			return await http.get(this.url, { 'lang': lang });
+			if (!data.client) {
+				data.client = 10;
+			}
+			if (!data.lang) {
+				data.lang = tool.getCache("APP_LANG") || config.LANG;
+			}
+			return await http.get(this.url, data);
 		},
 	},
 	listOsp: {

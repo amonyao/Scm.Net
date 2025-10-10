@@ -25,7 +25,7 @@ export default {
     methods: {
         async showData() {
             var date = this.$SCM.getDate();
-            var res = await this.$API.cjgloguserdailyarticle.daily.get(date);
+            var res = await this.$API.cmslogdailylitera.daily.get(date);
             if (res.code != 200) {
                 return;
             }

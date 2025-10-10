@@ -1,45 +1,32 @@
 <template>
 	<el-card shadow="never" header="近7天操作记录">
-		<scTable ref="table" :data="data" :column="column" height="auto" paginationLayout="total, prev, pager, next" hideDo>
-			<el-table-column label="序号" type="index"></el-table-column>
-			<el-table-column label="业务名称" prop="title" min-width="240"></el-table-column>
-			<el-table-column label="IP" prop="ip" width="150"></el-table-column>
-			<el-table-column label="结果" prop="code" width="150">
-				<el-tag type="success">成功</el-tag>
-			</el-table-column>
-			<el-table-column label="操作时间" prop="time" width="150"></el-table-column>
+		<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" height="auto"
+			paginationLayout="total, prev, pager, next">
+			<el-table-column label="#" type="index" width="50"></el-table-column>
+			<template #result="scope">
+				<el-tag type="success" v-if="scope.row.result">成功</el-tag>
+				<el-tag type="error" v-else>失败</el-tag>
+			</template>
 		</scTable>
 	</el-card>
 </template>
 
 <script>
 export default {
+	name: 'scm_user_logs',
 	data() {
 		return {
-			data: [
-				{
-					title: "修改用户",
-					ip: "211.187.11.18",
-					code: "成功",
-					operate_time: "2022-10-10 08:41:17"
-				},
-				{
-					title: "用户登录",
-					ip: "211.187.11.18",
-					code: "成功",
-					operate_time: "2022-10-10 08:21:51"
-				}
-			],
+			tableName: 'scm_user_logs',
+			apiObj: this.$API.scmloguser.page,
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: "title", label: "操作类型", width: 60 },
-				{ prop: "ip", label: "IP", width: 120 },
-				{ prop: "operate_time", label: "操作时间", width: 150, align: 'left' },
-				{ prop: "url", label: "操作地址", showOverflowTooltip: true, align: 'left' },
-				{ prop: "method", label: "提交类型", width: 80 },
-				{ prop: "browser", label: "浏览器", width: 100 },
-				{ prop: "agent", label: "用户代理", width: 100, showOverflowTooltip: true },
-				{ prop: "duration", label: "执行时长(毫秒)", width: 120 },
+				{ prop: "client_names", label: "终端类型", width: 80 },
+				{ prop: "type_names", label: "登录类型", width: 80 },
+				{ prop: "mode_names", label: "登录方式", width: 80 },
+				{ prop: "time", label: "操作时间", width: 160, align: 'left', formatter: this.$TOOL.dateTimeFormat },
+				{ prop: "ip", label: "IP", width: 140, align: 'right' },
+				{ prop: "result", label: "执行结果", width: 80 },
+				{ prop: "remark", label: "说明", minWidth: 160, align: 'left' },
 			]
 		}
 	}

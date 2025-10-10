@@ -119,7 +119,7 @@ export default {
 				{ prop: "agent", label: "用户代理", width: 100, showOverflowTooltip: true },
 				{ prop: "duration", label: "执行时长(毫秒)", width: 120 },
 			],
-			apiObj: this.$API.logapi.page,
+			apiObj: this.$API.scmlogapi.page,
 			search: {
 				time: undefined,
 			},
@@ -131,7 +131,7 @@ export default {
 	},
 	methods: {
 		async initChart() {
-			var res = await this.$API.logapi.chart.get();
+			var res = await this.$API.scmlogapi.chart.get();
 			if (res.code != 200) {
 				this.$alert(res.message, "提示", { type: "error" });
 				return;
@@ -171,7 +171,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.logapi.delete.delete(
+					var res = await this.$API.scmlogapi.delete.delete(
 						ids.join(",")
 					);
 					if (res.code == 200) {
@@ -196,7 +196,7 @@ export default {
 			)
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.logapi.clear.delete();
+					var res = await this.$API.scmlogapi.clear.delete();
 					if (res.code == 200) {
 						this.$refs.table.refresh();
 						loading.close();

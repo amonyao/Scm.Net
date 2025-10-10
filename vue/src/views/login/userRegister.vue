@@ -6,24 +6,17 @@
 			<el-step title="完成注册" />
 		</el-steps>
 		<el-form v-if="stepActive == 0" ref="stepForm_0" :model="formData" :rules="rules" :label-width="120">
-			<el-form-item label="账号类型" prop="type">
-				<el-radio-group v-model="formData.type" disabled>
-					<el-radio-button label="10">企业用户</el-radio-button>
-					<el-radio-button label="20">个人用户</el-radio-button>
-				</el-radio-group>
-				<div class="el-form-item-msg">系统目前仅支持企业账户申请</div>
-			</el-form-item>
-			<el-form-item label="企业简称" prop="unit" v-if="formData.type == 10">
-				<el-input v-model="formData.unit" placeholder="请输入企业简称"></el-input>
-				<div class="el-form-item-msg">企业简称将用于区分不同的账套主体</div>
-			</el-form-item>
-			<el-form-item label="企业全称" prop="unit_name" v-if="formData.type == 10">
+			<el-form-item label="企业全称" prop="unit_name" v-if="!isFixUnit()">
 				<el-input v-model="formData.unit_name" placeholder="请输入企业全称"></el-input>
 				<div class="el-form-item-msg">请输入完整的公司名称信息</div>
 			</el-form-item>
+			<el-form-item label="企业代码" prop="unit" v-if="!isFixUnit()">
+				<el-input v-model="formData.unit" placeholder="请输入企业代码"></el-input>
+				<div class="el-form-item-msg">企业代码将用于区分不同的账套主体，建议使用英文字母或数字。</div>
+			</el-form-item>
 			<el-form-item label="登录账号" prop="user">
 				<el-input v-model="formData.user" placeholder="请输入登录账号"></el-input>
-				<div class="el-form-item-msg">登录账号将作为当前账户下管理员账户</div>
+				<div class="el-form-item-msg">登录账号将作为当前企业下管理员账户，建议使用英文字母或数字。</div>
 			</el-form-item>
 			<el-form-item label="登录密码" prop="password1">
 				<el-input v-model="formData.password1" type="password" show-password placeholder="请输入登录密码"></el-input>
@@ -98,8 +91,9 @@ export default {
 			showAgree: false,
 			formData: this.def_data(),
 			rules: {
-				type: [{ required: true, message: '请选择账户类型' }],
-				unit: [{ required: true, message: '请输入企业简称' }],
+				unit_name: [{ required: true, message: '请输入企业全称' }],
+				unit: [{ required: true, message: '请输入企业代码' }],
+				user_name: [{ required: true, message: '请输入真实姓名' }],
 				user: [{ required: true, message: '请输入登录用户' }],
 				password1: [{ required: true, message: '请输入登录密码' }],
 				password2: [
@@ -125,8 +119,6 @@ export default {
 						}
 					}
 				],
-				unit_name: [{ required: true, message: '请输入企业全称' }],
-				user_name: [{ required: true, message: '请输入真实姓名' }],
 				email: [{ required: true, message: '请输入电子邮件' }],
 				open: [
 					{ required: true, message: '请选择开通类别' }
@@ -136,13 +128,14 @@ export default {
 		}
 	},
 	mounted() {
-
+		this.formData.user = this.getUser();
 	},
 	methods: {
 		def_data() {
 			return {
-				type: 10,
-				unit: '',
+				type: this.$CONFIG.DEF_LOGIN_TYPE,
+				mode: 10,//口令登录
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				user: '',
 				pass: '',
 				password1: '',
@@ -154,6 +147,9 @@ export default {
 				phone: '',
 				open: []
 			}
+		},
+		isFixUnit() {
+			return this.formData.type == 2;
 		},
 		pre() {
 			this.stepActive -= 1
@@ -179,6 +175,7 @@ export default {
 		async signon() {
 			var form = {
 				type: this.formData.type,
+				mode: this.formData.mode,
 				unit: this.formData.unit,
 				user: this.formData.user,
 				pass: this.$CRYPTO.SHA(this.formData.password1),
@@ -193,14 +190,28 @@ export default {
 				this.$message.warning(res.message);
 				return false;
 			}
-			// var data = res.data;
-			// if (!data.success) {
-			// 	this.$message.warning(data.message);
-			// 	return false;
-			// }
+			var data = res.data;
+			if (!data.success) {
+				this.$message.warning(data.message);
+				return false;
+			}
 
 			this.stepActive += 1;
-			this.signInName = this.formData.user + '@' + this.formData.unit;
+			this.signInName = this.getFullUser();
+		},
+		/** 获取推荐登录用户名称 */
+		getUser() {
+			if (this.isFixUnit()) {
+				return '';
+			}
+			return 'admin';
+		},
+		/** 获取完整登录用户名称 */
+		getFullUser() {
+			if (this.isFixUnit()) {
+				return this.formData.user;
+			}
+			return this.formData.user + '@' + this.formData.unit;
 		},
 		goLogin() {
 			this.$router.push({

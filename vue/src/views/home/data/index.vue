@@ -2,19 +2,23 @@
     <el-main>
         <el-row :gutter="15">
             <el-col :lg="6">
-                <myCard :title="summary0.title" :tooltip="summary0.tooltip" :number="summary0.value" :rate="summary0.rate">
+                <myCard :title="summary0.title" :tooltip="summary0.tooltip" :number="summary0.value"
+                    :rate="summary0.rate">
                 </myCard>
             </el-col>
             <el-col :lg="6">
-                <myCard :title="summary1.title" :tooltip="summary1.tooltip" :number="summary1.value" :rate="summary1.rate">
+                <myCard :title="summary1.title" :tooltip="summary1.tooltip" :number="summary1.value"
+                    :rate="summary1.rate">
                 </myCard>
             </el-col>
             <el-col :lg="6">
-                <myCard :title="summary2.title" :tooltip="summary2.tooltip" :number="summary2.value" :rate="summary2.rate">
+                <myCard :title="summary2.title" :tooltip="summary2.tooltip" :number="summary2.value"
+                    :rate="summary2.rate">
                 </myCard>
             </el-col>
             <el-col :lg="6">
-                <myCard :title="summary3.title" :tooltip="summary3.tooltip" :number="summary3.value" :rate="summary3.rate">
+                <myCard :title="summary3.title" :tooltip="summary3.tooltip" :number="summary3.value"
+                    :rate="summary3.rate">
                 </myCard>
             </el-col>
         </el-row>
@@ -86,38 +90,34 @@ export default {
                 yAxis: [
                     {
                         type: 'value',
-                        name: '降水量',
-                        min: 0,
-                        max: 250,
+                        name: 'PV数量',
                         position: 'right',
                         axisLabel: {
-                            formatter: '{value} ml'
+                            formatter: '{value}'
                         }
                     },
                     {
                         type: 'value',
-                        name: '温度',
-                        min: 0,
-                        max: 25,
+                        name: 'UV数量',
                         position: 'left',
                         axisLabel: {
-                            formatter: '{value} °C'
+                            formatter: '{value}'
                         }
                     }
                 ],
                 series: [
                     {
-                        name: '降水量',
+                        name: 'PV数量',
                         type: 'bar',
                         yAxisIndex: 0,
-                        data: [6, 32, 70, 86, 68.7, 100.7, 125.6, 112.2, 78.7, 48.8, 36.0, 19.3]
+                        data: []
                     },
                     {
-                        name: '温度',
+                        name: 'UV数量',
                         type: 'line',
                         smooth: true,
                         yAxisIndex: 1,
-                        data: [6.0, 10.2, 10.3, 11.5, 10.3, 13.2, 14.3, 16.4, 18.0, 16.5, 12.0, 5.2]
+                        data: []
                     }
                 ]
             },
@@ -144,6 +144,7 @@ export default {
 
             res = await this.$API.home.report.get();
             if (res != null && res.code == 200) {
+                this.optionCharts.xAxis[0].data = res.data.titles;
                 this.optionCharts.series[0].data = res.data.data1;
                 this.optionCharts.series[1].data = res.data.data2;
             }
@@ -173,7 +174,6 @@ export default {
             }];
         },
         handleClick() {
-
         }
     }
 }

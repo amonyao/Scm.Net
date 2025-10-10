@@ -1,7 +1,7 @@
 <template>
 	<el-card shadow="never" header="近7天操作记录">
-		<scTable ref="table" :data="data" :column="column" height="auto" paginationLayout="total, prev, pager, next" hideDo>
-			<el-table-column label="序号" type="index"></el-table-column>
+		<scTable ref="table" :table-name="tableName" :data="data" :column="column" height="auto" paginationLayout="total, prev, pager, next" hideDo>
+			<el-table-column label="序号" type="index" width="60"></el-table-column>
 			<el-table-column label="业务名称" prop="title" min-width="240"></el-table-column>
 			<el-table-column label="IP" prop="ip" width="150"></el-table-column>
 			<el-table-column label="结果" prop="code" width="150">
@@ -16,6 +16,7 @@
 export default {
 	data() {
 		return {
+			tableName: 'scm_unit_logs',
 			data: [
 				{
 					title: "修改用户",
@@ -32,7 +33,7 @@ export default {
 			],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ prop: "title", label: "操作类型", width: 60 },
+				{ prop: "title", label: "操作类型", width: 80 },
 				{ prop: "ip", label: "IP", width: 120 },
 				{ prop: "operate_time", label: "操作时间", width: 150, align: 'left' },
 				{ prop: "url", label: "操作地址", showOverflowTooltip: true, align: 'left' },

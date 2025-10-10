@@ -30,10 +30,13 @@ export default {
 	data() {
 		return {
 			form: {
-				type: 30,
+				mode: 30,
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				email: '',
 				code: '',
 				key: '',
+				req: '',
+				auto: true
 			},
 			rules: {
 				email: [{ required: true, message: this.$t('login.emailError') }],
@@ -49,13 +52,15 @@ export default {
 	},
 	methods: {
 		init() {
-			var key = this.$SCM.read_cache('scm_login_email', '');
-			if (!key) {
-				key = this.$TOOL.uuid();
+			var req = this.$SCM.read_cache('scm_login_email', '');
+			if (!req) {
+				req = this.$TOOL.uuid();
 			}
-			this.form.key = key;
+			this.form.req = req;
 		},
 		async getYzm() {
+			this.form.key = '';
+
 			var validate = await this.$refs.loginForm.validateField("email").catch(() => { })
 			if (!validate) { return false }
 
@@ -72,19 +77,32 @@ export default {
 			}, 1000);
 
 			var data = {
-				type: this.form.type,
+				mode: this.form.mode,
 				code: this.form.email,
-				key: this.form.key,
+				req: this.form.req,
 			};
 			var userRes = await this.$API.login.sendSms.post(data);
 			if (userRes.code != 200) {
 				this.$message.warning(userRes.message);
 				return false;
 			}
+			var data = userRes.data;
+			if (!data.success) {
+				{
+					this.$message.warning(data.message);
+					return false;
+				}
+			}
+			this.form.key = data.key;
 		},
 		async login() {
 			var validate = await this.$refs.loginForm.validate().catch(() => { })
 			if (!validate) { return false }
+
+			if (!this.form.key || this.form.key.length != 32) {
+				this.$message.warning('请先获取验证码！');
+				return false;
+			}
 
 			this.islogin = true;
 			this.checkAuth();
@@ -94,6 +112,11 @@ export default {
 			var userRes = await this.$API.login.token.post(this.form);
 			if (userRes.code != 200) {
 				this.$message.warning(userRes.message);
+				return false;
+			}
+			var data = userRes.data;
+			if (!data.success) {
+				this.$message.warning(data.message);
 				return false;
 			}
 
@@ -149,5 +172,3 @@ export default {
 	}
 }
 </script>
-
-<style></style>

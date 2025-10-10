@@ -5,12 +5,18 @@ const APP_CONFIG = {
 	APP_NAME: "产品名称",
 	/** 产品描述 */
 	APP_DESC: '这是基于Js的产品介绍',
+
+	/** 默认登录类型 */
+	DEF_LOGIN_TYPE: 1,
+	/** 默认登录模式 */
+	DEF_LOGIN_MODE: [10, 40],
 	/** 默认机构 */
-	DEF_UNIT: 'dev',
+	DEF_LOGIN_UNIT: 'dev',
 	/** 默认用户 */
-	DEF_USER: 'admin@dev',
+	DEF_LOGIN_USER: 'admin@dev',
 	/** 默认口令 */
-	DEF_PASS: '123456',
+	DEF_LOGIN_PASS: '123456',
+
 	/** OIDC URL */
 	OIDC_OSP: 'https://sso.c-scm.net/oauth/apposp/',
 	/** OIDC KEY */
@@ -18,6 +24,7 @@ const APP_CONFIG = {
 	OIDC_LOGO: 'https://sso.c-scm.net/data/logo/',
 	OIDC_AUTH: 'https://sso.c-scm.net/oauth/login/{osp}?app_key={key}&state={state}',
 	OIDC_BIND: 'https://sso.c-scm.net/oauth/index?key={key}&state={state}',
+
 	/** MIIT */
 	BEIAN_MIIT: '',
 	BEIAN_MPS: ''

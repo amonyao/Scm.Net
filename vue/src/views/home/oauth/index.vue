@@ -6,7 +6,7 @@
                     <template #item="{ item }">
                         <div class="oauth-item">
                             <div class="thumb">
-                                <el-avatar :size="50" :src="getAvatar(item)" />
+                                <el-avatar :size="50" :src="$SCM.get_user_avatar(item)" />
                             </div>
                             <div class="info">
                                 <div class="label">{{ item.name }}</div>
@@ -93,10 +93,6 @@ export default {
         getProvider(provider) {
             //this.$SCM.get_dic_names(this.vender_list, provider, '-');
             return provider;
-        },
-        getAvatar(item) {
-            var image = this.$SCM.get_avatar(item);
-            return this.$CONFIG.SERVER_URL + image;
         }
     }
 }

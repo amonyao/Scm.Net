@@ -83,11 +83,11 @@ export default {
 				{
 					groupName: "数据管理",
 					list: [
-						{
-							icon: "sc-database-2-line",
-							title: "存储空间信息",
-							component: "space",
-						},
+						// {
+						// 	icon: "sc-database-2-line",
+						// 	title: "存储空间信息",
+						// 	component: "space",
+						// },
 						{
 							icon: "sc-alarm-clock-line",
 							title: "操作日志",
@@ -130,7 +130,7 @@ export default {
 	},
 	methods: {
 		async init() {
-			const res = await this.$API.login.user.get();
+			const res = await this.$API.login.userwork.get();
 			this.user = res.data;
 		},
 		openPage(item) {

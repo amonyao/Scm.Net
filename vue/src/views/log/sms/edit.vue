@@ -86,7 +86,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.logsms.edit.get(row.id);
+				var res = await this.$API.scmlogsms.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -97,9 +97,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.logsms.add.post(this.formData);
+						res = await this.$API.scmlogsms.add.post(this.formData);
 					} else {
-						res = await this.$API.logsms.update.put(this.formData);
+						res = await this.$API.scmlogsms.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

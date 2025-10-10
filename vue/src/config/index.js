@@ -1,7 +1,7 @@
 const DEFAULT_CONFIG = {
 	// 应用代码
 	APP_CODE: process.env.VUE_APP_CODE,
-	
+
 	// 应用名称
 	APP_NAME: process.env.VUE_APP_NAME,
 
@@ -79,23 +79,34 @@ const DEFAULT_CONFIG = {
 		//小组件分布，com取值:views/home/components 文件名
 		copmsList: [["welcome", "ver"], ["time", "progress"], ["about"]],
 	},
+
+	// 默认登录配置
+	DEF_LOGIN_TYPE: 1,
+	DEF_LOGIN_MODE: [10, 40],
+	DEF_LOGIN_UNIT: '',
+	DEF_LOGIN_USER: '',
+	DEF_LOGIN_PASS: '',
+
+	// OIDC配置
 	OIDC_OSP: process.env.VUE_APP_OIDC_OSP,
 	OIDC_KEY: process.env.VUE_APP_OIDC_KEY,
 	OIDC_LOGO: process.env.VUE_APP_OIDC_LOGO,
 	OIDC_AUTH: process.env.VUE_APP_OIDC_AUTH,
 	OIDC_BIND: process.env.VUE_APP_OIDC_BIND,
-	BEIAN_MIIT: 'MIIT Beian',
+
+	BEIAN_MIIT: '',
 	BEIAN_MPS: ''
 };
 
 //合并业务配置
-import MY_CONFIG from "./myConfig";
-Object.assign(DEFAULT_CONFIG, MY_CONFIG);
+// import MY_CONFIG from "./myConfig";
+// Object.assign(DEFAULT_CONFIG, MY_CONFIG);
 
 // 如果生产模式，就合并动态的APP_CONFIG
 // public/config.js
-if (process.env.NODE_ENV === "production") {
-	Object.assign(DEFAULT_CONFIG, APP_CONFIG);
-}
+// if (process.env.NODE_ENV === "production") {
+// 	Object.assign(DEFAULT_CONFIG, APP_CONFIG);
+// }
+Object.assign(DEFAULT_CONFIG, APP_CONFIG);
 
 export default DEFAULT_CONFIG;

@@ -28,7 +28,7 @@ export default {
 	data() {
 		return {
 			tableName: 'log_online',
-			apiObj: this.$API.logonline.list,
+			apiObj: this.$API.scmlogonline.list,
 			list: [],
 			param: {
 				key: "",

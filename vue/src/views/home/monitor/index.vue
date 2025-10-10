@@ -1,43 +1,55 @@
 <template>
 	<el-main class="p10">
 		<el-row :gutter="10">
-			<el-col :span="6">
+			<el-col :md="6" :sm="24">
 				<el-card class="box-card">
 					<scEcharts height="300px" :option="optionCpu"></scEcharts>
 				</el-card>
 			</el-col>
-			<el-col :span="6">
+			<el-col :md="6" :sm="24">
 				<el-card class="box-card">
 					<scEcharts height="300px" :option="optionMemory"></scEcharts>
 				</el-card>
 			</el-col>
-			<el-col :span="6">
+			<el-col :md="6" :sm="24">
 				<el-card class="box-card">
 					<scEcharts height="300px" :option="optionDisk"></scEcharts>
 				</el-card>
 			</el-col>
-			<el-col :span="6">
+			<el-col :md="6" :sm="24">
 				<el-card class="box-card">
 					<scEcharts height="300px" :option="optionNetwork"></scEcharts>
 				</el-card>
 			</el-col>
+		</el-row>
+		<el-row :gutter="10">
 			<el-col :span="24">
 				<el-card class="box-card">
-					<template #header>
-						<div class="card-header">服务器信息</div>
-					</template>
-					<el-descriptions :column="3" border>
-						<el-descriptions-item label="系统架构" width="150px">{{ os.osArchitecture }}</el-descriptions-item>
-						<el-descriptions-item label="进程架构">{{ os.processArchitecture }}</el-descriptions-item>
+					<el-descriptions title="服务器信息" :column="2" border>
+						<el-descriptions-item label="系统架构" width="150">
+							{{ os.osArchitecture }}
+						</el-descriptions-item>
+						<el-descriptions-item label="进程架构" width="150">
+							{{ os.processArchitecture }}
+						</el-descriptions-item>
 						<el-descriptions-item label="64位操作系统">
 							<el-tag size="small">{{ os.is64BitOperatingSystem }}</el-tag>
 						</el-descriptions-item>
-						<el-descriptions-item label="运行环境">{{ os.frameworkDescription }}</el-descriptions-item>
-						<el-descriptions-item label="系统标识符">{{ os.runtimeIdentifier }}</el-descriptions-item>
-						<el-descriptions-item label="环境版本">{{ os.version }}</el-descriptions-item>
-
-						<el-descriptions-item label="机器名字">{{ os.machineName }}</el-descriptions-item>
-						<el-descriptions-item label="进程ID">{{ os.processId }}</el-descriptions-item>
+						<el-descriptions-item label="运行环境">
+							{{ os.frameworkDescription }}
+						</el-descriptions-item>
+						<el-descriptions-item label="系统标识符">
+							{{ os.runtimeIdentifier }}
+						</el-descriptions-item>
+						<el-descriptions-item label="环境版本">
+							{{ os.version }}
+						</el-descriptions-item>
+						<el-descriptions-item label="机器名字">
+							{{ os.machineName }}
+						</el-descriptions-item>
+						<el-descriptions-item label="进程ID">
+							{{ os.processId }}
+						</el-descriptions-item>
 						<el-descriptions-item label="CPU核数">
 							<el-tag size="small">{{ os.processorCount }}</el-tag>核
 						</el-descriptions-item>
@@ -45,19 +57,20 @@
 						<el-descriptions-item label="用户名称">{{ os.userName }}</el-descriptions-item>
 						<el-descriptions-item label="内存大小">{{ os.workingSet }}</el-descriptions-item>
 						<el-descriptions-item label="网络域名称">{{ os.userDomainName }}</el-descriptions-item>
-						<el-descriptions-item label="系统目录" :span="2">{{ os.systemDirectory }}</el-descriptions-item>
-						<el-descriptions-item label="系统名称" :span="3">{{ os.osDescription }}</el-descriptions-item>
-						<el-descriptions-item label="当前目录" :span="3">{{ os.currentDirectory }}</el-descriptions-item>
+						<el-descriptions-item label="系统目录">{{ os.systemDirectory }}</el-descriptions-item>
+						<el-descriptions-item label="系统名称" :span="2">{{ os.osDescription }}</el-descriptions-item>
+						<el-descriptions-item label="当前目录" :span="2">{{ os.currentDirectory }}</el-descriptions-item>
 					</el-descriptions>
 				</el-card>
 			</el-col>
+		</el-row>
+		<el-row :gutter="10">
 			<el-col :span="24">
 				<el-card class="box-card">
-					<template #header>
-						<div class="card-header">网络信息</div>
-					</template>
-					<el-descriptions :column="3" border>
-						<el-descriptions-item label="网卡名称" width="150px" :span="2">{{ netWork.name }}</el-descriptions-item>
+					<el-descriptions title="网络信息" :column="2" border>
+						<el-descriptions-item label="网卡名称">
+							{{ netWork.name }}
+						</el-descriptions-item>
 						<el-descriptions-item label="网络链接速度">{{ netWork.speed }}</el-descriptions-item>
 						<el-descriptions-item label="DNS">{{ netWork.dns }}</el-descriptions-item>
 						<el-descriptions-item label="网络类型">{{ netWork.networkType }}</el-descriptions-item>

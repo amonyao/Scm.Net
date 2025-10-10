@@ -88,7 +88,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.logsms.page,
+			apiObj: this.$API.scmlogsms.page,
 			list: [],
 			param: {
 				option_id: 0,
@@ -128,16 +128,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.logsms.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmlogsms.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.logsms.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmlogsms.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.logsms.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmlogsms.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.logsms.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmlogsms.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

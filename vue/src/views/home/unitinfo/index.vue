@@ -90,11 +90,11 @@ export default {
 							title: "存储空间信息",
 							component: "space",
 						},
-						{
-							icon: "el-icon-clock",
-							title: "操作日志",
-							component: "logs",
-						},
+						// {
+						// 	icon: "el-icon-clock",
+						// 	title: "操作日志",
+						// 	component: "logs",
+						// },
 					],
 				},
 			],
@@ -132,7 +132,7 @@ export default {
 	},
 	methods: {
 		async init() {
-			const res = await this.$API.login.user.get();
+			const res = await this.$API.login.userwork.get();
 			this.user = res.data;
 		},
 		openPage(item) {

@@ -51,10 +51,16 @@
 									<div class="login_user">
 										<div class="body">
 											<el-tabs>
-												<el-tab-pane :label="$t('login.accountLogin')" lazy>
-													<password-form></password-form>
+												<el-tab-pane :label="$t('login.accountLogin')" lazy v-if="hasMode(10)">
+													<pass-form></pass-form>
 												</el-tab-pane>
-												<el-tab-pane :label="$t('login.oauthLogin')" lazy>
+												<el-tab-pane :label="$t('login.phoneLogin')" lazy v-if="hasMode(20)">
+													<phone-form></phone-form>
+												</el-tab-pane>
+												<el-tab-pane :label="$t('login.emailLogin')" lazy v-if="hasMode(30)">
+													<email-form></email-form>
+												</el-tab-pane>
+												<el-tab-pane :label="$t('login.oauthLogin')" lazy v-if="hasMode(40)">
 													<oauth-form></oauth-form>
 												</el-tab-pane>
 											</el-tabs>
@@ -80,13 +86,17 @@
 </template>
 
 <script>
-import passwordForm from "./components/passwordForm";
+import passForm from "./components/passForm";
+import phoneForm from "./components/phoneForm";
+import emailForm from "./components/emailForm";
 import oauthForm from "./components/oauthForm";
 
 export default {
 	name: 'login',
 	components: {
-		passwordForm,
+		passForm,
+		phoneForm,
+		emailForm,
 		oauthForm,
 	},
 	data() {
@@ -113,7 +123,8 @@ export default {
 				mask: {
 					"backgroundColor": "rgba(0,0,0,0.5)"
 				}
-			}
+			},
+			mode: [10],
 		};
 	},
 	watch: {
@@ -148,6 +159,7 @@ export default {
 	},
 	methods: {
 		async loadInfo() {
+			this.mode = this.$CONFIG.DEF_LOGIN_MODE;
 			//var res = await this.$API.devapp.model.get({ 'code': this.$CONFIG.APP_CODE });
 			var res = await this.$API.sysapp.model.get(this.$CONFIG.APP_CODE);
 			if (res == null || res.code != 200) {
@@ -170,6 +182,16 @@ export default {
 		configLang(command) {
 			this.config.lang = command.value;
 		},
+		hasMode(mode) {
+			if (this.mode && this.mode.length > 0) {
+				for (var i = 0; i < this.mode.length; i += 1) {
+					if (this.mode[i] == mode) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	},
 };
 </script>

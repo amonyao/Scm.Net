@@ -41,11 +41,13 @@ export default {
 		return {
 			codeUrl: "img/loading.gif",
 			form: {
-				type: 10,
-				user: this.$CONFIG.DEF_USER,
-				pass: this.$CONFIG.DEF_PASS,
-				code: undefined,
+				type: this.$CONFIG.DEF_LOGIN_TYPE,
+				mode: 10,
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
+				user: this.$CONFIG.DEF_LOGIN_USER,
+				pass: this.$CONFIG.DEF_LOGIN_PASS,
 				codeKey: "",
+				code: undefined,
 				autologin: false,
 			},
 			rules: {
@@ -72,6 +74,15 @@ export default {
 			this.islogin = false;
 		},
 		async checkAuth() {
+			var user = this.form.user;
+			var idx = user.indexOf('@');
+			if (idx < 1) {
+				this.$message.warning('用户名格式应为：someone@unit_code');
+				return false;
+			}
+			var unit = user.substring(idx + 1);
+			user = user.substring(0, idx);
+
 			var pass = this.$CRYPTO.SHA(this.form.pass);
 			var time = new Date().getTime();
 			pass = this.$CRYPTO.SHA(pass + '@' + time);
@@ -79,7 +90,9 @@ export default {
 
 			const data = {
 				type: this.form.type,
-				user: this.form.user,
+				mode: this.form.mode,
+				unit: unit,
+				user: user,
 				pass: pass,
 				time: time,
 				code: this.form.code,

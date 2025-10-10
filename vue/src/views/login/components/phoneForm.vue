@@ -31,10 +31,13 @@ export default {
 	data() {
 		return {
 			form: {
-				type: 20,
+				mode: 20,
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				phone: '',
 				code: '',
 				key: '',
+				req: '',
+				auto: true
 			},
 			rules: {
 				phone: [{ required: true, message: this.$t('login.phoneError') }],
@@ -50,17 +53,19 @@ export default {
 	},
 	methods: {
 		init() {
-			var key = this.$SCM.read_cache('scm_login_pone', '');
-			if (!key) {
-				key = this.$TOOL.uuid();
+			var req = this.$SCM.read_cache('scm_login_phone', '');
+			if (!req) {
+				req = this.$TOOL.uuid();
 			}
-			this.form.key = key;
+			this.form.req = req;
 		},
 		async getYzm() {
+			this.form.key = '';
+
 			var validate = await this.$refs.loginForm.validateField("phone").catch(() => { })
 			if (!validate) { return false }
 
-			this.$message.success(this.$t('login.smsSent'))
+			this.$message.success(this.$t('login.msgSent'))
 			this.disabled = true
 			this.time = 60
 			var t = setInterval(() => {
@@ -70,11 +75,35 @@ export default {
 					this.disabled = false
 					this.time = 0
 				}
-			}, 1000)
+			}, 1000);
+
+			var data = {
+				mode: this.form.mode,
+				code: this.form.phone,
+				req: this.form.req,
+			};
+			var userRes = await this.$API.login.sendSms.post(data);
+			if (userRes.code != 200) {
+				this.$message.warning(userRes.message);
+				return false;
+			}
+			var data = userRes.data;
+			if (!data.success) {
+				{
+					this.$message.warning(data.message);
+					return false;
+				}
+			}
+			this.form.key = data.key;
 		},
 		async login() {
 			var validate = await this.$refs.loginForm.validate().catch(() => { })
 			if (!validate) { return false }
+
+			if (!this.form.key || this.form.key.length != 32) {
+				this.$message.warning('请先获取验证码！');
+				return false;
+			}
 
 			this.islogin = true;
 			this.checkAuth();
@@ -139,5 +168,3 @@ export default {
 	}
 }
 </script>
-
-<style></style>
