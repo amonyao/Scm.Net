@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
-    <PackageReference Include="MiniExcel" Version="1.41.3" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.197" />
+    <PackageReference Include="MiniExcel" Version="1.41.4" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.205" />
   </ItemGroup>
 
   <ItemGroup>
