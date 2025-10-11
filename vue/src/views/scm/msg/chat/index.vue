@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         async init() {
-            const res = await this.$API.login.user.get();
+            const res = await this.$API.login.userwork.get();
             if (!res || res.code != 200) {
                 return;
             }
