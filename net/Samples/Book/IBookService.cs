@@ -6,6 +6,6 @@ namespace Com.Scm.Samples.Book
     {
         BookDao GetDaoById(long id, bool useCache = true);
 
-        void RemoveCacheById(long id);
+        bool RemoveCacheById(long id);
     }
 }

@@ -25,21 +25,23 @@ namespace Com.Scm.Samples.Book
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="thisRepository"></param>
+        /// <param name="thisRepository">数据仓库</param>
+        /// <param name="userService">用户服务</param>
+        /// <param name="envConfig">环境配置</param>
         public SamplesBookService(SugarRepository<BookDao> thisRepository,
             IUserService userService,
-            EnvConfig config)
+            EnvConfig envConfig)
         {
             _thisRepository = thisRepository;
             _UserService = userService;
-            _Config = config;
+            _Config = envConfig;
         }
 
         /// <summary>
         /// 分页查询
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">分页查询请求</param>
+        /// <returns>分页查询结果数据</returns>
         public async Task<ScmSearchPageResponse<BookDvo>> GetPageAsync(SearchRequest request)
         {
             var isEmpty = string.IsNullOrWhiteSpace(request.key);
@@ -62,8 +64,8 @@ namespace Com.Scm.Samples.Book
         /// <summary>
         /// 查询所有
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">查询请求</param>
+        /// <returns>查询结果数据</returns>
         public async Task<List<BookDvo>> GetListAsync(SearchRequest request)
         {
             var items = await _thisRepository.AsQueryable()
@@ -79,6 +81,10 @@ namespace Com.Scm.Samples.Book
             return items;
         }
 
+        /// <summary>
+        /// 数据处理
+        /// </summary>
+        /// <param name="list"></param>
         private void Prepare(List<BookDvo> list)
         {
             foreach (var item in list)
@@ -90,10 +96,10 @@ namespace Com.Scm.Samples.Book
         }
 
         /// <summary>
-        /// 
+        /// 获取下拉列表
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">请求对象</param>
+        /// <returns>下拉列表</returns>
         public async Task<List<ResOptionDvo>> GetOptionAsync(SearchRequest request)
         {
             var items = await _thisRepository.AsQueryable()
@@ -110,70 +116,112 @@ namespace Com.Scm.Samples.Book
         /// <summary>
         /// 编辑读取
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">书籍ID</param>
+        /// <returns>书籍编辑对象</returns>
         [HttpGet("{id}")]
-        public async Task<BookDvo> GetEditAsync(long id)
+        public async Task<BookDto> GetEditAsync(long id)
         {
-            return await _thisRepository
-                .AsQueryable()
-                .Select<BookDvo>()
+            var dto = await _thisRepository.AsQueryable()
+                .Select<BookDto>()
                 .FirstAsync(m => m.id == id);
+
+            // 其它处理
+            // ...
+
+            return dto;
         }
 
         /// <summary>
         /// 查看读取
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">书籍ID</param>
+        /// <returns>书籍查看对象</returns>
         [HttpGet("{id}")]
         public async Task<BookDvo> GetViewAsync(long id)
         {
-            return await _thisRepository
-                .AsQueryable()
+            var dvo = await _thisRepository.AsQueryable()
                 .Select<BookDvo>()
                 .FirstAsync(m => m.id == id);
+
+            // 其它处理
+            // ...
+
+            return dvo;
         }
 
         /// <summary>
         /// 添加
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public async Task AddAsync(BookDto model)
+        /// <param name="model">书籍对象</param>
+        /// <returns>是否添加成功</returns>
+        public async Task<bool> AddAsync(BookDto model)
         {
-            var dao = model.Clone<BookDao>();
-            await _thisRepository.InsertAsync(dao);
+            // 对象为空检测
+            if (model == null)
+            {
+                throw new BusinessException("请求对象不能为空！");
+            }
+
+            // 编码重复检测
+            var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec);
+            if (dao != null)
+            {
+                throw new BusinessException($"已存在编码为{model.codec}的书籍！");
+            }
+
+            // 浅复制，通常使用此方法即可
+            dao = model.Adapt<BookDao>();
+            // 深复制
+            //dao = model.Clone<BookDao>();
+
+            // 插入对象
+            return await _thisRepository.InsertAsync(dao);
         }
 
         /// <summary>
         /// 更新
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">书籍对象</param>
+        /// <returns>是否更新成功</returns>
         public async Task<bool> UpdateAsync(BookDto model)
         {
+            // 对象为空检测
+            if (model == null)
+            {
+                throw new BusinessException("请求对象不能为空！");
+            }
+
+            // 编码重复检测
             var dao = await _thisRepository.GetFirstAsync(a => a.codec == model.codec && a.id != model.id);
             if (dao != null)
             {
-                throw new BusinessException("已存在相同编码的书籍！");
+                throw new BusinessException($"已存在编码为{model.codec}的书籍！");
             }
+
+            // 获取书籍信息
             dao = await _thisRepository.GetByIdAsync(model.id);
             if (dao == null)
             {
                 throw new BusinessException("无效的书籍！");
             }
 
+            // 浅复制，通常使用此方法即可
             dao = model.Adapt(dao);
+            // 深复制
+            //dao = model.Clone(dao);
+
+            // 清除缓存
             RemoveCacheById(dao.id);
+
+            // 更新对象
             return await _thisRepository.UpdateAsync(dao);
         }
 
         /// <summary>
         /// 批量更新状态
         /// </summary>
-        /// <param name="param">逗号分隔</param>
-        /// <returns></returns>
+        /// <param name="param">更新请求对象</param>
+        /// <returns>更新成功数量</returns>
         public async Task<int> StatusAsync(ScmChangeStatusRequest param)
         {
             return await UpdateStatus(_thisRepository, param.ids, param.status);
@@ -182,8 +230,8 @@ namespace Com.Scm.Samples.Book
         /// <summary>
         /// 批量删除记录
         /// </summary>
-        /// <param name="ids">逗号分隔</param>
-        /// <returns></returns>
+        /// <param name="ids">需要删除的ID列表，逗号分隔</param>
+        /// <returns>删除成功数量</returns>
         [HttpDelete]
         public async Task<int> DeleteAsync(string ids)
         {
@@ -193,8 +241,8 @@ namespace Com.Scm.Samples.Book
         /// <summary>
         /// 文件上传
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <param name="request">文件上传请求</param>
+        /// <returns>文件上传结果</returns>
         [HttpPost]
         public async Task<UploadResult> UploadAsync([FromForm] UploadRequest request)
         {
@@ -241,40 +289,58 @@ namespace Com.Scm.Samples.Book
         /// <summary>
         /// 查看文件
         /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
+        /// <param name="file">文件名称</param>
+        /// <returns>文件内容</returns>
         public async Task<FileResult> ViewFileAsync(string file)
         {
+            // 获取真实物理路径
             var path = _Config.GetUploadPath(file);
+
             using (var stream = File.OpenRead(path))
             {
                 var bytes = new byte[stream.Length];
-                await stream.ReadAsync(bytes, 0, bytes.Length);
+                await stream.ReadExactlyAsync(bytes, 0, bytes.Length);
                 return new FileContentResult(bytes, "image/png");
             }
         }
 
+        /// <summary>
+        /// 根据ID获取对象
+        /// </summary>
+        /// <param name="id">书籍ID</param>
+        /// <param name="useCache">是否缓存对象，默认是</param>
+        /// <returns>书籍对象</returns>
         public BookDao GetDaoById(long id, bool useCache = true)
         {
-            if (_Dict.ContainsKey(id))
+            // 检测缓存
+            if (useCache && _Dict.ContainsKey(id))
             {
                 return _Dict[id];
             }
 
+            // 数据库读取
             var dao = _thisRepository.GetById(id);
-            if (dao != null)
+
+            // 缓存数据
+            if (useCache && dao != null)
             {
                 _Dict[id] = dao;
             }
+
             return dao;
         }
 
-        public void RemoveCacheById(long id)
+        /// <summary>
+        /// 缓存处理
+        /// </summary>
+        /// <param name="id"></param>
+        public bool RemoveCacheById(long id)
         {
             if (_Dict.ContainsKey(id))
             {
-                _Dict.Remove(id);
+                return _Dict.Remove(id);
             }
+            return false;
         }
     }
 }
