@@ -23,7 +23,7 @@ namespace Com.Scm.Quartz.Service.Df
                      list = new List<QuarzTaskDao>();
                  }
 
-                 model.PrepareCreate(0, 0);
+                 model.PrepareCreate(0);
 
                  list.Add(model);
                  _Helper.WriteJobConfig(list);
@@ -106,7 +106,7 @@ namespace Com.Scm.Quartz.Service.Df
         {
             return Task.Run(() =>
             {
-                model.PrepareUpdate(0, 0);
+                model.PrepareUpdate(0);
 
                 var list = _Helper.GetJobs();
                 list.Remove(list.Find(a => a.id == model.id));

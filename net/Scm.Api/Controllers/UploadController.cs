@@ -12,9 +12,9 @@ namespace Com.Scm.Api.Controllers
     public class UploadController : ApiController
     {
         private EnvConfig _Config;
-        private SysSafetyService _SafetyService;
+        private ScmSysSafetyService _SafetyService;
 
-        public UploadController(EnvConfig config, SysSafetyService safetyService)
+        public UploadController(EnvConfig config, ScmSysSafetyService safetyService)
         {
             _Config = config;
             _SafetyService = safetyService;
