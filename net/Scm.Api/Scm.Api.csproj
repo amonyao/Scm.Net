@@ -23,8 +23,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="data\unit.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="data\scm.db" />
     <None Remove="data\scm.uid" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="data\unit.json" />
   </ItemGroup>
 
   <ItemGroup>
