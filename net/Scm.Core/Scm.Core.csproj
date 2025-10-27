@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Scm.Plugin.Image.SkiaSharp\Scm.Plugin.Image.SkiaSharp.csproj" />
     <ProjectReference Include="..\Scm.Server.Aiml\Scm.Server.Aiml.csproj" />
     <ProjectReference Include="..\Scm.Server.Api\Scm.Server.Api.csproj" />
+    <ProjectReference Include="..\Scm.Server.Quartz\Scm.Server.Quartz.csproj" />
     <ProjectReference Include="..\Scm.Server.SignalR\Scm.Server.SignalR.csproj" />
     <ProjectReference Include="..\Scm.Server\Scm.Server.csproj" />
   </ItemGroup>
@@ -31,9 +32,6 @@
   <ItemGroup>
     <Reference Include="Scm.Aiml">
       <HintPath>..\Libs\net9.0\Scm.Aiml.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Quartz">
-      <HintPath>..\Libs\net9.0\Scm.Server.Quartz.dll</HintPath>
     </Reference>
     <Reference Include="Scm.Uid">
       <HintPath>..\Libs\net9.0\Scm.Uid.dll</HintPath>
