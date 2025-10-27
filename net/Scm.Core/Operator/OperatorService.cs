@@ -574,6 +574,70 @@ public class OperatorService : ApiService
     }
     #endregion
 
+    #region 机构信息
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public OperatorUnitDvo GetUnitInfoAsync()
+    {
+        OperatorUnitDvo dvo = null;
+
+        var file = _EnvConfig.GetDataPath("unit.json");
+        if (File.Exists(file))
+        {
+            var json = FileUtils.ReadText(file);
+            if (!string.IsNullOrEmpty(json))
+            {
+                dvo = json.AsJsonObject<OperatorUnitDvo>();
+            }
+        }
+
+        return dvo;
+    }
+
+    /// <summary>
+    /// 工作台机构信息
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public OperatorUnitWorkResponse GetUnitWorkAsync()
+    {
+        OperatorUnitWorkResponse dvo = null;
+
+        var file = _EnvConfig.GetDataPath("unit.json");
+        if (File.Exists(file))
+        {
+            var json = FileUtils.ReadText(file);
+            if (!string.IsNullOrEmpty(json))
+            {
+                dvo = json.AsJsonObject<OperatorUnitWorkResponse>();
+            }
+        }
+
+        return dvo;
+    }
+
+    /// <summary>
+    /// 修改机构基本信息
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    public void UpdateUnitBasicAsync(UnitBasicRequest model)
+    {
+        var file = _EnvConfig.GetDataPath("unit.json");
+
+        var json = model.ToJsonString();
+        using (var stream = File.OpenWrite(file))
+        {
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.Write(json);
+            }
+        }
+    }
+    #endregion
+
     #region 用户信息
     /// <summary>
     /// 用户主题
