@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net9.0;net48</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm.Image</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ImageExts.cs" />
+    <Compile Remove="ImageUtils.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MetadataExtractor" Version="2.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Plugin\Scm.Plugin.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -8,7 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.205" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Common.Http\Scm.Common.Http.csproj" />
+    <ProjectReference Include="..\Scm.Common\Scm.Common.csproj" />
+    <ProjectReference Include="..\Scm.Email\Scm.Email.csproj" />
+    <ProjectReference Include="..\Scm.Plugin.Audio\Scm.Plugin.Audio.csproj" />
+    <ProjectReference Include="..\Scm.Server.Service\Scm.Server.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,6 @@ namespace Com.Scm.{NameSpace}
 	/// </summary>
 	public class {TableName}Dvo : ScmDataDvo
 	{
-{AttributeList}
+		{AttributeList}
 	}
 }

@@ -1,0 +1,16 @@
+using Com.Scm.Dao;
+using SqlSugar;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Com.Scm.{NameSpace}
+{
+	/// <summary>
+	/// {TableNameDescribe}
+	/// </summary>
+	[SugarTable("{DataTable}")]
+	public class {TableName}Dao : BaseDao
+	{
+{AttributeList}
+	}
+}

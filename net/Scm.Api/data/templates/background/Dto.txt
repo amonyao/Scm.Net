@@ -10,6 +10,6 @@ namespace Com.Scm.{NameSpace}
 	/// </summary>
 	public class {TableName}Dto : ScmDataDto
 	{
-{AttributeList}
+		{AttributeList}
 	}
 }

@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Com.Scm.Api.Controllers
 {
-    /// <summary>
-    /// 任务调度
-    /// </summary>
     [ApiExplorerSettings(GroupName = "Scm")]
     public class QuartzController : ApiController
     {

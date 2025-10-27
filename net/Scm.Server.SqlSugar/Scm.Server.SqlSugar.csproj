@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Dsa.Dba.Sugar\Scm.Dsa.Dba.Sugar.csproj" />
+    <ProjectReference Include="..\Scm.Server\Scm.Server.csproj" />
+  </ItemGroup>
+
+</Project>

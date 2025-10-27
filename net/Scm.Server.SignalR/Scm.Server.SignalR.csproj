@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SignalR\**" />
+    <EmbeddedResource Remove="SignalR\**" />
+    <None Remove="SignalR\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Server\Scm.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.Cache">
+      <HintPath>..\libs\net9.0\Scm.Cache.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

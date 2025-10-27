@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Common.Time\Scm.Common.Time.csproj" />
+    <ProjectReference Include="..\Scm.Dao\Scm.Dao.csproj" />
+    <ProjectReference Include="..\Scm.Dsa.Dba.Sugar\Scm.Dsa.Dba.Sugar.csproj" />
+    <ProjectReference Include="..\Scm.Dto\Scm.Dto.csproj" />
+    <ProjectReference Include="..\Scm.Email\Scm.Email.csproj" />
+    <ProjectReference Include="..\Scm.Phone\Scm.Phone.csproj" />
+    <ProjectReference Include="..\Scm.Server\Scm.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.Cache">
+      <HintPath>..\libs\net9.0\Scm.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Cache.Dictionary">
+      <HintPath>..\libs\net9.0\Scm.Cache.Dictionary.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Workflow">
+      <HintPath>..\Libs\net9.0\Scm.Workflow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

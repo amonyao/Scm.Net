@@ -12,12 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Scm.Common">
-      <HintPath>..\Libs\netstandard2.0\Scm.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Scm.Server.Dao">
-      <HintPath>..\Libs\net9.0\Scm.Server.Dao.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Samples.Common\Samples.Common.csproj" />
+    <ProjectReference Include="..\Scm.Server.Dao\Scm.Server.Dao.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Scm.Uid">
       <HintPath>..\Libs\net9.0\Scm.Uid.dll</HintPath>
     </Reference>

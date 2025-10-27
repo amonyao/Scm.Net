@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net9.0;net48</TargetFrameworks>
+    <RootNamespace>Com.Scm.Addon</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Common.Text\Scm.Common.Text.csproj" />
+  </ItemGroup>
+
+</Project>

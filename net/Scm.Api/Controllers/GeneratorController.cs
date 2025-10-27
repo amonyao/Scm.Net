@@ -46,9 +46,9 @@ namespace Com.Scm.Api.Controllers
         }
 
         [HttpPost, NoJsonResult]
-        public IActionResult Post([FromBody] GeneratorTableRequest param)
+        public IActionResult Post([FromBody] GeneratorTableRequest request)
         {
-            if (_generatorService.CreateCode(param))
+            if (_generatorService.CreateCode(request))
             {
                 if (_Config.Download)
                 {

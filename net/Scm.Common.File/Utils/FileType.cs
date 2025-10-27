@@ -1,0 +1,30 @@
+﻿namespace Com.Scm.Utils
+{
+    public enum FileType
+    {
+        UnKnown,
+        Bmp,
+        Jpg,
+        Png,
+        Gif,
+        Wmf,
+        Emf,
+        Wmp,
+        WebP,
+        Doc,
+        Docx,
+        Pdf,
+        Zip,
+        Mp4,
+        Mkv,
+        Mov,
+        M4v,
+        WebM,
+        Wmv,
+        Avi,
+        Flv,
+        Xls,
+        Xlsx,
+        Csv
+    }
+}

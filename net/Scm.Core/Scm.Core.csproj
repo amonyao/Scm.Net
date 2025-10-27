@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Cache\Scm.Cache.csproj" />
+    <ProjectReference Include="..\Scm.Common.Crypto\Scm.Common.Crypto.csproj" />
+    <ProjectReference Include="..\Scm.Common.Dto\Scm.Common.Dto.csproj" />
+    <ProjectReference Include="..\Scm.Common.Log\Scm.Common.Log.csproj" />
+    <ProjectReference Include="..\Scm.Common.OS\Scm.Common.OS.csproj" />
+    <ProjectReference Include="..\Scm.Common\Scm.Common.csproj" />
+    <ProjectReference Include="..\Scm.Dto\Scm.Dto.csproj" />
+    <ProjectReference Include="..\Scm.Email\Scm.Email.csproj" />
+    <ProjectReference Include="..\Scm.Plugin.Image.SkiaSharp\Scm.Plugin.Image.SkiaSharp.csproj" />
+    <ProjectReference Include="..\Scm.Server.Aiml\Scm.Server.Aiml.csproj" />
+    <ProjectReference Include="..\Scm.Server.Api\Scm.Server.Api.csproj" />
+    <ProjectReference Include="..\Scm.Server.SignalR\Scm.Server.SignalR.csproj" />
+    <ProjectReference Include="..\Scm.Server\Scm.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.Aiml">
+      <HintPath>..\Libs\net9.0\Scm.Aiml.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Server.Quartz">
+      <HintPath>..\Libs\net9.0\Scm.Server.Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Uid">
+      <HintPath>..\Libs\net9.0\Scm.Uid.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Workflow">
+      <HintPath>..\Libs\net9.0\Scm.Workflow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

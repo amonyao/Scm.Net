@@ -12,17 +12,17 @@ namespace Com.Scm.{NameSpace}
 	[SugarTable("{DataTable}")]
 	public class {TableName}Dao : ScmDataDao
 	{
-{AttributeList}
+        {AttributeList}
 
-        public override void PrepareCreate(long userId, long unitId = 0)
+        public override void PrepareCreate(long userId)
         {
-            base.PrepareCreate(userId, unitId);
+            base.PrepareCreate(userId);
 
             if (string.IsNullOrWhiteSpace(names))
             {
                 names = namef;
             }
-            codes = UidUtils.NextCodes("{DataTable}");
+            codes = UidHelper.NextCodes("{DataTable}");
         }
 	}
 }

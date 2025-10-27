@@ -10,6 +10,7 @@ using Com.Scm.Mapper;
 using Com.Scm.Phone.Config;
 using Com.Scm.Quartz.Config;
 using Com.Scm.Quartz.Extensions;
+using Com.Scm.Samples;
 using Com.Scm.Server;
 using Com.Scm.Service;
 using Com.Scm.Uid.Config;
@@ -31,7 +32,6 @@ namespace Com.Scm.Api
             Serilog.Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Configuration)
                 .CreateLogger();
-            //LogUtils.Setup();
 
             var services = builder.Services;
 
@@ -105,6 +105,9 @@ namespace Com.Scm.Api
             services.AddScoped<ITagService, ScmTagService>();
             services.AddScoped<ISmsService, ScmSmsService>();
             services.AddScoped<IFlowService, ScmFlowService>();
+
+            // 自定义服务
+            SamplesServerUtils.Setup(services);
 
             // 全局过滤
             services.AddControllers(options =>

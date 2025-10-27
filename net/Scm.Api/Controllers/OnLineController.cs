@@ -5,31 +5,30 @@ using Com.Scm.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.Api.Controllers
+namespace Com.Scm.Api.Controllers;
+
+/// <summary>
+/// 在线用户
+/// </summary>
+[ApiExplorerSettings(GroupName = "Scm")]
+public class OnLineController : ApiController
 {
-    /// <summary>
-    /// 在线用户
-    /// </summary>
-    [ApiExplorerSettings(GroupName = "Scm")]
-    public class OnLineController : ApiController
+    private readonly ICacheService _cacheService;
+
+    public OnLineController(ICacheService cacheService)
     {
-        private readonly ICacheService _cacheService;
+        _cacheService = cacheService;
+    }
 
-        public OnLineController(ICacheService cacheService)
-        {
-            _cacheService = cacheService;
-        }
+    /// <summary>
+    /// 获取所有在线信息
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet, AllowAnonymous]
+    public List<ClientUser> Get()
+    {
+        var userList = _cacheService.GetCache<List<ClientUser>>(KeyUtils.ONLINEUSERS);
 
-        /// <summary>
-        /// 获取所有在线信息
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet, AllowAnonymous]
-        public List<ClientUser> Get()
-        {
-            var userList = _cacheService.GetCache<List<ClientUser>>(KeyUtils.ONLINEUSERS);
-
-            return userList ?? new List<ClientUser>();
-        }
+        return userList ?? new List<ClientUser>();
     }
 }

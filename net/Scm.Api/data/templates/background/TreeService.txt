@@ -7,7 +7,7 @@ using Com.Scm.Text;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Com.Scm.{NameSpace}
+namespace FytSoa.Application.{NameSpace}
 {
 /// <summary>
 /// 服务接口

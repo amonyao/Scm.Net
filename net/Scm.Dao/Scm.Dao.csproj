@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Com.Scm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tasks\**" />
+    <EmbeddedResource Remove="Tasks\**" />
+    <None Remove="Tasks\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Dto\Scm.Dto.csproj" />
+    <ProjectReference Include="..\Scm.Server.Dao\Scm.Server.Dao.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Scm.Uid">
+      <HintPath>..\Libs\net9.0\Scm.Uid.dll</HintPath>
+    </Reference>
+    <Reference Include="Scm.Workflow">
+      <HintPath>..\Libs\net9.0\Scm.Workflow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -10,6 +10,11 @@
   <ItemGroup>
     <Folder Include="Demo\" />
     <Folder Include="Demo\" />
+    <Folder Include="PoDetail\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scm.Common\Scm.Common.csproj" />
   </ItemGroup>
 
 </Project>

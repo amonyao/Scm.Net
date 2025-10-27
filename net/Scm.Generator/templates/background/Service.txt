@@ -1,0 +1,135 @@
+using Com.Scm.Dsa.Dba.Sugar;
+using Com.Scm.Dvo;
+using Com.Scm.Service;
+using FytSoa.Common.Utils;
+using FytSoa.Domain.Core.Result;
+using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
+
+namespace Com.Scm.{NameSpace}
+{
+/// <summary>
+/// {TableNameDescribe}服务接口
+/// </summary>
+[ApiExplorerSettings(GroupName = "{Version}")]
+public class {TableName}Service : ApplicationService 
+{
+    private readonly SugarRepository<{TableName}Dao> _thisRepository;
+    public {TableName}Service(SugarRepository<{TableName}Dao> thisRepository)
+    {
+        _thisRepository = thisRepository;
+    }
+    
+    /// <summary>
+    /// 查询分页
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public async Task<PageResult<{TableName}Dto>> GetPagesAsync(BaseSearchPageRequest request)
+    {
+        return await _thisRepository.AsQueryable()
+            .WhereIF(IsValidId(request.option_id), a => a.option_id == request.option_id)
+            .WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
+            .OrderByDescending(m => m.id)
+            .Select<{TableName}Dto>()
+            .ToPageAsync(request.Page, request.Limit);
+    }
+
+    /// <summary>
+    /// 查询所有
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public async Task<List<{TableName}Dto>> GetListAsync(BaseSearchRequest request)
+    {
+        return await _thisRepository.AsQueryable()
+            .Where(a => a.row_status == Com.Scm.Enums.ScmStatusEnum.Enabled)
+            .WhereIF(!string.IsNullOrEmpty(request.key), a => a.text.Contains(request.key))
+            .OrderByDescending(m => m.id)
+            .Select<{TableName}Dto>()
+            .ToListAsync();
+    }
+
+    /// <summary>
+    /// 根据主键查询
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public async Task<{TableName}Dto> GetAsync(long id)
+    {
+        var model = await _thisRepository.GetByIdAsync(id);
+        return model.Adapt<{TableName}Dto>();
+    }
+
+    /// <summary>
+    /// 编辑读取
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public async Task<{TableName}Dto> GetEditAsync(long id)
+    {
+        return await _thisRepository
+            .AsQueryable()
+            .Select<{TableName}Dto>()
+            .FirstAsync(m => m.id == id);
+    }
+
+    /// <summary>
+    /// 查看读取
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public async Task<{TableName}Dto> GetViewAsync(long id)
+    {
+        return await _thisRepository
+            .AsQueryable()
+            .Select<{TableName}Dto>()
+            .FirstAsync(m => m.id == id);
+    }
+
+    /// <summary>
+    /// 添加
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    public async Task<bool> AddAsync({TableName}Dto model)
+    {
+        return await _thisRepository.InsertAsync(model.Adapt<{TableName}Dao>());
+    }
+
+    /// <summary>
+    /// 更新
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    public async Task UpdateAsync({TableName}Dto model)
+    {
+        await _thisRepository.UpdateAsync(model.Adapt<{TableName}Dao>());
+    }
+
+    /// <summary>
+    /// 批量更新状态
+    /// </summary>
+    /// <param name="param">逗号分隔</param>
+    /// <returns></returns>
+    public async Task<int> StatusAsync(ChangeStatusRequest param)
+    {
+        return await UpdateStatus(_thisRepository, param.ids, param.status);
+    }
+
+    /// <summary>
+    /// 批量删除记录
+    /// </summary>
+    /// <param name="ids">逗号分隔</param>
+    /// <returns></returns>
+    [HttpDelete]
+    public async Task<int> DeleteAsync(string ids)
+    {
+        return await DeleteRecord(_thisRepository, ids.StrToListLong());
+    }
+}
+}

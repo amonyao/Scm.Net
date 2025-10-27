@@ -57,9 +57,9 @@ namespace Com.Scm.Samples.Demo
         /// </summary>
         public ScmDeleteEnum row_delete { get; set; }
 
-        public override void PrepareCreate(long userId, long unitId = 0)
+        public override void PrepareCreate(long userId)
         {
-            base.PrepareCreate(userId, unitId);
+            base.PrepareCreate(userId);
 
             // 新增时，自动生成系统编码
             codes = UidUtils.NextCodes("samples_demo");
