@@ -50,7 +50,7 @@ public static class MapperConfigExtensions
         // 获取全局映射配置
         var config = TypeAdapterConfig.GlobalSettings;
 
-        var assemblyService = Assembly.Load("Scm.App");
+        var assemblyService = Assembly.Load("Scm.Core");
         // 扫描所有继承  IRegister 接口的对象映射配置
         config.Scan(assemblyService);
 
