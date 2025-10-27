@@ -66,8 +66,7 @@ export default {
         addMsg() {
         },
         getAvatar(item) {
-            var image = this.$SCM.get_avatar(item);
-            return this.$CONFIG.SERVER_URL + image;
+            return this.$SCM.get_user_avatar(item);
         },
         change(item) {
             this.$refs.friend.setUser(item);

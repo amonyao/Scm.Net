@@ -168,7 +168,7 @@ export default {
 			if (!row.id) {
 				return;
 			}
-			this.$router.push({ path: '/samples/demo/po/edit', query: { 'id': row.id } });
+			this.$router.push({ path: '/samples/po/edit', query: { 'id': row.id } });
 		}
 	},
 };

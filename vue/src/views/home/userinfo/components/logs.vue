@@ -5,7 +5,7 @@
 			<el-table-column label="#" type="index" width="50"></el-table-column>
 			<template #result="scope">
 				<el-tag type="success" v-if="scope.row.result">成功</el-tag>
-				<el-tag type="error" v-else>失败</el-tag>
+				<el-tag type="danger" v-else>失败</el-tag>
 			</template>
 		</scTable>
 	</el-card>
@@ -28,6 +28,13 @@ export default {
 				{ prop: "result", label: "执行结果", width: 80 },
 				{ prop: "remark", label: "说明", minWidth: 160, align: 'left' },
 			]
+		}
+	},
+	mounted() {
+	},
+	methods: {
+		getTag(result) {
+			return result ? 'success' : 'error';
 		}
 	}
 }

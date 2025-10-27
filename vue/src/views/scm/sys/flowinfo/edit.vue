@@ -80,7 +80,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.sysflowinfo.edit.get(row.id);
+				var res = await this.$API.scmsysflowinfo.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -94,9 +94,9 @@ export default {
 				this.isSaveing = true;
 				let res = null;
 				if (this.formData.id === '0') {
-					res = await this.$API.sysflowinfo.add.post(this.formData);
+					res = await this.$API.scmsysflowinfo.add.post(this.formData);
 				} else {
-					res = await this.$API.sysflowinfo.update.put(this.formData);
+					res = await this.$API.scmsysflowinfo.update.put(this.formData);
 				}
 				this.isSaveing = false;
 

@@ -45,7 +45,7 @@ export default {
             }
 
             this.app_code = arr[1];
-            var res = await this.$API.devversion.list.get({ 'code': this.app_code });
+            var res = await this.$API.scmdevversion.list.get({ 'code': this.app_code });
             if (res == null || res.code != 200) {
                 return;
             }

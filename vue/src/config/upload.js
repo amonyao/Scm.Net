@@ -3,7 +3,7 @@ import config from "@/config";
 
 //上传配置
 export default {
-	apiObj: API.sysfile.upload,						//上传请求API对象
+	apiObj: API.scmsysfile.upload,						//上传请求API对象
 	filename: "file",								//form请求时文件的key
 	successCode: 200,								//请求完成代码
 	maxSize: 100,									//最大文件大小 默认100MB
@@ -15,6 +15,6 @@ export default {
 			msg: res.message						//分析描述字段结构
 		}
 	},
-	apiObjFile: API.sysfile.uploadFile,				//附件上传请求API对象
+	apiObjFile: API.scmsysfile.uploadFile,				//附件上传请求API对象
 	maxSizeFile: 100								//最大文件大小 默认100MB
 }

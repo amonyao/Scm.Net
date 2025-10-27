@@ -109,7 +109,7 @@ export default {
 	},
 	methods: {
 		async init() {
-			const res = await this.$API.sysquartz.list.get();
+			const res = await this.$API.scmsysquartz.list.get();
 			if (res.code == 200) {
 				this.list = res.data;
 			}
@@ -129,7 +129,7 @@ export default {
 				confirmButtonClass: "el-button--danger",
 			})
 				.then(async () => {
-					var res = await that.$API.sysquartz.delete.delete(task);
+					var res = await that.$API.scmsysquartz.delete.delete(task);
 					if (res.code == 200) {
 						that.init();
 					} else {
@@ -161,7 +161,7 @@ export default {
 			}
 		},
 		async start(item) {
-			var res = await this.$API.sysquartz.start.put(item);
+			var res = await this.$API.scmsysquartz.start.put(item);
 			if (res.code == 200) {
 				this.init();
 			} else {
@@ -172,10 +172,10 @@ export default {
 			let res = null;
 			switch (arg.type) {
 				case "run":
-					res = await this.$API.sysquartz.run.put(arg.model);
+					res = await this.$API.scmsysquartz.run.put(arg.model);
 					break;
 				case "pause":
-					res = await this.$API.sysquartz.pause.put(arg.model);
+					res = await this.$API.scmsysquartz.pause.put(arg.model);
 					break;
 				case "del":
 					this.del(arg.model);

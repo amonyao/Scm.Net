@@ -177,7 +177,7 @@ export default {
 	mounted() {},
 	methods: {
 		async initTree() {
-			const t = await this.$API.sysadvcolumn.list.get();
+			const t = await this.$API.scmsysadvcolumn.list.get();
 			let _tree = [
 				{ id: "1", value: "0", label: "一级栏目", parentId: "0" },
 			];
@@ -197,7 +197,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.sysadvcolumn.model.get(row.id);
+				var res = await this.$API.scmsysadvcolumn.model.get(row.id);
 				res.data.parentIdList.pop();
 				if (res.data.parentIdList.length == 0)
 					res.data.parentIdList = ["0"];
@@ -211,11 +211,11 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.sysadvcolumn.add.post(
+						res = await this.$API.scmsysadvcolumn.add.post(
 							this.formData
 						);
 					} else {
-						res = await this.$API.sysadvcolumn.update.put(
+						res = await this.$API.scmsysadvcolumn.update.put(
 							this.formData
 						);
 					}

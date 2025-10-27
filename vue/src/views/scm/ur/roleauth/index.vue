@@ -109,7 +109,7 @@ export default {
 		//加载树数据
 		async getGroup() {
 			this.showGrouploading = true;
-			const res = await this.$API.urrole.list.get();
+			const res = await this.$API.scmurrole.list.get();
 			this.showGrouploading = false;
 			let _tree = [];
 			res.data.some((m) => {
@@ -123,7 +123,7 @@ export default {
 			this.roleTree = this.$TOOL.changeTree(_tree);
 
 			this.menuloading = true;
-			var resMenu = await this.$API.devmenu.list.get();
+			var resMenu = await this.$API.scmdevmenu.list.get();
 			this.menuloading = false;
 			let menutree = [];
 			resMenu.data.some((m) => {
@@ -186,7 +186,7 @@ export default {
 			// if (!data.children) {
 			this.selectRole = data;
 			this.btnDisable = false;
-			const res = await this.$API.urroleauth.role.get(data.id);
+			const res = await this.$API.scmurroleauth.role.get(data.id);
 			const that = this;
 			if (res.code == 200) {
 				res.data.forEach((item) => {
@@ -263,7 +263,7 @@ export default {
 			});
 			var data = { roleId: this.selectRole.id, menus: _menus };
 			this.loading = true;
-			const res = await this.$API.urroleauth.plusRole.post(data);
+			const res = await this.$API.scmurroleauth.plusRole.post(data);
 			this.loading = false;
 			if (res.code == 200) {
 				this.$message.success("授权成功");

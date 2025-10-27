@@ -32,10 +32,11 @@
 						@click="batch_del" />
 				</div>
 				<div class="right-panel">
-					<div class="right-panel-search">
-						<el-input v-model="param.key" clearable placeholder="关键字" />
-						<el-button icon="el-icon-search" type="primary" @click="search" />
-					</div>
+					<el-input v-model="param.key" clearable placeholder="关键字">
+						<template #append>
+							<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+						</template>
+					</el-input>
 				</div>
 			</el-header>
 			<el-main class="nopadding">
@@ -88,7 +89,7 @@ export default {
 	data() {
 		return {
 			serverApi: undefined,
-			apiObj: this.$API.sysadvinfo.page,
+			apiObj: this.$API.scmsysadvinfo.page,
 			list: [],
 			showGrouploading: false,
 			groupFilterText: "",
@@ -137,7 +138,7 @@ export default {
 		//加载树数据
 		async getGroup() {
 			this.showGrouploading = true;
-			const res = await this.$API.sysadvcolumn.list.get();
+			const res = await this.$API.scmsysadvcolumn.list.get();
 			this.showGrouploading = false;
 			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {
@@ -179,7 +180,7 @@ export default {
 		},
 		//删除
 		async table_del(row) {
-			var res = await this.$API.sysadvinfo.delete.delete(row.id);
+			var res = await this.$API.scmsysadvinfo.delete.delete(row.id);
 			if (res.code == 200) {
 				this.$refs.table.refresh();
 				this.$message.success("删除成功");
@@ -204,7 +205,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.sysadvinfo.delete.delete(
+					var res = await this.$API.scmsysadvinfo.delete.delete(
 						ids.join(",")
 					);
 					if (res.code == 200) {
@@ -232,7 +233,7 @@ export default {
 			})
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.sysadvcolumn.delete.delete(
+					var res = await this.$API.scmsysadvcolumn.delete.delete(
 						data.id
 					);
 					if (res.code == 200) {

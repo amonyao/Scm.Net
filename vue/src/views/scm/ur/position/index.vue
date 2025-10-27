@@ -87,7 +87,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.ur_position.page,
+			apiObj: this.$API.scmurposition.page,
 			tableName: 'scm_ur_position',
 			row_status_list: [this.$SCM.OPTION_ALL],
 			param: {
@@ -98,7 +98,7 @@ export default {
 			selection: [],
 			column: [
 				{ label: "id", prop: "id", hide: true },
-				{ label: "岗位编号", prop: "codec", width: 120 },
+				{ label: "岗位编号", prop: "codec", width: 120, align: "left" },
 				{ label: "岗位名称", prop: "namec", minWidth: 200, align: "left" },
 				{ label: "排序", prop: "od", width: "80" },
 				{ prop: "row_status", label: "数据状态", width: "80", },
@@ -123,28 +123,24 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.ur_position.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmurposition.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.ur_position.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmurposition.status, this.selection, status);
 		},
 		//删除
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.ur_position.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmurposition.delete, row);
 		},
 		//批量删除
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.ur_position.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmurposition.delete, this.selection);
 		},
 		show_search() {
 			this.$refs.search.open(this.param.key);
 		},
 		open_dialog(row) {
-			if (row.id) {
-				this.$refs.edit.open(row);
-			} else {
-				this.$refs.edit.open();
-			}
+			this.$refs.edit.open(row);
 		},
 		selectionChange(selection) {
 			this.selection = selection;

@@ -8,7 +8,7 @@ export default {
 	//配置组织
 	group: {
 		//请求接口对象
-		apiObj: API.urrole.list,
+		apiObj: API.scmurrole.list,
 		//接受数据字段映射
 		parseData: function (res) {
 			return {
@@ -26,7 +26,7 @@ export default {
 	},
 	//配置用户
 	user: {
-		apiObj: API.uruser.page,
+		apiObj: API.scmuruser.page,
 		pageSize: 20,
 		parseData: function (res) {
 			return {
@@ -50,7 +50,7 @@ export default {
 	//配置角色
 	role: {
 		//请求接口对象
-		apiObj: API.urrole.option,
+		apiObj: API.scmurrole.option,
 		//接受数据字段映射
 		parseData: function (res) {
 			return {

@@ -44,8 +44,7 @@ export default {
         },
         getAvatar(item) {
             var tmp = this.isMe(item) ? this.user : item.user;
-            var image = this.$SCM.get_avatar(tmp);
-            return this.$CONFIG.SERVER_URL + image;
+            return this.$SCM.get_user_avatar(tmp);
         }
     }
 }

@@ -48,8 +48,8 @@ export default {
 		};
 	},
 	mounted() {
-		this.$SCM.list_option(this.user_list, this.$API.uruser.option, {}, false);
-		this.$SCM.list_tag(this.tags_list, this.$API.sysmessage.SYS_ID, false);
+		this.$SCM.list_option(this.user_list, this.$API.scmuruser.option, {}, false);
+		this.$SCM.list_tag(this.tags_list, this.$API.scmmsgmessage.SYS_ID, false);
 	},
 	methods: {
 		def_data() {
@@ -65,7 +65,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.sysmessage.model.get(row.id);
+				var res = await this.$API.scmmsgmessage.model.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -76,9 +76,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.sysmessage.add.post(this.formData);
+						res = await this.$API.scmmsgmessage.add.post(this.formData);
 					} else {
-						res = await this.$API.sysmessage.update.put(this.formData);
+						res = await this.$API.scmmsgmessage.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

@@ -69,7 +69,7 @@ export default {
 					'Content-Type': 'multipart/form-data'
 				}
 			};
-			await this.$API.sysfile.upload.post(data, config);
+			await this.$API.scmsysfile.upload.post(data, config);
 		},
 		close() {
 			this.visible = false;

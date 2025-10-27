@@ -49,14 +49,14 @@ export default {
 			this.formData.id = row.id;
 			this.formData.owner_id = row.owner_id;
 
-			this.$SCM.list_option(this.user_list, this.$API.uruser.option, { 'organize_id': row.id }, false);
+			this.$SCM.list_option(this.user_list, this.$API.scmuruser.option, { 'organize_id': row.id }, false);
 			this.visible = true;
 		},
 		save() {
 			this.$refs.formRef.validate(async (valid) => {
 				if (valid) {
 					this.isSaveing = true;
-					let res = await this.$API.urorganize.changeOwner.post(
+					let res = await this.$API.scmurorganize.changeOwner.post(
 						this.formData
 					);
 					this.isSaveing = false;

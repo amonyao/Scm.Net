@@ -4,10 +4,7 @@
             <el-card>
                 <div v-html="html" v-if="html"></div>
                 <div v-else>
-                    <div style="padding: 20px">
-                        <span>暂时还没有来得及写，如果您有好意见或建议，请先通QQ交流群沟通。</span>
-                    </div>
-                    <img :src="img" class="image" />
+                    <el-skeleton />
                 </div>
             </el-card>
         </el-main>
@@ -21,7 +18,6 @@ export default {
     name: 'about',
     data() {
         return {
-            img: this.$CONFIG.SERVER_URL + '/data/qq.jpg',
             html: ''
         }
     },
@@ -46,7 +42,7 @@ export default {
             var section = arr[1];
             var code = arr[2];
 
-            var res = await this.$API.about.info.get({ 'code': code, 'section': section });
+            var res = await this.$API.scmabout.info.get({ 'code': code, 'section': section });
             if (!res || res.code != 200) {
                 return;
             }
@@ -61,10 +57,6 @@ export default {
 .el-card {
     max-width: 800px;
     margin: 0 auto;
-}
-
-.image {
-    width: 100%;
 }
 
 @media (max-width: 1000px) {

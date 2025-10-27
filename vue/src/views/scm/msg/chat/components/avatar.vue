@@ -38,8 +38,7 @@ export default {
             this.$emit('chatMe');
         },
         getAvatar() {
-            var image = this.$SCM.get_avatar(this.user);
-            return this.$CONFIG.SERVER_URL + image;
+            return this.$SCM.get_user_avatar(this.user);
         }
     }
 }

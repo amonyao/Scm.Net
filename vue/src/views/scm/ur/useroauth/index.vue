@@ -1,21 +1,21 @@
 <template>
+	<sc-search ref="search" @search="search">
+		<template #search>
+			<el-form ref="formRef" label-width="80px" :model="param">
+				<el-form-item label="查询选项" prop="option_id">
+					<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
+				</el-form-item>
+				<el-form-item label="数据状态" prop="row_status">
+					<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_time">
+					<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+						start-placeholder="开始日期" end-placeholder="结束日期" />
+				</el-form-item>
+			</el-form>
+		</template>
+	</sc-search>
 	<el-container>
-		<scSearch>
-			<template #search>
-				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="查询选项" prop="option_id">
-						<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
-					</el-form-item>
-					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list"/>
-					</el-form-item>
-					<el-form-item label="创建时间" prop="create_time">
-						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-							start-placeholder="开始日期" end-placeholder="结束日期" />
-					</el-form-item>
-				</el-form>
-			</template>
-		</scSearch>
 		<el-header>
 			<div class="left-panel">
 				<el-button icon="el-icon-plus" type="primary" @click="open_dialog()" />
@@ -36,10 +36,12 @@
 				</el-button-group>
 			</div>
 			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="关键字" />
-					<el-button icon="el-icon-search" type="primary" @click="search" />
-				</div>
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
+				<el-button @click="show_search">高级</el-button>
 			</div>
 		</el-header>
 		<el-main class="nopadding">
@@ -82,32 +84,32 @@ export default {
 		return {
 			apiObj: this.$API.scmuruseroauth.page,
 			list: [],
-            param:{
+			param: {
 				option_id: 0,
 				row_status: 1,
 				create_time: '',
 				key: ''
-            },
+			},
 			selection: [],
 			column: [
 				{ prop: "id", label: "id", hide: true },
-                { prop: 'user_id', label: '用户', width: 100 },
-                { prop: 'src', label: '登录网站', width: 100 },
-                { prop: 'union_id', label: 'UnionID', width: 100 },
-                { prop: 'user', label: '用户', width: 100 },
-                { prop: 'name', label: '昵称', width: 100 },
-                { prop: 'sex', label: '性别', width: 100 },
-                { prop: 'avatar', label: '头像', width: 100 },
-                { prop: 'access_token', label: 'access_token', width: 100 },
-                { prop: 'refresh_token', label: 'refresh_token', width: 100 },
-                { prop: 'expires_in', label: '过期时间', width: 100 },
-                { prop: 'err_code', label: '错误代码', width: 100 },
-                { prop: 'err_msg', label: '错误描述', width: 100 },
-                { prop: 'row_status', label: '数据状态', width: 100 },
-                { prop: 'update_time', label: '更新时间', width: 160 , formatter: this.$TOOL.dateTimeFormat},
-                { prop: 'update_names', label: '更新人员', width: 100 },
-                { prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
-                { prop: 'create_names', label: '创建人员', width: 100 },
+				{ prop: 'user_id', label: '用户', width: 100 },
+				{ prop: 'src', label: '登录网站', width: 100 },
+				{ prop: 'union_id', label: 'UnionID', width: 100 },
+				{ prop: 'user', label: '用户', width: 100 },
+				{ prop: 'name', label: '昵称', width: 100 },
+				{ prop: 'sex', label: '性别', width: 100 },
+				{ prop: 'avatar', label: '头像', width: 100 },
+				{ prop: 'access_token', label: 'access_token', width: 100 },
+				{ prop: 'refresh_token', label: 'refresh_token', width: 100 },
+				{ prop: 'expires_in', label: '过期时间', width: 100 },
+				{ prop: 'err_code', label: '错误代码', width: 100 },
+				{ prop: 'err_msg', label: '错误描述', width: 100 },
+				{ prop: 'row_status', label: '数据状态', width: 100 },
+				{ prop: 'update_time', label: '更新时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'update_names', label: '更新人员', width: 100 },
+				{ prop: 'create_time', label: '创建时间', width: 160, formatter: this.$TOOL.dateTimeFormat },
+				{ prop: 'create_names', label: '创建人员', width: 100 },
 			],
 			row_status_list: [],
 			option_list: [],
@@ -120,9 +122,9 @@ export default {
 		complete() {
 			this.$refs.table.refresh();
 		},
-        search(){
-            this.$refs.table.upData(this.param);
-        },
+		search() {
+			this.$refs.table.upData(this.param);
+		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.scmuruseroauth.status, row, row.row_status);
 		},
@@ -134,6 +136,9 @@ export default {
 		},
 		delete_list() {
 			this.$SCM.delete_list(this, this.$API.scmuruseroauth.delete, this.selection);
+		},
+		show_search() {
+			this.$refs.search.open(this.param.key);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

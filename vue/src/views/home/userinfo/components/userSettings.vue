@@ -56,7 +56,7 @@ export default {
 			lang: this.$TOOL.data.get('APP_LANG') || this.$CONFIG.LANG,
 			home: this.$TOOL.data.get('APP_HOME') || this.$CONFIG.HOME,
 			dark: this.$TOOL.data.get('APP_DARK') || false,
-			colorList: ['#409EFF', '#009688', '#536dfe', '#ff5c93', '#c62f2f', '#fd726d'],
+			colorList: this.$CONFIG.PREDEFINE_COLORS,
 			colorPrimary: this.$TOOL.data.get('APP_COLOR') || this.$CONFIG.COLOR || '#409EFF'
 		}
 	},
@@ -102,7 +102,7 @@ export default {
 	},
 	methods: {
 		async init() {
-			var cfgRes = await this.$API.syscfgconfig.list.get(10);
+			var cfgRes = await this.$API.scmsysconfig.list.get(10);
 			cfgRes.data.forEach((item) => {
 				if ("app_lang" == item.key) {
 					this.lang = item.value;
@@ -124,7 +124,7 @@ export default {
 			data.value = val;
 			data.types = 10;
 			data.data = 0;
-			var res = await this.$API.syscfgconfig.save.post(data);
+			var res = await this.$API.scmsysconfig.save.post(data);
 			if (res.code == 200) {
 				this.$message.success("保存成功");
 				this.visible = false;

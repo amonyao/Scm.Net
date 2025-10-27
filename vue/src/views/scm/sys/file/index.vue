@@ -106,14 +106,14 @@ export default {
 		};
 	},
 	mounted() {
-		this.serverApi = this.$API.sysfile.view.url + '?file=';
+		this.serverApi = this.$API.scmsysfile.view.url + '?file=';
 		this.init();
 		this.initFiles();
 		this.$SCM.list_dic(this.type_list, 'file_type', true);
 	},
 	methods: {
 		async init() {
-			const res = await this.$API.sysfile.list.get({ path: '/' });
+			const res = await this.$API.scmsysfile.list.get({ path: '/' });
 			if (!res || res.code != 200) {
 				return;
 			}
@@ -123,7 +123,7 @@ export default {
 		async initFiles() {
 			this.previewList = [];
 			this.value = [];
-			const res = await this.$API.sysfile.files.get(this.param);
+			const res = await this.$API.scmsysfile.files.get(this.param);
 			if (!res || res.code != 200) {
 				return;
 			}
@@ -195,7 +195,7 @@ export default {
 			)
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.sysfile.delFolder.delete(data.uri);
+					var res = await this.$API.scmsysfile.delFolder.delete(data.uri);
 					loading.close();
 					if (res.code == 200) {
 						this.param.path = "/upload/";
@@ -220,7 +220,7 @@ export default {
 			)
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.sysfile.delFile.delete(this.selectedFile.uri);
+					var res = await this.$API.scmsysfile.delFile.delete(this.selectedFile.uri);
 					if (res.code == 200) {
 						this.initFiles();
 						loading.close();

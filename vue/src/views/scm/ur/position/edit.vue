@@ -1,9 +1,9 @@
 <template>
-	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="750px" @close="close">
+	<sc-dialog v-model="visible" show-fullscreen :title="titleMap[mode]" width="450px" @close="close">
 		<el-form ref="formRef" label-width="100px" :model="formData" :rules="rules">
 			<el-form-item label="岗位编号" prop="codec">
-				<el-input v-model="formData.codec" placeholder="请输入岗位编号,例如：10001" :maxlength="6" show-word-limit clearable
-					:style="{ width: '100%' }"></el-input>
+				<el-input v-model="formData.codec" placeholder="请输入岗位编号,例如：10001" :maxlength="6" show-word-limit
+					clearable :style="{ width: '100%' }"></el-input>
 			</el-form-item>
 			<el-form-item label="岗位名称" prop="namec">
 				<el-input v-model="formData.namec" placeholder="请输入岗位名称" :maxlength="25" show-word-limit clearable
@@ -84,11 +84,11 @@ export default {
 	},
 	methods: {
 		async open(row) {
-			if (!row) {
+			if (!row || !row.id) {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.ur_position.model.get(row.id);
+				var res = await this.$API.scmurposition.model.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -99,9 +99,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.ur_position.add.post(this.formData);
+						res = await this.$API.scmurposition.add.post(this.formData);
 					} else {
-						res = await this.$API.ur_position.update.put(this.formData);
+						res = await this.$API.scmurposition.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

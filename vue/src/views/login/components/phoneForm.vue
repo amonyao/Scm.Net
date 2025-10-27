@@ -20,7 +20,7 @@
 				{{ $t('login.signIn') }}
 			</el-button>
 		</el-form-item>
-		<div class="login-reg">
+		<div class="login-reg" v-if="userRegister">
 			{{ $t('login.noAccount') }} <router-link to="/user_register">{{ $t('login.createAccount') }}</router-link>
 		</div>
 	</el-form>
@@ -45,6 +45,7 @@ export default {
 			disabled: false,
 			time: 0,
 			islogin: false,
+			userRegister: this.$CONFIG.USER_REGISTER_ENABLED,
 		}
 	},
 	mounted() {
@@ -145,7 +146,7 @@ export default {
 			this.$message.success("Login Success 登录成功");
 		},
 		async loadCfg() {
-			var cfgRes = await this.$API.syscfgconfig.list.get({ 'types': 10 });
+			var cfgRes = await this.$API.scmsysconfig.list.get({ 'types': 10 });
 			cfgRes.data.forEach((item) => {
 				if ("app_theme" == item.key) {
 					if (item.value == "true") {

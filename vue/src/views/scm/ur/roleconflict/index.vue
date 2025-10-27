@@ -64,7 +64,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.urroleconflict.page,
+			apiObj: this.$API.scmurroleconflict.page,
 			list: [],
 			param: {
 				key: "",
@@ -93,7 +93,7 @@ export default {
 		},
 		//删除
 		async table_del(row) {
-			var res = await this.$API.urroleconflict.delete.delete([row.id]);
+			var res = await this.$API.scmurroleconflict.delete.delete([row.id]);
 			if (res.code == 200) {
 				this.$refs.table.refresh();
 				this.$message.success("删除成功");
@@ -118,7 +118,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.urroleconflict.delete.delete(
+					var res = await this.$API.scmurroleconflict.delete.delete(
 						ids
 					);
 					if (res.code == 200) {

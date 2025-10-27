@@ -26,7 +26,7 @@ export default {
 	},
 	methods: {
 		async getVer() {
-			const res = await this.$API.devversion.ver.get({ 'types': 10, 'sys': 'scm_web' })
+			const res = await this.$API.scmdevversion.ver.get({ 'types': 10, 'sys': 'scm_web' })
 			this.ver = res.data;
 			this.remark = this.ver.remark;
 

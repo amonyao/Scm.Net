@@ -101,6 +101,3 @@
 		}
 	}
 </script>
-
-<style>
-</style>

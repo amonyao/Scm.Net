@@ -26,6 +26,7 @@ import scTable from "./components/scTable";
 import scTableSelect from "./components/scTableSelect";
 import scTitle from "./components/scTitle";
 import scUpload from "./components/scUpload";
+import scUploadFile from "./components/scUpload/file";
 import scUploadMultiple from "./components/scUpload/multiple";
 import scWaterfall from "./components/scWaterfall";
 import scWaterMark from "./components/scWaterMark";
@@ -62,6 +63,7 @@ export default {
 		app.component("scSearch", scSearch);
 		app.component("scFilterBar", scFilterBar);
 		app.component("scUpload", scUpload);
+		app.component("scUploadFile", scUploadFile);
 		app.component("scUploadMultiple", scUploadMultiple);
 		app.component("scFormTable", scFormTable);
 		app.component("scTableSelect", scTableSelect);

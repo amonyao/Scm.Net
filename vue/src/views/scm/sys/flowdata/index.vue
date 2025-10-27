@@ -2,6 +2,9 @@
 	<sc-search ref="search" @search="search">
 		<template #search>
 			<el-form ref="formRef" label-width="80px" :model="param">
+				<el-form-item label="查询选项" prop="option_id">
+					<sc-select v-model="param.option_id" placeholder="请选择" :data="option_list" />
+				</el-form-item>
 				<el-form-item label="数据状态" prop="row_status">
 					<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
 				</el-form-item>
@@ -32,9 +35,9 @@
 					</el-tooltip>
 				</el-button-group>
 				<el-divider direction="vertical"></el-divider>
-				<el-radio-group v-model="param.filter" @change="changeView()">
-					<el-radio-button :label="1">我发起的</el-radio-button>
-					<el-radio-button :label="2">我收到的</el-radio-button>
+				<el-radio-group v-model="param.filter">
+					<el-radio-button label="我发起的" :value="1" />
+					<el-radio-button label="我收到的" :value="2" />
 				</el-radio-group>
 			</div>
 			<div class="right-panel">
@@ -52,7 +55,7 @@
 				<el-table-column align="center" fixed type="selection" width="60" />
 				<el-table-column label="#" type="index" width="50"></el-table-column>
 				<template #order_codes="scope">
-					<el-button type="primary" link @click="open_tab(scope.row)">{{ scope.row.order_codes }}</el-button>
+					<el-button type="primary" plain @click="open_tab(scope.row)">{{ scope.row.order_codes }}</el-button>
 				</template>
 			</scTable>
 		</el-main>
@@ -64,13 +67,14 @@ export default {
 	data() {
 		return {
 			tableName: 'scm_sys_flowdata',
-			apiObj: this.$API.sysflowdata.page,
+			apiObj: this.$API.scmsysflowdata.page,
 			list: [],
 			param: {
-				filter: 1,
+				option_id: '0',
 				row_status: 1,
 				create_time: '',
 				key: '',
+				filter: 1
 			},
 			selection: [],
 			column: [
@@ -84,6 +88,7 @@ export default {
 				{ prop: "create_time", label: "创建时间", width: 160, formatter: this.$TOOL.dateTimeFormat },
 			],
 			row_status_list: [this.$SCM.OPTION_ALL],
+			option_list: [this.$SCM.OPTION_ALL],
 		};
 	},
 	mounted() {
@@ -97,16 +102,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysflowdata.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmsysflowdata.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysflowdata.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmsysflowdata.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysflowdata.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmsysflowdata.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysflowdata.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmsysflowdata.delete, this.selection);
 		},
 		show_search() {
 			this.$refs.search.open(this.param.key);
@@ -137,9 +142,6 @@ export default {
 			}
 
 			this.$router.push({ path: row.url, query: { 'id': row.id } });
-		},
-		changeView() {
-			this.search();
 		}
 	},
 };

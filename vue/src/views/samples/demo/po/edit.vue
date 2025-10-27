@@ -30,8 +30,6 @@
 					<div class="left-panel" v-show="editable">
 						<el-button icon="el-icon-plus" type="primary" @click="open_selector()" />
 						<el-divider direction="vertical"></el-divider>
-						<el-button type="primary" icon="el-icon-refresh" plain @click="search()"></el-button>
-						<el-divider direction="vertical"></el-divider>
 						<el-button type="danger" icon="el-icon-delete" plain :disabled="selection.length == 0"
 							@click="delete_list"></el-button>
 					</div>
@@ -41,9 +39,8 @@
 					</div>
 				</el-header>
 				<el-main class="nopadding">
-					<scTable ref="table" :table-name="tableName" :data="details" :column="column" row-key="id"
-						@menu-handle="menuHandle" @selection-change="selectionChange" :hidePagination="true"
-						:hideDo="true">
+					<scTable ref="table" :table-name="tableName" :api-obj="apiObj" :column="column" row-key="id"
+						@menu-handle="menuHandle" @selection-change="selectionChange">
 						<el-table-column align="center" fixed type="selection" width="60" />
 						<el-table-column label="#" type="index" width="50"></el-table-column>
 						<el-table-column label="操作" align="center" fixed="right" width="140">
@@ -81,6 +78,7 @@ export default {
 	data() {
 		return {
 			tableName: 'samples_po_detail',
+			apiObj: this.$API.samplespodetail.page,
 			param: {
 				id: '0',
 				row_status: 1,
@@ -101,8 +99,7 @@ export default {
 				{ prop: "create_time", label: "创建时间", width: 160, formatter: this.$TOOL.dateTimeFormat },
 			],
 			editable: false,
-			header: {},
-			details: []
+			header: {}
 		};
 	},
 	mounted() {
@@ -124,20 +121,13 @@ export default {
 			this.header = res.data;
 			this.editable = res.data.wfa_status < 1;
 
-			this.listDetail();
-		},
-		async listDetail() {
-			var res = await this.$API.samplespodetail.list.get(this.param);
-			if (!res || res.code != 200) {
-				return;
-			}
-			this.details = res.data;
+			this.search();
 		},
 		complete() {
-			this.listDetail();
+			this.$refs.table.refresh();
 		},
 		search() {
-			this.listDetail();
+			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
 			this.$SCM.status_item(this, this.$API.samplespodetail.status, row, row.row_status);
@@ -172,7 +162,7 @@ export default {
 			}
 		},
 		open_selector() {
-			this.$refs.bookSelector.open(this.param.id, this.$API.samplespodetail.batchappend);
+			this.$refs.bookSelector.open(this.param.id, this.$API.samplespodetail.batch);
 		},
 		async save() {
 			var tableData = this.$refs.table.getData();

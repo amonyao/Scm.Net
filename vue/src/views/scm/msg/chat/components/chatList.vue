@@ -13,7 +13,7 @@
                     <sc-list :data="chatList" @change="change" :showOpt="true" :showDrop="true" @dropItem="dropItem">
                         <template #item="{ item }">
                             <sc-summary :title="item.namec" :summary="$TOOL.dateTimeFormat(item.update_time)"
-                                :image="getAvatar(item)"></sc-summary>
+                                :image="$SCM.get_user_avatar(item)"></sc-summary>
                         </template>
                     </sc-list>
                 </el-main>
@@ -71,10 +71,6 @@ export default {
         },
         change(chat) {
             this.$refs.chatPage.setChat(chat);
-        },
-        getAvatar(item) {
-            var image = this.$SCM.get_avatar(item);
-            return this.$CONFIG.SERVER_URL + image;
         },
         openSelectUser() {
             if (this.isOpenUser) {

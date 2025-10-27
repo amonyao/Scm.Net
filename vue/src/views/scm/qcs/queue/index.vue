@@ -1,37 +1,33 @@
 <template>
-    <el-container class="is-vertical">
-        <sc-search @search="search">
-            <template #search>
-                <el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-                    <el-form-item label="排队方案" prop="detail_id">
-                        <sc-select v-model="param.detail_id" :data="detail_list" placeholder="请选择">
-                        </sc-select>
-                    </el-form-item>
-                    <el-form-item label="排队状态" prop="handle">
-                        <sc-select v-model="param.handle" :data="handle_list" placeholder="请选择">
-                        </sc-select>
-                    </el-form-item>
-                    <el-form-item label="数据状态" prop="row_status">
-                        <sc-select v-model="param.row_status" :data="statusList" placeholder="请选择">
-                        </sc-select>
-                    </el-form-item>
-                    <el-form-item label="创建时间" prop="create_time">
-                        <el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-                            start-placeholder="开始日期" end-placeholder="结束日期">
-                        </el-date-picker>
-                    </el-form-item>
-                    <el-form-item label="搜索内容">
-                        <el-input v-model="param.key" clearable placeholder="关键字" />
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="search">
-                            <sc-icon name="sc-search" />查询
-                        </el-button>
-                    </el-form-item>
-                </el-form>
-            </template>
-
-            <template #filter>
+    <sc-search ref="search" @search="search">
+        <template #search>
+            <el-form ref="formRef" label-width="80px" :model="param">
+                <el-form-item label="排队方案" prop="detail_id">
+                    <sc-select v-model="param.detail_id" :data="detail_list" placeholder="请选择">
+                    </sc-select>
+                </el-form-item>
+                <el-form-item label="排队状态" prop="handle">
+                    <sc-select v-model="param.handle" :data="handle_list" placeholder="请选择">
+                    </sc-select>
+                </el-form-item>
+                <el-form-item label="数据状态" prop="row_status">
+                    <sc-select v-model="param.row_status" :data="statusList" placeholder="请选择">
+                    </sc-select>
+                </el-form-item>
+                <el-form-item label="创建时间" prop="create_time">
+                    <el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+                        start-placeholder="开始日期" end-placeholder="结束日期">
+                    </el-date-picker>
+                </el-form-item>
+                <el-form-item label="搜索内容">
+                    <el-input v-model="param.key" clearable placeholder="关键字" />
+                </el-form-item>
+            </el-form>
+        </template>
+    </sc-search>
+    <el-container>
+        <el-header>
+            <div class="left-panel">
                 <el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
                 <el-divider direction="vertical"></el-divider>
                 <el-button-group>
@@ -51,8 +47,16 @@
                         </el-button>
                     </el-tooltip>
                 </el-button-group>
-            </template>
-        </sc-search>
+            </div>
+            <div class="right-panel">
+                <el-input v-model="param.key" clearable placeholder="关键字">
+                    <template #append>
+                        <el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+                    </template>
+                </el-input>
+                <el-button @click="show_search">高级</el-button>
+            </div>
+        </el-header>
         <el-main class="nopadding">
             <scTable ref="table" :api-obj="apiObj" :column="column" row-key="id" @menu-handle="menuHandle"
                 @selection-change="selectionChange">
@@ -146,6 +150,9 @@ export default {
         },
         delete_list() {
             this.$SCM.delete_list(this, this.$API.scmqcsqueue.delete, this.selection);
+        },
+        show_search() {
+            this.$refs.search.open(this.param.key);
         },
         open_dialog(row) {
             this.$refs.edit.open(row);

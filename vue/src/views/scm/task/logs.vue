@@ -32,7 +32,7 @@ export default {
 	},
 	methods: {
 		async init() {
-			const res = await this.$API.sysquartz.logs.get(this.params);
+			const res = await this.$API.scmsysquartz.logs.get(this.params);
 			if (res.code == 200) {
 				this.total = res.data.total
 				this.list = res.data.data;

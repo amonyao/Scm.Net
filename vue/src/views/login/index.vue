@@ -160,8 +160,8 @@ export default {
 	methods: {
 		async loadInfo() {
 			this.mode = this.$CONFIG.DEF_LOGIN_MODE;
-			//var res = await this.$API.devapp.model.get({ 'code': this.$CONFIG.APP_CODE });
-			var res = await this.$API.sysapp.model.get(this.$CONFIG.APP_CODE);
+			//var res = await this.$API.scmdevapp.model.get({ 'code': this.$CONFIG.APP_CODE });
+			var res = await this.$API.scmsysapp.model.get(this.$CONFIG.APP_CODE);
 			if (res == null || res.code != 200) {
 				return;
 			}

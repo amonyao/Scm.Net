@@ -6,21 +6,21 @@
                     <template #item="{ item }">
                         <div class="oauth-item">
                             <div class="thumb">
-                                <el-avatar :size="50" :src="$SCM.get_user_avatar(item)" />
+                                <el-avatar :size="50" :src="item.avatar" />
                             </div>
                             <div class="info">
                                 <div class="label">{{ item.name }}</div>
                                 <div class="value">{{ this.$TOOL.dateTimeFormat(item.create_time) }}</div>
                             </div>
                             <div class="opt">
-                                <label class="provider">{{ this.getProvider(item.provider) }}</label>
+                                <label class="provider">{{ item.provider }}</label>
                                 <el-button type="danger" @click="del(item.id)">解绑</el-button>
                             </div>
                         </div>
                     </template>
                 </sc-list>
                 <div style="margin-top: 20px;">
-                    <el-button type="primary" style="width: 100%;" @click="add()">添加</el-button>
+                    <el-button type="primary" style="width: 100%;" :loading="isLoading" @click="add()">添加</el-button>
                 </div>
             </div>
         </el-main>
@@ -32,8 +32,17 @@ import config from "@/config";
 export default {
     data() {
         return {
-            oauth_list: [],
-            vender_list: []
+            oauth_list: [],// 已授权列表
+            isLoading: false,// 绑定是否进行中
+            oidc_option: {
+                "mode": "spa",
+                "view": "none",
+                "style": "card",
+                "state": "login",
+                "columns": 5,
+                "success": this.bind_success,
+                "error": this.bind_error
+            }
         }
     },
     mounted() {
@@ -41,29 +50,12 @@ export default {
     },
     methods: {
         async init() {
-            this.$SCM.list_dic(this.handle_list, 'iam_vernder');
-
             this.load();
-        },
-        async unBind(id) {
-            var res = await this.$API.uruseroauth.unbind.post({ 'id': id });
-            if (res.code != 200) {
-                this.$message.warning(res.message);
-                return false;
-            }
 
-            var data = res.data;
-            if (data.code != 0) {
-                this.$message.warning(data.message);
-            }
-            else {
-                this.$message.success('联合登录解绑成功！');
-            }
-
-            this.load();
+            window.oidc.init(config.OIDC_KEY, "oidc", this.oidc_option);
         },
         async load() {
-            var res = await this.$API.uruseroauth.list.get();
+            var res = await this.$API.scmuruseroauth.list.get();
             if (!res || res.code != 200) {
                 return;
             }
@@ -71,9 +63,8 @@ export default {
             this.oauth_list = res.data;
         },
         add() {
-            var url = config.OIDC_BIND || '';
-            url = url.replace('{key}', config.OIDC_KEY).replace('{state}', 'bind');
-            window.location.href = url;
+            this.isLoading = true;
+            window.oidc.authroizeB();
         },
         del(id) {
             this.$confirm(
@@ -90,10 +81,45 @@ export default {
                 })
                 .catch(() => { });
         },
-        getProvider(provider) {
-            //this.$SCM.get_dic_names(this.vender_list, provider, '-');
-            return provider;
-        }
+        bind_success(user) {
+            this.doBind(user);
+        },
+        bind_error(message) {
+            this.isLoading = false;
+            this.$message.warning('联合登录绑定失败：' + message);
+        },
+        async doBind(user) {
+            var res = await this.$API.scmuruseroauth.dobind.post(user);
+            if (res.code != 200) {
+                this.isLoading = false;
+                this.$message.warning(res.message);
+                return false;
+            }
+
+            this.isLoading = false;
+            this.$message.success('联合登录解绑成功！');
+
+            this.load();
+
+            window.oidc.init(config.OIDC_KEY, "oidc", this.oidc_option);
+        },
+        async unBind(id) {
+            var res = await this.$API.scmuruseroauth.unbind.post({ 'id': id });
+            if (res.code != 200) {
+                this.$message.warning(res.message);
+                return false;
+            }
+
+            var data = res.data;
+            if (data.code != 0) {
+                this.$message.warning(data.message);
+            }
+            else {
+                this.$message.success('联合登录解绑成功！');
+            }
+
+            this.load();
+        },
     }
 }
 </script>
@@ -136,6 +162,8 @@ export default {
         .provider {
             color: #999;
             margin-right: 20px;
+            width: 100px;
+            text-align: right;
         }
     }
 }

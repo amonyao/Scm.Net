@@ -88,7 +88,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.cfgexportheader.page,
+			apiObj: this.$API.scmcfgexportheader.page,
 			list: [],
 			param: {
 				row_status: 1,
@@ -122,16 +122,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.cfgexportheader.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmcfgexportheader.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.cfgexportheader.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmcfgexportheader.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.cfgexportheader.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmcfgexportheader.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.cfgexportheader.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmcfgexportheader.delete, this.selection);
 		},
 		show_search() {
 			this.$refs.search.open(this.param.key);

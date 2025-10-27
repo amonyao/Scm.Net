@@ -63,7 +63,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.systask.edit.get(row.id);
+				var res = await this.$API.scmsystask.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -74,9 +74,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.systask.add.post(this.formData);
+						res = await this.$API.scmsystask.add.post(this.formData);
 					} else {
-						res = await this.$API.systask.update.put(this.formData);
+						res = await this.$API.scmsystask.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {
@@ -98,7 +98,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-select {
 	width: 100%;
 }

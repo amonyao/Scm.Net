@@ -98,7 +98,7 @@ export default {
     },
     methods: {
         async init() {
-            var res = await this.$API.msgcomment.view.get({ 'codec': this.code });
+            var res = await this.$API.scmmsgcomment.view.get({ 'codec': this.code });
             if (res == null || res.code != 200) {
                 return;
             }
@@ -122,7 +122,7 @@ export default {
         },
         async saveComment(comment) {
             var data = { 'codec': this.code, 'comment': comment, };
-            var res = await this.$API.msgcomment.save.post(data);
+            var res = await this.$API.scmmsgcomment.save.post(data);
             if (res == null || res.code != 200) {
                 return;
             }

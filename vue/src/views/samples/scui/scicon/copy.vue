@@ -3,7 +3,7 @@
 		<div class="body">
 			<div class="icon_panel">
 				<div class="icon">
-					<sc-icon :set="set" :name="name" :style="{ color: color }" :size="size" />
+					<sc-icon :name="name" :style="{ color: color }" :size="size" />
 				</div>
 				<el-form class="args">
 					<el-form-item label="图标大小：">
@@ -34,39 +34,20 @@ export default {
 			isSaveing: false,
 			visible: false,
 			icon: {},
-			set: '',
 			color: '',
-			size: '',
-			predefineColors: [
-				'#ffffff',
-				'#cccccc',
-				'#999999',
-				'#666666',
-				'#333333',
-				'#000000',
-				'#ff0000',
-				'#00ff00',
-				'#0000ff',
-				'#ff4500',
-				'#ff8c00',
-				'#ffd700',
-				'#90ee90',
-				'#00ced1',
-				'#1e90ff',
-				'#c71585',
-			],
+			size: 24,
+			predefineColors: this.$CONFIG.PREDEFINE_COLORS,
 		};
 	},
 	mounted() { },
 	computed: {
 		copyText() {
-			return '<sc-icon set="' + this.set + '" name="' + this.name + '" color="' + this.color + '" size="' + this.size + '"/>';
+			return '<sc-icon name="' + this.name + '" color="' + this.color + '" size="' + this.size + '"/>';
 		}
 	},
 	methods: {
-		open(name, set, color, size) {
+		open(name, color, size) {
 			this.name = name;
-			this.set = set;
 			this.color = color;
 			this.size = size;
 			this.visible = true;

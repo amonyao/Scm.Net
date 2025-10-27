@@ -101,7 +101,7 @@ export default {
 	data() {
 		return {
 			tableName: 'scm_ur_user',
-			apiObj: this.$API.uruser.page,
+			apiObj: this.$API.scmuruser.page,
 			showGrouploading: false,
 			groupFilterText: "",
 			group: [],
@@ -148,16 +148,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.uruser.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmuruser.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.uruser.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmuruser.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.uruser.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmuruser.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.uruser.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmuruser.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -192,7 +192,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.uruser.passreset.put(ids);
+					var res = await this.$API.scmuruser.passreset.put(ids);
 					if (res.code == 200) {
 						this.$refs.table.refresh();
 						loading.close();
@@ -221,7 +221,7 @@ export default {
 			this.$refs.userData.open(row);
 		},
 		async exportAll() {
-			const res = await this.$API.uruser.exportAll.get();
+			const res = await this.$API.scmuruser.exportAll.get();
 			if (res == null || res.code != 200) {
 				return;
 			}
@@ -229,7 +229,7 @@ export default {
 		//加载树数据
 		async getRole() {
 			this.showGrouploading = true;
-			const res = await this.$API.urrole.list.get();
+			const res = await this.$API.scmurrole.list.get();
 			this.showGrouploading = false;
 			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {

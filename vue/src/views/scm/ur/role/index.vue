@@ -79,7 +79,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.urrole.list,
+			apiObj: this.$API.scmurrole.list,
 			tableName: 'scm_ur_role',
 			param: {
 				key: "",
@@ -98,7 +98,7 @@ export default {
 		};
 	},
 	mounted() {
-		//this.apiObj = this.$API.urrole.list;
+		//this.apiObj = this.$API.scmurrole.list;
 	},
 	methods: {
 		complete() {
@@ -108,16 +108,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.urrole.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmurrole.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.urrole.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmurrole.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.urrole.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmurrole.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.urrole.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmurrole.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

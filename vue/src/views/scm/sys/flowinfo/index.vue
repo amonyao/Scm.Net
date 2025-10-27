@@ -68,7 +68,7 @@ export default {
 	data() {
 		return {
 			tableName: 'scm_sys_flowinfo',
-			apiObj: this.$API.sysflowinfo.page,
+			apiObj: this.$API.scmsysflowinfo.page,
 			list: [],
 			param: {
 				key: "",
@@ -96,16 +96,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.uruser.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmuruser.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.uruser.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmuruser.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.uruser.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmuruser.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.uruser.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmuruser.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

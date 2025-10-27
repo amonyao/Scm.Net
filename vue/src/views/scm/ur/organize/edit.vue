@@ -9,7 +9,7 @@
 			<el-form-item label="组织名称" prop="namec">
 				<el-input v-model="formData.namec" placeholder="请输入组织名称" clearable></el-input>
 			</el-form-item>
-			<el-form-item label="组织编码" prop="codec">
+			<el-form-item label="组织编码">
 				<el-input v-model="formData.codec" placeholder="请输入组织编码" clearable></el-input>
 			</el-form-item>
 			<el-form-item label="排序" prop="od" required>
@@ -39,9 +39,6 @@ export default {
 				// pid: [
 				// 	{ required: true, trigger: "change", pattern: this.$SCM.REGEX_ID, message: "请选择所属组织", },
 				// ],
-				codec: [
-					{ required: true, trigger: "blur", message: "请输入组织编码", },
-				],
 				namec: [
 					{ required: true, trigger: "blur", message: "请输入组织名称", },
 				],
@@ -64,7 +61,7 @@ export default {
 			}
 		},
 		async initTree() {
-			const t = await this.$API.urorganize.list.get();
+			const t = await this.$API.scmurorganize.list.get();
 			let _tree = [{ id: "1", value: "0", label: "（默认）", parentId: "0" }];
 			t.data.some((m) => {
 				_tree.push({
@@ -82,7 +79,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.urorganize.model.get(row.id);
+				var res = await this.$API.scmurorganize.model.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -93,11 +90,11 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.urorganize.add.post(
+						res = await this.$API.scmurorganize.add.post(
 							this.formData
 						);
 					} else {
-						res = await this.$API.urorganize.update.put(
+						res = await this.$API.scmurorganize.update.put(
 							this.formData
 						);
 					}

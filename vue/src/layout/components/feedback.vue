@@ -63,7 +63,7 @@ export default {
             this.$refs.formRef.validate(async (valid) => {
                 if (valid) {
                     this.isSaveing = true;
-                    var res = await this.$API.msgfeedbackheader.add.post(this.formData);
+                    var res = await this.$API.scmsysfeedbackheader.add.post(this.formData);
                     this.isSaveing = false;
                     if (res.code == 200) {
                         this.$emit("complete");

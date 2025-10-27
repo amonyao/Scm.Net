@@ -89,7 +89,7 @@ export default {
 	data() {
 		return {
 			tableName: 'scm_msg_message',
-			apiObj: this.$API.sysmessage.page,
+			apiObj: this.$API.scmmsgmessage.page,
 			types_list: [],
 			list: [],
 			param: {
@@ -161,7 +161,7 @@ export default {
 	},
 	methods: {
 		async initTags() {
-			var res = await this.$API.scmrestag.option.get(this.$API.sysmessage.SYS_ID);
+			var res = await this.$API.scmrestag.option.get(this.$API.scmmsgmessage.SYS_ID);
 			if (!res || res.code != 200) {
 				return;
 			}
@@ -178,7 +178,7 @@ export default {
 			}
 		},
 		async initTotal() {
-			var res = await this.$API.sysmessage.total.get();
+			var res = await this.$API.scmmsgmessage.total.get();
 			this.category_list[0].children[0].sum = res.data.allCount;
 			this.category_list[0].children[2].sum = res.data.unReadCount;
 			this.category_list[0].children[3].sum = res.data.recycleCount;
@@ -199,16 +199,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysmessage.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmmsgmessage.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysmessage.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmmsgmessage.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysmessage.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmmsgmessage.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysmessage.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmmsgmessage.delete, this.selection);
 		},
 		open_dialog(row) {
 			if (row.id) {
@@ -244,7 +244,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.sysmessage.recycle.put(ids);
+					var res = await this.$API.scmmsgmessage.recycle.put(ids);
 					loading.close();
 					if (res.code == 200) {
 						this.initTotal();
@@ -266,7 +266,7 @@ export default {
 
 			var ids = [];
 			ids.push(data.id);
-			var res = await this.$API.sysmessage.read.put(ids);
+			var res = await this.$API.scmmsgmessage.read.put(ids);
 			if (!res || res.code != 200) {
 				return;
 			}
@@ -282,7 +282,7 @@ export default {
 			})
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.sysmessage.read_all.put();
+					var res = await this.$API.scmmsgmessage.read_all.put();
 					loading.close();
 					if (res.code == 200) {
 						this.initTotal();
@@ -308,7 +308,7 @@ export default {
 					this.selection.forEach((element) => {
 						ids.push(element.id);
 					});
-					var res = await this.$API.sysmessage.read.put(ids);
+					var res = await this.$API.scmmsgmessage.read.put(ids);
 					loading.close();
 					if (res.code == 200) {
 						this.initTotal();

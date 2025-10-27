@@ -4,7 +4,7 @@
 			<div class="sc-upload__progress">
 				<el-progress :percentage="file.percentage" :text-inside="true" :stroke-width="16" />
 			</div>
-			<el-image class="image" :src="file.tempFile" fit="cover"></el-image>
+			<el-avatar class="image" :src="file.tempFile" fit="cover"></el-avatar>
 		</div>
 		<div v-if="file && file.status == 'success'" class="sc-upload__img">
 			<el-image class="image" :src="file.url" :preview-src-list="[file.url]" fit="cover" hide-on-click-modal
@@ -18,9 +18,9 @@
 			</div>
 		</div>
 		<el-upload v-if="!file" class="uploader" ref="uploader" :auto-upload="cropper ? false : autoUpload"
-			:disabled="disabled" :show-file-list="showFileList" :action="action" :name="name" :data="data" :accept="accept"
-			:limit="1" :http-request="request" :on-change="change" :before-upload="before" :on-success="success"
-			:on-error="error" :on-exceed="handleExceed">
+			:disabled="disabled" :show-file-list="showFileList" :action="action" :name="name" :data="data"
+			:accept="accept" :limit="1" :http-request="request" :on-change="change" :before-upload="before"
+			:on-success="success" :on-error="error" :on-exceed="handleExceed">
 			<slot>
 				<div class="el-upload--picture-card">
 					<div class="file-empty">
@@ -228,6 +228,7 @@ export default {
 				apiObj = this.apiObj;
 			}
 			const data = new FormData();
+			data.append('type', '1');
 			data.append(param.filename, param.file);
 			for (const key in param.data) {
 				data.append(key, param.data[key]);

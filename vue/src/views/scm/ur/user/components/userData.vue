@@ -52,7 +52,7 @@ export default {
             this.$refs.formRef.validate(async (valid) => {
                 if (valid) {
                     this.isSaveing = true;
-                    let res = await this.$API.uruser.userData.put(this.formData);
+                    let res = await this.$API.scmuruser.userData.put(this.formData);
                     this.isSaveing = false;
                     if (res.code == 200) {
                         this.$emit("complete");

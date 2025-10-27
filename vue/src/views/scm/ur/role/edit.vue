@@ -71,7 +71,7 @@ export default {
 			}
 		},
 		async initTree() {
-			const t = await this.$API.urrole.list.get();
+			const t = await this.$API.scmurrole.list.get();
 			let _tree = [
 				{ id: "1", value: "0", label: "（默认）", parentId: "0" }
 			];
@@ -91,7 +91,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.urrole.model.get(row.id);
+				var res = await this.$API.scmurrole.model.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -102,9 +102,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.urrole.add.post(this.formData);
+						res = await this.$API.scmurrole.add.post(this.formData);
 					} else {
-						res = await this.$API.urrole.update.put(this.formData);
+						res = await this.$API.scmurrole.update.put(this.formData);
 					}
 					this.isSaveing = false;
 					if (res.code == 200) {

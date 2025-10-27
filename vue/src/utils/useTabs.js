@@ -1,4 +1,4 @@
-import { nextTick  } from 'vue'
+import { nextTick } from 'vue'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import router from '@/router'
@@ -37,7 +37,7 @@ export default {
 		store.commit("removeViewTags", route)
 		store.commit("removeIframeList", route)
 		store.commit("removeKeepLive", route.name)
-		if(next){
+		if (next) {
 			const tagList = store.state.viewTags.viewTags
 			next(tagList)
 		}
@@ -47,15 +47,15 @@ export default {
 		const route = router.currentRoute.value
 		const tagList = [...store.state.viewTags.viewTags]
 		tagList.forEach(tag => {
-			if(tag.meta&&tag.meta.affix || route.fullPath==tag.fullPath){
+			if (tag.meta && tag.meta.affix || route.fullPath == tag.fullPath) {
 				return true
-			}else{
+			} else {
 				this.close(tag)
 			}
 		})
 	},
 	//设置标题
-	setTitle(title){
+	setTitle(title) {
 		store.commit("updateViewTagsTitle", title)
 	}
 }

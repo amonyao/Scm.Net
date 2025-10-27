@@ -1,4 +1,3 @@
-
 <template>
     <el-container>
         <el-header>
@@ -27,7 +26,8 @@
                         </template>
                         <el-scrollbar class="emoji-scrollbar">
                             <div class="emoji-group">
-                                <div class="emoji" v-for="(emoji, index) in emojis" :key="index" @click="setEmoji(emoji)">
+                                <div class="emoji" v-for="(emoji, index) in emojis" :key="index"
+                                    @click="setEmoji(emoji)">
                                     {{ emoji }}
                                 </div>
                             </div>
@@ -44,8 +44,8 @@
                     </el-upload>
                 </div>
                 <div class="textarea">
-                    <el-input v-model="content" type="textarea" resize="none" rows="4" @focus="inputFocus" @blur="inputBlur"
-                        @keydown="listener" />
+                    <el-input v-model="content" type="textarea" resize="none" rows="4" @focus="inputFocus"
+                        @blur="inputBlur" @keydown="listener" />
                     <el-tooltip effect="dark" placement="top-end" content="按Enter发送消息，Shift+Enter换行">
                         <el-button size="small" class="send" @click="sendMsg">发送</el-button>
                     </el-tooltip>
@@ -181,8 +181,7 @@ export default {
             })
         },
         getAvatar() {
-            var image = this.$SCM.get_avatar(this.chat);
-            return this.$CONFIG.SERVER_URL + image;
+            return this.$SCM.get_user_avatar(this.chat);
         },
         getUser(userId) {
             if (this.user_list) {

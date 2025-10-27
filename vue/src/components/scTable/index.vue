@@ -33,7 +33,7 @@
 				</template>
 			</el-table>
 		</div>
-		<div class="scTable-page" v-if="!hidePagination && !hideDo">
+		<div class="scTable-page">
 			<div class="scTable-pagination">
 				<el-pagination v-if="!hidePagination" :currentPage="currentPage" :page-size="pageSize"
 					:page-sizes="scPageSize" :layout="paginationLayout" :total="total" background :small="true"
@@ -113,6 +113,7 @@ import scContextmenuItem from "@/components/scContextmenu/item";
 
 export default {
 	name: "scTable",
+	emits: ['refresh', 'dataChange'],
 	components: {
 		columnSetting,
 		columnPrint,
@@ -208,7 +209,7 @@ export default {
 
 		//判断是否静态数据
 		if (this.apiObj) {
-			this.loadData();
+			this.getData();
 		} else if (this.data) {
 			this.tableData = this.data;
 			this.total = this.tableData.length;
@@ -231,8 +232,12 @@ export default {
 			);
 			this.userColumn = userColumn;
 		},
-		//加载数据
-		async loadData() {
+		//获取数据
+		async getData() {
+			if (!this.apiObj || !this.$refs || !this.$refs.scTable) {
+				return;
+			}
+
 			this.loading = true;
 			var reqData = {
 				[config.request.page]: this.currentPage,
@@ -264,33 +269,35 @@ export default {
 			this.$refs.scTable.setScrollTop(0);
 			this.$emit("dataChange", res, this.tableData);
 		},
-		getData() {
-			return this.tableData;
-		},
 		//分页点击
 		paginationChange(number) {
 			this.currentPage = number;
-			this.loadData();
+			this.getData();
 		},
 		paginationSizeChange(number) {
 			this.pageSize = number;
 			this.currentPage = 1;
-			this.loadData();
+			this.getData();
 		},
 		getTotal() {
 			return this.total;
 		},
 		//刷新数据
 		refresh() {
+			if (!this.apiObj) {
+				this.$emit('refresh');
+				return;
+			}
+
 			this.$refs.scTable.clearSelection();
-			this.loadData();
+			this.getData();
 		},
 		//更新数据 合并上一次params
 		upData(params, page = 1) {
 			this.currentPage = page;
 			this.$refs.scTable.clearSelection();
 			Object.assign(this.tableParams, params || {});
-			this.loadData();
+			this.getData();
 		},
 		//重载数据 替换params
 		reload(params, page = 1) {
@@ -299,7 +306,7 @@ export default {
 			this.$refs.scTable.clearSelection();
 			this.$refs.scTable.clearSort();
 			this.$refs.scTable.clearFilter();
-			this.loadData();
+			this.getData();
 		},
 		//自定义变化事件
 		columnSettingChange(userColumn) {
@@ -348,7 +355,7 @@ export default {
 				this.prop = null;
 				this.order = null;
 			}
-			this.loadData();
+			this.getData();
 		},
 		//本地过滤
 		filterHandler(value, row, column) {

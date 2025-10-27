@@ -77,7 +77,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.urgroup.list,
+			apiObj: this.$API.scmurgroup.list,
 			tableName: 'scm_ur_group',
 			list: [],
 			param: {
@@ -109,16 +109,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.urgroup.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmurgroup.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.urgroup.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmurgroup.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.urgroup.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmurgroup.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.urgroup.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmurgroup.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

@@ -102,7 +102,7 @@ export default {
 		//加载树数据
 		async getGroup() {
 			this.showGrouploading = true;
-			const res = await this.$API.urorganize.list.get();
+			const res = await this.$API.scmurorganize.list.get();
 			this.showGrouploading = false;
 			let _tree = [{ id: "1", value: "0", label: "所有", parentId: "0" }];
 			res.data.some((m) => {
@@ -117,7 +117,7 @@ export default {
 		},
 		async initUser() {
 			const that = this;
-			const res = await this.$API.uruser.page.get(this.param);
+			const res = await this.$API.scmuruser.page.get(this.param);
 			if (res.code == 200) {
 				this.user = res.data;
 				res.data.items.forEach((item) => {

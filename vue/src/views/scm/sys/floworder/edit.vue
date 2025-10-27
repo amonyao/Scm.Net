@@ -55,7 +55,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.$SCM.list_option(this.flow_list, this.$API.sysflowinfo.option, {}, false);
+		this.$SCM.list_option(this.flow_list, this.$API.scmsysflowinfo.option, {}, false);
 	},
 	methods: {
 		def_data() {
@@ -71,7 +71,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.sysfloworder.edit.get(row.id);
+				var res = await this.$API.scmsysfloworder.edit.get(row.id);
 				this.formData = res.data;
 			}
 			this.visible = true;
@@ -85,9 +85,9 @@ export default {
 				this.isSaveing = true;
 				let res = null;
 				if (this.formData.id === '0') {
-					res = await this.$API.sysfloworder.add.post(this.formData);
+					res = await this.$API.scmsysfloworder.add.post(this.formData);
 				} else {
-					res = await this.$API.sysfloworder.update.put(this.formData);
+					res = await this.$API.scmsysfloworder.update.put(this.formData);
 				}
 				this.isSaveing = false;
 

@@ -52,7 +52,7 @@
 				</template>
 			</el-result>
 		</div>
-		<el-form style="text-align: center;">
+		<el-form style="text-align: center;" v-if="userRegister">
 			<el-button v-if="stepActive > 0 && stepActive < 2" @click="pre()">上一步</el-button>
 			<el-button v-if="stepActive < 1" type="primary" @click="next()">下一步</el-button>
 			<el-button v-if="stepActive == 1" type="primary" @click="save()">提交</el-button>
@@ -117,6 +117,7 @@ export default {
 				]
 			},
 			signInName: 'user@unit',
+			userRegister: this.$CONFIG.USER_REGISTER_ENABLED
 		}
 	},
 	mounted() {
@@ -191,7 +192,7 @@ export default {
 		},
 		/** 获取完整登录用户名称 */
 		getFullUser() {
-			return this.formData.user;
+				return this.formData.user;
 		},
 		goLogin() {
 			this.$router.push({

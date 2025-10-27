@@ -1,24 +1,32 @@
 <template>
-	<el-container class="is-vertical">
-		<sc-search @search="search" :syncSearch="true" :expandVisible="false">
-			<template #filter>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
+				<label>图集：</label>
+				<sc-select v-model="param.set_id" :data="set_list" @change="changeSet()"
+					style="width: 120px;"></sc-select>
 				<label>图标格式：</label>
-				<el-switch v-model="mode" active-text="填充" inactive-text="线型" />
-				<label>图标大小：</label>
-				<el-slider v-model="size" :min="16" :max="128" :step="4" style="width: 120px;"></el-slider>
+				<sc-select v-model="param.type" :data="type_list" @change="changeSet()"
+					style="width: 120px;"></sc-select>
 				<label>图标颜色：</label>
 				<el-color-picker v-model="color" :predefine="predefineColors" />
-			</template>
-		</sc-search>
+			</div>
+			<div class="right-panel">
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
+			</div>
+		</el-header>
 		<el-main class="nopadding">
 			<el-container>
 				<el-aside style="width: 240px;">
-					<sc-list :data="filterData" @change="changeSet">
-
+					<sc-list v-model="param.cat_id" :data="cat_list" @change="changeCat">
 						<template #item="{ item }">
 							{{ item.name }}
 							<el-tag size="small" type="info">
-								{{ item.size }}
+								{{ item.qty }}
 							</el-tag>
 						</template>
 					</sc-list>
@@ -28,7 +36,7 @@
 						<div class="icon-list">
 							<el-empty v-if="!hasIcons()" :image-size="100" description="未查询到相关图标" />
 							<el-row v-else>
-								<el-col :xs="6" :sm="6" :md="4" :lg="3" :xl="3" v-for="(icon, index) in iconSet.icons"
+								<el-col :xs="6" :sm="6" :md="4" :lg="3" :xl="3" v-for="(icon, index) in data"
 									:key="index">
 									<div class="icon-item" :title="icon.desc" @click="copyCode(icon)">
 										<div class="icon-info" :style="{ 'fontSize': size + 'px', 'color': color }">
@@ -51,7 +59,6 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import scIcons from "@/config/scIcons";
 
 export default {
 	name: 'scui_scicon',
@@ -61,33 +68,18 @@ export default {
 	data() {
 		return {
 			param: {
+				set_id: this.$API.DEF_INT,
+				cat_id: '',
+				type: '',
 				key: ''
 			},
-			mode: false,
-			size: 24,
+			size: 32,
 			color: '#1a2947',
-			predefineColors: [
-				'#ffffff',
-				'#cccccc',
-				'#999999',
-				'#666666',
-				'#333333',
-				'#000000',
-				'#ff0000',
-				'#00ff00',
-				'#0000ff',
-				'#ff4500',
-				'#ff8c00',
-				'#ffd700',
-				'#90ee90',
-				'#00ced1',
-				'#1e90ff',
-				'#c71585',
-			],
-			data: [],
-			filterData: [],
-			iconSet: {},
-			index: 0,
+			predefineColors: this.$CONFIG.PREDEFINE_COLORS,
+			set_list: [],
+			cat_list: [],
+			type_list: [{ 'id': 1, 'label': '线型', 'value': 1 }, { 'id': 2, 'label': '填充', 'value': '2' }, { 'id': 3, 'label': '圆角', 'value': '3' }, { 'id': 4, 'label': '方形', 'value': '4' }],
+			data: []
 		};
 	},
 	watch: {
@@ -96,61 +88,70 @@ export default {
 		},
 	},
 	mounted() {
-		this.data.push(...scIcons.icons);
-		this.filterData = this.data;
-		this.iconSet = this.filterData[this.index];
+		this.listSet();
 	},
 	methods: {
-		changeSet(set, index) {
-			this.iconSet = set;
-			this.index = index;
+		listSet() {
+			this.$SCM.list_option(this.set_list, this.$API.scmresiconcat.option, {}, false);
+		},
+		async changeSet() {
+			this.cat = '';
+			var catRes = await this.$API.scmresiconcat.list.get({ 'pid': this.param.set_id });
+			if (!catRes || catRes.code != 200) {
+				return;
+			}
+			this.cat_list = catRes.data;
+		},
+		async changeCat(row) {
+			if (!row) {
+				return;
+			}
+
+			this.param.cat_id = row.id;
+			this.search();
+		},
+		async search() {
+			var iconRes = await this.$API.scmresicon.list.get(this.param);
+			if (!iconRes || iconRes.code != 200) {
+				return;
+			}
+
+			this.data = iconRes.data;
 		},
 		hasIcons() {
-			return this.iconSet && this.iconSet.icons && this.iconSet.icons.length > 0;
-		},
-		getText(icon) {
-			if (this.iconSet.set == 'ms') {
-				return icon.name;
-			}
-
-			return '';
+			return this.data && this.data.length > 0;
 		},
 		getName(icon) {
-			if (this.iconSet.set == 'ms') {
+			var name = icon.name;
+			if (name.startsWith('ms-')) {
 				return icon.name;
 			}
 
+			// if (icon.type == 'both') {
+			// 	name += (this.param.type ? '-fill' : '-line');
+			// } else if (icon.type) {
+			// 	name += '-' + icon.type;
+			// }
+			return name;
+		},
+		getText(icon) {
 			var name = icon.name;
-			if (icon.type == 'both') {
-				name += (this.mode ? '-fill' : '-line');
-			} else if (icon.type) {
-				name += '-' + icon.type;
+			if (name.startsWith('sc-')) {
+				return '';
 			}
-			return 'sc-' + name;
+
+			return name.substring(3);
 		},
 		getIcon(icon) {
-			if (this.iconSet.set == 'ms') {
-				return 'material-symbols-' + (this.mode ? 'rounded' : 'outlined');
+			var name = icon.name;
+			if (name.startsWith('ms-')) {
+				return 'material-symbols-' + (this.param.type ? 'rounded' : 'outlined');
 			}
 
 			return 'scfont ' + this.getName(icon);
 		},
 		copyCode(icon) {
-			this.$refs.copy.open(this.getName(icon), this.iconSet.set, this.color, this.size);
-		},
-		search(key) {
-			var filterData = [];
-			if (key) {
-				this.data.forEach((t) => {
-					var icons = t.icons.filter((n) => n.desc.includes(key));
-					var cat = { name: t.name, icons: icons, size: icons.length, set: t.set };
-					filterData.push(cat);
-				});
-			} else {
-				filterData = config.icons;
-			}
-			this.filterData = filterData;
-			this.iconSet = this.filterData[this.index];
+			this.$refs.copy.open(this.getName(icon), this.color, this.size);
 		}
 	},
 };

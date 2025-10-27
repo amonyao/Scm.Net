@@ -57,7 +57,7 @@ export default {
 			titleMap: { add: "新增", edit: "编辑", },
 			isSaveing: false,
 			visible: false,
-			apiObj: this.$API.uruser.simple,
+			apiObj: this.$API.scmuruser.simple,
 			props: {
 				label: "namec",
 				value: "id",
@@ -115,7 +115,7 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.syscalendar.model.get(row.id);
+				var res = await this.$API.scmsyscalendar.model.get(row.id);
 
 				// res.data.level = '' + res.data.level;
 				// res.data.types = '' + res.data.types;
@@ -146,11 +146,11 @@ export default {
 					let res = null;
 
 					if (this.formData.id === '0') {
-						res = await this.$API.syscalendar.add.post(
+						res = await this.$API.scmsyscalendar.add.post(
 							this.formData
 						);
 					} else {
-						res = await this.$API.syscalendar.update.put(
+						res = await this.$API.scmsyscalendar.update.put(
 							this.formData
 						);
 					}

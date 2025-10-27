@@ -28,7 +28,7 @@
 				{{ $t("login.signIn") }}
 			</el-button>
 		</el-form-item>
-		<div class="login-reg">
+		<div class="login-reg" v-if="userRegister">
 			{{ $t("login.noAccount") }}
 			<router-link to="/user_register">{{ $t("login.createAccount") }}</router-link>
 		</div>
@@ -55,6 +55,7 @@ export default {
 				code: [{ required: true, trigger: "blur", message: "验证码不能空" }],
 			},
 			islogin: false,
+			userRegister: this.$CONFIG.USER_REGISTER_ENABLED,
 		};
 	},
 	mounted() {
@@ -131,7 +132,7 @@ export default {
 			this.codeUrl = this.$CONFIG.API_URL + "/captcha/cha/" + this.form.codeKey + `?timestamp=${new Date().getTime()}`;
 		},
 		async loadCfg() {
-			var cfgRes = await this.$API.syscfgconfig.list.get({ 'types': 10 });
+			var cfgRes = await this.$API.scmsysconfig.list.get({ 'types': 10 });
 			if (!cfgRes || cfgRes.code != 200) {
 				return;
 			}

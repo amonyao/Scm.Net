@@ -94,9 +94,9 @@
 							<tableselect-render v-model="form[item.name]" :item="item"></tableselect-render>
 						</template>
 						<!-- editor -->
-						<!-- <template v-else-if="item.component=='editor'" >
+						<template v-else-if="item.component=='editor'" >
 							<sc-editor v-model="form[item.name]" placeholder="请输入" :height="400"></sc-editor>
-						</template> -->
+						</template>
 						<!-- noComponent -->
 						<template v-else>
 							<el-tag type="danger">[{{item.component}}] Component not found</el-tag>
@@ -121,6 +121,7 @@
 
 	import { defineAsyncComponent } from 'vue'
 	const tableselectRender = defineAsyncComponent(() => import('./items/tableselect'))
+	const scEditor = defineAsyncComponent(() => import('@/components/scEditor'))
 
 	export default {
 		props: {
@@ -129,7 +130,8 @@
 			loading: { type: Boolean, default: false },
 		},
 		components: {
-			tableselectRender
+			tableselectRender,
+			scEditor
 		},
 		data() {
 			return {

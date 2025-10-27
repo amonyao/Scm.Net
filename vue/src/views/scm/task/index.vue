@@ -41,10 +41,11 @@
 				</el-button-group>
 			</div>
 			<div class="right-panel">
-				<div class="right-panel-search">
-					<el-input v-model="param.key" clearable placeholder="群组名称" />
-					<el-button type="primary" @click="search"><sc-icon name="sc-search" /></el-button>
-				</div>
+				<el-input v-model="param.key" clearable placeholder="群组名称">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
 			</div>
 		</el-header>
 		<el-main class="nopadding">
@@ -99,7 +100,7 @@ export default {
 	data() {
 		return {
 			tableName: 'scm_task',
-			apiObj: this.$API.sysquartz.page,
+			apiObj: this.$API.scmsysquartz.page,
 			list: [],
 			param: {
 				key: '',
@@ -128,16 +129,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysquartz.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmsysquartz.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysquartz.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmsysquartz.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysquartz.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmsysquartz.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysquartz.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmsysquartz.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);
@@ -158,7 +159,7 @@ export default {
 		},
 		async pause_job() {
 			var row = this.selection[0];
-			var res = await this.$API.sysquartz.pause.put(row);
+			var res = await this.$API.scmsysquartz.pause.put(row);
 			if (res) {
 				if (res.code == 200 && res.data.handle) {
 					this.$message.success("操作成功");
@@ -170,7 +171,7 @@ export default {
 		},
 		async run_job() {
 			var row = this.selection[0];
-			var res = await this.$API.sysquartz.run.put(row);
+			var res = await this.$API.scmsysquartz.run.put(row);
 			if (res) {
 				if (res.code == 200 && res.data.handle) {
 					this.$message.success("操作成功");

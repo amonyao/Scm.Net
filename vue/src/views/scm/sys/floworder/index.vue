@@ -81,7 +81,7 @@ export default {
 	data() {
 		return {
 			tableName: 'scm_sys_floworder',
-			apiObj: this.$API.sysfloworder.page,
+			apiObj: this.$API.scmsysfloworder.page,
 			list: [],
 			param: {
 				option_id: '0',
@@ -115,16 +115,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysfloworder.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmsysfloworder.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysfloworder.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmsysfloworder.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysfloworder.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmsysfloworder.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysfloworder.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmsysfloworder.delete, this.selection);
 		},
 		show_search() {
 			this.$refs.search.open(this.param.key);

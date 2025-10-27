@@ -133,7 +133,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.uruser.simple,
+			apiObj: this.$API.scmuruser.simple,
 			stateMap: {
 				open: "open",
 				complete: "complete",
@@ -175,7 +175,7 @@ export default {
 			this.$SCM.list_dic(this.level_list, 'calendar-level', true);
 		},
 		async list_data() {
-			const res = await this.$API.syscalendar.list.get(this.param);
+			const res = await this.$API.scmsyscalendar.list.get(this.param);
 			if (res == null || res.code != 200) {
 				return;
 			}
@@ -220,7 +220,7 @@ export default {
 				cancelButtonText: "取消",
 			}).then(async () => {
 				const loading = this.$loading();
-				var res = await this.$API.syscalendar.delete.delete([
+				var res = await this.$API.scmsyscalendar.delete.delete([
 					row.id,
 				]);
 				if (res.code == 200) {

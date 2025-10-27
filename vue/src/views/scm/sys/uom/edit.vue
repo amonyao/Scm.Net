@@ -85,12 +85,10 @@ export default {
 					{ required: true, trigger: "change", message: "请选择以显示语言", pattern: this.$SCM.REGEX_INT },
 				],
 				codec: [
-					{ required: true, trigger: "blur", message: "单位编码不能为空" },
-					{ required: true, trigger: "blur", message: "单位编码应4至32个字符", pattern: this.$SCM.REGEX_CODEC },
+					{ required: true, trigger: "blur", message: "单位编码不能为空" }
 				],
 				namec: [
-					{ required: true, trigger: "blur", message: "单位名称不能为空" },
-					{ required: true, trigger: "blur", message: "单位名称应4至64个字符", pattern: this.$SCM.REGEX_NAMEC },
+					{ required: true, trigger: "blur", message: "单位名称不能为空" }
 				],
 			},
 			types_list: [this.$SCM.OPTION_ONE],

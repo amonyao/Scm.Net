@@ -129,7 +129,7 @@ async function recordPv(to) {
 
 	//var title = to.meta.title;
 	// 记录访问信息
-	await http.post(`${config.API_URL}/syspv`, { url: url });
+	await http.post(`${config.API_URL}/scmsyspv`, { url: url });
 	// if (!res || res.code != 200) {
 	// 	return;
 	// }
@@ -139,7 +139,7 @@ async function recordPv(to) {
 function filterAsyncRouter(routerMap) {
 	const accessedRouters = [];
 	routerMap.forEach((item) => {
-		item.meta = item.meta ? item.meta : {};
+		item.meta = item.meta || {};
 		//处理外部链接特殊路由
 		if (item.meta.type == "iframe") {
 			item.meta.url = item.path;

@@ -7,7 +7,7 @@ const scm = {};
 scm.DEF_INT = 0;
 scm.DEF_ID = "0";
 scm.SYS_ID = "1000000000000000001";
-scm.DEF_AVATAR = "/data/avatar/0.png";
+scm.DEF_AVATAR = "0.png";
 
 scm.REGEX_ID = /^[1-9]\d{15,18}$/;
 scm.REGEX_INT = /^[1-9]\d*$/;
@@ -16,19 +16,12 @@ scm.REGEX_NAMEC = /^\S{4,64}$/;
 scm.REGEX_NAMEF = /^\S{4,128}$/;
 scm.REGEX_NUMBER = /^\d+$/;
 
-scm.OPTION_ALL = { label: "所有", id: "0", value: "0" };
-scm.OPTION_ONE = { label: "请选择", id: "0", value: "0" };
-scm.OPTION_ALL_INT = { label: "所有", id: "0", value: 0 };
-scm.OPTION_ONE_INT = { label: "请选择", id: "0", value: 0 };
+scm.OPTION_ALL = { label: "所有", id: scm.DEF_ID, value: scm.DEF_ID };
+scm.OPTION_ONE = { label: "请选择", id: scm.DEF_ID, value: scm.DEF_ID };
+scm.OPTION_ALL_INT = { label: "所有", id: scm.DEF_ID, value: scm.DEF_INT };
+scm.OPTION_ONE_INT = { label: "请选择", id: scm.DEF_ID, value: scm.DEF_INT };
 
 scm.cache = [];
-
-scm.get_avatar = function (user) {
-	if (!user || !user.avatar) {
-		return scm.DEF_AVATAR;
-	}
-	return user.avatar;
-};
 
 scm.is_valid_id = function (text) {
 	return scm.REGEX_ID.test(text);
@@ -256,6 +249,39 @@ scm.list_dic = async function (list, key, all, useCatch) {
 };
 
 /**
+ * 获取配置
+ * @param {String} key 字典值
+ * @param {String} def 默认值
+ * @param {Boolean} useCatch 是否启用缓冲
+ * @returns
+ */
+scm.list_cfg = async function (key, def, useCatch) {
+	if (!key) {
+		return def;
+	}
+
+	var data = useCatch ? scm.cache[key] : null;
+	if (data == null) {
+		var res = await http.get(`${config.API_URL}/scmsysconfig/config/` + key);
+		if (!res || res.code != 200) {
+			return;
+		}
+
+		data = res.data;
+		if (!data) {
+			return def;
+		}
+		data = data.value;
+		if (useCatch) {
+			scm.cache[key] = data;
+		}
+	}
+
+	return data ?? def;
+};
+
+
+/**
  * 获取数据状态列表
  * @param {*} list
  * @param {*} all
@@ -297,7 +323,7 @@ scm.get_dic_names = function (list, key, def) {
  * @param {*} all
  */
 scm.list_cat = async function (list, param, all) {
-	var res = await http.get(`${config.API_URL}/rescat/option`, param);
+	var res = await http.get(`${config.API_URL}/scmrescat/option`, param);
 	scm.prepare(list, res, all);
 };
 
@@ -308,7 +334,7 @@ scm.list_cat = async function (list, param, all) {
  * @param {*} all
  */
 scm.list_tag = async function (list, app, all) {
-	var res = await http.get(`${config.API_URL}/restag/option/` + app);
+	var res = await http.get(`${config.API_URL}/scmrestag/option/` + app);
 	scm.prepare(list, res, all);
 };
 
@@ -320,6 +346,10 @@ scm.list_tag = async function (list, app, all) {
  * @param {*} all
  */
 scm.list_option = async function (list, api, param, all) {
+	if (!api) {
+		return;
+	}
+
 	var res = await api.get(param);
 	scm.prepare(list, res, all);
 };
@@ -349,7 +379,7 @@ scm.get_option_names = function (options, key, def) {
  * @param {*} all
  */
 scm.list_app = async function (list, types, all) {
-	var res = await http.get(`${config.API_URL}/devapp/option/` + types);
+	var res = await http.get(`${config.API_URL}/scmdevapp/option/` + types);
 	scm.prepare(list, res, all);
 };
 
@@ -365,7 +395,7 @@ scm.list_region = async function (list, pid, all) {
 		return;
 	}
 
-	var res = await http.get(`${config.API_URL}/sysregion/option/` + pid);
+	var res = await http.get(`${config.API_URL}/scmsysregion/option/` + pid);
 	scm.prepare(list, res, all);
 };
 
@@ -373,7 +403,7 @@ scm.get_table = async function (key, def) {
 	if (!key) {
 		return def;
 	}
-	var res = await http.get(`${config.API_URL}/systable/` + key);
+	var res = await http.get(`${config.API_URL}/scmsystable/` + key);
 	if (!res || res.code != 200) {
 		return def;
 	}
@@ -404,7 +434,7 @@ scm.save_table = async function (key, cfg) {
 	if (!key) {
 		return false;
 	}
-	var res = await http.post(`${config.API_URL}/systable/save`, {
+	var res = await http.post(`${config.API_URL}/scmsystable/save`, {
 		codec: key,
 		details: cfg,
 	});
@@ -487,9 +517,16 @@ scm.read_json = function (key, val) {
 
 scm.get_avatar = function (avatar) {
 	if (!avatar) {
-		avatar = '0.png';
+		avatar = scm.DEF_AVATAR;
 	}
 	return config.SERVER_URL + '/data/avatar/' + avatar;
+};
+
+scm.get_user_avatar = function (user) {
+	if (!user) {
+		return scm.get_avatar();
+	}
+	return scm.get_avatar(user.avatar);
 };
 
 scm.recursive_menu = function (menuList, pid) {

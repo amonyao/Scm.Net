@@ -60,7 +60,7 @@
 				this.$refs.form.validate(async (valid) => {
 					if (valid) {
 						const user=this.$TOOL.data.get("USER_INFO");
-						let res = await this.$API.uruser.setpwd.put({id:user.id,sourcePwd:this.form.userPassword,passWord:this.form.newPassword});
+						let res = await this.$API.scmuruser.setpwd.put({id:user.id,sourcePwd:this.form.userPassword,passWord:this.form.newPassword});
 						if(res.code==200){
 							this.$alert("密码修改成功，是否跳转至登录页使用新密码登录", "修改成功", {
 								type: 'success',

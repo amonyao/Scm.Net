@@ -63,7 +63,7 @@ export default {
 	methods: {
 		async getData() {
 			this.loading = true;
-			var res = await this.$API.systask.list.get();
+			var res = await this.$API.scmsystask.list.get();
 			if (!res || res.code != 200) {
 				return;
 			}

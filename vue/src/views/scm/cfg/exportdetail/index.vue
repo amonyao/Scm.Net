@@ -1,27 +1,23 @@
 <template>
-	<el-container class="is-vertical">
-		<sc-search @search="search">
-			<template #search>
-				<el-form ref="formRef" label-width="100px" :model="param" :inline="true">
-					<el-form-item label="数据状态" prop="row_status">
-						<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
-					</el-form-item>
-					<el-form-item label="创建时间" prop="create_time">
-						<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
-							start-placeholder="开始日期" end-placeholder="结束日期" />
-					</el-form-item>
-					<el-form-item label="搜索内容">
-						<el-input v-model="param.key" clearable placeholder="关键字" />
-					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click="search">
-							<sc-icon name="sc-search" />查询
-						</el-button>
-					</el-form-item>
-				</el-form>
-			</template>
-
-			<template #filter>
+	<sc-search ref="search" @search="search">
+		<template #search>
+			<el-form ref="formRef" label-width="80px" :model="param">
+				<el-form-item label="数据状态" prop="row_status">
+					<sc-select v-model="param.row_status" placeholder="请选择" :data="row_status_list" />
+				</el-form-item>
+				<el-form-item label="创建时间" prop="create_time">
+					<el-date-picker v-model="param.create_time" type="datetimerange" range-separator="至"
+						start-placeholder="开始日期" end-placeholder="结束日期" />
+				</el-form-item>
+				<el-form-item label="搜索内容">
+					<el-input v-model="param.key" clearable placeholder="关键字" />
+				</el-form-item>
+			</el-form>
+		</template>
+	</sc-search>
+	<el-container>
+		<el-header>
+			<div class="left-panel">
 				<el-button type="primary" @click="open_dialog()"><sc-icon name="sc-plus" /></el-button>
 				<el-divider direction="vertical"></el-divider>
 				<el-button-group>
@@ -38,8 +34,16 @@
 								name="sc-close-circle-line" /></el-button>
 					</el-tooltip>
 				</el-button-group>
-			</template>
-		</sc-search>
+			</div>
+			<div class="right-panel">
+				<el-input v-model="param.key" clearable placeholder="关键字">
+					<template #append>
+						<el-button type="primary" @click="search()"><sc-icon name="sc-search" /></el-button>
+					</template>
+				</el-input>
+				<el-button @click="show_search">高级</el-button>
+			</div>
+		</el-header>
 		<el-main class="nopadding">
 			<scTable ref="table" :data="list" :column="column" row-key="id" @menu-handle="menuHandle"
 				@selection-change="selectionChange">
@@ -113,7 +117,7 @@ export default {
 	methods: {
 		async init() {
 			this.param.hid = this.$route.query.id;
-			var res = await this.$API.cfgexportdetail.page.get(this.param);
+			var res = await this.$API.scmcfgexportdetail.page.get(this.param);
 			if (res != null && res.code == 200) {
 				this.list = res.data.items;
 			}
@@ -125,16 +129,19 @@ export default {
 			this.init();
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.cfgexportdetail.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmcfgexportdetail.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.cfgexportdetail.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmcfgexportdetail.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.cfgexportdetail.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmcfgexportdetail.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.cfgexportdetail.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmcfgexportdetail.delete, this.selection);
+		},
+		show_search() {
+			this.$refs.search.open(this.param.key);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row, this.param.hid);

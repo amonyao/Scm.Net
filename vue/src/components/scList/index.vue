@@ -7,9 +7,13 @@
         <div class="sc-list_body" :style="{ padding: this.padding + 'px' }" v-else>
             <div v-for="(item, index) in data" :key="index" @click="itemClick(item, index)" class="sc-list-item"
                 :class="{ actived: canSelected && currIndex == index }" :style="{ width: 100 / columns + '%' }">
+                <span class="check" v-if="showCheckbox">
+                    <el-checkbox v-model="item.checked" @change="itemChange(item, index)"></el-checkbox>
+                </span>
                 <slot name="item" :item="item" :index="index">
                     <div class="sc-list-item_label">
-                        <sc-icon :name="icon"></sc-icon>
+                        <sc-icon :name="icon" v-if="icon" :size="iconSize"></sc-icon>
+                        <el-avatar :src="item.icon" v-if="item.icon" :size="iconSize" />
                         {{ item.label }}
                     </div>
                     <div class="sc-list-item_value">
@@ -42,6 +46,7 @@ export default {
         header: { type: String, default: '' },
         footer: { type: String, default: '' },
         icon: { type: String, default: '' },
+        iconSize: { type: Number, default: 24 },
         data: { type: Array, default: function () { return []; } },
         width: { type: String, default: "" },
         canSelected: { type: Boolean, default: true },
@@ -49,6 +54,7 @@ export default {
         showOpt: { type: Boolean, default: false },
         showEdit: { type: Boolean, default: false },
         showDrop: { type: Boolean, default: false },
+        showCheckbox: { type: Boolean, default: false },
         columns: { type: Number, default: 1 },
         padding: { type: Number, default: 0 },
         emptyText: { type: String, default: "" },
@@ -70,6 +76,7 @@ export default {
             }
 
             this.currIndex = index;
+            item.checked = !item.checked;
             this.$emit("change", item, index);
         },
         itemEdit(item, index) {
@@ -77,6 +84,9 @@ export default {
         },
         itemRemove(item, index) {
             this.$emit('dropItem', item, index);
+        },
+        itemChange(item, index) {
+            this.$emit('change', item, index);
         },
         isEmpty() {
             return this.data == null || this.data.length < 1;
@@ -126,10 +136,20 @@ export default {
         padding: 10px;
         background-color: var(--el-fill-color-blank);
 
-        .sc-list-item_label {}
+        .sc-list-item_label {
+            flex-basis: 100%;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
         .sc-list-item_value {
-            color: gray;
+            color: lightgray;
+        }
+
+        .check {
+            margin-right: 5px;
+            width: 20px;
         }
 
         .opt {

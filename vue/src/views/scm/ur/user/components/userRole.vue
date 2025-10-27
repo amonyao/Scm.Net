@@ -25,14 +25,14 @@ export default {
 	},
 	methods: {
 		async initRole() {
-			const role = await this.$API.urrole.list.get();
+			const roleRes = await this.$API.scmurrole.list.get();
 			let roleArr = [];
-			role.data.forEach(function (m) {
+			roleRes.data.forEach(function (m) {
 				roleArr.push({
 					id: m.id,
 					value: m.id,
 					label: m.namec,
-					parentId: m.pid,
+					parentId: m.parentId,
 				});
 			});
 			this.data = this.$TOOL.changeTree(roleArr);
@@ -48,7 +48,7 @@ export default {
 				role.push(item.id);
 			});
 			this.isSaveing = true;
-			let res = await this.$API.urroleauth.plusAdmin.post({
+			let res = await this.$API.scmurroleauth.plusAdmin.post({
 				roleArr: role,
 				adminArr: this.adminIdArr,
 			});

@@ -81,7 +81,7 @@ export default {
 	},
 	data() {
 		return {
-			apiObj: this.$API.urorganize.list,
+			apiObj: this.$API.scmurorganize.list,
 			tableName: 'scm_ur_organize',
 			param: {
 				key: "",
@@ -111,16 +111,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.urorganize.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmurorganize.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.urorganize.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmurorganize.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.urorganize.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmurorganize.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.urorganize.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmurorganize.delete, this.selection);
 		},
 		open_dialog(row) {
 			this.$refs.edit.open(row);

@@ -159,16 +159,16 @@ export default {
 			this.$refs.table.upData(this.param);
 		},
 		async status_item(e, row) {
-			this.$SCM.status_item(this, this.$API.sysdicdetail.status, row, row.row_status);
+			this.$SCM.status_item(this, this.$API.scmsysdicdetail.status, row, row.row_status);
 		},
 		status_list(status) {
-			this.$SCM.status_list(this, this.$API.sysdicdetail.status, this.selection, status);
+			this.$SCM.status_list(this, this.$API.scmsysdicdetail.status, this.selection, status);
 		},
 		async delete_item(row) {
-			this.$SCM.delete_item(this, this.$API.sysdicdetail.delete, row);
+			this.$SCM.delete_item(this, this.$API.scmsysdicdetail.delete, row);
 		},
 		delete_list() {
-			this.$SCM.delete_list(this, this.$API.sysdicdetail.delete, this.selection);
+			this.$SCM.delete_list(this, this.$API.scmsysdicdetail.delete, this.selection);
 		},
 		open_dialog(row) {
 			if (row.id) {
@@ -251,7 +251,7 @@ export default {
 			})
 				.then(async () => {
 					const loading = this.$loading();
-					var res = await this.$API.sysdicheader.delete.delete(
+					var res = await this.$API.scmsysdicheader.delete.delete(
 						data.id
 					);
 					if (res.code == 200) {

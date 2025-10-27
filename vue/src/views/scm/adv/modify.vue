@@ -222,7 +222,7 @@ export default {
 			],
 			imgUrlfileList: [],
 			isUpHeadpic: false,
-			uploadApi:this.$API.sysfile.adv,
+			uploadApi:this.$API.scmsysfile.adv,
 		};
 	},
 	mounted() {
@@ -242,7 +242,7 @@ export default {
 				this.formData.columnId = row.id;
 			} else {
 				this.mode = type;
-				var res = await this.$API.sysadvinfo.model.get(row.id);
+				var res = await this.$API.scmsysadvinfo.model.get(row.id);
 				res.data.imgUrl=this.$CONFIG.SERVER_URL+res.data.imgUrl
 				this.formData = res.data;
 			}
@@ -257,11 +257,11 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.sysadvinfo.add.post(
+						res = await this.$API.scmsysadvinfo.add.post(
 							this.formData
 						);
 					} else {
-						res = await this.$API.sysadvinfo.update.put(
+						res = await this.$API.scmsysadvinfo.update.put(
 							this.formData
 						);
 					}

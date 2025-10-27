@@ -15,39 +15,43 @@
 			</el-button>
 		</div>
 		<el-dialog title="图标选择器" v-model="dialogVisible" :width="760" destroy-on-close append-to-body>
-			<div class="sc-icon-select__dialog" style="margin: -20px 0 -10px 0">
-				<el-form :rules="{}">
-					<el-form-item prop="searchText">
-						<el-input class="sc-icon-select__search-input" v-model="searchText" placeholder="搜索" clearable>
+			<div class="sc-icon-select__dialog">
+				<el-form>
+					<el-form-item prop="key">
+						<el-input class="sc-icon-select__search-input" v-model="param.key" placeholder="搜索" clearable>
 							<template #prepend>
-								<sc-icon name="sc-search" />
+								<sc-select v-model="param.set_id" :data="set_list" @change="changeSet"
+									style="width: 115px"></sc-select>
 							</template>
 							<template #append>
-								<el-select v-model="mode" placeholder="Select" style="width: 115px">
-									<el-option label="线型" :value="0" />
-									<el-option label="填充" :value="1" />
-								</el-select>
+								<el-button @click="search()">
+									<sc-icon name="sc-search" />
+								</el-button>
 							</template>
 						</el-input>
 					</el-form-item>
 				</el-form>
-				<el-tabs>
-					<el-tab-pane v-for="item in data" :key="item.name" lazy>
-						<template #label>
-							{{ item.name }}
-							<el-tag size="small" type="info">
-								{{ item.size }}
-							</el-tag>
-						</template>
-						<div class="sc-icon-select__list">
+				<el-row>
+					<el-col :span="6">
+						<sc-list v-model="param.cat_id" :data="cat_list" @change="changeCat" style="height: 400px;">
+							<template #item="{ item }">
+								{{ item.name }}
+								<el-tag size="small" type="info">
+									{{ item.qty }}
+								</el-tag>
+							</template>
+						</sc-list>
+					</el-col>
+					<el-col :span="18">
+						<div class="sc-icon-select__list" style="height: 400px;">
 							<el-scrollbar>
 								<ul>
-									<el-empty v-if="item.icons.length == 0" :image-size="100" description="未查询到相关图标" />
-									<li v-for="icon in item.icons" :key="icon" @click="selectIcon(item, icon)"
+									<el-empty v-if="!hasIcons()" :image-size="100" description="未查询到相关图标" />
+									<li v-for="icon in data" :key="icon.id" @click="selectIcon(icon)"
 										:title="icon.desc">
 										<div class="icon-item">
 											<div class="icon-info">
-												<span :class="getIcon(item, icon)">{{ getText(item, icon) }}</span>
+												<span :class="getIcon(icon)">{{ getText(icon) }}</span>
 											</div>
 											<div class="icon-desc">
 												{{ icon.desc }}
@@ -57,8 +61,8 @@
 								</ul>
 							</el-scrollbar>
 						</div>
-					</el-tab-pane>
-				</el-tabs>
+					</el-col>
+				</el-row>
 			</div>
 			<template #footer>
 				<el-button @click="clear" text>清除</el-button>
@@ -69,8 +73,6 @@
 </template>
 
 <script>
-import scIcons from "@/config/scIcons";
-
 export default {
 	props: {
 		modelValue: { type: String, default: "" },
@@ -79,10 +81,16 @@ export default {
 	data() {
 		return {
 			value: "",
+			param: {
+				set_id: '0',
+				cat_id: '0',
+				key: "",
+			},
 			dialogVisible: false,
 			mode: 0,
+			set_list: [],
+			cat_list: [],
 			data: [],
-			searchText: "",
 		};
 	},
 	watch: {
@@ -98,66 +106,86 @@ export default {
 	},
 	mounted() {
 		this.value = this.modelValue;
-		this.data.push(...scIcons.icons);
 	},
 	methods: {
 		open() {
 			if (this.disabled) {
 				return false;
 			}
+
+			this.listSet();
 			this.dialogVisible = true;
 		},
-		selectIcon(item, icon) {
+		listSet() {
+			this.$SCM.list_option(this.set_list, this.$API.scmresiconcat.option, {}, false);
+		},
+		async changeSet() {
+			this.cat = '';
+			var catRes = await this.$API.scmresiconcat.list.get({ 'pid': this.param.set_id });
+			if (!catRes || catRes.code != 200) {
+				return;
+			}
+			this.cat_list = catRes.data;
+		},
+		async changeCat(row) {
+			if (!row) {
+				return;
+			}
+
+			this.param.cat_id = row.id;
+			await this.search();
+		},
+		async search() {
+			var iconRes = await this.$API.scmresicon.list.get(this.param);
+			if (!iconRes || iconRes.code != 200) {
+				return;
+			}
+
+			this.data = iconRes.data;
+		},
+		hasIcons() {
+			return this.data && this.data.length > 0;
+		},
+		selectIcon(icon) {
 			if (!icon) {
 				return false;
 			}
-			this.value = this.getName(item, icon);
+
+			this.value = icon.name;
 			this.dialogVisible = false;
 		},
 		clear() {
 			this.value = "";
 			this.dialogVisible = false;
 		},
-		search(text) {
-			var filterData = [];
-			if (text) {
-				config.icons.forEach((t) => {
-					var icons = t.icons.filter((n) => n.desc.includes(text));
-					var cat = { name: t.name, icons: icons, size: icons.length, set: t.set };
-					filterData.push(cat);
-				});
-			} else {
-				filterData = config.icons;
-			}
-			this.data = filterData;
-		},
-		getText(item, icon) {
-			if (item.set == 'ms') {
-				return icon.name;
-			}
-
-			return '';
-		},
-		getName(item, icon) {
-			if (item.set == 'ms') {
-				return icon.name;
-			}
-
+		getName(icon) {
 			var name = icon.name;
-			if (icon.type == 'both') {
-				name += (this.mode ? '-fill' : '-line');
-			} else if (icon.type) {
-				name += '-' + icon.type;
+			if (name.startsWith('ms-')) {
+				return icon.name;
 			}
 
-			return 'sc-' + name;
+			// if (icon.type == 'both') {
+			// 	name += (this.param.type ? '-fill' : '-line');
+			// } else if (icon.type) {
+			// 	name += '-' + icon.type;
+			// }
+			return name;
 		},
-		getIcon(item, icon) {
-			if (item.set == 'ms') {
-				return 'material-symbols-' + (this.mode ? 'rounded' : 'outlined');
+		getText(icon) {
+			var name = icon.name;
+			if (name.startsWith('sc-')) {
+				return '';
 			}
 
-			return 'scfont ' + this.getName(item, icon);
+			return name.substring(3);
+		},
+		getIcon(icon) {
+			var name = icon.name;
+			if (name.startsWith('ms-')) {
+				return 'material-symbols-' + (this.param.type ? 'rounded' : 'outlined');
+			}
+
+			return 'scfont ' + this.getName(icon);
 		}
 	},
 };

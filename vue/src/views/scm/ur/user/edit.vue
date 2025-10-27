@@ -35,7 +35,7 @@
 					<el-row>
 						<el-col :span="12">
 							<el-form-item label="所属岗位" prop="position_list">
-								<sc-select v-model="formData.position_list" :apiObj="$API.ur_position.option"
+								<sc-select v-model="formData.position_list" :apiObj="$API.scmurposition.option"
 									placeholder="请选择所属岗位" multiple collapse-tags />
 							</el-form-item>
 						</el-col>
@@ -76,8 +76,8 @@
 						</el-col>
 						<el-col :span="12">
 							<el-form-item label="所属部门" prop="organize_list">
-								<el-tree-select v-model="formData.organize_list" placeholder="请选择所属部门" :data="organize_list"
-									multiple collapse-tags check-strictly />
+								<el-tree-select v-model="formData.organize_list" placeholder="请选择所属部门"
+									:data="organize_list" multiple collapse-tags check-strictly />
 							</el-form-item>
 						</el-col>
 						<el-col :span="12">
@@ -129,7 +129,7 @@ export default {
 	emits: ['complete'],
 	data() {
 		return {
-			uploadApi: this.$API.sysfile.avatar,
+			uploadApi: this.$API.scmsysfile.avatar,
 			mode: "add",
 			titleMap: {
 				add: "新增",
@@ -216,7 +216,7 @@ export default {
 		async init() {
 			this.$SCM.list_sex(this.sex_list, false);
 
-			const org = await this.$API.urorganize.list.get();
+			const org = await this.$API.scmurorganize.list.get();
 			let orgArr = [];
 			org.data.forEach(function (m) {
 				orgArr.push({
@@ -227,9 +227,9 @@ export default {
 				});
 			});
 			this.organize_list = this.$TOOL.changeTree(orgArr);
-			const role = await this.$API.urrole.list.get();
+			const roleRes = await this.$API.scmurrole.list.get();
 			let roleArr = [];
-			role.data.forEach(function (m) {
+			roleRes.data.forEach(function (m) {
 				roleArr.push({
 					id: m.id,
 					value: m.id,
@@ -244,8 +244,9 @@ export default {
 				this.mode = "add";
 			} else {
 				this.mode = "edit";
-				var res = await this.$API.uruser.edit.get(row.id);
-				res.data.avatar = this.$CONFIG.SERVER_URL + res.data.avatar;
+				var res = await this.$API.scmuruser.edit.get(row.id);
+				res.data.avatar = this.$SCM.get_avatar(res.data.avatar);
+				console.log(res.data.avatar)
 				// res.data.sex = '' + res.data.sex;
 				this.formData = res.data;
 			}
@@ -267,9 +268,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.uruser.add.post(this.formData);
+						res = await this.$API.scmuruser.add.post(this.formData);
 					} else {
-						res = await this.$API.uruser.update.put(
+						res = await this.$API.scmuruser.update.put(
 							this.formData
 						);
 					}

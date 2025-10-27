@@ -67,11 +67,12 @@ export default {
     methods: {
         def_data() {
             return {
-                type: 40,
-                opt: 1,
+                type: this.$CONFIG.DEF_LOGIN_TYPE,
+                mode: 40,
                 user: '',
                 user_id: '0',
                 pass: '',
+                opt: 1,
             }
         },
         save() {
@@ -92,7 +93,7 @@ export default {
         },
         async checkAuth(key) {
             this.key = key;
-            var data = { type: 40, key: key, code: key };
+            var data = { type: this.formData.type, mode: this.formData.mode, key: key, code: key };
             var res = await this.$API.login.token.post(data);
             if (res.code != 200) {
                 this.$message.warning(res.message);
@@ -139,7 +140,7 @@ export default {
             this.$message.success("Login Success 登录成功");
         },
         async loadCfg() {
-            var cfgRes = await this.$API.syscfgconfig.list.get({ 'types': 10 });
+            var cfgRes = await this.$API.scmsysconfig.list.get({ 'types': 10 });
             cfgRes.data.forEach((item) => {
                 if ("app_theme" == item.key) {
                     if (item.value == "true") {
@@ -159,10 +160,9 @@ export default {
             });
         },
         async signon() {
-            console.log(this.formData.pass);
-
             var data = {
                 type: this.formData.type,
+                mode: this.formData.mode,
                 user: this.formData.user,
                 pass: this.$CRYPTO.SHA(this.formData.pass),
                 opt: this.formData.opt,

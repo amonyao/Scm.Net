@@ -154,7 +154,7 @@ export default {
 			);
 			console.log('menu.id=' + menu.id)
 
-			var res = await this.$API.cfgmenu.save.post({ 'id': menu.id });
+			var res = await this.$API.scmcfgmenu.save.post({ 'id': menu.id });
 			if (!res) {
 				return;
 			}

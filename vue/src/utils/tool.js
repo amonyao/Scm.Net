@@ -44,6 +44,13 @@ tool.getCache = function (key, obj) {
 	return obj;
 };
 
+tool.removeCache = function (key) {
+	tool.data.remove(key);
+	tool.cookie.remove(key);
+	tool.session.remove(key);
+	tool.local.remove(key);
+};
+
 /** 临时缓存 */
 tool.data = {
 	set(key, obj) {
@@ -248,16 +255,20 @@ tool.objCopy = function (obj) {
 	return JSON.parse(JSON.stringify(obj));
 };
 
-tool.getDate = function () {
-	var date = new Date();
+tool.getDate = function (date) {
+	if (!date) {
+		date = new Date();
+	}
 	var y = date.getFullYear();
 	var m = date.getMonth() + 1;
 	var d = date.getDate();
 	return y + "-" + tool.lpad(m, 2, "0") + "-" + tool.lpad(d, 2, "0");
 };
 
-tool.getTime = function () {
-	var date = new Date();
+tool.getTime = function (date) {
+	if (!date) {
+		date = new Date();
+	}
 	var h = date.getHours();
 	var m = date.getMinutes();
 	var s = date.getSeconds();
@@ -398,7 +409,10 @@ tool.groupSeparator = function (num) {
 		.replace(/\.$/, "");
 };
 
-tool.changeTree = function (data) {
+tool.changeTree = function (data, pid) {
+	if (!pid) {
+		pid = '0';
+	}
 	if (data.length > 0) {
 		data.forEach((item) => {
 			const parentId = item.parentId;
@@ -417,7 +431,7 @@ tool.changeTree = function (data) {
 			}
 		});
 	}
-	return data.filter((item) => item.parentId == "0");
+	return data.filter((item) => item.parentId == pid);
 };
 
 tool.uuid = function (length = 32) {

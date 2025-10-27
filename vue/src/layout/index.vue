@@ -282,6 +282,9 @@ export default {
 		filterUrl(map) {
 			var newMap = []
 			map && map.forEach(item => {
+				if (!item.id) {
+					return false;
+				}
 				item.meta = item.meta ? item.meta : {};
 				//处理隐藏
 				if (item.meta.hidden) {

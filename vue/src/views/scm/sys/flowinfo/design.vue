@@ -39,7 +39,7 @@ export default {
 				return;
 			}
 
-			var res = await this.$API.sysflowinfo.readflow.get({ 'id': id });
+			var res = await this.$API.scmsysflowinfo.readflow.get({ 'id': id });
 			if (!res.data || res.data.length < 1) {
 				this.data = this.def_flow(id);
 				return;
@@ -161,7 +161,7 @@ export default {
 		},
 		async save() {
 			this.isSaveing = true;
-			var res = await this.$API.sysflowinfo.saveflow.post(this.data);
+			var res = await this.$API.scmsysflowinfo.saveflow.post(this.data);
 			this.isSaveing = false;
 			if (res.code == 200) {
 				this.$message.success("发布成功");

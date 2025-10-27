@@ -126,7 +126,7 @@ export default {
 			});
 		},
 		async listMsg() {
-			const res = await this.$API.sysmessage.page.get({
+			const res = await this.$API.scmmsgmessage.page.get({
 				page: 1,
 				limit: 10,
 				cat: 'msg12'
@@ -197,7 +197,7 @@ export default {
 			this.msgList.forEach((item) => {
 				ids.push(item.id);
 			});
-			const res = await this.$API.sysmessage.read.put(ids);
+			const res = await this.$API.scmmsgmessage.read.put(ids);
 			if (res.code == 200) {
 				this.$message.success("操作成功~");
 				this.msgList = [];

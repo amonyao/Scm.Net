@@ -186,9 +186,9 @@ export default {
 					this.isSaveing = true;
 					let res = null;
 					if (this.formData.id === '0') {
-						res = await this.$API.sysquartz.add.post(this.formData);
+						res = await this.$API.scmsysquartz.add.post(this.formData);
 					} else {
-						res = await this.$API.sysquartz.update.put(
+						res = await this.$API.scmsysquartz.update.put(
 							this.formData
 						);
 					}

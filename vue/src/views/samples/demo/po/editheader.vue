@@ -44,7 +44,8 @@ export default {
 		};
 	},
 	mounted() {
-		this.$SCM.list_dic(this.types_list, 'samples_demo_po_types', false);
+		// this.$SCM.list_option(this.types_list, this.$API.scmmgrunit.option, {}, false);
+		this.$SCM.list_dic(this.types_list, 'samples_po_types', false);
 	},
 	methods: {
 		def_data() {

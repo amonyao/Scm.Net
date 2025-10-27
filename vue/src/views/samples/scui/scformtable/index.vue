@@ -13,11 +13,13 @@
                                 </template>
                             </el-table-column>
                             <el-table-column prop="sex" label="性别">
+
                                 <template #default="scope">
                                     <sc-select v-model="scope.row.sex" :data="example1.data.sexs" />
                                 </template>
                             </el-table-column>
                             <el-table-column prop="phone" label="电话">
+
                                 <template #default="scope">
                                     <el-input v-model="scope.row.phone" placeholder="请输入电话" />
                                 </template>
