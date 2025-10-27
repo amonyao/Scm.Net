@@ -43,7 +43,6 @@ export default {
 			form: {
 				type: this.$CONFIG.DEF_LOGIN_TYPE,
 				mode: 10,
-				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				user: this.$CONFIG.DEF_LOGIN_USER,
 				pass: this.$CONFIG.DEF_LOGIN_PASS,
 				codeKey: "",
@@ -75,13 +74,6 @@ export default {
 		},
 		async checkAuth() {
 			var user = this.form.user;
-			var idx = user.indexOf('@');
-			if (idx < 1) {
-				this.$message.warning('用户名格式应为：someone@unit_code');
-				return false;
-			}
-			var unit = user.substring(idx + 1);
-			user = user.substring(0, idx);
 
 			var pass = this.$CRYPTO.SHA(this.form.pass);
 			var time = new Date().getTime();
@@ -91,7 +83,6 @@ export default {
 			const data = {
 				type: this.form.type,
 				mode: this.form.mode,
-				unit: unit,
 				user: user,
 				pass: pass,
 				time: time,
@@ -132,7 +123,7 @@ export default {
 
 			this.loadCfg();
 
-			let path = userRes.data.userInfo.unitId == 0 ? "/" : "/";//TODO:区分管理员与用户
+			let path = '/';
 			this.$router.replace({ path: path });
 			this.$message.success("Login Success 登录成功");
 		},

@@ -81,9 +81,7 @@ const DEFAULT_CONFIG = {
 	},
 
 	// 默认登录配置
-	DEF_LOGIN_TYPE: 1,
 	DEF_LOGIN_MODE: [10, 40],
-	DEF_LOGIN_UNIT: '',
 	DEF_LOGIN_USER: '',
 	DEF_LOGIN_PASS: '',
 

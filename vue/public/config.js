@@ -12,12 +12,12 @@ const APP_CONFIG = {
 	DEF_LOGIN_PASS: '123456',
 
 	/** OIDC URL */
-	OIDC_OSP: 'https://sso.c-scm.net/oauth/apposp/',
+	OIDC_OSP: 'https://oidc.org.cn/oauth/apposp/',
 	/** OIDC KEY */
-	OIDC_KEY: '08dc5d527578a465',
-	OIDC_LOGO: 'https://sso.c-scm.net/data/logo/',
-	OIDC_AUTH: 'https://sso.c-scm.net/oauth/login/{osp}?app_key={key}&state={state}',
-	OIDC_BIND: 'https://sso.c-scm.net/oauth/index?key={key}&state={state}',
+	OIDC_KEY: '08dc965832db7248',
+	OIDC_LOGO: 'https://oidc.org.cn/data/logo/',
+	OIDC_AUTH: 'https://oidc.org.cn/oauth/login/{osp}?client_id={key}&state={state}',
+	OIDC_BIND: 'https://oidc.org.cn/oauth/index?client_id={key}&state={state}',
 
 	/** MIIT */
 	BEIAN_MIIT: '',

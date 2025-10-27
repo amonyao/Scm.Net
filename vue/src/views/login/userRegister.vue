@@ -6,14 +6,6 @@
 			<el-step title="完成注册" />
 		</el-steps>
 		<el-form v-if="stepActive == 0" ref="stepForm_0" :model="formData" :rules="rules" :label-width="120">
-			<el-form-item label="企业全称" prop="unit_name" v-if="!isFixUnit()">
-				<el-input v-model="formData.unit_name" placeholder="请输入企业全称"></el-input>
-				<div class="el-form-item-msg">请输入完整的公司名称信息</div>
-			</el-form-item>
-			<el-form-item label="企业代码" prop="unit" v-if="!isFixUnit()">
-				<el-input v-model="formData.unit" placeholder="请输入企业代码"></el-input>
-				<div class="el-form-item-msg">企业代码将用于区分不同的账套主体，建议使用英文字母或数字。</div>
-			</el-form-item>
 			<el-form-item label="登录账号" prop="user">
 				<el-input v-model="formData.user" placeholder="请输入登录账号"></el-input>
 				<div class="el-form-item-msg">登录账号将作为当前企业下管理员账户，建议使用英文字母或数字。</div>
@@ -135,7 +127,6 @@ export default {
 			return {
 				type: this.$CONFIG.DEF_LOGIN_TYPE,
 				mode: 10,//口令登录
-				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				user: '',
 				pass: '',
 				password1: '',
@@ -147,9 +138,6 @@ export default {
 				phone: '',
 				open: []
 			}
-		},
-		isFixUnit() {
-			return this.formData.type == 2;
 		},
 		pre() {
 			this.stepActive -= 1
@@ -176,10 +164,8 @@ export default {
 			var form = {
 				type: this.formData.type,
 				mode: this.formData.mode,
-				unit: this.formData.unit,
 				user: this.formData.user,
 				pass: this.$CRYPTO.SHA(this.formData.password1),
-				unit_name: this.formData.unit_name,
 				user_name: this.formData.user_name,
 				email: this.formData.email,
 				phone: this.formData.phone,
@@ -201,17 +187,11 @@ export default {
 		},
 		/** 获取推荐登录用户名称 */
 		getUser() {
-			if (this.isFixUnit()) {
-				return '';
-			}
 			return 'admin';
 		},
 		/** 获取完整登录用户名称 */
 		getFullUser() {
-			if (this.isFixUnit()) {
-				return this.formData.user;
-			}
-			return this.formData.user + '@' + this.formData.unit;
+			return this.formData.user;
 		},
 		goLogin() {
 			this.$router.push({

@@ -32,7 +32,6 @@ export default {
 		return {
 			form: {
 				mode: 20,
-				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				phone: '',
 				code: '',
 				key: '',
@@ -141,7 +140,7 @@ export default {
 
 			this.loadCfg();
 
-			let path = userRes.data.userInfo.unitId == 0 ? "/" : "/";//TODO:区分管理员与用户
+			let path = '/';
 			this.$router.replace({ path: path });
 			this.$message.success("Login Success 登录成功");
 		},

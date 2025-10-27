@@ -1,3 +1,16 @@
+function $(id) {
+	return document.getElementById(id);
+}
+function getInfo(browerInfo, userAgent, brower) {
+	if (userAgent.indexOf(brower) > -1) {
+		browerInfo.type = brower;
+		browerInfo.version = userAgent.match(
+			new RegExp(brower + "/([\\d.]+)")
+		)[1];
+		return true;
+	}
+	return false;
+}
 function getBrowerInfo() {
 	var userAgent = window.navigator.userAgent;
 	var browerInfo = {
@@ -8,29 +21,24 @@ function getBrowerInfo() {
 	if (document.documentMode) {
 		browerInfo.type = "IE";
 		browerInfo.version = document.documentMode + "";
-	} else if (indexOf(userAgent, "Firefox")) {
-		browerInfo.type = "Firefox";
-		browerInfo.version = userAgent.match(/Firefox\/([\d.]+)/)[1];
-	} else if (indexOf(userAgent, "Opera")) {
-		browerInfo.type = "Opera";
-		browerInfo.version = userAgent.match(/Opera\/([\d.]+)/)[1];
-	} else if (indexOf(userAgent, "Edg")) {
-		browerInfo.type = "Edg";
-		browerInfo.version = userAgent.match(/Edg\/([\d.]+)/)[1];
-	} else if (indexOf(userAgent, "Chrome")) {
-		browerInfo.type = "Chrome";
-		browerInfo.version = userAgent.match(/Chrome\/([\d.]+)/)[1];
-	} else if (indexOf(userAgent, "Safari")) {
-		browerInfo.type = "Safari";
-		browerInfo.version = userAgent.match(/Safari\/([\d.]+)/)[1];
+		return browerInfo;
+	}
+	if (getInfo(browerInfo, userAgent, "Firefox")) {
+		return browerInfo;
+	}
+	if (getInfo(browerInfo, userAgent, "Opera")) {
+		return browerInfo;
+	}
+	if (getInfo(browerInfo, userAgent, "Edg")) {
+		return browerInfo;
+	}
+	if (getInfo(browerInfo, userAgent, "Chrome")) {
+		return browerInfo;
+	}
+	if (getInfo(browerInfo, userAgent, "Safari")) {
+		return browerInfo;
 	}
 	return browerInfo;
-}
-function indexOf(userAgent, brower) {
-	return userAgent.indexOf(brower) > -1;
-}
-function $(id) {
-	return document.getElementById(id);
 }
 function checkBrower() {
 	var minVer = {
@@ -46,6 +54,11 @@ function checkBrower() {
 		$("versionCheck").style.display = "block";
 		$("versionCheck-type").innerHTML = browerInfo.type;
 		$("versionCheck-version").innerHTML = browerInfo.version;
+		var support = "";
+		for (var key in minVer) {
+			support += key + " " + minVer[key] + "+、";
+		}
+		$("versionCheck-support").innerHTML = support.slice(0, -2);
 	}
 }
 checkBrower();
