@@ -43,6 +43,7 @@ export default {
 			form: {
 				type: this.$CONFIG.DEF_LOGIN_TYPE,
 				mode: 10,
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				user: this.$CONFIG.DEF_LOGIN_USER,
 				pass: this.$CONFIG.DEF_LOGIN_PASS,
 				codeKey: "",
@@ -75,6 +76,10 @@ export default {
 		},
 		async checkAuth() {
 			var user = this.form.user;
+			var idx = user.indexOf('@');
+			if (idx > 0) {
+				user = user.substring(0, idx);
+			}
 
 			var pass = this.$CRYPTO.SHA(this.form.pass);
 			var time = new Date().getTime();
@@ -84,6 +89,7 @@ export default {
 			const data = {
 				type: this.form.type,
 				mode: this.form.mode,
+				unit: this.form.unit,
 				user: user,
 				pass: pass,
 				time: time,

@@ -80,10 +80,15 @@ const DEFAULT_CONFIG = {
 		copmsList: [["welcome", "ver"], ["time", "progress"], ["about"]],
 	},
 
+	DEF_LOGIN_TYPE: 2,
 	// 默认登录配置
 	DEF_LOGIN_MODE: [10, 40],
-	DEF_LOGIN_USER: '',
-	DEF_LOGIN_PASS: '',
+	// 默认登录单位
+	DEF_LOGIN_UNIT: "demo",
+	// 默认登录用户名
+	DEF_LOGIN_USER: "",
+	// 默认登录密码
+	DEF_LOGIN_PASS: "",
 
 	// OIDC配置
 	OIDC_OSP: process.env.VUE_APP_OIDC_OSP,
@@ -91,15 +96,34 @@ const DEFAULT_CONFIG = {
 	OIDC_LOGO: process.env.VUE_APP_OIDC_LOGO,
 	OIDC_AUTH: process.env.VUE_APP_OIDC_AUTH,
 	OIDC_BIND: process.env.VUE_APP_OIDC_BIND,
-	OIDC_LOGIN: 'http://www.oidc.org.cn/web/login?client_id={key}&state={state}',
-	OIDC_REDIRECT_URI: 'http://www.c-scm.net/#/oauth',
+	OIDC_LOGIN: "http://www.oidc.org.cn/web/login?client_id={key}&state={state}",
+	OIDC_REDIRECT_URI: "http://www.c-scm.net/#/oauth",
 
 	PREDEFINE_COLORS: [
-		'#ffffff', '#cccccc', '#999999', '#666666', '#333333', '#000000', '#ff0000', '#ff4500', '#ff8c00', '#ffd700',
-		'#00ff00', '#90ee90', "#67c23a", '#00ced1', '#009688', '#1e90ff', "#409eff", '#536dfe', '#0000ff', '#c71585'],
+		"#ffffff",
+		"#cccccc",
+		"#999999",
+		"#666666",
+		"#333333",
+		"#000000",
+		"#ff0000",
+		"#ff4500",
+		"#ff8c00",
+		"#ffd700",
+		"#00ff00",
+		"#90ee90",
+		"#67c23a",
+		"#00ced1",
+		"#009688",
+		"#1e90ff",
+		"#409eff",
+		"#536dfe",
+		"#0000ff",
+		"#c71585",
+	],
 
-	BEIAN_MIIT: '',
-	BEIAN_MPS: ''
+	BEIAN_MIIT: "",
+	BEIAN_MPS: "",
 };
 
 //合并业务配置

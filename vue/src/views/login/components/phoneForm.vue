@@ -32,6 +32,7 @@ export default {
 		return {
 			form: {
 				mode: 20,
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				phone: '',
 				code: '',
 				key: '',
@@ -87,7 +88,7 @@ export default {
 				this.$message.warning(userRes.message);
 				return false;
 			}
-			var data = userRes.data;
+			data = userRes.data;
 			if (!data.success) {
 				{
 					this.$message.warning(data.message);

@@ -128,6 +128,7 @@ export default {
 			return {
 				type: this.$CONFIG.DEF_LOGIN_TYPE,
 				mode: 10,//口令登录
+				unit: this.$CONFIG.DEF_LOGIN_UNIT,
 				user: '',
 				pass: '',
 				password1: '',
@@ -165,6 +166,7 @@ export default {
 			var form = {
 				type: this.formData.type,
 				mode: this.formData.mode,
+				unit: this.formData.unit,
 				user: this.formData.user,
 				pass: this.$CRYPTO.SHA(this.formData.password1),
 				user_name: this.formData.user_name,
@@ -192,7 +194,7 @@ export default {
 		},
 		/** 获取完整登录用户名称 */
 		getFullUser() {
-				return this.formData.user;
+			return this.formData.user;
 		},
 		goLogin() {
 			this.$router.push({
