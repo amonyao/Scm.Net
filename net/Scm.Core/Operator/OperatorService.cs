@@ -579,7 +579,7 @@ public class OperatorService : ApiService
     /// 
     /// </summary>
     /// <returns></returns>
-    public OperatorUnitDvo GetUnitInfoAsync()
+    public OperatorUnitDvo GetUnitInfo()
     {
         OperatorUnitDvo dvo = null;
 
@@ -1169,12 +1169,21 @@ public class OperatorService : ApiService
     /// <returns></returns>
     private OperatorInfo GetUserInfo(UserDao userDao)
     {
+        var unitDao = GetUnitInfo();
+        if (unitDao == null)
+        {
+            unitDao = new OperatorUnitDvo();
+            unitDao.LoadDef();
+        }
+
         return new OperatorInfo()
         {
             Id = userDao.id.ToString(),
             UserId = userDao.id,
+            UserCode = userDao.codec,
             UserName = userDao.namec,
-            //Grand = authDao.CheckGrand(),
+            UnitCode = unitDao.codec,
+            UnitName = unitDao.namec,
             Avatar = userDao.avatar
         };
     }

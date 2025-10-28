@@ -8,17 +8,17 @@ namespace Com.Scm.Operator.Dvo
     public class OperatorUnitWorkResponse : ScmApiResponse
     {
         /// <summary>
-        /// 登录账户
+        /// 机构代码
         /// </summary>
         public string codec { get; set; }
 
         /// <summary>
-        /// 公司简称
+        /// 机构简称
         /// </summary>
         public string names { get; set; }
 
         /// <summary>
-        /// 公司全称
+        /// 机构全称
         /// </summary>
         public string namec { get; set; }
 
