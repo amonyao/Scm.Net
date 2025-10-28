@@ -84,7 +84,7 @@ const DEFAULT_CONFIG = {
 	// 默认登录配置
 	DEF_LOGIN_MODE: [10, 40],
 	// 默认登录单位
-	DEF_LOGIN_UNIT: "demo",
+	DEF_LOGIN_UNIT: "dev",
 	// 默认登录用户名
 	DEF_LOGIN_USER: "",
 	// 默认登录密码

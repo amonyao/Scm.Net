@@ -7,7 +7,7 @@ const APP_CONFIG = {
 	APP_DESC: "这是基于Js的产品介绍",
 
 	/** 默认登录单位 */
-	DEF_LOGIN_UNIT: "demo",
+	DEF_LOGIN_UNIT: "dev",
 	/** 默认用户 */
 	DEF_LOGIN_USER: "admin",
 	/** 默认口令 */
