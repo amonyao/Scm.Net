@@ -38,19 +38,21 @@ namespace Com.Scm.Quartz
             List<QuarzTaskDao> list = new List<QuarzTaskDao>();
             try
             {
-                IScheduler _scheduler = await _schedulerFactory.GetScheduler();
-                var groups = await _scheduler.GetJobGroupNames();
-                list = _quartzJobService.GetJobs().Result;
+                list = await _quartzJobService.GetJobs();
+                var scheduler = await _schedulerFactory.GetScheduler();
+                var groups = await scheduler.GetJobGroupNames();
                 foreach (var groupName in groups)
                 {
-                    foreach (var jobKey in await _scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(groupName)))
+                    foreach (var jobKey in await scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(groupName)))
                     {
                         QuarzTaskDao taskOption = list.Where(x => x.group == jobKey.Group && x.names == jobKey.Name)
                             .FirstOrDefault();
                         if (taskOption == null)
+                        {
                             continue;
+                        }
 
-                        var triggers = await _scheduler.GetTriggersOfJob(jobKey);
+                        var triggers = await scheduler.GetTriggersOfJob(jobKey);
                         foreach (ITrigger trigger in triggers)
                         {
                             DateTimeOffset? dateTimeOffset = trigger.GetPreviousFireTimeUtc();
@@ -157,33 +159,36 @@ namespace Com.Scm.Quartz
         /// <returns></returns>
         public async Task<JobResult> AddJob(QuarzTaskDao taskOptions)
         {
-            JobResult isaddsql = null;
+            JobResult result = null;
             try
             {
                 var validExpression = IsValidExpression(taskOptions.cron);
                 if (!validExpression.status)
+                {
                     return validExpression;
+                }
 
-                var model = _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group).Result.FirstOrDefault();
-                if (model != null)
+                var jobList = await _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group);
+                if (jobList.Count > 0)
                 {
                     return new JobResult { status = false, message = "任务已存在,添加失败!" };
                 }
-                isaddsql = await _quartzJobService.AddJob(taskOptions);
+
+                result = await _quartzJobService.AddJob(taskOptions);
                 IJobDetail job = null;
                 if (taskOptions.types == TaskTypeEnum.Dll)
                 {
                     job = JobBuilder.Create<DllMethodJob>()
-                    .WithIdentity(taskOptions.names, taskOptions.group)
-                    .Build();
-
+                        .WithIdentity(taskOptions.names, taskOptions.group)
+                        .Build();
                 }
                 else
                 {
                     job = JobBuilder.Create<ApiClientJob>()
-                    .WithIdentity(taskOptions.names, taskOptions.group)
-                    .Build();
+                        .WithIdentity(taskOptions.names, taskOptions.group)
+                        .Build();
                 }
+
                 //  IJobDetail job = JobBuilder.Create<HttpResultfulJob>()
                 // .WithIdentity(taskOptions.TaskName, taskOptions.GroupName)
                 //.Build();
@@ -235,11 +240,13 @@ namespace Com.Scm.Quartz
             {
                 return new JobResult { status = false, message = ex.Message };
             }
-            if (isaddsql.status)
+
+            if (result.status)
             {
-                isaddsql.message = "任务添加成功!";
+                result.message = "任务添加成功!";
             }
-            return isaddsql;// new ResultQuartzData { status = , message = "任务添加成功!" };
+
+            return result;// new ResultQuartzData { status = , message = "任务添加成功!" };
         }
 
         /// <summary>
