@@ -1,4 +1,4 @@
-﻿namespace Com.Scm.Quartz.Service
+﻿namespace Com.Scm.Quartz
 {
     public class JobResult
     {

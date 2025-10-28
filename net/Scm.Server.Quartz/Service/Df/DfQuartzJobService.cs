@@ -7,7 +7,7 @@ namespace Com.Scm.Quartz.Service.Df
     /// <summary>
     /// 基于文件的任务管理服务
     /// </summary>
-    public class DfQuartzJobService : IQuartzService
+    public class DfQuartzJobService : IQuartzJobService
     {
         private QuartzFileHelper _Helper;
 

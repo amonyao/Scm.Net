@@ -3,7 +3,7 @@
 namespace Com.Scm.Quartz.Service
 {
     /// <summary>
-    /// 日志管理服务
+    /// 日志服务
     /// </summary>
     public interface IQuartzLogService
     {

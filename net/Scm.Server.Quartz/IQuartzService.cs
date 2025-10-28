@@ -1,37 +1,30 @@
 ﻿using Com.Scm.Quartz.Dao;
-using Com.Scm.Quartz.Service;
-using System.Linq.Expressions;
 
 namespace Com.Scm.Quartz
 {
+    /// <summary>
+    /// 任务管理服务
+    /// </summary>
     public interface IQuartzService
     {
-        /// <summary>
-        /// 获取所有作业
-        /// </summary>
-        /// <returns></returns>
-        Task<List<QuarzTaskDao>> GetJobs(Expression<Func<QuarzTaskDao, bool>> where = null);
+        Task<JobResult> AddJob(QuarzTaskDao taskOptions);
 
-        /// <summary>
-        /// 添加任务
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        Task<JobResult> AddJob(QuarzTaskDao model);
+        Task<List<QuarzTaskDao>> GetJobs();
 
-        /// <summary>
-        /// 删除任务
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        Task<JobResult> Remove(QuarzTaskDao model);
+        void InitJobs();
 
-        /// <summary>
-        /// 更新任务
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        Task<JobResult> IsQuartzJob(string taskName, string groupName);
 
-        Task<JobResult> Update(QuarzTaskDao model);
+        JobResult IsValidExpression(string cronExpression);
+
+        Task<JobResult> Pause(QuarzTaskDao taskOptions);
+
+        Task<JobResult> Remove(QuarzTaskDao taskOptions);
+
+        Task<JobResult> Run(QuarzTaskDao taskOptions);
+
+        Task<JobResult> Start(QuarzTaskDao taskOptions);
+
+        Task<JobResult> Update(QuarzTaskDao taskOptions);
     }
 }

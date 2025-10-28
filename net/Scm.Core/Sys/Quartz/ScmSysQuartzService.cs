@@ -1,4 +1,5 @@
-﻿using Com.Scm.Quartz.Dao;
+﻿using Com.Scm.Quartz;
+using Com.Scm.Quartz.Dao;
 using Com.Scm.Quartz.Enums;
 using Com.Scm.Quartz.Service;
 using Com.Scm.Sys.Quartz.Dvo;
@@ -12,7 +13,7 @@ namespace Com.Scm.Sys.Quartz;
 [ApiExplorerSettings(GroupName = "Sys")]
 public class ScmSysQuartzService : IApiService
 {
-    private readonly IQuartzJobService _quartzHandle;
+    private readonly IQuartzService _quartzHandle;
     private readonly IQuartzLogService _logService;
 
     /// <summary>
@@ -20,7 +21,7 @@ public class ScmSysQuartzService : IApiService
     /// </summary>
     /// <param name="quartzHandle"></param>
     /// <param name="logService"></param>
-    public ScmSysQuartzService(IQuartzJobService quartzHandle, IQuartzLogService logService)
+    public ScmSysQuartzService(IQuartzService quartzHandle, IQuartzLogService logService)
     {
         _quartzHandle = quartzHandle;
         _logService = logService;
@@ -42,7 +43,7 @@ public class ScmSysQuartzService : IApiService
     public async Task<JobResult> AddAsync([FromBody] QuarzTaskDao model)
     {
         var date = await _quartzHandle.AddJob(model);
-        model.status = JobHandleEnum.Paused;
+        model.handle = JobHandleEnum.Paused;
         return date;
     }
 

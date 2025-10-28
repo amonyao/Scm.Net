@@ -1,32 +1,30 @@
 ﻿using Com.Scm.Quartz.Dao;
 using Com.Scm.Quartz.Enums;
 using Com.Scm.Quartz.Jobs;
-using Microsoft.Extensions.Logging;
+using Com.Scm.Quartz.Service;
+using Com.Scm.Utils;
 using Quartz;
 using Quartz.Impl.Matchers;
 using Quartz.Impl.Triggers;
 using Quartz.Spi;
 
-namespace Com.Scm.Quartz.Service.Job
+namespace Com.Scm.Quartz
 {
-    public class QuartzJobService : IQuartzJobService
+    public class QuartzService : IQuartzService
     {
-        private IQuartzService _quartzService;
-        private IQuartzLogService _quartzLogService;
-        private IJobFactory _jobFactory;
         private ISchedulerFactory _schedulerFactory;
-        private ILogger<QuartzJobService> _logger;
+        private IJobFactory _jobFactory;
+        private IQuartzJobService _quartzJobService;
+        private IQuartzLogService _quartzLogService;
 
-        public QuartzJobService(IQuartzService quartzService,
-            ISchedulerFactory schedulerFactory,
-            IQuartzLogService quartzLogService,
+        public QuartzService(ISchedulerFactory schedulerFactory,
             IJobFactory jobFactory,
-            ILogger<QuartzJobService> logger)
+            IQuartzJobService quartzJobService,
+            IQuartzLogService quartzLogService)
         {
-            _quartzService = quartzService;
+            _quartzJobService = quartzJobService;
             _schedulerFactory = schedulerFactory;
             _quartzLogService = quartzLogService;
-            _logger = logger;
             _jobFactory = jobFactory;
         }
 
@@ -42,7 +40,7 @@ namespace Com.Scm.Quartz.Service.Job
             {
                 IScheduler _scheduler = await _schedulerFactory.GetScheduler();
                 var groups = await _scheduler.GetJobGroupNames();
-                list = _quartzService.GetJobs().Result;
+                list = _quartzJobService.GetJobs().Result;
                 foreach (var groupName in groups)
                 {
                     foreach (var jobKey in await _scheduler.GetJobKeys(GroupMatcher<JobKey>.GroupEquals(groupName)))
@@ -74,10 +72,7 @@ namespace Com.Scm.Quartz.Service.Job
             }
             catch (Exception ex)
             {
-                if (_logger != null)
-                {
-                    _logger.LogWarning("获取作业异常：" + ex.Message + ex.StackTrace);
-                }
+                LogUtils.Error("获取作业异常：" + ex.Message + ex.StackTrace);
             }
             return list;
         }
@@ -100,7 +95,7 @@ namespace Com.Scm.Quartz.Service.Job
 
         public async void InitJobs()
         {
-            var jobs = await _quartzService.GetJobs();
+            var jobs = await _quartzJobService.GetJobs();
             IScheduler scheduler = await _schedulerFactory.GetScheduler();
             foreach (var item in jobs)
             {
@@ -109,13 +104,13 @@ namespace Com.Scm.Quartz.Service.Job
                     IJobDetail job = null;
                     if (item.types == TaskTypeEnum.Dll)
                     {
-                        job = JobBuilder.Create<ClassLibraryJob>()
+                        job = JobBuilder.Create<DllMethodJob>()
                         .WithIdentity(item.names, item.group)
                         .Build();
                     }
                     else
                     {
-                        job = JobBuilder.Create<HttpResultfulJob>()
+                        job = JobBuilder.Create<ApiClientJob>()
                         .WithIdentity(item.names, item.group)
                         .Build();
                     }
@@ -140,7 +135,7 @@ namespace Com.Scm.Quartz.Service.Job
                     {
                         await scheduler.ScheduleJob(job, trigger);
                         await Pause(item);
-                        _logger.LogError($"任务初始化,未启动,状态为:{item.handle}");
+                        LogUtils.Error($"任务初始化,未启动,状态为:{item.handle}");
                         //await _quartzLogService.AddLog(new tab_quarz_tasklog() { TaskName = item.TaskName, GroupName = item.GroupName, Msg = $"任务初始化,未启动,状态为:{item.Status}" });
                         //FileQuartz.WriteStartLog($"作业:{taskOptions.TaskName},分组:{taskOptions.GroupName},新建时未启动原因,状态为:{taskOptions.Status}");
                     }
@@ -169,23 +164,23 @@ namespace Com.Scm.Quartz.Service.Job
                 if (!validExpression.status)
                     return validExpression;
 
-                var model = _quartzService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group).Result.FirstOrDefault();
+                var model = _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group).Result.FirstOrDefault();
                 if (model != null)
                 {
                     return new JobResult { status = false, message = "任务已存在,添加失败!" };
                 }
-                isaddsql = await _quartzService.AddJob(taskOptions);
+                isaddsql = await _quartzJobService.AddJob(taskOptions);
                 IJobDetail job = null;
                 if (taskOptions.types == TaskTypeEnum.Dll)
                 {
-                    job = JobBuilder.Create<ClassLibraryJob>()
+                    job = JobBuilder.Create<DllMethodJob>()
                     .WithIdentity(taskOptions.names, taskOptions.group)
                     .Build();
 
                 }
                 else
                 {
-                    job = JobBuilder.Create<HttpResultfulJob>()
+                    job = JobBuilder.Create<ApiClientJob>()
                     .WithIdentity(taskOptions.names, taskOptions.group)
                     .Build();
                 }
@@ -257,7 +252,7 @@ namespace Com.Scm.Quartz.Service.Job
         public async Task<JobResult> Remove(QuarzTaskDao taskOptions)
         {
             var isjob = await IsQuartzJob(taskOptions.names, taskOptions.group);
-            var taskmodle = (await _quartzService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
+            var taskmodle = (await _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
             string message = "";
             if (isjob.status)
             {
@@ -279,7 +274,7 @@ namespace Com.Scm.Quartz.Service.Job
             }
             if (taskmodle != null)
             {
-                isjob = await _quartzService.Remove(taskmodle);
+                isjob = await _quartzJobService.Remove(taskmodle);
             }
             message += isjob.message;
 
@@ -295,7 +290,7 @@ namespace Com.Scm.Quartz.Service.Job
         public async Task<JobResult> Update(QuarzTaskDao taskOptions)
         {
             var isjob = await IsQuartzJob(taskOptions.names, taskOptions.group);
-            var taskmodle = (await _quartzService.GetJobs(a => a.id == taskOptions.id)).FirstOrDefault();
+            var taskmodle = (await _quartzJobService.GetJobs(a => a.id == taskOptions.id)).FirstOrDefault();
             var message = "";
             if (isjob.status) //如果Quartz存在就更新
             {
@@ -312,13 +307,13 @@ namespace Com.Scm.Quartz.Service.Job
                     IJobDetail job = null;
                     if (taskOptions.types == TaskTypeEnum.Dll)
                     {
-                        job = JobBuilder.Create<ClassLibraryJob>()
+                        job = JobBuilder.Create<DllMethodJob>()
                         .WithIdentity(taskOptions.names, taskOptions.group)
                         .Build();
                     }
                     else
                     {
-                        job = JobBuilder.Create<HttpResultfulJob>()
+                        job = JobBuilder.Create<ApiClientJob>()
                         .WithIdentity(taskOptions.names, taskOptions.group)
                         .Build();
                     }
@@ -355,7 +350,7 @@ namespace Com.Scm.Quartz.Service.Job
             }
             if (taskmodle != null)
             {
-                isjob = await _quartzService.Update(taskOptions);
+                isjob = await _quartzJobService.Update(taskOptions);
                 message += isjob.message;
             }
 
@@ -373,7 +368,7 @@ namespace Com.Scm.Quartz.Service.Job
             try
             {
                 var isjob = await IsQuartzJob(taskOptions.names, taskOptions.group);
-                var taskDao = (await _quartzService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
+                var taskDao = (await _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
 
                 if (isjob.status)
                 {
@@ -390,7 +385,7 @@ namespace Com.Scm.Quartz.Service.Job
                 {
                     taskDao.handle = JobHandleEnum.Paused;
 
-                    var date = await _quartzService.Update(taskDao);
+                    var date = await _quartzJobService.Update(taskDao);
                     isjob.status = date.status;
                     isjob.message += date.message;
                 }
@@ -414,7 +409,7 @@ namespace Com.Scm.Quartz.Service.Job
             try
             {
                 var isjob = await IsQuartzJob(taskOptions.names, taskOptions.group);
-                var taskDao = (await _quartzService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
+                var taskDao = (await _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
                 taskDao.handle = JobHandleEnum.Running;
 
                 IScheduler scheduler = await _schedulerFactory.GetScheduler();
@@ -423,13 +418,13 @@ namespace Com.Scm.Quartz.Service.Job
                     IJobDetail job = null;
                     if (taskOptions.types == TaskTypeEnum.Dll)
                     {
-                        job = JobBuilder.Create<ClassLibraryJob>()
+                        job = JobBuilder.Create<DllMethodJob>()
                         .WithIdentity(taskOptions.names, taskOptions.group)
                         .Build();
                     }
                     else
                     {
-                        job = JobBuilder.Create<HttpResultfulJob>()
+                        job = JobBuilder.Create<ApiClientJob>()
                         .WithIdentity(taskOptions.names, taskOptions.group)
                         .Build();
                     }
@@ -457,7 +452,7 @@ namespace Com.Scm.Quartz.Service.Job
                     await scheduler.ResumeTrigger(trigger.Key);
                 }
 
-                var date = await _quartzService.Update(taskDao);
+                var date = await _quartzJobService.Update(taskDao);
                 return date;
             }
             catch (Exception ex)
@@ -477,7 +472,7 @@ namespace Com.Scm.Quartz.Service.Job
             try
             {
                 var isjob = await IsQuartzJob(taskOptions.names, taskOptions.group);
-                var taskmodle = (await _quartzService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
+                var taskmodle = (await _quartzJobService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
                 if (isjob.status)
                 {
                     //taskmodle.Status = (int)JobState.立即执行;

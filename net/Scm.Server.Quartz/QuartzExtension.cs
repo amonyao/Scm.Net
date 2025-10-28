@@ -24,29 +24,23 @@ namespace Com.Scm.Quartz
 
             config.LoadDef();
 
-            //services.AddRazorPages();
-            services.AddHttpClient();
-            services.AddHttpContextAccessor();
-
             if (string.IsNullOrWhiteSpace(config.Type) || config.Type == "file")
             {
-                services.SetQuarzFileContext(config);
-                //services.AddScoped<QuartzFileHelper>();
+                services.AddSingleton(new QuartzFileHelper(config));
                 services.AddScoped<IQuartzLogService, DfQuartzLogService>();
-                services.AddScoped<IQuartzService, DfQuartzJobService>();
+                services.AddScoped<IQuartzJobService, DfQuartzJobService>();
             }
             else
             {
-                services.SetQuarzSugarContext(config);
                 services.AddScoped<IQuartzLogService, DbQuartzLogService>();
-                services.AddScoped<IQuartzService, DbQuartzJobService>();
+                services.AddScoped<IQuartzJobService, DbQuartzJobService>();
             }
 
-            services.AddScoped<HttpResultfulJob>();
-            services.AddScoped<ClassLibraryJob>();
+            services.AddScoped<DllMethodJob>();
+            services.AddScoped<ApiClientJob>();
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
             services.AddSingleton<IJobFactory, JobFactory>();
-            services.AddScoped<IQuartzJobService, Service.Job.QuartzJobService>();
+            services.AddScoped<IQuartzService, QuartzService>();
             return services;
         }
 
@@ -92,7 +86,7 @@ namespace Com.Scm.Quartz
         {
             var services = builder.ApplicationServices;
             using var serviceScope = services.CreateScope();
-            var handle = serviceScope.ServiceProvider.GetService<IQuartzJobService>();
+            var handle = serviceScope.ServiceProvider.GetService<IQuartzService>();
             handle?.InitJobs();
 
             return builder;

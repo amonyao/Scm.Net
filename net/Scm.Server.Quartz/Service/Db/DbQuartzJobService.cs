@@ -7,7 +7,7 @@ namespace Com.Scm.Quartz.Service.Db
     /// <summary>
     /// 基于数据库的任务管理服务
     /// </summary>
-    public class DbQuartzJobService : IQuartzService
+    public class DbQuartzJobService : IQuartzJobService
     {
         private ISqlSugarClient _Client;
 

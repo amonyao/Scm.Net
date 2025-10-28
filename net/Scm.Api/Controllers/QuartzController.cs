@@ -1,4 +1,5 @@
 using Com.Scm.Controllers;
+using Com.Scm.Quartz;
 using Com.Scm.Quartz.Dao;
 using Com.Scm.Quartz.Enums;
 using Com.Scm.Quartz.Service;
@@ -11,10 +12,10 @@ namespace Com.Scm.Api.Controllers
     [ApiExplorerSettings(GroupName = "Scm")]
     public class QuartzController : ApiController
     {
-        private readonly IQuartzJobService _jobService;
+        private readonly IQuartzService _jobService;
         private readonly IQuartzLogService _logService;
 
-        public QuartzController(IQuartzJobService jobService, IQuartzLogService logService)
+        public QuartzController(IQuartzService jobService, IQuartzLogService logService)
         {
             _jobService = jobService;
             _logService = logService;
@@ -50,7 +51,7 @@ namespace Com.Scm.Api.Controllers
         public async Task<IActionResult> Post([FromBody] QuarzTaskDao model)
         {
             var data = await _jobService.AddJob(model);
-            model.status = JobHandleEnum.Paused;
+            model.handle = JobHandleEnum.Paused;
             return Ok(data);
         }
 
