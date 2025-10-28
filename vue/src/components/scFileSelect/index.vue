@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 资源文件选择器
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年10月11日16:01:40
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<div class="sc-file-select">
 		<div class="sc-file-select__side" v-loading="menuLoading">

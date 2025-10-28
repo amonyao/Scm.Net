@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 局部水印组件
- * @version: 1.1
- * @Author: sakuya
- * @Date: 2021年12月18日12:16:16
- * @LastEditors: sakuya
- * @LastEditTime: 2022年1月5日09:52:59
--->
-
 <template>
 	<div class="sc-water-mark" ref="scWaterMark">
 		<slot></slot>

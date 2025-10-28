@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 二次封装el-select 支持拼音
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年7月31日22:26:56
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-select v-bind="$attrs" :filter-method="filterMethod" @visible-change="visibleChange">
 		<el-option v-for="field in optionsList" :key="field.value" :label="field.label" :value="field"></el-option>

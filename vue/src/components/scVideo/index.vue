@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: xgplayer二次封装
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年11月29日12:10:06
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<div class="sc-video" ref="scVideo"></div>
 </template>

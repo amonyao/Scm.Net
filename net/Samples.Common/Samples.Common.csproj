@@ -11,6 +11,8 @@
     <Folder Include="Demo\" />
     <Folder Include="Demo\" />
     <Folder Include="PoDetail\" />
+    <Folder Include="Demo\" />
+    <Folder Include="PoDetail\" />
   </ItemGroup>
 
   <ItemGroup>

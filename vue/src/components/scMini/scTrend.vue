@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 趋势标记
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年11月11日11:07:10
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<span class="sc-trend" :class="'sc-trend--'+type">
 		<el-icon v-if="iconType=='P'" class="sc-trend-icon"><el-icon-top /></el-icon>

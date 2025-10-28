@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 仿钉钉流程设计器
- * @version: 1.3
- * @Author: sakuya
- * @Date: 2021年9月14日08:38:35
- * @LastEditors: sakuya
- * @LastEditTime: 2022年5月14日19:43:46
--->
-
 <template>
 	<div class="sc-workflow-design">
 		<div class="box-scale">

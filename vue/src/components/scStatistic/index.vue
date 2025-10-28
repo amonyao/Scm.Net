@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 统计数值组件
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年6月23日13:11:32
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<div class="sc-statistic">
 		<div class="sc-statistic-title">

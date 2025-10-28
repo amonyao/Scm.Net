@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 过滤器V2
- * @version: 2.4
- * @Author: sakuya
- * @Date: 2021年7月30日14:48:41
- * @LastEditors: sakuya
- * @LastEditTime: 2022年2月8日15:28:24
--->
-
 <template>
 	<div class="sc-filterBar">
 		<slot :filterLength="filterObjLength" :openFilter="openFilter">

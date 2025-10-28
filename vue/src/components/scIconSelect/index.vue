@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 图标选择器组件
- * @version: 2.0
- * @Author: sakuya
- * @Date: 2021年7月27日10:02:46
- * @LastEditors: sakuya
- * @LastEditTime: 2022年6月6日13:48:49
--->
-
 <template>
 	<div class="sc-icon-select">
 		<div class="sc-icon-select__wrapper" :class="{ hasValue: value }" @click="open">
