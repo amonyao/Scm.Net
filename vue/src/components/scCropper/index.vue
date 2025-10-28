@@ -1,13 +1,3 @@
-<!--
- * @Descripttion: 图像裁剪组件
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年7月24日17:05:43
- * @LastEditors:
- * @LastEditTime:
- * @other: 代码完全开源，欢迎参考，也欢迎PR
--->
-
 <template>
 	<div class="sc-cropper">
 		<div class="sc-cropper__img">

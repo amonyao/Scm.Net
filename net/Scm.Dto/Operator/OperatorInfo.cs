@@ -26,12 +26,22 @@ namespace Com.Scm.Operator
         /// <summary>
         /// 人员代码
         /// </summary>
-        public string UserCodes { get; set; }
+        public string UserCode { get; set; }
 
         /// <summary>
         /// 人员名称
         /// </summary>
         public string UserName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string UnitCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string UnitName { get; set; }
 
         /// <summary>
         /// 许可状态

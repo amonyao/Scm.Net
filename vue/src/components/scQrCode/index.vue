@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 生成二维码组件
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年12月20日14:22:20
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<img ref="img" />
 </template>

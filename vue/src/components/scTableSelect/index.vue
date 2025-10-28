@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 表格选择器组件
- * @version: 1.3
- * @Author: sakuya
- * @Date: 2021年6月10日10:04:07
- * @LastEditors: sakuya
- * @LastEditTime: 2022年6月6日21:50:36
--->
-
 <template>
 	<el-select ref="select" v-model="defaultValue" :size="size" :clearable="clearable" :multiple="multiple"
 		:collapse-tags="collapseTags" :collapse-tags-tooltip="collapseTagsTooltip" :filterable="filterable"

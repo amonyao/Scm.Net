@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 过滤器V2 常用组件
- * @version: 2.0
- * @Author: sakuya
- * @Date: 2021年7月31日16:49:56
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<div class="sc-filter-my">
 		<div v-if="loading" class="sc-filter-my-loading">

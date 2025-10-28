@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 异步选择器
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年8月3日15:53:37
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-select v-bind="$attrs" :loading="loading">
 		<el-option v-for="item in options" :key="item[props.value]" :label="item[props.label]" :value="item[props.value]"

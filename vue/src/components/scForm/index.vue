@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 动态表单渲染器
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2021年9月22日09:26:25
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<el-skeleton v-if="renderLoading || Object.keys(form).length==0" animated />
 

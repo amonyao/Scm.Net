@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 文件导出
- * @version: 1.1
- * @Author: sakuya
- * @Date: 2022年5月24日16:20:12
- * @LastEditors: sakuya
- * @LastEditTime: 2022年6月13日17:32:05
--->
-
 <template>
 	<slot :open="open">
 		<el-button type="primary" plain @click="open">导出</el-button>

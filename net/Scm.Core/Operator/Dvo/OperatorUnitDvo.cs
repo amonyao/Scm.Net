@@ -6,9 +6,17 @@
     public class OperatorUnitDvo
     {
         /// <summary>
-        /// 全称
+        /// 机构代码
+        /// </summary>
+        public string codec { get; set; }
+        /// <summary>
+        /// 机构全称
         /// </summary>
         public string namec { get; set; }
+        /// <summary>
+        /// 机构简称
+        /// </summary>
+        public string names { get; set; }
 
         /// <summary>
         /// 
@@ -30,5 +38,12 @@
         /// 
         /// </summary>
         public string street { get; set; }
+
+        public void LoadDef()
+        {
+            codec = "Demo";
+            namec = "演示机构";
+            names = "演示机构有限公司";
+        }
     }
 }

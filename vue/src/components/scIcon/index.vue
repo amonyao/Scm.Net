@@ -1,10 +1,3 @@
-<!--
- * @Descripttion: scIcon图标组件
- * 所有图标的名称，必需以特定前缀开始，例如：sc-、vs-、ms-、mi-
- * @version: 1.1
- * @Author: zeroyao
- * @Date: 2025-10-21 10:32:41
--->
 <template>
     <i :class="getScClass()" :style="{ 'color': color }" v-if="isSc()"></i>
     <i :class="getMsClass()" :style="{ 'fontSize': size + 'px', 'color': color }" v-else>{{ getMsName() }}</i>

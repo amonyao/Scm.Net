@@ -1,12 +1,3 @@
-<!--
- * @Descripttion: 文件导入
- * @version: 1.0
- * @Author: sakuya
- * @Date: 2022年5月24日11:30:03
- * @LastEditors:
- * @LastEditTime:
--->
-
 <template>
 	<slot :open="open">
 		<el-button type="primary" plain @click="open">{{ text }}</el-button>

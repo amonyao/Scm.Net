@@ -6,6 +6,11 @@
     public class UnitBasicRequest : ScmUpdateRequest
     {
         /// <summary>
+        /// 机构代码
+        /// </summary>
+        public string codec { get; set; }
+
+        /// <summary>
         /// 机构全称
         /// </summary>
         public string namec { get; set; }
