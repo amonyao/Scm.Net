@@ -116,10 +116,10 @@ namespace Com.Scm.Quartz.Service.Df
                     continue;
                 if (arr.Length != 3)
                 {
-                    list.Add(new QuarzTaskLogDao() { result = item });
+                    list.Add(new QuarzTaskLogDao() { remark = item });
                     continue;
                 }
-                list.Add(new QuarzTaskLogDao() { begin_time = Convert.ToDateTime(arr[0]), end_time = Convert.ToDateTime(arr[1]), result = arr[2] });
+                list.Add(new QuarzTaskLogDao() { begin_time = Convert.ToDateTime(arr[0]), end_time = Convert.ToDateTime(arr[1]), remark = arr[2] });
             }
 
             return list.OrderByDescending(x => x.begin_time).ToList();

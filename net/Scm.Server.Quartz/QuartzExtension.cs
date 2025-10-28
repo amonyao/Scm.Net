@@ -1,6 +1,5 @@
-﻿using Com.Scm.Quartz.BaseJobs;
-using Com.Scm.Quartz.BaseService;
-using Com.Scm.Quartz.Config;
+﻿using Com.Scm.Quartz.Config;
+using Com.Scm.Quartz.Jobs;
 using Com.Scm.Quartz.Service;
 using Com.Scm.Quartz.Service.Db;
 using Com.Scm.Quartz.Service.Df;
@@ -12,7 +11,7 @@ using Quartz.Impl;
 using Quartz.Spi;
 using System.Reflection;
 
-namespace Com.Scm.Quartz.Extensions
+namespace Com.Scm.Quartz
 {
     public static class QuartzExtension
     {
@@ -40,7 +39,7 @@ namespace Com.Scm.Quartz.Extensions
             {
                 services.SetQuarzSugarContext(config);
                 services.AddScoped<IQuartzLogService, DbQuartzLogService>();
-                services.AddScoped<IQuartzService, Service.Db.DbQuartzJobService>();
+                services.AddScoped<IQuartzService, DbQuartzJobService>();
             }
 
             services.AddScoped<HttpResultfulJob>();
@@ -58,7 +57,7 @@ namespace Com.Scm.Quartz.Extensions
         /// <returns></returns>
         public static IServiceCollection AddQuartzClassJobs(this IServiceCollection services)
         {
-            var baseType = typeof(IJobService);
+            var baseType = typeof(INativeJobService);
             var path = AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory;
             var referencedAssemblies = Directory.GetFiles(path, "*.dll");
             List<Type> typelist = new List<Type>();

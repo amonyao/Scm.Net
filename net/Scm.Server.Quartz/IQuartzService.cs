@@ -1,7 +1,8 @@
 ﻿using Com.Scm.Quartz.Dao;
+using Com.Scm.Quartz.Service;
 using System.Linq.Expressions;
 
-namespace Com.Scm.Quartz.Service
+namespace Com.Scm.Quartz
 {
     public interface IQuartzService
     {

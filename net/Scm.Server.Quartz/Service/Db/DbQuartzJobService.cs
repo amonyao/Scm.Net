@@ -4,6 +4,9 @@ using System.Linq.Expressions;
 
 namespace Com.Scm.Quartz.Service.Db
 {
+    /// <summary>
+    /// 基于数据库的任务管理服务
+    /// </summary>
     public class DbQuartzJobService : IQuartzService
     {
         private ISqlSugarClient _Client;
@@ -15,11 +18,15 @@ namespace Com.Scm.Quartz.Service.Db
 
         public async Task<JobResult> AddJob(QuarzTaskDao model)
         {
-            var date = await _Client.Insertable(model).ExecuteCommandAsync();
             var result = new JobResult { status = false, message = "" };
-            if (date <= 0) return result;
-            result.status = true;
-            result.message = "数据库添加成功!";
+
+            var date = await _Client.Insertable(model).ExecuteCommandAsync();
+            if (date > 0)
+            {
+                result.status = true;
+                result.message = "数据库添加成功!";
+            }
+
             return result;
         }
 
@@ -30,21 +37,28 @@ namespace Com.Scm.Quartz.Service.Db
 
         public async Task<JobResult> Remove(QuarzTaskDao model)
         {
-            var date = await _Client.Deleteable<QuarzTaskDao>().Where(m => m.id == model.id).ExecuteCommandAsync();
             var result = new JobResult { status = false, message = "" };
-            if (date <= 0) return result;
-            result.status = true;
-            result.message = "数据库删除成功!";
+
+            var date = await _Client.Deleteable<QuarzTaskDao>().Where(m => m.id == model.id).ExecuteCommandAsync();
+            if (date > 0)
+            {
+                result.status = true;
+                result.message = "数据库删除成功!";
+            }
+
             return result;
         }
 
         public async Task<JobResult> Update(QuarzTaskDao model)
         {
-            var date = await _Client.Updateable(model).ExecuteCommandAsync();
             var result = new JobResult { status = false, message = "" };
-            if (date <= 0) return result;
-            result.status = true;
-            result.message = "数据库修改成功!";
+
+            var date = await _Client.Updateable(model).ExecuteCommandAsync();
+            if (date > 0)
+            {
+                result.status = true;
+                result.message = "数据库修改成功!";
+            }
             return result;
         }
     }

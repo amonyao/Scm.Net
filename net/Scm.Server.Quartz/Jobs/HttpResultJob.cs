@@ -1,5 +1,4 @@
 ﻿using Com.Scm.Quartz.Dao;
-using Com.Scm.Quartz.Extensions;
 using Com.Scm.Quartz.Service;
 using Com.Scm.Utils;
 using Microsoft.Extensions.Logging;
@@ -7,8 +6,11 @@ using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Triggers;
 
-namespace Com.Scm.Quartz.BaseJobs
+namespace Com.Scm.Quartz.Jobs
 {
+    /// <summary>
+    /// 网络服务
+    /// </summary>
     public class HttpResultfulJob : IJob, IDisposable
     {
         readonly IHttpClientFactory httpClientFactory;
@@ -57,16 +59,25 @@ namespace Com.Scm.Quartz.BaseJobs
             try
             {
                 Dictionary<string, string> header = new Dictionary<string, string>();
-                if (!string.IsNullOrEmpty(taskOptions.api_auth_key)
-                    && !string.IsNullOrEmpty(taskOptions.api_auth_value))
+                if (!string.IsNullOrEmpty(taskOptions.api_uri))
                 {
-                    header.Add(taskOptions.api_auth_key.Trim(), taskOptions.api_auth_value.Trim());
+                    header = taskOptions.api_headers.AsJsonObject<Dictionary<string, string>>();
+                }
+                Dictionary<string, string> body = new Dictionary<string, string>();
+                if (string.IsNullOrEmpty(taskOptions.api_parameter))
+                {
+                    body = taskOptions.api_parameter.AsJsonObject<Dictionary<string, string>>();
                 }
 
-                httpMessage = await httpClientFactory.HttpSendAsync(
-                    taskOptions.api_method?.ToLower() == "get" ? HttpMethod.Get : HttpMethod.Post,
-                    taskOptions.api_uri,
-                    header);
+                var method = taskOptions.api_method?.ToLower();
+                if (method == "get")
+                {
+                    httpMessage = await HttpUtils.GetStringAsync(taskOptions.api_uri, body, header);
+                }
+                else
+                {
+                    httpMessage = await HttpUtils.PostFormStringAsync(taskOptions.api_uri, body, header);
+                }
             }
             catch (Exception ex)
             {
@@ -77,7 +88,7 @@ namespace Com.Scm.Quartz.BaseJobs
             {
                 //string logContent = $"{(string.IsNullOrEmpty(httpMessage) ? "OK" : httpMessage)}\r\n";
                 tab_Quarz_Tasklog.end_time = DateTime.Now;
-                tab_Quarz_Tasklog.result = httpMessage;
+                tab_Quarz_Tasklog.remark = httpMessage;
                 await _quartzLogService.AddLog(tab_Quarz_Tasklog);
             }
             catch (Exception)

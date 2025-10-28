@@ -2,6 +2,9 @@
 
 namespace Com.Scm.Quartz.Service.Df
 {
+    /// <summary>
+    /// 基于文件的日志管理服务
+    /// </summary>
     public class DfQuartzLogService : IQuartzLogService
     {
         private QuartzFileHelper _Helper;

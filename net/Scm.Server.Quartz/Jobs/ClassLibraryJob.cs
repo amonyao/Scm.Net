@@ -1,5 +1,4 @@
-﻿using Com.Scm.Quartz.BaseService;
-using Com.Scm.Quartz.Dao;
+﻿using Com.Scm.Quartz.Dao;
 using Com.Scm.Quartz.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -7,8 +6,11 @@ using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Triggers;
 
-namespace Com.Scm.Quartz.BaseJobs
+namespace Com.Scm.Quartz.Jobs
 {
+    /// <summary>
+    /// 本地服务
+    /// </summary>
     public class ClassLibraryJob : IJob, IDisposable
     {
         private IQuartzService _quartzService;
@@ -58,11 +60,11 @@ namespace Com.Scm.Quartz.BaseJobs
 
             try
             {
-                var services = _serviceProvider.GetServices<IJobService>();
-                var service = services.Where(a => a.GetType().Name == taskOptions.dll_uri).FirstOrDefault();
+                var services = _serviceProvider.GetServices<INativeJobService>();
+                var service = services.Where(a => a.GetType().FullName == taskOptions.dll_uri).FirstOrDefault();
                 if (service != null)
                 {
-                    httpMessage = service.ExecuteService("");
+                    httpMessage = service.ExecuteService(taskOptions.dll_parameter);
                 }
                 else
                 {
@@ -78,7 +80,7 @@ namespace Com.Scm.Quartz.BaseJobs
             {
                 //string logContent = $"{(string.IsNullOrEmpty(httpMessage) ? "OK" : httpMessage)}\r\n";
                 tab_Quarz_Tasklog.end_time = DateTime.Now;
-                tab_Quarz_Tasklog.result = httpMessage;
+                tab_Quarz_Tasklog.remark = httpMessage;
                 await _quartzLogService.AddLog(tab_Quarz_Tasklog);
             }
             catch (Exception)

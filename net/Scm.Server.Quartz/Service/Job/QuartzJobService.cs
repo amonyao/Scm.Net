@@ -1,6 +1,6 @@
-﻿using Com.Scm.Quartz.BaseJobs;
-using Com.Scm.Quartz.Dao;
+﻿using Com.Scm.Quartz.Dao;
 using Com.Scm.Quartz.Enums;
+using Com.Scm.Quartz.Jobs;
 using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Impl.Matchers;
@@ -131,23 +131,23 @@ namespace Com.Scm.Quartz.Service.Job
                         scheduler.JobFactory = _jobFactory;
                     }
 
-                    if (item.status == JobHandleEnum.Running)
+                    if (item.handle == JobHandleEnum.Running)
                     {
                         await scheduler.ScheduleJob(job, trigger);
-                        await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = item.names, group = item.group, begin_time = DateTime.Now, result = $"任务初始化启动成功:{item.status}" });
+                        await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = item.names, group = item.group, begin_time = DateTime.Now, remark = $"任务初始化启动成功:{item.handle}" });
                     }
                     else
                     {
                         await scheduler.ScheduleJob(job, trigger);
                         await Pause(item);
-                        _logger.LogError($"任务初始化,未启动,状态为:{item.status}");
+                        _logger.LogError($"任务初始化,未启动,状态为:{item.handle}");
                         //await _quartzLogService.AddLog(new tab_quarz_tasklog() { TaskName = item.TaskName, GroupName = item.GroupName, Msg = $"任务初始化,未启动,状态为:{item.Status}" });
                         //FileQuartz.WriteStartLog($"作业:{taskOptions.TaskName},分组:{taskOptions.GroupName},新建时未启动原因,状态为:{taskOptions.Status}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = item.names, group = item.group, result = $"任务初始化未启动,出现异常,异常信息{ex.Message}" });
+                    await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = item.names, group = item.group, remark = $"任务初始化未启动,出现异常,异常信息{ex.Message}" });
                     continue;
                 }
                 await scheduler.Start();
@@ -218,7 +218,7 @@ namespace Com.Scm.Quartz.Service.Job
                 }
 
                 //开启才加入Schedule中,如果加入在暂停而定时任务执行过快,会导致卡死
-                if (taskOptions.status == JobHandleEnum.Running)
+                if (taskOptions.handle == JobHandleEnum.Running)
                 {
                     await scheduler.ScheduleJob(job, trigger);
                     await scheduler.Start();
@@ -226,7 +226,7 @@ namespace Com.Scm.Quartz.Service.Job
                 else
                 {
                     await Pause(taskOptions);
-                    await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = taskOptions.names, group = taskOptions.group, result = $"任务新建,未启动,状态为:{taskOptions.status}" });
+                    await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = taskOptions.names, group = taskOptions.group, remark = $"任务新建,未启动,状态为:{taskOptions.handle}" });
                     //FileQuartz.WriteStartLog($"作业:{taskOptions.TaskName},分组:{taskOptions.GroupName},新建时未启动原因,状态为:{taskOptions.Status}");
                 }
                 //if (!init)
@@ -337,14 +337,14 @@ namespace Com.Scm.Quartz.Service.Job
                         scheduler.JobFactory = _jobFactory;
                     }
                     await scheduler.ScheduleJob(job, triggernew);
-                    if (taskOptions.status == JobHandleEnum.Running)
+                    if (taskOptions.handle == JobHandleEnum.Running)
                     {
                         await scheduler.Start();
                     }
                     else
                     {
                         await scheduler.PauseTrigger(triggernew.Key);
-                        await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = taskOptions.names, group = taskOptions.group, result = $"任务新建,未启动,状态为:{taskOptions.status}" });
+                        await _quartzLogService.AddLog(new QuarzTaskLogDao() { task = taskOptions.names, group = taskOptions.group, remark = $"任务新建,未启动,状态为:{taskOptions.handle}" });
                     }
                     message += "quarz已更新,";
                 }
@@ -388,7 +388,7 @@ namespace Com.Scm.Quartz.Service.Job
 
                 if (taskDao != null)
                 {
-                    taskDao.status = JobHandleEnum.Paused;
+                    taskDao.handle = JobHandleEnum.Paused;
 
                     var date = await _quartzService.Update(taskDao);
                     isjob.status = date.status;
@@ -415,7 +415,7 @@ namespace Com.Scm.Quartz.Service.Job
             {
                 var isjob = await IsQuartzJob(taskOptions.names, taskOptions.group);
                 var taskDao = (await _quartzService.GetJobs(a => a.names == taskOptions.names && a.group == taskOptions.group)).FirstOrDefault();
-                taskDao.status = JobHandleEnum.Running;
+                taskDao.handle = JobHandleEnum.Running;
 
                 IScheduler scheduler = await _schedulerFactory.GetScheduler();
                 if (!isjob.status) //如果不存在则加入

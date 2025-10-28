@@ -14,6 +14,12 @@ namespace Com.Scm.Quartz.Dao
     public class QuarzTaskDao : ScmDataDao
     {
         /// <summary>
+        /// 任务类型(1.DLL类型,2.API类型)
+        /// </summary>
+        [Description("任务类型(1.DLL类型,2.API类型)")]
+        public TaskTypeEnum types { get; set; } = TaskTypeEnum.Dll;
+
+        /// <summary>
         /// 任务名
         /// </summary>
         [Description("任务名")]
@@ -25,6 +31,7 @@ namespace Com.Scm.Quartz.Dao
         [Description("分组名")]
         [StringLength(128)]
         public string group { get; set; }
+
         /// <summary>
         /// 间隔时间
         /// </summary>
@@ -32,12 +39,6 @@ namespace Com.Scm.Quartz.Dao
         [StringLength(128)]
         public string cron { get; set; }
 
-        /// <summary>
-        /// 任务描述
-        /// </summary>
-        [Description("任务描述")]
-        [StringLength(500)]
-        public string remark { get; set; }
         /// <summary>
         /// 最近一次运行时间
         /// </summary>
@@ -48,13 +49,19 @@ namespace Com.Scm.Quartz.Dao
         /// 运行状态
         /// </summary>
         [Description("运行状态")]
-        public JobHandleEnum status { get; set; }
+        public JobHandleEnum handle { get; set; }
 
         /// <summary>
-        /// 任务类型(1.DLL类型,2.API类型)
+        /// 
         /// </summary>
-        [Description("任务类型(1.DLL类型,2.API类型)")]
-        public TaskTypeEnum types { get; set; } = TaskTypeEnum.Dll;
+        public JobResultEnum result { get; set; }
+
+        /// <summary>
+        /// 任务描述
+        /// </summary>
+        [Description("任务描述")]
+        [StringLength(500)]
+        public string remark { get; set; }
 
         #region Api类型专用参数
         /// <summary>
@@ -74,20 +81,12 @@ namespace Com.Scm.Quartz.Dao
         /// 授权名(API类型)
         /// </summary>
         /// 
-        [Description("授权名(API类型)")]
-        [StringLength(50)]
-        public string api_auth_key { get; set; }
-        /// <summary>
-        /// 授权值(API类型)
-        /// </summary>
-        /// 
-        [Description("授权值(API类型)")]
-        [StringLength(500)]
-        public string api_auth_value { get; set; }
+        [Description("API请求头")]
+        [StringLength(1000)]
+        public string api_headers { get; set; }
         /// <summary>
         /// API参数
         /// </summary>
-        /// 
         [Description("API参数")]
         [StringLength(1000)]
         public string api_parameter { get; set; }
@@ -97,7 +96,6 @@ namespace Com.Scm.Quartz.Dao
         /// <summary>
         /// DLL类型名
         /// </summary>
-        /// 
         [Description("DLL类型名")]
         [StringLength(30)]
         public string dll_uri { get; set; }
@@ -109,6 +107,13 @@ namespace Com.Scm.Quartz.Dao
         [Description("Dll方法名")]
         [StringLength(30)]
         public string dll_method { get; set; }
+
+        /// <summary>
+        /// DLL参数
+        /// </summary>
+        [Description("DLL参数")]
+        [StringLength(1000)]
+        public string dll_parameter { get; set; }
         #endregion
     }
 }

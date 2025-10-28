@@ -4,6 +4,9 @@ using System.Linq.Expressions;
 
 namespace Com.Scm.Quartz.Service.Df
 {
+    /// <summary>
+    /// 基于文件的任务管理服务
+    /// </summary>
     public class DfQuartzJobService : IQuartzService
     {
         private QuartzFileHelper _Helper;
@@ -49,7 +52,7 @@ namespace Com.Scm.Quartz.Service.Df
                 {
                     if (item.names == model.names && item.group == model.group)
                     {
-                        item.status = JobHandleEnum.Paused;
+                        item.handle = JobHandleEnum.Paused;
                     }
                 });
                 _Helper.WriteJobConfig(list);
@@ -94,7 +97,7 @@ namespace Com.Scm.Quartz.Service.Df
                 {
                     if (item.names == model.names && item.group == model.group)
                     {
-                        item.status = JobHandleEnum.Running;
+                        item.handle = JobHandleEnum.Running;
                     }
                 });
                 _Helper.WriteJobConfig(list);

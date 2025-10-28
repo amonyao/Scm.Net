@@ -41,7 +41,12 @@ namespace Com.Scm.Quartz.Dao
         /// 任务执行结果
         /// </summary>
         [Description("任务执行结果")]
+        public int result { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [StringLength(2048)]
-        public string result { get; set; }
+        public string remark { get; set; }
     }
 }

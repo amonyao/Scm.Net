@@ -2,6 +2,9 @@
 
 namespace Com.Scm.Quartz.Service
 {
+    /// <summary>
+    /// 日志管理服务
+    /// </summary>
     public interface IQuartzLogService
     {
         Task<ResultData<QuarzTaskLogDao>> GetLogs(string taskName, string groupName, int page, int pageSize = 100);
