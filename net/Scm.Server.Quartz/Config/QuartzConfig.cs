@@ -1,4 +1,7 @@
-﻿namespace Com.Scm.Quartz.Config
+﻿using Com.Scm.Config;
+using Com.Scm.Utils;
+
+namespace Com.Scm.Quartz.Config
 {
     public class QuartzConfig
     {
@@ -34,7 +37,7 @@
         /// </summary>
         public string LogsDir { get; set; }
 
-        public void LoadDef()
+        public void Prepare(EnvConfig config)
         {
             if (string.IsNullOrWhiteSpace(Type))
             {
@@ -45,21 +48,33 @@
             {
                 BaseDir = "quartz";
             }
+            BaseDir = config.GetDataPath(BaseDir);
+            FileUtils.CreateFolder(BaseDir);
 
             if (string.IsNullOrWhiteSpace(DataDir))
             {
                 DataDir = "data";
             }
+            DataDir = Path.Combine(BaseDir, DataDir);
+            FileUtils.CreateFolder(DataDir);
 
             if (string.IsNullOrWhiteSpace(LogsDir))
             {
                 LogsDir = "logs";
             }
+            LogsDir = Path.Combine(BaseDir, LogsDir);
+            FileUtils.CreateFolder(LogsDir);
 
             if (string.IsNullOrEmpty(JobFile))
             {
                 JobFile = "jobs.json";
             }
+            JobFile = Path.Combine(DataDir, JobFile);
+        }
+
+        public string GetLogsFile(string file)
+        {
+            return Path.Combine(LogsDir, file);
         }
     }
 }

@@ -1,150 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Com.Scm.Utils
 {
     public class FileUtils
     {
+        #region 文件操作
         /// <summary>
-        /// 字节文件后缀
+        /// 创建文件
         /// </summary>
-        private static List<string> ByteExts = new List<string> { ".bin", ".dat" };
-        /// <summary>
-        /// 字符文件后缀
-        /// </summary>
-        private static List<string> TextExts = new List<string> { ".txt", ".log", ".css", ".html", ".htm", ".js", ".xml", ".json", ".cs", ".java", ".py" };
-        /// <summary>
-        /// 代码文件后缀
-        /// </summary>
-        private static List<string> CodeExts = new List<string> { ".css", ".html", ".htm", ".js", ".xml", ".json", ".cs", ".java", ".py" };
-        /// <summary>
-        /// 图像文件后缀
-        /// </summary>
-        private static List<string> ImageExts = new List<string> { ".bmp", ".gif", ".jpg", ".jpeg", ".png", ".webp" };
-        /// <summary>
-        /// 媒体文件后缀
-        /// </summary>
-        private static List<string> MeidaExts = new List<string> { ".avi", ".wma", ".wmv", ".mp3", ".mp4", ".webm" };
-        /// <summary>
-        /// 
-        /// </summary>
-        private static List<string> OfficeExts = new List<string> { ".xls", ".xlsx", ".doc", ".docx", ".ppt", ".pptx", ".pdf" };
-
-        /// <summary>
-        /// 压缩文件后缀
-        /// </summary>
-        private static List<string> ArchiveExts = new List<string> { ".zip", ".rar", ".7z", ".gzip" };
-
-        public static bool IsByteFile(string fileExt)
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static bool CreateFile(string fileName)
         {
-            return ByteExts.Contains(fileExt.ToLower());
-        }
-
-        public static bool IsTextFile(string fileExt)
-        {
-            return TextExts.Contains(fileExt.ToLower());
-        }
-
-        public static bool IsImageFile(string fileExt)
-        {
-            return ImageExts.Contains(fileExt.ToLower());
-        }
-
-        public static bool IsMediaFile(string fileExt)
-        {
-            return MeidaExts.Contains(fileExt.ToLower());
-        }
-
-        public static bool IsOfficeFile(string fileExt)
-        {
-            return OfficeExts.Contains(fileExt.ToLower());
-        }
-
-        public static bool IsArchiveFile(string fileExt)
-        {
-            return ArchiveExts.Contains(fileExt.ToLower());
-        }
-
-        public static string GetMimeByExt(string ext)
-        {
-            var sub = ext;
-            if (sub[0] == '.')
+            using (var stream = File.Create(fileName))
             {
-                sub = sub.Substring(1);
+                ;
             }
-            if (IsImageFile(ext))
-            {
-                return "image/" + sub;
-            }
-            if (IsTextFile(ext))
-            {
-                return "plain/text";
-            }
-
-            return "";
+            return true;
         }
 
-        #region 创建文件夹
         /// <summary>
-        /// 创建文件夹
+        /// 是否空文件
         /// </summary>
-        /// <param name="folderPath">文件夹的绝对路径</param>
-        public static void CreateFolder(string folderPath)
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool IsEmptyFile(string path)
         {
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
+            var info = new FileInfo(path);
+            return info.Length < 1;
         }
-        #endregion
 
-        #region 删除指定文件
         /// <summary>
-        /// 删除指定文件
+        /// 获取文件大小
         /// </summary>
-        /// <param name="filePath">文件的绝对路径</param>
-        public static void DeleteFile(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-        }
-        #endregion
-
-        #region 删除指定目录及其所有子目录
-        /// <summary>
-        /// 删除指定目录及其所有子目录
-        /// </summary>
-        /// <param name="directoryPath">文件的绝对路径</param>
-        public static void DeleteFolder(string directoryPath)
-        {
-            if (Directory.Exists(directoryPath))
-            {
-                Directory.Delete(directoryPath, true);
-            }
-        }
-
-        public static bool IsEmptyFolder(string path)
-        {
-            var dir = new DirectoryInfo(path);
-            return dir.GetFiles().Length < 1 && dir.GetDirectories().Length < 1;
-        }
-        #endregion
-
-        public static string ToFileUom(long size)
-        {
-            var units = new string[] { "B", "KB", "MB", "GB", "TB", "PB" };
-            int i = 0;
-            while (size > 1024)
-            {
-                size = size >> 10;
-                i++;
-            }
-            return size + units[i];
-        }
-
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static long GetFileSize(string file)
         {
             var info = new FileInfo(file);
@@ -156,43 +50,151 @@ namespace Com.Scm.Utils
             return info.Length;
         }
 
-        public static void FileRename(string srcFile, string dstFile)
+        /// <summary>
+        /// 复制文件
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <returns></returns>
+        private static bool CopyFile(string src, string dst)
         {
-            if (File.Exists(dstFile))
+            var dir = Path.GetDirectoryName(dst);
+            if (!Directory.Exists(dir))
             {
-                File.Delete(dstFile);
+                Directory.CreateDirectory(dir);
+            }
+            File.Copy(src, dst, true);
+            return true;
+        }
+
+        /// <summary>
+        /// 移动文件
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <returns></returns>
+        private static bool MoveFile(string src, string dst)
+        {
+            if (File.Exists(dst))
+            {
+                File.Delete(dst);
             }
 
-            new FileInfo(srcFile).MoveTo(dstFile);
+            var dir = Path.GetDirectoryName(dst);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            File.Move(src, dst);
+            return true;
         }
 
-        public static string ReadText(string file)
+        /// <summary>
+        /// 删除指定文件
+        /// </summary>
+        /// <param name="filePath">文件的绝对路径</param>
+        public static void DeleteFile(string filePath)
         {
-            using (var stream = new StreamReader(file))
+            if (File.Exists(filePath))
             {
-                return stream.ReadToEnd();
+                File.Delete(filePath);
             }
         }
 
-        public static string Md5(Stream stream)
+        /// <summary>
+        /// 获取重复后的文件名，返回格式：xxxx (nnnn).ext
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string GetFileName(string path, string file)
         {
-            stream.Position = 0;
-
-            var alg = System.Security.Cryptography.MD5.Create();
-            var result = alg.ComputeHash(stream);
-            return TextUtils.ToHexString(result);
-        }
-
-        public static string Md5(string file)
-        {
-            using (var stream = File.OpenRead(file))
+            var idx = 0;
+            var name = Path.GetFileNameWithoutExtension(file);
+            var exts = Path.GetExtension(file);
+            var tmp = "";
+            while (idx < 1000000)
             {
-                var alg = System.Security.Cryptography.MD5.Create();
-                var result = alg.ComputeHash(stream);
-                return TextUtils.ToHexString(result);
+                idx += 1;
+                tmp = Path.Combine(path, $"{name} ({idx}){exts}");
+                if (!File.Exists(tmp))
+                {
+                    break;
+                }
+            }
+
+            return tmp;
+        }
+        #endregion
+
+        #region 目录操作
+        /// <summary>
+        /// 创建目录
+        /// </summary>
+        /// <param name="folderPath">目录的绝对路径</param>
+        public static void CreateFolder(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
             }
         }
 
+        /// <summary>
+        /// 是否空目录
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool IsEmptyFolder(string path)
+        {
+            var info = new DirectoryInfo(path);
+            return info.GetFiles().Length < 1 && info.GetDirectories().Length < 1;
+        }
+
+        /// <summary>
+        /// 删除指定目录及其所有子目录
+        /// </summary>
+        /// <param name="directoryPath">文件的绝对路径</param>
+        /// <param name="recursive">是否级联删除</param>
+        public static void DeleteFolder(string directoryPath, bool recursive = true)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                Directory.Delete(directoryPath, recursive);
+            }
+        }
+
+        /// <summary>
+        /// 获取重复后的文件名，返回格式：xxxx (nnnn).ext
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string GetFolderName(string path, string file)
+        {
+            var idx = 0;
+            var tmp = "";
+            while (idx < 1000000)
+            {
+                idx += 1;
+                tmp = Path.Combine(path, $"{file} ({idx})");
+                if (!Directory.Exists(tmp))
+                {
+                    break;
+                }
+            }
+
+            return tmp;
+        }
+        #endregion
+
+        #region 文件或目录操作
+        /// <summary>
+        /// 复制文件或目录
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <returns></returns>
         public static bool Copyto(string src, string dst)
         {
             if (File.Exists(src))
@@ -230,17 +232,12 @@ namespace Com.Scm.Utils
             return true;
         }
 
-        private static bool CopyFile(string src, string dst)
-        {
-            var dir = Path.GetDirectoryName(dst);
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-            File.Copy(src, dst, true);
-            return true;
-        }
-
+        /// <summary>
+        /// 移动文件或目录
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <returns></returns>
         public static bool Moveto(string src, string dst)
         {
             if (File.Exists(src))
@@ -280,62 +277,414 @@ namespace Com.Scm.Utils
             return true;
         }
 
-        private static bool MoveFile(string src, string dst)
+        /// <summary>
+        /// 更名文件或目录
+        /// </summary>
+        /// <param name="srcFile"></param>
+        /// <param name="dstFile"></param>
+        public static bool RenameTo(string srcFile, string dstFile)
         {
-            if (File.Exists(dst))
+            Delete(dstFile);
+
+            if (File.Exists(srcFile))
             {
-                File.Delete(dst);
+                new FileInfo(srcFile).MoveTo(dstFile);
+                return true;
             }
 
-            var dir = Path.GetDirectoryName(dst);
-            if (!Directory.Exists(dir))
+            if (Directory.Exists(srcFile))
             {
-                Directory.CreateDirectory(dir);
+                new DirectoryInfo(srcFile).MoveTo(dstFile);
+                return true;
             }
-            File.Move(src, dst);
-            return true;
+
+            return false;
         }
 
-        public static void Delete(string path)
+        /// <summary>
+        /// 删除文件或目录
+        /// </summary>
+        /// <param name="path"></param>
+        public static bool Delete(string path)
         {
             if (File.Exists(path))
             {
                 File.Delete(path);
+                return true;
             }
 
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);
+                return true;
             }
-        }
 
+            return false;
+        }
+        #endregion
+
+        #region 文件类型判断
+        #region 根据文件后缀判断文件类型
+        /// <summary>
+        /// 字节文件后缀
+        /// </summary>
+        private static List<string> ByteExts = new List<string> { ".bin", ".dat" };
+        /// <summary>
+        /// 字符文件后缀
+        /// </summary>
+        private static List<string> TextExts = new List<string> { ".txt", ".log", ".css", ".html", ".htm", ".js", ".xml", ".json", ".cs", ".java", ".py" };
+        /// <summary>
+        /// 代码文件后缀
+        /// </summary>
+        private static List<string> CodeExts = new List<string> { ".css", ".html", ".htm", ".js", ".xml", ".json", ".cs", ".java", ".py" };
+        /// <summary>
+        /// 图像文件后缀
+        /// </summary>
+        private static List<string> ImageExts = new List<string> { ".bmp", ".gif", ".jpg", ".jpeg", ".png", ".webp" };
+        /// <summary>
+        /// 媒体文件后缀
+        /// </summary>
+        private static List<string> MeidaExts = new List<string> { ".avi", ".wma", ".wmv", ".mp3", ".mp4", ".webm" };
+        /// <summary>
+        /// 办公文件后缀
+        /// </summary>
+        private static List<string> OfficeExts = new List<string> { ".xls", ".xlsx", ".doc", ".docx", ".ppt", ".pptx", ".pdf" };
+        /// <summary>
+        /// 压缩文件后缀
+        /// </summary>
+        private static List<string> ArchiveExts = new List<string> { ".zip", ".rar", ".7z", ".gzip", ".tar", ".bzip", ".bzip2" };
 
         /// <summary>
-        /// 获取重复后的文件名，返回格式：xxxx (nnnn).ext
+        /// 是否字节文件
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="file"></param>
+        /// <param name="fileExt"></param>
         /// <returns></returns>
-        public static string GetValidName(string path, string file)
+        public static bool IsByteFile(string fileExt)
         {
-            var idx = 0;
-            var name = Path.GetFileNameWithoutExtension(file);
-            var exts = Path.GetExtension(file);
-            var tmp = "";
-            while (idx < 1000000)
-            {
-                idx += 1;
-                tmp = $"{name} ({idx}){exts}";
-                if (File.Exists(tmp))
-                {
-                    continue;
-                }
-                break;
-            }
-
-            return tmp;
+            return ByteExts.Contains(fileExt.ToLower());
         }
 
+        /// <summary>
+        /// 是否文本文件
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static bool IsTextFile(string fileExt)
+        {
+            return TextExts.Contains(fileExt.ToLower());
+        }
+
+        /// <summary>
+        /// 是否图像文件
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static bool IsImageFile(string fileExt)
+        {
+            return ImageExts.Contains(fileExt.ToLower());
+        }
+
+        /// <summary>
+        /// 是否媒体文件
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static bool IsMediaFile(string fileExt)
+        {
+            return MeidaExts.Contains(fileExt.ToLower());
+        }
+
+        /// <summary>
+        /// 是否办公文件
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static bool IsOfficeFile(string fileExt)
+        {
+            return OfficeExts.Contains(fileExt.ToLower());
+        }
+
+        /// <summary>
+        /// 是否归档文件
+        /// </summary>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static bool IsArchiveFile(string fileExt)
+        {
+            return ArchiveExts.Contains(fileExt.ToLower());
+        }
+        #endregion
+
+        #region 根据文件签名判断文件类型
+        /// <summary>
+        /// 从文件流判断文件类型
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public static FileType GetFileType(Stream stream)
+        {
+            stream.Position = 0;
+
+            var len = 160;
+            var bytes = new byte[160];
+            if (stream.Length < len)
+            {
+                len = (int)stream.Length;
+            }
+            stream.Read(bytes, 0, len);
+
+            var fileSigns = InitFileTypes();
+            foreach (var fileSign in fileSigns)
+            {
+                foreach (var sign in fileSign.sign)
+                {
+                    if (IsMatch(bytes, sign, fileSign.offset))
+                    {
+                        return fileSign.type;
+                    }
+                }
+            }
+
+            return FileType.UnKnown;
+        }
+
+        /// <summary>
+        /// 判断文件签名是否相同
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="fileSigns"></param>
+        /// <returns></returns>
+        public static bool IsMath(Stream stream, List<FileSign> fileSigns)
+        {
+            stream.Position = 0;
+
+            var len = 160;
+            var bytes = new byte[160];
+            if (stream.Length < len)
+            {
+                len = (int)stream.Length;
+            }
+            stream.Read(bytes, 0, len);
+
+            foreach (var fileSign in fileSigns)
+            {
+                foreach (var sign in fileSign.sign)
+                {
+                    if (IsMatch(bytes, sign, fileSign.offset))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 判断数组是否相同
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <param name="srcIndex"></param>
+        /// <returns></returns>
+        public static bool IsMatch(byte[] src, byte[] dst, int srcIndex)
+        {
+            if (srcIndex >= src.Length - dst.Length - 1)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < dst.Length; i++)
+            {
+                if (src[srcIndex + i] != dst[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 文件签名列表
+        /// </summary>
+        /// <returns></returns>
+        private static List<FileSign> InitFileTypes()
+        {
+            var list = new List<FileSign>();
+            // 文档类
+            list.Add(FileSign.Doc);
+            list.Add(FileSign.Docx);
+            list.Add(FileSign.Xls);
+            list.Add(FileSign.Xlsx);
+            list.Add(FileSign.Csv);
+            list.Add(FileSign.Pdf);
+
+            // 图像类
+            list.Add(FileSign.Bmp);
+            list.Add(FileSign.Gif);
+            list.Add(FileSign.Jpg);
+            list.Add(FileSign.Png);
+            list.Add(FileSign.Wmp);
+            list.Add(FileSign.Webp);
+
+            // 媒体类
+            list.Add(FileSign.Avi);
+            list.Add(FileSign.Flv);
+            list.Add(FileSign.Mp4);
+            list.Add(FileSign.M4v);
+            list.Add(FileSign.Mkv);
+            list.Add(FileSign.Mov);
+            list.Add(FileSign.WebM);
+            list.Add(FileSign.Wmv);
+
+            // 归档类
+            list.Add(FileSign.Zip);
+
+            return list;
+        }
+        #endregion
+
+        /// <summary>
+        /// 获取文件MIME类型
+        /// </summary>
+        /// <param name="ext"></param>
+        /// <returns></returns>
+        public static string GetMimeByExt(string ext)
+        {
+            var sub = ext;
+            if (sub[0] == '.')
+            {
+                sub = sub.Substring(1);
+            }
+            if (IsImageFile(ext))
+            {
+                return "image/" + sub;
+            }
+            if (IsTextFile(ext))
+            {
+                return "plain/text";
+            }
+
+            return "";
+        }
+        #endregion
+
+        #region 文本文件读写
+        /// <summary>
+        /// 同步读取文本内容
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="content">文件不存在时返回的默认内容</param>
+        /// <returns></returns>
+        public static string ReadText(string file, string content = null)
+        {
+            if (!File.Exists(file))
+            {
+                return content;
+            }
+
+            using (var stream = new StreamReader(file))
+            {
+                return stream.ReadToEnd();
+            }
+        }
+
+        /// <summary>
+        /// 异步读取文本内容
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="content">文件不存在时返回的默认内容</param>
+        /// <returns></returns>
+        public static async Task<string> ReadTextAsync(string file, string content = null)
+        {
+            if (!File.Exists(file))
+            {
+                return content;
+            }
+
+            using (var stream = new StreamReader(file))
+            {
+                return await stream.ReadToEndAsync();
+            }
+        }
+
+        /// <summary>
+        /// 同步写入文本内容
+        /// </summary>
+        /// <param name="file">文件路径</param>
+        /// <param name="content">文件内容</param>
+        /// <param name="appendToLast"></param>
+        public static bool WriteText(string file, string content, bool appendToLast = false)
+        {
+            using (var stream = File.Open(file, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                if (appendToLast)
+                {
+                    stream.Position = stream.Length;
+                }
+                else
+                {
+                    stream.SetLength(0);
+                }
+
+                var bytes = Encoding.Default.GetBytes(content);
+                stream.Write(bytes, 0, bytes.Length);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 异步写入文本内容
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="content"></param>
+        /// <param name="appendToLast"></param>
+        /// <returns></returns>
+        public static async Task<bool> WriteTextAsync(string file, string content, bool appendToLast = false)
+        {
+            using (var stream = File.Open(file, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                if (appendToLast)
+                {
+                    stream.Position = stream.Length;
+                }
+                else
+                {
+                    stream.SetLength(0);
+                }
+
+                var bytes = Encoding.Default.GetBytes(content);
+                await stream.WriteAsync(bytes, 0, bytes.Length);
+            }
+
+            return true;
+        }
+        #endregion
+
+        #region 文件内容操作
+        /// <summary>
+        /// 转换文件大小
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static string ToFileUom(long size)
+        {
+            var units = new string[] { "B", "KB", "MB", "GB", "TB", "PB" };
+            int i = 0;
+            while (size > 1024)
+            {
+                size = size >> 10;
+                i++;
+            }
+            return size + units[i];
+        }
+
+        /// <summary>
+        /// 转换为HTML的Base64表示
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public static string ToHtmlBase64(string file)
         {
             var pre = "";
@@ -372,149 +721,58 @@ namespace Com.Scm.Utils
             }
         }
 
-        private static Dictionary<string, bool> _ZipExts;
-
-        public static bool IsZip(string ext)
+        /// <summary>
+        /// 获取文件摘要
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public static string Md5(Stream stream)
         {
-            if (_ZipExts == null)
-            {
-                _ZipExts = new Dictionary<string, bool>();
-                _ZipExts[".zip"] = true;
-                _ZipExts[".gzip"] = true;
-                _ZipExts[".bzip2"] = true;
-                _ZipExts[".tar"] = true;
-                _ZipExts[".7z"] = true;
-            }
-
-            if (string.IsNullOrWhiteSpace(ext))
-            {
-                return false;
-            }
-
-            if (ext[0] != '.')
-            {
-                ext = '.' + ext;
-            }
-            return _ZipExts.ContainsKey(ext.ToLower());
+            return GetFileHash(stream, "MD5");
         }
 
-        public static FileType GetFileType(Stream stream)
+        /// <summary>
+        /// 获取文件摘要
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string Md5(string file)
         {
-            stream.Position = 0;
-
-            var len = 160;
-            var bytes = new byte[160];
-            if (stream.Length < len)
-            {
-                len = (int)stream.Length;
-            }
-            stream.Read(bytes, 0, len);
-
-            var dict = InitFileTypes();
-            foreach (var fileType in dict.Keys)
-            {
-                var signList = dict[fileType];
-                foreach (var sign in signList)
-                {
-                    if (IsMatch(bytes, sign, 0))
-                    {
-                        return fileType;
-                    }
-                }
-            }
-
-            return FileType.UnKnown;
+            return GetFileHash(file, "MD5");
         }
 
-        public static bool IsMathType(Stream stream, List<FileSign> fileSigns)
+        /// <summary>
+        /// 获取文件摘要
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="cipher"></param>
+        /// <returns></returns>
+        public static string GetFileHash(string file, string cipher)
         {
-            stream.Position = 0;
-
-            var len = 160;
-            var bytes = new byte[160];
-            if (stream.Length < len)
+            var alg = System.Security.Cryptography.HashAlgorithm.Create(cipher);
+            using (var stream = File.OpenRead(file))
             {
-                len = (int)stream.Length;
+                var result = alg.ComputeHash(stream);
+                return TextUtils.ToHexString(result);
             }
-            stream.Read(bytes, 0, len);
-
-            foreach (var fileSign in fileSigns)
-            {
-                foreach (var sign in fileSign.sign)
-                {
-                    if (IsMatch(bytes, sign, fileSign.offset))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
-        private static bool IsMatch(byte[] src, byte[] dst, int srcIndex)
+        /// <summary>
+        /// 获取文件摘要
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="cipher"></param>
+        /// <returns></returns>
+        public static string GetFileHash(Stream stream, string cipher)
         {
-            if (srcIndex >= src.Length - dst.Length - 1)
-            {
-                return false;
-            }
 
-            for (int i = 0; i < dst.Length; i++)
-            {
-                if (src[srcIndex + i] != dst[i])
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+            var alg = System.Security.Cryptography.HashAlgorithm.Create(cipher);
 
-        private static Dictionary<FileType, List<byte[]>> InitFileTypes()
-        {
-            var list = new Dictionary<FileType, List<byte[]>>();
-            list[FileType.Doc] = new List<byte[]> { new byte[] { 0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1 } };
-            list[FileType.Docx] = new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } };
-            list[FileType.Pdf] = new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } };
-            list[FileType.Zip] = new List<byte[]>
-                                {
-                                    new byte[] { 0x50, 0x4B, 0x03, 0x04 },
-                                    new byte[] { 0x50, 0x4B, 0x4C, 0x49, 0x54, 0x55 },
-                                    new byte[] { 0x50, 0x4B, 0x53, 0x70, 0x58 },
-                                    new byte[] { 0x50, 0x4B, 0x05, 0x06 },
-                                    new byte[] { 0x50, 0x4B, 0x07, 0x08 },
-                                    new byte[] { 0x57, 0x69, 0x6E, 0x5A, 0x69, 0x70 }
-                                };
-            list[FileType.Png] = new List<byte[]> { new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A } };
-            list[FileType.Jpg] = new List<byte[]> { new byte[] { 0xFF, 0xD8 } };
-            //{
-            //    new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
-            //    new byte[] { 0xFF, 0xD8, 0xFF, 0xE1 },
-            //    new byte[] { 0xFF, 0xD8, 0xFF, 0xE8 }
-            //};
-            list[FileType.Gif] = new List<byte[]> { new byte[] { 0x47, 0x49, 0x46, 0x38 } };
-            list[FileType.Bmp] = new List<byte[]> { new byte[] { 0x42, 0x4D } };
-            list[FileType.Mp4] = new List<byte[]>
-                                {
-                                    new byte[] { 0x00,0x00,0x00,0x18,0x66,0x74,0x79,0x70,0x6D,0x70,0x34,0x32 },
-                                    new byte[] { 0x00,0x00,0x00,0x1C,0x66,0x74,0x79,0x70,0x6D,0x70,0x34,0x32 },
-                                    new byte[] { 0x00,0x00,0x00,0x20,0x66,0x74,0x79,0x70,0x69,0x73,0x6F, 0x6D },
-                                };
-            list[FileType.Mkv] = new List<byte[]> { new byte[] { 0x1A, 0x45, 0xDF, 0xA3, 0xA3, 0x42, 0x86, 0x81, 0x01, 0x42, 0xF7 } };
-            list[FileType.Mov] = new List<byte[]> { new byte[] { 0x00, 0x00, 0x00, 0x14, 0x66, 0x74, 0x79, 0x70, 0x71, 0x74 } };
-            list[FileType.M4v] = new List<byte[]> { new byte[] { 0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70, 0x4D, 0x34, 0x56 } };
-            list[FileType.WebM] = new List<byte[]> { new byte[] { 0x1A, 0x45, 0xDF, 0xA3, 0x9F, 0x42, 0x86, 0x81, 0x01, 0x42, 0xF7, 0x81, 0x01, 0x42, 0xF2 } };
-            list[FileType.Wmv] = new List<byte[]> { new byte[] { 0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11 } };
-            list[FileType.Avi] = new List<byte[]> { new byte[] { 0x52, 0x49, 0x46, 0x46, 0x84, 0x4A, 0x1E, 0x00, 0x41, 0x56, 0x49 } };
-            list[FileType.Flv] = new List<byte[]> { new byte[] { 0x46, 0x4C, 0x56 } };
-            list[FileType.Xls] = new List<byte[]>
-                                {
-                                    new byte[] { 0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1 },
-                                    new byte[] { 0x09, 0x08, 0x10, 0x00, 0x00, 0x06, 0x05, 0x00 },
-                                    new byte[] { 0xFD, 0xFF, 0xFF, 0xFF }
-                                };
-            list[FileType.Xlsx] = new List<byte[]> { new byte[] { 0x50, 0x4B, 0x03, 0x04 } };
-            list[FileType.Csv] = new List<byte[]> { new byte[] { 0x49, 0x44 } };
-            return list;
+            stream.Seek(0, SeekOrigin.Begin);
+            var result = alg.ComputeHash(stream);
+            return TextUtils.ToHexString(result);
         }
+        #endregion
+
     }
 }

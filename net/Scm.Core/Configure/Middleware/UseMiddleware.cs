@@ -1,4 +1,4 @@
-using Com.Scm.Quartz.Extensions;
+using Com.Scm.Quartz;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
