@@ -73,6 +73,7 @@ namespace Com.Scm.Api
 
             // Quartz
             var quartzConfig = AppUtils.GetConfig<QuartzConfig>(QuartzConfig.NAME) ?? new QuartzConfig();
+            quartzConfig.Prepare(envConfig);
             services.AddQuartz(quartzConfig);
             services.AddQuartzClassJobs();
 
