@@ -5,7 +5,7 @@ namespace Com.Scm
     /// <summary>
     /// 系统Shell命令
     /// </summary>
-    public static class ShellUtils
+    public static class OsUtils
     {
         /// <summary>
         /// Bash命令

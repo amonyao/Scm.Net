@@ -62,7 +62,7 @@ namespace Com.Scm
             dynamic netWork = null;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                var output = ShellUtils.Bash("ifconfig eth0");
+                var output = OsUtils.Bash("ifconfig eth0");
                 var lines = output.Split('\n');
                 var nameArr = lines[0].Split('=');
                 var dnsArr = lines[1].Split('=');
@@ -81,7 +81,7 @@ namespace Com.Scm
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                var output = ShellUtils.Bash("ipconfig getpacket en0");
+                var output = OsUtils.Bash("ipconfig getpacket en0");
                 var lines = output.Split('\n');
                 var nameArr = lines[0].Split('=');
                 var dnsArr = lines[9].Split('=');
@@ -137,7 +137,7 @@ namespace Com.Scm
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                var output = ShellUtils.Bash("top -bn 1 -i -c");
+                var output = OsUtils.Bash("top -bn 1 -i -c");
                 var lines = output.Split('\n');
 
                 var cpuArr = lines[2].Split(' ');
@@ -148,7 +148,7 @@ namespace Com.Scm
 
                 res.TotalMemory = memRowArr[3];
                 // 硬盘使用率
-                var diskOutput = ShellUtils.Bash("df -lh");
+                var diskOutput = OsUtils.Bash("df -lh");
                 var diskLines = diskOutput.Split('\n');
                 double diskUse = 0;
                 for (var i = 1; i < diskLines.Length - 1; i++)
@@ -170,7 +170,7 @@ namespace Com.Scm
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 // CPU 使用率
-                var output = ShellUtils.Bash("top -l 1 | head -n 10");
+                var output = OsUtils.Bash("top -l 1 | head -n 10");
                 var lines = output.Split('\n');
                 var cpus = lines[3].Split(' ');
                 var c1 = cpus[2].Replace("%", "");
@@ -192,7 +192,7 @@ namespace Com.Scm
                 res.MemoryRate = Math.Round(useMemKb / totalMemKb * 100, 2);
 
                 // 硬盘使用率
-                var diskOutput = ShellUtils.Bash("df -lh");
+                var diskOutput = OsUtils.Bash("df -lh");
                 var diskLines = diskOutput.Split('\n');
                 double diskUse = 0;
                 for (var i = 1; i < diskLines.Length - 1; i++)

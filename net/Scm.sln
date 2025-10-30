@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scm.Email", "Scm.Email\Scm.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scm.Common.Excel", "Scm.Common.Excel\Scm.Common.Excel.csproj", "{9943E423-A678-4734-83DA-E373E6A028FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scm.Common.OS", "Scm.Common.OS\Scm.Common.OS.csproj", "{999CB784-7D68-4E10-A9E0-13D9A3968B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scm.Common.Os", "Scm.Common.Os\Scm.Common.Os.csproj", "{999CB784-7D68-4E10-A9E0-13D9A3968B8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scm.Server.Api", "Scm.Server.Api\Scm.Server.Api.csproj", "{DB7515C1-DDA4-4569-8936-DAD6C1668475}"
 EndProject
