@@ -145,7 +145,7 @@ namespace Com.Scm.Config
                 return basePath;
             }
 
-            path = FileUtils.ToMachinePath(path);
+            path = ScmUtils.ToMachinePath(path);
             if (path[0] == '\\')
             {
                 path = path.Substring(1);

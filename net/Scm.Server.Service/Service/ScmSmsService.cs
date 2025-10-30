@@ -102,7 +102,7 @@ namespace Com.Scm.Service
             }
 
             // 设置为发送中
-            logSmsDao.sms = TextUtils.SmsCode();
+            logSmsDao.sms = ScmUtils.SmsCode();
             logSmsDao.handle = SmsHandleEnum.Doing;
             logSmsDao.PrepareUpdate(UserDto.SYS_ID);
             await _SqlClient.UpdateAsync(logSmsDao);

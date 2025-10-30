@@ -14,7 +14,40 @@ namespace Com.Scm.Utils
 {
     public partial class TextUtils
     {
-        #region 格式转换
+        #region 对象转换
+        #region 大小写转换
+        /// <summary>
+        /// 首字母转小写
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string FirstCharToLower(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return s;
+            }
+
+            return char.ToLower(s[0]) + s.Substring(1);
+        }
+
+        /// <summary>
+        /// 首字母转大写
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string FirstCharToUpper(string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return s;
+            }
+
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
+        #endregion
+
+        #region 字符与对象转换
         private static JsonSerializerSettings _Settings = new JsonSerializerSettings();
 
         public static string ToJsonString(object obj, bool indented = false, bool ignore = false)
@@ -82,8 +115,74 @@ namespace Com.Scm.Utils
             }
             return obj;
         }
+        #endregion
 
-        #region
+        #region 编码方案转换
+        /// <summary>
+        /// 字节数组转换为字符
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="masks"></param>
+        /// <returns></returns>
+        public static string EncodeString(byte[] bytes, byte[] masks = null)
+        {
+            var text = new StringBuilder();
+            foreach (var b in bytes)
+            {
+                text.Append(b.ToString("x2"));
+            }
+            return text.ToString();
+        }
+
+        /// <summary>
+        /// 字符转换为字节数组
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="masks"></param>
+        /// <returns></returns>
+        public static byte[] DecodeString(string text, byte[] masks = null)
+        {
+            //var text = new StringBuilder();
+            //foreach (var b in bytes)
+            //{
+            //    text.Append(b.ToString("x2"));
+            //}
+            //return text.ToString();
+            var bytes = new byte[text.Length];
+            return bytes;
+        }
+
+        /// <summary>
+        /// 转换为16进度字符串
+        /// </summary>
+        /// <param name="bytes">待转换数组</param>
+        /// <param name="upperCase">是否为大写</param>
+        /// <returns></returns>
+        public static string ToHexString(byte[] bytes, bool upperCase = false)
+        {
+            var format = upperCase ? "X2" : "x2";
+            var builder = new StringBuilder();
+            foreach (var b in bytes)
+            {
+                builder.Append(b.ToString(format));
+            }
+            return builder.ToString();
+        }
+
+        public string FromUrlBase64String(string str)
+        {
+            byte[] decbuff = Convert.FromBase64String(str.Replace(",", "=").Replace("-", "+").Replace("/", "_"));
+            return System.Text.Encoding.UTF8.GetString(decbuff);
+        }
+
+        public string ToUrlBase64String(string input)
+        {
+            byte[] encbuff = Encoding.UTF8.GetBytes(input ?? "");
+            return Convert.ToBase64String(encbuff).Replace("=", ",").Replace("+", "-").Replace("_", "/");
+        }
+        #endregion
+
+        #region 对象与对象转换
         public static T ConvertTo<T>(object src, bool props = true, bool fields = true)
         {
             var srcType = src.GetType();
@@ -149,6 +248,80 @@ namespace Com.Scm.Utils
             return Convert.ChangeType(value, conversionType);
         }
         #endregion
+        #endregion
+
+        #region 数值转换
+        /// <summary>
+        ///  重量格式化（由克转换为千克），格式：0.000；
+        /// </summary>
+        /// <param name="weight"></param>
+        /// <returns></returns>
+        public static string FormatWeight(int weight)
+        {
+            return (weight / 1000f).ToString("f3");
+        }
+
+        /// <summary>
+        /// 重量转换，由千克转换为克
+        /// </summary>
+        /// <param name="weight"></param>
+        /// <returns></returns>
+        public static int ParseWeight(string weight)
+        {
+            if (IsDecimal(weight, 3))
+            {
+                return (int)(double.Parse(weight) * 1000);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// 体积格式化（由立方厘米转为立方米），格式：0.000；
+        /// </summary>
+        /// <param name="volume"></param>
+        /// <returns></returns>
+        public static string FormatVolume(int volume)
+        {
+            return (volume / 1000000f).ToString("f3");
+        }
+
+        /// <summary>
+        /// 体积转换，由立方米转为立方厘米
+        /// </summary>
+        /// <param name="volume"></param>
+        /// <returns></returns>
+        public static int ParseVolume(string volume)
+        {
+            if (IsDecimal(volume, 3))
+            {
+                return (int)(double.Parse(volume) * 1000000);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// 金额格式化（由分转换为元），格式：0.00；
+        /// </summary>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public static string FormatPrice(int price)
+        {
+            return (price / 100f).ToString("f2");
+        }
+
+        /// <summary>
+        /// 金额转换（由元转换为分）
+        /// </summary>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public static int ParsePrice(string price)
+        {
+            if (IsDecimal(price, 3))
+            {
+                return (int)(double.Parse(price) * 100);
+            }
+            return 0;
+        }
         #endregion
 
         #region 字符截取
@@ -286,168 +459,7 @@ namespace Com.Scm.Utils
         }
         #endregion
 
-        #region 数值转换
-        /// <summary>
-        ///  重量格式化（由克转换为千克），格式：0.000；
-        /// </summary>
-        /// <param name="weight"></param>
-        /// <returns></returns>
-        public static string FormatWeight(int weight)
-        {
-            return (weight / 1000f).ToString("f3");
-        }
-
-        /// <summary>
-        /// 重量转换，由千克转换为克
-        /// </summary>
-        /// <param name="weight"></param>
-        /// <returns></returns>
-        public static int ParseWeight(string weight)
-        {
-            if (IsDecimal(weight, 3))
-            {
-                return (int)(double.Parse(weight) * 1000);
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// 体积格式化（由立方厘米转为立方米），格式：0.000；
-        /// </summary>
-        /// <param name="volume"></param>
-        /// <returns></returns>
-        public static string FormatVolume(int volume)
-        {
-            return (volume / 1000000f).ToString("f3");
-        }
-
-        /// <summary>
-        /// 体积转换，由立方米转为立方厘米
-        /// </summary>
-        /// <param name="volume"></param>
-        /// <returns></returns>
-        public static int ParseVolume(string volume)
-        {
-            if (IsDecimal(volume, 3))
-            {
-                return (int)(double.Parse(volume) * 1000000);
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// 金额格式化（由分转换为元），格式：0.00；
-        /// </summary>
-        /// <param name="price"></param>
-        /// <returns></returns>
-        public static string FormatPrice(int price)
-        {
-            return (price / 100f).ToString("f2");
-        }
-
-        /// <summary>
-        /// 金额转换（由元转换为分）
-        /// </summary>
-        /// <param name="price"></param>
-        /// <returns></returns>
-        public static int ParsePrice(string price)
-        {
-            if (IsDecimal(price, 3))
-            {
-                return (int)(double.Parse(price) * 100);
-            }
-            return 0;
-        }
-        #endregion
-
-        #region 权威校验身份证号码
-
-        /// <summary>
-        /// 根据GB11643-1999标准权威校验中国身份证号码的合法性
-        /// </summary>
-        /// <param name="s">源字符串</param>
-        /// <returns>是否匹配成功</returns>
-        public static bool MatchIdentifyCard(string s)
-        {
-            if (s.Length == 18)
-            {
-                return CheckChinaID18(s);
-            }
-            if (s.Length == 15)
-            {
-                return CheckChinaID15(s);
-            }
-            return false;
-        }
-
-        private static readonly string[] ChinaIDProvinceCodes = {
-             "11", "12", "13", "14", "15",
-             "21", "22", "23",
-             "31", "32", "33", "34", "35", "36", "37",
-             "41", "42", "43", "44", "45", "46",
-             "50", "51", "52", "53", "54",
-             "61", "62", "63", "64", "65",
-             "71",
-             "81", "82",
-             "91"
-        };
-
-        private static bool CheckChinaID18(string ID)
-        {
-            ID = ID.ToUpper();
-            Match m = Regex.Match(ID, @"\d{17}[\dX]", RegexOptions.IgnoreCase);
-            if (!m.Success)
-            {
-                return false;
-            }
-            if (!ChinaIDProvinceCodes.Contains(ID.Substring(0, 2)))
-            {
-                return false;
-            }
-            CultureInfo zhCN = new CultureInfo("zh-CN", true);
-            if (!DateTime.TryParseExact(ID.Substring(6, 8), "yyyyMMdd", zhCN, DateTimeStyles.None, out DateTime birthday))
-            {
-                return false;
-            }
-            if (!IsBetween(birthday, new DateTime(1800, 1, 1), DateTime.Today))
-            {
-                return false;
-            }
-            int[] factors = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
-            int sum = 0;
-            for (int i = 0; i < 17; i++)
-            {
-                sum += (ID[i] - '0') * factors[i];
-            }
-            int n = (12 - sum % 11) % 11;
-            return n < 10 ? ID[17] - '0' == n : ID[17].Equals('X');
-        }
-
-        private static bool CheckChinaID15(string ID)
-        {
-            Match m = Regex.Match(ID, @"\d{15}", RegexOptions.IgnoreCase);
-            if (!m.Success)
-            {
-                return false;
-            }
-            if (!ChinaIDProvinceCodes.Contains(ID.Substring(0, 2)))
-            {
-                return false;
-            }
-            CultureInfo zhCN = new CultureInfo("zh-CN", true);
-            if (!DateTime.TryParseExact("19" + ID.Substring(6, 6), "yyyyMMdd", zhCN, DateTimeStyles.None, out DateTime birthday))
-            {
-                return false;
-            }
-            return IsBetween(birthday, new DateTime(1800, 1, 1), new DateTime(2000, 1, 1));
-        }
-
-        private static bool IsBetween(DateTime time, DateTime start, DateTime end)
-        {
-            return time >= start && time <= end;
-        }
-        #endregion 权威校验身份证号码
-
+        #region 掩码处理
         /// <summary>
         /// 字符串掩码，含手机号、用户名等
         /// </summary>
@@ -521,6 +533,7 @@ namespace Com.Scm.Utils
             }
             return s;
         }
+        #endregion
 
         #region 格式校验
         /// <summary>
@@ -796,139 +809,102 @@ namespace Com.Scm.Utils
         {
             return Regex.IsMatch(s, @"^\d{4}[-\/]\d{1,2}[-\/]\d{1,2}\s\d{2}[-:]\d{1,2}[-:]\d{1,2}$");
         }
+
+        #region 权威校验身份证号码
+        /// <summary>
+        /// 是否为中国身份证号码
+        /// 根据GB11643-1999标准权威校验中国身份证号码的合法性
+        /// </summary>
+        /// <param name="text">源字符串</param>
+        /// <param name="formatOnly">是否仅校验格式</param>
+        /// <returns>是否匹配成功</returns>
+        public static bool IsChinaID(string text, bool formatOnly = true)
+        {
+            if (formatOnly)
+            {
+                return Regex.IsMatch(text, @"^[1-9]\d{14}(\d{2}[0-9Xx])?$");
+            }
+
+            if (text.Length == 18)
+            {
+                return CheckChinaID18(text);
+            }
+            if (text.Length == 15)
+            {
+                return CheckChinaID15(text);
+            }
+            return false;
+        }
+
+        private static readonly string[] ChinaIDProvinceCodes = {
+             "11", "12", "13", "14", "15",
+             "21", "22", "23",
+             "31", "32", "33", "34", "35", "36", "37",
+             "41", "42", "43", "44", "45", "46",
+             "50", "51", "52", "53", "54",
+             "61", "62", "63", "64", "65",
+             "71",
+             "81", "82",
+             "91"
+        };
+
+        private static bool CheckChinaID18(string ID)
+        {
+            ID = ID.ToUpper();
+            Match m = Regex.Match(ID, @"\d{17}[\dX]", RegexOptions.IgnoreCase);
+            if (!m.Success)
+            {
+                return false;
+            }
+            if (!ChinaIDProvinceCodes.Contains(ID.Substring(0, 2)))
+            {
+                return false;
+            }
+            CultureInfo zhCN = new CultureInfo("zh-CN", true);
+            if (!DateTime.TryParseExact(ID.Substring(6, 8), "yyyyMMdd", zhCN, DateTimeStyles.None, out DateTime birthday))
+            {
+                return false;
+            }
+            if (!IsBetween(birthday, new DateTime(1800, 1, 1), DateTime.Today))
+            {
+                return false;
+            }
+            int[] factors = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
+            int sum = 0;
+            for (int i = 0; i < 17; i++)
+            {
+                sum += (ID[i] - '0') * factors[i];
+            }
+            int n = (12 - sum % 11) % 11;
+            return n < 10 ? ID[17] - '0' == n : ID[17].Equals('X');
+        }
+
+        private static bool CheckChinaID15(string ID)
+        {
+            Match m = Regex.Match(ID, @"\d{15}", RegexOptions.IgnoreCase);
+            if (!m.Success)
+            {
+                return false;
+            }
+            if (!ChinaIDProvinceCodes.Contains(ID.Substring(0, 2)))
+            {
+                return false;
+            }
+            CultureInfo zhCN = new CultureInfo("zh-CN", true);
+            if (!DateTime.TryParseExact("19" + ID.Substring(6, 6), "yyyyMMdd", zhCN, DateTimeStyles.None, out DateTime birthday))
+            {
+                return false;
+            }
+            return IsBetween(birthday, new DateTime(1800, 1, 1), new DateTime(2000, 1, 1));
+        }
+
+        private static bool IsBetween(DateTime time, DateTime start, DateTime end)
+        {
+            return time >= start && time <= end;
+        }
+        #endregion 权威校验身份证号码
+
         #endregion
-
-        public static string EncodeString(byte[] bytes, byte[] masks = null)
-        {
-            var text = new StringBuilder();
-            foreach (var b in bytes)
-            {
-                text.Append(b.ToString("x2"));
-            }
-            return text.ToString();
-        }
-
-        public static byte[] DecodeString(string text, byte[] masks = null)
-        {
-            //var text = new StringBuilder();
-            //foreach (var b in bytes)
-            //{
-            //    text.Append(b.ToString("x2"));
-            //}
-            //return text.ToString();
-            var bytes = new byte[text.Length];
-            return bytes;
-        }
-
-        /// <summary>
-        /// 转换为16进度字符串
-        /// </summary>
-        /// <param name="bytes">待转换数组</param>
-        /// <param name="upperCase">是否为大写</param>
-        /// <returns></returns>
-        public static string ToHexString(byte[] bytes, bool upperCase = false)
-        {
-            var format = upperCase ? "X2" : "x2";
-            var builder = new StringBuilder();
-            foreach (var b in bytes)
-            {
-                builder.Append(b.ToString(format));
-            }
-            return builder.ToString();
-        }
-
-        public string FromUrlBase64String(string str)
-        {
-            byte[] decbuff = Convert.FromBase64String(str.Replace(",", "=").Replace("-", "+").Replace("/", "_"));
-            return System.Text.Encoding.UTF8.GetString(decbuff);
-        }
-
-        public string ToUrlBase64String(string input)
-        {
-            byte[] encbuff = Encoding.UTF8.GetBytes(input ?? "");
-            return Convert.ToBase64String(encbuff).Replace("=", ",").Replace("+", "-").Replace("_", "/");
-        }
-
-        #region 首字母大小写转换
-        /// <summary>
-        /// 首字母转小写
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        public static string FirstCharToLower(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            return char.ToLower(s[0]) + s.Substring(1);
-        }
-
-        /// <summary>
-        /// 首字母转大写
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        public static string FirstCharToUpper(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            return char.ToUpper(s[0]) + s.Substring(1);
-        }
-        #endregion
-
-        #region 分隔字符串
-        /// <summary>
-        /// 将字符串转换为long类型数组
-        /// </summary>
-        /// <param name="str">如1,2,3,4,5</param>
-        /// <param name="c">分隔符</param>
-        /// <returns></returns>
-        public static List<string> ToList(string str, char c = ',')
-        {
-            var array = str.Split(c);
-            var list = new List<string>();
-            list.AddRange(array);
-            return list;
-        }
-
-        /// <summary>
-        /// 将字符串转换为long类型数组
-        /// </summary>
-        /// <param name="str">如1,2,3,4,5</param>
-        /// <returns></returns>
-        public static List<long> ToListLong(string str, char c = ',')
-        {
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                return null;
-            }
-
-            var array = str.Split(c);
-            var list = new List<long>();
-            foreach (var item in array)
-            {
-                if (IsNumberic(item))
-                {
-                    list.Add(long.Parse(item));
-                }
-            }
-            return list;
-        }
-        #endregion
-
-        /// <summary>
-        /// 生成验证码
-        /// </summary>
-        /// <returns></returns>
-        public static string SmsCode()
-        {
-            return RandomNumber(6);
-        }
 
         /// <summary>
         /// 随机数字串
@@ -1089,92 +1065,6 @@ namespace Com.Scm.Utils
         }
         #endregion
 
-        #region 文件格式判断
-        /// <summary>
-        /// 是否为（常见）图片
-        /// </summary>
-        /// <param name="fileExt">文件扩展名</param>
-        /// <returns></returns>
-        public static bool IsImage(string fileExt)
-        {
-            if (string.IsNullOrEmpty(fileExt))
-            {
-                return false;
-            }
-
-            if (fileExt[0] != '.')
-            {
-                fileExt = '.' + fileExt;
-            }
-
-            var images = new List<string> { ".jpg", ".jpeg", "png", ".gif", ".bmp", ".tiff", ".webp" };
-            return images.Contains(fileExt.ToLower());
-        }
-
-        /// <summary>
-        /// 是否为（常见）视频
-        /// </summary>
-        /// <param name="fileExt">文件扩展名</param>
-        /// <returns></returns>
-        public static bool IsVideo(string fileExt)
-        {
-            if (string.IsNullOrEmpty(fileExt))
-            {
-                return false;
-            }
-
-            if (fileExt[0] != '.')
-            {
-                fileExt = '.' + fileExt;
-            }
-
-            var videos = new List<string> { ".rmvb", ".mkv", ".ts", ".wma", ".avi", ".rm", ".mp4", ".flv", ".mpeg", ".mov", ".3gp", ".mpg" };
-            return videos.Contains(fileExt.ToLower());
-        }
-
-        /// <summary>
-        /// 是否为音频
-        /// </summary>
-        /// <param name="fileExt">文件扩展名</param>
-        /// <returns></returns>
-        public static bool IsAudio(string fileExt)
-        {
-            if (string.IsNullOrEmpty(fileExt))
-            {
-                return false;
-            }
-
-            if (fileExt[0] != '.')
-            {
-                fileExt = '.' + fileExt;
-            }
-
-            var musics = new List<string> { ".mp3", ".wav" };
-            return musics.Contains(fileExt.ToLower());
-        }
-
-        /// <summary>
-        /// 是否为文档
-        /// </summary>
-        /// <param name="fileExt">文件扩展名</param>
-        /// <returns></returns>
-        public static bool IsDocument(string fileExt)
-        {
-            if (string.IsNullOrEmpty(fileExt))
-            {
-                return false;
-            }
-
-            if (fileExt[0] != '.')
-            {
-                fileExt = '.' + fileExt;
-            }
-
-            var documents = new List<string> { ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".csv" };
-            return documents.Contains(fileExt.ToLower());
-        }
-        #endregion
-
         #region 密码掩码处理
         /// <summary>
         /// 
@@ -1228,6 +1118,12 @@ namespace Com.Scm.Utils
         }
         #endregion
 
+        /// <summary>
+        /// 字符摘要（MD5）
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="upperCase"></param>
+        /// <returns></returns>
         public static string Md5(string text, bool upperCase = false)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -1242,6 +1138,12 @@ namespace Com.Scm.Utils
             return ToHexString(result, upperCase);
         }
 
+        /// <summary>
+        /// 字符摘要（SHA）
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="upperCase"></param>
+        /// <returns></returns>
         public static string Sha(string text, bool upperCase = false)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -1250,6 +1152,27 @@ namespace Com.Scm.Utils
             }
 
             var alg = SHA256.Create();
+            var bytes = Encoding.UTF8.GetBytes(text);
+            var result = alg.ComputeHash(bytes);
+
+            return ToHexString(result, upperCase);
+        }
+
+        /// <summary>
+        /// 字符摘要
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="cipher"></param>
+        /// <param name="upperCase"></param>
+        /// <returns></returns>
+        public static string Digest(string text, string cipher, bool upperCase = false)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return "";
+            }
+
+            var alg = HashAlgorithm.Create(cipher);
             var bytes = Encoding.UTF8.GetBytes(text);
             var result = alg.ComputeHash(bytes);
 

@@ -2,7 +2,7 @@
 
 namespace Com.Scm.Enums
 {
-    public enum FileTypeEnum
+    public enum ScmFileTypeEnum
     {
         None = 0,
         [Description("字节文件")]

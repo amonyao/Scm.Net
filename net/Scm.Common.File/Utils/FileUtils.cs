@@ -1,5 +1,4 @@
-﻿using Com.Scm.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -369,15 +368,23 @@ namespace Com.Scm.Utils
         /// <summary>
         /// 图像文件后缀
         /// </summary>
-        private static List<string> ImageExts = new List<string> { ".bmp", ".gif", ".jpg", ".jpeg", ".png", ".webp" };
+        private static List<string> ImageExts = new List<string> { ".bmp", ".gif", ".jpg", ".jpeg", ".png", ".webp", ".tiff" };
+        /// <summary>
+        /// 音频文件后缀
+        /// </summary>
+        private static List<string> AudioExts = new List<string> { ".mp3", ".avi", ".wma" };
+        /// <summary>
+        /// 视频文件后缀
+        /// </summary>
+        private static List<string> VedioExts = new List<string> { ".rmvb", ".mkv", ".ts", ".wmv", ".rm", ".mp4", ".flv", ".mpeg", ".mov", ".3gp", ".mpg", ".webm" };
         /// <summary>
         /// 媒体文件后缀
         /// </summary>
-        private static List<string> MeidaExts = new List<string> { ".avi", ".wma", ".wmv", ".mp3", ".mp4", ".webm" };
+        private static List<string> MeidaExts = new List<string> { };
         /// <summary>
         /// 办公文件后缀
         /// </summary>
-        private static List<string> OfficeExts = new List<string> { ".xls", ".xlsx", ".doc", ".docx", ".ppt", ".pptx", ".pdf" };
+        private static List<string> OfficeExts = new List<string> { ".xls", ".xlsx", ".doc", ".docx", ".ppt", ".pptx", ".pdf", ".csv" };
         /// <summary>
         /// 压缩文件后缀
         /// </summary>
@@ -390,7 +397,7 @@ namespace Com.Scm.Utils
         /// <returns></returns>
         public static bool IsByteFile(string fileExt)
         {
-            return ByteExts.Contains(fileExt.ToLower());
+            return IsFileFormat(ByteExts, fileExt);
         }
 
         /// <summary>
@@ -400,7 +407,7 @@ namespace Com.Scm.Utils
         /// <returns></returns>
         public static bool IsTextFile(string fileExt)
         {
-            return TextExts.Contains(fileExt.ToLower());
+            return IsFileFormat(TextExts, fileExt);
         }
 
         /// <summary>
@@ -410,7 +417,22 @@ namespace Com.Scm.Utils
         /// <returns></returns>
         public static bool IsImageFile(string fileExt)
         {
-            return ImageExts.Contains(fileExt.ToLower());
+            return IsFileFormat(ImageExts, fileExt);
+        }
+
+        /// <summary>
+        /// 是否为音频
+        /// </summary>
+        /// <param name="fileExt">文件扩展名</param>
+        /// <returns></returns>
+        public static bool IsAudioFile(string fileExt)
+        {
+            return IsFileFormat(AudioExts, fileExt);
+        }
+
+        public static bool IsVideoFile(string fileExt)
+        {
+            return IsFileFormat(AudioExts, fileExt);
         }
 
         /// <summary>
@@ -420,7 +442,7 @@ namespace Com.Scm.Utils
         /// <returns></returns>
         public static bool IsMediaFile(string fileExt)
         {
-            return MeidaExts.Contains(fileExt.ToLower());
+            return IsAudioFile(fileExt) || IsVideoFile(fileExt);
         }
 
         /// <summary>
@@ -430,7 +452,7 @@ namespace Com.Scm.Utils
         /// <returns></returns>
         public static bool IsOfficeFile(string fileExt)
         {
-            return OfficeExts.Contains(fileExt.ToLower());
+            return IsFileFormat(OfficeExts, fileExt);
         }
 
         /// <summary>
@@ -440,7 +462,28 @@ namespace Com.Scm.Utils
         /// <returns></returns>
         public static bool IsArchiveFile(string fileExt)
         {
-            return ArchiveExts.Contains(fileExt.ToLower());
+            return IsFileFormat(ArchiveExts, fileExt);
+        }
+
+        /// <summary>
+        /// 是否为指定类型的文件
+        /// </summary>
+        /// <param name="extList"></param>
+        /// <param name="fileExt"></param>
+        /// <returns></returns>
+        public static bool IsFileFormat(List<string> extList, string fileExt)
+        {
+            if (string.IsNullOrEmpty(fileExt))
+            {
+                return false;
+            }
+
+            if (fileExt[0] != '.')
+            {
+                fileExt = '.' + fileExt;
+            }
+
+            return extList.Contains(fileExt.ToLower());
         }
         #endregion
 
@@ -800,174 +843,6 @@ namespace Com.Scm.Utils
             stream.Seek(0, SeekOrigin.Begin);
             var result = alg.ComputeHash(stream);
             return TextUtils.ToHexString(result);
-        }
-        #endregion
-
-        /// <summary>
-        /// 转换为本机路径
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <returns></returns>
-        public static string ToMachinePath(string uri)
-        {
-            return uri.Replace('/', Path.DirectorySeparatorChar);
-        }
-
-        /// <summary>
-        /// 转换为虚拟路径
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="basePath"></param>
-        /// <returns></returns>
-        public static string ToVirtualPath(string path, string basePath)
-        {
-            if (string.IsNullOrEmpty(path) || string.IsNullOrEmpty(basePath))
-            {
-                return path;
-            }
-
-            if (basePath[basePath.Length - 1] != Path.DirectorySeparatorChar)
-            {
-                basePath += Path.DirectorySeparatorChar;
-            }
-            return path.Replace(basePath, "/").Replace(Path.DirectorySeparatorChar, '/');
-        }
-
-        #region 获得文件目录
-        public static List<ScmFolderInfo> GetFolders(string path)
-        {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                return null;
-            }
-
-            var dir = new DirectoryInfo(path);
-            if (!dir.Exists)
-            {
-                return null;
-            }
-
-            return GetFolders(dir, "");
-        }
-
-        /// <summary>
-        /// 递归
-        /// </summary>
-        /// <param name="dir"></param>
-        /// <param name="baseUri"></param>
-        /// <returns></returns>
-        public static List<ScmFolderInfo> GetFolders(DirectoryInfo dir, string baseUri)
-        {
-            if (dir == null || !dir.Exists)
-            {
-                return null;
-            }
-
-            var list = new List<ScmFolderInfo>();
-            foreach (var sub in dir.GetDirectories())
-            {
-                var folder = new ScmFolderInfo();
-                folder.Name = sub.Name;
-                folder.Uri = baseUri + "/" + sub.Name;
-                folder.Children = GetFolders(sub, folder.Uri);
-                list.Add(folder);
-            }
-            return list;
-        }
-        #endregion
-
-        #region 获得文件目录下的文件，支持子目录
-        public static List<ScmFileInfo> GetFiles(string path, FileTypeEnum type, string basePath)
-        {
-            var list = new List<ScmFileInfo>();
-            var folder = new DirectoryInfo(path);
-            if (folder.Exists)
-            {
-                foreach (var file in folder.GetFiles())
-                {
-                    var exts = file.Extension;
-                    if (string.IsNullOrWhiteSpace(exts))
-                    {
-                        continue;
-                    }
-
-                    exts = exts.Trim().ToLower();
-                    if (type == FileTypeEnum.None)
-                    {
-                        if (IsByteFile(exts))
-                        {
-                            list.Add(GetFileInfo(file, FileTypeEnum.Byte, basePath));
-                            continue;
-                        }
-                        if (IsTextFile(exts))
-                        {
-                            list.Add(GetFileInfo(file, FileTypeEnum.Text, basePath));
-                            continue;
-                        }
-                        if (IsImageFile(exts))
-                        {
-                            list.Add(GetFileInfo(file, FileTypeEnum.Image, basePath));
-                            continue;
-                        }
-                        if (IsMediaFile(exts))
-                        {
-                            list.Add(GetFileInfo(file, FileTypeEnum.Media, basePath));
-                            continue;
-                        }
-                        if (IsOfficeFile(exts))
-                        {
-                            list.Add(GetFileInfo(file, FileTypeEnum.Office, basePath));
-                            continue;
-                        }
-
-                        list.Add(GetFileInfo(file, type, basePath));
-                        continue;
-                    }
-
-                    if (type == FileTypeEnum.Byte && IsByteFile(exts))
-                    {
-                        list.Add(GetFileInfo(file, FileTypeEnum.Byte, basePath));
-                        continue;
-                    }
-                    if (type == FileTypeEnum.Text && IsTextFile(exts))
-                    {
-                        list.Add(GetFileInfo(file, FileTypeEnum.Text, basePath));
-                        continue;
-                    }
-                    if (type == FileTypeEnum.Image && IsImageFile(exts))
-                    {
-                        list.Add(GetFileInfo(file, FileTypeEnum.Image, basePath));
-                        continue;
-                    }
-                    if (type == FileTypeEnum.Media && IsMediaFile(exts))
-                    {
-                        list.Add(GetFileInfo(file, FileTypeEnum.Media, basePath));
-                        continue;
-                    }
-                    if (type == FileTypeEnum.Office && IsOfficeFile(exts))
-                    {
-                        list.Add(GetFileInfo(file, FileTypeEnum.Office, basePath));
-                        continue;
-                    }
-                }
-            }
-            return list;
-        }
-
-        private static ScmFileInfo GetFileInfo(FileInfo file, FileTypeEnum type, string basePath)
-        {
-            var item = new ScmFileInfo();
-            item.Type = type;
-            item.Name = file.Name;
-            //item.FullName = file.FullName;
-            item.Extension = file.Extension;
-            item.Length = file.Length;
-            //item.FileSize = ToFileSize(file.Length);
-            item.Uri = ToVirtualPath(file.FullName, basePath);
-            item.CreationTime = file.CreationTime;
-            item.LastWriteTime = file.LastWriteTime;
-            item.LastAccessTime = file.LastAccessTime;
-            return item;
         }
         #endregion
     }

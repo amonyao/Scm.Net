@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Scm.Common.Text\Scm.Common.Text.csproj" />
-    <ProjectReference Include="..\Scm.Common\Scm.Common.csproj" />
   </ItemGroup>
 
 </Project>

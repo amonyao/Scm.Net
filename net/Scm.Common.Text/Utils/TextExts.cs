@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Com.Scm.Utils
+﻿namespace Com.Scm.Utils
 {
     public static class TextExts
     {
@@ -134,41 +132,9 @@ namespace Com.Scm.Utils
             return TextUtils.FirstCharToUpper(s);
         }
 
-        public static List<string> ToList(this string s, char c = ',')
-        {
-            return TextUtils.ToList(s, c);
-        }
-
-        public static List<long> ToListLong(this string s)
-        {
-            return TextUtils.ToListLong(s);
-        }
-
         public static string FilterEmoji(this string str)
         {
             return TextUtils.FilterEmoji(str);
         }
-
-        #region 文件格式
-        public static bool IsImage(this string s)
-        {
-            return TextUtils.IsImage(s);
-        }
-
-        public static bool IsVideo(this string s)
-        {
-            return TextUtils.IsVideo(s);
-        }
-
-        public static bool IsAudio(this string s)
-        {
-            return TextUtils.IsAudio(s);
-        }
-
-        public static bool IsDocument(this string s)
-        {
-            return TextUtils.IsDocument(s);
-        }
-        #endregion
     }
 }

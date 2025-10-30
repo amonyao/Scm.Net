@@ -52,7 +52,7 @@ public class ScmSysFileService : IApiService
         var root = new ScmFolderInfo() { Name = "根目录", Uri = "/" };
 
         var basePath = _envConfig.GetDataPath(request.path);
-        root.Children = FileUtils.GetFolders(basePath);
+        root.Children = ScmUtils.GetFolders(basePath);
 
         return new List<ScmFolderInfo> { root };
     }
@@ -65,7 +65,7 @@ public class ScmSysFileService : IApiService
     {
         var basePath = _envConfig.GetDataPath(request.path);
 
-        return FileUtils.GetFiles(basePath, request.type, _envConfig.DataDir);
+        return ScmUtils.GetFiles(basePath, request.type, _envConfig.DataDir);
     }
 
     #region 文件上传
