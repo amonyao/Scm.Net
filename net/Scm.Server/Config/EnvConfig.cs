@@ -1,5 +1,4 @@
-﻿using Com.Scm.Enums;
-using Com.Scm.Utils;
+﻿using Com.Scm.Utils;
 using Microsoft.AspNetCore.Builder;
 
 namespace Com.Scm.Config

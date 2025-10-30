@@ -15,10 +15,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Scm.Common.Dto\Scm.Common.Dto.csproj" />
+    <ProjectReference Include="..\Scm.Common.File\Scm.Common.File.csproj" />
     <ProjectReference Include="..\Scm.Common.Http\Scm.Common.Http.csproj" />
     <ProjectReference Include="..\Scm.Common\Scm.Common.csproj" />
     <ProjectReference Include="..\Scm.Dsa.Dba.Sugar\Scm.Dsa.Dba.Sugar.csproj" />
     <ProjectReference Include="..\Scm.Server.Dao\Scm.Server.Dao.csproj" />
+    <ProjectReference Include="..\Scm.Server\Scm.Server.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,6 @@ using Com.Scm.Hubs;
 using Com.Scm.Jwt;
 using Com.Scm.Msg.Aiml.Dvo;
 using Com.Scm.Service;
-using Com.Scm.Ur;
 using Com.Scm.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;

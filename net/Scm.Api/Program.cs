@@ -8,8 +8,8 @@ using Com.Scm.Generator.Config;
 using Com.Scm.Hubs;
 using Com.Scm.Mapper;
 using Com.Scm.Phone.Config;
+using Com.Scm.Quartz;
 using Com.Scm.Quartz.Config;
-using Com.Scm.Quartz.Extensions;
 using Com.Scm.Samples;
 using Com.Scm.Server;
 using Com.Scm.Service;
@@ -73,6 +73,7 @@ namespace Com.Scm.Api
 
             // Quartz
             var quartzConfig = AppUtils.GetConfig<QuartzConfig>(QuartzConfig.NAME) ?? new QuartzConfig();
+            quartzConfig.Prepare(envConfig);
             services.AddQuartz(quartzConfig);
             services.AddQuartzClassJobs();
 

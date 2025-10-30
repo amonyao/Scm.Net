@@ -554,10 +554,19 @@ public class OperatorService : ApiService
     [AllowAnonymous]
     public async Task<LoginResponse> GetSwaggerAsync(string user, string pass)
     {
+        if (string.IsNullOrEmpty(user))
+        {
+            throw new BusinessException("登录用户不能为空！");
+        }
+        if (string.IsNullOrEmpty(pass))
+        {
+            throw new BusinessException("登录口令不能为空！");
+        }
+
         pass = CryptoUtils.Sha(pass);
         var time = TimeUtils.GetUnixTime();
         pass = CryptoUtils.Sha(pass += "@" + time);
-        return await LoginAsync(new LoginRequest { user = user, pass = pass, time = time });
+        return await LoginAsync(new LoginRequest { mode = ScmLoginModeEnum.ByPass, user = user, pass = pass, time = time });
     }
     #endregion
 

@@ -22,8 +22,6 @@ namespace Com.Scm.Quartz
                 return services;
             }
 
-            config.LoadDef();
-
             if (string.IsNullOrWhiteSpace(config.Type) || config.Type == "file")
             {
                 services.AddSingleton(new QuartzFileHelper(config));
